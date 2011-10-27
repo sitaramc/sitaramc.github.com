@@ -1,0 +1,35 @@
+<p><head><style>
+    body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
+    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
+    h4, h5      { background: #ffb; margin-left: -20px; }
+    code        { font-size:    1.1em;  background:  #ddf; }
+    pre         { margin-left:  2em;    background:  #ddf; }
+    pre code    { font-size:    1.1em;  background:  #ddf; }
+</style></head></p>
+
+<h1>other cool stuff</h1>
+
+<ul>
+<li><p><a href="http://www.kernel.org/pub/software/scm/git/docs/howto/rebase-from-internal-branch.txt">http://www.kernel.org/pub/software/scm/git/docs/howto/rebase-from-internal-branch.txt</a>
+-- excellent article on rebase. This article is also available in the git
+installs, at least on MDV.  We already knew git was smart about not
+re-applying patches already applied, based on the SHA1 being in the chain.
+But the <strong>really cool</strong> thing about rebase is that it can ignore patches
+even when they had a different SHA1 (in the same way that git cherry does,
+by examining the changeset) which helps when your changes may have made it
+into the master via email.</p></li>
+<li><p><strong>cherry picking</strong> -- another good reason to make small commits!</p></li>
+<li><p>cherry picking while doing a rebase; <code>man git-rebase</code> for details.  In
+particular, you can rebase off of your own ancestor, to refactor a large
+set of recent changes, like this:</p>
+
+<pre><code>git rebase -i HEAD~10
+</code></pre>
+
+<p>You won't know how cool this is until you try it!</p></li>
+<li><p>Advantages of doing a rebase: doing a <code>git bisect</code> on a merged chain
+sometimes makes it difficult to find the specific commit that caused an
+error.  See
+<a href="http://www.kernel.org/pub/software/scm/git/docs/user-manual.html#bisect-merges">http://www.kernel.org/pub/software/scm/git/docs/user-manual.html#bisect-merges</a></p></li>
+</ul>

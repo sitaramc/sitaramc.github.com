@@ -1,0 +1,224 @@
+#!/usr/bin/perl -s -w
+use strict;
+
+# modelled after perl and haskell's map command
+
+# ...and due to a dislike of the -exec stuff in find and the even worse stuff
+# in xargs for single-shot executions (where the command has to be run
+# separately for each argument)
+
+# (I guess more haskell than perl, because if I implement perl's grep I'd have
+# to call it filter (like in Haskell) to avoid a name conflict with the GNU
+# grep program! ;-)
+
+my $usage = <<EOF1;
+Usage: $0 [-n] [-p] [-ts] [-x] [-t] [-e=ext-pcre] "cmd args %(F|D|B|E)" list
+F is for the full filename, including the directory part
+D is just the directory name
+B is like basename (no dir, no ext; also see -e below)
+E is just the extension (including the ".")
+    %F = %D/%B%E
+
+List can be from STDIN, like xargs. Works like -I.  If STDIN is not a tty, you
+don't have to worry about quoting the command.
+
+-n  is a dry-run; as a side-effect it can be used as a way to "generate" the
+    commands to use elsewhere if that's what you need!
+-p  shows you a "." for each command run so you get some idea of the progress
+-ts shows you the time each command started, which is useful for long running
+    jobs sometimes
+Using -n with -p or -ts doesn't make any sense, but is allowed.
+-x  xargs type optimisation -- reduce forking
+-t  trim leading and trailing blanks; this is not the default because
+    eliminating the constant need to do "-print0 ... | xargs -0 ..." is one of
+    our selling points!
+-e  use "ext-pcre" instead of the builtin-default "\\.[^.]*".
+
+EOF1
+
+my $tips = <<EOF2;
+TIPS:
+1.  multiple streams: use paste to feed a pasted stream to map instead of trying
+    to do it internally...
+2.  splitting spaces (treating a single input argument as multiple,
+    defeating the quoting that map does), prefix and suffix the %F with
+    \\", like this:
+        \\"%F\\"
+EOF2
+
+
+sub doBE
+{
+    # do the "B" template, which means something like "basename".  By default
+    # it just deletes an extension ( like s/\..*$//) but can be made to delete
+    # any trailing pattern...
+    my ($f, $pat, $bORe) = @_;
+    # print STDERR "DBG doBE dORe=$bORe, f=$f, pat=$pat, ";
+    # if <pat> was empty, it should be .* (that is, a normal file extension)
+    $pat ||= "\\.[^.]*";
+
+    my $ret = $f;
+    $ret =~ s(.*/)();   # delete the directory part using a greedy search for a slash
+    $ret =~ s/($pat)$//;
+    my $ext = $1 || ''; # else you get warnings when ext doesn't match at all
+    # print STDERR "bORe=$bORe, pat=$pat, ret=$ret, match=$ext\n";
+    return ($bORe eq 'B' ? $ret : $ext);
+}
+
+sub usage
+{
+    print STDERR "$usage\n$tips\n\n";
+    exit(1);
+}
+
+sub myjoin
+{
+    return join(" ", @_);
+}
+
+our ($n, $ts, $p, $x, $t, $e);          # flags
+
+my @cmd;
+# need a command; take the first word to start with
+$cmd[0] = shift or usage;
+# if STDIN is not a tty, the command is the whole damn line
+unless ( -t )
+{
+    # @cmd maintains the input args more faithfully (the old method breaks
+    # when an input arg had a space in it; forcing your to escape *that* and
+    # so on)
+    push @cmd, @ARGV;
+    @ARGV=();
+}
+else
+{
+    # When STDIN *is* a tty; the entire command (including args) is in the
+    # first argument *we* got; so word split it
+    @cmd = split ' ', $cmd[0];
+}
+
+# no templates in command?  Append an %F by default!
+(myjoin(@cmd)) =~ /%[FDBE]/ or push @cmd, "%F";
+my @cmd_x = @cmd;   # seed the xargs type long command
+# dry run only?
+$n and print STDERR "++ " . myjoin(@cmd) . "\n";
+
+# if there are arguments, use them, else STDIN, one on each line.
+
+# When stdin is used to supply the arguments (the normal case), then the
+# command being run should not have stdin at all, otherwise it ends up eating
+# later part of STDIN.  To test this, take the version of map before this one
+# (i.e., before 2009-02-08) and try
+#       seq 1 1111 | map grep | head
+# (you'll have to hit Ctrl-C a few times to exit that).  What happens is that
+# the map picks up and buffers the first 1000 or so lines, then the first grep
+# (which became 'grep 1') picks up the next few lines, etc.  You'll never see
+# this error on small inputs -- the map manages to buffer all of STDIN before
+# the first of the child programs starts.
+
+our $no_stdin = 0;
+
+my $f;
+if (@ARGV)
+{
+    for $f (@ARGV)
+    {
+        &do_one($f);
+    }
+}
+else
+{
+    $no_stdin = 1;
+    while (<>)
+    {
+        chomp($f=$_);
+        $t and do { $f =~ s/^\s+//; $f =~ s/\s+$//; };
+        &do_one($f);
+    }
+}
+
+sub do_one
+{
+    my $f = shift;
+    my $d;  # dirname
+    ($d = $f) =~ s/\/[^\/]*$// or $d = ".";
+
+    my @c=@cmd;
+    @c = @cmd_x if $x;
+    @c = &subst_pat($d, $f, @c);
+
+    if ($x) # xargs opt
+    {
+        @cmd_x = @c;
+        if (length(myjoin(@c)) > 64000)
+        {
+            &do_it_already(@c);
+            @cmd_x = @cmd;
+        }
+    }
+    else
+    {
+        &do_it_already(@c);
+    }
+}
+
+if ($x and myjoin(@cmd_x) ne myjoin(@cmd))
+{
+    &do_it_already(@cmd_x);
+}
+
+sub do_it_already
+{
+    my(@c) = @_;
+    my $rc;
+
+    # get rid of the meta-sequences left in by the -x logic
+    @c = grep { ! /%[FDBE]/ } @c;
+
+    $ts and print STDERR scalar(localtime), " ";
+    $p and print STDERR ".";
+
+    if ($n)
+    {
+        print myjoin(@c) . "\n";
+        return;
+    }
+
+    # yes this is a bare block.  Deal with it
+    {
+        local(*STDIN);
+        open(STDIN, "<", "/dev/null") if ($no_stdin);
+        $rc = system(@c);
+    }
+    # Ctrl-C kills the current child only, and continues to run the next child
+    # task.  Ctrl-\ kills the parent (the map program) itself.
+    print STDERR "===== Ctrl-C =====\n" if ($rc & 127) == 2;
+    exit 1 if ($rc & 127) == 3;
+}
+
+sub subst_pat
+{
+    my($d, $f, @c) = @_;
+
+    return map {
+        # if the %[FDBE] placeholders are "lone", we need to push a replica,
+        # so store that fact right now
+        my $lone_ph = '';
+        $lone_ph = $1 if /^(%[FDBE])$/;
+        if (/%[FDBE]/)
+        {
+            s/%F/$f/g;
+            s/%D/$d/g;
+            # substituting %B is tricky...
+            s/%B/&doBE($f, $e, 'B')/ge;
+            # %E uses the same code
+            s/%E/&doBE($f, $e, 'E')/ge;
+
+            $lone_ph ? ( $_, $lone_ph ) : ( $_ );
+        }
+        else
+        {
+            ( $_ );
+        }
+    } @c;
+}

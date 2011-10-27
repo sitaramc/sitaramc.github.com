@@ -1,0 +1,233 @@
+<p><head><style>
+    body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
+    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
+    h4, h5      { background: #ffb; margin-left: -20px; }
+    code        { font-size:    1.1em;  background:  #ddf; }
+    pre         { margin-left:  2em;    background:  #ddf; }
+    pre code    { font-size:    1.1em;  background:  #ddf; }
+</style></head></p>
+
+<h1><a name="dev_integ_workflow">dev/integ workflow</a></h1>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#dev_integ_workflow">dev/integ workflow</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#workflow">workflow</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#branches">branches</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#assumptions_startup_">assumptions / startup:</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#developer_workflow">developer workflow</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#integrator">integrator</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#gitolite_advanced_features_supporing_this_flow">gitolite advanced features supporing this flow</a><br></p>
+
+<hr />
+
+<h2><a name="workflow">workflow</a></h2>
+
+<p>This is one possible workflow for dev/integ using gitolite.  It assumes that
+there is one "integrator" and N developers "dev1", ... "devN".</p>
+
+<h3><a name="branches">branches</a></h3>
+
+<ul>
+<li><p><code>integ</code> -- a branch that is <code>R</code> (readonly) for devs, <code>RW+</code> for integrator.
+This branch will always be kept in a compilable, basically runnable, state
+by the integrator.  The history of this branch will be kept reasonably
+clean.</p>
+
+<p>Each developer will start a new piece of work or task using <code>integ</code> as a
+starting point, and making sure that when he submits his work it builds
+upon this stable point.</p></li>
+<li><p><code>dev/dev1/</code>, <code>dev/dev2/</code>, ... <code>dev/devN/</code></p>
+
+<p>branches under the <code>dev/devX/</code> hierarchy belong to the developer called
+<code>devX</code>.  He submits his work to the integrator by pushing to one such
+branch and emailing the integrator the branch name (say
+<code>dev/sitaram/issue3423</code> or <code>dev/someone-else/bugfix-2321</code></p></li>
+<li><p>master -- a branch that is even more sacred than <code>integ</code>.  Its usage and
+role are optional in the below described flow, but it can be used to
+filter <code>integ</code> even more, maybe based on some EQA (External Quality
+Assurance) perhaps.  If so, it's name can be changed to reflect that</p></li>
+</ul>
+
+<h3><a name="assumptions_startup_">assumptions / startup:</a></h3>
+
+<ul>
+<li>a repo is created</li>
+<li>the code is kept in a branch called <code>integ</code>, even if it is bare minimum
+code in the beginning</li>
+</ul>
+
+<h3><a name="developer_workflow">developer workflow</a></h3>
+
+<p>We use a sample developer called dev5 in the examples below.</p>
+
+<p>dev5 gets some work/spec/issue to work on.  He is given, or chooses, a short
+name for the work he is doing.  Examples:</p>
+
+<pre><code>xyz-module-error-23
+bugfix-2321
+issue-3394
+add-vorbis-support
+</code></pre>
+
+<p>In the rest of this example we will use <code>issue-3394</code></p>
+
+<ul>
+<li><p>dev clones the repo, if not already cloned</p>
+
+<pre><code>git clone [...]
+</code></pre></li>
+<li><p>fetch and checkout the current <code>integ</code> branch, making the new <code>issue-3394</code>
+branch from it</p>
+
+<pre><code>git fetch origin
+git checkout -b issue-3394 origin/integ
+
+---o---o---I
+(o, o = previous commits, irrelevant to us)
+I = origin/integ = issue-3394
+(current branch is issue-3394)
+</code></pre></li>
+<li><p>(<strong>LOOP POINT</strong>) work on this branch</p>
+
+<pre><code>git checkout issue-3394
+# (edit/compile/test)
+git add, git commit
+# repeat as needed
+# the last step should be a "test", ideally
+
+---o---o---I---a---b---c---d
+I = origin/integ
+a,b,c = intermediate commits
+d = issue-3394
+(current branch is issue-3394)
+</code></pre></li>
+</ul>
+
+<p>now he's ready to send.  In the meantime, <code>integ</code> may have moved ahead, and he
+has to make it work against that:</p>
+
+<ul>
+<li><p>fetch integ again and rebase</p>
+
+<pre><code>git fetch origin
+
+---o---o---I---J---K
+K = origin/integ now
+
+git checkout issue-3394         # if not already done
+git rebase origin/integ
+</code></pre>
+
+<p>what does this rebase do?  It takes this:</p>
+
+<pre><code>---o---o---I---J---K
+             \
+              \
+               a---b---c---d
+</code></pre>
+
+<p>and moves the "a, b, c, d" on top of K:</p>
+
+<pre><code>---o---o---I---J---K---a'---b'---c'---d'
+(a',b',c',d' are rebased versions of a,b,c,d)
+(K = origin/integ, d' = issue-3394)
+</code></pre>
+
+<p>There is a reason for doing it this way.  Dev5 is the one who knows the
+new code best, and he should be integrating it with the latest version of
+<code>integ</code> at any time he submits.  And since <code>issue-3394</code> is a private
+branch, he can rebase it as often as he likes.</p>
+
+<p>[SIDE NOTE] why do we use rebase instead of merge here?</p>
+
+<p><strong>this is not a hard and fast rule -- you can use merge if you like.  Feel
+free to experiment and see what works best for your team, because a lot
+also depends on their level of comfort with the process</strong></p>
+
+<p>However, in my opinion, work that has not been pushed out <em>and</em> accepted
+upstream should ideally be rebased against new upstream.  The main
+difference is that, if the <em>acceptance</em> of the work goes through a few
+iterations (let's say it is rejected and partially redone 2-3 times),
+using rebases is easier to do, and also will result in a cleaner looking
+<em>final</em> commit list.</p></li>
+<li><p>retest one more time, to make sure the new <code>J</code> and <code>K</code> commits have not
+caused a problem for <code>issue-3394</code></p>
+
+<p>if the test fails, he has to fix his commits (a', b', c', d') or add some
+new commits (maybe e, f) and make it work.</p></li>
+<li><p>when test OK, push <code>issue-3394</code> under your own hierarchy (each time he
+comes back to "LOOP POINT" because something was rejected by code review
+or integ testing, the <code>v1</code> will increase -- <code>v2</code>, <code>v3</code>, etc)</p>
+
+<pre><code>git push origin issue-3394:dev/dev5/issue-3394/v1
+</code></pre></li>
+<li><p>send email to integrator asking him to pull and test
+<code>dev/dev5/issue-3394/v1</code></p></li>
+</ul>
+
+<h3><a name="integrator">integrator</a></h3>
+
+<ul>
+<li><p>receive mail from dev5 saying <code>issue-3394</code> is done and ready</p></li>
+<li><p>clone repo if not already done</p></li>
+<li><p>fetch, make a test branch for testing <code>issue-3394</code></p>
+
+<pre><code>git fetch origin
+git checkout -b test_issue-3394 origin/dev/dev5/issue-3394
+</code></pre></li>
+<li><p>test, or do whatever he wants to do initially (maybe code review).  If he
+doesn't like it, send it back for more work.  <strong>dev5 then restarts his
+process from the point marked "LOOP POINT" in his workflow above</strong></p></li>
+<li><p>if it is OK so far, <strong>test merge</strong> it with the current <em>integ</em> branch.
+Ideally, this should be a <strong>fast forward</strong>, because dev5 <em>already</em> did
+this.</p>
+
+<pre><code>git checkout -b test_integ_issue-3394 integ
+git merge origin/dev/dev5/issue-3394
+# this should be a fast forward, ideally
+# make some final tests
+</code></pre>
+
+<p>If something went wrong, no problem; just delete the test branch and email
+dev5 saying what the problems are.  For dev5, work again starts at "LOOP
+POINT"</p>
+
+<pre><code>git branch -D test_integ_issue-3394
+</code></pre>
+
+<p>However, if the tests were all ok, move integ forward and delete test
+merge branch</p>
+
+<pre><code>git checkout integ
+git merge origin/dev/dev5/issue-3394
+git branch -D test_integ_issue-3394
+</code></pre>
+
+<p>This issue (3394) is now closed, unless there is a regression later.  It
+has been integrated successfully, and dev5 can be assigned some other
+task.</p></li>
+</ul>
+
+<h2><a name="gitolite_advanced_features_supporing_this_flow">gitolite advanced features supporing this flow</a></h2>
+
+<p>Here's a typical gitolite conf file:</p>
+
+<pre><code>@myteam = dev1 dev2 ... devN
+
+repo myrepo
+    RW+                 = integrator
+    RW+ dev/USER/       = @myteam
+</code></pre>
+
+<p>That's it?  How does, say <code>dev5</code> (assuming he is a member of <code>@myteam</code>), get
+access to write to <code>dev/dev5/something</code>?</p>
+
+<p>That is a unique feature of gitolite :-)  When a rule has the string <code>/USER/</code>
+in the "refex" (see gitolite documentation for details), it replaces it with
+the name of the user invoking the push.  This is effectively the same as
+manually adding one line like this</p>
+
+<pre><code>    RW+ dev/sitaram/    = sitaram
+</code></pre>
+
+<p>for each member of <code>@myteam</code>.</p>

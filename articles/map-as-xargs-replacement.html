@@ -1,0 +1,249 @@
+<p><head><style>
+    body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
+    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
+    h4, h5      { background: #ffb; margin-left: -20px; }
+    code        { font-size:    1.1em;  background:  #ddf; }
+    pre         { margin-left:  2em;    background:  #ddf; }
+    pre code    { font-size:    1.1em;  background:  #ddf; }
+</style></head></p>
+
+<h1><a name="_map_a_simpler_replacement_for_xargs"><code>map</code> -- a simpler replacement for xargs</a></h1>
+
+<p><code>map</code> can replace xargs for most purposes as well as replace many <code>for</code>
+loops in shell.  Download it <a href="map">here</a>.</p>
+
+<hr />
+
+<p><sup>This document has the following sections:</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#_map_a_simpler_replacement_for_xargs"><code>map</code> -- a simpler replacement for xargs</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#A_gradual_build_up_of_map_s_features">A gradual build up of <code>map</code>'s features</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Simple_Example">Simple Example</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Argument_in_the_middle_not_at_the_end_">Argument in the middle, not at the end!</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4_types_of_placeholders_not_just_">4 types of placeholders, not just <code>{</code>}</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Efficiency_the_x_flag">Efficiency -- the <code>-x</code> flag</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Arguments_from_the_command_line_instead_of_STDIN">Arguments from the command line instead of STDIN</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Replace_for_loops_also">Replace <code>for</code> loops also</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#_Dry_run_a_complex_command_with_the_n_option">"Dry run" a complex command with the <code>-n</code> option</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#More_complex_examples">More complex examples</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Usage_message">Usage message</a><br>
+</sup></p>
+
+<h2><a name="A_gradual_build_up_of_map_s_features">A gradual build up of <code>map</code>'s features</a></h2>
+
+<h3><a name="Simple_Example">Simple Example</a></h3>
+
+<p>If you already know <code>xargs</code>, and have often used <code>xargs</code> to process
+lists of files, especially with files containing spaces in their names, you
+will appreciate <code>map</code> for getting rid of the need to use <code>-print0</code> on
+the <code>find</code> command followed by the <code>-0</code> argument to xargs.  Each
+filename is assumed to be on a separate line, as far as <code>map</code> is
+concerned.</p>
+
+<p>[Of course, if some pathological idiot embeds a new-line into a file name, he
+should be taken out and shot.  Come to think of it, we should do that to
+people who embed spaces in filenames also but that would be genocide!]</p>
+
+<p>So,</p>
+
+<pre><code>find . -type f -name "*somepattern*" -print0 | xargs -0 some.command
+</code></pre>
+
+<p>becomes</p>
+
+<pre><code>find . -type f -name "*somepattern*"         | map some.command
+</code></pre>
+
+<h3><a name="Argument_in_the_middle_not_at_the_end_">Argument in the middle, not at the end!</a></h3>
+
+<p><code>xargs</code> is horrible at commands where the argument should be in the
+middle, like say a copy command:</p>
+
+<pre><code>find ..blah-blah.. | xargs cp '{}' destination  # DOESNT WORK!
+</code></pre>
+
+<p>With <code>map</code></p>
+
+<pre><code>find ..blah-blah.. | map cp %F destination
+</code></pre>
+
+<h3><a name="4_types_of_placeholders_not_just_">4 types of placeholders, not just <code>{</code>}</a></h3>
+
+<p>See that <code>%F</code>?  That stands for the full file name.  See the usage message at
+the bottom of this help file for the other 3 varieties!</p>
+
+<h3><a name="Efficiency_the_x_flag">Efficiency -- the <code>-x</code> flag</a></h3>
+
+<p>You may have noticed that the above commands run slower than the xargs
+equivalents.  This is because <code>map</code> is running each instance separately --
+forking a process (or more) once for each input argument/line.</p>
+
+<p>To make it efficient, like xargs, use the <code>-x</code> option.  Here's a demo:</p>
+
+<pre><code>$ (echo a; echo b; echo c) | map echo
+a
+b
+c
+</code></pre>
+
+<p>and</p>
+
+<pre><code>$ (echo a; echo b; echo c) | map -x echo
+a b c
+</code></pre>
+
+<p>It is clear that with <code>-x</code> it only ran the <code>echo</code> command once, giving
+it all input arguments in one shot.</p>
+
+<p><strong>Please note</strong> that <code>-x</code> essentially replaces each occurrence of <code>%F</code>
+(or any of the other 3 sequences listed below) with a list of all the
+arguments involved.  See below for an example where this will not work
+properly.</p>
+
+<h3><a name="Arguments_from_the_command_line_instead_of_STDIN">Arguments from the command line instead of STDIN</a></h3>
+
+<p>What's all that <code>echo</code> stuff about?</p>
+
+<p>Well we used a sequence of echos to give <code>map</code> 3 lines of input:</p>
+
+<pre><code>a
+b
+c
+</code></pre>
+
+<p>But input doesn't have to come from standard input.  In fact, if the input is
+a TTY (which is true if you have <strong>not</strong> redirected it using the shell's
+redirection facilities), map will treat the first argument as the command, and
+all subsequent arguments as, well, arguments to that command.</p>
+
+<p>So</p>
+
+<pre><code>$map echo a b c
+a
+b
+c
+
+$map -x echo a b c
+a b c
+</code></pre>
+
+<p>What if your command is not just one simple word?</p>
+
+<pre><code>$map echo your input was a b c
+your
+input
+was
+a
+b
+c
+</code></pre>
+
+<p>That didn't work...  How about now:</p>
+
+<pre><code>$map "echo your input was" a b c
+your input was a
+your input was b
+your input was c
+</code></pre>
+
+<p>Aah, much better!</p>
+
+<h3><a name="Replace_for_loops_also">Replace <code>for</code> loops also</a></h3>
+
+<p>Consider how often you might do something like:</p>
+
+<pre><code>for i in a b c d e f
+do
+    mkdir subdir.$i
+done
+# makes 6 subdirectories called subdir.a, subdir.b, etc
+</code></pre>
+
+<p>Now try:</p>
+
+<pre><code>map "mkdir subdir.%F" a b c d e f
+</code></pre>
+
+<p><strong>WARNING: DO NOT USE <code>-x</code> IN THE ABOVE COMMAND!</strong></p>
+
+<h3><a name="_Dry_run_a_complex_command_with_the_n_option">"Dry run" a complex command with the <code>-n</code> option</a></h3>
+
+<p>To see what <code>-x</code> would do above, use the <code>-n</code> (dry run) option:</p>
+
+<pre><code>$ map -n -x "mkdir subdir.%F" a b c d e f
+++ mkdir subdir.%F
+mkdir subdir."a" "b" "c" "d" "e" "f"
+</code></pre>
+
+<p>See what happened?  Only the first argument got the <code>subdir.</code> prefix which
+you intended for all of them.</p>
+
+<p>Now try without the <code>-x</code>:</p>
+
+<pre><code>$map -n "mkdir subdir.%F" a b c d e f
+++ mkdir subdir.%F
+mkdir subdir."a"
+mkdir subdir."b"
+mkdir subdir."c"
+mkdir subdir."d"
+mkdir subdir."e"
+mkdir subdir."f"
+</code></pre>
+
+<p>And this is what we want.</p>
+
+<h3><a name="More_complex_examples">More complex examples</a></h3>
+
+<p>Convert all JPEG files in this directory to thumbnails in GIF format with a
+size of 128x128 pixels and put them in the "thumbnails" directory:</p>
+
+<pre><code>map "convert %F -geometry 128x128 thumbnails/%B.gif" *.jpg
+</code></pre>
+
+<p>Print the name of every directory that contains photographs from my
+camera.  (My camera produces files that look like <code>IMG_1234.JPG</code>, although
+sometimes I make them lowercase)</p>
+
+<pre><code>find . -type f -iname "img*.jpg" | map echo %D | sort -u
+</code></pre>
+
+<p>In fact, <code>%B</code> and <code>%E</code> can trim complex extensions from file names
+using the <code>-e=regexp</code> option.  But that's a topic for another day, because
+"pcre" means "perl compatible regular expression" :-)</p>
+
+<h2><a name="Usage_message">Usage message</a></h2>
+
+<p>This is what you get if you run <code>map</code> with no arguments.</p>
+
+<pre><code>Usage: /home/sitaram/hobbits/._s/bin/map [-n] [-p] [-ts] [-x] [-t] [-e=ext-pcre] "cmd args %(F|D|B|E)" list
+F is for the full filename, including the directory part
+D is just the directory name
+B is like basename (no dir, no ext; also see -e below)
+E is just the extension (including the ".")
+    %F = %D/%B%E
+
+List can be from STDIN, like xargs. Works like -I.  If STDIN is not a tty, you
+don't have to worry about quoting the command.
+
+-n  is a dry-run; as a side-effect it can be used as a way to "generate" the
+    commands to use elsewhere if that's what you need!
+-p  shows you a "." for each command run so you get some idea of the progress
+-ts shows you the time each command started, which is useful for long running
+    jobs sometimes
+Using -n with -p or -ts doesn't make any sense, but is allowed.
+-x  xargs type optimisation -- reduce forking
+-t  trim leading and trailing blanks; this is not the default because
+    eliminating the constant need to do "-print0 ... | xargs -0 ..." is one of
+    our selling points!
+-e  use "ext-pcre" instead of the builtin-default "\.[^.]*".
+
+
+TIPS:
+1.  multiple streams: use paste to feed a pasted stream to map instead of trying
+    to do it internally...
+2.  splitting spaces (treating a single input argument as multiple,
+    defeating the quoting that map does), prefix and suffix the %F with
+    \", like this:
+        \"%F\"
+</code></pre>

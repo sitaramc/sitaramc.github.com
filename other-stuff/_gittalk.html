@@ -1,0 +1,774 @@
+<head>
+<title>HTML Slidy</title>
+<link rel="stylesheet" href="../tools/slidy.css" type="text/css">
+<meta name="font-size-adjustment" content="3">
+<script src="../tools/slidy.js" charset="utf-8" type="text/javascript">
+</script>
+</head>
+<body>
+
+<div class="slide cover">
+<center>
+<br/>
+<br/>
+<br/>
+<br/>
+<img src="../tools/git.png">
+<br/>
+<br/>
+<br/>
+<br/>
+<h1>presentation on git, a DVCS</h1>
+<br/>
+<br/>
+
+
+</center>
+</div>
+
+<h1>why</h1>
+
+<p><center><img src="../images/projects-sans-vcs.png"></center>
+</p>
+
+<h1>why use a VCS</h1>
+
+<ul>
+<li class="incremental">reversibility or rollback<n>, aka C-Y-A!
+<ul>
+<li class="incremental">linear (on the time axis)<n>, simple to implement</li>
+</ul></li>
+<li class="incremental">concurrency
+<ul>
+<li class="incremental">non-linear<n>, all the complexity is here</li>
+<li class="incremental">make or break productivity
+<ul>
+<li class="incremental">individual productivity also<n>, if it can make context switching
+trivial</li>
+</ul></li>
+</ul></li>
+<li class="incremental">annotation</li>
+</ul>
+
+<h1>VCSs in common use</h1>
+
+<ul>
+<li class="incremental">open source
+<ul>
+<li class="incremental">CVS</li>
+<li class="incremental">SVN (Subversion)</li>
+<li class="incremental">Darcs/TLA/Bazaar/Monotone<n>, Mercurial, Git</li>
+</ul></li>
+<li class="incremental">proprietary
+<ul>
+<li class="incremental">VSS<n>, Clearcase</n><n>, Perforce</li>
+<li class="incremental">Bitkeeper</li>
+<li class="incremental">others??</li>
+</ul></li>
+</ul>
+
+<h1>"distributed"?</h1>
+
+<ul>
+<li class="incremental">every dev has his/her own repository
+<ul>
+<li class="incremental">on their own workstation</li>
+<li class="incremental">no single point of failure/contention</li>
+</ul></li>
+<li class="incremental">all repos are (usually) "clones" of the central repository</li>
+<li class="incremental">easy to work offline
+<ul>
+<li class="incremental">e.g., long weekend+laptop :-)</li>
+<li class="incremental">commits made while offline retain their identity</li>
+<li class="incremental">they don't get collapsed into one big commit</li>
+</ul></li>
+<li class="incremental">commit-then-merge, not merge-then-commit</li>
+</ul>
+
+<h1>what's different about git?</h1>
+
+<ul>
+<li class="incremental">cryptographically secure integrity checks builtin</li>
+<li class="incremental">fast
+<ul>
+<li class="incremental">most operations are local</li>
+<li class="incremental">network operations are highly optimised</li>
+<li class="incremental"><strong>ideal</strong> for distributed teams</li>
+</ul></li>
+<li class="incremental">easy to setup/deploy
+<ul>
+<li class="incremental">server requires minimal hardware</li>
+<li class="incremental">no license costs</li>
+</ul></li>
+</ul>
+
+<h1>what's different about git? (cont'd)</h1>
+
+<ul>
+<li class="incremental">very small repo size
+<ul>
+<li class="incremental">Mozilla repo in CVS: 2.7 GB</li>
+<li class="incremental">imported to SVN 8.2 GB</li>
+<li class="incremental">imported to GIT: 450 MB!</li>
+<li class="incremental">(a full checkout is 350 MB)</li>
+</ul></li>
+<li class="incremental">very, very, cheap branching</li>
+<li class="incremental">excellent merging</li>
+</ul>
+
+<h1>caveats about git</h1>
+
+<ul>
+<li class="incremental">no partial checkouts -- it's the whole project or nothing
+<ul>
+<li class="incremental">but you can use the "submodule" mechanism if you know in advance what
+pieces will be separately needed</li>
+</ul></li>
+<li class="incremental">will not track
+<ul>
+<li class="incremental">permissions and ownership, except the "x" (executable) bit
+<ul>
+<li class="incremental">in unix terms, only cares about the first "x" in rwxrwxrwx</li>
+</ul></li>
+<li class="incremental">empty directories</li>
+</ul></li>
+<li class="incremental">not optimised for tracking <strong>very large</strong> binary files (movies, etc.)</li>
+</ul>
+
+<h1>history</h1>
+
+<ul>
+<li class="incremental">initially designed as a file system!</li>
+<li class="incremental">originally only a backend<n>, now all in one</li>
+<li class="incremental">reputation for being hard to use<n>, now no longer valid</li>
+<li class="incremental">focus on large projects with many developers
+<ul>
+<li class="incremental">but that doesn't mean small projects can't use it</li>
+<li class="incremental">remember: multi-tasking</li>
+</ul></li>
+</ul>
+
+<h1>working with git</h1>
+
+<ul>
+<li class="incremental">CLI is the most powerful</li>
+<li class="incremental">don't like the CLI?
+<ul>
+<li class="incremental">3 excellent GUI tools come with git</li>
+<li class="incremental">very powerful; for an excellent intro to these tools, see
+http://nathanj.github.com/gitguide</li>
+<li class="incremental">plugins: Eclipse and VS plugins available</li>
+<li class="incremental">but you miss many features <strong>unique</strong> to git if you only use these
+plugins</li>
+</ul></li>
+</ul>
+
+<h1>some mindset changes needed...</h1>
+
+<ul>
+<li class="incremental">learn to make many fine-grained commits rather than a few large ones</li>
+<li class="incremental">commit locally before performing any remote operations
+<ul>
+<li class="incremental">example, in the typical "svn update" scenario, if your changes are not
+yet ready to be sent to the server, you can either
+<ul>
+<li class="incremental">avoid doing the update</li>
+<li class="incremental">do it and pray :-)</li>
+</ul></li>
+<li class="incremental">in git, you just commit locally before doing the "git pull"</li>
+</ul></li>
+</ul>
+
+<h1>normal workflow - CVCSs</h1>
+
+<p><center><img src="../images/flow-CVCS.png"></center>
+</p>
+
+<h1>normal workflow - most DVCSs</h1>
+
+<p><center><img src="../images/flow-DVCS.png"></center>
+</p>
+
+<h1>normal workflow - Git</h1>
+
+<p><center><img src="../images/flow-Git.png"></center>
+</p>
+
+<h1>something unique to git</h1>
+
+<ul>
+<li class="incremental">index
+<ul>
+<li class="incremental">a staging area for the next commit</li>
+<li class="incremental">stuff gets sent here when you "add"</li>
+<li class="incremental">when you "commit", the current index is turned into a real commit
+object</li>
+</ul></li>
+<li class="incremental">helps in reviewing changes</li>
+<li class="incremental">helps when fixing conflicts during a complex merge</li>
+</ul>
+
+<h1>problems in SVN</h1>
+
+<ul>
+<li class="incremental">slow on large repositories</li>
+<li class="incremental">.SVN directories all over the place
+<ul>
+<li class="incremental">often as large as the entire git repo!</li>
+</ul></li>
+<li class="incremental">refactor/rename support missing</li>
+<li class="incremental">branching is fine...
+<ul>
+<li class="incremental">but merging...?</li>
+</ul></li>
+</ul>
+
+<h1>problems in SVN (cont'd)</h1>
+
+<ul>
+<li class="incremental">merge tracking not very well done
+<ul>
+<li class="incremental">does not record who did the branch (attributes all changes to the dev
+who did the merge)</li>
+<li class="incremental">does not record "merge-only" changes separately from the two branches</li>
+<li class="incremental">can make repeated merges very difficult
+<ul>
+<li class="incremental">SVN mergeinfo has many limitations</li>
+</ul></li>
+</ul></li>
+<li class="incremental">merges can be slow</li>
+<li class="incremental">large merges can be painful</li>
+</ul>
+
+<h1>branching in most older VCSs</h1>
+
+<ul>
+<li class="incremental">branching is considered advanced and people avoid it
+<ul>
+<li class="incremental">either the tool has no branching,</li>
+<li class="incremental">or has really bad merging</li>
+</ul></li>
+<li class="incremental">and branching is useless without good merging</li>
+<li class="incremental">so lots of parallelism goes unused
+<ul>
+<li class="incremental">or you need "SCM admins" to do the merge!</li>
+</ul></li>
+</ul>
+
+<h1>problems in SVN (cont'd)</h1>
+
+<ul>
+<li class="incremental">lack of local commits
+<ul>
+<li class="incremental">you don't want to "break the build"</li>
+<li class="incremental">so you keep lots of uncommitted changes outside the VCS</li>
+<li class="incremental">and do one big checkin when you're ready</li>
+</ul></li>
+</ul>
+
+<h1>productivity advantages of git</h1>
+
+<ul>
+<li class="incremental">history tracking handled much better; makes repeated merges a breeze
+<ul>
+<li class="incremental">all "commits" identified by a SHA-1 checksum
+<ul>
+<li class="incremental">this is what gives it the cryptographically secure integrity
+check)</li>
+</ul></li>
+<li class="incremental">a branch is just a pointer to some commit</li>
+<li class="incremental">every commit records its parent commit's sha</li>
+<li class="incremental">a merge is just a commit with more than one parent commit</li>
+</ul></li>
+<li class="incremental">so, every commit knows all of its ancestors
+<ul>
+<li class="incremental">regardless of repository, branch, etc</li>
+</ul></li>
+</ul>
+
+<h1>Linus on merging</h1>
+
+<ul>
+<li class="incremental">merging is the most important activity
+<ul>
+<li class="incremental">"I merge 22,000 files several times a day, and I get unhappy if a
+merge takes more than 5 seconds" -- Linus</li>
+<li class="incremental">the linux kernel has 22000 files and has averaged 4.5 merges/day over
+the last 2 years</li>
+</ul></li>
+</ul>
+
+<h1>Linus on merging (cont'd)</h1>
+
+<ul>
+<li class="incremental">make it fast and painless
+<ul>
+<li class="incremental">...and people will start using it every day</li>
+</ul></li>
+<li class="incremental">merge often, merge early</li>
+<li class="incremental">otherwise you have huge conflicts to resolve later!</li>
+</ul>
+
+<h1>productivity advantages of git (cont'd)</h1>
+
+<ul>
+<li class="incremental">complex merges handled much better; frees devs from worrying about it most
+of the time
+<ul>
+<li class="incremental">merges involving renames</li>
+<li class="incremental">criss-cross merges</li>
+</ul></li>
+<li class="incremental">encourages many small commits instead of few large commits
+<ul>
+<li class="incremental">easier code reviews</li>
+<li class="incremental">easier debugging</li>
+<li class="incremental">easier cherry picking</li>
+<li class="incremental">easier merging/rebasing (conflict resolution happens in much smaller
+units)</li>
+</ul></li>
+</ul>
+
+<h1>productivity advantages of git (cont'd)</h1>
+
+<ul>
+<li class="incremental">encourages creating local branches
+<ul>
+<li class="incremental">no need to pollute the central server</li>
+<li class="incremental">experimental code can be developed "on the side"
+<ul>
+<li class="incremental">if it works, promote it to the central server, with the full
+history of commits intact</li>
+<li class="incremental">otherwise, delete it; no need to immortalise failed experiments on
+the central server :-)</li>
+</ul></li>
+<li class="incremental">branch <strong>names</strong> are also local
+<ul>
+<li class="incremental">we can all have a branch called "my-test" or "test" or whatever,
+without worrying about "is someone else using the same branch
+name?"</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h1>productivity advantages of git (cont'd)</h1>
+
+<ul>
+<li class="incremental">encourages using the tools available
+<ul>
+<li class="incremental">important vcs operations (like "diff") do not need network access</li>
+<li class="incremental">blazingly fast
+<ul>
+<li class="incremental">even against a very old revision</li>
+<li class="incremental">or a version in some other branch</li>
+</ul></li>
+<li class="incremental">centralised VCSs take too long
+<ul>
+<li class="incremental">painful to use</li>
+<li class="incremental">so programmers avoid them (?)</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h1>maintainability -- refactor/rename support</h1>
+
+<ul>
+<li class="incremental">in most VCSs, renaming a file
+<ul>
+<li class="incremental">is treated as a copy+delete</li>
+<li class="incremental">loses history (?)</li>
+</ul></li>
+<li class="incremental">how about...
+<ul>
+<li class="incremental">rename + move + edit a file in one branch</li>
+<li class="incremental">while making some bugfixes to it in another?</li>
+</ul></li>
+<li class="incremental">git handles this without any fuss -- demo 09</li>
+</ul>
+
+<h1>demo 09 in pictures</h1>
+
+<p><center><img src="../images/demo-09-01.png"></center>
+</p>
+
+<h1>demo 09 in pictures</h1>
+
+<p><center><img src="../images/demo-09-02.png"></center>
+</p>
+
+<h1>demo 09 in pictures</h1>
+
+<p><center><img src="../images/demo-09-03.png"></center>
+</p>
+
+<h1>demo 09 in pictures</h1>
+
+<p><center><img src="../images/demo-09-04.png"></center>
+</p>
+
+<h1>demo 09 in pictures</h1>
+
+<p><center><img src="../images/demo-09-05.png"></center>
+</p>
+
+<h1>demo 09 in pictures</h1>
+
+<p><center><img src="../images/demo-09-06.png"></center>
+</p>
+
+<h1>demo 09 in pictures</h1>
+
+<p><center><img src="../images/demo-09-07.png"></center>
+</p>
+
+<h1>demo 09 in pictures</h1>
+
+<p><center><img src="../images/demo-09-08.png"></center>
+</p>
+
+<h1>demo 09 in pictures</h1>
+
+<p><center><img src="../images/demo-09-09.png"></center>
+</p>
+
+<h1>demo 09 in pictures</h1>
+
+<p><center><img src="../images/demo-09-10.png"></center>
+</p>
+
+<h1>demo 09 in pictures</h1>
+
+<p><center><img src="../images/demo-09-11.png"></center>
+</p>
+
+<h1>maintainability: code movement detection</h1>
+
+<ul>
+<li class="incremental">example
+<ul>
+<li class="incremental">move an important function with lots of history to some other file</li>
+</ul></li>
+<li class="incremental">what would other VCSs do to the <strong>history</strong>?</li>
+<li class="incremental">next 5 slides show code movement
+<ul>
+<li class="incremental">displayed using "git gui blame", one of the 3 GUI tools that come with
+git</li>
+</ul></li>
+</ul>
+
+<h1>code movement detection in pictures</h1>
+
+<p><center><img src="../images/gui-blame-1.png"></center>
+</p>
+
+<h1>code movement detection in pictures</h1>
+
+<p><center><img src="../images/gui-blame-2.png"></center>
+</p>
+
+<h1>code movement detection in pictures</h1>
+
+<p><center><img src="../images/gui-blame-3.png"></center>
+</p>
+
+<h1>code movement detection in pictures</h1>
+
+<p><center><img src="../images/gui-blame-4.png"></center>
+</p>
+
+<h1>code movement detection in pictures</h1>
+
+<p><center><img src="../images/gui-blame-5.png"></center>
+</p>
+
+<h1>maintainability: code movement detection (cont'd)</h1>
+
+<ul>
+<li class="incremental">this is <strong>way</strong> beyond what any other VCS can even dream of</li>
+<li class="incremental">great help for new people trying to understand existing code base</li>
+<li class="incremental">here's a secret...
+<ul>
+<li class="incremental">the information you see is not <strong>stored</strong> in the repository</li>
+<li class="incremental">it is <strong>computed</strong> on demand, dynamically!</li>
+<li class="incremental">which means you can get the same tracability for all your existing
+code
+<ul>
+<li class="incremental">simply by converting to git!</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h1>maintainability: revision history viewer</h1>
+
+<ul>
+<li class="incremental">git has another GUI to show you the version history graph
+<ul>
+<li class="incremental">very intuitive, shows merges etc very nicely</li>
+<li class="incremental">lots of "right click" options in various places, to help track things
+down...</li>
+<li class="incremental">(one small example follows; there are many, many, more features --
+there is not enough time to talk about more!)</li>
+</ul></li>
+</ul>
+
+<h1>revision history viewer</h1>
+
+<p><center><img src="../images/gitk-1.png"></center>
+</p>
+
+<h1>revision history viewer</h1>
+
+<p><center><img src="../images/gitk-2.png"></center>
+</p>
+
+<h1>revision history viewer</h1>
+
+<p><center><img src="../images/gitk-3.png"></center>
+</p>
+
+<h1>git concepts</h1>
+
+<ul>
+<li class="incremental">repo
+<ul>
+<li class="incremental">self-contained; remove ".git" and it's all gone</li>
+</ul></li>
+<li class="incremental">branch
+<ul>
+<li class="incremental">active line of development</li>
+<li class="incremental">a repo can track any number of branches</li>
+</ul></li>
+<li class="incremental">master
+<ul>
+<li class="incremental">default branch in a new git project</li>
+</ul></li>
+</ul>
+
+<h1>concept detail: branches</h1>
+
+<ul>
+<li class="incremental">easy and inexpensive</li>
+<li class="incremental">can have separate branches for separate features</li>
+<li class="incremental">many being worked on "simultaneously"!</li>
+<li class="incremental">you can switch rapidly between branches</li>
+<li class="incremental">boosts individual productivity as well as team productivity</li>
+<li class="incremental">almost all existing VCSs suck at this</li>
+</ul>
+
+<h1>git concepts (cont'd)</h1>
+
+<ul>
+<li class="incremental">working tree
+<ul>
+<li class="incremental">is associated with only one branch</li>
+</ul></li>
+<li class="incremental">head
+<ul>
+<li class="incremental">the tip of a branch</li>
+</ul></li>
+<li class="incremental">HEAD
+<ul>
+<li class="incremental">the tip of the branch associated with your working tree; this is where
+commits go</li>
+</ul></li>
+</ul>
+
+<h1>git concepts (cont'd)</h1>
+
+<ul>
+<li class="incremental">index: holding area for changes approved for commit
+<ul>
+<li class="incremental">git tracks content, not files</li>
+<li class="incremental">lets you select some files to commit while postponing others</li>
+<li class="incremental">lets you keep uncommited changes hanging around</li>
+</ul></li>
+<li class="incremental">remote</li>
+<li class="incremental">origin</li>
+</ul>
+
+<h1>some more git concepts</h1>
+
+<ul>
+<li class="incremental">commit ancestry</li>
+<li class="incremental">commit ancestry as a DAG
+<ul>
+<li class="incremental">the essence of git is to build and traverse this DAG</li>
+</ul></li>
+</ul>
+
+<h1>CVS/SVN equivalence</h1>
+
+<pre><code>    CVS                  GIT
+    ---                  ---
+    checkout             clone
+    update               pull
+    checkin              commit + push
+    add                  add
+    remove               rm
+    ???                  mv
+</code></pre>
+
+<h1>cool stuff</h1>
+
+<ul>
+<li class="incremental">the reflog, reachability, and garbage collection</li>
+<li class="incremental">demo 10 -- cherry picking</li>
+<li class="incremental">rebase</li>
+<li class="incremental">bisect</li>
+<li class="incremental">stash</li>
+</ul>
+
+<h1>demo 10 in pictures</h1>
+
+<p><center><img src="../images/demo-10-01.png"></center>
+</p>
+
+<h1>demo 10 in pictures</h1>
+
+<p><center><img src="../images/demo-10-02.png"></center>
+</p>
+
+<h1>demo 10 in pictures</h1>
+
+<p><center><img src="../images/demo-10-03.png"></center>
+</p>
+
+<h1>rebase -- what and why</h1>
+
+<ul>
+<li class="incremental">what</li>
+<li class="incremental">why
+<ul>
+<li class="incremental">parallel and serial branching</li>
+<li class="incremental">getting the best out of bisect</li>
+</ul></li>
+</ul>
+
+<h1>rebase -- when and how</h1>
+
+<ul>
+<li class="incremental">killing off an old commit</li>
+<li class="incremental">re-arranging your commits interactively -- demo 11</li>
+<li class="incremental"><strong>when not to use it!</strong></li>
+<li class="incremental">origin has moved
+<ul>
+<li class="incremental">demo 12 -- parallel branch using merge</li>
+<li class="incremental">demo 13 -- serial branch using rebase</li>
+</ul></li>
+<li class="incremental">same, but after some of your changes have gone upstream
+<ul>
+<li class="incremental">and they have DIFFERENT SHA1s now!!</li>
+</ul></li>
+</ul>
+
+<h1>demo 11 in pictures</h1>
+
+<p><center><img src="../images/demo-11-01.png"></center>
+</p>
+
+<ul>
+<li class="incremental">and now we do:
+<ul>
+<li class="incremental"><code>git rebase -i HEAD~8</code></li>
+</ul></li>
+</ul>
+
+<h1>demo 11 in pictures</h1>
+
+<p><center><img src="../images/demo-11-02.png"></center>
+</p>
+
+<h1>demo 11 in pictures</h1>
+
+<p><center><img src="../images/demo-11-03.png"></center>
+</p>
+
+<h1>demo 11 in pictures</h1>
+
+<p><center><img src="../images/demo-11-04.png"></center>
+</p>
+
+<h1>demo 11 in pictures</h1>
+
+<p><center><img src="../images/demo-11-05.png"></center>
+</p>
+
+<h1>demo 11 in pictures</h1>
+
+<p><center><img src="../images/demo-11-06.png"></center>
+</p>
+
+<h1>demo 12 (normal merge)</h1>
+
+<p><center><img src="../images/demo-12-01.png"></center>
+</p>
+
+<h1>demo 12 (normal merge)</h1>
+
+<p><center><img src="../images/demo-12-02.png"></center>
+</p>
+
+<h1>demo 12 (normal merge)</h1>
+
+<p><center><img src="../images/demo-12-03.png"></center>
+</p>
+
+<h1>demo 12 (normal merge)</h1>
+
+<p><center><img src="../images/demo-12-04.png"></center>
+</p>
+
+<h1>demo 12 (normal merge)</h1>
+
+<p><center><img src="../images/demo-12-05.png"></center>
+</p>
+
+<h1>demo 13 (rebase)</h1>
+
+<p><center><img src="../images/demo-13-01.png"></center>
+</p>
+
+<h1>demo 13 (rebase)</h1>
+
+<p><center><img src="../images/demo-13-02.png"></center>
+</p>
+
+<h1>demo 13 (rebase)</h1>
+
+<p><center><img src="../images/demo-13-03.png"></center>
+</p>
+
+<h1>odds and ends</h1>
+
+<ul>
+<li class="incremental">only one ".git" dir at the top</li>
+<li class="incremental">patches and repo updates can be ftp-d or mailed</li>
+<li class="incremental">multi-protocol transport
+<ul>
+<li class="incremental">http, ssh, git</li>
+</ul></li>
+<li class="incremental">all copies of a repo have the same history
+<ul>
+<li class="incremental">universal public identifier (a SHA-1 hash)</li>
+<li class="incremental">entire 2 year history of linux kernel is half the current full size</li>
+</ul></li>
+</ul>
+
+<h1>summary: what is git optimised for</h1>
+
+<ul>
+<li class="incremental">distributed development</li>
+<li class="incremental">large file sets</li>
+<li class="incremental">complex merges</li>
+<li class="incremental">speculative, trial branches</li>
+<li class="incremental">EXTREME SPEED -- very fast and very robust</li>
+</ul>
+
+<h1>Thank you</h1>
+
+<hr />
+
+<h3>Questions?</h3>
+
+<hr />
+
+<hr />

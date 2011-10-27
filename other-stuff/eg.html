@@ -1,0 +1,139 @@
+<p><head><style>
+    body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
+    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
+    h4, h5      { background: #ffb; margin-left: -20px; }
+    code        { font-size:    1.1em;  background:  #ddf; }
+    pre         { margin-left:  2em;    background:  #ddf; }
+    pre code    { font-size:    1.1em;  background:  #ddf; }
+</style></head></p>
+
+<h1><a name="notes_on_eg_Elijah_Newren_s_easy_git_">notes on "eg" (Elijah Newren's "easy git")</a></h1>
+
+<p><sup><a href="http://www.gnome.org/~newren/eg/">eg</a> is a single file wrapper for <code>git</code>
+that provides much more user-friendly options and more sensible defaults for
+many commands.  It's a great tool, the documentation is top class, the focus
+on consistency and layering etc., is very nice, and clearly a lot of TLC has
+gone into making it.</p>
+
+<p>I'm not sure I like the whole package, but the nice thing is that eg co-exists
+quite happily with normal git, so you can mix and match -- use only those eg
+commands that you like, and ignore the others.</p>
+
+<p>In this note, I explain some of the eg commands, and their advantages (or
+lack) compared to plain git.  This is essentially my personal notes on "eg",
+describing what I like, what I don't, etc., focusing mainly on commands where
+the behaviour is <em>significantly</em> different from plain git.</sup></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#notes_on_eg_Elijah_Newren_s_easy_git_">notes on "eg" (Elijah Newren's "easy git")</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#really_useful_commands">really useful commands</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#_eg_revert_and_eg_cherry_pick_"><code>eg revert</code> and <code>eg cherry-pick</code></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#other_commands">other commands</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#not_so_useful_commands">not (so) useful commands</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#_eg_diff_"><code>eg diff</code></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#other_commands">other commands</a><br></p>
+
+<h3><a name="really_useful_commands">really useful commands</a></h3>
+
+<h4><a name="_eg_revert_and_eg_cherry_pick_"><code>eg revert</code> and <code>eg cherry-pick</code></a></h4>
+
+<p><code>eg revert</code> eliminates a lot of the confusion between plain git's various
+ways of getting at old content.  This command's help text has the longest
+description of the differences from plain git.  At the same time, git's own
+"revert" command is done in eg by <code>eg cherry-pick -R</code>, which actually
+makes a lot of sense.</p>
+
+<p>The most important feature that "eg revert" provides is <code>eg revert --in REV
+FILE</code>.  This reverts the change to FILE made in revision REV.  It's a
+partial revert of an earlier commit.  This does not actually have a single
+command equivalent in plain git, and it is done by piping a suitable <code>git
+diff</code> to <code>git apply -R</code>.</p>
+
+<p>The second variation is <code>eg revert --since REV FILE</code>, which reverts FILE
+to the content it had in revision REV.  This is plain git's checkout paths
+mode.</p>
+
+<h4><a name="other_commands">other commands</a></h4>
+
+<ul>
+<li><p><code>eg info</code> is pretty cool :-)</p></li>
+<li><p><code>eg publish</code> is neat too; as the man page says, normal git makes it
+quite annoying (I wish you could clone from an empty repo -- that by
+itself would make things a lot easier)</p></li>
+<li><p><code>eg bundle create</code> adds <code>--all HEAD</code> to the normal command.  eg
+also provides <code>eg bundle create-update new.bdl old.bdl</code> which is
+functionally the same as</p>
+
+<pre><code>git bundle create new.bdl --all HEAD --not \
+    $(git ls-remote old.bdl | cut -f1)
+</code></pre></li>
+</ul>
+
+<h3><a name="not_so_useful_commands">not (so) useful commands</a></h3>
+
+<h4><a name="_eg_diff_"><code>eg diff</code></a></h4>
+
+<p><code>eg diff</code> shows changes against HEAD, not the index.  I prefer the normal
+git behaviour, for reasons cited in
+<a href="../concepts/uses-of-index.html">uses of index</a></p>
+
+<p><code>eg diff</code>'s second change from normal git (see
+<a href="http://www.gnome.org/~newren/eg/documentation/diff.html">http://www.gnome.org/~newren/eg/documentation/diff.html</a>) seems logical on the
+face of it, but I'm not buying.  <code>diff</code> and <code>log</code> are inherently
+different commands with different purposes and outputs, and it's meaningless
+to try and synchronise their syntax.</p>
+
+<p>To start with, these points are fundamental:</p>
+
+<ul>
+<li>the older revision is (normally) specified on the left side (LHS)</li>
+<li>"diff" only works on two <em>endpoint</em> commits, regardless of how many
+commits exist in between those endpoints</li>
+<li>however, "log" works on all the in between commits also</li>
+<li>normal, everyday, usage is <code>git diff A..B</code>, meaning "changes from A to
+B", and <code>git log A..B</code>, meaning "commits in B but not in A".</li>
+</ul>
+
+<p>To those simple rules, add just one more (easy enough to remember): the
+"<code>...</code>" operator always involves the common ancestor somehow.</p>
+
+<p>With those rules in mind, you can keep track of what the double-dot and
+triple-dot mean very easily.</p>
+
+<p>Consider <code>git diff A...B</code>:</p>
+
+<ul>
+<li>since the "<code>...</code>" is used, the common ancestor is involved</li>
+<li>since diff can only deal with 2 end points, one of A or B has to make way
+for the common ancestor</li>
+<li>since the common ancestor is older than A and B, clearly it has to appear
+on the left side, so A loses :-)</li>
+</ul>
+
+<p>And this becomes <code>git diff CA(A,B)..B</code>, where CA(A,B) is the common
+ancestor of A and B.  Easy enough?</p>
+
+<p>Now look at <code>git log A...B</code></p>
+
+<ul>
+<li>again, the "<code>...</code>" is used, so the common ancestor is involved</li>
+<li>since log is not constrained to only 2 endpoints like diff is, you don't
+have to discard A or B</li>
+<li>so you show the commits between the common ancestor and A, <em>as well as</em>
+between the common ancestor and B</li>
+</ul>
+
+<p>So: <code>git log CA(A,B)..A</code> PLUS <code>git log CA(A,B)..B</code></p>
+
+<h4><a name="other_commands">other commands</a></h4>
+
+<ul>
+<li><p><code>eg log</code> doesn't seem to add much value compared to <code>--decorate</code>,
+plus it eats up the colors</p></li>
+<li><p><code>eg commit</code> attempts to simplify the many combinations you can have
+(untracked, tracked+changed, tracked+changed+staged, etc) but I don't
+think it succeeds very well (this is a subjective opinion, not fact!).
+But really, if the command line options to stage and unstage confuse you,
+just use <code>git gui</code>, where the icons and the two panes on the left tell
+you all you want to know.  Couldn't be simpler than that.</p></li>
+</ul>

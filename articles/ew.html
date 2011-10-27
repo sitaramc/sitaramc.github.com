@@ -1,0 +1,124 @@
+<p><head><style>
+    body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
+    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
+    h4, h5      { background: #ffb; margin-left: -20px; }
+    code        { font-size:    1.1em;  background:  #ddf; }
+    pre         { margin-left:  2em;    background:  #ddf; }
+    pre code    { font-size:    1.1em;  background:  #ddf; }
+</style></head></p>
+
+<h1><a name="_ew_an_egrep_wrapper"><code>ew</code> -- an egrep wrapper</a></h1>
+
+<p><sup>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#_ew_an_egrep_wrapper"><code>ew</code> -- an egrep wrapper</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#basic_features">basic features</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#a_tale_of_inertia_or_ack_thooo_">a tale of inertia (or ack-thooo!)</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#update_2009_02_17_passthru_mode_is_so_easy_">update 2009-02-17: passthru mode is so easy!</a><br>
+</sup></p>
+
+<hr />
+
+<h3><a name="basic_features">basic features</a></h3>
+
+<p><code>ew</code> is a simple shell script that eventually invokes <code>grep -E</code>.  It's about
+125 lines, but the actual code is about 60 lines.  You can download it
+<a href="ew">here</a>.</p>
+
+<p>The usage message you see when you invoke it is this:</p>
+
+<pre><code>Usage:
+  ew [-G glob-to-search]* [other egrep options] egrep-pattern
+
+ew is an 'egrep wrapper'
+
+Features:
+  1.  forces egrep syntax (-E).  When input is a terminal, also forces
+      recursion (-r), and ignores binary files (-I).  Exclusions are handled
+      by setting the environment variable GREP_OPTIONS.  For example:
+          export GREP_OPTIONS="--exclude-dir=.git"
+  2.  'smartcase' emulation: if the pattern does not have any uppercase
+      letters, adds the '-i' flag
+  3.  you can restrict the search to specific glob(s) -- use as many '-G'
+      options as you want.  Be sure to escape meta-characters.  Examples:
+          ew pattern -G \*.c -G \*.h
+  4.  any other options will be passed on to grep so you're not losing any
+      grep functionality
+  5.  if the environment variable 'D' exists, ew will show you the generated
+      egrep command before executing.  For example:
+          D=1 ew pattern -G \*.pl
+
+Caveats:
+  1.  if using as a pipe, put the pattern at the end to get smartcase
+  2.  standard grep options that need arguments must have the arguments
+      'stuck' to them (like '-C4' instead of '-C 4').  In practice the only
+      ones affected are -m, -A, -B, and -C.  If you need -f, use the
+      '--file=' form.
+  Both these caveats are because I'm too lazy to use shopts :-)  I'll fix it
+  someday, or if anyone asks.
+
+Tip: to get ack's passthru mode, just prefix your pattern with '$|' (or
+'$\|' to protect it from the shell).  Grep will do the rest ;-)
+</code></pre>
+
+<p>There's nothing more to add as far as using <code>ew</code> goes.  It leaves all the
+heavy lifting to grep anyway, and the debug mode helps you figure out what
+it's actually doing in the unlikely event that you're surprised.</p>
+
+<h3><a name="a_tale_of_inertia_or_ack_thooo_">a tale of inertia (or ack-thooo!)</a></h3>
+
+<p>The 'smartcase' and the '-G' features were inspired by
+<a href="http://petdance.com/ack/">ack</a>.</p>
+
+<p>I started using ack about 2 years ago, and it's a very nice program.  It's
+main aim is cut the fluff when you're searching for something -- really cool
+if your files are all neatly laid out with proper extensions and you want to
+search <em>only</em> those files.</p>
+
+<p>The problem with ack is that it grows on you, replacing grep in your mind.
+And then one day you use it where it <em>doesn't</em> do the same thing as grep.</p>
+
+<p>At that point, you <em>might</em> (if you're lucky) realise that finding no matches
+doesn't mean there really weren't any to be found, and you then switch your
+brain from whatever problem you're trying to solve, to figuring out why ack
+missed some.  The argument is often made that ack has a '-f' flag to show you
+what files are being searched, but it's still a distraction from your real
+work.</p>
+
+<p>In short, ack is the wrong tool for people with unstructured needs; it cuts
+out <em>too much</em>, and I gradually grew more and more frustrated with this
+impedance mismatch.</p>
+
+<p>It's a testament to what a nice program it otherwise was that -- despite many
+similar (unresolved) problems, and one really bizarre bug that almost caused
+me data loss (fixed very quickly by a user called Bill Riker) -- I stuck with
+ack for two years!  The tipping point finally came when the author said
+<a href="http://groups.google.com/group/ack-users/browse_thread/thread/ae646df76cc15259">"There's really no English that explains how it
+works"</a>
+when someone asked him for a description of the file selection logic!</p>
+
+<p>When you really like a program, it's disconcerting to hear the primary author
+say something like that!  So -- still unwilling to let go -- I took it on
+myself to go through the code and write up a <a href="http://groups.google.com/group/ack-users/browse_thread/thread/91d95a012be2905a">description of the default file
+choice logic for
+ack</a>.</p>
+
+<p>And <em>that</em> finally did the trick!  Reading over all the special cases and
+exceptions, many of which were undocumented, I realised that I was not the
+target audience for ack.</p>
+
+<p>It was ironic that something I did for love of the program made me stop
+using it and write my own instead.</p>
+
+<h4><a name="update_2009_02_17_passthru_mode_is_so_easy_">update 2009-02-17: passthru mode is so easy!</a></h4>
+
+<p>Getting ack's passthru mode -- which is the <em>only</em> thing I missed about ack,
+is so freaking easy:</p>
+
+<pre><code>tail -f /var/log/messages | ew $\|pattern
+</code></pre>
+
+<p>The first part of the alternation matches every line, but there's nothing to
+highlight.  When the pattern matches, it is highlighted.  Result: passthru
+mode!</p>
+
+<p>:-)</p>

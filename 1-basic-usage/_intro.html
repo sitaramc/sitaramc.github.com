@@ -1,0 +1,546 @@
+<head>
+<title>HTML Slidy</title>
+<link rel="stylesheet" href="../tools/slidy.css" type="text/css">
+<meta name="font-size-adjustment" content="3">
+<script src="../tools/slidy.js" charset="utf-8" type="text/javascript">
+</script>
+</head>
+<body>
+
+<div class="slide cover">
+<center>
+<br/>
+<br/>
+<br/>
+<br/>
+<img src="../tools/git.png">
+<br/>
+<br/>
+<br/>
+<br/>
+<h1>a very basic intro to version control and git</h1>
+<br/>
+<br/>
+
+
+</center>
+</div>
+
+<h1>why</h1>
+
+<p><center><img src="../images/projects-sans-vcs.png"></center>
+</p>
+
+<h1>what is a VCS</h1>
+
+<h1>why use a VCS</h1>
+
+<ul>
+<li class="incremental">reversibility or rollback<n>, aka C-Y-A!
+<ul>
+<li class="incremental">linear (on the time axis)<n>, simple to implement</li>
+</ul></li>
+<li class="incremental">concurrency
+<ul>
+<li class="incremental">non-linear<n>, all the complexity is here</li>
+</ul></li>
+<li class="incremental">annotation</li>
+</ul>
+
+<h1>creating a repository</h1>
+
+<ul>
+<li class="incremental">how hard is it?</li>
+</ul>
+
+<h1>an empty directory</h1>
+
+<p><center><img src="intro-images/empty.png"></center>
+</p>
+
+<h1>add some files</h1>
+
+<p><center><img src="intro-images/sampleproj.png"></center>
+</p>
+
+<h1>'git init' -- done!</h1>
+
+<p><center><img src="intro-images/init-done.png"></center>
+</p>
+
+<h1>how about on windows?</h1>
+
+<p><center><img src="intro-images/empty-windows.png"></center>
+</p>
+
+<h1>making a repository</h1>
+
+<p><center><img src="intro-images/init-win1.png"></center>
+</p>
+
+<h1>making a repository</h1>
+
+<p><center><img src="intro-images/init-win2.png"></center>
+</p>
+
+<h1>making a repository</h1>
+
+<p><center><img src="intro-images/init-win3.png"></center>
+</p>
+
+<h1>done!</h1>
+
+<p><center><img src="intro-images/init-win4.png"></center>
+</p>
+
+<h1>just checking...</h1>
+
+<p><center><img src="intro-images/init-done-win1.png"></center>
+</p>
+
+<h1>yup -- works fine!</h1>
+
+<p><center><img src="intro-images/init-done-win2.png"></center>
+</p>
+
+<h1>CLI on windows?</h1>
+
+<p><center><img src="intro-images/init-winb1.png"></center>
+</p>
+
+<h1>a bash shell</h1>
+
+<p><center><img src="intro-images/init-winb2.png"></center>
+</p>
+
+<h1>'git init' -- done!</h1>
+
+<p><center><img src="intro-images/init-done-winb.png"></center>
+</p>
+
+<h1>what is a 'work tree'</h1>
+
+<p><center><img src="intro-images/worktree.png"></center>
+</p>
+
+<h1>what is a 'repo'</h1>
+
+<ul>
+<li class="incremental">A repository is just
+<ul>
+<li class="incremental">a work tree, <n>plus</li>
+<li class="incremental">a special '.git' directory at the top level of the work tree.</li>
+</ul></li>
+<li class="incremental">NEVER FIDDLE WITH THIS DIRECTORY UNLESS YOU KNOW WHAT YOU ARE DOING!</li>
+<li class="incremental">YOU HAVE BEEN WARNED!</li>
+</ul>
+
+<h1>repository</h1>
+
+<p><center><img src="intro-images/repo.png"></center>
+</p>
+
+<h1>(what's inside '.git'?)</h1>
+
+<p><center><img src="intro-images/inside-dotgit.png"></center>
+</p>
+
+<h1>you said 'non-linear'</h1>
+
+<p><img src="intro-images/worktree-symbol.png" align="left">
+</p>
+
+<ul>
+<li class="incremental">sure...</li>
+<li class="incremental">a repository keeps snapshots of the work tree...</li>
+<li class="incremental">...at different points in time</li>
+</ul>
+
+<h1>snap</h1>
+
+<p><center><img src="intro-images/repo-1.png"></center>
+</p>
+
+<h1>snapshots</h1>
+
+<p><center><img src="intro-images/repo-2.png"></center>
+</p>
+
+<h1>snapshots of the work tree</h1>
+
+<p><center><img src="intro-images/repo-3.png"></center>
+</p>
+
+<h1>at different</h1>
+
+<p><center><img src="intro-images/repo-4.png"></center>
+</p>
+
+<h1>at different points</h1>
+
+<p><center><img src="intro-images/repo-5.png"></center>
+</p>
+
+<h1>at different points in time</h1>
+
+<p><center><img src="intro-images/repo-6.png"></center>
+</p>
+
+<h1>what is a commit</h1>
+
+<p>remember those snapshots?  Yup -- they're all commits!</p>
+
+<p>Here, to refresh your memory:</p>
+
+<p><img src="intro-images/repo-6.png" height="50%">
+</p>
+
+<h1>what is a repo again?</h1>
+
+<ul>
+<li class="incremental">a work tree + .git?  <n>sure, but also...</li>
+<li class="incremental">a bunch of commits laid out as a 'graph'
+<ul>
+<li class="incremental">a "directed acyclic graph", if you're interested</li>
+</ul></li>
+</ul>
+
+<h1>DAG</h1>
+
+<p><center><img src="intro-images/dag.png"></center>
+</p>
+
+<h1>what is a branch</h1>
+
+<ul>
+<li class="incremental">since a graph is sort of the same as a tree (for our purposes)
+<ul>
+<li class="incremental">it has branches</li>
+<li class="incremental">and those branches have names</li>
+</ul></li>
+</ul>
+
+<h1>branches</h1>
+
+<p><center><img src="intro-images/dag-br.png"></center>
+</p>
+
+<h1>what is a tag</h1>
+
+<ul>
+<li class="incremental">when you checkout a branch and then commit, the branch is now pointing at
+the new 'snapshot'.  <n>This means...</li>
+<li class="incremental">...the branch 'tip' keeps moving with every commit</li>
+<li class="incremental">But sometimes you want to mark a point in your development
+<ul>
+<li class="incremental">with some sort of a permanent label</li>
+<li class="incremental">that stays right there, even if you add commits on top</li>
+</ul></li>
+</ul>
+
+<h1>tags</h1>
+
+<p><center><img src="intro-images/dag-br-tag.png"></center>
+</p>
+
+<h1>general VCS concepts</h1>
+
+<ul>
+<li class="incremental">"project": minimum set of source code (and related files) needed
+to <strong>build</strong> the software</li>
+<li class="incremental">in a CVCS (Centralised VCS)
+<ul>
+<li class="incremental">each project will have exactly one "repository"</li>
+<li class="incremental">on some central server</li>
+<li class="incremental">and each developer will checkout the project
+<ul>
+<li class="incremental">from the server to his workstation</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h1>a DVCS is different</h1>
+
+<ul>
+<li class="incremental">each project will have one "central" repository
+<ul>
+<li class="incremental">(maybe; see next slide)</li>
+</ul></li>
+<li class="incremental">but each repository can have many "clones"</li>
+<li class="incremental">so each developer has a clone on his workstation
+<ul>
+<li class="incremental">a complete copy of the repository</li>
+<li class="incremental">plus his own work/changes</li>
+</ul></li>
+</ul>
+
+<h1>central repo in a DVCS?</h1>
+
+<ul>
+<li class="incremental">the developers can push and pull from each other directly
+<ul>
+<li class="incremental">because they're also repositories just like the "central" one</li>
+</ul></li>
+<li class="incremental">so do we still need a "central" repo?
+<ul>
+<li class="incremental">not really<n>; that's only an administrative decision now</li>
+<li class="incremental">not a technical requirement</li>
+<li class="incremental">but it makes managing projects easier</li>
+<li class="incremental">so yes, we still have central repos for most projects</li>
+</ul></li>
+</ul>
+
+<h1>what is a 'remote'</h1>
+
+<ul>
+<li class="incremental">when you clone, the repo you cloned from is a 'remote' for you</li>
+<li class="incremental">every remote has a name (a user-friendly name you choose)</li>
+<li class="incremental">(special case for clone: the 'remote' has a special name: 'origin')
+<ul>
+<li class="incremental">much nicer than using the full URL, like</li>
+<li class="incremental"><code>ssh://sitaram@git.server/repos/myproj.git</code></li>
+</ul></li>
+<li class="incremental">bad picture coming up...</li>
+</ul>
+
+<h1>remotes</h1>
+
+<p>(ok that's not a bad picture; it's HORRIBLE picture!)</p>
+
+<p><center><img src="intro-images/remote.png"></center>
+</p>
+
+<h1>git concepts</h1>
+
+<ul>
+<li class="incremental">repo
+<ul>
+<li class="incremental">self-contained; remove ".git" at the top and it's all gone</li>
+</ul></li>
+<li class="incremental">branch
+<ul>
+<li class="incremental">an active line of development</li>
+<li class="incremental">a repo can track any number of branches</li>
+</ul></li>
+<li class="incremental">master
+<ul>
+<li class="incremental">name of default branch in a new git project</li>
+</ul></li>
+</ul>
+
+<h1>concept detail: branches</h1>
+
+<ul>
+<li class="incremental">easy and inexpensive</li>
+<li class="incremental">can have separate branches for separate features</li>
+<li class="incremental">many being worked on "simultaneously"!</li>
+<li class="incremental">you can switch rapidly between branches</li>
+<li class="incremental">boosts individual productivity as well as team productivity</li>
+<li class="incremental">almost all existing VCSs suck at this</li>
+</ul>
+
+<h1>individual productivity?</h1>
+
+<ul>
+<li class="incremental">concurrency</li>
+<li class="incremental">makes context switching trivial</li>
+</ul>
+
+<h1>git concepts (cont'd)</h1>
+
+<ul>
+<li class="incremental">working tree
+<ul>
+<li class="incremental">is associated with only one branch at any time</li>
+</ul></li>
+<li class="incremental">head
+<ul>
+<li class="incremental">the tip of a branch</li>
+</ul></li>
+<li class="incremental">HEAD
+<ul>
+<li class="incremental">the tip of the branch associated with your working tree; this is where
+commits go</li>
+</ul></li>
+</ul>
+
+<h1>git concepts (cont'd)</h1>
+
+<ul>
+<li class="incremental">index: holding area for changes approved for commit
+<ul>
+<li class="incremental">git tracks content, not files</li>
+<li class="incremental">lets you select some files to commit while postponing others</li>
+<li class="incremental">lets you keep uncommited changes hanging around</li>
+</ul></li>
+</ul>
+
+<h1>some more git concepts</h1>
+
+<ul>
+<li class="incremental">commit ancestry</li>
+<li class="incremental">commit ancestry as a DAG
+<ul>
+<li class="incremental">the essence of git is to build and traverse this DAG</li>
+<li class="incremental">http://sitaramc.github.com/gcs/index.html</li>
+</ul></li>
+<li class="incremental">universal public identifier (a SHA-1 hash)
+<ul>
+<li class="incremental">every file, directory, and commit has a unique hash</li>
+<li class="incremental">check the integrity of an entire repo by comparing just one 160-bit
+value (40 hex digits)</li>
+</ul></li>
+</ul>
+
+<h1>workflow</h1>
+
+<ul>
+<li class="incremental">far better than anything I can try:
+<ul>
+<li class="incremental">http://nathanj.github.com/gitguide</li>
+</ul></li>
+<li class="incremental">so I'll just describe things at a high level</li>
+</ul>
+
+<h1>one-time setup</h1>
+
+<ul>
+<li class="incremental">per developer
+<ul>
+<li class="incremental">set up your name and email address</li>
+</ul></li>
+<li class="incremental">per developer per project
+<ul>
+<li class="incremental">'git init' (the first guy)</li>
+<li class="incremental">'git clone ...' (the others)</li>
+</ul></li>
+</ul>
+
+<h1>err... clone?  from where?</h1>
+
+<ul>
+<li class="incremental">git servers and protocols (note: git does NO access control!)
+<ul>
+<li class="incremental">ssh (RW, access control by ssh)</li>
+<li class="incremental">file protocol (RW, access control by OS)</li>
+<li class="incremental">git protocol (RO, access control by OS/firewall etc)
+<ul>
+<li class="incremental">needs git daemon to be started first</li>
+</ul></li>
+<li class="incremental">old style http (RO, access control by Apache)
+<ul>
+<li class="incremental">RW possible but painful; requires WebDAV</li>
+</ul></li>
+<li class="incremental">new style http (RW, access control by apache)
+<ul>
+<li class="incremental">requires git 1.6.6 or better on both server and client</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h1>many users/repos?</h1>
+
+<ul>
+<li class="incremental">just install 'gitolite' and be done!</li>
+<li class="incremental">gitolite can provide fine-grained access control</li>
+<li class="incremental">works over sshd or apache
+<ul>
+<li class="incremental">sshd (or httpd) authenticates the user</li>
+<li class="incremental">passes the username to gitolite</li>
+<li class="incremental">gitolite uses the authenticated username, looks at the config file, and
+makes the authorisation decision</li>
+</ul></li>
+</ul>
+
+<h1>normal workflow activities</h1>
+
+<ul>
+<li class="incremental">checkout a branch</li>
+<li class="incremental">edit files</li>
+<li class="incremental">review your changes ('git diff', or 'git gui')</li>
+<li class="incremental">review other people's changes or your older commits ('gitk' -- a very
+powerful GUI tool)</li>
+<li class="incremental">stage and commit them</li>
+</ul>
+
+<h1>normal workflow activities</h1>
+
+<ul>
+<li class="incremental">push your commits to the server</li>
+<li class="incremental">push failed?  maybe your teammates committed something recently?
+<ul>
+<li class="incremental">pull from the server first</li>
+<li class="incremental">their changes get merged into your local repo</li>
+<li class="incremental">then you push...</li>
+</ul></li>
+</ul>
+
+<h1>clean and dirty work tree</h1>
+
+<ul>
+<li class="incremental">clean: all changes committed to local repo</li>
+<li class="incremental">dirty: some files changed, and changes not yet committed</li>
+<li class="incremental">PULL IS BEST DONE ON A CLEAN TREE!</li>
+</ul>
+
+<h1>clean tree - CLI</h1>
+
+<p><center><img src="intro-images/clean-cli.png"></center>
+</p>
+
+<h1>clean tree - GUI</h1>
+
+<p><center><img src="intro-images/clean-gui.png"></center>
+</p>
+
+<h1>dirty tree - CLI</h1>
+
+<p><center><img src="intro-images/dirty-cli.png"></center>
+</p>
+
+<h1>dirty tree - GUI</h1>
+
+<p><center><img src="intro-images/dirty-gui.png"></center>
+</p>
+
+<h1>staging from the GUI</h1>
+
+<p><center><img src="intro-images/staging-gui.png"></center>
+</p>
+
+<h1>staged files - CLI</h1>
+
+<p><center><img src="intro-images/staged-cli.png"></center>
+</p>
+
+<h1>committing from the GUI</h1>
+
+<p><center><img src="intro-images/commit-gui.png"></center>
+</p>
+
+<h1>clean again!</h1>
+
+<p><center><img src="intro-images/clean-again.png"></center>
+</p>
+
+<h1>conflicts</h1>
+
+<ul>
+<li class="incremental">what is a conflict</li>
+<li class="incremental">how do you resolve it?</li>
+</ul>
+
+<h1>advanced workflow activities</h1>
+
+<ul>
+<li class="incremental">cherry-pick -- pick up specific changes from another branch or repo and
+make those changes happen in your repo</li>
+<li class="incremental">rebase -- move commits around<n>; sort of like
+<ul>
+<li class="incremental">cut off a branch where it connects to the trunk of a tree...</li>
+<li class="incremental">...and graft it somewhere else</li>
+</ul></li>
+<li class="incremental">bisect</li>
+</ul>
+
+<h1>...and we're done!</h1>
