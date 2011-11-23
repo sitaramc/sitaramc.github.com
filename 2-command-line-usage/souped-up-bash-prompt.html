@@ -1,24 +1,32 @@
-<p><head><style>
+<head>
+<title>
+souping up your bash prompt
+</title>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="souping_up_your_bash_prompt">souping up your bash prompt</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#2-command-line-usage/souped-up-bash-prompt">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
 
-<p><sup>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#souping_up_your_bash_prompt">souping up your bash prompt</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Summary_for_the_impatient_expert">Summary for the impatient/expert</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Details">Details</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Download_bash_script">Download bash script</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Screenshot">Screenshot</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#extracode">Supplementary code</a><br>
-</sup></p>
 
-<hr />
+<p><a name="2_command_line_usage_souped_up_bash_prompt_souping_up_your_bash_prompt_"></a></p>
+
+<h1>souping up your bash prompt</h1>
 
 <p>This document describes how to get command completion as well as a souped up
 bash prompt.</p>
@@ -29,7 +37,9 @@ care of command completion as well as displaying the current branch name in your
 inside of it (meaning you can upgrade that without worry) -- we add more
 functionality.</p>
 
-<h4><a name="Summary_for_the_impatient_expert">Summary for the impatient/expert</a></h4>
+<p><a name="2_command_line_usage_souped_up_bash_prompt_Summary_for_the_impatient_expert_"></a></p>
+
+<h2>Summary for the impatient/expert</h2>
 
 <ul>
 <li>normally, shows whatever <code>__git_ps1</code> sends back.  That is, completion,
@@ -56,7 +66,9 @@ expensive to compute and could delay the prompt.</p>
 <p>The implementation is either a neat and elegant hack or kludge city, depending
 on whom you ask :)</p>
 
-<h4><a name="Details">Details</a></h4>
+<p><a name="2_command_line_usage_souped_up_bash_prompt_Details_"></a></p>
+
+<h2>Details</h2>
 
 <p>For a while, I've wanted a quick summary of <code>git status</code> -- how many files are
 staged (<code>git add</code>ed), modified, untracked, unmerged, etc.  I've also wanted a
@@ -77,12 +89,14 @@ called psychic mode!)</li>
 <p>That last part was tough, but I'm pleased that my solution not only works, it
 even works on msysgit so my Windows users are happy too!</p>
 
-<h4><a name="Download_bash_script">Download bash script</a></h4>
+<p><a name="2_command_line_usage_souped_up_bash_prompt_Download_bash_script_"></a></p>
+
+<h3>Download bash script</h3>
 
 <p>The part that computes the status and summarises it with colored numbers is a
 hacked up version of git://github.com/lvv/git-prompt.git), and you can
-download it <a href="../tools/git-completion-plus.bash.txt">here</a>.  And here's a
-<a href="../tools/git-completion-plus.bash.html">syntax colored</a> version to quickly
+download it <a href="tools/git-completion-plus.bash.txt">here</a>.  And here's a
+<a href="tools/git-completion-plus.bash.html">syntax colored</a> version to quickly
 view on a browser.  You're expected to source it into your <code>.bashrc</code>; it'll
 take care of sourcing the git-supplied one, which it looks for in <code>$HOME</code>.</p>
 
@@ -91,12 +105,14 @@ section</a>.  I used to have all this in one file, but the code to
 detect the quick-double-enter has uses outside git also, so I separated that
 logic from the 'git status colorisation' stuff.</p>
 
-<h4><a name="Screenshot">Screenshot</a></h4>
+<p><a name="2_command_line_usage_souped_up_bash_prompt_Screenshot_"></a></p>
+
+<h3>Screenshot</h3>
 
 <p>[Update 2009-03-19: the screenshot is not quite current but will suffice to
 give you the general idea]</p>
 
-<p>Someone asked for a screenshot so <a href="../images/git-completion-plus.png">here is
+<p>Someone asked for a screenshot so <a href="images/git-completion-plus.png">here is
 one</a>; it should give you enough of an idea.
 You can see the extra information (namely, the output of <code>__git_ps1</code> being
 colored, and a few numbers after that in different colors at certain places:</p>
@@ -117,7 +133,9 @@ blue.  Unmerged files are magenta.</p>
 trigger the extra info.  I also didn't show all 4 colors (staged, modified,
 untracked, unmerged) at the same time but I'm sure you get the idea.</p>
 
-<h4><a name="extracode">Supplementary code</a></h4>
+<p><a name="2_command_line_usage_souped_up_bash_prompt_Supplementary_code_"></a></p>
+
+<h3>Supplementary code</h3>
 
 <p>The following code contains the hack to do something different if you hit
 enter twice in quick succession.  It need to be run via bash's
@@ -177,5 +195,5 @@ __ps1_plus()
 
 <hr />
 
-<p><sup>and <a href="../tools/git-completion.bash.txt">this</a> is a copy of the v1.6.1 version of
-git-completion.bash from the git source tree; you probably have it already</sup></p>
+<p>^^and <a href="tools/git-completion.bash.txt">this</a> is a copy of the v1.6.1 version of
+git-completion.bash from the git source tree; you probably have it already^^</p>

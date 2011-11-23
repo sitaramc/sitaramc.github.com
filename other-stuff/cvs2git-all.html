@@ -1,0 +1,134 @@
+<head>
+<title>
+converting CVS to git
+</title>
+<style>
+    body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
+    code        { font-size:    1.1em;  background:  #ddf; }
+    pre         { margin-left:  2em;    background:  #ddf; }
+    pre code    { font-size:    1.1em;  background:  #ddf; }
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#other-stuff/cvs2git">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
+
+<!-- file: other-stuff/cvs2git "converting CVS to git" -->
+
+<p><a name="other_stuff_cvs2git_converting_CVS_to_git_"></a></p>
+
+<h1>converting CVS to git</h1>
+
+<p>Update 2009-10-08: It has been pointed out that cvsimport, which I recommend
+against using below, can do incremental imports.  If this is important to you
+(it wasn't, to me, and it never will be), then this document is probably no
+use to you.  Sorry...</p>
+
+<hr />
+
+<p>First: do <strong>NOT</strong> use the builtin <code>git cvsimport</code> unless your repository is
+very simple and linear.  Problems I had using it on a moderately complex repo
+include missing tags, branches grafted to the wrong place (by comparing with a
+<code>--simplify-by-decoration</code> tree later), missing commits (which is what
+originally made me start investigating), and even missing files in the root of
+the repo!!</p>
+
+<p>It's been too long since I last used CVS to figure this out, and cvs2svn
+seemed to deal with a lot more nuances, so I used that instead.</p>
+
+<p><a name="other_stuff_cvs2git_step_1_make_a_dump_file_"></a></p>
+
+<h2>step 1 -- make a dump file</h2>
+
+<ul>
+<li><p>download cvs2svn version 2.1 or higher from somewhere within
+<a href="http://cvs2svn.tigris.org/cvs2git.html">http://cvs2svn.tigris.org/cvs2git.html</a>. DO NOT BE DISTRACTED BY THE
+MISLEADING REFERENCES TO A MYTHICAL <code>cvs2git</code> COMMAND IN THAT PAGE :)  As
+of the time I tried this, it didn't exist.  Maybe now it does...</p></li>
+<li><p>expand it somewhere, and cd there</p></li>
+<li><p>in there, create an options file from the original, like shown in the
+<a href="#patch">patch</a> at the end of this file (change accordingly of course;
+this diff only shows where you should make the changes, not what)</p>
+
+<p><strong>IMPORTANT WARNING</strong></p>
+
+<p>DO NOT USE the <code>test-data/main-cvsrepos/cvs2svn-git.options</code> file as a
+starting point.  Though the intermediate files were about 3X smaller when
+I used it, there were lots of inaccuracies w.r.t the $id type stuff, and
+for some older tags whole files were missing, compared to the
+corresponding CVS checkout.  The <code>-inline</code> version seems to work fine; no
+errors on any of the 30 or so tags I checked on a project that had about 5
+years of work in CVS.</p></li>
+<li><p>run</p>
+
+<pre><code>./cvs2svn --options=my.c2soptions
+</code></pre></li>
+<li><p>when it completes, check the <code>cvs2svn-tmp</code> directory for a rather large
+file called git-dump.dat</p></li>
+</ul>
+
+<p><a name="other_stuff_cvs2git_step_2_import_into_git_"></a></p>
+
+<h2>step 2 -- import into git</h2>
+
+<ul>
+<li><p>make an empty directory, cd to it, git init, then run</p>
+
+<pre><code>cat ~-/cvs2svn-tmp/git-dump.dat | git fast-import
+</code></pre></li>
+<li><p>if you used the non-inline options file, or wanted to test that as well,
+there would be <em>two</em> files in the cvs2svn-tmp directory, and the command
+would now be:</p>
+
+<pre><code>cat ~-/cvs2svn-tmp/git-{blob,dump}.dat | git fast-import
+</code></pre></li>
+</ul>
+
+<p><a name="patch"></a></p>
+
+<h2>Appendix</h2>
+
+<p>These are the changes I made to the options file:</p>
+
+<pre><code>diff --git 1/test-data/main-cvsrepos/cvs2svn-git-inline.options 2/my.c2soptions.inline
+index 635f9cd..a5a4018 100644
+--- 1/test-data/main-cvsrepos/cvs2svn-git-inline.options
++++ 2/my.c2soptions.inline
+@@ -39,7 +39,7 @@ ctx.cross_branch_commits = False
+ # record the original author (for example, the creation of a branch).
+ # This should be a simple (unix-style) username, but it can be
+ # translated into a git-style name by the author_transforms map.
+-ctx.username = 'cvs2svn'
++ctx.username = 'someone'
+
+ # CVS uses unix login names as author names whereas git requires
+ # author names to be of the form "foo &lt;bar&gt;".  The default is to set
+@@ -59,7 +59,7 @@ author_transforms={
+
+     # This one will be used for commits for which CVS doesn't record
+     # the original author, as explained above.
+-    'cvs2svn' : ('cvs2svn', 'admin@example.com'),
++    'someone' : ('someone', 'someone@my.company.com'),
+     }
+
+ # This is the main option that causes cvs2svn to output to git rather
+@@ -115,7 +115,7 @@ run_options.add_project(
+     # The path to the part of the CVS repository (*not* a CVS working
+     # copy) that should be converted.  This may be a subdirectory
+     # (i.e., a module) within a larger CVS repository.
+-    r'test-data/main-cvsrepos',
++    r'../cvsroot/myproj',
+
+     # See cvs2svn-example.options for more documention about symbol
+     # transforms that can be set using this option.
+</code></pre>

@@ -1,31 +1,43 @@
-<p><head><style>
+<head>
+<title>
+dev/integ workflow
+</title>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="dev_integ_workflow">dev/integ workflow</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#the-list-and-irc/workflow-integ-devs">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#dev_integ_workflow">dev/integ workflow</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#workflow">workflow</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#branches">branches</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#assumptions_startup_">assumptions / startup:</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#developer_workflow">developer workflow</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#integrator">integrator</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#gitolite_advanced_features_supporing_this_flow">gitolite advanced features supporing this flow</a><br></p>
 
-<hr />
+<p><a name="the_list_and_irc_workflow_integ_devs_dev_integ_workflow_"></a></p>
 
-<h2><a name="workflow">workflow</a></h2>
+<h1>dev/integ workflow</h1>
+
+<p><a name="the_list_and_irc_workflow_integ_devs_workflow_"></a></p>
+
+<h2>workflow</h2>
 
 <p>This is one possible workflow for dev/integ using gitolite.  It assumes that
 there is one "integrator" and N developers "dev1", ... "devN".</p>
 
-<h3><a name="branches">branches</a></h3>
+<p><a name="the_list_and_irc_workflow_integ_devs_branches_"></a></p>
+
+<h3>branches</h3>
 
 <ul>
 <li><p><code>integ</code> -- a branch that is <code>R</code> (readonly) for devs, <code>RW+</code> for integrator.
@@ -48,7 +60,9 @@ filter <code>integ</code> even more, maybe based on some EQA (External Quality
 Assurance) perhaps.  If so, it's name can be changed to reflect that</p></li>
 </ul>
 
-<h3><a name="assumptions_startup_">assumptions / startup:</a></h3>
+<p><a name="the_list_and_irc_workflow_integ_devs_assumptions_startup__"></a></p>
+
+<h3>assumptions / startup:</h3>
 
 <ul>
 <li>a repo is created</li>
@@ -56,7 +70,9 @@ Assurance) perhaps.  If so, it's name can be changed to reflect that</p></li>
 code in the beginning</li>
 </ul>
 
-<h3><a name="developer_workflow">developer workflow</a></h3>
+<p><a name="the_list_and_irc_workflow_integ_devs_developer_workflow_"></a></p>
+
+<h3>developer workflow</h3>
 
 <p>We use a sample developer called dev5 in the examples below.</p>
 
@@ -165,7 +181,9 @@ or integ testing, the <code>v1</code> will increase -- <code>v2</code>, <code>v3
 <code>dev/dev5/issue-3394/v1</code></p></li>
 </ul>
 
-<h3><a name="integrator">integrator</a></h3>
+<p><a name="the_list_and_irc_workflow_integ_devs_integrator_"></a></p>
+
+<h3>integrator</h3>
 
 <ul>
 <li><p>receive mail from dev5 saying <code>issue-3394</code> is done and ready</p></li>
@@ -208,7 +226,9 @@ has been integrated successfully, and dev5 can be assigned some other
 task.</p></li>
 </ul>
 
-<h2><a name="gitolite_advanced_features_supporing_this_flow">gitolite advanced features supporing this flow</a></h2>
+<p><a name="the_list_and_irc_workflow_integ_devs_gitolite_advanced_features_supporing_this_flow_"></a></p>
+
+<h2>gitolite advanced features supporing this flow</h2>
 
 <p>Here's a typical gitolite conf file:</p>
 

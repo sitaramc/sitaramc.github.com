@@ -1,23 +1,37 @@
-<p><head><style>
+<head>
+<title>
+gardening tips -- grafting branches
+</title>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="gardening_tips_grafting_branches">gardening tips -- grafting branches</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#concepts/grafting">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
 
-<p><sup>[If you think the jokes are bad, you don't know me very well.  Clearly that
-is <em>your</em> fault, not mine :-)]</sup></p>
 
-<p><sup>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#gardening_tips_grafting_branches">gardening tips -- grafting branches</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#connecting_two_unrelated_lines">connecting two unrelated lines</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#breaking_a_line_into_two_">breaking a line into two...</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#_and_joining_them_parallely_branch_merge_">...and joining them parallely (branch + merge)</a><br>
-</sup></p>
+<p><a name="concepts_grafting_gardening_tips_grafting_branches_"></a></p>
+
+<h1>gardening tips -- grafting branches</h1>
+
+<p>^^[If you think the jokes are bad, you don't know me very well.  Clearly that
+is <em>your</em> fault, not mine :-)]^^</p>
+
+<p>^^[[TOC]]^^</p>
 
 <hr />
 
@@ -38,14 +52,16 @@ with a ++ next time you see him on #git!).</p>
 of commits with no branch or merge within it".  In <code>gitk --all</code>, it is
 literally a straight line.</p>
 
-<h3><a name="connecting_two_unrelated_lines">connecting two unrelated lines</a></h3>
+<p><a name="concepts_grafting_connecting_two_unrelated_lines_"></a></p>
+
+<h2>connecting two unrelated lines</h2>
 
 <p>Let's say you have the following history, with two unrelated lines of
 development (quite easily achieved by just fetching from some other repo that
 has no common commits with yours!).</p>
 
-<p><sup>(By the way, how can you tell they are unrelated?  Easy -- just look at the
-break in the graph connector after "a1"!)</sup></p>
+<p>^^(By the way, how can you tell they are unrelated?  Easy -- just look at the
+break in the graph connector after "a1"!)^^</p>
 
 <pre><code>$ git log --graph '--pretty=tformat:%H %d %s %n'  --all
 * 891f2a69544779e7f61a6ae2c213a3c2dc2957b1  (refs/heads/a-m) a3
@@ -133,7 +149,7 @@ has made the relationship <em>permanent</em>, the SHAs for the "a"s change.</p>
 diagram they have switched places.  Topologically that's irrelevant, so don't
 worry about it.</p>
 
-<p><sup>
+<p>^^
 The <em>most</em> observant people will notice that instead of <code>--all</code> I have now
 passed <code>master a-m</code> (the actual branch names).  This is what you will see if
 you do this with <code>--all</code>:</p>
@@ -175,9 +191,11 @@ git reset --hard original/refs/heads/a-m
 </code></pre>
 
 <p>That's it!
-</sup></p>
+^^</p>
 
-<h3><a name="breaking_a_line_into_two_">breaking a line into two...</a></h3>
+<p><a name="concepts_grafting_breaking_a_line_into_two__"></a></p>
+
+<h2>breaking a line into two...</h2>
 
 <p>What other tricks can you get up to?</p>
 
@@ -234,7 +252,9 @@ git reset --hard original/refs/heads/a-m
 course, if you do this without giving "a5" ("a6"'s original parent) a proper
 name, "a5" will become unreachable.  Which is why we gave it a name.</p>
 
-<h3><a name="_and_joining_them_parallely_branch_merge_">...and joining them parallely (branch + merge)</a></h3>
+<p><a name="concepts_grafting_and_joining_them_parallely_branch_merge__"></a></p>
+
+<h2>...and joining them parallely (branch + merge)</h2>
 
 <p>Or how about not just breaking them and leaving them separate, but taking the
 pieces and putting them <em>parallel</em> to each other, with the tops and bottoms

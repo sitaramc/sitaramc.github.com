@@ -1,16 +1,36 @@
-<p><head><style>
+<head>
+<title>
+what the heck is a *reflog* and why is it so important?
+</title>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#concepts/reflog">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
+
+
+<p><a name="concepts_reflog_what_the_heck_is_a_reflog_and_why_is_it_so_important__"></a></p>
 
 <h1>what the heck is a <em>reflog</em> and why is it so important?</h1>
 
-<h3>what is it</h3>
+<p><a name="concepts_reflog_what_is_it_"></a></p>
+
+<h2>what is it</h2>
 
 <ul>
 <li><p>a reflog is a very special "branch" that records each position of HEAD
@@ -22,7 +42,9 @@ is the only thing you lose if you clone a project as a means of performing
 a backup.</p></li>
 </ul>
 
-<h3>how do I visualise it</h3>
+<p><a name="concepts_reflog_how_do_I_visualise_it_"></a></p>
+
+<h2>how do I visualise it</h2>
 
 <ul>
 <li><p>the basic reflog commands are like this (the relative date is my
@@ -54,7 +76,9 @@ unreachable</li>
 </ul></li>
 </ul>
 
-<h3>why would I need it</h3>
+<p><a name="concepts_reflog_why_would_I_need_it_"></a></p>
+
+<h2>why would I need it</h2>
 
 <ul>
 <li><p>I particularly like setting</p>
@@ -67,16 +91,18 @@ git config --global receive.denyDeletes true
 force-pushes a bad revision, the reflog on the server will let me find the
 previous (good) revisions easily</p></li>
 <li><p>you can recover commits made on a detached head: see
-<a href="../concepts/detached-head.html#Auld_Lang_Syne">this</a></p></li>
+<a href="concepts/detached-head.html#Auld_Lang_Syne">this</a></p></li>
 <li><p>you can fix a non-bare push: see
-<a href="../concepts/bare.html#how_do_I_fix_such_a_non_bare_push_">this</a></p></li>
+<a href="concepts/bare.html#how_do_I_fix_such_a_non_bare_push_">this</a></p></li>
 </ul>
 
-<h3>cool tricks</h3>
+<p><a name="concepts_reflog_cool_tricks_"></a></p>
 
-<p><a href="../tools/git-reflogk">Here</a>'s a neat tool that shows you reflog output but
+<h2>cool tricks</h2>
+
+<p><a href="tools/git-reflogk">Here</a>'s a neat tool that shows you reflog output but
 using gitk -- the graphical viewer.  Don't knock it until you've tried it :-)</p>
 
 <hr />
 
-<p><sup>based on a comment in <a href="http://blogs.gnome.org/newren/2007/11/24/local-caching-a-major-distinguishing-difference-between-vcses/">http://blogs.gnome.org/newren/2007/11/24/local-caching-a-major-distinguishing-difference-between-vcses/</a> </sup></p>
+<p>^^based on a comment in <a href="http://blogs.gnome.org/newren/2007/11/24/local-caching-a-major-distinguishing-difference-between-vcses/">http://blogs.gnome.org/newren/2007/11/24/local-caching-a-major-distinguishing-difference-between-vcses/</a> ^^</p>

@@ -1,33 +1,44 @@
-<p><head><style>
+<head>
+<title>
+DOs and DONTs
+</title>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="DOs_and_DONTs">DOs and DONTs</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#1-basic-usage/DOs-and-DONTs">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
 
-<p><sup>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#DOs_and_DONTs">DOs and DONTs</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#DOs">DOs</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#setting_up_your_gitconfig">setting up your gitconfig</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#your_global_gitconfig">your global gitconfig</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#_admin_every_bare_repository">(admin) every bare repository</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#write_useful_readable_commit_messages">write useful, readable, commit messages</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#DONTs">DONTs</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#actions_whose_results_can_be_confusing">actions whose results can be confusing</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#do_not_checkout_remote_branches">do not checkout "remote" branches</a><br>
-</sup></p>
 
-<hr />
+<p><a name="1_basic_usage_DOs_and_DONTs_DOs_and_DONTs_"></a></p>
 
-<h2><a name="DOs">DOs</a></h2>
+<h1>DOs and DONTs</h1>
 
-<h3><a name="setting_up_your_gitconfig">setting up your gitconfig</a></h3>
+<p><a name="1_basic_usage_DOs_and_DONTs_DOs_"></a></p>
 
-<h4><a name="your_global_gitconfig">your global gitconfig</a></h4>
+<h2>DOs</h2>
+
+<p><a name="1_basic_usage_DOs_and_DONTs_setting_up_your_gitconfig_"></a></p>
+
+<h3>setting up your gitconfig</h3>
+
+<p><a name="1_basic_usage_DOs_and_DONTs_your_global_gitconfig_"></a></p>
+
+<h4>your global gitconfig</h4>
 
 <p>This is <code>$HOME/.gitconfig</code>.  Whenever you add the <code>--global</code> option to the
 <code>git config</code> command, it acts on the global gitconfig file.</p>
@@ -55,12 +66,14 @@ git config --global guitool.Edit.needsfile yes
 </code></pre>
 
 <p>If you intend to use the command line more than the GUI, please do check out
-<a href="../tools/my.gitconfig.txt">my gitconfig</a> for many useful examples that will
+<a href="tools/my.gitconfig.txt">my gitconfig</a> for many useful examples that will
 save you lots of time and trouble.</p>
 
-<h4><a name="_admin_every_bare_repository">(admin) every bare repository</a></h4>
+<p><a name="1_basic_usage_DOs_and_DONTs_admin_every_bare_repository_"></a></p>
 
-<p><sup><a href="../concepts/bare.html">What is a bare repo?</a></sup></p>
+<h4>(admin) every bare repository</h4>
+
+<p>^^<a href="concepts/bare.html">What is a bare repo?</a>^^</p>
 
 <p>Make sure all updates are logged and remote deletion of branches is disabled.
 If this is a "git server" (all repos are bare), you should seriously consider
@@ -71,7 +84,9 @@ to remember to do this on each repo.</p>
 git config receive.denyDeletes true
 </code></pre>
 
-<h3><a name="write_useful_readable_commit_messages">write useful, readable, commit messages</a></h3>
+<p><a name="1_basic_usage_DOs_and_DONTs_write_useful_readable_commit_messages_"></a></p>
+
+<h3>write useful, readable, commit messages</h3>
 
 <p>A good description of this is at <a href="http://www.tpope.net/node/106">http://www.tpope.net/node/106</a>.  But
 briefly, try and stick to the following guidelines:</p>
@@ -89,11 +104,17 @@ blank line between the "subject" and the "body"</li>
 <p>Git uses the "subject" part in many places and it is very useful to have a
 short, meaningful subject line for each commit.</p>
 
-<h2><a name="DONTs">DONTs</a></h2>
+<p><a name="1_basic_usage_DOs_and_DONTs_DONTs_"></a></p>
 
-<h3><a name="actions_whose_results_can_be_confusing">actions whose results can be confusing</a></h3>
+<h2>DONTs</h2>
 
-<h4><a name="do_not_checkout_remote_branches">do not checkout "remote" branches</a></h4>
+<p><a name="1_basic_usage_DOs_and_DONTs_actions_whose_results_can_be_confusing_"></a></p>
+
+<h3>actions whose results can be confusing</h3>
+
+<p><a name="1_basic_usage_DOs_and_DONTs_do_not_checkout_remote_branches_"></a></p>
+
+<h4>do not checkout "remote" branches</h4>
 
 <p>When running <code>gitk</code> (the graphical history viewer) do NOT be tempted to right
 click and checkout any branch whose name starts with "remotes/".</p>
@@ -103,4 +124,4 @@ click and checkout any branch whose name starts with "remotes/".</p>
 
 <p>The problem with checking out a "remotes" branch is that any commits you make
 on top of them can get lost when you checkout some other branch.  See the
-article on a <a href="../concepts/detached-head.html">detached head</a>.</p>
+article on a <a href="concepts/detached-head.html">detached head</a>.</p>

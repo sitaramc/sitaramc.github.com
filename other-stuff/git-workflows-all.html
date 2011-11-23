@@ -1,0 +1,230 @@
+<head>
+<title>
+git -- suggested workflow for large projects
+</title>
+<style>
+    body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
+    code        { font-size:    1.1em;  background:  #ddf; }
+    pre         { margin-left:  2em;    background:  #ddf; }
+    pre code    { font-size:    1.1em;  background:  #ddf; }
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#other-stuff/git-workflows">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
+
+<!-- file: other-stuff/git-workflows "git -- suggested workflow for large projects" -->
+
+<p><a name="other_stuff_git_workflows_git_suggested_workflow_for_large_projects_"></a></p>
+
+<h1>git -- suggested workflow for large projects</h1>
+
+<blockquote>
+  <p>^^<strong>WARNING: I have not checked out all the commands -- there could be
+    errors!  The first time you use it, please try them on a sandbox!</strong>  Also,
+    note that a lot of this can be done from the GUI also, if you wish.</p>
+
+<blockquote>
+  <blockquote>
+  <blockquote>
+  <p><strong><em>YOU HAVE BEEN WARNED</em></strong></p>
+</blockquote>
+
+<p></blockquote></p>
+
+<p></blockquote></p>
+
+<p>This is essentially a modification and simplification of the typical
+    workflow that Linux and other projects using DVCSs use.^^</p>
+
+<p></blockquote></p>
+
+<p><a name="other_stuff_git_workflows_assumptions_"></a></p>
+
+<h2>assumptions</h2>
+
+<ul>
+<li>the team needs to manage multiple projects</li>
+<li>the team has one "server", in the sense that it is "on" most of the time
+(doesn't have to be big and powerful; can even be someone's desktop)</li>
+<li>each developer has a copy of git on his desktop, and knows some basic
+commands or at least the GUI stuff</li>
+</ul>
+
+<p><a name="other_stuff_git_workflows_roles_"></a></p>
+
+<h2>roles</h2>
+
+<p>Every project has the following loosely defined roles.  If it's a small
+project the same person may take on multiple roles.</p>
+
+<ul>
+<li>1 release manager.  In $COMPANY terms, this is the PL</li>
+<li>1 quality guy (maybe the same as the release manager)</li>
+<li>(optional) M feature guys, one for each major "feature" in the project, if
+any.  In $COMPANY terms, this is like the ML</li>
+<li>N developers</li>
+</ul>
+
+<p><a name="other_stuff_git_workflows_typical_workflow_"></a></p>
+
+<h2>typical workflow</h2>
+
+<p>Here's a typical workflow, assuming a starting point from the "master" branch
+on the master server.  This assumes that the people on the project have ssh
+(write) access to the repo -- it is not the "please pull..." mode that open
+source projects use on the internet.</p>
+
+<p><a name="other_stuff_git_workflows_developer_"></a></p>
+
+<h3>developer</h3>
+
+<p>One-time:</p>
+
+<ul>
+<li><p>clone from master</p>
+
+<pre><code>git clone ssh://sita@master.server.com/path/to/repo.git
+</code></pre></li>
+<li><p>create your work branch and switch to it</p>
+
+<pre><code>git checkout -b sita-work master
+</code></pre></li>
+</ul>
+
+<p>Regular:</p>
+
+<ul>
+<li><p>switch to your work branch; assumed for the rest of this section</p>
+
+<pre><code>git checkout sita-work
+</code></pre></li>
+<li><p>work work work/commit/test etc</p>
+
+<pre><code>...
+</code></pre></li>
+<li><p>keep up-to-date with changes on the server</p>
+
+<pre><code>git fetch origin
+
+# destroys history but OK if you haven't published your commits yet
+git rebase origin/master
+
+# preserves history, but not always pretty; mandatory if you have
+# published your changes somewhere already
+git merge origin/master
+
+# make sure you re-test all your changes after this operation, in case
+# some upstream change has affected your code
+</code></pre></li>
+<li><p>keep sending your changes upstream</p>
+
+<pre><code>git push origin sita-work
+</code></pre></li>
+</ul>
+
+<p>Irregular:</p>
+
+<ul>
+<li><p>emergency fix ordered for bug 123 on v2.3</p>
+
+<pre><code>git stash
+git fetch origin v2.3
+git checkout -b sita-v2.3-bug123 origin/v2.3
+# work work work test commit test commit etc
+git push origin sita-v2.3-bug123
+# email release manager to pull/test the above branch and merge into
+# master if OK
+# go back to your work
+git checkout sita-work
+git stash pop --index
+</code></pre></li>
+<li><p>(wild idea strikes you; so wild you don't even want to risk putting it in
+next)</p>
+
+<pre><code>git checkout -b wildidea sita-work
+(work work work/commit/test etc)
+git checkout sita-work
+
+# is wildidea useful?
+git merge wildidea  # should be a "fast-forward"
+
+# useful or not, you can get rid of temp branch now
+git branch -d wildidea
+</code></pre></li>
+</ul>
+
+<p><a name="other_stuff_git_workflows_feature_guy_"></a></p>
+
+<h3>feature guy</h3>
+
+<p>This will be a mix between the developers workflow and the release manager's
+workflow.</p>
+
+<p><a name="other_stuff_git_workflows_release_manager_"></a></p>
+
+<h3>release manager</h3>
+
+<p>When doing your own development, you do the same thing as the developer
+described above</p>
+
+<p>Regular:</p>
+
+<ul>
+<li><p>keep up-to-date with changes on the server (not needed if you are the only
+release manager)</p>
+
+<pre><code>...same as for developer workflow above...
+</code></pre></li>
+<li><p>pull stuff from developers</p>
+
+<pre><code>git checkout next
+git tag -f savenext
+git fetch origin dev-work
+git merge origin/dev-work
+# test it
+# test ok?
+    git checkout master
+    git merge origin/dev-work
+    # test again just to make sure
+# test not ok?
+    # discard changes
+    git reset --hard savenext
+    # send dev a problem report and ask him to resubmit
+</code></pre></li>
+<li><p>make sure next > master > maint is preserved</p>
+
+<pre><code>git checkout master
+git merge vX.Y      # for each vX.Y that has seen any recent activity
+# test...
+
+git checkout next
+git merge master
+# test...
+</code></pre></li>
+<li><p>submit code to the master server</p>
+
+<pre><code>git checkout master
+# test
+# test ok?  tag it
+git tag ready-`date -I`     # or something appropriate
+git push origin ready-`date -I`"
+</code></pre></li>
+<li><p>make a release</p>
+
+<pre><code>git checkout master
+# test again?
+git tag v3.7
+git push origin v3.7
+</code></pre></li>
+</ul>

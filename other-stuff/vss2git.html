@@ -1,14 +1,32 @@
-<p><head><style>
+<head>
+<title>
+converting Visual Source Shredder to GIT
+</title>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="converting_Visual_Source_Shredder_to_GIT">converting Visual Source Shredder to GIT</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#other-stuff/vss2git">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
+
+
+<p><a name="other_stuff_vss2git_converting_Visual_Source_Shredder_to_GIT_"></a></p>
+
+<h1>converting Visual Source Shredder to GIT</h1>
 
 <p>[Thanks to http://martinfowler.com/bliki/VersionControlTools.html for the
 new expansion of VSS]</p>
@@ -17,25 +35,9 @@ new expansion of VSS]</p>
 thing is it can all be done in Linux; no need to use a Windows machine as long
 as you have a copy of the full VSS repo.</p>
 
-<p><sup>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#converting_Visual_Source_Shredder_to_GIT">converting Visual Source Shredder to GIT</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#build_vss2svn">build vss2svn</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#run_vss2svn">run vss2svn</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#load_the_SVN_dump_file">load the SVN dump file</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#convert_svn_to_git">convert svn to git</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#checking_the_results">checking the results</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tags">tags</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#deleted_files">deleted files</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#that_damn_CRLF_thing">that damn CRLF thing</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#bottom_line">bottom line</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#alternative_method_using_perl_on_windows">alternative method using perl on windows</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Appendices">Appendices</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#perlmodinstalls">installing the perl modules</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#libboostpatch">patch for libboost 1.36</a><br>
-</sup></p>
+<p><a name="other_stuff_vss2git_build_vss2svn_"></a></p>
 
-<hr />
-
-<h3><a name="build_vss2svn">build vss2svn</a></h3>
+<h2>build vss2svn</h2>
 
 <p>The base for all this is <a href="http://www.pumacode.org/projects/vss2svn">http://www.pumacode.org/projects/vss2svn</a>.  What I
 did is the following:</p>
@@ -65,7 +67,9 @@ sudo ./Build install
 
 <p>And that should be that...</p>
 
-<h3><a name="run_vss2svn">run vss2svn</a></h3>
+<p><a name="other_stuff_vss2git_run_vss2svn_"></a></p>
+
+<h2>run vss2svn</h2>
 
 <p>This should be easy enough, for most normal repos.  You need to get the entire
 VSS repo onto your system (the one that contains something called
@@ -77,7 +81,9 @@ VSS repo onto your system (the one that contains something called
 <p>I have no idea how to deal with labels etc., properly in this command, but the
 basic stuff should work fine.</p>
 
-<h3><a name="load_the_SVN_dump_file">load the SVN dump file</a></h3>
+<p><a name="other_stuff_vss2git_load_the_SVN_dump_file_"></a></p>
+
+<h2>load the SVN dump file</h2>
 
 <p>The previous step should produce just an SVN dump file, which you need to
 load, and that gives you an SVN repo.</p>
@@ -94,7 +100,9 @@ because I do not know any other way of doing this if you don't already know
 svn checkout file://$PWD/svnrepo svnco
 </code></pre>
 
-<h3><a name="convert_svn_to_git">convert svn to git</a></h3>
+<p><a name="other_stuff_vss2git_convert_svn_to_git_"></a></p>
+
+<h2>convert svn to git</h2>
 
 <p>This is, naturally, the easiest of all, especially if you don't intend to go
 back :)</p>
@@ -115,27 +123,35 @@ whereas in git each project is in its own repository.</p>
     # for each project
 </code></pre>
 
-<h3><a name="checking_the_results">checking the results</a></h3>
+<p><a name="other_stuff_vss2git_checking_the_results_"></a></p>
 
-<h4><a name="tags">tags</a></h4>
+<h2>checking the results</h2>
+
+<p><a name="other_stuff_vss2git_tags_"></a></p>
+
+<h3>tags</h3>
 
 <p>Tags (labels in VSS) don't seem to carry across properly.</p>
 
-<p><sup>[rant] My idea of a tag is a symbolic name for a certain revision, so if you
+<p>^^[rant] My idea of a tag is a symbolic name for a certain revision, so if you
 check it out you should see approximately the same number of files that the
 repo had around that time frame.  What I actually see is that the number of
 files representing the various tags (as seen from an SVN checkout) range from
 5% to 75% of the actual number of files in the repo!  So -- until I see a VSS
 repo where the tags are actually used (and I mean <em>used</em>, as in, "these tags
 do get <em>checked out</em> when needed; they're not just for show!") I'm not going
-to worry about it.</sup></p>
+to worry about it.^^</p>
 
-<h4><a name="deleted_files">deleted files</a></h4>
+<p><a name="other_stuff_vss2git_deleted_files_"></a></p>
+
+<h3>deleted files</h3>
 
 <p>I've also not tested if renamed/deleted files etc also work OK, but I think
 they ought to.</p>
 
-<h4><a name="that_damn_CRLF_thing">that damn CRLF thing</a></h4>
+<p><a name="other_stuff_vss2git_that_damn_CRLF_thing_"></a></p>
+
+<h3>that damn CRLF thing</h3>
 
 <p>When you do it this way, you don't have an opportunity to fix the CRLFs as
 they go in -- they'll all go into the repo as CRLF.  If you try to force it on
@@ -163,7 +179,9 @@ a Unix box.</p>
 to miss a lot of files, which still go in with CRLFs.  Doing an explicit touch
 seems to be the only way.  I have no idea why this is so.</p>
 
-<h4><a name="bottom_line">bottom line</a></h4>
+<p><a name="other_stuff_vss2git_bottom_line_"></a></p>
+
+<h3>bottom line</h3>
 
 <p>Anyway, your bottom line should be:</p>
 
@@ -179,11 +197,13 @@ history at some revision that was not explicitly checked during the
 migration.</li>
 </ol>
 
-<h3><a name="alternative_method_using_perl_on_windows">alternative method using perl on windows</a></h3>
+<p><a name="other_stuff_vss2git_alternative_method_using_perl_on_windows_"></a></p>
+
+<h2>alternative method using perl on windows</h2>
 
 <p>There is another method, achieved by hacking a perl script that was supposed
 to convert <a href="http://www.riseup.com/~brettw/dev/VSS2Subversion.html">to SVN</a>, to
-make it go <a href="../tools/vss2git.pl">to git</a> instead.  Pros and cons:</p>
+make it go <a href="tools/vss2git.pl">to git</a> instead.  Pros and cons:</p>
 
 <ul>
 <li>(+) no CRLF problem</li>
@@ -205,11 +225,15 @@ no harm keeping two tools around...!</p>
 
 <hr />
 
-<h3><a name="Appendices">Appendices</a></h3>
+<p><a name="other_stuff_vss2git_Appendices_"></a></p>
+
+<h2>Appendices</h2>
 
 <p><font size=-1></p>
 
-<h4><a name="perlmodinstalls">installing the perl modules</a></h4>
+<p><a name="perlmodinstalls"></a></p>
+
+<h3>installing the perl modules</h3>
 
 <p>Note: I <em>did</em> indeed have to install DBD::SQLite2 manually.  Also, Text::Glob
 had to be installed using <code>perl -MCPAN -e shell</code> followed by <code>install
@@ -234,7 +258,9 @@ make
 make install
 </code></pre>
 
-<h4><a name="libboostpatch">patch for libboost 1.36</a></h4>
+<p><a name="libboostpatch"></a></p>
+
+<h3>patch for libboost 1.36</h3>
 
 <pre><code>commit 4a3a283593bf8a991e0553e3ac3252c75a1349db
 Author: Sitaram Chamarty &lt;sitaramc@gmail.com&gt;

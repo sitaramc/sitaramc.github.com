@@ -1,12 +1,30 @@
-<p><head><style>
+<head>
+<title>
+corruption in a git repository
+</title>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#tips/corruption">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
+
+
+<p><a name="tips_corruption_corruption_in_a_git_repository_"></a></p>
 
 <h1>corruption in a git repository</h1>
 
@@ -15,7 +33,27 @@ studies.</p>
 
 <p>IMPORTANT NOTE: <code>git fsck --full</code> is needed to reliably find repo corruption</p>
 
-<h3>case 1: Kolkata Korruption -- 2 missing tree objects</h3>
+<p><a name="tips_corruption_case_1_Kolkata_Korruption_2_missing_tree_objects_"></a></p>
+
+<h2>case 1: Kolkata Korruption -- 2 missing tree objects</h2>
+
+<p>UPDATE 2013-01-11 13:28 Fri</p>
+
+<p>This should be MUCH easier</p>
+
+<pre><code>on bad:
+    git fsck | grep -v dangling | cut -f3 -d' '
+
+then double check it's a list of SHAs
+
+on good, with this list:
+    git pack-objects --revs pack &lt; list
+
+then copy the two pack* files (pack and idx) to the bad repo's
+objects/pack directory.
+
+That should be it.
+</code></pre>
 
 <p>what finally worked:</p>
 

@@ -1,16 +1,36 @@
-<p><head><style>
+<head>
+<title>
+notes on "eg" (Elijah Newren's "easy git")
+</title>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="notes_on_eg_Elijah_Newren_s_easy_git_">notes on "eg" (Elijah Newren's "easy git")</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#other-stuff/eg">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
 
-<p><sup><a href="http://www.gnome.org/~newren/eg/">eg</a> is a single file wrapper for <code>git</code>
+
+<p><a name="other_stuff_eg_notes_on_eg_Elijah_Newren_s_easy_git__"></a></p>
+
+<h1>notes on "eg" (Elijah Newren's "easy git")</h1>
+
+<p>(Warning: probably out of date)</p>
+
+<p>^^<a href="http://www.gnome.org/~newren/eg/">eg</a> is a single file wrapper for <code>git</code>
 that provides much more user-friendly options and more sensible defaults for
 many commands.  It's a great tool, the documentation is top class, the focus
 on consistency and layering etc., is very nice, and clearly a lot of TLC has
@@ -23,19 +43,15 @@ commands that you like, and ignore the others.</p>
 <p>In this note, I explain some of the eg commands, and their advantages (or
 lack) compared to plain git.  This is essentially my personal notes on "eg",
 describing what I like, what I don't, etc., focusing mainly on commands where
-the behaviour is <em>significantly</em> different from plain git.</sup></p>
+the behaviour is <em>significantly</em> different from plain git.^^</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#notes_on_eg_Elijah_Newren_s_easy_git_">notes on "eg" (Elijah Newren's "easy git")</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#really_useful_commands">really useful commands</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#_eg_revert_and_eg_cherry_pick_"><code>eg revert</code> and <code>eg cherry-pick</code></a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#other_commands">other commands</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#not_so_useful_commands">not (so) useful commands</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#_eg_diff_"><code>eg diff</code></a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#other_commands">other commands</a><br></p>
+<p><a name="other_stuff_eg_really_useful_commands_"></a></p>
 
-<h3><a name="really_useful_commands">really useful commands</a></h3>
+<h2>really useful commands</h2>
 
-<h4><a name="_eg_revert_and_eg_cherry_pick_"><code>eg revert</code> and <code>eg cherry-pick</code></a></h4>
+<p><a name="other_stuff_eg_eg_revert_and_eg_cherry_pick__"></a></p>
+
+<h3><code>eg revert</code> and <code>eg cherry-pick</code></h3>
 
 <p><code>eg revert</code> eliminates a lot of the confusion between plain git's various
 ways of getting at old content.  This command's help text has the longest
@@ -53,7 +69,9 @@ diff</code> to <code>git apply -R</code>.</p>
 to the content it had in revision REV.  This is plain git's checkout paths
 mode.</p>
 
-<h4><a name="other_commands">other commands</a></h4>
+<p><a name="other_stuff_eg_other_commands_"></a></p>
+
+<h3>other commands</h3>
 
 <ul>
 <li><p><code>eg info</code> is pretty cool :-)</p></li>
@@ -69,13 +87,17 @@ functionally the same as</p>
 </code></pre></li>
 </ul>
 
-<h3><a name="not_so_useful_commands">not (so) useful commands</a></h3>
+<p><a name="other_stuff_eg_not_so_useful_commands_"></a></p>
 
-<h4><a name="_eg_diff_"><code>eg diff</code></a></h4>
+<h2>not (so) useful commands</h2>
+
+<p><a name="other_stuff_eg_eg_diff__"></a></p>
+
+<h3><code>eg diff</code></h3>
 
 <p><code>eg diff</code> shows changes against HEAD, not the index.  I prefer the normal
 git behaviour, for reasons cited in
-<a href="../concepts/uses-of-index.html">uses of index</a></p>
+<a href="concepts/uses-of-index.html">uses of index</a></p>
 
 <p><code>eg diff</code>'s second change from normal git (see
 <a href="http://www.gnome.org/~newren/eg/documentation/diff.html">http://www.gnome.org/~newren/eg/documentation/diff.html</a>) seems logical on the
@@ -125,7 +147,9 @@ between the common ancestor and B</li>
 
 <p>So: <code>git log CA(A,B)..A</code> PLUS <code>git log CA(A,B)..B</code></p>
 
-<h4><a name="other_commands">other commands</a></h4>
+<p><a name="other_stuff_eg_other_commands_"></a></p>
+
+<h3>other commands</h3>
 
 <ul>
 <li><p><code>eg log</code> doesn't seem to add much value compared to <code>--decorate</code>,

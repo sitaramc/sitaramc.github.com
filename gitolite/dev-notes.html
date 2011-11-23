@@ -1,0 +1,493 @@
+
+<head>
+    <title>notes for developers</title>
+<style>
+    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+    h4          { background: #ffb; text-color: #000; }
+    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+</style>
+<style>
+   body{counter-reset: section}
+   h1{counter-reset: sub-section}
+   h2{counter-reset: composite}
+   h3{counter-reset: detail}
+
+   h1:before {
+     counter-increment: section;
+     content: counter(section) ". ";
+   }
+   h2:before {
+     counter-increment: sub-section;
+     content: counter(section) "." counter(sub-section) ". ";
+   }
+   h3:before {
+     counter-increment: composite;
+     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
+   }
+   h4:before {
+     counter-increment: detail;
+     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
+   }
+</style>
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="index.html">main page</a>
+|
+    <a href="gitolite.html">single-page</a>
+|
+    <a href="index.html#license">license</a>
+</p>
+<p style="text-align:center">
+<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+</p>
+<h1>notes for developers</h1>
+
+<ul>
+<li><a href="dev-notes.html">notes for developers</a>
+<ul>
+<li>environment variables and other inputs
+</li>
+<li>APIs
+<ul>
+<li>the shell API
+</li>
+<li>the perl API
+</li>
+</ul>
+</li>
+<li>writing your own...
+<ul>
+<li>...commands
+</li>
+<li>...hooks
+<ul>
+<li>anything but the update hook
+</li>
+<li>update hook
+</li>
+</ul>
+</li>
+<li>...trigger programs
+</li>
+<li>..."sugar"
+</li>
+</ul>
+</li>
+<li>appendix 1: notes on the INPUT trigger
+</li>
+<li><a href="dev-notes.html#rsev">appendix 2: repo-specific environment variables</a>
+</li>
+<li><a href="dev-notes.html#lff">appendix 3: log file format</a>
+</li>
+</ul>
+</li>
+</ul>
+
+<hr />
+
+<p>Gitolite has a huge bunch of existing features that gradually need to be moved
+over.  Plus you may want to write your own programs to interact with it.</p>
+
+<p><strong>This document is about <em>writing</em> hooks, commands, triggers, VREFS, and sugar
+scripts.  <em>Installing</em> them, including "where and how", is described
+<a href="cust.html#localcode">here</a></strong>.</p>
+
+<p>Note: the <a href="cust.html">customisation</a> document is the starting point for all
+information about customising gitolite.</p>
+
+<h2>environment variables and other inputs</h2>
+
+<p>In general, the following environment variables should always be available:</p>
+
+<pre><code>GL_BINDIR
+GL_REPO_BASE
+GL_ADMIN_BASE
+</code></pre>
+
+<p>In addition, commands invoked by a remote client also have <code>GL_USER</code>, while
+hooks have <code>GL_USER</code> as well as <code>GL_REPO</code>.</p>
+
+<p>A special form of the <a href="options.html">option</a> syntax can be used to set
+<a href="dev-notes.html#rsev">repo-specific environment variables</a>.</p>
+
+<p>Finally, note that triggers get a lot of relevant information from gitolite as
+arguments; see <a href="triggers.html">here</a> for details.</p>
+
+<h2>APIs</h2>
+
+<h3>the shell API</h3>
+
+<p>The following commands exist to help you write shell scripts that interact
+easily with gitolite.  Each of them responds to <code>-h</code> so please run that for
+more info.</p>
+
+<ul>
+<li><p><code>gitolite access</code> to check access rights given repo, user, type of access
+(R, W, ...) and refname (optional).  Example use: src/commands/desc.</p></li>
+<li><p><code>gitolite creator</code> to get/check the creator of a repo.  Example use:
+src/commands/desc.</p></li>
+<li><p><code>gitolite git-config</code> to check gitolite options or git config variables
+directly from gitolite's "compiled" output, (i.e., without looking at the
+actual <code>repo.git/config</code> file or using the <code>git config</code> command).  Example
+use: src/triggers/post-compile/update-gitweb-access-list.</p></li>
+<li><p><code>gitolite query-rc</code> to check the value of an RC variable.  Example use:
+src/commands/desc.</p></li>
+</ul>
+
+<p>In addition, you can also look at the comments in src/lib/Gitolite/Easy.pm
+(the perl API module) for ideas.</p>
+
+<h3>the perl API</h3>
+
+<p>...is implemented by Gitolite::Easy; the comments in src/lib/Gitolite/Easy.pm
+serve as documentation.</p>
+
+<p>Note that some of the perl functions called by Easy.pm will change the current
+directory to something else, without saving and restoring the directory.
+Patches (to Easy.pm <em>only</em>) welcome.</p>
+
+<h2>writing your own...</h2>
+
+<h3>...commands</h3>
+
+<p>Commands are standalone programs, in any language you like.  They simply
+receive the arguments you append.  In addition, the env var <code>GL_USER</code> is
+available if it is being run remotely.  src/commands/desc is the best example
+at present.</p>
+
+<h3>...hooks</h3>
+
+<h4>anything but the update hook</h4>
+
+<p>If you want to add any hook other than the update hook, 'man githooks' is all
+you need.</p>
+
+<h4>update hook</h4>
+
+<p>If you want to add additional <code>update</code> hook functionality, do this:</p>
+
+<ul>
+<li><p>Write and test your update hook separately from gitolite.</p></li>
+<li><p>Now add the code as a VREF (see <a href="cust.html#localcode">here</a> for details).  Let's say
+you called it "foo".</p>
+
+<p>NOTE: if you don't care about all the extra stuff that VREFs give you over
+a normal update hook, you don't have to read that document at all; just
+put the code in the right place and go to the next step.</p></li>
+<li><p>To call your new update hook to all accesses for all repos, add this to
+the end of your conf file:</p>
+
+<pre><code>repo @all
+    -       VREF/foo        =   @all
+</code></pre></li>
+</ul>
+
+<p>As you probably guessed, you can make your additional update hooks more
+selective, applying them only to some repos / users / combinations.</p>
+
+<p>Note: a normal update hook expects 3 arguments (ref, old SHA, new SHA).  A
+VREF will get those three, followed by at least 4 more.  Your VREF should just
+ignore the extra args.</p>
+
+<h3>...trigger programs</h3>
+
+<p>Trigger programs run at specific points in gitolite's execution, with specific
+arguments being passed to them.  See the <a href="triggers.html">triggers</a> page for details.</p>
+
+<p>You can write programs that are both manually runnable as well as callable by
+trigger events, especially if they don't <em>need</em> any arguments.</p>
+
+<h3>..."sugar"</h3>
+
+<p>Syntactic sugar helpers are NOT complete, standalone, programs.  They must
+include a perl sub called <code>sugar_script</code> that takes in a listref, and returns
+a listref.  The listrefs point to a list that contains the entire conf file
+(with all <a href="syntax.html#include">include</a> processing already done).  You create a new list with
+contents modified as you like and return a ref to it.</p>
+
+<p>There are a couple of examples in src/syntactic-sugar.</p>
+
+<h2>appendix 1: notes on the INPUT trigger</h2>
+
+<p>Note: some of this won't make sense if you haven't read about <a href="triggers.html">triggers</a>.</p>
+
+<p>The INPUT trigger sequence is designed to set or change environment variables
+or the argument list.  (Side note: this means INPUT triggers have to be
+written as perl modules; they cannot be standalone scripts).  This is a very
+powerful idea so an extended description may be useful.</p>
+
+<p>Sshd invokes gitolite-shell with the SSH_ORIGINAL_COMMAND env var containing
+the git/gitolite command and one argument: the gitolite username.</p>
+
+<ul>
+<li>see <a href="glssh.html">this</a> for details on the latter
+</li>
+<li>the <em>first</em> thing gitolite does in smart http mode is to use the
+REMOTE_USER and the CGI variables that apache provides to <em>construct</em>
+a fake argument list and a fake SSH_ORIGINAL_COMMAND env var, so the
+rest of the code can stay the same
+</li>
+</ul>
+
+<p>The INPUT trigger is then run.  The purpose of the input trigger is to ensure
+that the first argument <em>is</em> the gitolite username, and that the
+SSH_ORIGINAL_COMMAND env var contains the actual command to execute.  It can
+also be used to set up any other environment variables that you may decide you
+need.</p>
+
+<p>Wait... didn't we say that's what gitolite-shell gets anyway, just now?</p>
+
+<p>Well, we lied a bit there; it's not always true!</p>
+
+<p>For example, if <a href="sts.html#giving-shell">this</a> feature is used, the first argument <em>may</em>
+be "-s", with the username in the <em>second</em> argument.  Shell.pm deals with
+that.  <font color="gray">(Order matters.  If you use this feature, put the
+<code>'Shell::input',</code> line ahead of the others, since it is the only one prepared
+to deal with username not being the first argument).</font></p>
+
+<p>If you look at CpuTime.pm, you'll see that it's <code>input()</code> function doesn't set
+or change anything, but does set a package variable to record the start time.
+Later, when the same module's <code>post_git()</code> function is invoked, it uses this
+variable to determine elapsed time.</p>
+
+<p><em>(This is a very nice and simple example of how you can implement features by
+latching onto multiple events and sharing data to do something)</em>.</p>
+
+<p>You can even change the reponame the user sees, behind his back.  Alias.pm
+handles that.</p>
+
+<p>Finally, as an exercise for the reader, consider how you would create a brand
+new env var that contains the <em>comment</em> field of the ssh pubkey that was used
+to gain access, using the information <a href="sts.html#kfn">here</a>.</p>
+
+<h2><a name="rsev"></a> appendix 2: repo-specific environment variables</h2>
+
+<p>A special form of the <a href="options.html">option</a> syntax can be used to set
+repo-specific environment variables that are visible to gitolite triggers and
+any git hooks you may install.</p>
+
+<p>For example, let's say you installed a post-update hook that initiates a CI
+job.  By default, of course, this hook will be active for <em>all</em>
+gitolite-managed repos.  However, you only want it to run for some specific
+repos, say r1, r2, and r4.</p>
+
+<p>To do that, first add this to the gitolite.conf:</p>
+
+<pre><code>repo r1 r2 r4
+    option ENV.CI = 1
+</code></pre>
+
+<p>This creates an environment variable called <code>GL_OPTION_CI</code> with the value 1,
+before any trigger or hook is invoked.</p>
+
+<p>Note: option names <em>must</em> start with <code>ENV.</code>, followed by a seqence of
+characters composed of alphas, numbers, and the underscore character.</p>
+
+<p>Now the hook running the CI job can easily decide what to do:</p>
+
+<pre><code># exit if $GL_OPTION_CI is not set
+[ -z $GL_OPTION_CI ] &amp;&amp; exit
+
+... rest of CI job code as before ...
+</code></pre>
+
+<p>Of course you can also do the opposite; i.e. decide that the listed repos
+should <em>not</em> run the CI job but all other repos should:</p>
+
+<pre><code>repo @all
+    option ENV.CI = 1
+
+repo r1 r2 r4
+    option ENV.CI = ""
+</code></pre>
+
+<p>(The hook code remains the same as before.)</p>
+
+<p><font color="gray">Before this feature was added, you could still do this, by
+using the <code>gitolite git-config</code> command inside the hook code to test for
+options and configs set for the repo, like:</p>
+
+<pre><code>if gitolite git-config -q reponame gitolite-options.option-name
+then
+    ...
+</code></pre>
+
+<p>The new method is much more convenient, as you can see.</font></p>
+
+<h2><a name="lff"></a> appendix 3: log file format</h2>
+
+<p>Here's a brief description of gitolite's log file format.  All fields are tab
+separated.</p>
+
+<p>There are two kinds of lines in the log file:</p>
+
+<ul>
+<li><p>third field non-empty: actual log lines.  These are documented below.</p></li>
+<li><p>third field empty (i.e., two tabs after the second field): informational
+output.  These are NOT documented and may change without notice.  They can
+be turned off completely by setting the RC variable <code>LOG_EXTRA</code> to 0.</p></li>
+</ul>
+
+<p>For all types of log lines, the first two fields are:</p>
+
+<ul>
+<li><p>field 1: local time, in YYYY-MM-DD.HH:MM:SS format</p></li>
+<li><p>field 2: transaction ID or "TID".  This is actually the PID of the
+outermost command that was initiated (usually "gitolite-shell").  It helps
+to keep log lines pertaining to one "run" together, even if several
+sub-commands are spawned (like for example from triggers, or even the
+update hook itself).</p></li>
+</ul>
+
+<p>The third and later fields are all dependent on what type of log line it is.</p>
+
+<p>The various log line formats are:</p>
+
+<ul>
+<li><p><strong>start</strong></p>
+
+<p>This line denotes the beginning of a gitolite operation.</p>
+
+<ul>
+<li><p>field 3: 'ssh' or 'http'</p></li>
+<li><p>field 4: <code>ARGV=&lt;comma-separated list of command line arguments&gt;</code></p>
+
+<p>Usually this is just the gitolite username (the argument to
+gitolite-shell, as supplied by the forced command in the authorized
+keys file).  If you're <a href="sts.html#giving-shell">giving shell access</a> to some
+users, this would be "-s,username".  That's two command line arguments
+("-s" and the username), comma separated.</p></li>
+<li><p>field 5: <code>SOC=&lt;original command from client&gt;</code></p>
+
+<p>This is the command exactly as the git client sent it, or the user
+typed it.  Typically this is one of these:</p>
+
+<pre><code>git-upload-pack 'reponame'
+git-receive-pack 'reponame'
+</code></pre>
+
+<p>(including the single quotes, because that's what the client sent).</p>
+
+<p>Gitolite commands are also recorded as is, so this could be something
+like <code>info</code> or perhaps <code>perms -l reponame</code> etc.</p></li>
+<li><p>field 6: <code>FROM=&lt;ip address&gt;</code></p></li>
+</ul></li>
+<li><p><strong>pre-git</strong></p>
+
+<p>This log line appears when the first access check succeeds (i.e., before
+git-upload-pack or git-receive-pack is called).</p>
+
+<ul>
+<li>field 3: 'pre_git'
+</li>
+<li>field 4: reponame
+</li>
+<li>field 5: username
+</li>
+<li>field 6: 'R' or 'W'
+</li>
+<li>field 7: 'any'
+</li>
+<li>field 8: the refex that allowed access
+</li>
+</ul></li>
+<li><p><strong>update</strong></p>
+
+<p>This log line appears when the second access check succeeds (i.e., when
+the update hook decides to allow the push).</p>
+
+<ul>
+<li>field 3: 'update'
+</li>
+<li>field 4: reponame
+</li>
+<li>field 5: username
+</li>
+<li>field 6: 'W', '+', 'C', 'D', 'WM', '+M', 'CM', or 'DM'
+</li>
+<li>field 7: ref name (like 'refs/heads/master')
+</li>
+<li>field 8: old SHA
+</li>
+<li>field 9: new SHA
+</li>
+<li>field 10: the refex that allowed access
+</li>
+</ul>
+
+<p>The values in field 6 reflect the possible <a href="write-types.html">write types</a>, but
+note that there is a difference between what the log file contains and
+what the gitolite.conf file contains (e.g., <code>+</code> versus <code>RW+</code>).  There's
+another subtle difference for those who are not thinking clearly: the
+<code>RW+</code> in the conf file is a permission, but it would show up as a <code>+</code> in
+the log file only if an <em>actual</em> force push had happened, otherwise it
+would be just <code>W</code>.</p>
+
+<p>By the way, notice that fields 7 to 9 are exactly what git itself supplies
+the update hook (see 'man githooks').</p>
+
+<p><font color="gray">There is a special version of this line that appears
+when someone <a href="emergencies.html#bypass">bypasses</a> gitolite's access control to push directly
+on the server.  The 'reponame' (field 4) is replaced by the full path of
+the repo being pushed to, the username (field 5) is replaced by the Unix
+userid in parentheses, and the operation code (field 6) is
+'bypass'.</font></p></li>
+<li><p><strong>create</strong></p>
+
+<p>This log line appears when a wild repo was auto-created by a user.</p>
+
+<ul>
+<li>field 3: 'create'
+</li>
+<li>field 4: reponame
+</li>
+<li>field 5: username
+</li>
+<li>field 6: 'R' or 'W'
+</li>
+</ul>
+
+<p>Field 6 is 'perms-c' if the wild repo is created using the perms command's
+'-c' option.</p></li>
+<li><p><strong>end</strong></p>
+
+<p>This indicates the end of the transaction.  Normally, you should not see
+any more lines with the same TID after this line.</p>
+
+<ul>
+<li>field 3: 'END'
+</li>
+</ul></li>
+<li><p><strong>warnings</strong> and <strong>errors</strong></p>
+
+<p>Typically seen when access is denied.</p>
+
+<ul>
+<li>field 3: 'warn' or 'die'
+</li>
+<li>field 4: message.  Parts of the message (like reponame, username, etc)
+are not split out into fields, though.
+</li>
+</ul></li>
+<li><p><strong>cli</strong></p>
+
+<p>This logs gitolite sub-commands run directly on the server, like <code>gitolite
+setup</code> etc.</p>
+
+<ul>
+<li>field 3: 'cli'
+</li>
+<li>field 4: 'gitolite'
+</li>
+<li>field 5 to end: arguments supplied to gitolite command, one per field
+</li>
+</ul></li>
+</ul>

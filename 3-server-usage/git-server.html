@@ -1,0 +1,216 @@
+<head>
+<title>
+setting up your own git server
+</title>
+<style>
+    body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
+    code        { font-size:    1.1em;  background:  #ddf; }
+    pre         { margin-left:  2em;    background:  #ddf; }
+    pre code    { font-size:    1.1em;  background:  #ddf; }
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#3-server-usage/git-server">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
+
+
+<p><a name="server"></a></p>
+
+<h1>setting up your own git server</h1>
+
+<p><code>git</code> is a <em>distributed</em> version control system (DVCS), and every developer
+thus has his/her own repository.  A central server is therefore not a
+technical requirement, but more of a practical and/or administrative one, if
+at least as a place for the "official" version of your repo.</p>
+
+<hr />
+
+<p><a name="3_server_usage_git_server_sidebar_defining_authentication_and_authorisation__"></a></p>
+
+<h2>(sidebar: defining authentication and authorisation)</h2>
+
+<p>In order for some of the following to make sense, we need to define the words
+"authentication" and "authorisation".</p>
+
+<blockquote>
+  <p><strong>Authentication</strong> is the process of verifying that you are who you claim
+  to be.  An authentication system will establish that I am the user
+  "sitaram" on my work system.  The one behind gmail will similarly
+  establish that I am "sitaramc".  And so on...</p>
+
+<p><strong>Authorisation</strong> is the process of asking what you want to do and
+  deciding if you're allowed to do it or not.</p>
+</blockquote>
+
+<p><a name="protocols"></a></p>
+
+<h2>protocols that git uses</h2>
+
+<p><font color="gray"></p>
+
+<p><strong>Sidenote on URLs and "remotes"</strong>: regardless of what protocol a server uses,
+the client-side git commands work pretty much the same, once a "remote" has
+been defined with the appropriate URL.</p>
+
+<p>For most common usage patterns, you only need the URL in the <code>git clone</code>
+command, which automatically sets up a "remote" called <code>origin</code> that points to
+the URL you just used.</p>
+
+<p>Sometimes you will need to manually add a new remote using <code>git remote</code> if you
+have another server to deal with.  See <code>man git-remote</code> for details.</p>
+
+<p></font></p>
+
+<p>Git uses the following protocols to access remote repositories; example URLs
+are given in parentheses:</p>
+
+<ul>
+<li><p><strong>ssh</strong> (<code>ssh://user@my.server/path/to/repo</code>).  Authentication is handled
+by ssh.  See the section on "gitolite and other tools" for authorisation.</p></li>
+<li><p><strong>http/https</strong>: (<code>http://my.server/path/to/repo</code>).  Authentication is
+handled by the web server.  Authorisation <em>can</em> be handled by gitolite if
+you're using "smart http" (see 'man git-http-backend').</p></li>
+<li><p><strong>local file system</strong>: (<code>file:///path/to/repo</code>).  Authentication is not
+relevant (you're already logged in).</p>
+
+<p>Authorisation is handled by OS file-system permissions, but there's a
+little twist.  Using OS permissions, or even filesystem ACLs, you can only
+get repo-level granularity for reads and writes (i.e., you can say Alice
+can read the repo, Bob can read and write, and Carol cannot do either, but
+that;s it).</p></li>
+<li><p><strong>git</strong>: (<code>git://my.server/path/to/repo</code>).  This is an <em>UNAUTHENTICATED</em>
+protocol, useful only for allowing clones of publicly accessible repos.
+If they can reach port 9418 on your server, they can get it.  Pushes are
+disabled by default, and -- needless to say -- you must <em>NEVER</em> enable
+them!</p>
+
+<p>This protocol is handled by the special 'git-daemon' program, which you
+can run either directly or via inetd/xinetd.  Please see its man page etc
+for details.</p></li>
+</ul>
+
+<p>This document will concentrate on ssh access.  I'm not too familiar with http,
+even though gitolite supports "smart http".  The other 2 modes have been dealt
+with and/or are pretty simple.</p>
+
+<p><a name="3_server_usage_git_server_ssh_setup_for__"></a></p>
+
+<h2>ssh setup for...</h2>
+
+<p><a name="3_server_usage_git_server_just_yourself_"></a></p>
+
+<h3>...just yourself</h3>
+
+<p>When you have a setup just for yourself, things are quite simple.  You setup a
+bare repo on the server, add a remote to the repo on your workstation (or
+clone <em>from</em> the server).  So first you do:</p>
+
+<pre><code># on your userid on the server
+git init --bare reponame
+</code></pre>
+
+<p>Then, if you don't already have an existing repo on your workstation, you do:</p>
+
+<pre><code># on your workstation
+git clone yourname@server:path/to/reponame
+cd reponame
+# start work
+</code></pre>
+
+<p>or, if you have a local repo on which you already did some work:</p>
+
+<pre><code># on your workstation
+cd reponame
+git remote add origin yourname@server:path/to/reponame
+# start work
+</code></pre>
+
+<p>Authentication is either by password or public key; it doesn't matter.
+Authorisation is not done; you get access to everything.</p>
+
+<p><a name="3_server_usage_git_server_just_yourself_and_a_few_others_with_total_trust__"></a></p>
+
+<h3>...just yourself and a few others, with "total trust"</h3>
+
+<p>(total trust means anyone can do anything to any repo and you trust all of
+them to do the right thing and not do the wrong thing).</p>
+
+<p>Now you will need to create a common userid on the server (unless you're
+willing to give them all access to <em>your</em> userid on the server).</p>
+
+<p>Let's say this common id is "git".  Everyone should know the password, or you
+can collect their public keys and add all of them to <code>~/.ssh/authorized_keys</code>
+on the server to have some means of adding and removing users without changing
+passwords and communicating the new one to everyone.</p>
+
+<p>The git commands are the same as in the previous section.</p>
+
+<p>Note the phrase "total trust" -- you will not know who pushed what if you do
+this, but for small, close-knit, teams it does not matter.</p>
+
+<p><a name="3_server_usage_git_server_any_number_of_people_but_without_total_trust__"></a></p>
+
+<h3>...any number of people but without "total trust"</h3>
+
+<p>With any other situation, it's best if you just install gitolite or something
+similar.  You need authorisation; just authentication will not do any more.</p>
+
+<p><a name="3_server_usage_git_server_gitolite_and_others_tools_for_authorisation_"></a></p>
+
+<h2>gitolite and others tools for authorisation</h2>
+
+<p>There are many situations where you need to establish limits on what someone
+can do.  When you have a number of developers, with varying levels of
+experience and expertise, accessing a number of repos, and different branches
+in different repos have different levels of "importance", you need some
+serious authorisation tool.</p>
+
+<p><a href="http://github.com/sitaramc/gitolite">Gitolite</a> is the best such tool I know (blame author bias if you don't
+agree!).  It comes with a <a href="http://sitaramc.github.com/gitolite/index.html#qi">quick
+install</a> section, plus lots
+and lots of <a href="http://sitaramc.github.com/gitolite">documentation</a>.</p>
+
+<p>Other tools exist, but they are all web-based.  Google for "gitorious" or
+"gerrit code review", for access control tools.  For open source projects or
+if you don't mind paying a small amount of money, Github is very nice.
+(Gitolite's primary host is Github, and I have no other relationship with them
+than being a free user).</p>
+
+<p><a name="3_server_usage_git_server_side_note_setting_limits_on_yourself_"></a></p>
+
+<h3>side note: setting limits on yourself</h3>
+
+<p>Strictly speaking, you might need to set limits on even <em>yourself</em>.  Let's say
+you have a bad habit of running <code>git push -f</code>, and you want to protect from a
+shoot-yourself-in-the-foot episode.</p>
+
+<p>One way to do this is to run <code>git config receive.denyNonFastForwards true</code> on
+the repo (server-side, not client-side).  This blocks rewind pushes, which is
+great, but it does so for the <em>entire</em> repo; you can't choose to protect only
+certain important branches this way.  Using something like gitolite makes this
+possible.</p>
+
+<p></font></p>
+
+<p><a name="3_server_usage_git_server_appendix_A_compiling_tips_"></a></p>
+
+<h2>appendix A: compiling tips</h2>
+
+<p>If you're not able to install git using your system's normal install
+mechanisms, you may end up having to compile it.</p>
+
+<p>You may find that setting <code>NO_CURL</code>, <code>NO_EXPAT</code>, and <code>NO_TCLTK</code> may help if
+you are missing dependencies.  The first two will prevent http-pull/push from
+being built, but I never use those protocols anyway, so I don't care :-)  The
+third one will prevent the GUI tools from being built, which does not matter
+on a server</p>

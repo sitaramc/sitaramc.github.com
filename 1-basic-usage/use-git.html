@@ -1,32 +1,43 @@
-<p><head><style>
+<head>
+<title>
+(user) overview on using git, especially with the GUI tools
+</title>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="_user_overview_on_using_git_especially_with_the_GUI_tools">(user) overview on using git, especially with the GUI tools</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#1-basic-usage/use-git">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#_user_overview_on_using_git_especially_with_the_GUI_tools">(user) overview on using git, especially with the GUI tools</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#launching_and_using_git_the_command_line">launching and using git -- the command line</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#launching_and_using_git_the_GUI_interfaces">launching and using git -- the GUI interfaces</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#_git_gui_"><code>git gui</code></a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#_gitk_"><code>gitk</code></a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#where_you_really_need_the_command_line">where you <em>really</em> need the command line</a><br></p>
 
-<hr />
+<p><a name="1_basic_usage_use_git_user_overview_on_using_git_especially_with_the_GUI_tools_"></a></p>
+
+<h1>(user) overview on using git, especially with the GUI tools</h1>
 
 <blockquote>
-  <p><sup>These are generic instructions that may also eventually go on a public
+  <p>^^These are generic instructions that may also eventually go on a public
     website somewhere.  Anything that is CAPITALISED in the notes below must
     be replaced as appropriate to (y)our internal environment.  Contact me for
-    details.  -- Sitaram Chamarty</sup></p>
+    details.  -- Sitaram Chamarty^^</p>
 </blockquote>
 
-<h3><a name="launching_and_using_git_the_command_line">launching and using git -- the command line</a></h3>
+<p><a name="1_basic_usage_use_git_launching_and_using_git_the_command_line_"></a></p>
+
+<h2>launching and using git -- the command line</h2>
 
 <p>Git has a command line interface and two different GUI interfaces.</p>
 
@@ -50,7 +61,9 @@ like <code>E:\some\path</code> are accessed as <code>/e/some/path</code>.</li>
 bash" command line positioned at that directory.  </p></li>
 </ul>
 
-<h3><a name="launching_and_using_git_the_GUI_interfaces">launching and using git -- the GUI interfaces</a></h3>
+<p><a name="1_basic_usage_use_git_launching_and_using_git_the_GUI_interfaces_"></a></p>
+
+<h2>launching and using git -- the GUI interfaces</h2>
 
 <p>The two GUI tools are very powerful; if you don't like the command line, you
 can quite easily stick to them and get by for most purposes.  Briefly, the GUI
@@ -62,9 +75,9 @@ tools are:</p>
 --all</code> to view all branches, local and remote</li>
 </ul>
 
-<p><sup>(<em>staging</em> a file means getting a file ready to commit -- only files that
+<p>^^(<em>staging</em> a file means getting a file ready to commit -- only files that
 are staged will be committed; this allows you to keep some changes "pending",
-without committing them)</sup></p>
+without committing them)^^</p>
 
 <p>Git's GUI interfaces let you do almost anything that you <strong>normally</strong> need to
 do -- all the simple straightforward things as well as some sophisticated
@@ -81,7 +94,9 @@ menus ("Repository -> Visualise History", or "File -> Start Git GUI")</li>
 
 <p>You might be wondering why there are two GUIs...</p>
 
-<h4><a name="_git_gui_"><code>git gui</code></a></h4>
+<p><a name="1_basic_usage_use_git_git_gui__"></a></p>
+
+<h3><code>git gui</code></h3>
 
 <p><code>git gui</code> shows you the current state of your work area with respect to
 the currently checked-out branch.  In the top left pane, it shows you what
@@ -92,7 +107,7 @@ will go into the next commit if you commit now.</p>
 <p>(As I said above, git allows you to keep some changes "pending", without
 committing them.  The "ready to commit" part is called the "index", "staging
 area", or "cache" in the documentation, so the bottom left pane is showing you
-what is in the "index".  Check out <a href="../concepts/uses-of-index.html">why the index is
+what is in the "index".  Check out <a href="concepts/uses-of-index.html">why the index is
 useful</a> for more).</p>
 
 <p>In either case, the changes made to the currently selected file are shown on
@@ -111,7 +126,9 @@ button.  This commits the change to your local repository</li>
 can pull them</li>
 </ul>
 
-<h4><a name="_gitk_"><code>gitk</code></a></h4>
+<p><a name="1_basic_usage_use_git_gitk__"></a></p>
+
+<h3><code>gitk</code></h3>
 
 <p><code>gitk</code> (or <code>gitk --all</code>, which is what I use more often) shows you a
 visual tree of all the commits that have happened on this repository.  It is a
@@ -135,7 +152,9 @@ mentioning it explicitly.  (Think of it like a link to an XLS on a website --
 you can click the link and open it and edit it, but you can't save it back to
 where it came from!)</p>
 
-<h4><a name="where_you_really_need_the_command_line">where you <em>really</em> need the command line</a></h4>
+<p><a name="1_basic_usage_use_git_where_you_really_need_the_command_line_"></a></p>
+
+<h3>where you <em>really</em> need the command line</h3>
 
 <p>One common task that is needlessly complex in both the GUIs is <code>git pull</code>.
 In a properly setup repository that has been cloned from the project master or

@@ -1,0 +1,242 @@
+<head>
+<title>
+git as a backup/sync tool
+</title>
+<style>
+    body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
+    code        { font-size:    1.1em;  background:  #ddf; }
+    pre         { margin-left:  2em;    background:  #ddf; }
+    pre code    { font-size:    1.1em;  background:  #ddf; }
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#articles/backup-and-sync-with-git">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
+
+<!-- file: articles/backup-and-sync-with-git "git as a backup/sync tool" -->
+
+<p><a name="articles_backup_and_sync_with_git_git_as_a_backup_sync_tool_"></a></p>
+
+<h1>git as a backup/sync tool</h1>
+
+<p>working title for the movie being made of this epic:</p>
+
+<p><center>
+<strong><em>To Abuse or not to Abuse</em></strong>
+</center></p>
+
+<hr />
+
+<p><a name="articles_backup_and_sync_with_git_UGFWIINI_"></a></p>
+
+<h2>UGFWIINI</h2>
+
+<p>All this is largely UGFWIINI ("using git for what it is not intended").  Being
+a generic backup/sync tool is one of those things that git was not really
+meant to do.</p>
+
+<p>At the same time, I'm a great fan of
+<a href="http://www.imdb.com/title/tt0088559/">Macgyver</a>, so to hell with the "not
+intended" stuff, mmmkay? :-)</p>
+
+<p><a name="articles_backup_and_sync_with_git_how_to_decide_if_git_is_it_"></a></p>
+
+<h2>how to decide if git is it</h2>
+
+<p>There are a few questions you have to ask yourself if you're considering git
+as a generic backup/sync tool:</p>
+
+<ol>
+<li><p>do I really want branching and merging?</p>
+
+<p>Other forms of this question are:</p>
+
+<ul>
+<li>will the history of these files have alternative timelines? (ie, will
+it be more than just a straight line)</li>
+<li>if I ever revisit or rollback to a prior version, will it be based on
+something <em>other than</em> time?  (ie., not just "last night", "last
+week", "1st of the month", etc.)</li>
+<li>will the commits be manual and will I be making meaningful commit
+messages?  (ie it's not just automated to run via cron or something)</li>
+</ul>
+
+<p>If the answer to most, or all, of these questions is "no", you're using a
+very powerful VCS as nothing more than a backup tool.</p></li>
+<li><p>are all the files really related?  On the rare occasions when I do restore
+something, will I be restoring the entire state of the working tree (ie,
+not just a few files/directories)?</p>
+
+<p>If it is quite common to restore only part of the tree from an older
+version, then it is likely that the set of files in the repo are not
+related to each other.</p></li>
+<li><p>do I really want all versions of my files, forever, or say 2 years old
+(for example)?  Will I ever need to see such files?</p>
+
+<p>This is not about disk space -- git doesn't need a lot anyway.  It's about
+adding complexity to an otherwise simple task.  If you never want to see
+such old files again, why use git?</p></li>
+</ol>
+
+<p><a name="articles_backup_and_sync_with_git_alternatives_to_rolling_your_own_"></a></p>
+
+<h2>alternatives to rolling your own</h2>
+
+<p>You can use something like etckeeper, which hides all the issues that git has
+with being a true backup solution.</p>
+
+<p>Or go for 'bup', which is much more powerful, but still a work in progress
+(meaning I have not switched to it yet ;-)</p>
+
+<p>Still, for most people considering git for <strong>backup</strong>, the closest, correct,
+choice is <a href="http://rdiff-backup.nongnu.org/">rdiff-backup</a> which is available,
+and maybe even installed by default, in most distributions of Linux.  It
+stores the most recent version as is (you can do a plain <code>cp</code> to restore), and
+older versions as "reverse deltas" using the rsync algorithm.  So, what rsync
+does only for network bandwidth, rdiff-backup extends to disk space as well!
+This is still not as efficient as git (because the topmost revision is not
+compressed), but good enough for most people.  It also has a handy
+"remove-older-than" option to prune old backups, which can make this whole
+thing pretty much fire and forget using a script+cron.</p>
+
+<p>There are many other similar schemes that build on rsync; investigate or ask
+around.</p>
+
+<p>The best choice for <strong>synchronisation</strong> is
+<a href="http://www.cis.upenn.edu/~bcpierce/unison/">unison</a>.  It has a few quirks
+(like being overly version sensitive) but if you install the same version on
+both sides it's a wonderful program.</p>
+
+<p>Both of these work over ssh, so security is taken care of sensibly.</p>
+
+<p><a name="articles_backup_and_sync_with_git_how_I_version_all_the_important_stuff_in_my_HOME__"></a></p>
+
+<h2>how I version all the important stuff in my <code>$HOME</code></h2>
+
+<p>Having said all that, I do version <em>some parts</em> of my home envionment using
+git.  Here's how.</p>
+
+<p><strong>First things first</strong>: git does <strong>not</strong> track permissions except the first
+"x" in <code>rwxrwxrwx</code>.  Do not use this for anything where ownership or
+permissions are important.</p>
+
+<p><a name="articles_backup_and_sync_with_git_my_needs_"></a></p>
+
+<h3>my needs</h3>
+
+<p>I want to version control</p>
+
+<ul>
+<li>some of my dot-files, not all of them</li>
+<li>all the dozens of custom scripts in my <code>~/bin</code></li>
+<li>some notes and other files in <code>~/notes</code>, <code>~/docs</code>, etc. (for example) that
+are related to these scripts</li>
+</ul>
+
+<p><a name="articles_backup_and_sync_with_git_basic_idea_"></a></p>
+
+<h3>basic idea</h3>
+
+<p>The basic idea is you put your project in a directory called <code>sitastuff</code> and
+<code>git init</code> that.  Here're the details:</p>
+
+<ol>
+<li><p>put everything in this directory that does not <em>have to</em> be in <code>$HOME</code> and
+is willing to be placed elsewhere by using an environment variable.  For
+example, <code>.wgetrc</code>, <code>.curlrc</code>, <code>.less</code>, <code>.vimrc</code></p></li>
+<li><p>make environment variables pointing to them, like so, and put them all in
+one file which we'll call "extra.bashrc".  For example:</p>
+
+<pre><code>export SITASTUFF=~/sitastuff
+export LESSKEY=$SITASTUFF/.less
+export VIMINIT="so $SITASTUFF/.vimrc"
+export CURL_HOME=$SITASTUFF
+export WGETRC=$SITASTUFF/.wgetrc
+</code></pre></li>
+<li><p>make a directory called <code>symlinks</code> within <code>sitastuff</code></p></li>
+<li><p>find all the stuff that <em>must</em> be in <code>$HOME</code> and put it in here.  For
+example, <code>.irssi</code>, <code>.lftprc</code>, etc.</p></li>
+<li><p>to your <code>extra.bashrc</code> script add the following lines</p>
+
+<pre><code>for i in $sitastuff/symlinks/*
+do
+    ln -s $i $HOME
+done 2&gt;/dev/null
+</code></pre></li>
+<li><p>move <code>~/bin</code> to <code>~/sitastuff/bin</code>, and add another line to your
+<code>extra.bashrc</code> which appends <code>~/sitastuff/bin</code> to the PATH.  Also move your
+<code>~/notes</code> and <code>~/docs</code> or whatever.  If you wish, you can move them into
+the <code>symlinks</code> directory to have them accessible straight from <code>$HOME</code>.</p></li>
+</ol>
+
+<p>Now all you do is add one line to your normal .bashrc</p>
+
+<pre><code>source ~/sitastuff/extra.bashrc
+</code></pre>
+
+<p><a name="articles_backup_and_sync_with_git_advantages_"></a></p>
+
+<h3>advantages</h3>
+
+<ol>
+<li><p><code>git status</code> is much more meaningful (see below); a very big advantage</p></li>
+<li><p>when I have to start working on a new machine, I clone this repo, add that
+one line to the default <code>.bashrc</code>, and I'm in business</p></li>
+<li><p>more importantly, when I have to <em>stop</em> using that machine (as in, it
+belongs to some other project but I was helping them with something for a
+short while), I just delete <code>~/sitastuff</code>, remove that one line from the
+<code>~/.bashrc</code>, and their system is back to where it was.</p></li>
+</ol>
+
+<p><a name="articles_backup_and_sync_with_git_about_that_git_status_thing__"></a></p>
+
+<h4>about that <code>git status</code> thing...</h4>
+
+<p>Some people just do a <code>git init</code> in <code>$HOME</code> and add stuff as they need.  This
+has two problems: <code>git status</code> output is too long and pretty much useless, and
+so adding new files is something you have to remember.</p>
+
+<p>Using the symlink method mitigates problem 1.  It also mitigates problem 2 for
+situations where the top level directory is already tracked.  My classic
+example is <code>~/.irssi</code>.  Once this is inside <code>~/sitastuff</code> (actually inside
+<code>~/sitastuff/symlinks</code>) and is being tracked, if I put a new script inside it,
+<code>git status</code> will show me I have a new script and I can remember to add it.</p>
+
+<p>Of course, neither method can tell you about a new file that you should be
+adding, if it's mixed in with all the other junk in <code>$HOME</code>.</p>
+
+<p><a name="articles_backup_and_sync_with_git_criticism_"></a></p>
+
+<h3>criticism</h3>
+
+<p>Some people are very pedantic about the fact that git is meant to track whole
+trees of connected files, and using it like this is "abusing git".  I was told
+(by a veritable legend in the perl world, and now you can guess who that is!)
+to "stop abusing git".  He was polite (as usual -- he never seems to get
+ruffled; would love to meet him someday; during my days on clpm I really grew
+to admire the guy) but he seemed to feel very strongly about this and almost
+seemed upset at what I was doing!</p>
+
+<p>From my point of view, all the stuff I do this with is essentially code.  My
+toolkit, if you like.  For instance, bits of my .vimrc are connected with some
+scriptlets I write, which may in turn rely on .lftprc for something or other.
+I can't honestly say they're all completely unrelated files, they need
+versioning in the source code sense, not the zfs sense, and I have to work on
+them on multiple machines, and it all has to sync up.  There really isn't any
+better way that I know of.  I mean it <em>has</em> to be a VCS, not just a fancy file
+system.  And I'm certainly not about to learn some other VCS at this age :-)</p>
+
+<p>So, at least until PETVCS (people for the ethical treatment of version control
+systems) starts a demonstration outside my door, I will continue to do this.</p>
+
+<p>And they have to be young, female, and under-dressed, or it doesn't count :-)</p>

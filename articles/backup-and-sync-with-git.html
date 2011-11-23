@@ -1,14 +1,32 @@
-<p><head><style>
+<head>
+<title>
+git as a backup/sync tool
+</title>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="git_as_a_backup_sync_tool">git as a backup/sync tool</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#articles/backup-and-sync-with-git">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
+
+
+<p><a name="articles_backup_and_sync_with_git_git_as_a_backup_sync_tool_"></a></p>
+
+<h1>git as a backup/sync tool</h1>
 
 <p>working title for the movie being made of this epic:</p>
 
@@ -18,19 +36,9 @@
 
 <hr />
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#git_as_a_backup_sync_tool">git as a backup/sync tool</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#UGFWIINI">UGFWIINI</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#how_to_decide_if_git_is_it">how to decide if git is it</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#alternatives_to_rolling_your_own">alternatives to rolling your own</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#how_I_version_all_the_important_stuff_in_my_HOME_">how I version all the important stuff in my <code>$HOME</code></a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#my_needs">my needs</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#basic_idea">basic idea</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#advantages">advantages</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#criticism">criticism</a><br></p>
+<p><a name="articles_backup_and_sync_with_git_UGFWIINI_"></a></p>
 
-<hr />
-
-<h3><a name="UGFWIINI">UGFWIINI</a></h3>
+<h2>UGFWIINI</h2>
 
 <p>All this is largely UGFWIINI ("using git for what it is not intended").  Being
 a generic backup/sync tool is one of those things that git was not really
@@ -40,7 +48,9 @@ meant to do.</p>
 <a href="http://www.imdb.com/title/tt0088559/">Macgyver</a>, so to hell with the "not
 intended" stuff, mmmkay? :-)</p>
 
-<h3><a name="how_to_decide_if_git_is_it">how to decide if git is it</a></h3>
+<p><a name="articles_backup_and_sync_with_git_how_to_decide_if_git_is_it_"></a></p>
+
+<h2>how to decide if git is it</h2>
 
 <p>There are a few questions you have to ask yourself if you're considering git
 as a generic backup/sync tool:</p>
@@ -77,7 +87,9 @@ adding complexity to an otherwise simple task.  If you never want to see
 such old files again, why use git?</p></li>
 </ol>
 
-<h3><a name="alternatives_to_rolling_your_own">alternatives to rolling your own</a></h3>
+<p><a name="articles_backup_and_sync_with_git_alternatives_to_rolling_your_own_"></a></p>
+
+<h2>alternatives to rolling your own</h2>
 
 <p>You can use something like etckeeper, which hides all the issues that git has
 with being a true backup solution.</p>
@@ -106,7 +118,9 @@ both sides it's a wonderful program.</p>
 
 <p>Both of these work over ssh, so security is taken care of sensibly.</p>
 
-<h3><a name="how_I_version_all_the_important_stuff_in_my_HOME_">how I version all the important stuff in my <code>$HOME</code></a></h3>
+<p><a name="articles_backup_and_sync_with_git_how_I_version_all_the_important_stuff_in_my_HOME__"></a></p>
+
+<h2>how I version all the important stuff in my <code>$HOME</code></h2>
 
 <p>Having said all that, I do version <em>some parts</em> of my home envionment using
 git.  Here's how.</p>
@@ -115,7 +129,9 @@ git.  Here's how.</p>
 "x" in <code>rwxrwxrwx</code>.  Do not use this for anything where ownership or
 permissions are important.</p>
 
-<h4><a name="my_needs">my needs</a></h4>
+<p><a name="articles_backup_and_sync_with_git_my_needs_"></a></p>
+
+<h3>my needs</h3>
 
 <p>I want to version control</p>
 
@@ -126,7 +142,9 @@ permissions are important.</p>
 are related to these scripts</li>
 </ul>
 
-<h4><a name="basic_idea">basic idea</a></h4>
+<p><a name="articles_backup_and_sync_with_git_basic_idea_"></a></p>
+
+<h3>basic idea</h3>
 
 <p>The basic idea is you put your project in a directory called <code>sitastuff</code> and
 <code>git init</code> that.  Here're the details:</p>
@@ -165,7 +183,9 @@ the <code>symlinks</code> directory to have them accessible straight from <code>
 <pre><code>source ~/sitastuff/extra.bashrc
 </code></pre>
 
-<h4><a name="advantages">advantages</a></h4>
+<p><a name="articles_backup_and_sync_with_git_advantages_"></a></p>
+
+<h3>advantages</h3>
 
 <ol>
 <li><p><code>git status</code> is much more meaningful (see below); a very big advantage</p></li>
@@ -177,7 +197,9 @@ short while), I just delete <code>~/sitastuff</code>, remove that one line from 
 <code>~/.bashrc</code>, and their system is back to where it was.</p></li>
 </ol>
 
-<h5>about that <code>git status</code> thing...</h5>
+<p><a name="articles_backup_and_sync_with_git_about_that_git_status_thing__"></a></p>
+
+<h4>about that <code>git status</code> thing...</h4>
 
 <p>Some people just do a <code>git init</code> in <code>$HOME</code> and add stuff as they need.  This
 has two problems: <code>git status</code> output is too long and pretty much useless, and
@@ -192,7 +214,9 @@ example is <code>~/.irssi</code>.  Once this is inside <code>~/sitastuff</code> 
 <p>Of course, neither method can tell you about a new file that you should be
 adding, if it's mixed in with all the other junk in <code>$HOME</code>.</p>
 
-<h4><a name="criticism">criticism</a></h4>
+<p><a name="articles_backup_and_sync_with_git_criticism_"></a></p>
+
+<h3>criticism</h3>
 
 <p>Some people are very pedantic about the fact that git is meant to track whole
 trees of connected files, and using it like this is "abusing git".  I was told
@@ -214,4 +238,4 @@ system.  And I'm certainly not about to learn some other VCS at this age :-)</p>
 <p>So, at least until PETVCS (people for the ethical treatment of version control
 systems) starts a demonstration outside my door, I will continue to do this.</p>
 
-<p>And they have to be young, female, and un[der]-dressed, or it doesn't count :-)</p>
+<p>And they have to be young, female, and under-dressed, or it doesn't count :-)</p>

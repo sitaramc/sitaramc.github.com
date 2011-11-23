@@ -1,0 +1,150 @@
+
+<head>
+    <title>gitolite performance</title>
+<style>
+    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+    h4          { background: #ffb; text-color: #000; }
+    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+</style>
+<style>
+   body{counter-reset: section}
+   h1{counter-reset: sub-section}
+   h2{counter-reset: composite}
+   h3{counter-reset: detail}
+
+   h1:before {
+     counter-increment: section;
+     content: counter(section) ". ";
+   }
+   h2:before {
+     counter-increment: sub-section;
+     content: counter(section) "." counter(sub-section) ". ";
+   }
+   h3:before {
+     counter-increment: composite;
+     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
+   }
+   h4:before {
+     counter-increment: detail;
+     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
+   }
+</style>
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="index.html">main page</a>
+|
+    <a href="gitolite.html">single-page</a>
+|
+    <a href="index.html#license">license</a>
+</p>
+<p style="text-align:center">
+<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+</p>
+<h1>gitolite performance</h1>
+
+<p>TOP TIP: If you have more than 2000 or so repos, then you should be using v3.2
+or later; there was a bit of code that went in there that makes a <em>huge</em>
+difference for really large sites.</p>
+
+<h2>tips for performance worriers</h2>
+
+<p>Gitolite is pretty efficient in most cases, and generally nothing needs to be
+done.  If you think you have a performance problem, let me know on the mailing
+list.  Meanwhile, here are some tips:</p>
+
+<ul>
+<li><p>Look in the gitolite log file after any operation that you think ran
+slowly.  In particular, pushing to the admin repo, or a user creating a
+new wild repo, might be a little slow, and the log file will tell you a
+bit more detail on what took time.</p></li>
+<li><p>If you don't use gitweb or git-daemon, or use them but are perfectly happy
+to control access to them from outside gitolite, you can comment out the
+corresponding lines in the ENABLE list the rc file.</p></li>
+<li><p>If you can't get rid of those scripts, and they are still taking too long,
+you can make them run in the background.  They'll eventually finish but
+the user doesn't have to wait.  See src/triggers/bg.  <em>This should not
+normally be needed; if you feel you need it, please talk to me so I can
+understand why and maybe help</em>.</p></li>
+<li><p>If you're more concerned about your users' time when they create a new
+wild repo (and not so much about the admin push taking time), you can fix
+a couple of scripts and send me a patch :)</p>
+
+<p>Here's the scoop:</p>
+
+<p>Scripts invoked via <code>POST_CREATE</code> <em>do</em> get information about what repo has
+just been created.  However, the gitweb and daemon scripts are not set to
+take advantage of this, only the git-config one is.  So use the git-config
+script as an example, and/or read the <a href="triggers.html">triggers</a> documentation, and fix
+the other two programs.</p>
+
+<p>(This should be easy enough for the daemon update, but the gitweb update
+may be a little more tricky, since it may involve <em>deleting</em> lines from
+the "projects.list" file.)</p></li>
+</ul>
+
+<h2>why there's really no need to worry!</h2>
+
+<p>In general, gitolite has a constant overhead of about 0.2 seconds on my
+laptop.  There really is nothing to optimise, but you can comment out some
+triggers as the previous section said.</p>
+
+<p>Here's the big-O stuff:</p>
+
+<ul>
+<li>N = number of normal repos, each with its own set of rules.  In <code>repo r1
+r2 r3</code>, N = 3.  Add up all such lines.
+</li>
+<li>G = number of groups or wild patterns.  In <code>repo @g1 @g2 foo/[a-z]*</code>, G =
+3.
+</li>
+<li>M = number of members.  In <code>@g1 = r1 r2 &lt;nl&gt; @g2 = r3 r4 r5</code>, M = 5.
+</li>
+<li>A = average number of rule lines in each "repo" block.  Usually about 5,
+maybe 10 sometimes.  You may have more.
+</li>
+</ul>
+
+<p>Gitolite overheads compared to a normal ssh push are:</p>
+
+<ol>
+<li>perl startup time.  Fairly constant and fairly small.  I have generally
+found it pretty hard to measure, especially with a hot cache.
+</li>
+<li>rule parse time.  Details below
+</li>
+<li>rule interpretation time.  Fairly constant, or at least subject to much
+smaller variations than #2.
+</li>
+</ol>
+
+<p>"rule parse time" is where it makes a difference.  There are 2 files gitolite
+parses on each "access": <code>~/.gitolite/conf/gitolite.conf-compiled.pm</code> and
+<code>~/repositories/your_repo.git/gl-conf</code>.  The former contains O(N + M + G*A)
+lines.  In addition, the gl-conf files contains about "A" lines (remember we
+called it an average), which is negligible.</p>
+
+<p>In practice, you can't measure this at a scale that a developer running a "git
+push" might even pretend to notice, unless you have more than, say, 5000 repos
+or so.  On my testbed of 11,100 repos, where the compiled.pm is almost 0.7 MB,
+it takes less than 0.2 seconds to do this.</p>
+
+<p>And on a busy system, when that file will be pretty much always in cache, it's
+even less.</p>
+
+<h2>the only thing that will take more time</h2>
+
+<p>Literally, the only thing that will take time is something like "ssh git@host
+info" because it finds all possible repos and for each of them it tries to
+check the access.  On that same test bed, therefore, this ends up reading all
+11,100 "gl-conf" files.</p>
+
+<p>On my laptop this takes about 14 seconds.  In contrast, a normal git operation
+(clone, pull, push, etc) is so small it is hard to measure without software.</p>

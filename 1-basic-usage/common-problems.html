@@ -1,25 +1,36 @@
-<p><head><style>
+<head>
+<title>
+common problems and gotchas
+</title>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="common_problems_and_gotchas">common problems and gotchas</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#1-basic-usage/common-problems">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
 
-<hr />
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#common_problems_and_gotchas">common problems and gotchas</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#_windows_keeping_files_open_in_an_editor">(windows) keeping files open in an editor</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#_Not_currently_on_any_branch_">"Not currently on any branch"?</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#simple_gotchas_at_the_command_line">simple gotchas at the command line</a><br></p>
+<p><a name="1_basic_usage_common_problems_common_problems_and_gotchas_"></a></p>
 
-<hr />
+<h1>common problems and gotchas</h1>
 
-<h3><a name="_windows_keeping_files_open_in_an_editor">(windows) keeping files open in an editor</a></h3>
+<p><a name="1_basic_usage_common_problems_windows_keeping_files_open_in_an_editor_"></a></p>
+
+<h2>(windows) keeping files open in an editor</h2>
 
 <p>Windows does not allow you to overwrite or delete a file that is open in an
 editor.  As a result, operations such as <code>git pull</code>, <code>merge</code>,
@@ -29,7 +40,9 @@ one of the files you have kept open.</p>
 <p>If you get funky errors while doing any git operations, close all editors and
 try again!</p>
 
-<h3><a name="_Not_currently_on_any_branch_">"Not currently on any branch"?</a></h3>
+<p><a name="1_basic_usage_common_problems_Not_currently_on_any_branch__"></a></p>
+
+<h2>"Not currently on any branch"?</h2>
 
 <p>In the graphical tool <code>gitk</code>, any "branch" that has a leading part in
 yellow is a <strong>remote</strong> branch.  Do not checkout such a branch until you get a
@@ -61,10 +74,12 @@ branches</li>
 </ul></li>
 </ul>
 
-<p>Update: I have since written about this in <a href="../concepts/detached-head.html">more depth
+<p>Update: I have since written about this in <a href="concepts/detached-head.html">more depth
 here</a>.</p>
 
-<h3><a name="simple_gotchas_at_the_command_line">simple gotchas at the command line</a></h3>
+<p><a name="1_basic_usage_common_problems_simple_gotchas_at_the_command_line_"></a></p>
+
+<h2>simple gotchas at the command line</h2>
 
 <ul>
 <li><p><code>git log rev</code> and <code>git diff rev</code> go in different directions.  Log shows

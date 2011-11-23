@@ -1,0 +1,99 @@
+<head>
+<title>
+for people who think Hg is just as good
+</title>
+<style>
+    body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
+    code        { font-size:    1.1em;  background:  #ddf; }
+    pre         { margin-left:  2em;    background:  #ddf; }
+    pre code    { font-size:    1.1em;  background:  #ddf; }
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#other-stuff/hg">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
+
+<!-- file: other-stuff/hg "for people who think Hg is just as good" -->
+
+<p><a name="other_stuff_hg_for_people_who_think_Hg_is_just_as_good_"></a></p>
+
+<h1>for people who think Hg is just as good</h1>
+
+<p>Hg is almost as good as git.  Linus pretty much says so in his famous
+googletalk.</p>
+
+<p>Almost :-)</p>
+
+<p>Here're some links about Hg; detailed commentary from me may come later, but I
+doubt I will have the time or the inclination.  It's not like this is SVN and
+I have to strenuously keep you away from it -- go ahead and use Hg if you like
+it and it fits your work style :-)</p>
+
+<p>Also, I have no intention of becoming an Hg expert to answer questions or
+criticisms about this page.  If you think something is wrong, tell me and I'd
+be happy to update it.</p>
+
+<p><a name="other_stuff_hg_Local_branches_"></a></p>
+
+<h2>Local branches</h2>
+
+<p>Hg does not permit a quick experimental branch just to test some wild idea
+quickly.  Check out the "Branch Management" section in
+<a href="http://www.rockstarprogrammer.org/post/2008/apr/06/differences-between-mercurial-and-git/">http://www.rockstarprogrammer.org/post/2008/apr/06/differences-between-mercurial-and-git/</a>.</p>
+
+<p>Read the last 3 paras of that section, at least.</p>
+
+<!--
+
+Also, because the branch name is in the changeset, the branch lives forever.
+The only short-term branches are clone branches. That just doesn't encourage
+quick experiments.
+
+In git, a branch is just a head (see above). Making changes to a branch
+actually moves the pointer to the new changeset. This head must be explicitly
+shared across repositories.
+
+In practice, this drops the cost down to approximately zero. You won't
+accidentally push code you don't mean to. You won't have to be reminded of a
+failed experiment for the rest of your life, and you won't have to fear
+naming them in such a way that they don't collide with something someone else
+has done somewhere else. 
+
+-->
+
+<p><a name="other_stuff_hg_Projects_"></a></p>
+
+<h2>Projects</h2>
+
+<p>Mozilla: quote from
+<a href="http://weblogs.mozillazine.org/preed/2007/04/version_control_system_shootou_1.html">http://weblogs.mozillazine.org/preed/2007/04/version_control_system_shootou_1.html</a>:</p>
+
+<blockquote>
+  <p><em>"As good, performant Win32 (and Mac and Linux) is a hard-requirement, Git
+    lost in early Kombat rounds. This is unfortunate because (as we would soon
+    find out), lots of issues with the other systems did "just work" in Git."</em></p>
+</blockquote>
+
+<p><a name="other_stuff_hg_Unsorted_URLs_"></a></p>
+
+<h2>Unsorted URLs</h2>
+
+<ul>
+<li><a href="http://weblog.masukomi.org/2008/2/4/some-thoughts-about-git">http://weblog.masukomi.org/2008/2/4/some-thoughts-about-git</a></li>
+<li><a href="http://texagon.blogspot.com/2008/02/use-mercurial-you-git.html?showComment=1202345880000#c900552130121547868">http://texagon.blogspot.com/2008/02/use-mercurial-you-git.html?showComment=1202345880000#c900552130121547868</a>: 
+<em>I used to be more of a Mercurial guy, but there's just a moment (at least
+there was for me) where it all clicks and Git makes sense. Having your
+repository be just a giant DAG of commits is what you want -- forcing each
+fork in the road to live in its own separate repository is a pain and
+unnecessary.</em></li>
+</ul>

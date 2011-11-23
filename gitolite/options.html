@@ -1,0 +1,100 @@
+
+<head>
+    <title>gitolite options</title>
+<style>
+    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+    h4          { background: #ffb; text-color: #000; }
+    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+</style>
+<style>
+   body{counter-reset: section}
+   h1{counter-reset: sub-section}
+   h2{counter-reset: composite}
+   h3{counter-reset: detail}
+
+   h1:before {
+     counter-increment: section;
+     content: counter(section) ". ";
+   }
+   h2:before {
+     counter-increment: sub-section;
+     content: counter(section) "." counter(sub-section) ". ";
+   }
+   h3:before {
+     counter-increment: composite;
+     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
+   }
+   h4:before {
+     counter-increment: detail;
+     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
+   }
+</style>
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="index.html">main page</a>
+|
+    <a href="gitolite.html">single-page</a>
+|
+    <a href="index.html#license">license</a>
+</p>
+<p style="text-align:center">
+<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+</p>
+<h1>gitolite options</h1>
+
+<p>Some gitolite features are enabled, or gitolite's behaviour changed, by
+setting "options".</p>
+
+<p>A line like 'option foo = 1' is really just syntactic sugar for 'config
+gitolite-options.foo = 1', so everything in the <a href="git-config.html">git-config</a> page also
+applies here (especially the bit about <a href="git-config.html#override_conf">overriding config
+values</a>).</p>
+
+<p><strong>However</strong>, these values are <strong>not</strong> written into git's own <code>config</code> file, so
+git (or other programs running <code>git config</code>) will not see them.  You can only
+query them using <code>gitolite git-config</code>, where they will appear in full in the
+output.</p>
+
+<p>Options are set by repo.  The syntax is very simple:</p>
+
+<pre><code>option  foo.bar     =   baz
+</code></pre>
+
+<p>Of course this is useless if some other part of gitolite, or some external
+command, is not querying for the option key 'foo.bar'!</p>
+
+<p>Options are therefore documented in the section/page they belong in, not here.
+Here are some examples, although this list is not exhaustive:</p>
+
+<ul>
+<li><p><a href="rules.html#deny-rules">deny-rules</a> -- ask gitolite to honor deny rules during the pre-git
+check also.</p></li>
+<li><p><a href="mirroring.html">mirroring</a> related options -- tell gitolite who is the master server,
+and who are the slaves, for each repo.</p></li>
+<li><p>the optional post-compile trigger 'update-gitweb-daemon-from-options'
+allows you to use options instead of special usernames gitweb and daemon
+to determine access for those tools.</p></li>
+<li><p>you can set <a href="dev-notes.html#rsev">repo-specific environment variables</a> for triggers and
+hooks to test, which is very useful.</p></li>
+</ul>
+
+<p>Here's how to disable an option from a single repo if it was enabled earlier
+in a group (which you might guess from reading the <a href="git-config.html">git-config</a> page):</p>
+
+<pre><code>@g = r1 r2 r3
+
+repo @g
+    option gitweb = 1
+
+# but repo r2 should not be accessible by gitweb
+repo r2
+    option gitweb = ""
+</code></pre>

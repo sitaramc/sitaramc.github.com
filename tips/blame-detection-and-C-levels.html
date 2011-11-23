@@ -1,12 +1,30 @@
-<p><head><style>
+<head>
+<title>
+blame detection
+</title>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#tips/blame-detection-and-C-levels">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
+
+
+<p><a name="tips_blame_detection_and_C_levels_blame_detection_"></a></p>
 
 <h1>blame detection</h1>
 
@@ -15,7 +33,9 @@
 the project.  It's a very powerful feature, accessed by specifying the
 <code>-C</code> flag one or more times, but there are some nuances.</p>
 
-<h4>move detection versus copy detection</h4>
+<p><a name="tips_blame_detection_and_C_levels_move_detection_versus_copy_detection_"></a></p>
+
+<h2>move detection versus copy detection</h2>
 
 <p>When the <code>-C</code> flag is given only once, it looks for code blocks that were
 <strong>moved</strong>.  That is, it searches for new code among other files that were also
@@ -25,9 +45,12 @@ modified in the same commit.  This runs very fast.</p>
 files in the parent commit, and so it detects code that was <strong>copied</strong>.</p>
 
 <p><code>git gui blame</code> behaves like <code>-C -C</code> by default, but can behave like <code>-C</code> if
-<code>gui.fastcopyblame</code> is true.</p>
+<code>gui.fastcopyblame</code> is true.  (In addition, it also appears to set <code>-w</code>, to
+ignore whitespace changes while blaming).</p>
 
-<h4>threshold, and how to specify it</h4>
+<p><a name="tips_blame_detection_and_C_levels_threshold_and_how_to_specify_it_"></a></p>
+
+<h2>threshold, and how to specify it</h2>
 
 <p>There is a concept of a "threshold", which is the minimum number of
 alphanumeric characters required to count something as a code move/copy -- be
@@ -41,7 +64,9 @@ detection.  You can override it by appending a number to the <code>-C</code> opt
 GUI (Edit->Options), or directly set the <code>gui.copyblamethreshold</code> config
 variable.</p>
 
-<h4>documentation lacunae</h4>
+<p><a name="tips_blame_detection_and_C_levels_documentation_lacunae_"></a></p>
+
+<h2>documentation lacunae</h2>
 
 <p>The documentation does not seem to be very clear about the effect of <em>three</em>
 <code>-C</code> options on <code>git blame</code>.  (In the GUI this is done by choosing full copy
@@ -64,7 +89,9 @@ documentation, I imagine "removed files" actually means "code from some other
 modified file in the same commit", and similarly "existing files" means "code
 from any files in the parent commit".</p>
 
-<h4>my observations</h4>
+<p><a name="tips_blame_detection_and_C_levels_my_observations_"></a></p>
+
+<h2>my observations</h2>
 
 <ul>
 <li>a very high threshold makes it behave like no <code>-C</code> flags were supplied</li>

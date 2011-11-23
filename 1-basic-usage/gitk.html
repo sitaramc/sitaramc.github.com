@@ -1,16 +1,32 @@
-<p><head><style>
+<head>
+<title>
+the missing gitk documentation
+</title>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="the_missing_gitk_documentation">the missing gitk documentation</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#1-basic-usage/gitk">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
 
-<p><sup></p>
+
+<p><a name="1_basic_usage_gitk_the_missing_gitk_documentation_"></a></p>
+
+<h1>the missing gitk documentation</h1>
 
 <p><code>gitk</code> is a very powerful GUI tool.  It's one of those rare beasts where the
 pretty stuff is not just a crutch for the command-line-ignorant -- it actually
@@ -23,30 +39,24 @@ undocumented.</p>
 explore the UI and find all these features yourself, and indeed, if you find
 any that are not listed here, please <a href="mailto:sitaramc@gmail.com">email me</a>.</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#the_missing_gitk_documentation">the missing gitk documentation</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#colors_and_bold">colors and bold</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#repository_operations">repository operations</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#the_main_menu">the main menu</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#browsing_the_commit_list_top_pane_">browsing the commit list (top pane)</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#browsing_the_diff">browsing the diff</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#running_a_diff_between_two_arbitrary_commits">running a diff between two arbitrary commits</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#searching_for_commits">searching for commits</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#navigating_the_commit_tree">navigating the commit tree</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#some_other_tricks">some other tricks</a><br></p>
+<p><a name="1_basic_usage_gitk_colors_and_bold_"></a></p>
 
-<p></sup></p>
-
-<h3><a name="colors_and_bold">colors and bold</a></h3>
+<h2>colors and bold</h2>
 
 <ul>
 <li>local branch names are in a green background.</li>
-<li>remote branch names are in a mixed orange/green background.  (<a href="../concepts/detached-head.html"><strong>DO NOT
+<li>remote branch names are in a mixed orange/green background.  (<a href="concepts/detached-head.html"><strong>DO NOT
 checkout remote branches</strong></a>!)</li>
 <li>the currently checked out branch name is in bold.</li>
 <li>tags are on a yellow background.</li>
+<li>a yellow dot marks the current HEAD</li>
+<li>a yellow square marks commits which have "notes" ('man git-notes' for what
+that means)</li>
 </ul>
 
-<h3><a name="repository_operations">repository operations</a></h3>
+<p><a name="1_basic_usage_gitk_repository_operations_"></a></p>
+
+<h2>repository operations</h2>
 
 <p>All these are from the commit list (the top pane):</p>
 
@@ -62,13 +72,15 @@ checkout remote branches</strong></a>!)</li>
 <li><p>right clicking on a branch name</p>
 
 <ul>
-<li>checkout the branch (please heed the warning above and <a href="../concepts/detached-head.html"><strong>DO NOT
+<li>checkout the branch (please heed the warning above and <a href="concepts/detached-head.html"><strong>DO NOT
 checkout remote branches</strong></a>!)</li>
 <li>remove the branch</li>
 </ul></li>
 </ul>
 
-<h3><a name="the_main_menu">the main menu</a></h3>
+<p><a name="1_basic_usage_gitk_the_main_menu_"></a></p>
+
+<h2>the main menu</h2>
 
 <ul>
 <li><p>reload: if you're doing stuff on the command line in another screen, and
@@ -87,7 +99,9 @@ to that reference.  The list window will stay open so you can click on
 other refs.</p></li>
 </ul>
 
-<h3><a name="browsing_the_commit_list_top_pane_">browsing the commit list (top pane)</a></h3>
+<p><a name="1_basic_usage_gitk_browsing_the_commit_list_top_pane__"></a></p>
+
+<h2>browsing the commit list (top pane)</h2>
 
 <p>Many of these functions also have character key bindings.  For example "n"
 acts the same as a "down arrow".  I'm not listing those; if you need them,
@@ -102,7 +116,9 @@ browser's back/forward)</li>
 below)</li>
 </ul>
 
-<h3><a name="browsing_the_diff">browsing the diff</a></h3>
+<p><a name="1_basic_usage_gitk_browsing_the_diff_"></a></p>
+
+<h2>browsing the diff</h2>
 
 <p>At any time, the bottom left pane shows a "diff", usually of the current
 commit shown in the top pane.  The bottom right pane (by default) shows a list
@@ -120,7 +136,9 @@ will show a change when you do this.</li>
 file's changes</li>
 </ul>
 
-<h4><a name="running_a_diff_between_two_arbitrary_commits">running a diff between two arbitrary commits</a></h4>
+<p><a name="1_basic_usage_gitk_running_a_diff_between_two_arbitrary_commits_"></a></p>
+
+<h3>running a diff between two arbitrary commits</h3>
 
 <ul>
 <li>left click on the "new" commit</li>
@@ -136,7 +154,9 @@ change the view to show that commit, so while examining this "diff", stick to
 
 <p><a name="sfc"></p>
 
-<h3><a name="searching_for_commits">searching for commits</a></h3>
+<p><a name="1_basic_usage_gitk_searching_for_commits_"></a></p>
+
+<h2>searching for commits</h2>
 
 <p>Here're some ways to search for commits.  The commits that result will become
 highlighted in bold, so you can see them in the context of their surrounding
@@ -167,7 +187,9 @@ also; they're fairly self-explanatory.  Note that the last widget (All fields,
 Headlines, Comments, Author, Committer) is only valid when the type of search
 widget shows "containing:".</p>
 
-<h3><a name="navigating_the_commit_tree">navigating the commit tree</a></h3>
+<p><a name="1_basic_usage_gitk_navigating_the_commit_tree_"></a></p>
+
+<h2>navigating the commit tree</h2>
 
 <p>There are several ways to navigate the tree quickly.</p>
 
@@ -192,7 +214,9 @@ find the commit for a bugfix or a feature you want, this will tell you the
 minimum version you should upgrade to.</p></li>
 </ul>
 
-<h3><a name="some_other_tricks">some other tricks</a></h3>
+<p><a name="1_basic_usage_gitk_some_other_tricks_"></a></p>
+
+<h2>some other tricks</h2>
 
 <ul>
 <li><p>expand the diff view by using the spin control that says "Lines of

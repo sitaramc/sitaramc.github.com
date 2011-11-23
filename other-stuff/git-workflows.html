@@ -1,27 +1,35 @@
-<p><head><style>
+<head>
+<title>
+git -- suggested workflow for large projects
+</title>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="git_suggested_workflow_for_large_projects">git -- suggested workflow for large projects</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#other-stuff/git-workflows">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#git_suggested_workflow_for_large_projects">git -- suggested workflow for large projects</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#assumptions">assumptions</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#roles">roles</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#typical_workflow">typical workflow</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#developer">developer</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#feature_guy">feature guy</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#release_manager">release manager</a><br></p>
 
-<hr />
+<p><a name="other_stuff_git_workflows_git_suggested_workflow_for_large_projects_"></a></p>
+
+<h1>git -- suggested workflow for large projects</h1>
 
 <blockquote>
-  <p><sup><strong>WARNING: I have not checked out all the commands -- there could be
+  <p>^^<strong>WARNING: I have not checked out all the commands -- there could be
     errors!  The first time you use it, please try them on a sandbox!</strong>  Also,
     note that a lot of this can be done from the GUI also, if you wish.</p>
 
@@ -36,11 +44,13 @@
 <p></blockquote></p>
 
 <p>This is essentially a modification and simplification of the typical
-    workflow that Linux and other projects using DVCSs use.</sup></p>
+    workflow that Linux and other projects using DVCSs use.^^</p>
 
 <p></blockquote></p>
 
-<h3><a name="assumptions">assumptions</a></h3>
+<p><a name="other_stuff_git_workflows_assumptions_"></a></p>
+
+<h2>assumptions</h2>
 
 <ul>
 <li>the team needs to manage multiple projects</li>
@@ -50,7 +60,9 @@
 commands or at least the GUI stuff</li>
 </ul>
 
-<h3><a name="roles">roles</a></h3>
+<p><a name="other_stuff_git_workflows_roles_"></a></p>
+
+<h2>roles</h2>
 
 <p>Every project has the following loosely defined roles.  If it's a small
 project the same person may take on multiple roles.</p>
@@ -63,14 +75,18 @@ any.  In $COMPANY terms, this is like the ML</li>
 <li>N developers</li>
 </ul>
 
-<h3><a name="typical_workflow">typical workflow</a></h3>
+<p><a name="other_stuff_git_workflows_typical_workflow_"></a></p>
+
+<h2>typical workflow</h2>
 
 <p>Here's a typical workflow, assuming a starting point from the "master" branch
 on the master server.  This assumes that the people on the project have ssh
 (write) access to the repo -- it is not the "please pull..." mode that open
 source projects use on the internet.</p>
 
-<h4><a name="developer">developer</a></h4>
+<p><a name="other_stuff_git_workflows_developer_"></a></p>
+
+<h3>developer</h3>
 
 <p>One-time:</p>
 
@@ -147,12 +163,16 @@ git branch -d wildidea
 </code></pre></li>
 </ul>
 
-<h4><a name="feature_guy">feature guy</a></h4>
+<p><a name="other_stuff_git_workflows_feature_guy_"></a></p>
+
+<h3>feature guy</h3>
 
 <p>This will be a mix between the developers workflow and the release manager's
 workflow.</p>
 
-<h4><a name="release_manager">release manager</a></h4>
+<p><a name="other_stuff_git_workflows_release_manager_"></a></p>
+
+<h3>release manager</h3>
 
 <p>When doing your own development, you do the same thing as the developer
 described above</p>
