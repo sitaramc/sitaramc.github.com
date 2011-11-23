@@ -1,12 +1,25 @@
-<p><head><style>
+<head>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#the-list-and-irc/special-branches">chapter TOC</a>
+</p>
+
+
+<p><a name="the_list_and_irc_special_branches_customer_branches_"></a></p>
 
 <h1>customer branches</h1>
 
@@ -37,15 +50,17 @@ at a time.</p>
 
 <hr />
 
-<h4>SVN-itis</h4>
+<p><a name="the_list_and_irc_special_branches_SVN_itis_"></a></p>
+
+<h2>SVN-itis</h2>
 
 <p>The first thing to note is that the question reflects what I have started
 calling <code>SVN-itis</code> -- where "branch" and "(sub)directory" are conflated :-)</p>
 
-<p>Some <a href="../concepts/0-terminology.html">basic
+<p>Some <a href="concepts/0-terminology.html">basic
 terminology</a> is
 probably useful, if you're really new to git, or perhaps some info on
-<a href="../concepts/branches.html">branches in git</a>, but
+<a href="concepts/branches.html">branches in git</a>, but
 neither of these quite manage a cure for SVN-itis.  So let's lay it out:</p>
 
 <blockquote>
@@ -65,7 +80,9 @@ the actual directory structure for this version is pretty much the same as,
 say, for customer "B", and both of them are similar to the directory structure
 of the main branch.</p>
 
-<h4>cherry-pick versus merge</h4>
+<p><a name="the_list_and_irc_special_branches_cherry_pick_versus_merge_"></a></p>
+
+<h2>cherry-pick versus merge</h2>
 
 <p>[also see <code>git help workflows</code>]</p>
 
@@ -102,7 +119,9 @@ merge a branch, <em>all</em> the changes in that branch are brought in (merging 
 <em>not</em> a selective operation) so it is best to <em>create a different branch for
 each logically separate set of changes</em>.</p>
 
-<h4>customer specific branches</h4>
+<p><a name="the_list_and_irc_special_branches_customer_specific_branches_"></a></p>
+
+<h2>customer specific branches</h2>
 
 <p>The idea is you use one common branch, and two (or as many as you need)
 customer specific branches.  All common changes go into the master, and each
@@ -127,7 +146,9 @@ then rely on merging A into C, because that would get all of A into C.</p>
 in the same branch (<code>git checkout AC_feature; edit/test/commit</code>), and then you
 merge it into <code>custA</code> and <code>custC</code> as above.</p>
 
-<h4>Summary</h4>
+<p><a name="the_list_and_irc_special_branches_Summary_"></a></p>
+
+<h2>Summary</h2>
 
 <p>The main thing we're avoiding in all this is cherry-picking specific commits
 because you only wanted a part of that code in this branch -- cherry-picking
@@ -136,5 +157,5 @@ is certainly doable, but it is not scalable and in the long term it's a pain.</p
 <p>Of course, you do have to be disciplined about which branch you make each
 commit in, in order to keep things properly separated.</p>
 
-<p>But <a href="special-branch-fixups.html">here</a> is one way to fix up things if you did
+<p>But <a href="the-list-and-irc/special-branch-fixups.html">here</a> is one way to fix up things if you did
 not manage to do that for some reason.</p>

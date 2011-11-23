@@ -1,80 +1,37 @@
-<p><head><style>
+<head>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#gcs/index">chapter TOC</a>
+</p>
+
+
+<p><a name="gcs_index_git_for_computer_scientists_my_version_"></a></p>
 
 <h1>git for computer scientists -- my version</h1>
 
 <p>[Inside joke: Hey I rewrote gitosis so why not this?]</p>
 
-<hr />
+<p><a name="gcs_index_basics_"></a></p>
 
-<p>In this document:</p>
+<h2>basics</h2>
 
-<ul>
-<li><a href="#_basics">basics</a>
-<ul>
-<li><a href="#_the_4_git_object_types">the 4 git object types</a></li>
-<li><a href="#_what_is_a_SHA">what is a SHA</a></li>
-<li><a href="#_what_is_a_repo">what is a repo</a></li>
-</ul></li>
-<li><a href="#_why_are_the_arrows_backward_in_your_pictures_"><strong>(why are the arrows backward in your pictures?)</strong></a></li>
-<li><a href="#_branches_and_tags">branches and tags</a>
-<ul>
-<li><a href="#_branch">branch</a></li>
-<li><a href="#_more_than_one_branch">more than one branch</a></li>
-<li><a href="#_more_than_one_parent_commit">more than one parent commit</a></li>
-<li><a href="#_current_branch_checked_out_branch">current branch/checked out branch</a></li>
-<li><a href="#_committing">committing</a></li>
-<li><a href="#_naming_non_leaf_nodes">naming non-leaf nodes</a></li>
-<li><a href="#_tags">tags</a></li>
-</ul></li>
-<li><a href="#_the_difference_between_branches_and_tags">the difference between branches and tags</a></li>
-<li><a href="#_digressions">digressions</a>
-<ul>
-<li><a href="#_what_is_a_git_URL_">what is a git URL?</a></li>
-<li><a href="#_what_is_a_remote_">what is a "remote"?</a></li>
-</ul></li>
-<li><a href="#_local_and_remote_repos">local and remote repos</a>
-<ul>
-<li><a href="#_remote_branches">remote branches</a></li>
-<li><a href="#_multiple_remotes">multiple remotes</a></li>
-<li><a href="#_fetching_and_merging_from_another_repo">fetching and merging from another repo</a></li>
-</ul></li>
-<li><a href="#_the_object_store">the object store</a>
-<ul>
-<li><a href="#_what_is_a_repo_again_">what is a repo (again)</a></li>
-<li><a href="#_objects_and_branches_tags">objects and branches/tags</a></li>
-</ul></li>
-<li><a href="#_advanced_operations">advanced operations</a>
-<ul>
-<li><a href="#_merging">merging</a></li>
-<li><a href="#_cherry_pick">cherry-pick</a></li>
-<li><a href="#_rebasing">rebasing</a></li>
-</ul></li>
-<li><a href="#_the_confusion_about_checkout_versus_reset">the confusion about checkout versus reset</a></li>
-<li><a href="#_detached_HEAD_and_all_that">detached HEAD and all that</a>
-<ul>
-<li><a href="#_other_ways_to_detach_your_HEAD">other ways to detach your HEAD</a></li>
-<li><a href="#_re_attaching_the_HEAD">re-attaching the HEAD</a></li>
-<li><a href="#_the_reflog">the reflog</a></li>
-</ul></li>
-</ul>
+<p><a name="gcs_index_the_4_git_object_types_"></a></p>
 
-<hr />
-
-<p><a name="_basics"></a></p>
-
-<h3>basics</h3>
-
-<p><a name="_the_4_git_object_types"></a></p>
-
-<h4>the 4 git object types</h4>
+<h3>the 4 git object types</h3>
 
 <p>Git keeps all its data inside a special directory called <code>.git</code> at the top
 level of your repository.  Somewhere in there is what we will simply call the
@@ -95,9 +52,9 @@ time, although it contains a lot of other information also.</p></li>
 <li><p><strong>tag</strong> -- we will see this type a bit later.</p></li>
 </ul>
 
-<p><a name="_what_is_a_SHA"></a></p>
+<p><a name="gcs_index_what_is_a_SHA_"></a></p>
 
-<h4>what is a SHA</h4>
+<h3>what is a SHA</h3>
 
 <p>A commit is uniquely identified by a 160-bit hex value (the 'SHA').  This is
 computed from the tree, plus the following pieces of information:</p>
@@ -129,9 +86,9 @@ just take it on faith).</p>
 
 <p>An example SHA: <code>a30236028b7ddd65f01321af42f904479eaff549</code></p>
 
-<p><a name="_what_is_a_repo"></a></p>
+<p><a name="gcs_index_what_is_a_repo_"></a></p>
 
-<h4>what is a repo</h4>
+<h3>what is a repo</h3>
 
 <p>A repository ('repo') is a graph of commits.  In our figures, we represent
 SHAs with numbers for convenience.  We also represent time going
@@ -139,9 +96,9 @@ upward (bottom to top).</p>
 
 <img src="images/plain" title="plain" />
 
-<p><a name="_why_are_the_arrows_backward_in_your_pictures_"></a></p>
+<p><a name="gcs_index_why_are_the_arrows_backward_in_your_pictures__"></a></p>
 
-<h3><strong>(why are the arrows backward in your pictures?)</strong></h3>
+<h2><strong>(why are the arrows backward in your pictures?)</strong></h2>
 
 <p>So why are the arrows pointing backward?</p>
 
@@ -152,22 +109,22 @@ upward (bottom to top).</p>
 <p>Therefore a repo is like a single linked list.  It cannot be a double linked
 list -- this is because any change to the contents would change the SHA!</p>
 
-<p><a name="_branches_and_tags"></a></p>
+<p><a name="gcs_index_branches_and_tags_"></a></p>
 
-<h3>branches and tags</h3>
+<h2>branches and tags</h2>
 
-<p><a name="_branch"></a></p>
+<p><a name="gcs_index_branch_"></a></p>
 
-<h4>branch</h4>
+<h3>branch</h3>
 
 <p>Traditionally, the top of a linked list has a name.  That name is a BRANCH
 name.  We show branch names in green circles.</p>
 
-<img src="images/fig-0002" title="master" />
+<img src="images/gcs_index-0002" title="master" />
 
-<p><a name="_more_than_one_branch"></a></p>
+<p><a name="gcs_index_more_than_one_branch_"></a></p>
 
-<h4>more than one branch</h4>
+<h3>more than one branch</h3>
 
 <p>(a.k.a "more than one child commit")</p>
 
@@ -175,17 +132,17 @@ name.  We show branch names in green circles.</p>
 may be pointing at the same parent node.  In this case, each 'leaf node' is a
 branch, and will have a name.</p>
 
-<img src="images/fig-0003" title="Figure 3" />
+<img src="images/gcs_index-0003" title="Figure 3" />
 
-<p><a name="_more_than_one_parent_commit"></a></p>
+<p><a name="gcs_index_more_than_one_parent_commit_"></a></p>
 
-<h4>more than one parent commit</h4>
+<h3>more than one parent commit</h3>
 
 <p>Well we can't keep creating more branches without eventually merging them
 back.  So let's say "feature X" is now tested enough to be merged into the
 main branch, so you <code>git merge feature_X</code>.  Here's what you get:</p>
 
-<img src="images/fig-0004" title="Figure 4" />
+<img src="images/gcs_index-0004" title="Figure 4" />
 
 <p>Notice that commit 8 now has 2 parents, showing that it is a "merge commit".</p>
 
@@ -193,11 +150,11 @@ main branch, so you <code>git merge feature_X</code>.  Here's what you get:</p>
 you anticipate no more "large" changes.  So you can run <code>git branch -d
 feature_X</code>, which gives you this:</p>
 
-<img src="images/fig-0005" title="Figure 5" />
+<img src="images/gcs_index-0005" title="Figure 5" />
 
-<p><a name="_current_branch_checked_out_branch"></a></p>
+<p><a name="gcs_index_current_branch_checked_out_branch_"></a></p>
 
-<h4>current branch/checked out branch</h4>
+<h3>current branch/checked out branch</h3>
 
 <p>There is a notion of a 'currently checked out' branch.  This is denoted by a
 special ref called HEAD.  HEAD is a <strong>symbolic</strong> ref, which points to the
@@ -205,24 +162,24 @@ special ref called HEAD.  HEAD is a <strong>symbolic</strong> ref, which points 
 
 <img src="images/HEAD" title="HEAD" />
 
-<p><a name="_committing"></a></p>
+<p><a name="gcs_index_committing_"></a></p>
 
-<h4>committing</h4>
+<h3>committing</h3>
 
 <p>When you make a new commit, the current branch moves.  Technically, whatever
 branch HEAD is pointing to will move.</p>
 
-<img src="images/fig-0007" title="Figure 7" />
+<img src="images/gcs_index-0007" title="Figure 7" />
 
-<p><a name="_naming_non_leaf_nodes"></a></p>
+<p><a name="gcs_index_naming_non_leaf_nodes_"></a></p>
 
-<h4>naming non-leaf nodes</h4>
+<h3>naming non-leaf nodes</h3>
 
 <p>It's not just 'leaf' nodes, but inner nodes can also have names.  Recall the
 result of merging <code>feature_X</code> earlier (see the "more than one parent commit"
 section):</p>
 
-<img src="images/fig-0008" title="Figure 8" />
+<img src="images/gcs_index-0008" title="Figure 8" />
 
 <p>At this point, you could leave <code>feature_X</code> as it is forever.  Or you could
 delete the branch (as we showed in that section), in which case that label
@@ -237,33 +194,33 @@ to make sure it has all the other stuff that master may have acquired till
 now (this is shown by commit 9 below) before continuing further
 development:</font></p>
 
-<img src="images/fig-0009" title="Figure 9" />
+<img src="images/gcs_index-0009" title="Figure 9" />
 
-<p><a name="_tags"></a></p>
+<p><a name="gcs_index_tags_"></a></p>
 
-<h4>tags</h4>
+<h3>tags</h3>
 
 <p>More commonly, inner nodes are TAGS.  We show tag names in yellow circles.</p>
 
-<img src="images/fig-0010" title="Figure 10" />
+<img src="images/gcs_index-0010" title="Figure 10" />
 
-<p><a name="_the_difference_between_branches_and_tags"></a></p>
+<p><a name="gcs_index_the_difference_between_branches_and_tags_"></a></p>
 
-<h3>the difference between branches and tags</h3>
+<h2>the difference between branches and tags</h2>
 
 <p>The main difference between a branch and a tag is branches move, tags don't.
 When you make a commit with the "master" branch currently checked out, master
 will move to point to the new commit.</p>
 
-<img src="images/fig-0011" title="Figure 11" />
+<img src="images/gcs_index-0011" title="Figure 11" />
 
-<p><a name="_digressions"></a></p>
+<p><a name="gcs_index_digressions_"></a></p>
 
-<h3>digressions</h3>
+<h2>digressions</h2>
 
-<p><a name="_what_is_a_git_URL_"></a></p>
+<p><a name="gcs_index_what_is_a_git_URL__"></a></p>
 
-<h4>what is a git URL?</h4>
+<h3>what is a git URL?</h3>
 
 <p>Git repos are accessed by providing a URL.  There are typically 4 kinds of Git
 URLs:</p>
@@ -277,9 +234,9 @@ software</li>
 <li>local file: like <code>file:///full/path/to/reponame</code></li>
 </ul>
 
-<p><a name="_what_is_a_remote_"></a></p>
+<p><a name="gcs_index_what_is_a_remote__"></a></p>
 
-<h4>what is a "remote"?</h4>
+<h3>what is a "remote"?</h3>
 
 <p>A remote is a short name (like an alias) used to refer to a specific git
 repository.  Instead of always saying <code>git fetch git://sitaramc/gitolite</code>, you
@@ -288,49 +245,49 @@ can add that as a remote and use that short name instead of the long URL.</p>
 <p>For convenience, a 'remote' called 'origin' is automatically created
 when you clone a repo, pointing to the repo you cloned from.</p>
 
-<p><a name="_local_and_remote_repos"></a></p>
+<p><a name="gcs_index_local_and_remote_repos_"></a></p>
 
-<h3>local and remote repos</h3>
+<h2>local and remote repos</h2>
 
-<p><a name="_remote_branches"></a></p>
+<p><a name="gcs_index_remote_branches_"></a></p>
 
-<h4>remote branches</h4>
+<h3>remote branches</h3>
 
 <p>Git is a distributed version control system.  So when you clone someone's
 repo, you get all the branches in that one.  Remote branches are prefixed by
 the name of the remote, and we show them in orange.</p>
 
-<img src="images/fig-0012" title="Figure 12" />
+<img src="images/gcs_index-0012" title="Figure 12" />
 
-<p><a name="_multiple_remotes"></a></p>
+<p><a name="gcs_index_multiple_remotes_"></a></p>
 
-<h4>multiple remotes</h4>
+<h3>multiple remotes</h3>
 
 <p>You can have several remotes.</p>
 
-<img src="images/fig-0013" title="Figure 13" />
+<img src="images/gcs_index-0013" title="Figure 13" />
 
-<p><a name="_fetching_and_merging_from_another_repo"></a></p>
+<p><a name="gcs_index_fetching_and_merging_from_another_repo_"></a></p>
 
-<h4>fetching and merging from another repo</h4>
+<h3>fetching and merging from another repo</h3>
 
 <p>Now let's say Sita's repo had a couple of new commits on its master, and you
 run <code>git fetch sitas-repo</code>.  (We have pruned the graph a litle for clarity,
 showing only the relevant commits; the rest of the commits and branches are
 assumed to be present as in the previous picture).</p>
 
-<img src="images/fig-0014" title="Figure 14" />
+<img src="images/gcs_index-0014" title="Figure 14" />
 
 <p>Now you want to merge Sita's master branch into yours.  Since your master does
 not have any commits that Sita's master doesn't have (i.e., Sita's master is
 like a superset of yours), running <code>git merge sitas-repo/master</code> will get you
 this:</p>
 
-<img src="images/fig-0015" title="Figure 15" />
+<img src="images/gcs_index-0015" title="Figure 15" />
 
-<p><a name="_the_object_store"></a></p>
+<p><a name="gcs_index_the_object_store_"></a></p>
 
-<h3>the object store</h3>
+<h2>the object store</h2>
 
 <p>Git stores all your data in an "object store".  There are 4 types of objects
 in this store: files (called "blobs"), trees (which are directories+files),
@@ -341,9 +298,9 @@ blobs and trees make a tree.  A commit is a tree, plus the SHA of its parent
 commit(s), the commit message, author/committer names and emails, and
 timestamps.  Under normal usage, you don't need to deal with all this).</p>
 
-<p><a name="_what_is_a_repo_again_"></a></p>
+<p><a name="gcs_index_what_is_a_repo_again__"></a></p>
 
-<h4>what is a repo (again)</h4>
+<h3>what is a repo (again)</h3>
 
 <p>Earlier, we saw that a repo was a graph of commits.  At the file system level,
 however, it is basically a directory called <code>.git</code> which looks somewhat like
@@ -363,9 +320,9 @@ drwxrwxr-x 4 sitaram sitaram 4096 Sep 14 18:54 objects/
 drwxrwxr-x 4 sitaram sitaram 4096 Sep 14 18:54 refs/
 </code></pre>
 
-<p><a name="_objects_and_branches_tags"></a></p>
+<p><a name="gcs_index_objects_and_branches_tags_"></a></p>
 
-<h4>objects and branches/tags</h4>
+<h3>objects and branches/tags</h3>
 
 <p><font color="gray"></p>
 
@@ -386,15 +343,15 @@ it entered the object store.  Once it's there, it's there!</p>
 
 <p>Think back to these three diagrams.  The first is before you did a fetch.</p>
 
-<img src="images/fig-0016" title="Figure 16" />
+<img src="images/gcs_index-0016" title="Figure 16" />
 
 <p>The next two figures are after <code>git fetch sitas-repo</code> and <code>git merge
 sitas-repo/master</code>, respectively.  The fetch command added two new commits (10
 and 11) to your object store, along with any other objects those commits
 reference.</p>
 
-<img src="images/fig-0017" title="Figure 17" />
-<img src="images/fig-0018" title="Figure 18" />
+<img src="images/gcs_index-0017" title="Figure 17" />
+<img src="images/gcs_index-0018" title="Figure 18" />
 
 <p>However, note that commits 10 and 11 did not change in any way simply because
 they are now in <strong>your local "master" branch</strong>.  They continue to have the
@@ -404,15 +361,15 @@ command at all.</p>
 <p>All you did was move a pointer from one node to another.  Which is why the
 linked list analogy works so well in understanding git as a DAG.</p>
 
-<p><a name="_advanced_operations"></a></p>
+<p><a name="gcs_index_advanced_operations_"></a></p>
 
-<h3>advanced operations</h3>
+<h2>advanced operations</h2>
 
 <p>We'll now show some advanced operations with the aid of this same tree.</p>
 
-<p><a name="_merging"></a></p>
+<p><a name="gcs_index_merging_"></a></p>
 
-<h4>merging</h4>
+<h3>merging</h3>
 
 <p>First, let's do merging.  The merge you saw earlier was what is called a
 "fast-forward" merge, because your local master did not have any commits that
@@ -421,20 +378,20 @@ the remote branch you were merging did not have.</p>
 <p>In practice, this is rare, especially on an active project with many
 developers.  So let's see what that looks like.  The starting point was this:</p>
 
-<img src="images/fig-0019" title="Figure 19" />
+<img src="images/gcs_index-0019" title="Figure 19" />
 
 <p>Now, you made some changes on your local master.  Meanwhile, sitas-repo has
 had some changes which you got by doing a fetch:</p>
 
-<img src="images/fig-0020" title="Figure 20" />
+<img src="images/gcs_index-0020" title="Figure 20" />
 
 <p>When you merge, the end result will usually look like this:</p>
 
-<img src="images/fig-0021" title="Figure 21" />
+<img src="images/gcs_index-0021" title="Figure 21" />
 
-<p><a name="_cherry_pick"></a></p>
+<p><a name="gcs_index_cherry_pick_"></a></p>
 
-<h4>cherry-pick</h4>
+<h3>cherry-pick</h3>
 
 <p>A cherry-pick is not very commonly done -- in well designed workflows it
 should actually be rare.  However, it's a good way to illustrate an important
@@ -452,7 +409,7 @@ repo.</p>
 
 <p>The starting point is this:</p>
 
-<img src="images/fig-0022" title="Figure 22" />
+<img src="images/gcs_index-0022" title="Figure 22" />
 
 <p>In this, sitas-repo has 3 commits on his master (12, 13, and 14) and you are
 only interested in the change that commit 13 made.</p>
@@ -465,16 +422,16 @@ able to guess!), but here's the command you might run:</p>
 
 <p>This results in the following commit graph.</p>
 
-<img src="images/fig-0023" title="Figure 23" />
+<img src="images/gcs_index-0023" title="Figure 23" />
 
 <p>Note that I've called the new commit "13a".  This is to reflect the fact that,
 while the <em>change</em> made is the same as in the original commit 13, the <em>SHA</em>
 will not be the same anymore (new parent commit, new "tree", new committer
 name/email, commit time, etc).</p>
 
-<p><a name="_rebasing"></a></p>
+<p><a name="gcs_index_rebasing_"></a></p>
 
-<h4>rebasing</h4>
+<h3>rebasing</h3>
 
 <p>Instead of merging, let's say you wanted to rebase your commits on top of
 Sita's commits.</p>
@@ -490,14 +447,14 @@ sitas-repo, the new commits are in "origin" (which is the "main" server for
 this project).  You haad your own commits, and you did a <code>git fetch origin</code>
 which brought in the latest commits from "origin", so it looks like:</p>
 
-<img src="images/fig-0024" title="Figure 24" />
+<img src="images/gcs_index-0024" title="Figure 24" />
 
 <p>Now, instead of merging "origin/master" into your local master, you want to
 rebase your commits on top of "origin/master".  That is, you want to pretend
 your local changes were made <em>after</em> commit 13 on the origin.  So you run <code>git
 rebase origin/master</code>, and this is the result:</p>
 
-<img src="images/fig-0025" title="Figure 25" />
+<img src="images/gcs_index-0025" title="Figure 25" />
 
 <p>Note that again, we're ignoring command syntax and nuances here.  This is
 about concepts.  Also again, note that the SHAs of the 2 commits have changed,
@@ -514,11 +471,11 @@ has some other forms.  This form is one, but the most common is when a
 developer wants to re-arrange his own local commits in a more logical sequence
 before publishing/pushing them.  (I often do the eqvt of changing this:</p>
 
-<img src="images/fig-0026" title="Figure 26" />
+<img src="images/gcs_index-0026" title="Figure 26" />
 
 <p>where "22delta" is a minor fixup to "22", into</p>
 
-<img src="images/fig-0027" title="Figure 27" />
+<img src="images/gcs_index-0027" title="Figure 27" />
 
 <p>using "git rebase -i".</p>
 
@@ -526,9 +483,9 @@ before publishing/pushing them.  (I often do the eqvt of changing this:</p>
 rebased -- will also have new SHAs.  This is why you should (almost) never
 rebase branches that have already been published.</p>
 
-<p><a name="_the_confusion_about_checkout_versus_reset"></a></p>
+<p><a name="gcs_index_the_confusion_about_checkout_versus_reset_"></a></p>
 
-<h3>the confusion about checkout versus reset</h3>
+<h2>the confusion about checkout versus reset</h2>
 
 <p><strong>Please note</strong> <font color="gray">that this section completely ignores the
 myriad options available to both these commands, especially the ones that
@@ -558,11 +515,11 @@ below 6 and 7 are omitted for brevity).</p>
 of a checkout and a reset, respectively.  Notice which line is moving in each
 picture, compared to the starting point.</p>
 
-<img src="images/fig-0028" title="starting point" />
-<img src="images/fig-0029" title="Figure 29" />
-<img src="images/fig-0030" title="Figure 30" />
-<img src="images/fig-0031" title="Figure 31" />
-<img src="images/fig-0032" title="Figure 32" />
+<img src="images/gcs_index-0028" title="starting point" />
+<img src="images/gcs_index-0029" title="Figure 29" />
+<img src="images/gcs_index-0030" title="Figure 30" />
+<img src="images/gcs_index-0031" title="Figure 31" />
+<img src="images/gcs_index-0032" title="Figure 32" />
 
 <p>As you can see, your current branch, when you start, is "master" (indicated by
 where HEAD is pointing).</p>
@@ -578,9 +535,9 @@ be a <em>completely</em> different history.</p>
 one that cannot be reached by any branch.  It is still accessible using the
 'reflog' and will eventually get garbage collected)</p>
 
-<p><a name="_detached_HEAD_and_all_that"></a></p>
+<p><a name="gcs_index_detached_HEAD_and_all_that_"></a></p>
 
-<h3>detached HEAD and all that</h3>
+<h2>detached HEAD and all that</h2>
 
 <p>All this time you have seen HEAD pointing to a branch name, and the branch
 itself pointing to a commit.  Then, when you make a commit, the branch moves
@@ -588,12 +545,12 @@ to the new commit (although HEAD still continue to point to the branch name).
 If you want to recap, here's a look at just the part of the tree that concerns
 us, in a simple before/after display:</p>
 
-<img src="images/fig-0033" title="Figure 33" />
-<img src="images/fig-0034" title="Figure 34" />
+<img src="images/gcs_index-0033" title="Figure 33" />
+<img src="images/gcs_index-0034" title="Figure 34" />
 
 <p>Now see what happens when you <code>git checkout v1.0</code>:</p>
 
-<img src="images/fig-0035" title="Figure 35" />
+<img src="images/gcs_index-0035" title="Figure 35" />
 
 <p>Notice the subtle difference?  HEAD is no longer a <strong>symbolic</strong> ref (i.e.,
 pointing to a real branch).  Instead, it is pointing directly to a commit.</p>
@@ -622,19 +579,19 @@ it moved!</p>
 <p>So from this point on, if you make a commit, only HEAD changes, nothing else,
 since it is no longer "attached" to any local branch name"</p>
 
-<img src="images/fig-0036" title="Figure 36" />
+<img src="images/gcs_index-0036" title="Figure 36" />
 
 <p>The reason this is considered dangerous is that, if you now do <code>git checkout
 master</code>, you get this:</p>
 
-<img src="images/fig-0037" title="Figure 37" />
+<img src="images/gcs_index-0037" title="Figure 37" />
 
 <p>Notice what happened to your new commit 8?  It's dangling.  Unreachable.
 (Except by the reflog, of course, but beginners can get shaken up!)</p>
 
-<p><a name="_other_ways_to_detach_your_HEAD"></a></p>
+<p><a name="gcs_index_other_ways_to_detach_your_HEAD_"></a></p>
 
-<h4>other ways to detach your HEAD</h4>
+<h3>other ways to detach your HEAD</h3>
 
 <p>The most common way to get into a detached HEAD state is to check out a remote
 branch (like <code>git checkout origin/branch</code>), without realising that you need to
@@ -668,9 +625,9 @@ refs/heads/branch</code>.</p>
 notation means "the actual commit that master points to", so it's just like
 saying <code>git checkout &lt;SHA&gt;</code>.</p>
 
-<p><a name="_re_attaching_the_HEAD"></a></p>
+<p><a name="gcs_index_re_attaching_the_HEAD_"></a></p>
 
-<h4>re-attaching the HEAD</h4>
+<h3>re-attaching the HEAD</h3>
 
 <p>Modern git will warn you about losing commits on a detached HEAD if you're at
 the command line, and tell you how to recover (immediately).</p>
@@ -688,9 +645,9 @@ and switch to that using some command like:</p>
 <pre><code>git branch newbranch HEAD@{1}
 </code></pre>
 
-<p><a name="_the_reflog"></a></p>
+<p><a name="gcs_index_the_reflog_"></a></p>
 
-<h4>the reflog</h4>
+<h3>the reflog</h3>
 
 <p>The reflog can show you all the values that HEAD has taken in the past.
 Here's a simulated example.  I cloned a repo that had a master and a 'foo'

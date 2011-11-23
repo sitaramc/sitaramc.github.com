@@ -1,0 +1,60 @@
+<head>
+<style>
+    body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
+    code        { font-size:    1.1em;  background:  #ddf; }
+    pre         { margin-left:  2em;    background:  #ddf; }
+    pre code    { font-size:    1.1em;  background:  #ddf; }
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#the-list-and-irc/backup-repo">chapter TOC</a>
+</p>
+
+<!-- file: the-list-and-irc/backup-repo -->
+
+<p><a name="the_list_and_irc_backup_repo_backing_up_a_repo_by_just_git_push_backup_"></a></p>
+
+<h1>backing up a repo by just: git push backup</h1>
+
+<p>(Of course, gitolite's
+<a href="http://sitaramc.github.com/gitolite/mirroring.html">mirroring</a> feature does
+essentially this, but of course with a lot more dressing and garnish.  You
+could say it's the 5-star version of this basic recipe!)</p>
+
+<p>This is, like many things in this directory, by doener, on irc circa
+2009-03-25 19:24 Wed IST</p>
+
+<pre><code>mkdir -p ~/backups/projectX.git
+cd ~/backups/projectX.git
+git init --bare
+# see notes below for these two
+git config core.logAllRefUpdates true
+git config receive.denyDeletes true
+
+cd /path/to/projectX
+git remote add -t dont_fetch_from_the_backup --mirror backup ~/backups/projectX.git
+</code></pre>
+
+<p>Here is some documentation (paraphrased from the irc chat log).</p>
+
+<p>It creates a bare repo to store the backup, adds a remote to the "work" repo
+and then pushes.  The <code>--mirror</code> bit makes the remote act as a mirror (i.e.
+"git push" will default to <code>--mirrror</code> for this remote) The <code>-t
+dont_fetch_from_the_backup</code> is there because, normally, with <code>--mirror</code> you
+get a bidirectional mirror setup, i.e. fetch is set to <code>refs/*:refs/*</code>, and
+you don't want an accidental fetch to kill your work.  Of course simply
+unsetting <code>remote.backup.fetch</code> would also do, but the error message for the
+invalid ref reminds you you shouldn't be doing that.</p>
+
+<p>My additions:  I hope that by adding the two config variables above, I can
+allow non-fast forward pushes, letting the reflog act as a safety net as
+usual.  The reflog does not protect from a deleted branch, hence we disallow
+that (that is rare enough that I can do it manually if I need to).</p>

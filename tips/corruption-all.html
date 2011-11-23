@@ -1,0 +1,71 @@
+<head>
+<style>
+    body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
+    code        { font-size:    1.1em;  background:  #ddf; }
+    pre         { margin-left:  2em;    background:  #ddf; }
+    pre code    { font-size:    1.1em;  background:  #ddf; }
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#tips/corruption">chapter TOC</a>
+</p>
+
+<!-- file: tips/corruption -->
+
+<p><a name="tips_corruption_corruption_in_a_git_repository_"></a></p>
+
+<h1>corruption in a git repository</h1>
+
+<p>For now, this is just loosely formatted text, maybe like a series of case
+studies.</p>
+
+<p>IMPORTANT NOTE: <code>git fsck --full</code> is needed to reliably find repo corruption</p>
+
+<p><a name="tips_corruption_case_1_Kolkata_Korruption_2_missing_tree_objects_"></a></p>
+
+<h2>case 1: Kolkata Korruption -- 2 missing tree objects</h2>
+
+<p>what finally worked:</p>
+
+<pre><code># on some good repo
+TYPE=$(git cat-file -t $BADOBJSHA)
+git cat-file $TYPE $BADOBJSHA &gt; file
+
+# copy file to bad repo
+git hash-object -t $TYPE -w --stdin &lt; file
+</code></pre>
+
+<p>However, this may not always work; it is not certain that hash-object will
+<em>replace</em> a corrupted object (as opposed to creating a <em>missing</em> object).  So
+try that, <em>as well as</em> this (generic object):</p>
+
+<pre><code># on some good repo
+echo $object | git pack-objects --revs pack
+# will create two files named pack-*.{idx,pack}
+</code></pre>
+
+<p>confirm:</p>
+
+<pre><code>git verify-pack -v pack-*.idx | grep $object
+# should also contain all sub objects
+</code></pre>
+
+<p>copy:</p>
+
+<pre><code>pack* to $bad_repo/[.git?]/objects/pack
+</code></pre>
+
+<p>repack:</p>
+
+<pre><code>repack -a -d
+</code></pre>
+
+<p>(you could also do "unpack-objects" I guess)</p>

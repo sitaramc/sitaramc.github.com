@@ -1,24 +1,27 @@
-<p><head><style>
+<head>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="sizing_a_server_for_git">sizing a server for git</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#other-stuff/server-sizing">chapter TOC</a>
+</p>
 
-<p><sup>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#sizing_a_server_for_git">sizing a server for git</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#bandwidth_usage_">bandwidth usage:</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#CPU_usage">CPU usage</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#memory">memory</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#disk">disk</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#repack">stressing out a git server</a><br>
-</sup></p>
 
-<hr />
+<p><a name="other_stuff_server_sizing_sizing_a_server_for_git_"></a></p>
+
+<h1>sizing a server for git</h1>
 
 <p>How big a server do you need to host git repos?  These are my current thoughts
 on this, and they're essentially what I sent in an internal email to someone
@@ -37,7 +40,9 @@ hits "push" or "pull" at exactly the same time  :-) </p>
 "enterprise" use of a VCS.  Be sure to read the last section on the <a href="#repack">one
 operation</a> that <em>can</em> stress out a git server.</p>
 
-<h3><a name="bandwidth_usage_">bandwidth usage:</a></h3>
+<p><a name="other_stuff_server_sizing_bandwidth_usage__"></a></p>
+
+<h2>bandwidth usage:</h2>
 
 <ul>
 <li><p>the initial clone (like when a new team member joins the project)
@@ -75,7 +80,9 @@ and one extra command on each client, you have "seeded" an entire site
 with just one download  :-) </p></li>
 </ul>
 
-<h3><a name="CPU_usage">CPU usage</a></h3>
+<p><a name="other_stuff_server_sizing_CPU_usage_"></a></p>
+
+<h2>CPU usage</h2>
 
 <p>Git does take some CPU time to pack up a repository, especially to supply an
 initial clone.  Even in the initial clone, on a decent dual-core machine it
@@ -100,7 +107,7 @@ decent/recent dual-core CPU should be able to handle it very fast.</p>
 <blockquote>
   <hr />
 
-<p><sup>Further details on this, courtesy charon on #git:</p>
+<p>^^Further details on this, courtesy charon on #git:</p>
 
 <p>Even when computing deltas to send, git reuses packs.  This means that
     objects that are already packed are not delta compressed again --
@@ -110,10 +117,12 @@ decent/recent dual-core CPU should be able to handle it very fast.</p>
 
 <p>As a result, cpu usage on the server is now mostly in the "counting
     objects" phase (i.e., figuring out what to send), which is not much of a
-    load.</sup></p>
+    load.^^</p>
 </blockquote>
 
-<h3><a name="memory">memory</a></h3>
+<p><a name="other_stuff_server_sizing_memory_"></a></p>
+
+<h2>memory</h2>
 
 <p>A machine with about 512 MB <strong><em>free</em></strong> RAM will probably work fine for most
 development style repositories.  In practice this means about 1 GB total RAM,
@@ -134,14 +143,18 @@ happen...]</p>
 <p>Otherwise there's nothing inherently in git to gobble up memory except the
 <a href="#repack">repack</a> operation mentioned in the last section.</p>
 
-<h3><a name="disk">disk</a></h3>
+<p><a name="other_stuff_server_sizing_disk_"></a></p>
+
+<h2>disk</h2>
 
 <p>As I mentioned in one of my presentations, git takes about 1/20th the size of
 an SVN repository, so this should not be a concern.  However, this does assume
 the "repack" operation referred to below is being run at least once a month or
 so.</p>
 
-<h3><a name="repack">stressing out a git server</a></h3>
+<p><a name="repack"></a></p>
+
+<h2>stressing out a git server</h2>
 
 <p>The only time git does anything that seriously stresses the machine (in <strong><em>all
 respects</em></strong>, not just CPU) is a "repack" operation that (by default) runs very

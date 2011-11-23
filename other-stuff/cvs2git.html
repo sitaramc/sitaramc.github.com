@@ -1,22 +1,27 @@
-<p><head><style>
+<head>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="converting_CVS_to_git">converting CVS to git</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#other-stuff/cvs2git">chapter TOC</a>
+</p>
 
-<p><sup>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#converting_CVS_to_git">converting CVS to git</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#step_1_make_a_dump_file">step 1 -- make a dump file</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#step_2_import_into_git">step 2 -- import into git</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#patch">Appendix</a><br>
-</sup></p>
 
-<hr />
+<p><a name="other_stuff_cvs2git_converting_CVS_to_git_"></a></p>
+
+<h1>converting CVS to git</h1>
 
 <p>Update 2009-10-08: It has been pointed out that cvsimport, which I recommend
 against using below, can do incremental imports.  If this is important to you
@@ -35,7 +40,9 @@ the repo!!</p>
 <p>It's been too long since I last used CVS to figure this out, and cvs2svn
 seemed to deal with a lot more nuances, so I used that instead.</p>
 
-<h3><a name="step_1_make_a_dump_file">step 1 -- make a dump file</a></h3>
+<p><a name="other_stuff_cvs2git_step_1_make_a_dump_file_"></a></p>
+
+<h2>step 1 -- make a dump file</h2>
 
 <ul>
 <li><p>download cvs2svn version 2.1 or higher from somewhere within
@@ -64,7 +71,9 @@ years of work in CVS.</p></li>
 file called git-dump.dat</p></li>
 </ul>
 
-<h3><a name="step_2_import_into_git">step 2 -- import into git</a></h3>
+<p><a name="other_stuff_cvs2git_step_2_import_into_git_"></a></p>
+
+<h2>step 2 -- import into git</h2>
 
 <ul>
 <li><p>make an empty directory, cd to it, git init, then run</p>
@@ -79,7 +88,9 @@ would now be:</p>
 </code></pre></li>
 </ul>
 
-<h3><a name="patch">Appendix</a></h3>
+<p><a name="patch"></a></p>
+
+<h2>Appendix</h2>
 
 <p>These are the changes I made to the options file:</p>
 

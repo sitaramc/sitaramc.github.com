@@ -1,26 +1,29 @@
-<p><head><style>
+<head>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="who_pushed_this_particular_commit_">who pushed this particular commit?</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#the-list-and-irc/real-blame">chapter TOC</a>
+</p>
 
-<p><sup>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#who_pushed_this_particular_commit_">who pushed this particular commit?</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#WARNING_THIS_DOCUMENT_IS_OBSOLETE">WARNING: THIS DOCUMENT IS OBSOLETE</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#one_time_setup">one-time setup</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#investigation">investigation</a><br></p>
 
-<p></sup></p>
+<p><a name="the_list_and_irc_real_blame_who_pushed_this_particular_commit__"></a></p>
 
-<hr />
+<h1>who pushed this particular commit?</h1>
 
-<h2><a name="WARNING_THIS_DOCUMENT_IS_OBSOLETE">WARNING: THIS DOCUMENT IS OBSOLETE</a></h2>
+<p><strong>WARNING: THIS DOCUMENT IS OBSOLETE</strong></p>
 
 <p>Just install gitolite -- it'll produce a much better log than anything you'll
 get from this document.  See the "better logging" section of
@@ -50,7 +53,9 @@ pay for something that may never happen.  We need something that'll just sit
 in the background, saving enough info for us to track "after the fact", should
 it ever become necessary.</p>
 
-<h3><a name="one_time_setup">one-time setup</a></h3>
+<p><a name="the_list_and_irc_real_blame_one_time_setup_"></a></p>
+
+<h2>one-time setup</h2>
 
 <p>So, the short answer, for a gitosis-administered central repo, is this:</p>
 
@@ -76,7 +81,9 @@ git config receive.denyDeletes true
 so, you may want to keep <code>auth.log</code> out of it or do something to preserve
 those logs for a longer period of time.</p>
 
-<h3><a name="investigation">investigation</a></h3>
+<p><a name="the_list_and_irc_real_blame_investigation_"></a></p>
+
+<h2>investigation</h2>
 
 <p>So let's say you look at the reflog and find you want to know who pushed a
 particular commit[1]</p>
@@ -135,18 +142,18 @@ done
 
 <p>And we've nailed him :-)</p>
 
-<p><sup>
+<p>^^
 PS: a note on that shell snippet: you need to do it this way because a gitosis
 pubkey file can contain more than one pubkey (for the same user of course) in
 it.  Typically this is because of using different machines or whatever.  If
 you pass such a file to <code>ssh-keygen -l</code> it'll only compute the fingerprint of
 the first pubkey in the file.  I found this out quite luckily -- I'd
 completely forgotten about the multiple keys per file thing...!
-</sup></p>
+^^</p>
 
 <hr />
 
-<p><sup>
+<p>^^
 [1] The reflog stores only the "tip" of a series of commits, so if the
 suspicious commit is in the middle of a series which was pushed all at once,
 you have some extra work.</p>
@@ -157,4 +164,4 @@ then choose the earliest among them to go check in <code>auth.log</code>.</p>
 
 <p>I'll write a script to do this if someone asks... right now I can't be
 bothered :-)
-</sup></p>
+^^</p>

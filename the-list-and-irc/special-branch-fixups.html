@@ -1,28 +1,27 @@
-<p><head><style>
+<head>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="fixing_up_common_and_customer_branches">fixing-up common and customer branches</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#the-list-and-irc/special-branch-fixups">chapter TOC</a>
+</p>
 
-<p><sup>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#fixing_up_common_and_customer_branches">fixing-up common and customer branches</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#The_basic_rules">The basic rules</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Terminology">Terminology</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#The_nitty_gritty">The nitty gritty</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Before_you_start">Before you start</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Separating_common_and_special_">Separating 'common' and 'special'</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#utcb">Updating and testing the 'common' branch</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Merging_common_into_special_">Merging 'common' into 'special'</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Fixing_up_special_">Fixing up 'special'</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Final_sanity_check">Final sanity check</a><br>
-</sup></p>
 
-<hr />
+<p><a name="the_list_and_irc_special_branch_fixups_fixing_up_common_and_customer_branches_"></a></p>
+
+<h1>fixing-up common and customer branches</h1>
 
 <p>The following document explains how to maintain a 'common' branch,
 with one or more 'customer specific' branches that hang off of the
@@ -40,7 +39,9 @@ done in one branch, or whatever), and so you now have a mix of 'common' and
 <p><strong>This article describes one way to 'fix up' such a mixed development into the
 proper form</strong>.</p>
 
-<h3><a name="The_basic_rules">The basic rules</a></h3>
+<p><a name="the_list_and_irc_special_branch_fixups_The_basic_rules_"></a></p>
+
+<h2>The basic rules</h2>
 
 <p>The basic rules are best described by Junio in
 <a href="http://permalink.gmane.org/gmane.comp.version-control.git/110489">http://permalink.gmane.org/gmane.comp.version-control.git/110489</a></p>
@@ -54,7 +55,9 @@ proper form</strong>.</p>
 with comments on a previous draft of this text.  However, any
 errors or other problems that remain are mine.]</p>
 
-<h3><a name="Terminology">Terminology</a></h3>
+<p><a name="the_list_and_irc_special_branch_fixups_Terminology_"></a></p>
+
+<h2>Terminology</h2>
 
 <p>We use the following terminology:</p>
 
@@ -73,9 +76,13 @@ too many such customers you may also want to look at <a href="http://gitster.liv
 merging back</a>
 for an additional tip on this.</p>
 
-<h3><a name="The_nitty_gritty">The nitty gritty</a></h3>
+<p><a name="the_list_and_irc_special_branch_fixups_The_nitty_gritty_"></a></p>
 
-<h4><a name="Before_you_start">Before you start</a></h4>
+<h2>The nitty gritty</h2>
+
+<p><a name="the_list_and_irc_special_branch_fixups_Before_you_start_"></a></p>
+
+<h3>Before you start</h3>
 
 <p>The history looks like this in the beginning:</p>
 
@@ -121,7 +128,9 @@ eventually want on the special branch as well.</p>
 ---o--X--Y                      &lt;- common
 </code></pre>
 
-<h4><a name="Separating_common_and_special_">Separating 'common' and 'special'</a></h4>
+<p><a name="the_list_and_irc_special_branch_fixups_Separating_common_and_special__"></a></p>
+
+<h3>Separating 'common' and 'special'</h3>
 
 <p>The first thing to do is to tease the tangled commits apart
 using rebase.</p>
@@ -147,7 +156,9 @@ can, if you wish, check that the trees are indeed the same</p>
 <p>The <code>@{1}</code> notation specifies the shape of the TEMP branch before the rebase
 started.</p>
 
-<h4><a name="utcb">Updating and testing the 'common' branch</a></h4>
+<p><a name="utcb"></a></p>
+
+<h3>Updating and testing the 'common' branch</h3>
 
 <p>Now switch to the 'common' branch and cherry pick the
 changes that belong on 'common'.  The simplest way to cherry
@@ -174,7 +185,9 @@ the new code in TEMP goes to 'common'.  If the test failed or required fixups,
 do them in the context of the 'common' case only, right here on the 'common'
 branch.  <strong>Note that this affects the rebase coming up later!</strong></p>
 
-<h4><a name="Merging_common_into_special_">Merging 'common' into 'special'</a></h4>
+<p><a name="the_list_and_irc_special_branch_fixups_Merging_common_into_special__"></a></p>
+
+<h3>Merging 'common' into 'special'</h3>
 
 <p>Once that test is done, merge from 'common' to 'special'</p>
 
@@ -191,7 +204,9 @@ git merge common
 ---o--X--Y--A'--B'--C'
 </code></pre>
 
-<h4><a name="Fixing_up_special_">Fixing up 'special'</a></h4>
+<p><a name="the_list_and_irc_special_branch_fixups_Fixing_up_special__"></a></p>
+
+<h3>Fixing up 'special'</h3>
 
 <p>Now all we need is to get commits 1, 2, and 3 onto 'special'.  Although this
 is easiest done by using 'rebase', that will only work if your <a href="#utcb">updating and
@@ -215,7 +230,9 @@ branch)</p>
 ---o--X--Y--A'--B'--C'
 </code></pre>
 
-<h4><a name="Final_sanity_check">Final sanity check</a></h4>
+<p><a name="the_list_and_irc_special_branch_fixups_Final_sanity_check_"></a></p>
+
+<h3>Final sanity check</h3>
 
 <p>At this point you should <em>definitely</em> re-test all the changes you made, to
 make sure nothing got missed out.  If there were no 'X' and 'Y' commits on

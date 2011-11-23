@@ -1,28 +1,30 @@
-<p><head><style>
+<head>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="Why_the_index_staging_area_is_so_useful">Why the index/staging area is so useful</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#concepts/uses-of-index">chapter TOC</a>
+</p>
 
-<p><sup>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Why_the_index_staging_area_is_so_useful">Why the index/staging area is so useful</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#what_is_the_index">what is the index</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#staging_helps_you_split_up_one_large_change_into_multiple_commits">staging helps you split up one large change into multiple commits</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#staging_helps_in_reviewing_changes">staging helps in reviewing changes</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#staging_helps_when_a_merge_has_conflicts">staging helps when a merge has conflicts</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#staging_helps_you_keep_extra_local_files_hanging_around">staging helps you keep extra local files hanging around</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#staging_helps_you_sneak_in_small_changes_">staging helps you sneak in small changes ;-)</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#a_word_of_warning_">a word of warning...</a><br></p>
 
-<p>[Also see <a href="../tips/1-vc-habits.html">good version control habits</a> for more on
+<p><a name="concepts_uses_of_index_Why_the_index_staging_area_is_so_useful_"></a></p>
+
+<h1>Why the index/staging area is so useful</h1>
+
+<p>[Also see <a href="tips/1-vc-habits.html">good version control habits</a> for more on
 a related topic.]</p>
-
-<p></sup></p>
 
 <hr />
 
@@ -36,7 +38,9 @@ a related topic.]</p>
     index, staging area, and cache?</p>
 </blockquote>
 
-<h3><a name="what_is_the_index">what is the index</a></h3>
+<p><a name="concepts_uses_of_index_what_is_the_index_"></a></p>
+
+<h2>what is the index</h2>
 
 <p>The index (or any of its other names) is essentially a "holding area" for
 changes that will be committed when you next do <code>git commit</code>.  That is, unlike
@@ -48,7 +52,9 @@ operation.</p>
 <p>That should be sufficient background to appreciate (in abstract terms) the
 following discussion.</p>
 
-<h3><a name="staging_helps_you_split_up_one_large_change_into_multiple_commits">staging helps you split up one large change into multiple commits</a></h3>
+<p><a name="concepts_uses_of_index_staging_helps_you_split_up_one_large_change_into_multiple_commits_"></a></p>
+
+<h2>staging helps you split up one large change into multiple commits</h2>
 
 <p>Let's say you worked on a large-ish change, involving a lot of files and quite
 a few different subtasks.  You didn't actually commit any of these -- you were
@@ -64,7 +70,9 @@ changes.</p>
 changes are pending.  Really works well with <code>git gui</code> if you're into that
 too, or you can use <code>git add -p</code> or, with newer gits, <code>git add -e</code>.</p>
 
-<h3><a name="staging_helps_in_reviewing_changes">staging helps in reviewing changes</a></h3>
+<p><a name="concepts_uses_of_index_staging_helps_in_reviewing_changes_"></a></p>
+
+<h2>staging helps in reviewing changes</h2>
 
 <p>Staging helps you "check off" individual changes as you review a complex
 commit, and to concentrate on the stuff that has not yet passed your review.
@@ -84,10 +92,12 @@ pane of <code>git gui</code>, right click on a change that you approve of and ch
 fact, if there are other, unstaged, changes in that same file, you'll find
 that the file now appears on <em>both</em> top and bottom left panes!</p>
 
-<p><sup>[Do remember, however, that if the change is really complex maybe you should
-split it into multiple commits!]</sup></p>
+<p>^^[Do remember, however, that if the change is really complex maybe you should
+split it into multiple commits!]^^</p>
 
-<h3><a name="staging_helps_when_a_merge_has_conflicts">staging helps when a merge has conflicts</a></h3>
+<p><a name="concepts_uses_of_index_staging_helps_when_a_merge_has_conflicts_"></a></p>
+
+<h2>staging helps when a merge has conflicts</h2>
 
 <p>When a merge happens, changes that merge cleanly are updated both in the
 staging area as well as in your work tree.  Only changes that did not merge
@@ -97,7 +107,9 @@ or in the top left pane of <code>git gui</code>.</p>
 <p>Again, this lets you concentrate on the stuff that needs your attention -- the
 merge conflicts.</p>
 
-<h3><a name="staging_helps_you_keep_extra_local_files_hanging_around">staging helps you keep extra local files hanging around</a></h3>
+<p><a name="concepts_uses_of_index_staging_helps_you_keep_extra_local_files_hanging_around_"></a></p>
+
+<h2>staging helps you keep extra local files hanging around</h2>
 
 <p>Usually, files that should not be committed go into <code>.gitignore</code> or the
 local variant, <code>.git/info/exclude</code>.</p>
@@ -120,7 +132,9 @@ test... whatever.</p>
 <p>In git, all you have to do is never to stage that file or that change.  That's
 it.</p>
 
-<h3><a name="staging_helps_you_sneak_in_small_changes_">staging helps you sneak in small changes ;-)</a></h3>
+<p><a name="concepts_uses_of_index_staging_helps_you_sneak_in_small_changes__"></a></p>
+
+<h2>staging helps you sneak in small changes ;-)</h2>
 
 <p>Let's say you're in the middle of a somewhat large-ish change and you are told
 about a very important bug that needs to be fixed asap.</p>
@@ -136,7 +150,9 @@ committing all the other stuff you're still working on.</p>
 committed, so just make sure only that change gets there and commit, then
 push!</p>
 
-<h4><a name="a_word_of_warning_">a word of warning...</a></h4>
+<p><a name="concepts_uses_of_index_a_word_of_warning__"></a></p>
+
+<h3>a word of warning...</h3>
 
 <p>While the first 3 use cases are perfectly legitimate and useful uses of the
 index, this last example could be dangerous if you get carried away.  You

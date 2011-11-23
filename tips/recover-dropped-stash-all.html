@@ -1,0 +1,60 @@
+<head>
+<style>
+    body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
+    code        { font-size:    1.1em;  background:  #ddf; }
+    pre         { margin-left:  2em;    background:  #ddf; }
+    pre code    { font-size:    1.1em;  background:  #ddf; }
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#tips/recover-dropped-stash">chapter TOC</a>
+</p>
+
+<!-- file: tips/recover-dropped-stash -->
+
+<p><a name="tips_recover_dropped_stash_recovering_a_dropped_stash__"></a></p>
+
+<h1>recovering a dropped stash:</h1>
+
+<p><a name="tips_recover_dropped_stash_the_GUI_way_"></a></p>
+
+<h2>the GUI way</h2>
+
+<p>You dropped a stash that was created recently, and now you want to recover it.
+As long as you did not do a garbage collection in between, this should work:</p>
+
+<pre><code>gitk $(git fsck | grep commit | cut -f3 -d' ') --since='1 week ago'
+</code></pre>
+
+<p>The part within the parenthesis finds all unreachable commit objects and
+returns their hashes.  If you never did a garbage collect there might be too
+many false positives so the <code>--since</code> clause (which you can adjust to whatever
+you want of course; mine is just an example) limits the display to commits
+created recently.</p>
+
+<p>A "stash" has a very recognisable, triangular, shape in the commit DAG, and
+with gitk you can visually find stashes really fast.  For me, this is the kind
+of task that <em>calls out</em> for a GUI -- infrequently required, no conceivable
+need to automate, and containing data that stands out visually.</p>
+
+<p><a name="tips_recover_dropped_stash_the_command_line_way_"></a></p>
+
+<h2>the command line way</h2>
+
+<p>Writing something longer than that for a problem that occurs once in a blue
+moon is not my style (very low ROI!), but doener gave me this:</p>
+
+<pre><code>git fsck --unreachable | grep commit | cut -d\  -f3 |
+xargs git log --no-walk --merges --grep='^\(WIP on \|On \)\((no branch)\|[^ ]\+\):'
+</code></pre>
+
+<p>I knew about <code>--merges</code> but not <code>--no-walk</code>, and I anticipate using it a lot
+more in future :-)</p>

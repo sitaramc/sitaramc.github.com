@@ -1,14 +1,27 @@
-<p><head><style>
+<head>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="for_people_who_think_SVN_is_good_enough_">for people who think SVN is good enough ;-)</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#other-stuff/svn">chapter TOC</a>
+</p>
+
+
+<p><a name="other_stuff_svn_for_people_who_think_SVN_is_good_enough__"></a></p>
+
+<h1>for people who think SVN is good enough ;-)</h1>
 
 <p>The official comparison is <a href="http://git.or.cz/gitwiki/GitSvnComparsion">here</a>.
 There is also a <a href="http://git-scm.com/course/svn.html">Git - SVN crash course</a>.</p>
@@ -16,22 +29,15 @@ There is also a <a href="http://git-scm.com/course/svn.html">Git - SVN crash cou
 <p><em>Lots of SVN info is scattered in a few other files in this directory;
 eventually it should all be pulled into this file.</em></p>
 
-<p><sup>as Churchill said, so much to do, and so little time in which to do it... (<em>sigh</em>)</sup></p>
+<p>^^as Churchill said, so much to do, and so little time in which to do it... (<em>sigh</em>)^^</p>
 
 <p>What follows is my understanding of the SVN scenario, from various sources.  I
 personally have used SVN only briefly.  If there are errors in the SVN part of
 this description please let <a href="mailto:sitaramc@gmail.com">me</a> know.</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#for_people_who_think_SVN_is_good_enough_">for people who think SVN is good enough ;-)</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#briefly_">briefly...</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#_and_a_bit_more_detail">...and a bit more detail</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#_svn_update_on_very_active_projects">'svn update' on very active projects</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#local_caching_and_repository_size">local caching and repository size</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#some_links">some links</a><br></p>
+<p><a name="other_stuff_svn_briefly__"></a></p>
 
-<hr />
-
-<h3><a name="briefly_">briefly...</a></h3>
+<h2>briefly...</h2>
 
 <p>Git's advantages over SVN (all of them affect productivity and/or
 maintainability, indicated in parens as <strong>P</strong> or <strong>M</strong>) are:</p>
@@ -88,9 +94,13 @@ real lifesaver for someone who picks up a complex project for maintenance
 or a new team member is trying to understand the existing project.</p></li>
 </ul>
 
-<h3><a name="_and_a_bit_more_detail">...and a bit more detail</a></h3>
+<p><a name="other_stuff_svn_and_a_bit_more_detail_"></a></p>
 
-<h4><a name="_svn_update_on_very_active_projects">'svn update' on very active projects</a></h4>
+<h2>...and a bit more detail</h2>
+
+<p><a name="other_stuff_svn_svn_update_on_very_active_projects_"></a></p>
+
+<h3>'svn update' on very active projects</h3>
 
 <p>When you, as a developer, have made a fair number of changes on your
 workstation, and wish to commit these to the SVN repo, you do an 'svn update'.
@@ -133,12 +143,16 @@ salvage the pieces that are still acceptable and redo only those that are
 not.  Then you do your <code>git pull</code> or <code>git pull --rebase</code> again.</li>
 </ol>
 
-<p><sup>Basic idea from a post by Junio at
-<a href="http://article.gmane.org/gmane.comp.version-control.git/110671">http://article.gmane.org/gmane.comp.version-control.git/110671</a></sup></p>
+<p>^^Basic idea from a post by Junio at
+<a href="http://article.gmane.org/gmane.comp.version-control.git/110671">http://article.gmane.org/gmane.comp.version-control.git/110671</a>^^</p>
 
-<h4><a name="local_caching_and_repository_size">local caching and repository size</a></h4>
+<p><a name="other_stuff_svn_local_caching_and_repository_size_"></a></p>
 
-<h5>What extra information is cached locally?</h5>
+<h3>local caching and repository size</h3>
+
+<p><a name="other_stuff_svn_What_extra_information_is_cached_locally__"></a></p>
+
+<h4>What extra information is cached locally?</h4>
 
 <p>When you do an 'svn checkout', you get a working copy of the revision you
 checked out, plus svn saves away an extra copy of the same stuff.  This allows
@@ -166,7 +180,9 @@ Mozilla repository, with full history from 1998 or so:</p>
 
 <p>That's a ratio of almost 20:1 in size over SVN.</p>
 
-<h3><a name="some_links">some links</a></h3>
+<p><a name="other_stuff_svn_some_links_"></a></p>
+
+<h2>some links</h2>
 
 <ul>
 <li><a href="http://markmcb.com/2008/10/18/3-reasons-to-switch-to-git-from-subversion/">http://markmcb.com/2008/10/18/3-reasons-to-switch-to-git-from-subversion/</a>:

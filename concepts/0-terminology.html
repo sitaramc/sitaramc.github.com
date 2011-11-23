@@ -1,33 +1,31 @@
-<p><head><style>
+<head>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="terminology">terminology</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#concepts/0-terminology">chapter TOC</a>
+</p>
 
-<p><sup>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terminology">terminology</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#general_VCS_terminology">general VCS terminology</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#git_specific_terminology">git-specific terminology</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#working_tree_repository_bare_repository">working tree, repository, bare repository</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#commits_SHAs">commits, SHAs</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#parent_commits_commit_tree">parent commits, commit tree</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#head_branch_tag">head, branch, tag</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#reachability">reachability</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#master_HEAD">master, HEAD</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#index">index</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#terminology_related_to_being_distributed_">terminology related to being "distributed"</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#clone_versus_checkout">clone versus checkout</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#accessing_remote_repositories">accessing remote repositories</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#naming_remote_repositories">naming remote repositories</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#what_is_a_bare_repository_">what is a "bare" repository?</a><br>
-</sup></p>
 
-<h3><a name="general_VCS_terminology">general VCS terminology</a></h3>
+<p><a name="concepts_0_terminology_terminology_"></a></p>
+
+<h1>terminology</h1>
+
+<p><a name="concepts_0_terminology_general_VCS_terminology_"></a></p>
+
+<h2>general VCS terminology</h2>
 
 <p>A <strong>project</strong> is the minimum set of source code (and related files) that need
 to be kept together to <strong>build</strong> the software.  Example: Linux</p>
@@ -65,9 +63,13 @@ stable points in its development cycle -- merges its changes back into the
 main line</li>
 </ul>
 
-<h3><a name="git_specific_terminology">git-specific terminology</a></h3>
+<p><a name="concepts_0_terminology_git_specific_terminology_"></a></p>
 
-<h4><a name="working_tree_repository_bare_repository">working tree, repository, bare repository</a></h4>
+<h2>git-specific terminology</h2>
+
+<p><a name="concepts_0_terminology_working_tree_repository_bare_repository_"></a></p>
+
+<h3>working tree, repository, bare repository</h3>
 
 <ul>
 <li><p>a <strong>working tree</strong> in git is the same as anywhere else.  When you edit,
@@ -80,33 +82,37 @@ mess with unless you know what you're doing)</p></li>
 <li><p>a <strong>bare repository</strong> in git is a very special animal: it is a repository
 <em>without</em> a working tree (so you cannot edit, compile, test etc., in it).
 Central (or server) repos, meant only for people to push to and clone/pull
-from, are usually bare.  Read more about it <a href="../concepts/bare.html">here</a>
+from, are usually bare.  Read more about it <a href="concepts/bare.html">here</a>
 if you like</p></li>
 </ul>
 
-<h4><a name="commits_SHAs">commits, SHAs</a></h4>
+<p><a name="concepts_0_terminology_commits_SHAs_"></a></p>
+
+<h3>commits, SHAs</h3>
 
 <ul>
-<li><p>a <strong>commit</strong> records the content of the project files at a point in time</p></li>
+<li><p>a <strong>commit</strong> records the content of the working tree at a point in time</p></li>
 <li><p>every commit in git is represented by a globally unique 160-bit value (40
 hex digits) which is a cryptographically secure hash of the commit data.
 This is often called the <strong>SHA</strong> or SHA-1, after the algorithm used.</p>
 
-<p><sup>"Globally unique" means no other commit in any other repository in any
+<p>^^"Globally unique" means no other commit in any other repository in any
 other project anywhere in the world will have the same SHA.  You can
 become very, very, famous in the cryptography world if you find two
-different commits with the same SHA :-)</sup></p></li>
+different commits with the same SHA :-)^^</p></li>
 </ul>
 
-<h4><a name="parent_commits_commit_tree">parent commits, commit tree</a></h4>
+<p><a name="concepts_0_terminology_parent_commits_commit_tree_"></a></p>
+
+<h3>parent commits, commit tree</h3>
 
 <ul>
-<li><p>every commit builds on top of one or more previous commits, called
+<li><p>most commits build on top of one or more previous commits, called
 <strong>parents</strong>.  Normal commits have only one parent, while "merge" commits
-have two.  The very first commit in the tree has no parents; this is called
-a "root commit".</p>
+have two.  The very first commit in the tree has no parents; this is
+called a "root commit".</p>
 
-<p><sup>A repo can have more than one "root commit", but this is rare</sup></p></li>
+<p>^^A repo can have more than one "root commit", but this is rare^^</p></li>
 <li><p>every commit records the SHAs of its parent(s).  It's as if every commit
 has an arrow pointing to its parents, like a back pointer in a linked list</p>
 
@@ -119,7 +125,9 @@ pointing <strong>in</strong>, because it's the parent for more than one commit</
 this is a DAG -- or "directed acyclic graph".</p></li>
 </ul>
 
-<h4><a name="head_branch_tag">head, branch, tag</a></h4>
+<p><a name="concepts_0_terminology_head_branch_tag_"></a></p>
+
+<h3>head, branch, tag</h3>
 
 <ul>
 <li><p>a <strong>branch</strong> represents an active line of development; you use different
@@ -135,7 +143,7 @@ points to the <em>new</em> head node.  In other words, a branch is a pointer tha
 <em>moves as you make commits</em>.</p>
 
 <p>A repository can track many branches, but the working tree is associated
-with only one branch at a time</p></li>
+with at most one branch at a time.</p></li>
 <li><p>a <strong>tag</strong> is also a symbolic name given to a commit.  Tags don't "move" as
 you make new commits -- they stay where they are.</p>
 
@@ -143,7 +151,9 @@ you make new commits -- they stay where they are.</p>
 "v2.9", etc.</p></li>
 </ul>
 
-<h4><a name="reachability">reachability</a></h4>
+<p><a name="concepts_0_terminology_reachability_"></a></p>
+
+<h3>reachability</h3>
 
 <ul>
 <li><p>you can start from a commit X and follow the parent SHAs ("arrows") until
@@ -152,26 +162,30 @@ said to be <strong>reachable</strong> from X</p></li>
 <li><p>if you have commit X in some other repo, git guarantees that that repo
 also has all these "reachable" commits.</p>
 
-<p><sup>[If you know about grafts or shallow clones, you're too advanced to be
-reading this document ;-)]</sup></p></li>
+<p>^^[If you know about grafts or shallow clones, you're too advanced to be
+reading this document ;-)]^^</p></li>
 <li><p>when you merge a branch into the currently checked out branch, git uses
 reachability to determine what commits to actually bring in.  All the
 commits reachable from the branch being merged, which are not already
 reachable from the current branch, are pulled in and applied</p></li>
 </ul>
 
-<h4><a name="master_HEAD">master, HEAD</a></h4>
+<p><a name="concepts_0_terminology_master_HEAD_"></a></p>
+
+<h3>master, HEAD</h3>
 
 <ul>
 <li><em>master</em>: default branch in a project (main development tree), by
 convention</li>
 <li><em>HEAD</em>: tip of the branch associated with the working tree; this is where
 commits go.  Normally.  There is also something called a 'detached HEAD'
-that you should be aware of.  See the article on the <a href="detached-head.html">detached
+that you should be aware of.  See the article on the <a href="concepts/detached-head.html">detached
 HEAD</a> for more.</li>
 </ul>
 
-<h4><a name="index">index</a></h4>
+<p><a name="concepts_0_terminology_index_"></a></p>
+
+<h3>index</h3>
 
 <ul>
 <li><p>a staging area for the next commit; when you commit, the current
@@ -186,17 +200,22 @@ index is turned into a real commit object</p></li>
 working tree (<code>git diff</code>)</p></li>
 <li><p>the <strong>uncommitted but staged changes</strong> are the difference between
 HEAD and index (<code>git diff --cached</code>)</p></li>
-<li><p>see <a href="uses-of-index.html">uses of index</a> for the cool things you
+<li><p>see <a href="concepts/uses-of-index.html">uses of index</a> for the cool things you
 can do with it</p></li>
 </ul>
 
-<h3><a name="terminology_related_to_being_distributed_">terminology related to being "distributed"</a></h3>
+<p><a name="concepts_0_terminology_terminology_related_to_being_distributed__"></a></p>
 
-<h4><a name="clone_versus_checkout">clone versus checkout</a></h4>
+<h2>terminology related to being "distributed"</h2>
+
+<p><a name="concepts_0_terminology_clone_versus_checkout_"></a></p>
+
+<h3>clone versus checkout</h3>
 
 <p>In a <em>distributed</em> VCS, every developer's workstation has a full copy of the
 entire repository.  It is therefore called a <strong>clone</strong> -- you <strong>clone</strong> the
-remote repository, you don't merely <em>checkout</em> the latest version from it.</p>
+remote repository, you don't merely <em>checkout</em> the latest version from it.
+(Of course, you can have several clones on the same workstation if you wish).</p>
 
 <p>So where does <em>checkout</em> come in?  In git, you <strong>checkout</strong> a <em>branch</em> from
 your local repo, so this happens <em>after</em> the clone.  Remember this is a full
@@ -209,10 +228,12 @@ However, you can checkout some other branch at any time (and if you're using
 git, you will checkout and manage multiple branches on your local repo all the
 time, otherwise you're not really <em>using</em> git!)</p>
 
-<h4><a name="accessing_remote_repositories">accessing remote repositories</a></h4>
+<p><a name="concepts_0_terminology_accessing_remote_repositories_"></a></p>
+
+<h3>accessing remote repositories</h3>
 
 <p>Every remote repository (often called just a <strong>remote</strong>) has a URL associated
-with it, depending on how your local repo is able to reach it.  The simplest
+with it, which tells your (local) git client how to reach it.  The simplest
 URL is for a repo that is on the same machine, which can then use the <em>file</em>
 protocol: <code>file:///home/sitaram/path/to/repo.git</code>.</p>
 
@@ -224,12 +245,16 @@ efficient for continuous use.</p>
 
 <p>A remote repository to which you have write access will almost certainly use
 <em>ssh</em> as the underlying authentication protocol, so the remote URL might look
-like <code>ssh://sitaram@172.1.7.2/full/path/to/repo.git</code>.</p>
+like <code>ssh://sitaram@172.1.7.2/full/path/to/repo.git</code>.  (We say 'might look
+like' because there are other syntactical variants of ssh urls for git; see
+'man git-clone').</p>
 
-<h4><a name="naming_remote_repositories">naming remote repositories</a></h4>
+<p><a name="concepts_0_terminology_naming_remote_repositories_"></a></p>
 
-<p>You can refer to, (or fetch from, and push to) many remote repos in <em>your</em>
-clone, because they all have different URLs.  After a while it gets
+<h3>naming remote repositories</h3>
+
+<p>You can refer to, (or fetch from, and push to) more then one remote repos in
+<em>your</em> clone, giving them all different URLs.  After a while it gets
 inconvenient to use the full URLs in your <code>git fetch</code> and <code>git push</code> commands,
 so git allows you to give an easy to remember "nickname" for each "remote".  I
 could, for instance, do this:</p>
@@ -240,7 +265,9 @@ could, for instance, do this:</p>
 <p>After this I could refer to the longer URL by the shortname "sejal" and it
 would be the same thing.</p>
 
-<h5>origin</h5>
+<p><a name="concepts_0_terminology_origin_"></a></p>
+
+<h4>origin</h4>
 
 <p>So now you know what a nickname is, you can understand what "origin" means.
 "origin" is just the default name given to the remote repository when you do a
@@ -255,6 +282,8 @@ nickname <code>origin</code>, which points to
 convenience thing.  You can delete that nickname, you can rename it to
 something else, etc., if you like.</p>
 
-<h4><a name="what_is_a_bare_repository_">what is a "bare" repository?</a></h4>
+<p><a name="concepts_0_terminology_what_is_a_bare_repository__"></a></p>
 
-<p>This has been moved into it's <a href="bare.html">own page</a> now.</p>
+<h3>what is a "bare" repository?</h3>
+
+<p>This has been moved into it's <a href="concepts/bare.html">own page</a> now.</p>

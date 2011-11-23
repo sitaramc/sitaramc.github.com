@@ -1,25 +1,27 @@
-<p><head><style>
+<head>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="all_about_bare_repos_what_why_and_how_to_fix_a_non_bare_push">all about "bare" repos -- what, why, and how to fix a non-bare push</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#concepts/bare">chapter TOC</a>
+</p>
 
-<p><sup>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#all_about_bare_repos_what_why_and_how_to_fix_a_non_bare_push">all about "bare" repos -- what, why, and how to fix a non-bare push</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#what_is_a_bare_repo_">what is a bare repo?</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#yeah_yeah_but_why_do_I_need_a_bare_repo_">yeah yeah, but <strong>why</strong> do I need a bare repo?</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#how_do_I_fix_such_a_non_bare_push_">how do I fix such a non-bare push?</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#how_do_I_prevent_the_problem_from_happening_again_">how do I prevent the problem from happening again?</a><br></p>
 
-<p></sup></p>
+<p><a name="concepts_bare_all_about_bare_repos_what_why_and_how_to_fix_a_non_bare_push_"></a></p>
 
-<hr />
+<h1>all about "bare" repos -- what, why, and how to fix a non-bare push</h1>
 
 <p><center>
 <strong><em>Update for git 1.7.0 and above</em></strong>
@@ -35,7 +37,9 @@
   or 'false'.</p>
 </blockquote>
 
-<h3><a name="what_is_a_bare_repo_">what is a bare repo?</a></h3>
+<p><a name="concepts_bare_what_is_a_bare_repo__"></a></p>
+
+<h2>what is a bare repo?</h2>
 
 <p>A bare repository is a concept that is sort of unique to a Distributed VCS
 like git (and, I presume, other such DVCSs like Hg/Bzr/etc also).</p>
@@ -61,7 +65,9 @@ doesn't contain the special <code>.git</code> sub-directory either; instead, it
 contains all the contents of the <code>.git</code> subdirectory right in the main
 directory itself.</p>
 
-<h3><a name="yeah_yeah_but_why_do_I_need_a_bare_repo_">yeah yeah, but <strong>why</strong> do I need a bare repo?</a></h3>
+<p><a name="concepts_bare_yeah_yeah_but_why_do_I_need_a_bare_repo__"></a></p>
+
+<h2>yeah yeah, but <strong>why</strong> do I need a bare repo?</h2>
 
 <p>ok; demo time...</p>
 
@@ -129,7 +135,9 @@ tree, so it just does what the "server" notionally does in a centralised VCS
 -- records commits, branches, etc when you push to it, and gives you the
 latest versions when you clone or pull from it.</p>
 
-<h3><a name="how_do_I_fix_such_a_non_bare_push_">how do I fix such a non-bare push?</a></h3>
+<p><a name="concepts_bare_how_do_I_fix_such_a_non_bare_push__"></a></p>
+
+<h2>how do I fix such a non-bare push?</h2>
 
 <p>If you did push into a non-bare repo, the first thing to do is make sure that
 no one is working on that checked out work tree, and no local changes have
@@ -199,7 +207,9 @@ on which option you chose above; it's just a normal branch now!</p></li>
 </ul></li>
 </ol>
 
-<h3><a name="how_do_I_prevent_the_problem_from_happening_again_">how do I prevent the problem from happening again?</a></h3>
+<p><a name="concepts_bare_how_do_I_prevent_the_problem_from_happening_again__"></a></p>
+
+<h2>how do I prevent the problem from happening again?</h2>
 
 <p>The best option is upgrade to git 1.7.0 or later!</p>
 

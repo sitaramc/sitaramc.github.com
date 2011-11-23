@@ -1,25 +1,27 @@
-<p><head><style>
+<head>
+<style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; margin-left: -30px;   border-bottom: 5px  solid #ccc; }
-    h2, h3      { background: #ffb; margin-left: -30px;   border-top:    3px  solid #ddd; }
-    h4, h5      { background: #ffb; margin-left: -20px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
     code        { font-size:    1.1em;  background:  #ddf; }
     pre         { margin-left:  2em;    background:  #ddf; }
     pre code    { font-size:    1.1em;  background:  #ddf; }
-</style></head></p>
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
 
-<h1><a name="detached_HEAD_explained">detached HEAD explained</a></h1>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#concepts/detached-head">chapter TOC</a>
+</p>
 
-<p><sup>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#detached_HEAD_explained">detached HEAD explained</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#the_analogy">the analogy</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#reality_check">reality check</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#re_attaching_the_HEAD">re-attaching the HEAD</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Auld_Lang_Syne">Auld Lang Syne</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#reality_check_conclusion">reality check -- conclusion</a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#footnotes">footnotes</a><br></p>
 
-<h2></sup></h2>
+<p><a name="concepts_detached_head_detached_HEAD_explained_"></a></p>
+
+<h1>detached HEAD explained</h1>
 
 <p>Git has something called a 'detached HEAD' that bears some explanation.  You
 are told 'do not commit on a detached HEAD', and it is not always clear what
@@ -28,13 +30,15 @@ or why this is.</p>
 <hr />
 
 <p><font color="red">This document is here for historical reasons, and because it
-provides a nice analogy.  However, <a href="../gcs/index.html">Git for Computer Scientists (my
+provides a nice analogy.  However, <a href="gcs/index.html">Git for Computer Scientists (my
 version)</a> should be a much nicer read for most people.
 Despite the name, it has very few mentions of linked lists, and no pseudo-code
 at <em>all</em>!  Instead, it has a lot of nice pictures, and it also touches upon
 many other issues, not just on detached HEADs.  </font></p>
 
-<h4><a name="the_analogy">the analogy</a></h4>
+<p><a name="concepts_detached_head_the_analogy_"></a></p>
+
+<h2>the analogy</h2>
 
 <p>Forget git for a bit and think about linked lists from your data structures
 course.  Specifically, consider a <em>singly linked</em> list, where each node is
@@ -88,7 +92,9 @@ this time.</p>
 into some 'global' (or 'static') variable, you risk losing that commit you
 just made, oops, I mean the new node you added to the linked list :-)</p>
 
-<h4><a name="reality_check">reality check</a></h4>
+<p><a name="concepts_detached_head_reality_check_"></a></p>
+
+<h2>reality check</h2>
 
 <p>A previous version of this article took the analogy too far into git
 territory, and I did not realise how many facts about git I had passed
@@ -129,7 +135,9 @@ git checkout tagname        # since you cant commit to a tag!
 <p>These will all make <code>.git/HEAD</code> contain the actual (40-hex-digit) hash of the
 corresponding commit instead of some string like <code>ref: refs/heads/branch</code>.</p>
 
-<h5><a name="re_attaching_the_HEAD">re-attaching the HEAD</a></h5>
+<p><a name="concepts_detached_head_re_attaching_the_HEAD_"></a></p>
+
+<h3>re-attaching the HEAD</h3>
 
 <p>If you made the classic error of checking out a remote branch (like <code>git
 checkout origin/master</code>) and making a few commits on it before realising
@@ -143,7 +151,9 @@ something was wrong, you can recover quite easily:</p>
 'global' variable to save off the value of 'temp' before some other operation
 overwrote it.</p>
 
-<h5><a name="Auld_Lang_Syne">Auld Lang Syne</a></h5>
+<p><a name="concepts_detached_head_Auld_Lang_Syne_"></a></p>
+
+<h3>Auld Lang Syne</h3>
 
 <p>What if you didn't realise this, and -- after making those commits -- blithely
 switched to another branch:</p>
@@ -197,14 +207,16 @@ c55900c... HEAD@{23 minutes ago}: commit (amend): 0-terminology: the malloc anal
 git checkout thank_God_its_safe
 </code></pre>
 
-<h5><a name="reality_check_conclusion">reality check -- conclusion</a></h5>
+<p><a name="concepts_detached_head_reality_check_conclusion_"></a></p>
+
+<h3>reality check -- conclusion</h3>
 
 <p>There are a few other points that don't fit the simple 'linked list' analogy,
 or present some additional information that may be useful:</p>
 
 <ul>
 <li><p>a commit 'tree' is really more of a graph.  A 'directed acyclic graph', to
-be precise; see <a href="../gcs/index.html">here</a> for more on this.</p></li>
+be precise; see <a href="gcs/index.html">here</a> for more on this.</p></li>
 <li><p>a branch can point to any node in the graph, not just the top one.  For
 example, when you fork a branch called 'new' from 'master', and make 2
 commits on 'new', then 'new' is pointing to the top node in that portion
@@ -223,7 +235,9 @@ superset of the reflogs of all the local branches, with some extra detail
 
 <hr />
 
-<h5><a name="footnotes">footnotes</a></h5>
+<p><a name="concepts_detached_head_footnotes_"></a></p>
+
+<h3>footnotes</h3>
 
 <p><a name="fn"><sup>[1] Curiously, <code>git checkout master^0</code> also gets you a detached HEAD.  The
 command actually says "switch to the commit that master currently points to".
