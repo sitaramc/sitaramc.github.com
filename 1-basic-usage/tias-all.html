@@ -1,0 +1,57 @@
+<head>
+<style>
+    body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
+    code        { font-size:    1.1em;  background:  #ddf; }
+    pre         { margin-left:  2em;    background:  #ddf; }
+    pre code    { font-size:    1.1em;  background:  #ddf; }
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#1-basic-usage/tias">chapter TOC</a>
+</p>
+
+<!-- file: 1-basic-usage/tias -->
+
+<p><a name="1_basic_usage_tias_try_it_and_see__"></a></p>
+
+<h1>try it and see...</h1>
+
+<p>It's easy to forget that a lot of git's features, including features concerned
+with remote repos like fetch/pull/push, can be safely and easily tried out
+<strong>locally</strong>:</p>
+
+<ul>
+<li>start with an empty directory</li>
+<li>create a new bare repo in it (e.g., <code>git init --bare b.git</code>)</li>
+<li>clone this one or more times (e.g., <code>git clone b.git c1; git clone b.git c2</code>)</li>
+</ul>
+
+<p>...and you're ready to test out whatever features you want using any or all of
+the clones you created.</p>
+
+<p>Notice that we are simply using the local file system as the transport
+protocol.  People familiar with URLs on a browser might recognise this as eqvt
+to <code>file:///full/path/to/something</code>, and indeed that is exactly what git
+treats it as.</p>
+
+<p>Using ssh or http merely changes</p>
+
+<ul>
+<li>the URL used</li>
+<li>the authentication required and permissions granted by the server</li>
+</ul>
+
+<p>What <strong>does NOT change</strong> is the behaviour of most git commands!</p>
+
+<p>This means you can play with git to your heart's content in some temporary
+directory.  There's no danger of messing up a real repo, or of getting
+side-tracked by connectivity or permissions or even speed issues, which might
+happen if you tried this with a real server.</p>

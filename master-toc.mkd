@@ -63,11 +63,11 @@
 
 ----
 
-<a name="1-basic-usage/simple-git-session"></a>
+<a name="1-basic-usage/tias"></a>
 
-### 1-basic-usage/simple-git-session
+### 1-basic-usage/tias
 
-  * [simple git session](1-basic-usage/simple-git-session.html#1_basic_usage_simple_git_session_simple_git_session_)
+  * [try it and see...](1-basic-usage/tias.html#1_basic_usage_tias_try_it_and_see__)
 
 ----
 
