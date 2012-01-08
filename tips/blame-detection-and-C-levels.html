@@ -40,7 +40,8 @@ modified in the same commit.  This runs very fast.</p>
 files in the parent commit, and so it detects code that was <strong>copied</strong>.</p>
 
 <p><code>git gui blame</code> behaves like <code>-C -C</code> by default, but can behave like <code>-C</code> if
-<code>gui.fastcopyblame</code> is true.</p>
+<code>gui.fastcopyblame</code> is true.  (In addition, it also appears to set <code>-w</code>, to
+ignore whitespace changes while blaming).</p>
 
 <p><a name="tips_blame_detection_and_C_levels_threshold_and_how_to_specify_it_"></a></p>
 
