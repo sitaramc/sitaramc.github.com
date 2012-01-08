@@ -1,4 +1,7 @@
 <head>
+<title>
+try it and see...
+</title>
 <style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
     h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -16,9 +19,11 @@
     <a href="master-toc.html">master TOC</a>
 |
     <a href="master-toc.html#1-basic-usage/tias">chapter TOC</a>
+|
+    <a href="license.html">license</a>
 </p>
 
-<!-- file: 1-basic-usage/tias -->
+<!-- file: 1-basic-usage/tias "try it and see..." -->
 
 <p><a name="1_basic_usage_tias_try_it_and_see__"></a></p>
 
@@ -30,11 +35,15 @@ with remote repos like fetch/pull/push, can be safely and easily tried out
 
 <ul>
 <li>start with an empty directory</li>
-<li>create a new bare repo in it (e.g., <code>git init --bare b.git</code>)</li>
-<li>clone this one or more times (e.g., <code>git clone b.git c1; git clone b.git c2</code>)</li>
+<li>create a new bare repo in it (e.g., <code>git init --bare b.git</code>).  This is
+your <strong>server</strong> repo!</li>
+<li>clone this one or more times (e.g., <code>git clone b.git c1; git clone b.git
+c2</code>).  These are your <strong>developer</strong> repos; you can treat each one as
+belonging to a different developer.  The "server" repo you cloned from
+will be defined as the remote called "origin" in each of these clones.</li>
 </ul>
 
-<p>...and you're ready to test out whatever features you want using any or all of
+<p>Now you're ready to test out whatever features you want using any or all of
 the clones you created.</p>
 
 <p>Notice that we are simply using the local file system as the transport
@@ -55,3 +64,18 @@ treats it as.</p>
 directory.  There's no danger of messing up a real repo, or of getting
 side-tracked by connectivity or permissions or even speed issues, which might
 happen if you tried this with a real server.</p>
+
+<p>If playing on a test repo is not sufficient for your needs, you can replace
+the "create a new bare repo" step with a clone of one of your real repos.  For
+example, I might do this:</p>
+
+<pre><code>git clone --bare git://github.com/sitaramc/gitolite.git b.git
+</code></pre>
+
+<p>and that would give me a "b.git" that is a bare repo that starts out with all
+the code and branches that my real server repo has.</p>
+
+<hr />
+
+<p>Note: the <a href="http://sitaramc.github.com/concepts/0-terminology.html">terminology</a> page may also be useful, especially the section
+on "accessing remote repositories".</p>

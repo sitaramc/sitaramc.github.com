@@ -8,6 +8,15 @@
   * [(READ THIS FIRST) README for the git-notes repo](index.html#index_READ_THIS_FIRST_README_for_the_git_notes_repo_)
       * [Basics](index.html#index_Basics_)
           * [Beyond the basics](index.html#index_Beyond_the_basics_)
+      * [License](index.html#index_License_)
+
+----
+
+<a name="license"></a>
+
+### license
+
+  * [License](license.html#license_License_)
 
 ----
 
@@ -286,7 +295,7 @@
 
 ### gcs/index
 
-  * [git for computer scientists -- my version](gcs/index.html#gcs_index_git_for_computer_scientists_my_version_)
+  * [git concepts simplified](gcs/index.html#gcs_index_git_concepts_simplified_)
       * [basics](gcs/index.html#gcs_index_basics_)
           * [the 4 git object types](gcs/index.html#gcs_index_the_4_git_object_types_)
           * [what is a SHA](gcs/index.html#gcs_index_what_is_a_SHA_)
@@ -320,6 +329,16 @@
           * [other ways to detach your HEAD](gcs/index.html#gcs_index_other_ways_to_detach_your_HEAD_)
           * [re-attaching the HEAD](gcs/index.html#gcs_index_re_attaching_the_HEAD_)
           * [the reflog](gcs/index.html#gcs_index_the_reflog_)
+
+----
+
+<a name="kwords/index"></a>
+
+### kwords/index
+
+  * [a few pictures](kwords/index.html#kwords_index_a_few_pictures_)
+      * [traditional VCS versus DVCS](kwords/index.html#kwords_index_traditional_VCS_versus_DVCS_)
+      * [what's a **bare** repo](kwords/index.html#kwords_index_what_s_a_bare_repo_)
 
 ----
 
@@ -499,6 +518,25 @@
 ### the-list-and-irc/backup-repo
 
   * [backing up a repo by just: git push backup](the-list-and-irc/backup-repo.html#the_list_and_irc_backup_repo_backing_up_a_repo_by_just_git_push_backup_)
+
+----
+
+<a name="the-list-and-irc/deploy"></a>
+
+### the-list-and-irc/deploy
+
+  * [git as a deployment tool](the-list-and-irc/deploy.html#the_list_and_irc_deploy_git_as_a_deployment_tool_)
+      * [introduction](the-list-and-irc/deploy.html#the_list_and_irc_deploy_introduction_)
+      * [deployment rules](the-list-and-irc/deploy.html#the_list_and_irc_deploy_deployment_rules_)
+      * [why git is not a deployment tool](the-list-and-irc/deploy.html#the_list_and_irc_deploy_why_git_is_not_a_deployment_tool_)
+      * [6 different ways to deploy](the-list-and-irc/deploy.html#the_list_and_irc_deploy_6_different_ways_to_deploy_)
+          * [checkout -- the "fight club" of git deployment](the-list-and-irc/deploy.html#the_list_and_irc_deploy_checkout_the_fight_club_of_git_deployment_)
+          * [fetch -- reverse the flow](the-list-and-irc/deploy.html#the_list_and_irc_deploy_fetch_reverse_the_flow_)
+          * [reset -- another reversing trick](the-list-and-irc/deploy.html#the_list_and_irc_deploy_reset_another_reversing_trick_)
+          * [direct archive dump](the-list-and-irc/deploy.html#the_list_and_irc_deploy_direct_archive_dump_)
+          * [archive dump with staging](the-list-and-irc/deploy.html#the_list_and_irc_deploy_archive_dump_with_staging_)
+          * [archive dump with staging, using rsync](the-list-and-irc/deploy.html#the_list_and_irc_deploy_archive_dump_with_staging_using_rsync_)
+      * [summary/recap](the-list-and-irc/deploy.html#the_list_and_irc_deploy_summary_recap_)
 
 ----
 

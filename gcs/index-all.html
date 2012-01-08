@@ -1,4 +1,7 @@
 <head>
+<title>
+git concepts simplified
+</title>
 <style>
     body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
     h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -16,15 +19,38 @@
     <a href="master-toc.html">master TOC</a>
 |
     <a href="master-toc.html#gcs/index">chapter TOC</a>
+|
+    <a href="license.html">license</a>
 </p>
 
-<!-- file: gcs/index -->
+<!-- file: gcs/index "git concepts simplified" -->
 
-<p><a name="gcs_index_git_for_computer_scientists_my_version_"></a></p>
+<p><a name="gcs_index_git_concepts_simplified_"></a></p>
 
-<h1>git for computer scientists -- my version</h1>
+<h1>git concepts simplified</h1>
 
-<p>[Inside joke: Hey I rewrote gitosis so why not this?]</p>
+<p><font color="gray"></p>
+
+<p>The title of this page used to be "git for computer scientists -- my version",
+said title being inspired by a much older page at
+http://eagain.net/articles/git-for-computer-scientists.</p>
+
+<p>Following a discussion on IRC where someone said I copied the idea but did not
+acknowledge the original, I first added the previous para, than sat down to
+re-read both looking for any similarities.  I did not find anything
+significant except the title itself.  (Here's a quick check you can do in a
+few seconds: click on the "chapter toc" above to see the structure of this
+one, then try and do a mental "diff" with the old version.)</p>
+
+<p>Anyway, as a result of this re-look I remembered why I actually wrote it:
+because I felt the older one was too abstract and terse for a real newbie.  I
+also realised that my version is not really targeted at computer scientists
+specifically, and arguably <a href="https://github.com/sitaramc/git-notes/commit/13a2ffaca484a1136c256dc72e93a88eff8fd4ff">never was</a>.</p>
+
+<p>So I changed the title, carefully picking one that would not affect the URL
+because I know people have bookmarked it.</p>
+
+<p></font></p>
 
 <p><a name="gcs_index_basics_"></a></p>
 
@@ -227,13 +253,15 @@ will move to point to the new commit.</p>
 URLs:</p>
 
 <ul>
-<li>ssh: like <code>ssh://git@server:reponame</code></li>
-<li>http: like <code>http://server:reponame</code></li>
-<li>git: like <code>git://server:reponame</code> -- note that this is an unauthenticated
-protocol suitable only for allowing downloads of open source or similar
-software</li>
+<li>ssh: like <code>ssh://[user@]host.xz[:port]/path/to/repo.git/</code></li>
+<li>http: like <code>http[s]://host.xz[:port]/path/to/repo.git/</code></li>
+<li>git: like <code>git://host.xz[:port]/path/to/repo.git/</code> -- note that this is an
+unauthenticated protocol suitable only for allowing downloads of open
+source or similar software</li>
 <li>local file: like <code>file:///full/path/to/reponame</code></li>
 </ul>
+
+<p>(see 'man git-clone' for all the allowed syntaxes for git URLs).</p>
 
 <p><a name="gcs_index_what_is_a_remote__"></a></p>
 
@@ -359,8 +387,7 @@ they are now in <strong>your local "master" branch</strong>.  They continue to h
 same SHA values and the object store does not change as a result of this
 command at all.</p>
 
-<p>All you did was move a pointer from one node to another.  Which is why the
-linked list analogy works so well in understanding git as a DAG.</p>
+<p>All you did was move a pointer from one node to another.</p>
 
 <p><a name="gcs_index_advanced_operations_"></a></p>
 
@@ -404,7 +431,7 @@ commit as representing a set of changes too.  (In fact, most older VCSs do
 this).</p>
 
 <p>Let's say one of your collaborators (this mythical "Sita" again!) made a whole
-bunch of changes to his cpoy of the repo.  You don't like most of these
+bunch of changes to his copy of the repo.  You don't like most of these
 changes, except one specific change which you would like to bring in to your
 repo.</p>
 

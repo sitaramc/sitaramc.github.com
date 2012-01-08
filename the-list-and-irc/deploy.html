@@ -1,0 +1,317 @@
+<head>
+<title>
+git as a deployment tool
+</title>
+<style>
+    body        { background: #fff; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; margin-left: -10px; }
+    h4          { background: #ffb; }
+    code        { font-size:    1.1em;  background:  #ddf; }
+    pre         { margin-left:  2em;    background:  #ddf; }
+    pre code    { font-size:    1.1em;  background:  #ddf; }
+</style>
+<base href="http://sitaramc.github.com/" />
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="master-toc.html#the-list-and-irc/deploy">chapter TOC</a>
+|
+    <a href="license.html">license</a>
+</p>
+
+
+<p><a name="the_list_and_irc_deploy_git_as_a_deployment_tool_"></a></p>
+
+<h1>git as a deployment tool</h1>
+
+<p>One of the first things people want to do with a server side repo is to
+automatically deploy something when someone pushes to it.</p>
+
+<p>And one of the first things they hear when they ask about it on #git is "git
+is not a deployment tool, so don't do that" ;-)</p>
+
+<p>So let's talk deployment...</p>
+
+<hr />
+
+<p><a name="the_list_and_irc_deploy_introduction_"></a></p>
+
+<h2>introduction</h2>
+
+<p>Deploying on a push to a bare repo should be easy.  Just add a post-receive
+hook that contains this code:</p>
+
+<pre><code>#!/bin/sh
+some-magic-deploy-command /deploy/directory
+</code></pre>
+
+<p>Opinions differ on what that magic deploy command should actually be, and
+indeed whether there should even <em>be</em> one at all :-)</p>
+
+<p><a name="the_list_and_irc_deploy_deployment_rules_"></a></p>
+
+<h2>deployment rules</h2>
+
+<p>Here's what we expect from a deployment tool.  Note the rule numbers -- we'll
+be referring to some of them simply by number later.</p>
+
+<ol>
+<li><p>All files in the branch being deployed should be copied to the deployment
+directory.</p></li>
+<li><p>Files that were deleted in the git repo since the last deployment should
+get deleted from the deployment directory.</p></li>
+<li><p>Any changes <em>to tracked files</em> in the deployment directory after the last
+deployment should be ignored when following rules 1 and 2.</p>
+
+<p>However, sometimes you might want to detect such changes and abort if you
+found any.</p></li>
+<li><p><em>Untracked</em> files in the deploy directory should be left alone.</p>
+
+<p>Again, some people might want to detect this and abort the deployment.</p></li>
+</ol>
+
+<p><a name="the_list_and_irc_deploy_why_git_is_not_a_deployment_tool_"></a></p>
+
+<h2>why git is not a deployment tool</h2>
+
+<p>The most important reason is this: git does not track permissions (other than
+the first "x" in "rwxrwxrwx").  Many real-world deployments need a bit more
+granularity than that, I suspect.</p>
+
+<p>Also, git does not track empty directories, which could also be a problem
+(albeit less common than permissions).</p>
+
+<p>There could be other reasons; I'll update this section as I hear of any but
+I'm sure those are the main ones.</p>
+
+<p><a name="the_list_and_irc_deploy_6_different_ways_to_deploy_"></a></p>
+
+<h2>6 different ways to deploy</h2>
+
+<p>We'll discuss these 6 ways of deploying your project using git.  Note that
+none of these methods can overcome git's inherent limitations for deployment
+(permissions, etc., as described above), though any of them can be followed up
+with extra code to do that, using some site-local script.</p>
+
+<p><a name="the_list_and_irc_deploy_checkout_the_fight_club_of_git_deployment_"></a></p>
+
+<h3>checkout -- the "fight club" of git deployment</h3>
+
+<p><strong>Summary</strong></p>
+
+<pre><code>export GIT_WORK_TREE=/deploy/dir
+git checkout -f master
+</code></pre>
+
+<p><strong>Pros</strong>: satisfies all 4 of our rules.</p>
+
+<p><strong>Cons</strong>: requires you to satisfy its own rules in turn:</p>
+
+<ul>
+<li>you don't talk about it or ask questions about it ;-)</li>
+<li>you always checkout to the same deploy directory</li>
+<li>you always checkout the same branch</li>
+<li>you always use "-f"</li>
+</ul>
+
+<p><strong>Discussion</strong></p>
+
+<p>The reason the collected wisdom of #git says "dont use git as a deploy tool"
+is because it's <em>hard to explain</em> the last 3 rules there.</p>
+
+<p>Worse, you might discover that it <em>appears</em> safe to violate one of the rules,
+but unless you're an expert you've just walked past without noticing the
+"Danger: quicksand ahead" sign!</p>
+
+<p>It <em>does</em> work fine if you stick to those rules.  But I will not support it if
+you run into trouble because I know you must have violated one or more of them
+and all you're doing is asking <em>me</em> to play 20 questions to dig out of <em>you</em>
+which ones they were ;-)</p>
+
+<p>Aborting on changes to tracked files is easy.  Before the checkout, run:</p>
+
+<pre><code>git diff --quiet || exit 1
+</code></pre>
+
+<p>Aborting on finding untracked files is also easy enough:</p>
+
+<pre><code>git ls-files -o | grep &gt;/dev/null . &amp;&amp; exit 1
+</code></pre>
+
+<p><a name="the_list_and_irc_deploy_fetch_reverse_the_flow_"></a></p>
+
+<h3>fetch -- reverse the flow</h3>
+
+<p><strong>Summary</strong></p>
+
+<pre><code>cd /deploy/dir
+unset GIT_DIR
+git fetch origin
+git reset --hard origin/master
+</code></pre>
+
+<p><strong>Pros</strong>: satisfies all 4 rules</p>
+
+<p><strong>Cons</strong>: your deploy directory needs to be a clone of the bare repo.</p>
+
+<p><strong>Discussion</strong></p>
+
+<p>If your deploy directory is OK with having a ".git" sitting in it (i.e.,
+whatever application you have won't barf because of it), this is a simple way
+of reversing the flow.</p>
+
+<p>A lot of people try this; they fail because they don't realise git sets up an
+extra environment variable (because it expects to be running in a bare repo)
+that you need to unset when you cross over into a non-bare repo.</p>
+
+<p>Aborting on finding local changes is the same as in the previous section.  Run
+those commands just before the fetch.</p>
+
+<p><strong>Security</strong>: a readable ".git" may be a security issue in some cases.</p>
+
+<p><a name="the_list_and_irc_deploy_reset_another_reversing_trick_"></a></p>
+
+<h3>reset -- another reversing trick</h3>
+
+<p><strong>Summary</strong></p>
+
+<pre><code>GIT_DIR=$PWD
+cd /deploy/dir
+export GIT_WORK_TREE=.
+git reset --hard
+</code></pre>
+
+<p><strong>Pros</strong>: satisfies all 4 rules</p>
+
+<p><strong>Cons</strong>: newbie-unsafe; see below.</p>
+
+<p><strong>Discussion</strong></p>
+
+<p>This code deploys whatever HEAD points to, as it doesn't explicitly name a
+branch.</p>
+
+<p>A newbie may be tempted to fix that:</p>
+
+<pre><code>git reset --hard master     # DONT DO THIS!
+</code></pre>
+
+<p>In a word, <strong>DON'T</strong>!  If you did not change HEAD you do not need it.  And if
+you <em>did</em> change HEAD to something other than master you'd lose that branch!
+(Didn't see <em>that</em> coming did ya?)</p>
+
+<p>If you never change HEAD and no one in their right mind in your site would,
+you can use this.  But do you really want to take that chance?</p>
+
+<p>Finally, it has <em>no</em> advantage over the first method in any way.</p>
+
+<p><a name="the_list_and_irc_deploy_direct_archive_dump_"></a></p>
+
+<h3>direct archive dump</h3>
+
+<p><strong>Summary</strong></p>
+
+<pre><code>git archive master | tar -C /deploy/dir -xf -
+</code></pre>
+
+<p><strong>Pros</strong>: clean and simple</p>
+
+<p><strong>Cons</strong>: doesn't satisfy rule 2 (deleted files don't get deleted).</p>
+
+<p><strong>Discussion</strong></p>
+
+<p>Pretty useless, since it violates rule 2.  If you prefer to sacrifice rule 4
+instead of rule 2, see the next section!</p>
+
+<p>It's also inefficient for large repos if only a few files have changed.</p>
+
+<p><a name="the_list_and_irc_deploy_archive_dump_with_staging_"></a></p>
+
+<h3>archive dump with staging</h3>
+
+<p><strong>Summary</strong></p>
+
+<pre><code>git archive master | tar -C /deploy/dir.new -xf -
+mv /deploy/dir      /deploy/dir.old
+mv /deploy/dir.new  /deploy/dir
+rm -rf              /deploy/dir.old
+</code></pre>
+
+<p><strong>Pros</strong>: clean and simple, using only a tar file and shell commands.</p>
+
+<p><strong>Cons</strong>: sacrifices rule 4.</p>
+
+<p><strong>Discussion</strong></p>
+
+<p>This method uses a staging directory between the repo and the deploy
+directory.  It is best used if you need to make any adjustments before the
+actual files are copied over.</p>
+
+<p>While still inefficient (in terms of disk writes compared to number of changed
+files), this method compensates for the inefficiency by allowing almost-atomic
+switchover if you put the staging directory on the same filesystem.</p>
+
+<p>However, every time you use "rm -rf" in a script, a little kitten dies
+somewhere, so you may not be comfortable with this script :-)</p>
+
+<p><strong>Security</strong>: You also need to worry about security for the temp dir if
+untrusted people have local shell access to the server.  Consider using mktemp
+and umask.</p>
+
+<p>Aborting on finding local changes is not easy.  You need to checkout the <em>old</em>
+commit somewhere and compare files manually.  If this is important, use one of
+the earlier methods.</p>
+
+<p><a name="the_list_and_irc_deploy_archive_dump_with_staging_using_rsync_"></a></p>
+
+<h3>archive dump with staging, using rsync</h3>
+
+<p>This is a variation of the previous one, except that your deploy directory is
+on a different host, so you use rsync for network-efficiency.  (Presumably
+there are security or such reasons not to have the git repo on the destination
+server).</p>
+
+<p>You no longer get atomic switchover, but rsync's network efficiency is
+probably good enough.  Maybe not as instantaneous as two rename commands (or a
+symlink switch) but not too bad.</p>
+
+<p>EugeneKay has written a very comprehensive script that uses this technique,
+but adds many more bells and whistles; find it <a href="https://github.com/EugeneKay/scripts/blob/master/bash/git-deploy-hook.sh">here</a>.  I'm sure after he
+reads this he will add an "--atomic" flag, <em>and</em> make it work across hosts ;-)</p>
+
+<p>However, please note that if you use that script, you have to <strong>explicitly
+enable</strong> rule 2 support by adding <code>--delete</code> to the rsync options.  It's not
+on by default, and I think it should be because I consider rule 2 to be
+<strong>much</strong> more important than rule 4.</p>
+
+<p><a name="the_list_and_irc_deploy_summary_recap_"></a></p>
+
+<h2>summary/recap</h2>
+
+<p>We've seen 6 methods.  Here's my summary.  The ones in gray are considered not
+useful enough to be in the running.</p>
+
+<ul>
+<li><p>checkout -- this is the one I prefer, in fact I use it in gitolite.  It's
+very efficient (only changed files are written, as normal in git) and
+newbie friendly enough.  The rules imposed are simple to understand and
+easy to stick to.</p>
+
+<p>In addition, it's easy to detect local changes and abort.  (This is
+equally true for the next 2 methods also).</p></li>
+<li><p>fetch -- this is pretty intuitive even for git-newbies (while also
+remaining efficient), but your deploy directory needs to be a clone, which
+could be a problem.</p></li>
+<li><p><font color="gray">reset -- highly newbie-unsafe.  No particular advantage
+over the "checkout" method anyway.</font></p></li>
+<li><p><font color="gray">direct archive dump -- this is the only one that
+doesn't satisfy rule 2, so it's kinda useless :(</font></p></li>
+<li><p>archive dump with staging -- the absolute simplest in terms of git
+concepts.  It's inefficient but compensates by allowing atomic
+switchovers.</p></li>
+<li><p>archive dump with staging using rsync -- very useful if your deploy dir is
+on a different server.</p></li>
+</ul>
