@@ -58,3 +58,13 @@ treats it as.</p>
 directory.  There's no danger of messing up a real repo, or of getting
 side-tracked by connectivity or permissions or even speed issues, which might
 happen if you tried this with a real server.</p>
+
+<p>If playing on a test repo is not sufficient for your needs, you can replace
+the "create a new bare repo" step with a clone of one of your own repos.  For
+example, I might do this:</p>
+
+<pre><code>git clone --bare git://github.com/sitaramc/gitolite.git b.git
+</code></pre>
+
+<p>and that would give me a "b.git" that is a bare repo that starts out with all
+the code and branches that my real server repo has.</p>
