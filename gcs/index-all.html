@@ -230,13 +230,15 @@ will move to point to the new commit.</p>
 URLs:</p>
 
 <ul>
-<li>ssh: like <code>ssh://git@server:reponame</code></li>
-<li>http: like <code>http://server:reponame</code></li>
-<li>git: like <code>git://server:reponame</code> -- note that this is an unauthenticated
-protocol suitable only for allowing downloads of open source or similar
-software</li>
+<li>ssh: like <code>ssh://[user@]host.xz[:port]/path/to/repo.git/</code></li>
+<li>http: like <code>http[s]://host.xz[:port]/path/to/repo.git/</code></li>
+<li>git: like <code>git://host.xz[:port]/path/to/repo.git/</code> -- note that this is an
+unauthenticated protocol suitable only for allowing downloads of open
+source or similar software</li>
 <li>local file: like <code>file:///full/path/to/reponame</code></li>
 </ul>
+
+<p>(see 'man git-clone' for all the allowed syntaxes for git URLs).</p>
 
 <p><a name="gcs_index_what_is_a_remote__"></a></p>
 

@@ -237,27 +237,25 @@ time, otherwise you're not really <em>using</em> git!)</p>
 <h3>accessing remote repositories</h3>
 
 <p>Every remote repository (often called just a <strong>remote</strong>) has a URL associated
-with it, which tells your (local) git client how to reach it.  The simplest
-URL is for a repo that is on the same machine, which can then use the <em>file</em>
-protocol: <code>file:///home/sitaram/path/to/repo.git</code>.</p>
+with it, which tells your (local) git client how to reach it.  There are
+typically 4 kinds of Git URLs:</p>
 
-<p>Anonymous access (read-only) repositories can be grabbed using the <em>git</em>
-protocol; for example, Linus Torvalds' version of the current Linux kernel is
-at <code>git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git</code>.
-Read-only repos can also use the HTTP protocol, although this is not as
-efficient for continuous use.</p>
+<ul>
+<li>ssh: like <code>ssh://[user@]host.xz[:port]/path/to/repo.git/</code></li>
+<li>http: like <code>http[s]://host.xz[:port]/path/to/repo.git/</code></li>
+<li>git: like <code>git://host.xz[:port]/path/to/repo.git/</code> -- note that this is an
+unauthenticated protocol suitable only for allowing downloads of open
+source or similar software</li>
+<li>local file: like <code>file:///full/path/to/reponame</code></li>
+</ul>
 
-<p>A remote repository to which you have write access will almost certainly use
-<em>ssh</em> as the underlying authentication protocol, so the remote URL might look
-like <code>ssh://sitaram@172.1.7.2/full/path/to/repo.git</code>.  (We say 'might look
-like' because there are other syntactical variants of ssh urls for git; see
-'man git-clone').</p>
+<p>See 'man git-clone' for all the allowed syntaxes for git URLs.</p>
 
 <p><a name="concepts_0_terminology_naming_remote_repositories_"></a></p>
 
 <h3>naming remote repositories</h3>
 
-<p>You can refer to, (or fetch from, and push to) more then one remote repos in
+<p>You can refer to, (or fetch from, and push to) more than one remote repo in
 <em>your</em> clone, giving them all different URLs.  After a while it gets
 inconvenient to use the full URLs in your <code>git fetch</code> and <code>git push</code> commands,
 so git allows you to give an easy to remember "nickname" for each "remote".  I
@@ -266,8 +264,11 @@ could, for instance, do this:</p>
 <pre><code>git remote add sejal ssh://sitaram@sejal.herlab.ourcompany.com/path/to/repo.git
 </code></pre>
 
-<p>After this I could refer to the longer URL by the shortname "sejal" and it
-would be the same thing.</p>
+<p>After this I could refer to the longer URL by the shortname "sejal" in most
+git commands and it would be the same thing.</p>
+
+<p>(Note: for convenience, a 'remote' called 'origin' is automatically created
+when you clone a repo, pointing to the repo you cloned from.)</p>
 
 <p><a name="concepts_0_terminology_origin_"></a></p>
 
