@@ -8,6 +8,7 @@
   * [(READ THIS FIRST) README for the git-notes repo](index.html#index_READ_THIS_FIRST_README_for_the_git_notes_repo_)
       * [Basics](index.html#index_Basics_)
           * [Beyond the basics](index.html#index_Beyond_the_basics_)
+      * [License](index.html#index_License_)
 
 ----
 

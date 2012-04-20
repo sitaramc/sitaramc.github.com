@@ -171,6 +171,7 @@
   'gcs_index_why_are_the_arrows_backward_in_your_pictures__' => 'gcs/index.html#gcs_index_why_are_the_arrows_backward_in_your_pictures__ "**(why are the arrows backward in your pictures?)**"',
   'index_Basics_' => 'index.html#index_Basics_ "Basics"',
   'index_Beyond_the_basics_' => 'index.html#index_Beyond_the_basics_ "Beyond the basics"',
+  'index_License_' => 'index.html#index_License_ "License"',
   'index_READ_THIS_FIRST_README_for_the_git_notes_repo_' => 'index.html#index_READ_THIS_FIRST_README_for_the_git_notes_repo_ "(READ THIS FIRST) README for the git-notes repo"',
   'libboostpatch' => 'other-stuff/vss2git.html#libboostpatch "patch for libboost 1.36"',
   'other_stuff_000_README_other_stuff_' => 'other-stuff/000-README.html#other_stuff_000_README_other_stuff_ "other stuff"',
