@@ -12,6 +12,14 @@
 
 ----
 
+<a name="license"></a>
+
+### license
+
+  * [License](license.html#license_License_)
+
+----
+
 <a name="1-basic-usage/common-problems"></a>
 
 ### 1-basic-usage/common-problems
