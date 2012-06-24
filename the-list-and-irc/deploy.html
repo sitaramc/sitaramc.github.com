@@ -252,8 +252,13 @@ actual files are copied over.</p>
 files), this method compensates for the inefficiency by allowing almost-atomic
 switchover if you put the staging directory on the same filesystem.</p>
 
-<p>However, every time you use "rm -rf" in a script, a little kitten dies
-somewhere, so you may not be comfortable with this script :-)</p>
+<p>Now, while I would consider a two-mv command sequence as atomic enough,
+there'll always be nitpickers who insist that "almost" isn't good enough.
+Patches welcome :-)</p>
+
+<p><font color="gray">(IMO, if you're worrying about that level of atomicity in
+these days of "eventually consistent" databases you should be <em>writing</em> this
+document not reading it!)</font></p>
 
 <p><strong>Security</strong>: You also need to worry about security for the temp dir if
 untrusted people have local shell access to the server.  Consider using mktemp
