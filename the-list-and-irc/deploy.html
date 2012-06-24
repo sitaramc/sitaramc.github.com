@@ -109,12 +109,12 @@ git checkout -f master
 
 <p><strong>Pros</strong>: satisfies all 4 of our rules.</p>
 
-<p><strong>Cons</strong>: you don't talk about it or ask questions about it ;-)</p>
+<p><strong>Cons</strong>: you don't talk about it or ask questions about it ;-)  Jokes apart,
+see discussion below.</p>
 
 <p><strong>Discussion</strong></p>
 
-<p>The reason the collected wisdom of #git says "dont use git as a deploy tool"
-is because you have to make sure:</p>
+<p>If you want to use this method, you have to make sure:</p>
 
 <ul>
 <li>you always checkout to the same deploy directory</li>
@@ -122,10 +122,13 @@ is because you have to make sure:</p>
 <li>you always use "-f"</li>
 </ul>
 
-<p>but it's hard to explain <em>why</em>.  (It has to do with HEAD, the index, and the
-actual work tree getting out of sync in ways that don't happen on a normal
-repo).  If you run into trouble, it becomes a game of trying to dig out of you
-what exactly you did in what sequence, hence the lack of support!</p>
+<p>But it's hard to explain <em>why</em>.  (It has to do with HEAD, the index, and the
+actual work tree getting out of sync in ways that won't ever happen on a
+normal repo using normal git commands).</p>
+
+<p>So if you run into trouble, it becomes a game of trying to dig out of you what
+exactly you did in what sequence.  And if you think that's easy you've never
+done tech support :)</p>
 
 <p>Aborting on changes to tracked files is easy.  Before the checkout, run:</p>
 
