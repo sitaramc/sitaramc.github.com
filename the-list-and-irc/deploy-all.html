@@ -110,28 +110,23 @@ git checkout -f master
 
 <p><strong>Pros</strong>: satisfies all 4 of our rules.</p>
 
-<p><strong>Cons</strong>: requires you to satisfy its own rules in turn:</p>
+<p><strong>Cons</strong>: you don't talk about it or ask questions about it ;-)</p>
+
+<p><strong>Discussion</strong></p>
+
+<p>The reason the collected wisdom of #git says "dont use git as a deploy tool"
+is because you have to make sure:</p>
 
 <ul>
-<li>you don't talk about it or ask questions about it ;-)</li>
 <li>you always checkout to the same deploy directory</li>
 <li>you always checkout the same branch</li>
 <li>you always use "-f"</li>
 </ul>
 
-<p><strong>Discussion</strong></p>
-
-<p>The reason the collected wisdom of #git says "dont use git as a deploy tool"
-is because it's <em>hard to explain</em> the last 3 rules there.</p>
-
-<p>Worse, you might discover that it <em>appears</em> safe to violate one of the rules,
-but unless you're an expert you've just walked past without noticing the
-"Danger: quicksand ahead" sign!</p>
-
-<p>It <em>does</em> work fine if you stick to those rules.  But I will not support it if
-you run into trouble because I know you must have violated one or more of them
-and all you're doing is asking <em>me</em> to play 20 questions to dig out of <em>you</em>
-which ones they were ;-)</p>
+<p>but it's hard to explain <em>why</em>.  (It has to do with HEAD, the index, and the
+actual work tree getting out of sync in ways that don't happen on a normal
+repo).  If you run into trouble, it becomes a game of trying to dig out of you
+what exactly you did in what sequence, hence the lack of support!</p>
 
 <p>Aborting on changes to tracked files is easy.  Before the checkout, run:</p>
 
@@ -298,8 +293,8 @@ useful enough to be in the running.</p>
 <ul>
 <li><p>checkout -- this is the one I prefer, in fact I use it in gitolite.  It's
 very efficient (only changed files are written, as normal in git) and
-newbie friendly enough.  The rules imposed are simple to understand and
-easy to stick to.</p>
+newbie friendly enough.  The constraints imposed are simple to understand
+and easy to stick to.</p>
 
 <p>In addition, it's easy to detect local changes and abort.  (This is
 equally true for the next 2 methods also).</p></li>
