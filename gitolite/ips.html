@@ -1,0 +1,131 @@
+
+<head>
+    <title>idiot-proof setup for gitolite</title>
+<style>
+    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+    h4          { background: #ffb; text-color: #000; }
+    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+</style>
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="index.html">main page</a>
+|
+    <a href="index.html#license">license</a>
+</p>
+<p style="text-align:center">
+<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+</p>
+<h2>idiot-proof setup for gitolite</h2>
+
+<p>WARNING 1: this document uses my new, Linus-inspired, motto: people who get
+offended, <em>should</em> be offended.</p>
+
+<p>WARNING 2: contains more words in ALL CAPS than all my other documents put
+together.</p>
+
+<p>WARNING 3: this document will work for any Linux on which git has already been
+installed.  BSDs, or legacy systems like Solaris, also should work but I can't
+guarantee it or test it.</p>
+
+<hr />
+
+<p>Some people seem to get terribly, <strong>terribly</strong> confused by ssh.  If you've
+read through all the <a href="ssh.html">documentation on ssh</a> that came with gitolite, yet
+you <em>still</em> cannot get things to work, you have two choices:</p>
+
+<ol>
+<li><p>exchange your "developer" badge for a "manager" badge and then hire
+someone to do this.</p></li>
+<li><p>start over with the instructions below.  They include some DRASTIC
+measures, requirements, and restrictions, almost NONE of which are
+normally necessary, but it's either that or a suit and tie from tomorrow
+so play along.</p></li>
+</ol>
+
+<p><strong>IMPORTANT</strong>: Do NOT ask for help on these instructions unless you have kept
+a detailed log of every command you typed, and the complete response you got.
+I do not ask for this information to help you -- that's only a front.  I
+<em>know</em> these instructions work (at least on any Linux that already has git
+installed), so the real reason is to find where you mistyped something and
+mock you for that,</p>
+
+<h3>Assumptions</h3>
+
+<ul>
+<li><p>your name is Ron.  Substitute accordingly in the instructions below.</p></li>
+<li><p>you have a workstation.</p></li>
+<li><p>you have a server called <code>server</code>.</p></li>
+<li><p>you have root access on this server.</p></li>
+</ul>
+
+<h3>Tasks</h3>
+
+<ol>
+<li><p>Create a new userid on the server, say <code>git</code>.  This will be the <strong>hosting
+user</strong>.  ("hosting user" means when you're done installing, your users
+will use URLs like <code>git@server:reponame</code> or <code>ssh://git@server/reponame</code>).</p>
+
+<p><strong>Make sure this is a NEW userid</strong>.</p>
+
+<p>If the name you want already exists, then:</p>
+
+<ul>
+<li>log in as root</li>
+<li>if you have any data on that user's HOME directory save it somewhere
+else</li>
+<li>delete the userid</li>
+<li>obliterate the home directory of the user (since on most systems
+merely deleting the user does not remove the home directory).</li>
+<li>re-create the userid again</li>
+</ul></li>
+<li><p>If you don't already have one, make yourself an ssh keypair <strong>on your
+workstation</strong>.</p>
+
+<p>Do NOT, in a fit of inspiration and energy, add this public key to the
+authorised keys file on the newly created hosting user!</p>
+
+<p>Your ONLY access to the new (<code>git</code>) userid should be by logging onto the
+server as root, then running <code>su - git</code>.</p></li>
+<li><p>Now copy the pubkey from your workstation (<code>~/.ssh/id_rsa.pub</code>) to the
+server as <code>/tmp/ron.pub</code>.  (Your name is Ron, remember?)</p></li>
+<li><p>Log on to the server as root.</p></li>
+<li><p>Switch to the <code>git</code> user:</p>
+
+<pre><code>su - git
+</code></pre></li>
+<li><p>Clone the gitolite source code</p>
+
+<pre><code>git clone git://github.com/sitaramc/gitolite
+</code></pre></li>
+<li><p>Install it</p>
+
+<pre><code>cd $HOME
+mkdir -p bin
+gitolite/install -to $HOME/bin
+</code></pre></li>
+<li><p>Set it up</p>
+
+<pre><code>cd $HOME
+$HOME/bin/gitolite setup -pk /tmp/ron.pub
+</code></pre></li>
+<li><p>Now go to your workstation and type in</p>
+
+<pre><code>git ls-remote git@server:gitolite-admin
+</code></pre>
+
+<p>This should return something like</p>
+
+<pre><code>9dd8aab60bac5e54ccf887a87b4f3d35c96b05e4    HEAD
+9dd8aab60bac5e54ccf887a87b4f3d35c96b05e4    refs/heads/master
+</code></pre>
+
+<p>(do I have to mention that your SHAs will be different?)</p></li>
+</ol>

@@ -1,0 +1,76 @@
+
+<head>
+    <title>testing gitolite</title>
+<style>
+    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+    h4          { background: #ffb; text-color: #000; }
+    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+</style>
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="index.html">main page</a>
+|
+    <a href="index.html#license">license</a>
+</p>
+<p style="text-align:center">
+<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+</p>
+<h1>testing gitolite</h1>
+
+<p>Here's how to <em>run</em> the tests.</p>
+
+<p><font color="red"><strong>WARNING: they will clobber lots of things in your <code>$HOME</code>,
+so be sure to use a throwaway userid</strong>.</font></p>
+
+<pre><code>git clone git://github.com/sitaramc/gitolite
+cd gitolite
+prove
+</code></pre>
+
+<p>Make sure:</p>
+
+<ul>
+<li><code>$HOME/bin</code> is in <code>$PATH</code></li>
+<li>sshd allows incoming ssh to this userid, at least from localhost</li>
+</ul>
+
+<p>Gitolite's test suite is mostly written using <a href="http://github.com/sitaramc/tsh">tsh</a> -- the "testing shell".
+Take a look at some of the scripts and you will see what it looks like.  It
+has a few quirks and nuances; if you really care, email me.</p>
+
+<p>The tests also use a somewhat convoluted system of environment variables in
+order to run <em>entirely</em> as a local user, without going through ssh at all.
+This lets a complete test suite run in about a fifth or less of the time it
+would otherwise take.</p>
+
+<p>If you think that defeats the purpose of the testing, you haven't read
+<a href="auth.html">this</a> yet.</p>
+
+<h2><a name="trying"></a> trying out gitolite</h2>
+
+<p>It's easy to take gitolite for a trial run, in ssh mode, and play with all of
+its features (except mirroring).</p>
+
+<p>Create a <strong>throw-away userid</strong>, log in to it, then do what the "testing
+gitolite" section above says, except instead of running <code>prove</code>, you run
+<code>prove t/ssh*</code>.</p>
+
+<p>When this is done, you get a gitolite installation with 7 gitolite users
+("admin", and "u1" through "u6").</p>
+
+<p>Don't forget that the client and the server are all on the same user on the
+same machine; we're <em>simulating</em> 7 gitolite users using ssh keys!  (How?
+Maybe <code>~/.ssh/config</code> will give you a hint).</p>
+
+<p>URLs look like <code>user:repo</code>, so for example you can clone the admin repo by
+<code>git clone admin:gitolite-admin</code>.  Remote commands look like <code>ssh u1 info</code>.</p>
+
+<p>So start by cloning the admin repo, and try out whatever you want!</p>

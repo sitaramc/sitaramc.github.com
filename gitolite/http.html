@@ -1,0 +1,103 @@
+
+<head>
+    <title>how to setup gitolite to use smart http mode</title>
+<style>
+    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+    h4          { background: #ffb; text-color: #000; }
+    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+</style>
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="index.html">main page</a>
+|
+    <a href="index.html#license">license</a>
+</p>
+<p style="text-align:center">
+<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+</p>
+<h1>how to setup gitolite to use smart http mode</h1>
+
+<p><strong>Note</strong>: "smart http" refers to the feature that came with git 1.6.6, late
+2009 or so.  The base documentation for this is <code>man git-http-backend</code>.  Do
+<strong>NOT</strong> read <code>Documentation/howto/setup-git-server-over-http.txt</code> and think
+that is the same or even relevant -- that is from 2006 and is quite different
+(and arguably obsolete).</p>
+
+<h2>WARNINGS and important notes</h2>
+
+<ul>
+<li><p>Please read <a href="auth.html">authentication versus authorisation</a> first, and make
+sure you understand what is gitolite's responsibility and what isn't.</p></li>
+<li><p>I have tested this only on stock Fedora 16; YDMV.</p></li>
+</ul>
+
+<h2>assumptions:</h2>
+
+<ul>
+<li>Apache 2.x and git installed.</li>
+<li>Httpd runs under the "apache" userid; adjust instructions below if not.</li>
+<li>Similarly for "/var/www" and other file names/locations.</li>
+</ul>
+
+<h2>instructions</h2>
+
+<p>The detailed instructions I used to have in g2 have now been replaced by a
+script called <code>t/smart-http.root-setup</code>.  <strong>Do NOT run this script as is -- it
+is actually meant for my testing setup and deletes stuff</strong>.  However, it does
+provide an excellent (and working!) narration of what you need to do to
+install gitolite in smart http mode.</p>
+
+<p>Make a copy of the script, go through it carefully, (possibly removing lines
+that delete files etc.), change values per your system, and only then run it.</p>
+
+<p><font color="gray">Note that the <code>GIT_PROJECT_ROOT</code> variable (see "man
+git-http-backend") is no longer optional.  Make sure you set it to some place
+outside apache's <code>DOCUMENT_ROOT</code>.</font></p>
+
+<h2>Making repositories available to both ssh and http mode clients</h2>
+
+<p>This section has been contributed by Thomas Hager (duke at sigsegv dot at),
+and is available <a href="ssh-and-http.html">here</a>.</p>
+
+<h2>usage</h2>
+
+<h3>client side</h3>
+
+<p>Git URLs look like <code>http://user:password@server/git/reponame.git</code>.</p>
+
+<p>The custom commands, like "info", "expand" should be handled as follows.  The
+command name will come just after the <code>/git/</code>, followed by a <code>?</code>, followed by
+the arguments, with <code>+</code> representing a space.  Here are some examples:</p>
+
+<pre><code># ssh git@server info
+curl http://user:password@server/git/info
+# ssh git@server info repopatt
+curl http://user:password@server/git/info?repopatt
+# ssh git@server info repopatt user1 user2
+curl http://user:password@server/git/info?repopatt+user1+user2
+</code></pre>
+
+<p>With a few nice shell aliases, you won't even notice the horrible convolutions
+here ;-)  See t/smart-http for a couple of useful ones.</p>
+
+<h3>server side</h3>
+
+<p>The 'gitolite' command (for example, 'gitolite compile', 'gitolite query-rc',
+and so on) <em>can</em> be run on the server, but it's not straightforward.  Assuming
+you installed exactly as given in this document, you should</p>
+
+<ul>
+<li>get a shell by using, say, <code>su -s /bin/bash - apache</code></li>
+<li>run <code>export HOME=$HOME/gitolite-home</code></li>
+<li>run <code>export PATH=$PATH:$HOME/bin</code></li>
+</ul>
+
+<p>and <em>then</em> you can run <code>gitolite &lt;subcommand&gt;</code></p>

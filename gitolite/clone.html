@@ -1,0 +1,45 @@
+
+<head>
+    <title>cloning the admin repo</title>
+<style>
+    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+    h4          { background: #ffb; text-color: #000; }
+    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+</style>
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="index.html">main page</a>
+|
+    <a href="index.html#license">license</a>
+</p>
+<p style="text-align:center">
+<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+</p>
+<h1>cloning the admin repo</h1>
+
+<p>This is the third step in using gitolite, after <a href="install.html">install</a> and <a href="setup.html">setup</a>.</p>
+
+<p>To clone the admin repo, go to the workstation where the public key used in
+'setup' came from, and run this:</p>
+
+<pre><code>git clone git@host:gitolite-admin
+</code></pre>
+
+<p>NOTE that (1) you must not include the <code>repositories/</code> part (gitolite handles
+that internally), and (2) you may include the ".git" at the end but it is
+optional.</p>
+
+<p>If this step succeeds, you can add <a href="users.html">users</a>, <a href="repos.html">repos</a>, or anything else
+described <a href="admin.html#adminrepo">here</a>.</p>
+
+<p>If this step fails, be sure to look at the <a href="ssh.html">ssh</a> documentation before asking
+for help.  (A very basic first step is to run <code>ssh git@host info</code>;
+<a href="user.html#info">this</a> page tells you what to expect).</p>

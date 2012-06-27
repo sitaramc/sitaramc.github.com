@@ -1,0 +1,331 @@
+
+<head>
+    <title>migration example</title>
+<style>
+    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+    h4          { background: #ffb; text-color: #000; }
+    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+</style>
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="index.html">main page</a>
+|
+    <a href="index.html#license">license</a>
+</p>
+<p style="text-align:center">
+<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+</p>
+<h1>migration example</h1>
+
+<p>This shows what a typical migration would look like, using a test setup.</p>
+
+<ul>
+<li><a href="g2migr-example.html">migration example</a>
+<ul>
+<li>existing setup</li>
+<li>preparing for the migration
+<ul>
+<li>getting g3</li>
+<li>run check-g2-compat</li>
+</ul></li>
+<li>the actual migration
+<ul>
+<li>step 1</li>
+<li>step 2</li>
+<li>step 3</li>
+<li>step 4</li>
+<li>step 5</li>
+</ul></li>
+<li>checking things out</li>
+</ul></li>
+</ul>
+
+<h2>existing setup</h2>
+
+<p>The existing gitolite is the latest in the "g2" (v2.x) branch.</p>
+
+<p>First, the rc file has the following lines different from the default:</p>
+
+<pre><code>-$GL_WILDREPOS = 0;
++$GL_WILDREPOS = 1;
+
+-$GL_GITCONFIG_KEYS = "";
++$GL_GITCONFIG_KEYS = ".*";
+</code></pre>
+
+<p>Next, the conf/gitolite.conf file in <code>~/.gitolite</code>:</p>
+
+<pre><code>repo    gitolite-admin
+        RW+             =   tester u1
+
+repo    testing
+        RW+     =   @all
+
+repo foo
+        RW+             =   u1 u2
+        RW+ NAME/       =   u1
+        RW+ NAME/u2     =   u2
+
+repo bar
+        RW  =   u2
+
+repo baz/..*
+        C   =   u3 u4
+        RW+         =   CREATOR
+        config foo.bar = baz
+</code></pre>
+
+<p>(Note that this conf file has NAME/ rules, which <strong>have changed</strong>
+significantly in g3; see <a href="g2incompat.html#g2i-name">here</a> for details).</p>
+
+<p>These are the repos already existing</p>
+
+<pre><code>$ find repositories -name "*.git" | sort
+repositories/bar.git
+repositories/baz/u3.git
+repositories/baz/u4.git
+repositories/baz/uthree.git
+repositories/foo.git
+repositories/gitolite-admin.git
+repositories/testing.git
+</code></pre>
+
+<p>The config entries exist for all the baz/ repos:</p>
+
+<pre><code>$ grep -2 foo `find repositories -name "config" `
+repositories/baz/uthree.git/config-[gitweb]
+repositories/baz/uthree.git/config- owner = u3
+repositories/baz/uthree.git/config:[foo]
+repositories/baz/uthree.git/config- bar = baz
+--
+repositories/baz/u4.git/config-[gitweb]
+repositories/baz/u4.git/config-     owner = u4
+repositories/baz/u4.git/config:[foo]
+repositories/baz/u4.git/config-     bar = baz
+--
+repositories/baz/u3.git/config-[gitweb]
+repositories/baz/u3.git/config-     owner = u3
+repositories/baz/u3.git/config:[foo]
+repositories/baz/u3.git/config-     bar = baz
+</code></pre>
+
+<h2>preparing for the migration</h2>
+
+<h3>getting g3</h3>
+
+<p>Fortunately this is easy here; I just happened to have the repo already
+fetched so I just had to switch branches.  You may have to 'git clone ...'
+from github.</p>
+
+<pre><code>$ cd gitolite
+$ git checkout master
+Branch master set up to track remote branch master from origin.
+Switched to a new branch 'master'
+</code></pre>
+
+<h3>run check-g2-compat</h3>
+
+<p>This is a quick and dirty program to catch some of the big issues.</p>
+
+<pre><code>$ cd
+$ gitolite/check-g2-compat
+INFO        This program only checks for uses that make the new g3 completely unusable
+            or that might end up giving *more* access to someone if migrated as-is.
+            It does NOT attempt to catch all the differences described in the docs.
+
+INFO        'see docs' usually means doc/g2migr.mkd
+            (online at http://sitaramc.github.com/gitolite/g2migr.html)
+
+checking rc file...
+NOTE        GL_ADMINDIR is in the right place; assuming you did not mess with
+            GL_CONF, GL_LOGT, GL_KEYDIR, and GL_CONF_COMPILED
+
+checking conf file(s)...
+SEVERE      NAME rules; see docs
+
+checking repos...
+WARNING     found 3 gl-creater files; see docs
+
+...all done...
+</code></pre>
+
+<h2>the actual migration</h2>
+
+<p>Here's the actual migration, step by step</p>
+
+<h3>step 1</h3>
+
+<pre><code>$ ls -a bin
+.                gl-admin-push    gl-install       gl-setup-authkeys  gl-VREF-DUPKEYS
+..               gl-auth-command  gl-mirror-push   gl-system-install  gl-VREF-EMAIL_CHECK
+gitolite_env.pm  gl-compile-conf  gl-mirror-shell  gl-time            gl-VREF-FILETYPE
+gitolite.pm      gl-conf-convert  gl-query-rc      gl-tool            gl-VREF-MERGE_CHECK
+gitolite_rc.pm   gl-dryrun        gl-setup         gl-VREF-COUNT      sshkeys-lint
+$ rm -rf bin;mkdir bin
+
+$ grep GL_PACKAGE .gitolite.rc
+$GL_PACKAGE_CONF = "/home/g3/share/gitolite/conf";
+$GL_PACKAGE_HOOKS = "/home/g3/share/gitolite/hooks";
+$ rm -rf share
+
+$GL_PACKAGE_HOOKS = "/home/g3/share/gitolite/hooks";
+$ rm -rf share
+
+$ mv .gitolite.rc old.grc
+</code></pre>
+
+<p>(still on step 1, this is substep 3) notice we are cloning <strong>on the server</strong>,
+using a <strong>full path</strong> to the repo.</p>
+
+<pre><code>$ git clone repositories/gitolite-admin.git old.ga
+Cloning into 'old.ga'...
+done.
+$ rm -rf repositories/gitolite-admin.git/
+</code></pre>
+
+<p>Since I'm not interested in preserving the logs and don't have any custom
+hooks:</p>
+
+<pre><code>$ rm -rf .gitolite
+</code></pre>
+
+<h3>step 2</h3>
+
+<p>I have no variables that <em>must</em> be preset, since the report by
+<code>check-g2-compat</code> is clear.</p>
+
+<h3>step 3</h3>
+
+<p>Here we install the new gitolite.  Remember we already got the new software
+(in order to run 'check-g2-compat').</p>
+
+<p>Just check that bin is empty, then run 'install -ln' from the gitolite source
+tree:</p>
+
+<pre><code>$ ls -al bin
+total 8
+drwxrwxr-x 2 g3 g3 4096 Apr 24 10:57 .
+drwx------ 8 g3 g3 4096 Apr 24 10:59 ..
+$ gitolite/install -ln
+$ ls -al bin
+total 8
+drwxrwxr-x 2 g3 g3 4096 Apr 24 11:01 .
+drwx------ 8 g3 g3 4096 Apr 24 10:59 ..
+lrwxrwxrwx 1 g3 g3   30 Apr 24 11:01 gitolite -&gt; /home/g3/gitolite/src/gitolite
+</code></pre>
+
+<p>OK that went well.  Now setup gitolite.  You don't need a key here; just use a
+random name:</p>
+
+<pre><code>$ gitolite setup -a admin
+Initialized empty Git repository in /home/g3/repositories/gitolite-admin.git/
+</code></pre>
+
+<h3>step 4</h3>
+
+<p>Now go to your old clone, and push it:</p>
+
+<pre><code>$ cd old.ga
+$ gitolite push -f
+    ...usual git progress output deleted...
+remote: FATAL: git config foo.bar not allowed
+remote: check GIT_CONFIG_KEYS in the rc file
+To /home/g3/repositories/gitolite-admin.git
+ + 7eb8163...1474770 master -&gt; master (forced update)
+</code></pre>
+
+<p>Aaha!  I forgot to set <code>CONFIG_KEYS</code> (new name for <code>GL_GIT_CONFIG_KEYS</code>) in
+the new rc file so fix that:</p>
+
+<pre><code>$ vim ~/.gitolite.rc
+(edit and set it to `.*` for now)
+</code></pre>
+
+<p>and push again:</p>
+
+<pre><code>$ gitolite push -f
+Everything up-to-date
+</code></pre>
+
+<p>Damn.  We have to make a dummy commit to allow the push to do something.</p>
+
+<p>But wait!  We forgot fix the <a href="g2incompat.html#g2i-name">NAME/</a> rules, so may as well fix
+those, add, and push:</p>
+
+<pre><code>$ vim conf/gitolite.conf
+# change all NAME/ to VREF/NAME/
+# append a '- VREF/NAME/ = @all' at the end
+# save
+git add conf
+
+$ git commit -m name-rules
+    ... some output for add...
+
+$ gitolite push -f
+Counting objects: 1, done.
+Writing objects: 100% (1/1), 181 bytes, done.
+Total 1 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (1/1), done.
+To /home/g3/repositories/gitolite-admin.git
+   1474770..4c2b41d  master -&gt; master
+</code></pre>
+
+<h3>step 5</h3>
+
+<p>The only thing left is to fix up the gl-creater files:</p>
+
+<pre><code>$ cd $HOME/repositories
+$ find . -type d -name "*.git" -prune | while read r
+&gt; do
+&gt;     mv $r/gl-creater $r/gl-creator
+&gt; done 2&gt;/dev/null
+</code></pre>
+
+<p>And we're done!</p>
+
+<h2>checking things out</h2>
+
+<p>Let's see what repos u3 has:</p>
+
+<pre><code>ssh u3 info
+hello u3, this is g3@sita-lt running gitolite3 v3.0-11-g090b0f5 on git 1.7.7.6
+
+     C      baz/..*
+ R W        baz/u3
+ R W        baz/uthree
+ R W        gitolite-admin
+ R W        testing
+</code></pre>
+
+<p>That's a combination of 'info' and 'expand', by the way.  There is no expand
+command any more.</p>
+
+<p>How about adding a new repo and checking if the config entries made it?</p>
+
+<pre><code>$ git ls-remote u4:baz/ufour
+Initialized empty Git repository in /home/g3/repositories/baz/ufour.git/
+$ grep -A1 foo `find repositories -name "config" `
+repositories/baz/u3.git/config:[foo]
+repositories/baz/u3.git/config- bar = baz
+--
+repositories/baz/u4.git/config:[foo]
+repositories/baz/u4.git/config- bar = baz
+--
+repositories/baz/ufour.git/config:[foo]
+repositories/baz/ufour.git/config-      bar = baz
+--
+repositories/baz/uthree.git/config:[foo]
+repositories/baz/uthree.git/config-     bar = baz
+</code></pre>
+
+<p>And there it is, in the second block of lines...</p>
+
+<p>And now we're really done.</p>

@@ -1,0 +1,213 @@
+
+<head>
+    <title>gitolite triggers</title>
+<style>
+    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+    h4          { background: #ffb; text-color: #000; }
+    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+</style>
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="index.html">main page</a>
+|
+    <a href="index.html#license">license</a>
+</p>
+<p style="text-align:center">
+<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+</p>
+<h1>gitolite triggers</h1>
+
+<ul>
+<li><a href="triggers.html">gitolite triggers</a>
+<ul>
+<li>intro and sample rc excerpt</li>
+<li>types of trigger programs</li>
+<li>manually firing triggers</li>
+<li>common arguments</li>
+<li>trigger-specific arguments and other details</li>
+<li>tips</li>
+</ul></li>
+</ul>
+
+<h2>intro and sample rc excerpt</h2>
+
+<p>Gitolite fires off external commands at 7 different times.  The <a href="rc.html">rc</a> file
+specifies what commands to run at each trigger point, but for illustration,
+here's an excerpt:</p>
+
+<pre><code>%RC = (
+
+    &lt;...several lines later...&gt;
+
+    # comment out or uncomment as needed
+    # these will run in sequence after post-update
+    POST_COMPILE                =&gt;
+        [
+            'post-compile/ssh-authkeys',
+            'post-compile/update-git-configs',
+            'post-compile/update-gitweb-access-list',
+            'post-compile/update-git-daemon-access-list',
+        ],
+
+    # comment out or uncomment as needed
+    # these will run in sequence after a new wild repo is created
+    POST_CREATE                 =&gt;
+        [
+            'post-compile/update-git-configs',
+            'post-compile/update-gitweb-access-list',
+            'post-compile/update-git-daemon-access-list',
+        ],
+</code></pre>
+
+<p>(As you can see, post-create runs 3 programs that also run from post-compile.
+This is perfectly fine, by the way)</p>
+
+<h2>types of trigger programs</h2>
+
+<p>There are two types of trigger programs.  Standalone scripts are placed in
+src/triggers or its subdirectories.  They are invoked by being added to a
+trigger list (using the path after "src/triggers/", as you can see).  Such
+scripts are quick and easy to write in any language of your choice.</p>
+
+<p>Triggers written as perl modules are placed in src/lib/Gitolite/Triggers.
+They are invoked by being listed with the package+function name, although even
+here the 'Gitolite::Triggers' part is skipped.  Perl modules have to follow
+some conventions (see some of the shipped modules to ideas) but the advantage
+is that they can set environment variables and change the argument list of the
+gitolite-shell program that invokes them.</p>
+
+<p>If this does not make sense, please examine a default install of gitolite,
+paying attention to:</p>
+
+<ul>
+<li>the path names in various trigger lists in the rc file</li>
+<li>corresponding path names in the src/ directory in gitolite source</li>
+<li>and for perl modules, the package names and function names within.</li>
+</ul>
+
+<h2>manually firing triggers</h2>
+
+<p>...from the server command line is easy.  For example:</p>
+
+<pre><code>gitolite trigger POST_COMPILE
+</code></pre>
+
+<p>However if the triggered code depends on arguments (see next section) this
+won't work.  (The <code>POST_COMPILE</code> trigger programs all just happen to not
+require any arguments, so it works).</p>
+
+<h2>common arguments</h2>
+
+<p>Triggers receive the following arguments:</p>
+
+<ol>
+<li><p>any arguments mentioned in the rc file (for an example, see the renice
+command in the PRE_GIT trigger sequence),</p></li>
+<li><p>the name of the trigger as a string (example, <code>"POST_COMPILE"</code>), so you
+can call the same program from multiple triggers and it can know where it
+was called from,</p></li>
+<li><p>followed by zero or more arguments specific to the trigger, as given in
+the next section.</p></li>
+</ol>
+
+<h2>trigger-specific arguments and other details</h2>
+
+<p>Here are the <strong>rest of</strong> the arguments for each trigger, plus a brief
+description of when the trigger runs:</p>
+
+<ul>
+<li><p><code>INPUT</code> runs before pretty much anything else.  INPUT trigger scripts
+<em>must</em> be in perl, since they manipulate the arguments to and the
+environment of the 'gitolite-shell' program itself.  Most commonly they
+will read/change <code>@ARGV</code>, and/or <code>$ENV{SSH_ORIGINAL_COMMAND}</code>.</p>
+
+<p>There are certain conventions to adhere to; please see some of the shipped
+samples or ask me if you need help writing your own.</p></li>
+<li><p><code>ACCESS_1</code> runs after the first access check.  Extra arguments:</p>
+
+<ul>
+<li>repo</li>
+<li>user</li>
+<li>'R' or 'W'</li>
+<li>'any'</li>
+<li>result (see notes below)</li>
+</ul>
+
+<p>'result' is the return value of the access() function.  If it contains the
+uppercase word "DENIED", the access was rejected.  Otherwise it is the
+refex that caused the access to succeed.</p>
+
+<p><em>Please note that if access is rejected, gitolite-shell will die as soon
+as it returns from the trigger</em>.</p></li>
+<li><p><code>ACCESS_2</code> runs after the second access check, which is invoked by the
+update hook to check the ref.  Extra arguments:</p>
+
+<ul>
+<li>repo</li>
+<li>user</li>
+<li>any of W, +, C, D, WM, +M, CM, DM</li>
+<li>the ref being updated (e.g., 'refs/heads/master')</li>
+<li>result</li>
+<li>old SHA</li>
+<li>new SHA</li>
+</ul>
+
+<p><code>ACCESS_2</code> also runs on each <a href="vref.html">VREF</a> that gets checked.  In this case
+the "ref" argument will start with "VREF/", and the last two arguments
+won't be passed.</p>
+
+<p>'result' is similar to <code>ACCESS_1</code>, except that it is the <em>update hook</em>
+which dies as soon as access is rejected for the ref or any of the VREFs.
+Control then returns to git, and then to gitolite-shell, so the <code>POST_GIT</code>
+trigger <em>will</em> run.</p></li>
+<li><p><code>PRE_GIT</code> and <code>POST_GIT</code> run just before and after the git command.
+Extra arguments:</p>
+
+<ul>
+<li>repo</li>
+<li>user</li>
+<li>'R' or 'W'</li>
+<li>'any'</li>
+<li>the git command ('git-receive-pack', 'git-upload-pack', or
+'git-upload-archive') being invoked.</li>
+</ul></li>
+<li><p><code>PRE_CREATE</code> and <code>POST_CREATE</code> run just before and after a new "<a href="wild.html">wild</a>"
+repo is created by user action.  Extra arguments:</p>
+
+<ul>
+<li>repo</li>
+<li>user</li>
+<li>invoking operation
+<ul>
+<li>'R' for fetch/clone/ls-remote, 'W' for push</li>
+<li>can also be anything set by the external command running the
+trigger (e.g., see the perms and fork commands).</li>
+</ul></li>
+</ul>
+
+<p>They are also run when a <em>normal</em> repo is created (say by adding a "repo
+foo" line to the conf file).  This case has only one extra argument:</p>
+
+<ul>
+<li>repo</li>
+</ul></li>
+<li><p><code>POST_COMPILE</code> runs after an admin push has successfully "compiled" the
+config file.  By default, the next thing is to update the ssh authkeys
+file, then all the 'git-config's, gitweb access, and daemon access.</p>
+
+<p>No extra arguments.</p></li>
+</ul>
+
+<h2>tips</h2>
+
+<p>If you have code that latches onto more than one trigger, collecting data
+(such as for logging), then the outputs may be intermixed.  You can record the
+value of the environment variable <code>GL_TID</code> to tie together related entries.</p>

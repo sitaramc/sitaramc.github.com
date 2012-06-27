@@ -1,0 +1,178 @@
+
+<head>
+    <title>non-core programs shipped with gitolite</title>
+<style>
+    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+    h4          { background: #ffb; text-color: #000; }
+    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+</style>
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="index.html">main page</a>
+|
+    <a href="index.html#license">license</a>
+</p>
+<p style="text-align:center">
+<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+</p>
+<h1>non-core programs shipped with gitolite</h1>
+
+<hr />
+
+<ul>
+<li><a href="non-core.html">non-core programs shipped with gitolite</a>
+<ul>
+<li>commands</li>
+<li>syntactic sugar</li>
+<li>triggers</li>
+<li>VREFs</li>
+<li>special cases
+<ul>
+<li><a href="non-core.html#partial-copy">partial-copy: selective read control for branches</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<hr />
+
+<h2>commands</h2>
+
+<p>A list of these commands can be obtained by running <code>gitolite help</code> on the
+server.  A different (and probably much smaller) list can be obtained by a
+remote user running <code>ssh git@host help</code>.</p>
+
+<p>All the commands that ship with gitolite will respond to <code>-h</code>; please report a
+bug to me if they don't.</p>
+
+<p>A particularly interesting command is the 'sudo' command, which allows an
+admin to run any remote command as some other user (though not the other way
+round!)</p>
+
+<p>Here's a list of some commands where additional information is available
+elsewhere:</p>
+
+<ul>
+<li>'info' -- documented <a href="user.html#info">here</a></li>
+<li>'mirror' -- documented <a href="mirroring.html#sync">here</a></li>
+<li>'perms' -- get/set the gl-perms file; see <a href="user.html#perms">perms</a> for more</li>
+<li>'sskm' -- self-service key management, see <a href="sskm.html">sskm</a> for more</li>
+</ul>
+
+<h2>syntactic sugar</h2>
+
+<p>The following "sugar" programs are available:</p>
+
+<ul>
+<li><p>Continuation-lines -- allow the use of C-style backslash escaped
+continuation lines in the conf file.  I don't like it but some people do,
+and now I can support them without bulking up the "core" conf parser!</p></li>
+<li><p>Keysubdirs-as-groups -- someone wanted the sub-directory name (of
+"keydir/") in which the pubkey was placed to be a group to which the user
+automatically belonged.  A very unusual requirement, and one which would
+<em>never</em> have seen the light of day in g2, but in g3 it's easy, and doesn't
+affect anyone else!</p>
+
+<p>(Note: the last component of the directory path is used if there are more
+than one level between "keydir/" and the actual file).</p></li>
+</ul>
+
+<h2>triggers</h2>
+
+<p>Most triggers need to be enabled by adding or uncommenting an appropriate line
+in the <a href="rc.html">rc</a> file.  There are enough examples in there for the syntax to not
+need explanation.</p>
+
+<p>Some features need to be enabled in more than one trigger.  Mirroring is
+probably the best example -- it needs to hook into the <code>INPUT</code>, <code>PRE_GIT</code>, and
+the <code>POST_GIT</code> triggers to work.</p>
+
+<p>In general, the source code for each trigger will tell you what it is doing
+and which trigger list you should add it to.  Please note that there are two
+types of <a href="triggers.html">triggers</a>; the perl triggers usually have subroutine names that
+reflect what trigger sections they should go into.  (Using mirroring as an
+example again, the Mirroring.pm perl module has sub's named 'input',
+'pre_git', and 'post_git').</p>
+
+<p>Please report a bug to me if you could not find the information you wanted on
+any specific trigger.</p>
+
+<p>Here's a list of some triggers where additional information is available
+elsewhere:</p>
+
+<ul>
+<li>Shell -- see "giving shell access to gitolite users" in <a href="sts.html">this</a> page.</li>
+<li>Mirroring -- see <a href="mirroring.html">doc/mirroring.mkd</a></li>
+<li>partial-copy -- this has its own section later in this page.</li>
+</ul>
+
+<h2>VREFs</h2>
+
+<p>VREFs have their <a href="vref.html">own page</a>.</p>
+
+<h2>special cases</h2>
+
+<h3><a name="partial-copy"></a> partial-copy: selective read control for branches</h3>
+
+<p>Git (and therefore gitolite) cannot do selective read control -- allowing
+someone to read branch A but not branch B.  It's the entire repo or nothing.</p>
+
+<p><font color="gray"> [Side note: Gerrit Code Review can do that, but that is
+because they have their own git stack (and their own sshd, and so on) all in
+one big Java program.  Gerrit is <em>really</em> useful if you want code review to be
+part of the access control decision] </font></p>
+
+<p>Gitolite can now help you do this.  Note that this is only for branches; you
+can't do this for files and directories.</p>
+
+<p>Here's how:</p>
+
+<ol>
+<li><p>enable 'partial-copy' in the <code>PRE_GIT</code> section in the rc file.</p></li>
+<li><p>for each repo "foo" which has secret branches that a certain set of
+developers (we'll use a group called <code>@temp-emp</code> as an example) are not
+supposed to see, do this:</p>
+
+<pre><code>repo foo
+    # rules should allow @temp-emp NO ACCESS
+
+repo foo-partialcopy-1
+    -   secret-branch               =   @temp-emp
+
+<pre><code># other rules; see notes below
+
+-   VREF/partial-copy           =   @all
+config gitolite.partialCopyOf   =   foo
+</code></pre>
+
+</code></pre>
+
+<p><strong>IMPORTANT NOTES</strong>:</p>
+
+<ul>
+<li><p>if you're using other VREFs, <strong>make sure</strong> this one is placed at the
+end, after all the others.</p></li>
+<li><p>remember that any change allowed to be made to the partial-copy repo
+will propagate to the main repo so make sure you use other rules to
+restrict pushes to other branches and tags as needed.</p></li>
+</ul></li>
+</ol>
+
+<p>And that should be it.  <strong>Please test it and let me know if it doesn't work!</strong></p>
+
+<p>WARNINGS:</p>
+
+<ul>
+<li><p>If you change the config to disallow something that used to be allowed,
+you should delete the partial repo on the server and then run <code>gitolite
+compile; gitolite trigger POST_COMPILE</code> to let it build again.</p></li>
+<li><p>Not tested with smart http; probably won't work.</p></li>
+<li><p>Also not tested with mirroring, or with wild card repos.</p></li>
+</ul>

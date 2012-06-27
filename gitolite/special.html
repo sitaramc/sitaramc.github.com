@@ -1,0 +1,145 @@
+
+<head>
+    <title>special features and setups</title>
+<style>
+    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+    h4          { background: #ffb; text-color: #000; }
+    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+</style>
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="index.html">main page</a>
+|
+    <a href="index.html#license">license</a>
+</p>
+<p style="text-align:center">
+<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+</p>
+<h1>special features and setups</h1>
+
+<hr />
+
+<ul>
+<li><a href="special.html">special features and setups</a>
+<ul>
+<li><a href="special.html#elsewhere">putting 'repositories' and '.gitolite' somewhere else</a></li>
+<li><a href="special.html#writable">disabling pushes to take backups</a></li>
+<li><a href="special.html#pers">"personal" branches</a></li>
+<li>delegating access control responsibilities</li>
+<li><a href="special.html#keysonly">using pubkeys obtained from elsewhere</a></li>
+<li><a href="special.html#gh">giving users their own repos</a></li>
+</ul></li>
+</ul>
+
+<hr />
+
+<h2><a name="elsewhere"></a> putting 'repositories' and '.gitolite' somewhere else</h2>
+
+<p>Gitolite insists that the "repositories" and ".gitolite" directories be in
+<code>$HOME</code>.  If you want them somewhere else:</p>
+
+<ul>
+<li>do the install as normal,</li>
+<li><em>then</em> move those directories to wherever you want and replace them with
+symlinks pointing to the new location.</li>
+</ul>
+
+<h2><a name="writable"></a> disabling pushes to take backups</h2>
+
+<p>The <code>writable</code> command allows you to disable pushes to all repos or just the
+named repo, in order to do file-system level things to the repo directory that
+require it not to change, like using normal backup software.</p>
+
+<p>Run <code>gitolite writable -h</code> for more info.</p>
+
+<h2><a name="pers"></a> "personal" branches</h2>
+
+<p>"personal" branches are great for environments where developers need to share
+work but can't directly pull from each other (usually due to either a
+networking or authentication related reason, both common in corporate setups).</p>
+
+<p>Personal branches exist <strong>in a namespace</strong> of their own.  The syntax is</p>
+
+<pre><code>    RW+ personal/USER/  =   @userlist
+</code></pre>
+
+<p>where the "personal" can be anything you like (but cannot be empty), and the
+"/USER/" part is <strong>necessary (including both slashes)</strong>.</p>
+
+<p>A user "alice" (if she's in the userlist) can then push any branches inside
+<code>personal/alice/</code>.  Which means she can push <code>personal/alice/foo</code> and
+<code>personal/alice/bar</code>, but NOT <code>personal/alice</code>.</p>
+
+<p>(Background: at runtime the "USER" component will be replaced by the name of
+the invoking user.  Access is determined by the right hand side, as usual).</p>
+
+<p>Compared to using arbitrary branch names on the same server, this:</p>
+
+<ul>
+<li>Reduces namespace pollution by corralling all these ad hoc branches into
+the "personal/" namespace.</li>
+<li>Reduces branch name collision by giving each developer her own
+sub-hierarchy within that.</li>
+<li>Removes the need to think about access control, because a user can push
+only to his own sub-hierarchy.</li>
+</ul>
+
+<h2>delegating access control responsibilities</h2>
+
+<p>See <a href="deleg.html">this</a>.</p>
+
+<h2><a name="keysonly"></a> using pubkeys obtained from elsewhere</h2>
+
+<p>If you're not managing keys via the gitolite-admin repo, but getting them from
+somewhere else, you'll want to periodically "update" the keys.</p>
+
+<p>To do that, first edit your rc file and add something like this:</p>
+
+<pre><code>SSH_AUTHKEYS                =&gt;
+    [
+        'post-compile/ssh-authkeys',
+    ],
+</code></pre>
+
+<p>Then write a script that</p>
+
+<ul>
+<li><p>gets all the keys and dumps them into <code>$HOME/.gitolite/keydir</code> (or into a
+subdirectory of it).</p></li>
+<li><p>runs <code>gitolite trigger SSH_AUTHKEYS</code>.</p></li>
+</ul>
+
+<p>Run this from cron or however you want.</p>
+
+<h2><a name="gh"></a> giving users their own repos</h2>
+
+<p>(Please see <a href="wild.html">this</a> for background on the ideas in this section).</p>
+
+<p>It's very easy to give users their own set of repos to create, with the
+username at the top level.  The simplest setup is:</p>
+
+<pre><code>repo CREATOR/..*
+    C   =   @all
+    RW+ =   CREATOR
+    RW  =   WRITERS
+    R   =   READERS
+</code></pre>
+
+<p>Now users can create any repo under their own name simply by cloning it or
+pushing to it, then use the <a href="user.html#perms">perms</a> command to add other users to their
+WRITERS and READERS lists.</p>
+
+<p>Of course you can get much more creative if you add a few more roles (see
+"roles" in <a href="wild.html">this</a> page).</p>
+
+<p><font color="gray">(I prefer using some prefix, say "u", as in <code>repo
+u/CREATOR/..*</code>.  This helps to keep user-created repos separate, and avoid
+name clashes in some far-fetched scenarios).</font></p>

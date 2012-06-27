@@ -1,0 +1,82 @@
+
+<head>
+    <title>gitolite administration</title>
+<style>
+    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+    h4          { background: #ffb; text-color: #000; }
+    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+</style>
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="index.html">main page</a>
+|
+    <a href="index.html#license">license</a>
+</p>
+<p style="text-align:center">
+<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+</p>
+<h1>gitolite administration</h1>
+
+<h2><a name="server"></a> server-side administration</h2>
+
+<p>The following activities require command line access to the server.  They are
+usually one-time or rarely done activities.</p>
+
+<ul>
+<li>Changing anything in the <a href="rc.html">rc</a> file.</li>
+<li>Installing custom <a href="cust.html#hooks">hooks</a>, whether to all repos or just some repos.</li>
+<li>Moving <a href="rare.html#existing">existing</a> repos into gitolite control.</li>
+</ul>
+
+<p>Please read the <a href="WARNINGS.html">WARNINGS</a> page first.</p>
+
+<h2><a name="adminrepo"></a> access control via the gitolite-admin repo</h2>
+
+<p>Most day-to-day administration of a gitolite site happens like this:</p>
+
+<ul>
+<li><a href="clone.html">clone</a> the gitolite-admin repo to your workstation</li>
+<li>make appropriate changes</li>
+<li>add, commit, and push</li>
+</ul>
+
+<h3><a name="conf"></a> the conf/gitolite.conf file</h3>
+
+<p>Most of gitolite's power is in the conf/gitolite.conf file, which specifies
+detailed access control for repos.  Everything except <a href="users.html">adding users</a>
+happens from this file.</p>
+
+<p>Here is an example of a simple conf/gitolite.conf file.</p>
+
+<pre><code>    @staff              =   dilbert alice           # line 1
+    @projects           =   foo bar                 # line 2
+
+    repo @projects baz                              # line 3
+        RW+             =   @staff                  # line 4
+        -       master  =   ashok                   # line 5
+        RW              =   ashok                   # line 6
+        R               =   wally                   # line 7
+
+        config hooks.emailprefix = '[%GL_REPO] '    # line 8
+</code></pre>
+
+<p>Use the following links to learn more:</p>
+
+<ul>
+<li>The basic <a href="syntax.html">syntax</a> -- comments, whitespace, include files, etc.</li>
+<li>Defining <a href="groups.html">groups</a>, as in lines 1 and 2.</li>
+<li>Adding and removing <a href="users.html">users</a>.</li>
+<li>Adding and removing <a href="repos.html">repos</a>, as in line 3.</li>
+<li>Defining access <a href="rules.html">rules</a>, as in lines 4, 5, 6, and 7.</li>
+<li>Gitolite <a href="options.html">options</a>.</li>
+<li><a href="git-config.html">Git config</a> keys and values, as in line 8.</li>
+<li><a href="wild.html">"Wild"</a> repos -- ad hoc, user-created, repos.</li>
+</ul>

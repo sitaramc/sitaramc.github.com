@@ -1,0 +1,96 @@
+
+<head>
+    <title>adding and removing users</title>
+<style>
+    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+    h4          { background: #ffb; text-color: #000; }
+    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+</style>
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="index.html">main page</a>
+|
+    <a href="index.html#license">license</a>
+</p>
+<p style="text-align:center">
+<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+</p>
+<h1>adding and removing users</h1>
+
+<p>Strictly speaking, gitolite doesn't know where users come from.  If that
+surprises you, read <a href="auth.html">this</a>.  However, gitolite does help with ssh-based
+authentication, so here's some info on adding and removing users.</p>
+
+<blockquote>
+  <hr />
+
+<p><em>WARNING: Do NOT add new repos or users manually on the server.  Gitolite
+  users, repos, and access rules are maintained by making changes to a
+  special repo called 'gitolite-admin' and pushing those changes to the
+  server.</em></p>
+
+<hr />
+</blockquote>
+
+<p>All operations are in a clone of the gitolite-admin repo.</p>
+
+<p>To <strong>add</strong> a user, say Alice, obtain her public key (typically
+<code>$HOME/.ssh/id_rsa.pub</code> on her workstation), copy it to <code>keydir</code> with the user
+name as the basename (e.g., 'alice.pub' for user alice), then <code>git add
+keydir/alice.pub</code>.  (All keys files must have names ending in ".pub", and must
+be in openssh's default format).</p>
+
+<p>To <strong>remove</strong> a user, <code>git rm keydir/alice.pub</code>.</p>
+
+<p>In both cases, you must commit and push.  On receiving the push, gitolite will
+carry out the changes specified.</p>
+
+<p>The user name is simply the base name of the public key file name.  So
+'alice.pub', 'foo/alice.pub' and 'bar/alice.pub', all resolve to user "alice".</p>
+
+<h2><a name="multi-key"></a> multiple keys per user</h2>
+
+<p>The simplest and most understandable is to put their keys in different
+subdirectories, (alice.pub, home/alice.pub, laptop/alice.pub, etc).</p>
+
+<h3>old style multi-keys</h3>
+
+<p>There is another way that involves creating key files like <code>alice@home.pub</code>
+and <code>alice@laptop.pub</code>, but there is a complication because gitolite also
+allows <em>full email addresses</em> as user names.  (I.e., <code>sitaramc@gmail.com.pub</code>
+denotes the user called <code>sitaramc@gmail.com</code>).</p>
+
+<p>This older method of enabling multi-keys was developed to deal with that.  It
+will continue to work and be supported in <em>code</em>, simply because I prefer it.
+But I will not accept questions or doc patches for it, because it seems it is
+too difficult to understand for a lot of people.  This table of sample pubkey
+filenames and the corresponding derived usernames is all you get:</p>
+
+<ul>
+<li><p>plain username, no multikey</p>
+
+<pre><code>sitaramc.pub                            sitaramc
+</code></pre></li>
+<li><p>plain username, with multikeys</p>
+
+<pre><code>sitaramc@laptop.pub                     sitaramc
+sitaramc@desktop.pub                    sitaramc
+</code></pre></li>
+<li><p>email address as username, no multikey</p>
+
+<pre><code>sitaramc@gmail.com.pub                  sitaramc@gmail.com
+</code></pre></li>
+<li><p>email address as username, with multikeys</p>
+
+<pre><code>sitaramc@gmail.com@laptop.pub           sitaramc@gmail.com
+sitaramc@gmail.com@desktop.pub          sitaramc@gmail.com
+</code></pre></li>
+</ul>
