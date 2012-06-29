@@ -36,13 +36,14 @@ who stop reading halfway!</p>
 <ul>
 <li>rule matching recap</li>
 <li>what is a virtual ref</li>
-<li><a href="vref.html#vref-fallthru">fallthru is success here</a></li>
-<li>how it works -- overview</li>
-<li>how it works -- details
+<li><a href="vref.html#vref-fallthru">why is fallthru considered success with VREFs</a></li>
+<li>how does it work
 <ul>
+<li>how are vrefs "created"</li>
+<li>in what order are these programs called</li>
 <li><a href="vref.html#vref-args">arguments passed to the vref code</a></li>
-</ul></li>
 <li>what (else) can the vref code pass back</li>
+</ul></li>
 <li>VREFs shipped with gitolite
 <ul>
 <li><a href="vref.html#NAME">restricting pushes by dir/file name</a></li>
@@ -83,95 +84,145 @@ nor those that have more than 3 new files.</p>
 VREFs, a <strong>fallthru results in success</strong>.  You'll see why this is more
 convenient as you read on.</p>
 
-<hr />
-
 <h2>what is a virtual ref</h2>
 
-<p>A ref like <code>refs/heads/master</code> is the main property of a push that gitolite
-uses to make its yes/no decision.  I call this a "real" ref.</p>
-
-<p>Any <em>other</em> property of the push that you want to use to help in the decision
-is therefore a <em>virtual</em> ref.  This could be a property that git knows about,
-like in the example above, or comes from outside git like, say, the current
-time; see examples section later for some ideas.</p>
-
-<h2><a name="vref-fallthru"></a> fallthru is success here</h2>
-
-<p>Notice that you didn't need to add an <code>RW+ VREF/...</code> rule for user <code>lead_dev</code>
-in our example.  This section explains why.</p>
-
-<p><strong>Virtual refs are best used as additional "deny" rules</strong>, performing extra
-checks that core gitolite cannot.</p>
-
-<p>Making fallthru be a "fail" forces you to add rules for all users, instead of
-just the ones who should have those extra checks.  Worse, since every virtual
-ref involves calling an external program, many of these calls may be wasted.</p>
-
-<p>There's another advantage to doing it this way: a VREF can choose to simply
-die if things look bad, and it will have the same effect, assuming you used
-the VREF only in "deny" rules.</p>
-
-<p>This in turn means any existing update hook can be used as a VREF <em>as-is</em>, as
-long as it (a) prints nothing on success and (b) dies on failure.  See the
-email-check example later.</p>
-
-<h2>how it works -- overview</h2>
-
-<p>Briefly, a refex starting with <code>VREF/FOO</code> triggers a call to a program called
-<code>FOO</code> in <code>$GL_BINDIR/VREF</code>.</p>
-
-<p>That program is expected to print zero or more lines to its STDOUT; each line
-that starts with <code>VREF/</code> is taken by gitolite as a new "ref" to be matched
-against all the refexes for this user in the config.  Including the refex that
-caused the vref call, of course.</p>
-
-<p>Normally, you send back the refex itself, if the test determines that the rule
-should be matched, otherwise nothing.  So, in our example, we print
-<code>VREF/COUNT/9</code> if the count was indeed greater than 9.  Otherwise we just
-exit.</p>
-
-<h2>how it works -- details</h2>
+<p>Here's how to think about this whole vref thing.</p>
 
 <ul>
-<li><p>The VREF code is only called if there are any VREF rules for the user,
-which means when the lead developer pushes, the VREF is not called at all.</p>
+<li><p>When git calls the update hook, it passes it the name of a ref, say
+refs/heads/master or refs/tags/v1.0.  Let's call this a <strong>real ref</strong>.</p>
 
-<p>Side note: this is enormously more efficient than adding additional
-<code>update</code> hooks, which will get executed whether they are needed or not,
-for every repo and every user!</p></li>
-<li><p>When dev2 or dev3 push, gitolite first checks the real ref
-(<code>ref/heads/master</code> or whatever).  After this it looks at VREF rules, and
-calls an external program for every one it finds.  Specifically, in a line
-like</p>
+<p>This ref must pass the gauntlet of the <a href="rules.html">rules</a> as usual, and may be
+allowed or rejected, as the case may be.  If it is rejected, that's the
+end of the story.  None of the VREF code will run.</p>
+
+<p>Anyway, this "real" ref is an <em>attribute</em> of the push.  We're using this
+attribute to decide if the push should be allowed or not.</p></li>
+<li><p>Similarly, there could be other attributes that a push has.  They could be
+deduced from the pushed commits:</p>
+
+<ul>
+<li>the <em>name</em> of each file changed</li>
+<li>the <em>number</em> of new or changed files</li>
+<li>the <em>number</em> of new <em>binary</em> files</li>
+</ul>
+
+<p>or come from the environment:</p>
+
+<ul>
+<li>the time of day when the push is being made, vis-a-vis the IP address
+it is coming from or the user it is coming from</li>
+</ul>
+
+<p>or simply come out of the blue:</p>
+
+<ul>
+<li>the phase of the moon!</li>
+</ul>
+
+<p><p>We'll call these properties <strong>virtual</strong> refs.</p></li>
+<li><p>What do they look like?  Well, you already saw a couple up top.  The NAME
+vref is more commonly used though.  So if this push changed files foo and
+bar/baz, the NAME vrefs would be <code>VREF/NAME/foo</code> and <code>VREF/NAME/bar/baz</code>.</p></li>
+</ul></p>
+
+<h2><a name="vref-fallthru"></a> why is fallthru considered success with VREFs</h2>
+
+<p>Virtual refs are <strong>best used</strong> [1] as additional "deny" rules, performing
+extra checks that core gitolite cannot.  You usually want such extra checks
+only for some people.</p>
+
+<p>When fallthru is success, you can simply <em>ignore</em> all the other users (for
+whom such additional checks are not needed).</p>
+
+<p>If fallthru were to be considered 'failure', you'd be forced to add a "success
+rule" like this for <em>every</em> vref you used in this repo, in each case listing
+every user who was not already mentioned in the context of that vref:</p>
+
+<pre><code>RW+ VREF/VREFNAME   =   @userlist   # uggh! what a pain!
+</code></pre>
+
+<p>Worse, since every virtual ref involves calling an external program, many of
+these calls may be wasted.</p>
+
+<p>[1] "best used as..." does not mean "only used as...".  For example it's
+perfectly easy to turn this around if, instead of having a list of people who
+<em>do</em> need extra checks, all you have is the complementary list:</p>
+
+<pre><code>RW+ VREF/NAME/Makefile      =   @senior-devs
+-   VREF/NAME/Makefile      =   @all
+</code></pre>
+
+<h2>how does it work</h2>
+
+<ul>
+<li><p>something creates a bunch of virtual refs</p></li>
+<li><p>each generated vref goes through the gauntlet of the <a href="rules.html">rules</a>, just like
+the real ref does, with the same logic except for the fact that fallthru
+is success here.</p></li>
+</ul>
+
+<h3>how are vrefs "created"</h3>
+
+<p>As we know, the one and only real ref is sent in by git, so where do the
+virtual ones come from?</p>
+
+<p>Well, here's where you need to pay attention.  The same rule that the vref
+needs to be checked against, like:</p>
+
+<pre><code>-   VREF/COUNT/9            =   dev2 dev3
+</code></pre>
+
+<p>or</p>
+
+<pre><code>-   VREF/NAME/Makefile       =   @junior-devs
+</code></pre>
+
+<p>also <em>creates</em> them!  Yes.  Mind blowingly simple.  <code>\o/</code></p>
+
+<p>Here's how:</p>
+
+<ul>
+<li><p>For every refex starting with <code>VREF/FOO/</code> in a rule that applies to this
+user, a call to a program called FOO is triggered.  (See <a href="cust.html">here</a> for
+actual locations on disk).  Note that the program isn't even called if the
+VREF rule doesn't apply to that user.</p></li>
+<li><p>This call has several arguments.  For example, a line like:</p>
 
 <pre><code>   -   VREF/COUNT/3/NEWFILES    =   user
 </code></pre>
 
-<p>COUNT is the vref name, so the program called is
-<code>$GL_BINDIR/VREF/COUNT</code>.</p>
-
-<p>The program is passed <strong>nine arguments</strong> in this case (see next section
-for details).</p></li>
+<p>sends <strong>nine arguments</strong>; see later for details.</p></li>
 <li><p>The script can print anything it wants to STDOUT.  Lines not starting with
 <code>VREF/</code> are printed as is (so your VREF can do mostly-normal printing to
 STDOUT).</p>
 
 <p>For lines starting with <code>VREF/</code>, the first word in each such line will be
-treated as a virtual ref to be matched against all the rules, while the
-rest, if any, is a message to be added to the standard "...DENIED..."
-message that gitolite prints if that refex matches.</p>
+treated as a virtual ref, while the rest, if any, is a message to be added
+to the standard "...DENIED..." message that gitolite will print if that
+refex matches and the rule is a deny rule.</p>
 
 <p>Usually it only makes sense to either</p>
 
 <ul>
-<li>Print nothing that starts with <code>VREF/</code> -- if you don't want the rule
+<li><p>Print nothing that starts with <code>VREF/</code> -- if you don't want the rule
 that triggered it to match (ie., whatever condition being tested was
 not violated; like if the count of changed files did not exceed 9, in
-our earlier example).</li>
-<li>Print the refex itself (plus an optional message), so that it matches
-the line which invoked it.</li>
+our earlier example).</p></li>
+<li><p>Print the refex itself (plus an optional message), so that it matches
+the line which invoked it.</p></li>
 </ul></li>
 </ul>
+
+<h3>in what order are these programs called</h3>
+
+<p>Vref generating programs (as they properly should be called) are called in the
+sequence in which they appear in the conf file.</p>
+
+<p>There are some optimisations to prevent calling the same VREF with the same
+arguments more than once, and the NAME generating code is called only once
+regardless of how many times it appears but these details should not concern
+anyone but a developer.</p>
 
 <h3><a name="vref-args"></a> arguments passed to the vref code</h3>
 
@@ -195,8 +246,7 @@ $newsha</code> would not error out when passed an all-0 SHA.)</p></li>
 could also be <code>C</code>, <code>D</code>, or any of these 4 followed by <code>M</code>.  If you have to
 ask what they mean, you haven't read enough gitolite documentation to be
 able to make virtual refs work.</p></li>
-<li><p>Argument <strong>7</strong>: is the entire refex; in our example
-<code>VREF/COUNT/3/NEWFILES</code>.</p></li>
+<li><p>Argument <strong>7</strong>: is the entire refex; say <code>VREF/COUNT/3/NEWFILES</code>.</p></li>
 <li><p>Arguments <strong>8 onward</strong>: are the split out (by <code>/</code>) portions of the refex,
 excluding the first two components.  In our example they would be <code>3</code>
 followed by <code>NEWFILES</code>.</p></li>
@@ -205,7 +255,7 @@ followed by <code>NEWFILES</code>.</p></li>
 <p>Yes, argument 7 is redundant if you have 8 and 9.  It's meant to make it easy
 to write vref scripts in any language.  See script examples in source.</p>
 
-<h2>what (else) can the vref code pass back</h2>
+<h3>what (else) can the vref code pass back</h3>
 
 <p>Actually, the vref code can pass anything back; each line in its output that
 starts with <code>VREF/</code> will be matched against all the rules as usual (with the
