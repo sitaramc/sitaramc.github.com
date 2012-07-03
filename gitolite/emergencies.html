@@ -163,6 +163,16 @@ good shape.</p>
 <p>If you think neither of those is the cause, email me.</p></li>
 </ul>
 
+<h2><a name="nonstd"></a> non-standard configs that'll trip you up</h2>
+
+<ul>
+<li><p>having sshd setup to put the authorized_keys file somewhere other than
+the default (which is in .ssh in the hosting user's home directory).</p></li>
+<li><p>having sshd setup to not allow incoming ssh for the hosting user.  Check
+things like 'Allowusers' setting in /etc/ssh/sshd_config etc.</p></li>
+<li><p>having the home directory in a partition that is mounted noexec.</p></li>
+</ul>
+
 <h2><a name="ngp"></a> things that are not gitolite problems</h2>
 
 <p>There are several things that appear to be gitolite problems but are not.  I
