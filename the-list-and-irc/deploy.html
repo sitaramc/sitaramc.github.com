@@ -74,6 +74,12 @@ found any.</p></li>
 <p>Again, some people might want to detect this and abort the deployment.</p></li>
 </ol>
 
+<p><strong>NOTE</strong>: if you need more than this, you should seriously consider a proper
+deployment tool.  The best one I have heard of (but not used, since I don't
+need that level of control) is <a href="https://github.com/git-deploy/git-deploy">git-deploy</a>.  It's educational to at
+least be aware of what is possible with a real tool, even if your current
+situation does not require it.</p>
+
 <p><a name="the_list_and_irc_deploy_why_git_is_not_a_deployment_tool_"></a></p>
 
 <h2>why git is not a deployment tool</h2>
@@ -273,9 +279,8 @@ the earlier methods.</p>
 <h3>archive dump with staging, using rsync</h3>
 
 <p>This is a variation of the previous one, except that your deploy directory is
-on a different host, so you use rsync for network-efficiency.  (Presumably
-there are security or such reasons not to have the git repo on the destination
-server).</p>
+on a different host, or on a different user on the same server.  The git user
+needs ssh access to the deploy user, and you use rsync to copy the files.</p>
 
 <p>You no longer get atomic switchover, but rsync's network efficiency is
 probably good enough.  Maybe not as instantaneous as two rename commands (or a
@@ -289,6 +294,10 @@ reads this he will add an "--atomic" flag, <em>and</em> make it work across host
 enable</strong> rule 2 support by adding <code>--delete</code> to the rsync options.  It's not
 on by default, and I think it should be because I consider rule 2 to be
 <strong>much</strong> more important than rule 4.</p>
+
+<p><strong>Security</strong>: If you don't want your git user to have full access to your
+deploy user, you need to restrict what it can do using 'rrsync', a script that
+comes with rsync.  This is left as an exercise for the reader :-)</p>
 
 <p><a name="the_list_and_irc_deploy_summary_recap_"></a></p>
 
@@ -316,5 +325,5 @@ doesn't satisfy rule 2, so it's kinda useless :(</font></p></li>
 concepts.  It's inefficient but compensates by allowing atomic
 switchovers.</p></li>
 <li><p>archive dump with staging using rsync -- very useful if your deploy dir is
-on a different server.</p></li>
+on a different server, or on a different user on the same server.</p></li>
 </ul>
