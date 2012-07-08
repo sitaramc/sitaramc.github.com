@@ -171,6 +171,8 @@ the default (which is in .ssh in the hosting user's home directory).</p></li>
 <li><p>having sshd setup to not allow incoming ssh for the hosting user.  Check
 things like 'Allowusers' setting in /etc/ssh/sshd_config etc.</p></li>
 <li><p>having the home directory in a partition that is mounted noexec.</p></li>
+<li><p>having the default shell be something like /bin/false, and/or not having
+the default shell be part of /etc/shells.</p></li>
 </ul>
 
 <h2><a name="ngp"></a> things that are not gitolite problems</h2>
