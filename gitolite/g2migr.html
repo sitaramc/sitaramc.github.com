@@ -121,9 +121,10 @@ script as a VREF; they'll work.  Don't forget to add a rule that
 references the new VREF!</p></li>
 <li><p><code>GIT_PATH</code> <strong>dropped</strong>, <strong>requires presetting</strong>.</p>
 
-<p>If you need its functionality, add these lines to the end of the rc file:</p>
+<p>If you need this, manipulate the PATH environment variable directly.  Just
+put something like this at the end of the rc file:</p>
 
-<pre><code>$ENV{PATH}="...whatever you want...";
+<pre><code>$ENV{PATH} = "/some/non-standard/path:$ENV{PATH}";
 1;
 </code></pre></li>
 </ul>
