@@ -68,7 +68,9 @@ examples).  Other forms of the <code>git config</code> command (<code>--add</cod
 <hr />
 </blockquote>
 
-<p>You can also use the special value <code>%GL_REPO</code> in the string to save typing:</p>
+<p>You can also use the special values <code>%GL_REPO</code> and <code>%GL_CREATOR</code> in the
+string.  The former is available to all repos, while the latter is only
+available to <a href="wild.html">wild</a> repos.</p>
 
 <pre><code>repo foo bar baz
     config hooks.mailinglist = %GL_REPO-commits@example.tld
