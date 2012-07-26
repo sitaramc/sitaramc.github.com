@@ -63,6 +63,11 @@ information)</li>
 <p>A refex is an expression that matches the ref (i.e., branch or tag) being
 pushed.  See <a href="refex.html">this</a> for more info.</p>
 
+<p>You can also use <a href="vref.html">virtual refs</a> to perform extra checks and controls
+that you can't do with just the normal ref (like refs/heads/master) being
+pushed.  The most common example is restricting pushes by dir/file name, but
+there are lots of other possibilities.</p>
+
 <h3>when are the rules checked?</h3>
 
 <p>There are 2 places where access rules are checked.</p>
