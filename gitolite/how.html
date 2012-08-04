@@ -1,0 +1,122 @@
+
+<head>
+    <title>how does gitolite work</title>
+<style>
+    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+    h4          { background: #ffb; text-color: #000; }
+    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+</style>
+</head>
+
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="index.html">main page</a>
+|
+    <a href="index.html#license">license</a>
+</p>
+<p style="text-align:center">
+<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+</p>
+<h1>how does gitolite work</h1>
+
+<p>You'll appreciate this more if you first read the <a href="http://sitaramc.github.com/1-basic-usage/tias.html">try it and see</a> page
+(don't worry, it's very short and quick).</p>
+
+<h2>conventions used</h2>
+
+<pre><code>--//--&gt;     network connection
+------&gt;     exec() or system() call
+--??--&gt;     conditional exec() or system() call
+</code></pre>
+
+<p>"Conditional" means some checks done by the caller may result in caller
+deciding not to make the call and abort instead.</p>
+
+<h2>git over plain ssh</h2>
+
+<p>Here's how git via plain ssh works:</p>
+
+<pre><code># for read operations
+git clone ------&gt; ssh --//--&gt; sshd ------&gt; git-upload-pack
+git fetch ------&gt; ssh --//--&gt; sshd ------&gt; git-upload-pack
+
+# for write operations
+git push  ------&gt; ssh --//--&gt; sshd ------&gt; git-receive-pack
+</code></pre>
+
+<p>The local git client internally does something like this:</p>
+
+<pre><code># using 'push' example
+ssh git@host git-receive-pack \'path/to/reponame.git\'
+</code></pre>
+
+<p>and when that connection is established the local git-push and the remote
+git-receive-pack communicate over this connection.</p>
+
+<p>That's really all there is to it.  Not too different from rsync over ssh if
+you think about it.</p>
+
+<h2>git over gitolite</h2>
+
+<p>Git via gitolite is slightly different; here's how the push looks, for
+example:</p>
+
+<pre><code>git push  ------&gt; ssh --//--&gt; sshd ------&gt; gitolite-shell --??--&gt; git-receive-pack
+</code></pre>
+
+<p>Note that the git client does not change at all.  It doesn't even know there
+is something called gitolite in between itself and its server side peer!</p>
+
+<p>Here's how the server side changes:</p>
+
+<ul>
+<li><p>we make sshd invoke 'gitolite-shell', even though the git client asked it
+to invoke 'git-receive-pack' (or 'git-upload-pack' for reads).</p></li>
+<li><p>we also make sshd supply an argument to 'gitolite-shell'.  This is the
+name of the gitolite user.  (Remember this is a virtual user, not a real
+"unix" userid).</p></li>
+<li><p>finally, sshd itself supplies the original command that the git <em>client</em>
+wanted to run (<code>git-receive-pack 'path/to/reponame.git'</code>) in a special
+environment variable called <code>SSH_ORIGINAL_COMMAND</code>.</p></li>
+</ul>
+
+<p>(<font color="gray">All this is done using various ssh features; see the
+<a href="glssh.html">gitolite and ssh</a> page for details</font>).</p>
+
+<h3>gitolite-shell</h3>
+
+<p>So gitolite-shell has two pieces of information.  From argument-1 it knows the
+username, and from that env var it knows what repo and what operation (i.e.,
+is it a read or a write) is requested.</p>
+
+<p>At this point, it checks the user's access and decides if the access is
+allowed or not.</p>
+
+<p>(<font color="gray">For details see the <a href="rules.html">rules</a> page, especially the
+sections "when are the rules checked" and "how are the rules matched"</font>).</p>
+
+<p>For read operations this is the end of gitolite's interference.  If the access
+is allowed, git-upload-pack runs, does its job, and exits.</p>
+
+<h3>update hook</h3>
+
+<p>For write operations, git itself runs an update hook, if one is available,
+before allowing the ref to be updated.  All of gitolite's "fine-grained access
+control" happens via this hook, which gitolite installs on every repo that it
+is managing.</p>
+
+<p>When git calls the update hook, it supplies 3 critical pieces of information
+as arguments.  Together with what we already know (user, repo), these 3 pieces
+of information (refname being updated, the old SHA, and the new SHA) tell us
+all we need to implement whatever access control you want to, like "only alice
+and dilbert can push the master branch", "wally can only push branches
+starting with 'wally/'", or "only dilbert can push changes to 'license.txt',
+etc.</p>
+
+<p>(<font color="gray">Again, details are in the <a href="rules.html">rules</a> page</font>).</p>
