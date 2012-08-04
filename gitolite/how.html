@@ -40,7 +40,10 @@ deciding not to make the call and abort instead.</p>
 
 <h2>git over plain ssh</h2>
 
-<p>Here's how git via plain ssh works:</p>
+<p>If you have used rsync or any similar program with a remote host using ssh,
+then you already understand the basics of git over ssh.</p>
+
+<p>Here is a little more detail on what is happening:</p>
 
 <pre><code># for read operations
 git clone ------&gt; ssh --//--&gt; sshd ------&gt; git-upload-pack
@@ -50,30 +53,26 @@ git fetch ------&gt; ssh --//--&gt; sshd ------&gt; git-upload-pack
 git push  ------&gt; ssh --//--&gt; sshd ------&gt; git-receive-pack
 </code></pre>
 
-<p>The local git client internally does something like this:</p>
-
-<pre><code># using 'push' example
-ssh git@host git-receive-pack \'path/to/reponame.git\'
-</code></pre>
-
-<p>and when that connection is established the local git-push and the remote
-git-receive-pack communicate over this connection.</p>
-
-<p>That's really all there is to it.  Not too different from rsync over ssh if
-you think about it.</p>
+<p>The local git client just runs something like <code>ssh git@host git-receive-pack
+'path/to/reponame.git'</code> (using the push example), and when that connection is
+established the local git-push and the remote git-receive-pack communicate
+over this connection.</p>
 
 <h2>git over gitolite</h2>
 
-<p>Git via gitolite is slightly different; here's how the push looks, for
-example:</p>
+<p>Installing gitolite only adds an extra layer in between the sshd and the
+git-receive-pack (or git-upload-pack, for read operations), to check if the
+access is allowed and abort if needed.</p>
+
+<p>Using the push as an example, this is what it looks like:</p>
 
 <pre><code>git push  ------&gt; ssh --//--&gt; sshd ------&gt; gitolite-shell --??--&gt; git-receive-pack
 </code></pre>
 
-<p>Note that the git client does not change at all.  It doesn't even know there
-is something called gitolite in between itself and its server side peer!</p>
+<p>Note that the git <em>client</em> does not change at all; in fact it doesn't even
+know that something called gitolite exists!</p>
 
-<p>Here's how the server side changes:</p>
+<p>Here's how we get the server side behaviour shown above:</p>
 
 <ul>
 <li><p>we make sshd invoke 'gitolite-shell', even though the git client asked it
