@@ -332,16 +332,6 @@
 
 ----
 
-<a name="kwords/index"></a>
-
-### kwords/index
-
-  * [a few pictures](kwords/index.html#kwords_index_a_few_pictures_)
-      * [traditional VCS versus DVCS](kwords/index.html#kwords_index_traditional_VCS_versus_DVCS_)
-      * [what's a **bare** repo](kwords/index.html#kwords_index_what_s_a_bare_repo_)
-
-----
-
 <a name="other-stuff/000-README"></a>
 
 ### other-stuff/000-README
