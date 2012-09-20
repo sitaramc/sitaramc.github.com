@@ -255,7 +255,10 @@ you were to a default install of the old gitolite, the less time a
 migration will take.)</p>
 
 <p>This includes at least running <code>check-g2-compat</code> to see what are the big
-issues you might need to address during the migration.</p></li>
+issues you might need to address during the migration.</p>
+
+<p>In particular, note if you use any variables that the pre-migration
+checklist describes as "requires presetting".</p></li>
 </ol>
 
 <h3>the actual migration</h3>
@@ -305,12 +308,12 @@ somewhere else.</p></li>
 <li><p>Delete <code>~/.gitolite</code>.</p></li>
 </ul></li>
 </ul></li>
-<li><p>Read about <a href="g2migr.html#rc-preset">presetting</a> the rc file; if you're using any
-variables listed as requiring preset, follow those instructions to create
-your new rc file.</p></li>
-<li><p>Install gitolite g3; see <a href="qi.html">quick install and setup</a> or <a href="install.html">install</a>
-followed by <a href="setup.html">setup</a>.  However, the 'setup' step need not supply a
-private key.  You can run it as <code>gitolite setup -a admin</code>.</p>
+<li><p>Install gitolite g3; see <a href="install.html">install</a>.</p></li>
+<li><p>If you're using any rc variables that the pre-migration checklist said
+would "require presetting", then read about <a href="g2migr.html#rc-preset">presetting</a> the rc
+file, and follow those instructions to create your new rc file.</p></li>
+<li><p>Setup gitolite; see <a href="setup.html">setup</a>.  However, the 'setup' step need not supply
+a private key.  You can run it as <code>gitolite setup -a admin</code>.</p>
 
 <p>NOTE: ignore any 'split conf not set, gl-conf present...' errors at this
 time.  You may see none, some, or many.  It does not matter right now.</p></li>
