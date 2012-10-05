@@ -173,11 +173,11 @@ gitolite_rc.pm   gl-dryrun        gl-setup         gl-VREF-COUNT      sshkeys-li
 $ rm -rf bin;mkdir bin
 
 $ grep GL_PACKAGE .gitolite.rc
-$GL_PACKAGE_CONF = "/home/g3/share/gitolite/conf";
-$GL_PACKAGE_HOOKS = "/home/g3/share/gitolite/hooks";
+$GL_PACKAGE_CONF = "/home/git/share/gitolite/conf";
+$GL_PACKAGE_HOOKS = "/home/git/share/gitolite/hooks";
 $ rm -rf share
 
-$GL_PACKAGE_HOOKS = "/home/g3/share/gitolite/hooks";
+$GL_PACKAGE_HOOKS = "/home/git/share/gitolite/hooks";
 $ rm -rf share
 
 $ mv .gitolite.rc old.grc
@@ -213,21 +213,21 @@ tree:</p>
 
 <pre><code>$ ls -al bin
 total 8
-drwxrwxr-x 2 g3 g3 4096 Apr 24 10:57 .
-drwx------ 8 g3 g3 4096 Apr 24 10:59 ..
+drwxrwxr-x 2 git git 4096 Apr 24 10:57 .
+drwx------ 8 git git 4096 Apr 24 10:59 ..
 $ gitolite/install -ln
 $ ls -al bin
 total 8
-drwxrwxr-x 2 g3 g3 4096 Apr 24 11:01 .
-drwx------ 8 g3 g3 4096 Apr 24 10:59 ..
-lrwxrwxrwx 1 g3 g3   30 Apr 24 11:01 gitolite -&gt; /home/g3/gitolite/src/gitolite
+drwxrwxr-x 2 git git 4096 Apr 24 11:01 .
+drwx------ 8 git git 4096 Apr 24 10:59 ..
+lrwxrwxrwx 1 git git   30 Apr 24 11:01 gitolite -&gt; /home/git/gitolite/src/gitolite
 </code></pre>
 
 <p>OK that went well.  Now setup gitolite.  You don't need a key here; just use a
 random name:</p>
 
 <pre><code>$ gitolite setup -a admin
-Initialized empty Git repository in /home/g3/repositories/gitolite-admin.git/
+Initialized empty Git repository in /home/git/repositories/gitolite-admin.git/
 </code></pre>
 
 <h3>step 4</h3>
@@ -239,7 +239,7 @@ $ gitolite push -f
     ...usual git progress output deleted...
 remote: FATAL: git config foo.bar not allowed
 remote: check GIT_CONFIG_KEYS in the rc file
-To /home/g3/repositories/gitolite-admin.git
+To /home/git/repositories/gitolite-admin.git
  + 7eb8163...1474770 master -&gt; master (forced update)
 </code></pre>
 
@@ -275,7 +275,7 @@ Counting objects: 1, done.
 Writing objects: 100% (1/1), 181 bytes, done.
 Total 1 (delta 0), reused 0 (delta 0)
 Unpacking objects: 100% (1/1), done.
-To /home/g3/repositories/gitolite-admin.git
+To /home/git/repositories/gitolite-admin.git
    1474770..4c2b41d  master -&gt; master
 </code></pre>
 
@@ -296,8 +296,9 @@ $ find . -type d -name "*.git" -prune | while read r
 
 <p>Let's see what repos u3 has:</p>
 
-<pre><code>ssh u3 info
-hello u3, this is g3@sita-lt running gitolite3 v3.0-11-g090b0f5 on git 1.7.7.6
+<pre><code># as user 'u3'
+ssh git@server info
+hello u3, this is git@server running gitolite3 v3.0-11-g090b0f5 on git 1.7.7.6
 
      C      baz/..*
  R W        baz/u3
@@ -311,8 +312,9 @@ command any more.</p>
 
 <p>How about adding a new repo and checking if the config entries made it?</p>
 
-<pre><code>$ git ls-remote u4:baz/ufour
-Initialized empty Git repository in /home/g3/repositories/baz/ufour.git/
+<pre><code># as user u4
+$ git ls-remote git@server:baz/ufour
+Initialized empty Git repository in /home/git/repositories/baz/ufour.git/
 $ grep -A1 foo `find repositories -name "config" `
 repositories/baz/u3.git/config:[foo]
 repositories/baz/u3.git/config- bar = baz
