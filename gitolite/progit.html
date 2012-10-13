@@ -1,6 +1,6 @@
 
 <head>
-    <title>(expanded version of the gitolite chapter in the progit book)</title>
+    <title>(master copy/latest version of the gitolite chapter in the progit book)</title>
 <style>
     body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
     h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -23,13 +23,13 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1>(expanded version of the gitolite chapter in the progit book)</h1>
+<h1>(master copy/latest version of the gitolite chapter in the progit book)</h1>
 
 <h2>Gitolite</h2>
 
-<p>[Update 2012-04-10]: This page has been completely rewritten for gitolite version 3, informally called "g3".  G3 is a <em>total</em> rewrite of gitolite to push a lot more features away from "core", give the core a bunch of extension mechanisms, and finally have much better shell and perl APIs to bring all this together.</p>
+<p>This section serves as a quick introduction to gitolite, and provides basic installation and setup instructions.  It cannot, however, replace the enormous amount of <a href="http://sitaramc.github.com/gitolite/master-toc.html">documentation</a> that gitolite comes with.</p>
 
-<p>Git has become very popular in corporate environments, which tend to have some additional requirements in terms of access control.  Gitolite was originally created to help with those requirements, but it turns out that it's equally useful in the open source world: the Fedora Project controls access to their package management repositories (over 10,000 of them!) using gitolite, and this is probably the largest gitolite installation anywhere too.  KDE, and kernel.org, are other very high-profile users of gitolite.</p>
+<p>Gitolite is an authorisation layer on top of git, relying on sshd or httpd for authentication.  (Recap: authentication is identifying who the user is, authorisation is deciding if he is allowed to do what he is attempting to).</p>
 
 <p>Gitolite allows you to specify permissions not just by repository, but also by branch or tag names within each repository.  That is, you can specify that certain people (or groups of people) can only push certain "refs" (branches or tags) but not others.</p>
 
@@ -37,7 +37,7 @@
 
 <p>Installing Gitolite is very easy, even if you don't read the extensive documentation that comes with it.  You need an account on a Unix server of some kind.  You do not need root access, assuming git, perl, and an openssh compatible ssh server are already installed.  In the examples below, we will use the <code>git</code> account on a host called <code>gitserver</code>.</p>
 
-<p>Gitolite is somewhat unusual as far as "server" software goes -- access is via ssh, and so every userid on the server is a potential "gitolite host".  Gitolite is at present best installed manually, as the "g3" version does not yet have RPM/DEB support from distros.  We will describe the simplest install method in this article; for the other methods please see the documentation.</p>
+<p>Gitolite is somewhat unusual as far as "server" software goes -- access is via ssh, and so every userid on the server is a potential "gitolite host".  We will describe the simplest install method in this article; for the other methods please see the documentation.</p>
 
 <p>To begin, create a user called <code>git</code> on your server and login to this user.  Copy your ssh pubkey (a file called <code>~/.ssh/id_rsa.pub</code> if you did a plain <code>ssh-keygen</code> with all the defaults) from your workstation, renaming it to <code>YourName.pub</code>.  Then run these commands:</p>
 
@@ -50,7 +50,7 @@ gitolite setup -pk $HOME/YourName.pub
 
 <p>Finally, back on your workstation, run <code>git clone git@server:gitolite-admin</code>.</p>
 
-<p>And you're done!  Gitolite has now been installed on the server, and you now have a brand new repository called <code>gitolite-admin</code> in your workstation.  You administer your gitolite setup by making changes to this repository and pushing.  See adding <a href="users.html">users</a> and <a href="repos.html">repos</a> to start with.</p>
+<p>And you're done!  Gitolite has now been installed on the server, and you now have a brand new repository called <code>gitolite-admin</code> in your workstation.  You administer your gitolite setup by making changes to this repository and pushing.</p>
 
 <h3>Customising the Install</h3>
 
@@ -58,7 +58,7 @@ gitolite setup -pk $HOME/YourName.pub
 
 <h3>Config File and Access Control Rules</h3>
 
-<p>Once the install is done, you switch to the <code>gitolite-admin</code> repository (placed in your HOME directory) and poke around to see what you got:</p>
+<p>Once the install is done, you switch to the <code>gitolite-admin</code> clone you just made on your workstation, and poke around to see what you got:</p>
 
 <pre><code>$ cd ~/gitolite-admin/
 $ ls
@@ -76,6 +76,8 @@ repo testing
 </code></pre>
 
 <p>Notice that "sitaram" (the name of the pubkey in the gl-setup command you used earlier) has read-write permissions on the <code>gitolite-admin</code> repository as well as a public key file of the same name.</p>
+
+<p>Adding users is easy.  To add a user called "alice", obtain her public key, name it "alice.pub", and put it in the "keydir" directory of the clone of the gitolite-admin repo you just made on your workstation.  Add, commit, and push the change, and the user has been added.</p>
 
 <p>The config file syntax for gitolite is <a href="admin.html#conf">well documented</a>, so we'll only mention some highlights here.</p>
 
@@ -119,7 +121,7 @@ repo testing
 
 <h3>Advanced Access Control with "deny" rules</h3>
 
-<p>So far, we've only seen permissions to be one or <code>R</code>, <code>RW</code>, or <code>RW+</code>.  However, gitolite allows another permission: <code>-</code>, standing for "deny".  This gives you a lot more power, at the expense of some complexity, because now fallthrough is not the <em>only</em> way for access to be denied, so the <em>order of the rules now matters</em>!</p>
+<p>So far, we've only seen permissions to be one of <code>R</code>, <code>RW</code>, or <code>RW+</code>.  However, gitolite allows another permission: <code>-</code>, standing for "deny".  This gives you a lot more power, at the expense of some complexity, because now fallthrough is not the <em>only</em> way for access to be denied, so the <em>order of the rules now matters</em>!</p>
 
 <p>Let us say, in the situation above, we want engineers to be able to rewind any branch <em>except</em> master and integ.  Here's how to do that:</p>
 
@@ -129,21 +131,6 @@ repo testing
 </code></pre>
 
 <p>Again, you simply follow the rules top down until you hit a match for your access mode, or a deny.  Non-rewind push to master or integ is allowed by the first rule.  A rewind push to those refs does not match the first rule, drops down to the second, and is therefore denied.  Any push (rewind or non-rewind) to refs other than master or integ won't match the first two rules anyway, and the third rule allows it.</p>
-
-<p>You can also use deny rules to hide specific repos from people (or gitweb, or git-daemon, etc.), when you have otherwise allowed them access to <em>all</em> repos.  For example, a server containing open source repos may nevertheless wish to hide the special 'gitolite-admin' repo from gitweb, even though all the other repos can be made visible:</p>
-
-<pre><code>    repo gitolite-admin
-    -   =   gitweb daemon
-    [... other access rules ...]
-    option deny-rules = 1
-            # remember this is for gitolite "g3"; the older gitolite had a
-            # different syntax
-
-    repo @all
-    R   =   gitweb daemon
-</code></pre>
-
-<p><a href="rules.html#deny-rules">This</a> page has more details.</p>
 
 <h3>Restricting pushes by files changed</h3>
 
@@ -179,7 +166,7 @@ repo testing
 
 <p><strong>Access rights reporting</strong>: Another convenient feature is what happens when you try and just ssh to the server.  Gitolite shows you what repos you have access to, and what that access may be.  Here's an example:</p>
 
-<pre><code>    hello sitaram, this is git@git running gitolite3 v0.02-15-g1db50f4 on git 1.7.4.4
+<pre><code>    hello sitaram, this is git@git running gitolite3 v3.01-18-g9609868 on git 1.7.4.4
 
          R     anu-wsd
          R     entrans
