@@ -287,13 +287,7 @@ probably good enough.  Maybe not as instantaneous as two rename commands (or a
 symlink switch) but not too bad.</p>
 
 <p>EugeneKay has written a very comprehensive script that uses this technique,
-but adds many more bells and whistles; find it <a href="https://github.com/EugeneKay/scripts/blob/master/bash/git-deploy-hook.sh">here</a>.  I'm sure after he
-reads this he will add an "--atomic" flag, <em>and</em> make it work across hosts ;-)</p>
-
-<p>However, please note that if you use that script, you have to <strong>explicitly
-enable</strong> rule 2 support by adding <code>--delete</code> to the rsync options.  It's not
-on by default, and I think it should be because I consider rule 2 to be
-<strong>much</strong> more important than rule 4.</p>
+but adds many more bells and whistles; find it <a href="https://github.com/EugeneKay/scripts/blob/master/bash/git-deploy-hook.sh">here</a>.</p>
 
 <p><strong>Security</strong>: If you don't want your git user to have full access to your
 deploy user, you need to restrict what it can do using 'rrsync', a script that
