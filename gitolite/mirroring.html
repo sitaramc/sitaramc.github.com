@@ -131,7 +131,9 @@ file settings and syntax.</p>
 <li><p>Install gitolite normally.  Make clones of the server's 'gitolite-admin'
 repo on your workstation so you can admin them all from one place.</p></li>
 <li><p>Give the server a short, simple, "hostname" and set the HOSTNAME in the
-rc file to this name, for example 'mars'.</p></li>
+rc file to this name, for example 'mars'.  <em>Note: this has nothing to do
+with the hostname of the server in networking or DNS terms, or in OS
+terms.  This is internal to gitolite</em>.</p></li>
 <li><p>Run ssh-keygen if needed and get an ssh key pair for the server.  Copy the
 public key to a common area and name it after the host, but with 'server-'
 prefixed.  For example, the pubkey for server 'mars' must be stored as

@@ -89,7 +89,11 @@ functionality, and invoke <em>that</em> from the rc file instead.</p>
 <ul>
 <li><p>There is no 'post-receive' hook to be installed.  Mirroring is handled by
 g3's <a href="triggers.html">triggers</a> mechanism.  Gitolite triggers are enabled by adding (or
-uncommenting, in this case) appropriate lines in the rc file.</p></li>
+uncommenting, in this case) appropriate lines in the rc file.</p>
+
+<p>You need to either remove these files (actually symlinks) from each repo's
+'hooks' directory, or remove the old (v2) sources so they become broken
+symlinks.</p></li>
 <li><p>The <code>GL_HOSTNAME</code> variable is now <code>HOSTNAME</code>.  (Note that the rc file
 syntax itself has changed quite a bit; to be accurate, HOSTNAME is not a
 variable but a hash key with an associated value).</p></li>
