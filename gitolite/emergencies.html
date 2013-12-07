@@ -1,41 +1,23 @@
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>help for emergencies</title>
-<style>
-    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
-    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
-    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
-    h4          { background: #ffb; text-color: #000; }
-    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
-    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-</style>
-<style>
-   body{counter-reset: section}
-   h1{counter-reset: sub-section}
-   h2{counter-reset: composite}
-   h3{counter-reset: detail}
-
-   h1:before {
-     counter-increment: section;
-     content: counter(section) ". ";
-   }
-   h2:before {
-     counter-increment: sub-section;
-     content: counter(section) "." counter(sub-section) ". ";
-   }
-   h3:before {
-     counter-increment: composite;
-     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
-   }
-   h4:before {
-     counter-increment: detail;
-     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
-   }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
 </head>
-
+<body>
 <p style="text-align:center">
     <a href="master-toc.html">master TOC</a>
 |
@@ -46,248 +28,126 @@
     <a href="index.html#license">license</a>
 </p>
 <p style="text-align:center">
-<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+<font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1>help for emergencies</h1>
+<div id="TOC">
+<ul>
+<li><a href="#help-for-emergencies"><span class="toc-section-number">1</span> help for emergencies</a><ul>
+<li><a href="#installsetup-issues"><span class="toc-section-number">1.1</span> install/setup issues</a></li>
+<li><a href="#lost-key"><span class="toc-section-number">1.2</span> lost admin key/access</a></li>
+<li><a href="#bypass"><span class="toc-section-number">1.3</span> bypassing gitolite</a></li>
+<li><a href="#botch"><span class="toc-section-number">1.4</span> botched something?</a><ul>
+<li><a href="#fixing-botched-repos"><span class="toc-section-number">1.4.1</span> fixing botched repos</a></li>
+<li><a href="#clean"><span class="toc-section-number">1.4.2</span> cleaning out a botched install</a></li>
+</ul></li>
+<li><a href="#ce"><span class="toc-section-number">1.5</span> common errors</a></li>
+<li><a href="#ue"><span class="toc-section-number">1.6</span> uncommon errors</a></li>
+<li><a href="#nonstd"><span class="toc-section-number">1.7</span> non-standard configs that'll trip you up</a></li>
+<li><a href="#ngp"><span class="toc-section-number">1.8</span> things that are not gitolite problems</a></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="help-for-emergencies"><a href="#help-for-emergencies"><span class="header-section-number">1</span> help for emergencies</a></h1>
+<!-- pandoc: toc -->
 
+<blockquote>
 <hr />
-
-<p>"Don't Panic!"</p>
-
+</blockquote>
+<blockquote>
+<p><font color="red"><strong>&quot;Don't Panic!&quot;</strong></font></p>
+</blockquote>
+<blockquote>
 <hr />
-
+</blockquote>
+<h2 id="installsetup-issues"><a href="#installsetup-issues"><span class="header-section-number">1.1</span> install/setup issues</a></h2>
+<p>Most install/setup issues are caused by lack of ssh knowledge. Ssh is a complex beast, and -- unless you are using the <a href="http.html">http</a> mode -- can cause problems for people who are not familiar with its quirks.</p>
+<p><strong>Be prepared to spend some time reading the <a href="ssh.html">ssh</a> documentation that comes with gitolite</strong>.</p>
+<h2 id="lost-key"><a href="#lost-key"><span class="header-section-number">1.2</span> lost admin key/access</a></h2>
+<p>If you lost your gitolite <strong>admin</strong> key or access, here's what you do. We'll assume your username is 'alice'.</p>
 <ul>
-<li><a href="emergencies.html">help for emergencies</a>
-<ul>
-<li>install/setup issues
-</li>
-<li><a href="emergencies.html#lost-key">lost admin key/access</a>
-</li>
-<li><a href="emergencies.html#bypass">bypassing gitolite</a>
-</li>
-<li><a href="emergencies.html#botch">botched something?</a>
-<ul>
-<li>fixing botched repos
-</li>
-<li><a href="emergencies.html#clean">cleaning out a botched install</a>
-</li>
-</ul>
-</li>
-<li><a href="emergencies.html#ce">common errors</a>
-</li>
-<li><a href="emergencies.html#ue">uncommon errors</a>
-</li>
-<li><a href="emergencies.html#nonstd">non-standard configs that'll trip you up</a>
-</li>
-<li><a href="emergencies.html#ngp">things that are not gitolite problems</a>
-</li>
-</ul>
-</li>
-</ul>
-
-<h2>install/setup issues</h2>
-
-<p>Most install/setup issues are caused by lack of ssh knowledge.  Ssh is a
-complex beast, and -- unless you are using the <a href="http.html">http</a> mode -- can cause
-problems for people who are not familiar with its quirks.</p>
-
-<p><strong>Be prepared to spend some time reading the <a href="ssh.html">ssh</a> documentation that comes
-with gitolite</strong>.</p>
-
-<h2><a name="lost-key"></a> lost admin key/access</h2>
-
-<p>If you lost your gitolite <strong>admin</strong> key or access, here's what you do.  We'll
-assume your username is 'alice'.</p>
-
-<ul>
-<li><p>Make yourself a new keypair and copy the public key to the server as
-'alice.pub'.</p></li>
+<li><p>Make yourself a new keypair and copy the public key to the server as 'alice.pub'.</p></li>
 <li><p>Log on to the server, and run <code>gitolite setup -pk alice.pub</code>.</p></li>
 </ul>
-
-<p>That's it; the new alice.pub file replaces whatever existed in the repo
-before.</p>
-
-<h2><a name="bypass"></a> bypassing gitolite</h2>
-
-<p>You may have lost access because of a conf file error, in which case the above
-trick won't help.  What you want is to make changes to the repo (or perhaps
-just rewind) and push that.  Here's how to do that:</p>
-
+<p>That's it; the new alice.pub file replaces whatever existed in the repo before.</p>
+<h2 id="bypass"><a href="#bypass"><span class="header-section-number">1.3</span> bypassing gitolite</a></h2>
+<p>You may have lost access because of a conf file error, in which case the above trick won't help. What you want is to make changes to the repo (or perhaps just rewind) and push that. Here's how to do that:</p>
 <ul>
 <li><p>Log on to the server.</p></li>
-<li><p>Clone the admin repo using the full path: <code>git clone
-$HOME/repositories/gitolite-admin.git temp</code>.</p></li>
-<li><p>Make whatever changes you want -- add/replace a key, 'git revert' or 'git
-reset --hard' to an older commit, etc.  Anything you need to fix the
-problem, really.</p></li>
-<li><p>Run <code>gitolite push</code> (or possibly <code>gitolite push -f</code>).  Note that's
-'gitolite push', not 'git push'.</p></li>
+<li><p>Clone the admin repo using the full path: <code>git clone     $HOME/repositories/gitolite-admin.git temp</code>.</p></li>
+<li><p>Make whatever changes you want -- add/replace a key, 'git revert' or 'git reset --hard' to an older commit, etc. Anything you need to fix the problem, really.</p></li>
+<li><p>Run <code>gitolite push</code> (or possibly <code>gitolite push -f</code>). Note that's 'gitolite push', not 'git push'.</p></li>
 </ul>
-
-<p><font color="red">
-<strong>NOTE</strong>: gitolite does <strong>no access checking</strong> when you do this!
-</font></p>
-
-<h2><a name="botch"></a> botched something?</h2>
-
-<h3>fixing botched repos</h3>
-
-<p>If you copied some repos from somewhere else, or mucked with the hooks for
-some reason, or deleted any gitolite-specific files, or tried any other
-"behind the scenes" stunts, the quickest, sanest, way to fix everything up is:</p>
-
+<p><font color="red"> <strong>NOTE</strong>: gitolite does <strong>no access checking</strong> when you do this! </font></p>
+<h2 id="botch"><a href="#botch"><span class="header-section-number">1.4</span> botched something?</a></h2>
+<h3 id="fixing-botched-repos"><a href="#fixing-botched-repos"><span class="header-section-number">1.4.1</span> fixing botched repos</a></h3>
+<p>If you copied some repos from somewhere else, or mucked with the hooks for some reason, or deleted any gitolite-specific files, or tried any other &quot;behind the scenes&quot; stunts, the quickest, sanest, way to fix everything up is:</p>
 <ul>
-<li>make sure any new repos you copied in are mentioned in the gitolite.conf
-in some 'repo' line and the change pushed
-</li>
-<li>then run <code>gitolite setup</code> on the server
-</li>
+<li>make sure any new repos you copied in are mentioned in the gitolite.conf in some 'repo' line and the change pushed</li>
+<li>then run <code>gitolite setup</code> on the server</li>
 </ul>
-
-<p>If the repo you botched is a wild repo, please ask on the mailing list or on
-IRC (see <a href="index.html#contact">contact</a>).</p>
-
-<h3><a name="clean"></a> cleaning out a botched install</h3>
-
-<p>If you've read the <a href="files.html">files involved in gitolite</a> page, you probably know
-the answer, but here's a list of files and directories to deal with:</p>
-
+<p>If the repo you botched is a wild repo, please ask on the mailing list or on IRC (see <a href="index.html#contact">contact</a>).</p>
+<h3 id="clean"><a href="#clean"><span class="header-section-number">1.4.2</span> cleaning out a botched install</a></h3>
+<p>If you've read the <a href="files.html">files involved in gitolite</a> page, you probably know the answer, but here's a list of files and directories to deal with:</p>
 <ul>
-<li><p><strong>Gitolite sources</strong> -- can be found by running <code>which gitolite</code>.  If it's
-a symlink, go to its target directory.</p></li>
-<li><p><strong>Gitolite admin directory</strong> -- <code>$HOME/.gitolite</code>.  Save the 'logs'
-directory if you want to preserve them for any reason.</p></li>
-<li><p><strong>The rc file</strong> -- <code>$HOME/.gitolite.rc</code>.  If you made any changes to it
-you can save it as some other name instead of deleting it.</p></li>
-<li><p><strong>The gitolite-admin repo</strong> -- <code>$HOME/repositories/gitolite-admin.git</code>.
-You can clone it somewhere to save it before blowing it away if you wish.</p></li>
-<li><p><strong>Git repositories</strong> -- <code>$HOME/repositories</code>.  The install process will
-not touch any existing repos except 'gitolite-admin.git', so you do not
-have to blow away (or move) your work repos to fix a botched install.</p>
-
-<p>Only when you update the conf to include those repos and push the changes
-will those repos be touched.  And even then all that happens is that the
-update hook, if any, is replaced with gitolite's own hook.</p></li>
-<li><p><strong>Ssh stuff</strong> -- exercise caution when doing this, but in general it
-should be safe to delete all lines between the "gitolite start" and
-"gitolite end" markers in <code>$HOME/.ssh/authorized_keys</code>.</p>
-
+<li><p><strong>Gitolite sources</strong> -- can be found by running <code>which gitolite</code>. If it's a symlink, go to its target directory.</p></li>
+<li><p><strong>Gitolite admin directory</strong> -- <code>$HOME/.gitolite</code>. Save the 'logs' directory if you want to preserve them for any reason.</p></li>
+<li><p><strong>The rc file</strong> -- <code>$HOME/.gitolite.rc</code>. If you made any changes to it you can save it as some other name instead of deleting it.</p></li>
+<li><p><strong>The gitolite-admin repo</strong> -- <code>$HOME/repositories/gitolite-admin.git</code>. You can clone it somewhere to save it before blowing it away if you wish.</p></li>
+<li><p><strong>Git repositories</strong> -- <code>$HOME/repositories</code>. The install process will not touch any existing repos except 'gitolite-admin.git', so you do not have to blow away (or move) your work repos to fix a botched install.</p>
+<p>Only when you update the conf to include those repos and push the changes will those repos be touched. And even then all that happens is that the update hook, if any, is replaced with gitolite's own hook.</p></li>
+<li><p><strong>Ssh stuff</strong> -- exercise caution when doing this, but in general it should be safe to delete all lines between the &quot;gitolite start&quot; and &quot;gitolite end&quot; markers in <code>$HOME/.ssh/authorized_keys</code>.</p>
 <p>Gitolite does not touch any other files in the ssh directory.</p></li>
 </ul>
-
-<h2><a name="ce"></a> common errors</h2>
-
+<h2 id="ce"><a href="#ce"><span class="header-section-number">1.5</span> common errors</a></h2>
 <ul>
 <li><p><code>WARNING: keydir/&lt;yourname&gt;.pub duplicates a non-gitolite key, sshd will ignore it</code></p>
-
-<p>You used a key that is already set to give you shell access.  You cannot
-use the same key to get shell access as well as access gitolite repos.</p>
-
-<p>Solution: use a different keypair for gitolite.  There's a slightly longer
-discussion in the <a href="setup.html">setup</a> page.  Also see <a href="sts.html#ybpfail">why bypassing causes a
-problem</a> and both the documents in <a href="ssh.html">ssh</a> for background.</p></li>
+<p>You used a key that is already set to give you shell access. You cannot use the same key to get shell access as well as access gitolite repos.</p>
+<p>Solution: use a different keypair for gitolite. There's a slightly longer discussion in the <a href="setup.html">setup</a> page. Also see <a href="sts.html#ybpfail">why bypassing causes a problem</a> and both the documents in <a href="ssh.html">ssh</a> for background.</p></li>
 <li><p><code>Empty compile time value given to use lib at hooks/update line 6</code></p>
-
-<p>(followed by <code>Can't locate Gitolite/Hooks/Update.pm in @INC</code> a couple of
-lines later).</p>
-
-<p>You're bypassing gitolite.  You cloned the repo using the full path (i.e.,
-including the <code>repositories/</code> prefix), either directly on the server, or
-via ssh but with a key that gives you <strong>shell</strong> access.</p>
-
+<p>(followed by <code>Can't locate Gitolite/Hooks/Update.pm in @INC</code> a couple of lines later).</p>
+<p>You're bypassing gitolite. You cloned the repo using the full path (i.e., including the <code>repositories/</code> prefix), either directly on the server, or via ssh but with a key that gives you <strong>shell</strong> access.</p>
 <p>Solution: same as for the previous bullet.</p>
-
-<p>NOTE: If you really <em>must</em> do it, and this is a one-time thing, you can
-try <code>gitolite push</code> instead of <code>git push</code>.  <strong>BUT</strong>... this defeats all
-gitolite access control, so if you're going to do this often, maybe you
-don't need gitolite!</p></li>
+<p>NOTE: If you really <em>must</em> do it, and this is a one-time thing, you can try <code>gitolite push</code> instead of <code>git push</code>. <strong>BUT</strong>... this defeats all gitolite access control, so if you're going to do this often, maybe you don't need gitolite!</p></li>
 </ul>
-
-<h2><a name="ue"></a> uncommon errors</h2>
-
+<h2 id="ue"><a href="#ue"><span class="header-section-number">1.6</span> uncommon errors</a></h2>
 <p>(This page intentionally left blank)</p>
-
-<h2><a name="nonstd"></a> non-standard configs that'll trip you up</h2>
-
+<h2 id="nonstd"><a href="#nonstd"><span class="header-section-number">1.7</span> non-standard configs that'll trip you up</a></h2>
 <ul>
-<li><p>if your 'git' binary is in a non-PATH location, or you have more than one
-version and want a specific one to be picked up, you will have to add a
-line like this at the end of the rc file (outside the <code>%RC</code> hash, but
-before the<code>1;</code> line):</p>
-
-<pre><code>$ENV{PATH} = "/your/git/path:$ENV{PATH}";
-</code></pre></li>
-<li><p>having sshd setup to put the authorized_keys file somewhere other than
-the default (which is in .ssh in the <a href="install.html#nnc">hosting user</a>'s home directory).</p></li>
-<li><p>having sshd setup to not allow incoming ssh for the hosting user.  Check
-things like 'Allowusers' setting in /etc/ssh/sshd_config etc.</p></li>
+<li><p>if your 'git' binary is in a non-PATH location, or you have more than one version and want a specific one to be picked up, you will have to add a line like this at the end of the rc file (outside the <code>%RC</code> hash, but before the<code>1;</code> line):</p>
+<pre><code>$ENV{PATH} = &quot;/your/git/path:$ENV{PATH}&quot;;</code></pre></li>
+<li><p>having sshd setup to put the authorized_keys file somewhere other than the default (which is in .ssh in the <a href="install.html#nnc">hosting user</a>'s home directory).</p></li>
+<li><p>having sshd setup to not allow incoming ssh for the hosting user. Check things like 'Allowusers' setting in /etc/ssh/sshd_config etc.</p></li>
 <li><p>having the home directory in a partition that is mounted noexec.</p></li>
-<li><p>having the default shell be something like /bin/false, and/or not having
-the default shell be part of /etc/shells.</p></li>
+<li><p>having the default shell be something like /bin/false, and/or not having the default shell be part of /etc/shells.</p></li>
 </ul>
-
-<h2><a name="ngp"></a> things that are not gitolite problems</h2>
-
-<p>There are several things that appear to be gitolite problems but are not.  I
-cannot help with most of these (although the good folks on irc or the mailing
-list -- see <a href="index.html#contact">contact</a> -- might be able to; they certainly appear to have a
-lot more patience than I do, bless 'em!)</p>
-
+<h2 id="ngp"><a href="#ngp"><span class="header-section-number">1.8</span> things that are not gitolite problems</a></h2>
+<p>There are several things that appear to be gitolite problems but are not. I cannot help with most of these (although the good folks on irc or the mailing list -- see <a href="index.html#contact">contact</a> -- might be able to; they certainly appear to have a lot more patience than I do, bless 'em!)</p>
 <ul>
 <li><p><strong>Client side software</strong></p>
-
 <ul>
-<li>putty/plink
-</li>
-<li>jgit/Eclipse
-</li>
-<li>Mac OS client <strong>or</strong> server
-</li>
-<li>putty/plink
-</li>
-<li>windows as a server
-</li>
-<li>...probably some more I forgot; will update this list as I remember...
-</li>
-<li>did I mention putty/plink?
-</li>
+<li>putty/plink</li>
+<li>jgit/Eclipse</li>
+<li>Mac OS client <strong>or</strong> server</li>
+<li>putty/plink</li>
+<li>windows as a server</li>
+<li>...probably some more I forgot; will update this list as I remember...</li>
+<li>did I mention putty/plink?</li>
 </ul></li>
 <li><p><strong>Ssh</strong></p>
-
-<p>The <em>superstar</em> of the "not a gitolite problem" category is actually ssh.</p>
-
-<p>Surprised?  It is so common that it has <a href="auth.html">its own document</a> to tell
-you why it is <em>not</em> a gitolite problem, while <a href="ssh.html">another one</a> tries to
-help you anyway!</p>
-
-<p>Everything I know is in that latter link.  Please email me about ssh ONLY
-if you find something wrong or missing in those documents.</p></li>
+<p>The <em>superstar</em> of the &quot;not a gitolite problem&quot; category is actually ssh.</p>
+<p>Surprised? It is so common that it has <a href="auth.html">its own document</a> to tell you why it is <em>not</em> a gitolite problem, while <a href="ssh.html">another one</a> tries to help you anyway!</p>
+<p>Everything I know is in that latter link. Please email me about ssh ONLY if you find something wrong or missing in those documents.</p></li>
 <li><p><strong>Git</strong></p>
-
-<p>I wish I had a dollar for each time someone did a <em>first push</em> on a new
-repo, got an error because there were "no refs in common (etc.)", and
-asked me why gitolite was not allowing the push.</p>
-
-<p>Gitolite is designed to look like just another bare repo server to a
-client (except requiring public keys -- no passwords allowed).  It is
-<em>completely transparent</em> when there is no authorisation failure (i.e.,
-when the access is allowed, the remote client has no way of knowing
-gitolite was even installed!)</p>
-
-<p>Even "on disk", apart from reserving the <code>update</code> hook for itself,
-gitolite does nothing to your bare repos unless you tell it to (for
-example, adding 'gitweb.owner' and such to the config file).</p>
-
-<p>BEFORE you think gitolite is the problem, try the same thing with a normal
-bare repo.  In most cases you can play with it just by doing something
-like this:</p>
-
+<p>I wish I had a dollar for each time someone did a <em>first push</em> on a new repo, got an error because there were &quot;no refs in common (etc.)&quot;, and asked me why gitolite was not allowing the push.</p>
+<p>Gitolite is designed to look like just another bare repo server to a client (except requiring public keys -- no passwords allowed). It is <em>completely transparent</em> when there is no authorisation failure (i.e., when the access is allowed, the remote client has no way of knowing gitolite was even installed!)</p>
+<p>Even &quot;on disk&quot;, apart from reserving the <code>update</code> hook for itself, gitolite does nothing to your bare repos unless you tell it to (for example, adding 'gitweb.owner' and such to the config file).</p>
+<p>BEFORE you think gitolite is the problem, try the same thing with a normal bare repo. In most cases you can play with it just by doing something like this:</p>
 <pre><code>mkdir /tmp/throwaway
 cd    /tmp/throwaway
 git clone --mirror &lt;some repo you have a URL for&gt; bare.git
 git clone bare.git worktree
 cd worktree
-&lt;...try stuff&gt;
-</code></pre></li>
+&lt;...try stuff&gt;</code></pre></li>
 </ul>
+</body>
+</html>

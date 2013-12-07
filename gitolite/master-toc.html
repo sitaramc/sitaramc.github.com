@@ -1,41 +1,23 @@
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>gitolite documentation</title>
-<style>
-    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
-    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
-    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
-    h4          { background: #ffb; text-color: #000; }
-    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
-    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-</style>
-<style>
-   body{counter-reset: section}
-   h1{counter-reset: sub-section}
-   h2{counter-reset: composite}
-   h3{counter-reset: detail}
-
-   h1:before {
-     counter-increment: section;
-     content: counter(section) ". ";
-   }
-   h2:before {
-     counter-increment: sub-section;
-     content: counter(section) "." counter(sub-section) ". ";
-   }
-   h3:before {
-     counter-increment: composite;
-     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
-   }
-   h4:before {
-     counter-increment: detail;
-     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
-   }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
 </head>
-
+<body>
 <p style="text-align:center">
     <a href="master-toc.html">master TOC</a>
 |
@@ -46,370 +28,216 @@
     <a href="index.html#license">license</a>
 </p>
 <p style="text-align:center">
-<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+<font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1>gitolite documentation</h1>
-
-<p>This is the master index for all gitolite documentation.  The sequence is
-designed to go from background, to basics, to advanced, and then to more
-advanced topics.</p>
-
-<p>If you find this flow hard to follow, try these graphical overviews of the
-documentation: <a href="basic.html">basic</a> and <a href="advanced.html">advanced</a>.</p>
-
-<h2><a href="index.html">Introduction</a></h2>
-
+<h1 id="gitolite-documentation"><span class="header-section-number">1</span> gitolite documentation</h1>
+<p>This is the master index for all gitolite documentation. The sequence is designed to go from background, to basics, to advanced, and then to more advanced topics.</p>
+<p>If you find this flow hard to follow, try these graphical overviews of the documentation: <a href="basic.html">basic</a> and <a href="advanced.html">advanced</a>.</p>
+<h2 id="introductionindex"><span class="header-section-number">1.1</span> <a href="index.html">Introduction</a></h2>
 <ul>
-<li>(for <a href="index.html#g2">older</a> gitolite (v1 or v2) users)
-</li>
-<li><a href="index.html#ql">quick links</a>
-</li>
-<li><a href="index.html#what">what</a> is gitolite?
-</li>
-<li><a href="how.html">how</a> does it work?
-</li>
-<li><a href="why.html">why</a> might you need it?
-</li>
-<li><a href="who.html">who</a> is using it?
-</li>
-<li><a href="index.html#contact">contact</a> info, mailing list, IRC channel
-</li>
-<li><a href="index.html#license">license</a> info
-</li>
+<li>(for <a href="index.html#g2">older</a> gitolite (v1 or v2) users)</li>
+<li><a href="index.html#ql">quick links</a></li>
+<li><a href="index.html#what">what</a> is gitolite?</li>
+<li><a href="how.html">how</a> does it work?</li>
+<li><a href="why.html">why</a> might you need it?</li>
+<li><a href="who.html">who</a> is using it?</li>
+<li><a href="index.html#contact">contact</a> info, mailing list, IRC channel</li>
+<li><a href="index.html#license">license</a> info</li>
 </ul>
-
-<h2><a href="WARNINGS.html">WARNINGS</a></h2>
-
-<h2>help for <a href="emergencies.html">emergencies</a></h2>
-
+<h2 id="warnings"><span class="header-section-number">1.2</span> <a href="WARNINGS.html">WARNINGS</a></h2>
+<h2 id="help-for-emergencies"><span class="header-section-number">1.3</span> help for <a href="emergencies.html">emergencies</a></h2>
 <ul>
-<li><strong>install/setup issues caused by <a href="ssh.html">ssh</a></strong>
-</li>
-<li><a href="emergencies.html#lost-key">lost</a> admin key/access
-</li>
-<li><a href="emergencies.html#bypass">bypass</a>ing gitolite
-</li>
-<li><a href="emergencies.html#clean">clean</a>ing out a botched install
-</li>
-<li><a href="emergencies.html#ce">common</a> errors
-</li>
-<li><a href="emergencies.html#ue">uncommon</a> errors
-</li>
-<li><a href="emergencies.html#nonstd">non-standard configs</a> that'll trip you up
-</li>
-<li>things that are <a href="emergencies.html#ngp">not gitolite problems</a>
-</li>
+<li><strong>install/setup issues caused by <a href="ssh.html">ssh</a></strong></li>
+<li><a href="emergencies.html#lost-key">lost</a> admin key/access</li>
+<li><a href="emergencies.html#bypass">bypass</a>ing gitolite</li>
+<li><a href="emergencies.html#clean">clean</a>ing out a botched install</li>
+<li><a href="emergencies.html#ce">common</a> errors</li>
+<li><a href="emergencies.html#ue">uncommon</a> errors</li>
+<li><a href="emergencies.html#nonstd">non-standard configs</a> that'll trip you up</li>
+<li>things that are <a href="emergencies.html#ngp">not gitolite problems</a></li>
 </ul>
-
-<h2><a href="testing.html">testing</a> gitolite</h2>
-
+<h2 id="testing-gitolite"><span class="header-section-number">1.4</span> <a href="testing.html">testing</a> gitolite</h2>
 <ul>
-<li><a href="testing.html#trying">trying</a> out gitolite
-</li>
+<li><a href="testing.html#trying">trying</a> out gitolite</li>
 </ul>
-
-<h2><a href="qi.html">quick</a> install, setup, and clone</h2>
-
-<h2><a href="install.html">install</a></h2>
-
+<h2 id="quickqi-install-setup-and-clone"><span class="header-section-number">1.5</span> <a href="qi.html">quick</a> install, setup, and clone</h2>
+<h2 id="install"><span class="header-section-number">1.6</span> <a href="install.html">install</a></h2>
 <ul>
-<li>notes and naming conventions
-</li>
+<li>notes and naming conventions</li>
 <li><a href="install.html#req">requirements</a>
 <ul>
-<li>your skills
-</li>
-<li>server
-</li>
-<li>client
-</li>
+<li>your skills</li>
+<li>server</li>
+<li>client</li>
+</ul></li>
+<li>getting the software</li>
+<li>the actual install</li>
+<li>upgrading</li>
+<li><a href="install.html#package">packaging</a> gitolite</li>
+<li><a href="migr.html">migrating</a> from v2</li>
 </ul>
-</li>
-<li>getting the software
-</li>
-<li>the actual install
-</li>
-<li>upgrading
-</li>
-<li><a href="install.html#package">packaging</a> gitolite
-</li>
-<li><a href="migr.html">migrating</a> from v2
-</li>
-</ul>
-
-<h2><a href="setup.html">setup</a></h2>
-
-<h2><a href="clone.html">clone</a></h2>
-
+<h2 id="setup"><span class="header-section-number">1.7</span> <a href="setup.html">setup</a></h2>
+<h2 id="clone"><span class="header-section-number">1.8</span> <a href="clone.html">clone</a></h2>
 <ul>
-<li>(appendix: administer gitolite directly on the server)
-</li>
+<li>(appendix: administer gitolite directly on the server)</li>
 </ul>
-
-<h2>gitolite <a href="admin.html">admin</a>istration</h2>
-
+<h2 id="gitolite-administration"><span class="header-section-number">1.9</span> gitolite <a href="admin.html">admin</a>istration</h2>
 <ul>
 <li>(<a href="admin.html#server">server-side</a>) settings, hooks, etc.
 <ul>
-<li>(<a href="WARNINGS.html">link</a>: important cautions on server side activity)
-</li>
-<li>changing settings in the <a href="rc.html">rc</a> file
-</li>
-<li>installing custom <a href="cust.html#hooks">hooks</a>
-</li>
-<li>(<a href="rare.html#existing">link</a>: moving existing repos into gitolite)
-</li>
-</ul>
-</li>
+<li>(<a href="WARNINGS.html">link</a>: important cautions on server side activity)</li>
+<li>changing settings in the <a href="rc.html">rc</a> file</li>
+<li>installing custom <a href="cust.html#hooks">hooks</a></li>
+<li>(<a href="rare.html#existing">link</a>: moving existing repos into gitolite)</li>
+</ul></li>
 <li>(<a href="admin.html#adminrepo">client-side</a>) access control via the gitolite-admin repo
 <ul>
 <li>basic <a href="syntax.html">syntax</a> of the <a href="admin.html#conf">conf</a> file
 <ul>
-<li>include files
-</li>
-<li>(<a href="cust.html#sugar">link</a>: syntactic sugar)
-</li>
-</ul>
-</li>
+<li>include files</li>
+<li>(<a href="cust.html#sugar">link</a>: syntactic sugar)</li>
+</ul></li>
 <li><a href="groups.html">groups</a> (of users and repos)
 <ul>
-<li>special: '@all'
-</li>
-<li>(<a href="auth.html#ldap">link</a>: getting user group info from LDAP)
-</li>
-</ul>
-</li>
+<li>special: '@all'</li>
+<li>(<a href="auth.html#ldap">link</a>: getting user group info from LDAP)</li>
+</ul></li>
 <li>adding and removing <a href="users.html">users</a>
 <ul>
-<li><a href="users.html#multi-key">multiple keys</a> per user
-</li>
-</ul>
-</li>
+<li><a href="users.html#multi-key">multiple keys</a> per user</li>
+</ul></li>
 <li>adding and removing <a href="repos.html">repos</a>
 <ul>
-<li>renaming repos
-</li>
-</ul>
-</li>
+<li>renaming repos</li>
+</ul></li>
 <li>defining access <a href="rules.html">rules</a>
 <ul>
-<li>what does a rule look like?
-</li>
-<li>when are the rules checked?
-</li>
-<li>how are the rules matched?
-</li>
-<li>summary of <a href="rules.html#permsum">permissions</a>
-</li>
+<li>what does a rule look like?</li>
+<li>when are the rules checked?</li>
+<li>how are the rules matched?</li>
+<li>summary of <a href="rules.html#permsum">permissions</a></li>
 <li>additional topics
 <ul>
-<li><a href="rules.html#rule-accum">rule accumulation</a>
-</li>
-<li>applying <a href="rules.html#deny-rules">deny rules</a> during the pre-git check
-</li>
-</ul>
-</li>
-<li>(<a href="refex.html">link</a>: refexes)
-</li>
-<li>(<a href="write-types.html">link</a>: different types of write operations)
-</li>
-<li>(<a href="vref.html">link</a>: virtual refs)
-</li>
-</ul>
-</li>
-<li>gitolite <a href="options.html">options</a>
-</li>
-<li>"<a href="git-config.html">git config</a>" keys and values
-</li>
-<li><a href="wild.html">"wild"</a> repos (user created repos)
+<li><a href="rules.html#rule-accum">rule accumulation</a></li>
+<li>applying <a href="rules.html#deny-rules">deny rules</a> during the pre-git check</li>
+</ul></li>
+<li>(<a href="refex.html">link</a>: refexes)</li>
+<li>(<a href="write-types.html">link</a>: different types of write operations)</li>
+<li>(<a href="vref.html">link</a>: virtual refs)</li>
+</ul></li>
+<li>gitolite <a href="options.html">options</a></li>
+<li>&quot;<a href="git-config.html">git config</a>&quot; keys and values</li>
+<li><a href="wild.html">&quot;wild&quot;</a> repos (user created repos)
 <ul>
-<li>quick introduction
-</li>
-<li>(admin) declaring wild repos in the conf file
-</li>
-<li>(user) <a href="wild.html#create">creating</a> a specific repo
-</li>
-<li>repo patterns
-</li>
-<li>roles
-</li>
+<li>quick introduction</li>
+<li>(admin) declaring wild repos in the conf file</li>
+<li>(user) <a href="wild.html#create">creating</a> a specific repo</li>
+<li>repo patterns</li>
+<li>roles</li>
 <li>adding other roles
 <ul>
-<li><a href="wild.html#rolenamewarn">IMPORTANT WARNING ABOUT THIS FEATURE</a>
-</li>
+<li><a href="wild.html#rolenamewarn">IMPORTANT WARNING ABOUT THIS FEATURE</a></li>
+</ul></li>
+<li>listing wild repos</li>
+<li>deleting wild repos</li>
+</ul></li>
+</ul></li>
 </ul>
-</li>
-<li>listing wild repos
-</li>
-<li>deleting wild repos
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-<h2>what your <a href="user.html">user</a>s need to know</h2>
-
-<h2><a href="special.html">special</a> features in core gitolite</h2>
-
-<p><strong>NOTE: <a href="non-core.html">non-core</a> features are listed in a <a href="non-core.html">separate document</a>
-since there are so many of them</strong>.</p>
-
+<h2 id="what-your-users-need-to-know"><span class="header-section-number">1.10</span> what your <a href="user.html">user</a>s need to know</h2>
+<h2 id="special-features-in-core-gitolite"><span class="header-section-number">1.11</span> <a href="special.html">special</a> features in core gitolite</h2>
+<p><strong>NOTE: <a href="non-core.html">non-core</a> features are listed in a <a href="non-core.html">separate document</a> since there are so many of them</strong>.</p>
 <ul>
-<li>putting 'repositories' and '.gitolite' <a href="special.html#elsewhere">somewhere else</a>
-</li>
-<li><a href="special.html#writable">disabling pushes</a> to take backups
-</li>
-<li><a href="special.html#pers">personal</a> branches
-</li>
+<li>putting 'repositories' and '.gitolite' <a href="special.html#elsewhere">somewhere else</a></li>
+<li><a href="special.html#writable">disabling pushes</a> to take backups</li>
+<li><a href="special.html#pers">personal</a> branches</li>
 <li><a href="deleg.html">delegating</a> access control responsibilities
 <ul>
-<li>(<a href="vref.html#NAME">link</a>: the NAME VREF)
-</li>
-<li>the <a href="deleg.html#subconf">subconf</a> command
-</li>
+<li>(<a href="vref.html#NAME">link</a>: the NAME VREF)</li>
+<li>the <a href="deleg.html#subconf">subconf</a> command</li>
+</ul></li>
+<li>using pubkeys obtained <a href="special.html#keysonly">from elsewhere</a></li>
+<li>giving users <a href="special.html#gh">their own repos</a></li>
 </ul>
-</li>
-<li>using pubkeys obtained <a href="special.html#keysonly">from elsewhere</a>
-</li>
-<li>giving users <a href="special.html#gh">their own repos</a>
-</li>
-</ul>
-
-<h2>interfacing with <a href="external.html">external</a> tools</h2>
-
+<h2 id="interfacing-with-external-tools"><span class="header-section-number">1.12</span> interfacing with <a href="external.html">external</a> tools</h2>
 <ul>
 <li>gitweb
 <ul>
-<li>setting owner, description, etc.
-</li>
-<li>changing the <a href="external.html#umask">UMASK</a>
-</li>
+<li>setting owner, description, etc.</li>
+<li>changing the <a href="external.html#umask">UMASK</a></li>
+</ul></li>
+<li>git-daemon</li>
 </ul>
-</li>
-<li>git-daemon
-</li>
+<h2 id="mirroring"><span class="header-section-number">1.13</span> <a href="mirroring.html">mirroring</a></h2>
+<h2 id="rareone-time-activities"><span class="header-section-number">1.14</span> <a href="rare.html">rare</a>/one-time activities</h2>
+<ul>
+<li>moving <a href="rare.html#existing">existing</a> repos into gitolite</li>
+<li><a href="rare.html#moving">moving</a> servers</li>
 </ul>
-
-<h2><a href="mirroring.html">mirroring</a></h2>
-
-<h2><a href="rare.html">rare</a>/one-time activities</h2>
-
+<h2 id="customising-gitolite"><span class="header-section-number">1.15</span> customising gitolite</h2>
 <ul>
-<li>moving <a href="rare.html#existing">existing</a> repos into gitolite
-</li>
-<li><a href="rare.html#moving">moving</a> servers
-</li>
-</ul>
-
-<h2>customising gitolite</h2>
-
+<li><a href="cust.html">customisation</a> overview
 <ul>
-<li><p><a href="cust.html">customisation</a> overview</p>
-
-<ul>
-<li><a href="cust.html#ncintro">introduction</a>
-</li>
+<li><a href="cust.html#ncintro">introduction</a></li>
 <li><a href="cust.html#ncloc">where</a> do you put custom code?
 <ul>
-<li>(<a href="cust.html#pushcode">link</a>: updating code via the admin repo)
-</li>
-</ul>
-</li>
+<li>(<a href="cust.html#pushcode">link</a>: updating code via the admin repo)</li>
+</ul></li>
 <li><a href="cust.html#nctypes">types</a> of non-core programs
 <ul>
-<li><a href="cust.html#commands">commands</a>
-</li>
-<li><a href="cust.html#hooks">hooks</a>
-</li>
-<li>syntactic <a href="cust.html#sugar">sugar</a>
-</li>
-<li>(<a href="triggers.html">link</a>: triggers)
-</li>
-<li>(<a href="vref.html">link</a>: VREFs)
-</li>
-</ul>
-</li>
+<li><a href="cust.html#commands">commands</a></li>
+<li><a href="cust.html#hooks">hooks</a></li>
+<li>syntactic <a href="cust.html#sugar">sugar</a></li>
+<li>(<a href="triggers.html">link</a>: triggers)</li>
+<li>(<a href="vref.html">link</a>: VREFs)</li>
 </ul></li>
-<li><p><a href="dev-notes.html">developer notes</a> -- writing your own custom code</p>
-
+</ul></li>
+<li><a href="dev-notes.html">developer notes</a> -- writing your own custom code
 <ul>
-<li>environment variables and other inputs
-</li>
+<li>environment variables and other inputs</li>
 <li>APIs
 <ul>
-<li>the shell API
-</li>
-<li>the perl API
-</li>
-</ul>
-</li>
+<li>the shell API</li>
+<li>the perl API</li>
+</ul></li>
 <li>writing your own...
 <ul>
-<li>hooks
-</li>
-<li>commands
-</li>
-<li>trigger programs
-</li>
-<li>sugar
-</li>
-</ul>
-</li>
+<li>hooks</li>
+<li>commands</li>
+<li>trigger programs</li>
+<li>sugar</li>
+</ul></li>
 <li>appendices
 <ul>
-<li>notes on the INPUT trigger
-</li>
-<li><a href="dev-notes.html#rsev">repo-specific environment variables</a>
-</li>
-<li><a href="dev-notes.html#lff">log file format</a>
-</li>
-</ul>
-</li>
+<li>notes on the INPUT trigger</li>
+<li><a href="dev-notes.html#rsev">repo-specific environment variables</a></li>
+<li><a href="dev-notes.html#lff">log file format</a></li>
 </ul></li>
-<li><p><a href="non-core.html">list of non-core programs</a> shipped with gitolite</p></li>
+</ul></li>
+<li><a href="non-core.html">list of non-core programs</a> shipped with gitolite</li>
 </ul>
-
-<h2>background info</h2>
-
+<h2 id="background-info"><span class="header-section-number">1.16</span> background info</h2>
 <ul>
-<li><a href="files.html">files and directories</a> involved in install+setup
-</li>
+<li><a href="files.html">files and directories</a> involved in install+setup</li>
 <li><a href="auth.html">auth</a>entication versus authorisation
 <ul>
-<li>interfacing with <a href="auth.html#otherauth">other authentication</a> systems
-</li>
-<li>getting user group info from <a href="auth.html#ldap">LDAP</a>
-</li>
+<li>interfacing with <a href="auth.html#otherauth">other authentication</a> systems</li>
+<li>getting user group info from <a href="auth.html#ldap">LDAP</a></li>
+</ul></li>
+<li><a href="ssh.html">ssh</a></li>
+<li><a href="regex.html">regular expressions</a></li>
+<li><a href="perf.html">gitolite performance</a> and optional <a href="cache.html">caching</a></li>
 </ul>
-</li>
-<li><a href="ssh.html">ssh</a>
-</li>
-<li><a href="regex.html">regular expressions</a>
-</li>
-<li><a href="perf.html">gitolite performance</a> and optional <a href="cache.html">caching</a>
-</li>
-</ul>
-
-<h2>contributed software, tools, and documentation</h2>
-
+<h2 id="contributed-software-tools-and-documentation"><span class="header-section-number">1.17</span> contributed software, tools, and documentation</h2>
 <ul>
-<li><a href="README-emacs.html">emacs</a> "major mode"
-</li>
-<li>(rest: TBD)
-</li>
+<li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
+<li>(rest: TBD)</li>
 </ul>
-
-<h2>TBD</h2>
-
+<h2 id="tbd"><span class="header-section-number">1.18</span> TBD</h2>
 <ul>
-<li>log file format, LOG_EXTRA
-</li>
-<li>hub
-</li>
-<li>mob branches
-</li>
-<li>password access
-</li>
+<li>log file format, LOG_EXTRA</li>
+<li>hub</li>
+<li>mob branches</li>
+<li>password access</li>
 </ul>
+</body>
+</html>

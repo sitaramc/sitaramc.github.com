@@ -1,41 +1,23 @@
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>WARNINGS</title>
-<style>
-    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
-    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
-    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
-    h4          { background: #ffb; text-color: #000; }
-    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
-    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-</style>
-<style>
-   body{counter-reset: section}
-   h1{counter-reset: sub-section}
-   h2{counter-reset: composite}
-   h3{counter-reset: detail}
-
-   h1:before {
-     counter-increment: section;
-     content: counter(section) ". ";
-   }
-   h2:before {
-     counter-increment: sub-section;
-     content: counter(section) "." counter(sub-section) ". ";
-   }
-   h3:before {
-     counter-increment: composite;
-     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
-   }
-   h4:before {
-     counter-increment: detail;
-     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
-   }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
 </head>
-
+<body>
 <p style="text-align:center">
     <a href="master-toc.html">master TOC</a>
 |
@@ -46,93 +28,44 @@
     <a href="index.html#license">license</a>
 </p>
 <p style="text-align:center">
-<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+<font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1>WARNINGS</h1>
-
+<h1 id="warnings"><span class="header-section-number">1</span> WARNINGS</h1>
 <p><strong>Please take note of the following points</strong>:</p>
-
 <ul>
-<li><p>If you're bringing existing repos into gitolite, please see
-<a href="rare.html#existing">this</a> first.</p></li>
-<li><p>Gitolite expects all the directories and files it manages/uses to be owned
-by the <a href="install.html#nnc">hosting user</a> and not have strange permissions and
-ownerships.</p></li>
-<li><p>Gitolite does NOT like it if you fiddle with files and directories it
-cares about in any way except as directed in the documentation.</p>
-
+<li><p>If you're bringing existing repos into gitolite, please see <a href="rare.html#existing">this</a> first.</p></li>
+<li><p>Gitolite expects all the directories and files it manages/uses to be owned by the <a href="install.html#nnc">hosting user</a> and not have strange permissions and ownerships.</p></li>
+<li><p>Gitolite does NOT like it if you fiddle with files and directories it cares about in any way except as directed in the documentation.</p>
 <p>Gitolite cares about the following directories</p>
-
 <pre><code>~/.gitolite.rc
 ~/.gitolite
-~/repositories/gitolite-admin.git
-</code></pre>
-
+~/repositories/gitolite-admin.git</code></pre>
 <p>Also, in each repo, gitolite cares about</p>
-
 <pre><code>gl-*
-hooks/update
-</code></pre></li>
-<li><p>Gitolite depends on several system-installed packages: openssh, git, perl,
-sh being the main ones.  They should all be configured sensibly and with
-most of the normal defaults.  (For example, if your sshd config says the
-authorized keys file should be placed in some directory other than the
-default, expect trouble).</p></li>
+hooks/update</code></pre></li>
+<li><p>Gitolite depends on several system-installed packages: openssh, git, perl, sh being the main ones. They should all be configured sensibly and with most of the normal defaults. (For example, if your sshd config says the authorized keys file should be placed in some directory other than the default, expect trouble).</p></li>
 </ul>
-
 <p>...ok that's the serious stuff done...</p>
-
 <hr />
-
-<p>For the entertainment of the sensible majority, and as a way of thanking all
-of you, here are some examples of requests (demands in some cases) I have
-received over the last couple of years.</p>
-
+<p>For the entertainment of the sensible majority, and as a way of thanking all of you, here are some examples of requests (demands in some cases) I have received over the last couple of years.</p>
 <ul>
 <li><p>deleting environment variables copied from client session</p>
-
-<p>demand: add code to delete certain environment variables at startup
-because "the openssh servers in the linux distribution that [he] use[s],
-are configured to copy <code>GIT_*</code> variables to the remote session".</p>
-
+<p>demand: add code to delete certain environment variables at startup because &quot;the openssh servers in the linux distribution that [he] use[s], are configured to copy <code>GIT_*</code> variables to the remote session&quot;.</p>
 <p>This is wrong on so many levels it's almost plonk-able!</p></li>
 <li><p>using <code>cp</code> instead of <code>ln</code></p>
-
-<p>Guy has an NTFS file system mounted on Linux.  So... no symlinks (an NTFS
-file system on Windows works fine because msysgit/cygwin manage to
-<em>simulate</em> them.  NTFS mounted on Linux won't do that!)</p>
-
+<p>Guy has an NTFS file system mounted on Linux. So... no symlinks (an NTFS file system on Windows works fine because msysgit/cygwin manage to <em>simulate</em> them. NTFS mounted on Linux won't do that!)</p>
 <p>He wanted all the symlink stuff to be replaced by copies.</p>
-
 <p>No. Way.</p></li>
 <li><p>non-bare repos on the server</p>
-
-<p>Some guy gave me a complicated spiel about git-svn not liking bare repos
-or whatever.  I tuned off at the first mention of those 3 letters so I
-don't really know what the actual problem was.</p>
-
-<p>But it doesn't matter.  Even if someone (Ralf H) had not chipped in with a
-workable solution, I still would not do it.  A server repo should be bare.
-Period.</p></li>
+<p>Some guy gave me a complicated spiel about git-svn not liking bare repos or whatever. I tuned off at the first mention of those 3 letters so I don't really know what the actual problem was.</p>
+<p>But it doesn't matter. Even if someone (Ralf H) had not chipped in with a workable solution, I still would not do it. A server repo should be bare. Period.</p></li>
 <li><p>incomplete ownership of <code>GL_REPO_BASE</code></p>
-
-<p>This guy had a repo-base directory where not all of the files were owned
-by the git user.  As a result, some of the hooks did not get created.  He
-claimed my code should detect OS-permissions issues while it's doing its
-stuff.</p>
-
-<p>No.  I refuse to have the code constantly look over its shoulder making
-sure fundamental assumptions are being met.</p></li>
+<p>This guy had a repo-base directory where not all of the files were owned by the git user. As a result, some of the hooks did not get created. He claimed my code should detect OS-permissions issues while it's doing its stuff.</p>
+<p>No. I refuse to have the code constantly look over its shoulder making sure fundamental assumptions are being met.</p></li>
 <li><p>empty template directory</p>
-
 <p>(See man git-init for what a template directory is).</p>
-
-<p>The same guy with the environment variables had an empty template
-directory because he "does not like to have sample hooks in every
-repository".  So naturally, the hooks directory does not get created when
-you run a <code>git init</code>.  He expects gitolite to compensate for it.</p>
-
-<p>Granted, it's only a 1-line change.  But again, this falls under
-"constantly looking over your shoulder to double check fundamental
-assumptions".  Where does it end?</p></li>
+<p>The same guy with the environment variables had an empty template directory because he &quot;does not like to have sample hooks in every repository&quot;. So naturally, the hooks directory does not get created when you run a <code>git init</code>. He expects gitolite to compensate for it.</p>
+<p>Granted, it's only a 1-line change. But again, this falls under &quot;constantly looking over your shoulder to double check fundamental assumptions&quot;. Where does it end?</p></li>
 </ul>
+</body>
+</html>

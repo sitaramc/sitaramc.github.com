@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
+</head>
+<body>
+<p style="text-align:center">
+    <a href="index.html">git notes main page</a>
+|
+<a href="gitolite/index.html"><strong>gitolite</strong> main page</a>
+|
+    <a href="license.html">license</a>
+</p>
+<div id="TOC">
+<ul>
+<li><a href="#git----urls-galore">git -- URLs galore</a><ul>
+<li><a href="#basic-stuffconcepts">basic stuff/concepts</a><ul>
+<li><a href="#for-svn-and-other-centralised-vcs-users">...for SVN and other Centralised VCS users</a></li>
+</ul></li>
+<li><a href="#detailed-tutorials">detailed tutorials</a></li>
+<li><a href="#advanced-stuffbest-practices">advanced stuff/best practices</a></li>
+<li><a href="#digging-into-gittroubleshooting">digging into git/troubleshooting</a></li>
+<li><a href="#opinionsdiscussiondvcss-in-general">opinions/discussion/DVCSs in general</a></li>
+<li><a href="#advocacy">advocacy</a></li>
+<li><a href="#the-chief-penguin-wrangler-speaks--">the chief penguin wrangler speaks :-)</a><ul>
+<li><a href="#fanboi-links">fanboi links</a></li>
+</ul></li>
+<li><a href="#other-vcss----comparision-criticism-etc">other VCSs -- comparision, criticism, etc</a><ul>
+<li><a href="#cvs">CVS</a></li>
+<li><a href="#svn">SVN</a></li>
+<li><a href="#visual-source-unsafe-and-tfs">Visual Source <font size="-5">un</font>Safe and TFS</a></li>
+<li><a href="#clearcase">Clearcase</a></li>
+<li><a href="#hg">Hg</a></li>
+<li><a href="#darcs">darcs</a></li>
+<li><a href="#perforce">perforce</a></li>
+</ul></li>
+<li><a href="#funny-stuff">funny stuff</a></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="git----urls-galore" class="unnumbered"><a href="#git----urls-galore">git -- URLs galore</a></h1>
+<!-- pandoc: toc -->
+
+<h2 id="basic-stuffconcepts" class="unnumbered"><a href="#basic-stuffconcepts">basic stuff/concepts</a></h2>
+<ul>
+<li><a href="http://sitaramc.github.com/gcs.html">http://sitaramc.github.com/gcs.html</a> -- my version of the classic &quot;Git for Computer Scientists&quot;</li>
+<li><a href="http://cworth.org/hgbook-git/tour/">http://cworth.org/hgbook-git/tour/</a> -- I cannot emphasise how useful this URL has been in getting started!</li>
+<li><a href="http://git.or.cz/gitwiki/GitCheatSheet">http://git.or.cz/gitwiki/GitCheatSheet</a></li>
+<li>who says git is harder than SVN? Try <a href="http://git.or.cz/course/svn.html">http://git.or.cz/course/svn.html</a></li>
+<li>very nice, pictorial, explanation at <a href="http://www.kernel.org/~junio/200607-ols.pdf">http://www.kernel.org/~junio/200607-ols.pdf</a></li>
+</ul>
+<h3 id="for-svn-and-other-centralised-vcs-users" class="unnumbered"><a href="#for-svn-and-other-centralised-vcs-users">...for SVN and other Centralised VCS users</a></h3>
+<ul>
+<li><p>If you always wondered what exactly was meant by &quot;<strong>commit-then-merge versus merge-then-commit</strong>&quot;, take a couple of minutes to read <a href="http://www.ericsink.com/entries/dvcs_dag_1.html">http://www.ericsink.com/entries/dvcs_dag_1.html</a>. You'll also understand what a DAG (directed acyclic graph) is, in case you didn't know, with very nice ilustrations at an easy reading pace.</p>
+<p>This site belongs to someone who is making a commercial version control system, and is documenting his findings and thoughts very laboriously. While I don't always agree with him, he (a) certainly writes well, and I absolutely love his sense of humour, and (b) is refreshingly honest about his biases in <a href="http://www.ericsink.com/entries/dvcs_dag_2.html">his followup blog post</a>.</p></li>
+<li><p><a href="http://codeclimber.blogspot.com/2009/05/git-solves-all-your-branching-and.html">http://codeclimber.blogspot.com/2009/05/git-solves-all-your-branching-and.html</a> talks about the reluctance to try branching when coming from a painful-to-branch model like SVN. The fact is, in git, branching is one of those rare beasts: easy <em>and</em> powerful.</p></li>
+<li><p><a href="http://www.lwn.net/Articles/381796/">http://www.lwn.net/Articles/381796/</a> Subversion is unable to separate the steps &quot;fix bug A&quot; and &quot;integrate with bugfixes B C D and E, having been checked in while you've been working on A&quot;. Mr. Corporate Manager wants this feature.</p>
+<p>Subversion cannot do that unless you create a branch for everything. <em>Poof</em> your workflow is now an order of magnitude more complicated than git or hg (which is IMHO even less complicated than SVN, once you let go of the centralized-repo, poisoned-by-CVS mindset.)</p></li>
+</ul>
+<h2 id="detailed-tutorials" class="unnumbered"><a href="#detailed-tutorials">detailed tutorials</a></h2>
+<ul>
+<li><p>about the best darn doc on using the 3 GUIs that come with git: <a href="http://nathanj.github.com/gitguide/tour.html">http://nathanj.github.com/gitguide/tour.html</a> has a Windows slant but except for the &quot;installation&quot; pieces, the rest is just as applicable to Linux</p></li>
+<li><p>another <em>very useful</em> resource is the <a href="http://gitready.com/">gitready</a> site, where you'll find lots of tips and techniques. In particular, they explain things very graphically (for example, if you always wondered what rebase is, try <a href="http://gitready.com/intermediate/2009/01/31/intro-to-rebase.html">intro to rebase</a>, then maybe <a href="http://gitready.com/advanced/2009/02/11/pull-with-rebase.html">pull with rebase</a> or <a href="http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html">squashing commits with rebase</a>).</p></li>
+</ul>
+<h2 id="advanced-stuffbest-practices" class="unnumbered"><a href="#advanced-stuffbest-practices">advanced stuff/best practices</a></h2>
+<ul>
+<li><p>release engineering, branches never-merged-back, etc., <a href="http://gitster.livejournal.com/2009/01/14/">http://gitster.livejournal.com/2009/01/14/</a></p></li>
+<li><p>Ingo Molnar (mingo) on reviewing merge commits versus rebased ones: <a href="http://lwn.net/Articles/409775/">http://lwn.net/Articles/409775/</a></p></li>
+<li><p>Shawn on contrib/workdir/git-new-workdir: <a href="http://kerneltrap.org/mailarchive/git/2007/10/11/335637">http://kerneltrap.org/mailarchive/git/2007/10/11/335637</a></p></li>
+</ul>
+<h2 id="digging-into-gittroubleshooting" class="unnumbered"><a href="#digging-into-gittroubleshooting">digging into git/troubleshooting</a></h2>
+<ul>
+<li><a href="http://article.gmane.org/gmane.comp.version-control.git/46609">http://article.gmane.org/gmane.comp.version-control.git/46609</a> -- how <code>git am -3</code> works</li>
+<li><a href="http://www.kernel.org/pub/software/scm/git/docs/howto/recover-corrupted-blob-object.txt">http://www.kernel.org/pub/software/scm/git/docs/howto/recover-corrupted-blob-object.txt</a></li>
+</ul>
+<h2 id="opinionsdiscussiondvcss-in-general" class="unnumbered"><a href="#opinionsdiscussiondvcss-in-general">opinions/discussion/DVCSs in general</a></h2>
+<ul>
+<li>a somewhat longer, more philosophical article on git: <a href="http://www.betaversion.org/~stefano/linotype/news/106/">http://www.betaversion.org/~stefano/linotype/news/106/</a></li>
+<li>on tracking content instead of files: <a href="http://marc.info/?l=git&amp;m=116473016012824">http://marc.info/?l=git&amp;m=116473016012824</a></li>
+<li>a more detailed version of the same: <a href="http://article.gmane.org/gmane.comp.version-control.git/217">http://article.gmane.org/gmane.comp.version-control.git/217</a></li>
+<li>descriptive article on the advantages of a DVCS and speculative branching and low overhead repos and so on: <a href="http://griddlenoise.blogspot.com/2007/12/distributed-vcss-are-great-enablers-or.html">http://griddlenoise.blogspot.com/2007/12/distributed-vcss-are-great-enablers-or.html</a></li>
+<li>very informative comment on the advantages of a distributed system: <a href="http://weblogs.mozillazine.org/preed/2006/11/version_control_system_shootou.html#comment-486521">http://weblogs.mozillazine.org/preed/2006/11/version_control_system_shootou.html#comment-486521</a></li>
+<li><a href="http://keithp.com/blogs/Repository_Formats_Matter/">http://keithp.com/blogs/Repository_Formats_Matter/</a> -- discusses git from a small project point of view; you can retain your central model even with git</li>
+<li><p><a href="http://blogs.gnome.org/newren/2007/11/24/local-caching-a-major-distinguishing-difference-between-vcses/">http://blogs.gnome.org/newren/2007/11/24/local-caching-a-major-distinguishing-difference-between-vcses/</a></p></li>
+<li>on git being very liberal: <a href="http://tomayko.com/writings/the-thing-about-git">http://tomayko.com/writings/the-thing-about-git</a>
+<ul>
+<li>Version control systems have traditionally required a lot of up-front planning followed by constant interaction to get changes to the right place at the right time and in the right order. And woe unto thee if a rule is broken somewhere along the way, or you change your mind about something, or you just want to fix this one thing real quick before having to commit all the other crap in your working copy.</li>
+</ul></li>
+</ul>
+<h2 id="advocacy" class="unnumbered"><a href="#advocacy">advocacy</a></h2>
+<ul>
+<li>features unique to git: <a href="http://gitster.livejournal.com/16077.html">http://gitster.livejournal.com/16077.html</a></li>
+<li><a href="http://lwn.net/Articles/317154/">http://lwn.net/Articles/317154/</a>: <em>git bisect &quot;is well-nigh single-handedly responsible for reducing our average bugreport-to-fix time from 4 days to 6 hours&quot;.</em></li>
+<li>on why git is so revolutionary. This is actually the most &quot;concept-ish&quot; of all the praising articles on git, and yet the most tangible because he keeps on pumping us with examples of stuff he and others had done which could ALL be replaced by git: <a href="http://www.advogato.org/person/apenwarr/diary/371.html">http://www.advogato.org/person/apenwarr/diary/371.html</a>. Has stuff like &quot;I wanted to build distributed filesystem, but git beat me to it; I wanted a file backup system, but git beat me to it&quot;, etc., essentially saying that git is a platform for building whatever you want, not just a VCS. Or how about a &quot;hash indexed backup system&quot; to store backups from different systems efficiently?</li>
+</ul>
+<h2 id="the-chief-penguin-wrangler-speaks--" class="unnumbered"><a href="#the-chief-penguin-wrangler-speaks--">the chief penguin wrangler speaks :-)</a></h2>
+<ul>
+<li>Linus on merging: <a href="http://git.or.cz/gitwiki/LinusTalk200705Transcript">http://git.or.cz/gitwiki/LinusTalk200705Transcript</a></li>
+<li>linus explaining merging (what should be automatic and what should not) in a mailing list <a href="http://marc.info/?t=119198137100002&amp;r=1&amp;w=2">http://marc.info/?t=119198137100002&amp;r=1&amp;w=2</a></li>
+<li>some important comments on Linus's google-talk video, especially about branching and merging: <a href="http://codicesoftware.blogspot.com/2007/05/linus-torvalds-on-git-and-scm.html">http://codicesoftware.blogspot.com/2007/05/linus-torvalds-on-git-and-scm.html</a></li>
+<li>Linus on &quot;clean&quot; &quot;history&quot; <a href="http://www.mail-archive.com/dri-devel@lists.sourceforge.net/msg39091.html">http://www.mail-archive.com/dri-devel@lists.sourceforge.net/msg39091.html</a></li>
+<li><a href="http://www.kernel.org/pub/software/scm/git/docs/howto/recover-corrupted-blob-object.txt">http://www.kernel.org/pub/software/scm/git/docs/howto/recover-corrupted-blob-object.txt</a></li>
+</ul>
+<h3 id="fanboi-links" class="unnumbered"><a href="#fanboi-links">fanboi links</a></h3>
+<ul>
+<li><a href="http://gitster.livejournal.com/9970.html">http://gitster.livejournal.com/9970.html</a> -- It still is amazing that all of these were done without having to go back to the drawing board. It shows how sound the initial conceptual design was</li>
+<li><a href="http://article.gmane.org/gmane.comp.version-control.git/217">http://article.gmane.org/gmane.comp.version-control.git/217</a> -- In other words, I'm right. I'm always right, but sometimes I'm more right than other times. And dammit, when I say &quot;files don't matter&quot;, I'm really really Right(tm).</li>
+</ul>
+<h2 id="other-vcss----comparision-criticism-etc" class="unnumbered"><a href="#other-vcss----comparision-criticism-etc">other VCSs -- comparision, criticism, etc</a></h2>
+<p>look, don't expect too much praise for any of the other systems, except possibly Hg -- and even that might be back-handed ;-)</p>
+<h3 id="cvs" class="unnumbered"><a href="#cvs">CVS</a></h3>
+<ul>
+<li><a href="http://stackoverflow.com/questions/802573/difference-between-git-and-cvs/824241#824241">http://stackoverflow.com/questions/802573/difference-between-git-and-cvs/824241#824241</a> -- no summary possible; it's very well written and covers a lot of ground. It starts off with &quot;even if you use version control for single developer, on single machine (single account), there are a few differences between Git and CVS&quot;, listing 10 points there :-) A &quot;must read&quot;.</li>
+</ul>
+<h3 id="svn" class="unnumbered"><a href="#svn">SVN</a></h3>
+<p>...but also see the <a href="svn.html">archived article on subversion</a> for a lot more; SVN is the most used VCS in terms of what potential git users are <em>currently</em> using, so it has its own page.</p>
+<ul>
+<li><a href="http://blog.mwolson.org/tech/why_i_dislike_subversion.html">http://blog.mwolson.org/tech/why_i_dislike_subversion.html</a></li>
+</ul>
+<h3 id="visual-source-unsafe-and-tfs" class="unnumbered"><a href="#visual-source-unsafe-and-tfs">Visual Source <font size="-5">un</font>Safe and TFS</a></h3>
+<ul>
+<li>data integrity issues in VSS: <a href="http://www.developsense.com/testing/VSSDefects.html">http://www.developsense.com/testing/VSSDefects.html</a></li>
+<li><p>from <a href="http://martinfowler.com/bliki/VersionControlTools.html">http://martinfowler.com/bliki/VersionControlTools.html</a>: <em>Before I finish with those behind the threshold, I just want to say a few things about a particularly awful tool: Visual Source Safe, or as I call it: Visual Source Shredder. We see this less often now, thank goodness, but if you are using it we'd strongly suggest you get off it. Now. Not just is it a pain to use, I've heard too many tales of repository corruption to trust it with anything more valuable than foo.txt.</em></p></li>
+<li><p>TFS rant <a href="http://developers.slashdot.org/comments.pl?sid=1872398&amp;cid=34258672">http://developers.slashdot.org/comments.pl?sid=1872398&amp;cid=34258672</a></p></li>
+</ul>
+<h3 id="clearcase" class="unnumbered"><a href="#clearcase">Clearcase</a></h3>
+<ul>
+<li><a href="http://creativekarma.com/ee.php/weblog/comments/why_clearcase_sucks/">http://creativekarma.com/ee.php/weblog/comments/why_clearcase_sucks/</a></li>
+<li><a href="http://evilparty.org/~orc/2004/08/03/001/index.html">http://evilparty.org/~orc/2004/08/03/001/index.html</a></li>
+<li><a href="http://selenic.com/pipermail/mercurial/2007-April/012864.html">http://selenic.com/pipermail/mercurial/2007-April/012864.html</a></li>
+<li><a href="http://www.digitaltorque.ca/2006/12/18/clearcase-making-easy-things-hard/">http://www.digitaltorque.ca/2006/12/18/clearcase-making-easy-things-hard/</a></li>
+<li><a href="http://www.germane-software.com:8080/ser/aikido/clearcase-sucks">http://www.germane-software.com:8080/ser/aikido/clearcase-sucks</a></li>
+<li><a href="http://www.littleredbat.net/mk/blog/story/63/">http://www.littleredbat.net/mk/blog/story/63/</a> -- git to the rescue :-)</li>
+<li><a href="http://www.trolocsis.com/wp/2007/04/18/the-joys-of-clearcase/">http://www.trolocsis.com/wp/2007/04/18/the-joys-of-clearcase/</a></li>
+<li><a href="http://codicesoftware.blogspot.com/2008/04/break-up-clearcase-bad-love-affair.html">http://codicesoftware.blogspot.com/2008/04/break-up-clearcase-bad-love-affair.html</a></li>
+<li><a href="http://permalink.gmane.org/gmane.comp.version-control.git/132311">http://permalink.gmane.org/gmane.comp.version-control.git/132311</a> -- on CC's speed</li>
+</ul>
+<h3 id="hg" class="unnumbered"><a href="#hg">Hg</a></h3>
+<ul>
+<li><a href="http://weblog.masukomi.org/2008/2/4/some-thoughts-about-git">http://weblog.masukomi.org/2008/2/4/some-thoughts-about-git</a> (cf Hg)</li>
+<li><a href="http://weblogs.mozillazine.org/preed/2007/04/version_control_system_shootou_1.html">http://weblogs.mozillazine.org/preed/2007/04/version_control_system_shootou_1.html</a> :-)</li>
+</ul>
+<h3 id="darcs" class="unnumbered"><a href="#darcs">darcs</a></h3>
+<p>Used to be very slow. Now it's probably just slow :-)</p>
+<ul>
+<li><a href="http://blog.moertel.com/articles/2007/12/10/how-i-stopped-missing-darcs-and-started-loving-git#comment-856">http://blog.moertel.com/articles/2007/12/10/how-i-stopped-missing-darcs-and-started-loving-git#comment-856</a> a very cogent comparision with Darcs from someone who used Darcs for 3 years and git for 1 year</li>
+</ul>
+<h3 id="perforce" class="unnumbered"><a href="#perforce">perforce</a></h3>
+<ul>
+<li><a href="http://kb.perforce.com/UserTasks/WorkingDisconnected">http://kb.perforce.com/UserTasks/WorkingDisconnected</a></li>
+<li><a href="http://luqui.org/blog/archives/2007/02/19/perforce-sucks/">http://luqui.org/blog/archives/2007/02/19/perforce-sucks/</a></li>
+<li>very interesting stuff. SVN guys will like this :-) <a href="http://www.harukizaemon.com/2006/09/no-really-perforce-does-suck.html">http://www.harukizaemon.com/2006/09/no-really-perforce-does-suck.html</a></li>
+</ul>
+<h2 id="funny-stuff" class="unnumbered"><a href="#funny-stuff">funny stuff</a></h2>
+<ul>
+<li><a href="http://changelog.complete.org/posts/698-If-Version-Control-Systems-were-Airlines.html">http://changelog.complete.org/posts/698-If-Version-Control-Systems-were-Airlines.html</a> -- esp the last 2 &quot;airlines&quot;. No wonder I like git so much :-)</li>
+</ul>
+</body>
+</html>

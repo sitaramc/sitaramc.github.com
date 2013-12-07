@@ -1,41 +1,23 @@
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>pre-migration checklist</title>
-<style>
-    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
-    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
-    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
-    h4          { background: #ffb; text-color: #000; }
-    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
-    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-</style>
-<style>
-   body{counter-reset: section}
-   h1{counter-reset: sub-section}
-   h2{counter-reset: composite}
-   h3{counter-reset: detail}
-
-   h1:before {
-     counter-increment: section;
-     content: counter(section) ". ";
-   }
-   h2:before {
-     counter-increment: sub-section;
-     content: counter(section) "." counter(sub-section) ". ";
-   }
-   h3:before {
-     counter-increment: composite;
-     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
-   }
-   h4:before {
-     counter-increment: detail;
-     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
-   }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
 </head>
-
+<body>
 <p style="text-align:center">
     <a href="master-toc.html">master TOC</a>
 |
@@ -46,283 +28,143 @@
     <a href="index.html#license">license</a>
 </p>
 <p style="text-align:center">
-<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+<font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1><a name="g2migr"></a> pre-migration checklist</h1>
+<div id="TOC">
+<ul>
+<li><a href="#pre-migration-checklist"><span class="toc-section-number">1</span> pre-migration checklist</a><ul>
+<li><a href="#incompatible-features"><span class="toc-section-number">1.1</span> incompatible features</a><ul>
+<li><a href="#high-impact"><span class="toc-section-number">1.1.1</span> high impact</a></li>
+<li><a href="#medium-impact"><span class="toc-section-number">1.1.2</span> medium impact</a></li>
+<li><a href="#low-impact"><span class="toc-section-number">1.1.3</span> low impact</a></li>
+</ul></li>
+<li><a href="#cg2c"><span class="toc-section-number">1.2</span> using the &quot;check-g2-compat&quot; program</a></li>
+<li><a href="#rc-preset"><span class="toc-section-number">1.3</span> presetting the rc file</a></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="pre-migration-checklist"><a href="#pre-migration-checklist"><span class="header-section-number">1</span> pre-migration checklist</a></h1>
+<!-- pandoc: toc -->
 
-<p><font color="red"> <strong>This document is a <em>MUST</em> read if you are currently using
-g2 and want to move to g3.</strong> </font></p>
-
+<p><font color="red"> <strong>This document is a <em>MUST</em> read if you are currently using g2 and want to move to g3.</strong> </font></p>
 <hr />
-
-<ul>
-<li><a href="g2migr.html">pre-migration checklist</a>
-<ul>
-<li>incompatible features
-<ul>
-<li>high impact
-</li>
-<li>medium impact
-</li>
-<li>low impact
-</li>
-</ul>
-</li>
-<li><a href="g2migr.html#cg2c">using the "check-g2-compat" program</a>
-</li>
-<li><a href="g2migr.html#rc-preset">presetting the rc file</a>
-</li>
-</ul>
-</li>
-</ul>
-
-<hr />
-
-<p>First things first: g2 will be supported for a good long time for critical
-bugs, although enhancements and new features won't happen.</p>
-
-<p>Migration should be straightforward, but it is not automatic.  The biggest
-differences are in the rc file, mirroring, "NAME/" rules, and delegation.</p>
-
+<p>First things first: g2 will be supported for a good long time for critical bugs, although enhancements and new features won't happen.</p>
+<p>Migration should be straightforward, but it is not automatic. The biggest differences are in the rc file, mirroring, &quot;NAME/&quot; rules, and delegation.</p>
 <blockquote>
-  <hr />
-  
-  <p><strong>Presetting the rc file</strong></p>
-  
-  <p>Some rc settings in the older gitolite are such that you cannot directly
-    run <code>gitolite setup</code> when you're ready to migrate.  <strong>Doing that will
-    clobber something important</strong>.  See <a href="g2migr.html#rc-preset">presetting the rc file</a>
-    for details.</p>
-  
-  <hr />
+<hr />
 </blockquote>
-
-<p>The <code>check-g2-compat</code> program attempts to identify any <em>big</em> issues you will
-be facing; run that first.  See <a href="g2migr.html#cg2c">later</a> in this page for what its
-messages mean.  If it does not report any issues, your migrate will probably
-go quickly.  I still suggest you go through the links below in case that
-program missed something.</p>
-
-<h2>incompatible features</h2>
-
-<p>Here's a list of incompatible features and what you need to do to migrate.
-Some of them have links where there is more detail than I want to put here.</p>
-
-<h3>high impact</h3>
-
+<blockquote>
+<p><strong>Presetting the rc file</strong></p>
+</blockquote>
+<blockquote>
+<p>Some rc settings in the older gitolite are such that you cannot directly run <code>gitolite setup</code> when you're ready to migrate. <strong>Doing that will clobber something important</strong>. See <a href="g2migr.html#rc-preset">presetting the rc file</a> for details.</p>
+</blockquote>
+<blockquote>
+<hr />
+</blockquote>
+<p>The <code>check-g2-compat</code> program attempts to identify any <em>big</em> issues you will be facing; run that first. See <a href="g2migr.html#cg2c">later</a> in this page for what its messages mean. If it does not report any issues, your migrate will probably go quickly. I still suggest you go through the links below in case that program missed something.</p>
+<h2 id="incompatible-features"><a href="#incompatible-features"><span class="header-section-number">1.1</span> incompatible features</a></h2>
+<p>Here's a list of incompatible features and what you need to do to migrate. Some of them have links where there is more detail than I want to put here.</p>
+<h3 id="high-impact"><a href="#high-impact"><span class="header-section-number">1.1.1</span> high impact</a></h3>
 <p>(serious loss of functionality and/or access control compromised)</p>
-
 <ul>
-<li><p><a href="g2incompat.html#g2i-name"><code>NAME/</code></a> rules: thes need to change to <code>VREF/NAME/</code>, and you
-need to add a deny rule at the end because fallthru is "success" for all
-<a href="vref.html">VREFs</a> now, including the "NAME" VREF.</p></li>
-<li><p><a href="g2incompat.html#g2i-subconf">subconf</a>: if you're using <a href="deleg.html">delegation</a>, there is no
-implicit "subconf" at the end; you'll have to add it in.</p></li>
-<li><p>There are several important differences in mirroring.  You can start from
-scratch by reading the new <a href="mirroring.html">mirroring</a> doc or
-<a href="g2incompat.html#g2i-mirroring">migrate</a> (carefully!).</p></li>
-<li><p><code>ADMIN_POST_UPDATE_CHAINS_TO</code> -- <strong>dropped</strong>.  Add your script to the
-<code>POST_COMPILE</code> trigger chain.  Your script won't be getting the arguments
-that <em>git</em> sends to the post-update hook, but for the admin repo the only
-argument that even comes in (or is significant) is "refs/heads/master"
-anyway.</p></li>
+<li><p><a href="g2incompat.html#g2i-name"><code>NAME/</code></a> rules: thes need to change to <code>VREF/NAME/</code>, and you need to add a deny rule at the end because fallthru is &quot;success&quot; for all <a href="vref.html">VREFs</a> now, including the &quot;NAME&quot; VREF.</p></li>
+<li><p><a href="g2incompat.html#g2i-subconf">subconf</a>: if you're using <a href="deleg.html">delegation</a>, there is no implicit &quot;subconf&quot; at the end; you'll have to add it in.</p></li>
+<li><p>There are several important differences in mirroring. You can start from scratch by reading the new <a href="mirroring.html">mirroring</a> doc or <a href="g2incompat.html#g2i-mirroring">migrate</a> (carefully!).</p></li>
+<li><p><code>ADMIN_POST_UPDATE_CHAINS_TO</code> -- <strong>dropped</strong>. Add your script to the <code>POST_COMPILE</code> trigger chain. Your script won't be getting the arguments that <em>git</em> sends to the post-update hook, but for the admin repo the only argument that even comes in (or is significant) is &quot;refs/heads/master&quot; anyway.</p></li>
 <li><p><code>GL_ALL_INCLUDES_SPECIAL</code> -- <strong>dropped</strong>, <strong>requires presetting</strong>.</p>
-
-<p>@all always includes gitweb and daemon now.  Use <a href="rules.html#deny-rules">deny-rules</a> if you
-want to say <code>R = @all</code> but not have the repo(s) be visible to gitweb or
-daemon.</p></li>
-<li><p><code>GL_NO_CREATE_REPOS</code> -- <strong>dropped</strong>.  If you think you need this, email
-me.  I know one group who does need this so I will be putting it in
-eventually but not right away.  It's almost certain to be renamed anyway.</p></li>
-<li><p><code>GL_NO_DAEMON_NO_GITWEB</code> <strong>dropped</strong>, <strong>requires presetting</strong>.  Default
-will clobber your projects.list file and git-daemon-export-ok files.</p>
-
-<p>Comment out the 'daemon' and 'gitweb' lines in the ENABLE list in the rc
-file.  As you can see, gitweb and daemon can now be separately disabled,
-instead of both being tied to the same setting.</p></li>
-<li><p><code>GL_NO_SETUP_AUTHKEYS</code> <strong>dropped</strong>, <strong>requires presetting</strong>.  Default will
-clobber your authkeys file.</p>
-
+<p>@all always includes gitweb and daemon now. Use <a href="rules.html#deny-rules">deny-rules</a> if you want to say <code>R = @all</code> but not have the repo(s) be visible to gitweb or daemon.</p></li>
+<li><p><code>GL_NO_CREATE_REPOS</code> -- <strong>dropped</strong>. If you think you need this, email me. I know one group who does need this so I will be putting it in eventually but not right away. It's almost certain to be renamed anyway.</p></li>
+<li><p><code>GL_NO_DAEMON_NO_GITWEB</code> <strong>dropped</strong>, <strong>requires presetting</strong>. Default will clobber your projects.list file and git-daemon-export-ok files.</p>
+<p>Comment out the 'daemon' and 'gitweb' lines in the ENABLE list in the rc file. As you can see, gitweb and daemon can now be separately disabled, instead of both being tied to the same setting.</p></li>
+<li><p><code>GL_NO_SETUP_AUTHKEYS</code> <strong>dropped</strong>, <strong>requires presetting</strong>. Default will clobber your authkeys file.</p>
 <p>Comment out all the line(s) that call ssh-authkeys in the rc file.</p></li>
-<li><p><code>UPDATE_CHAINS_TO</code> <strong>dropped</strong>, <strong>requires presetting</strong>.  Default will
-fail to run this extra check when users push.</p>
-
-<p>Use a <a href="vref.html">vref</a> instead.  You can directly use any existing chained-to
-script as a VREF; they'll work.  Don't forget to add a rule that
-references the new VREF!</p></li>
+<li><p><code>UPDATE_CHAINS_TO</code> <strong>dropped</strong>, <strong>requires presetting</strong>. Default will fail to run this extra check when users push.</p>
+<p>Use a <a href="vref.html">vref</a> instead. You can directly use any existing chained-to script as a VREF; they'll work. Don't forget to add a rule that references the new VREF!</p></li>
 <li><p><code>GIT_PATH</code> <strong>dropped</strong>, <strong>requires presetting</strong>.</p>
-
-<p>If you need this, manipulate the PATH environment variable directly.  Just
-put something like this at the end of the rc file:</p>
-
-<pre><code>$ENV{PATH} = "/some/non-standard/path:$ENV{PATH}";
-1;
-</code></pre></li>
+<p>If you need this, manipulate the PATH environment variable directly. Just put something like this at the end of the rc file:</p>
+<pre><code>$ENV{PATH} = &quot;/some/non-standard/path:$ENV{PATH}&quot;;
+1;</code></pre></li>
 </ul>
-
-<h3>medium impact</h3>
-
+<h3 id="medium-impact"><a href="#medium-impact"><span class="header-section-number">1.1.2</span> medium impact</a></h3>
 <p>(important functionality lost, but access control not compromised)</p>
-
 <ul>
-<li><p><code>GL_ADMINDIR</code> -- <strong>dropped</strong>, is now at a fixed location: <code>~/.gitolite</code>.
-If you want it somewhere else go ahead and move it, then place a symlink
-from the assumed location to the real one.</p></li>
-<li><p><code>GL_GET_MEMBERSHIPS_PGM</code> -- is now <code>GROUPLIST_PGM</code>, see
-<a href="auth.html#ldap">here</a>.</p></li>
+<li><p><code>GL_ADMINDIR</code> -- <strong>dropped</strong>, is now at a fixed location: <code>~/.gitolite</code>. If you want it somewhere else go ahead and move it, then place a symlink from the assumed location to the real one.</p></li>
+<li><p><code>GL_GET_MEMBERSHIPS_PGM</code> -- is now <code>GROUPLIST_PGM</code>, see <a href="auth.html#ldap">here</a>.</p></li>
 <li><p><code>GL_WILDREPOS_DEFPERMS</code> -- is gone; see <a href="wild.html#roles">roles</a> for how to do this.</p></li>
-<li><p><code>REPO_BASE</code> -- <strong>dropped</strong>, is now at a fixed location: <code>~/repositories</code>.
-If you want it somewhere else go ahead and move it, then place a symlink
-from the assumed location to the real one.</p></li>
+<li><p><code>REPO_BASE</code> -- <strong>dropped</strong>, is now at a fixed location: <code>~/repositories</code>. If you want it somewhere else go ahead and move it, then place a symlink from the assumed location to the real one.</p></li>
 </ul>
-
-<h3>low impact</h3>
-
+<h3 id="low-impact"><a href="#low-impact"><span class="header-section-number">1.1.3</span> low impact</a></h3>
 <p>(ancillary, non-core, or minor functionality lost)</p>
-
 <ul>
-<li><p>Built-in command <code>expand</code> -- <strong>dropped</strong>.  The 'info' command shows you
-both normal and wild repos now.  The output format is also much simpler.</p></li>
-<li><p>Built-in commands 'getperms', 'setperms' -- <strong>merged</strong> into external
-command 'perms'.  Run <code>ssh git@host perms -h</code> for details.</p>
-
+<li><p>Built-in command <code>expand</code> -- <strong>dropped</strong>. The 'info' command shows you both normal and wild repos now. The output format is also much simpler.</p></li>
+<li><p>Built-in commands 'getperms', 'setperms' -- <strong>merged</strong> into external command 'perms'. Run <code>ssh git@host perms -h</code> for details.</p>
 <p>Similarly, 'getdesc' and 'setdesc' have been merged into 'desc'.</p></li>
 <li><p>Several 'ADC's -- see the <a href="dev-status.html">dev-status</a> page for more on this.</p></li>
 <li><p><a href="g2incompat.html#g2i-gl-time">gl-time</a>: the CpuTime module replaces gl-time.</p></li>
-<li><p><code>BIG_INFO_CAP</code> -- <strong>dropped</strong>.  If you think you must have this, try it
-without and see if there's a difference.  If you <em>know</em> you need this,
-convince me.</p></li>
-<li><p><code>GL_ADC_PATH</code> -- <strong>dropped</strong>.  It is obsolete; use <a href="cust.html#commands">commands</a> or add
-<a href="dev-notes.html">your own</a>.</p></li>
-<li><p><code>GL_ALL_READ_ALL</code> -- <strong>dropped</strong>.  If you think you must have this, try it
-without and see if there's a difference.  If you <em>know</em> you need this,
-convince me.</p></li>
-<li><p><code>GL_BIG_CONFIG</code> -- <strong>dropped</strong>.  This feature is default now.</p></li>
-<li><p><code>GL_CONF</code>, <code>GL_CONF_COMPILED</code>, and <code>GL_KEYDIR</code> -- <strong>dropped</strong>.  You had no
-business touching these anyway; if you did, move them into the expected
-default locations before attempting to run <code>gitolite setup</code></p></li>
+<li><p><code>BIG_INFO_CAP</code> -- <strong>dropped</strong>. If you think you must have this, try it without and see if there's a difference. If you <em>know</em> you need this, convince me.</p></li>
+<li><p><code>GL_ADC_PATH</code> -- <strong>dropped</strong>. It is obsolete; use <a href="cust.html#commands">commands</a> or add <a href="dev-notes.html">your own</a>.</p></li>
+<li><p><code>GL_ALL_READ_ALL</code> -- <strong>dropped</strong>. If you think you must have this, try it without and see if there's a difference. If you <em>know</em> you need this, convince me.</p></li>
+<li><p><code>GL_BIG_CONFIG</code> -- <strong>dropped</strong>. This feature is default now.</p></li>
+<li><p><code>GL_CONF</code>, <code>GL_CONF_COMPILED</code>, and <code>GL_KEYDIR</code> -- <strong>dropped</strong>. You had no business touching these anyway; if you did, move them into the expected default locations before attempting to run <code>gitolite setup</code></p></li>
 <li><p><code>GL_GITCONFIG_KEYS</code> -- is now <code>GIT_CONFIG_KEYS</code>.</p></li>
 <li><p><code>GL_LOGT</code> -- now has a fixed value; email me if this is a problem.</p></li>
-<li><p><code>GL_PACKAGE_CONF</code> and <code>GL_PACKAGE_HOOKS</code> -- <strong>dropped</strong>.  They are not
-needed anymore, but check if you had any custom hooks set in the latter
-location and copy them across.</p></li>
-<li><p><code>GL_PERFLOGT</code> -- <strong>dropped</strong>.  See <a href="g2incompat.html#g2i-gl-time">gl-time</a>.</p></li>
+<li><p><code>GL_PACKAGE_CONF</code> and <code>GL_PACKAGE_HOOKS</code> -- <strong>dropped</strong>. They are not needed anymore, but check if you had any custom hooks set in the latter location and copy them across.</p></li>
+<li><p><code>GL_PERFLOGT</code> -- <strong>dropped</strong>. See <a href="g2incompat.html#g2i-gl-time">gl-time</a>.</p></li>
 <li><p><code>GL_SITE_INFO</code> -- is now <code>SITE_INFO</code>.</p></li>
-<li><p><code>GL_WILDREPOS</code> -- <strong>dropped</strong>.  This feature is default now.</p></li>
+<li><p><code>GL_WILDREPOS</code> -- <strong>dropped</strong>. This feature is default now.</p></li>
 <li><p><code>GL_WILDREPOS_PERM_CATS</code> -- is now the ROLES hash in the rc file.</p></li>
-<li><p><code>RSYNC_BASE</code> -- needs work.  Email me if you are using this.</p></li>
-<li><p><code>NICE_VALUE</code> -- <strong>dropped</strong>.  Uncomment the 'renice 10' line in the rc
-file.  You can also change the 10 to something else if you wish.</p></li>
-<li><p><code>PROJECTS_LIST</code> -- is now <code>GITWEB_PROJECTS_LIST</code>.  More importantly, it is
-only used by update-gitweb-access-list in src/commands/post-compile.  This
-variable now has nothing to do with gitolite core, and the rc is just
-helping to store settings for external programs like that one.</p></li>
+<li><p><code>RSYNC_BASE</code> -- needs work. Email me if you are using this.</p></li>
+<li><p><code>NICE_VALUE</code> -- <strong>dropped</strong>. Uncomment the 'renice 10' line in the rc file. You can also change the 10 to something else if you wish.</p></li>
+<li><p><code>PROJECTS_LIST</code> -- is now <code>GITWEB_PROJECTS_LIST</code>. More importantly, it is only used by update-gitweb-access-list in src/commands/post-compile. This variable now has nothing to do with gitolite core, and the rc is just helping to store settings for external programs like that one.</p></li>
 <li><p><code>REPO_UMASK</code> -- is now <code>UMASK</code>.</p></li>
-<li><p><code>WEB_INTERFACE</code> and <code>GITWEB_URI_ESCAPE</code> -- <strong>dropped</strong>.  Patches to the
-update program to directly do those things are welcome.  Personally, I
-think people who use spaces and other funky characters in dir/file names
-should be shot but no one listens to me anyway.</p></li>
+<li><p><code>WEB_INTERFACE</code> and <code>GITWEB_URI_ESCAPE</code> -- <strong>dropped</strong>. Patches to the update program to directly do those things are welcome. Personally, I think people who use spaces and other funky characters in dir/file names should be shot but no one listens to me anyway.</p></li>
 </ul>
-
-<h2><a name="cg2c"></a> using the "check-g2-compat" program</h2>
-
-<p>This program checks a few things only, not everything.  In particular, it
-looks for settings and status that might:</p>
-
+<h2 id="cg2c"><a href="#cg2c"><span class="header-section-number">1.2</span> using the &quot;check-g2-compat&quot; program</a></h2>
+<p>This program checks a few things only, not everything. In particular, it looks for settings and status that might:</p>
 <ul>
-<li>make g3 unusable for lots of users
-</li>
-<li>make g3 give <em>more</em> access than g2 under some conditions
-</li>
+<li>make g3 unusable for lots of users</li>
+<li>make g3 give <em>more</em> access than g2 under some conditions</li>
 </ul>
-
-<p>It does NOT look for or warn about anything else; you're expected to read (and
-act upon, if needed) the rest of the migration guide links given a few paras
-above to cover everything else.</p>
-
-<p>Here's an explanation of those messages that the check-g2-compat program may
-put that contain the words "see docs":</p>
-
+<p>It does NOT look for or warn about anything else; you're expected to read (and act upon, if needed) the rest of the migration guide links given a few paras above to cover everything else.</p>
+<p>Here's an explanation of those messages that the check-g2-compat program may put that contain the words &quot;see docs&quot;:</p>
 <ul>
 <li><p><code>GL_ADMINDIR in the wrong place -- aborting</code></p>
-
-<p>It expects to find <code>GL_ADMINDIR</code> and <code>REPO_BASE</code> pointing to the right
-places.  It aborts if these conditions are not met and does not scan
-further since that sort of guesswork is not good.  If you are in that
-position, make a symlink from the real location to the expected location,
-change the RC accordingly, and re-try.</p></li>
+<p>It expects to find <code>GL_ADMINDIR</code> and <code>REPO_BASE</code> pointing to the right places. It aborts if these conditions are not met and does not scan further since that sort of guesswork is not good. If you are in that position, make a symlink from the real location to the expected location, change the RC accordingly, and re-try.</p></li>
 <li><p><code>REPO_BASE in the wrong place -- aborting</code></p>
-
 <p>same as above</p></li>
 <li><p><code>NAME rules</code></p>
-
-<p><strong>This is a significant difference and affects access badly (gives access
-that would otherwise not be given)</strong>.  Please see the <a href="g2incompat.html">list of non-RC
-incompatibilities</a>.</p></li>
+<p><strong>This is a significant difference and affects access badly (gives access that would otherwise not be given)</strong>. Please see the <a href="g2incompat.html#g2incompat">list of non-RC incompatibilities</a>.</p></li>
 <li><p><code>subconf command in admin repo</code></p>
-
-<p>This is not so bad security wise but it might <em>reduce</em> access by not
-processing files you intended to.  Again, see the same link as in the
-previous bullet.</p></li>
+<p>This is not so bad security wise but it might <em>reduce</em> access by not processing files you intended to. Again, see the same link as in the previous bullet.</p></li>
 <li><p><code>mirroring used</code></p>
-
-<p>There have been quite a few changes to mirroring.  You can start from
-scratch by reading the new <a href="mirroring.html">mirroring</a> doc or
-<a href="g2incompat.html#g2i-mirroring">migrate</a> (carefully!).</p></li>
+<p>There have been quite a few changes to mirroring. You can start from scratch by reading the new <a href="mirroring.html">mirroring</a> doc or <a href="g2incompat.html#g2i-mirroring">migrate</a> (carefully!).</p></li>
 <li><p><code>found N gl-creater files</code></p>
-
-<p>These need to be renamed to <code>gl-creator</code> (the correct spelling at last,
-hooray!).  Suggested command sequence:</p>
-
+<p>These need to be renamed to <code>gl-creator</code> (the correct spelling at last, hooray!). Suggested command sequence:</p>
 <pre><code>cd $HOME/repositories
-find . -type d -name "*.git" -prune | while read r
+find . -type d -name &quot;*.git&quot; -prune | while read r
 do
     mv $r/gl-creater $r/gl-creator
-done 2&gt;/dev/null
-</code></pre>
-
-<p>Once you do this, the g2 will not work completely unless you change them
-back.</p></li>
+done 2&gt;/dev/null</code></pre>
+<p>Once you do this, the g2 will not work completely unless you change them back.</p></li>
 <li><p><code>found N gl-perms files with R or RW</code></p>
-
-<p>Setting perms of R and RW will no longer work; you have to say READERS and
-WRITERS now.  Suggested command:</p>
-
+<p>Setting perms of R and RW will no longer work; you have to say READERS and WRITERS now. Suggested command:</p>
 <pre><code>find `gitolite query-rc GL_REPO_BASE` -name gl-perms |
-    xargs perl -pi -e 's/\bR\b/READERS/;s/\bRW\b/WRITERS/'
-</code></pre></li>
+    xargs perl -pi -e 's/\bR\b/READERS/;s/\bRW\b/WRITERS/'</code></pre></li>
 </ul>
-
-<h2><a name="rc-preset"></a> presetting the rc file</h2>
-
-<p>Some rc settings in the older gitolite are such that you cannot directly run
-<code>gitolite setup</code> when you're ready to migrate.  <strong>Doing that will clobber
-something important</strong>.  You have to create a default rc file, edit it
-appropriately, and <em>then</em> run <code>gitolite setup</code>.</p>
-
-<p>The most serious example of this is <code>GL_NO_SETUP_AUTHKEYS</code>, which tells the
-(old) gitolite that you want to manage <code>~/.ssh/authorized_keys</code> yourself and
-it should not fiddle with it.</p>
-
-<p>If you don't preset the rc (in this case, by commenting out the 'ssh-authkeys'
-line) <strong>before</strong> running <code>gitolite setup</code>, <strong>your <code>~/.ssh/authorized_keys</code>
-file will get clobbered</strong>.</p>
-
-<p>The actual rc settings that require presetting are listed in the "high
-impact" section above.  This section tells you how to do the presetting.</p>
-
+<h2 id="rc-preset"><a href="#rc-preset"><span class="header-section-number">1.3</span> presetting the rc file</a></h2>
+<p>Some rc settings in the older gitolite are such that you cannot directly run <code>gitolite setup</code> when you're ready to migrate. <strong>Doing that will clobber something important</strong>. You have to create a default rc file, edit it appropriately, and <em>then</em> run <code>gitolite setup</code>.</p>
+<p>The most serious example of this is <code>GL_NO_SETUP_AUTHKEYS</code>, which tells the (old) gitolite that you want to manage <code>~/.ssh/authorized_keys</code> yourself and it should not fiddle with it.</p>
+<p>If you don't preset the rc (in this case, by commenting out the 'ssh-authkeys' line) <strong>before</strong> running <code>gitolite setup</code>, <strong>your <code>~/.ssh/authorized_keys</code> file will get clobbered</strong>.</p>
+<p>The actual rc settings that require presetting are listed in the &quot;high impact&quot; section above. This section tells you how to do the presetting.</p>
 <ul>
 <li><p>rename (not just copy) your old (g2) rc file to something else</p></li>
 <li><p>run</p>
-
-<pre><code>gitolite print-default-rc &gt; $HOME/.gitolite.rc
-</code></pre></li>
+<pre><code>gitolite print-default-rc &gt; $HOME/.gitolite.rc</code></pre></li>
 <li><p>edit the file</p>
-
-<pre><code>${EDITOR:-vim} $HOME/.gitolite.rc
-</code></pre>
-
-<p>make appropriate changes as described elsewhere in this migration guide,
-and save it.</p></li>
+<pre><code>${EDITOR:-vim} $HOME/.gitolite.rc</code></pre>
+<p>make appropriate changes as described elsewhere in this migration guide, and save it.</p></li>
 <li><p><em>then</em> you can run <a href="setup.html">gitolite setup</a>.</p></li>
 </ul>
+</body>
+</html>

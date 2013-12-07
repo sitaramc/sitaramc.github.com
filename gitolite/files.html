@@ -1,41 +1,23 @@
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>files involved in gitolite</title>
-<style>
-    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
-    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
-    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
-    h4          { background: #ffb; text-color: #000; }
-    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
-    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-</style>
-<style>
-   body{counter-reset: section}
-   h1{counter-reset: sub-section}
-   h2{counter-reset: composite}
-   h3{counter-reset: detail}
-
-   h1:before {
-     counter-increment: section;
-     content: counter(section) ". ";
-   }
-   h2:before {
-     counter-increment: sub-section;
-     content: counter(section) "." counter(sub-section) ". ";
-   }
-   h3:before {
-     counter-increment: composite;
-     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
-   }
-   h4:before {
-     counter-increment: detail;
-     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
-   }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
 </head>
-
+<body>
 <p style="text-align:center">
     <a href="master-toc.html">master TOC</a>
 |
@@ -46,47 +28,24 @@
     <a href="index.html#license">license</a>
 </p>
 <p style="text-align:center">
-<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+<font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1>files involved in gitolite</h1>
-
+<h1 id="files-involved-in-gitolite"><span class="header-section-number">1</span> files involved in gitolite</h1>
 <p>Gitolite creates and uses the following files and directories:</p>
-
 <ul>
-<li><code>~/repositories</code> -- the actual (bare) repositories are here
-</li>
-<li><code>~/.gitolite.rc</code> -- configuration parameters that must be done directly on
-the server
-</li>
-<li><code>~/.gitolite</code> -- gitolite's "working" directory.  This contains everything
-else that gitolite needs.  (Warning: you're not supposed to fiddle with
-the files and directories within; instead, make changes in a clone of the
-gitolite-admin repository and push, and those appear magically here).
-</li>
+<li><code>~/repositories</code> -- the actual (bare) repositories are here</li>
+<li><code>~/.gitolite.rc</code> -- configuration parameters that must be done directly on the server</li>
+<li><code>~/.gitolite</code> -- gitolite's &quot;working&quot; directory. This contains everything else that gitolite needs. (Warning: you're not supposed to fiddle with the files and directories within; instead, make changes in a clone of the gitolite-admin repository and push, and those appear magically here).</li>
 </ul>
-
-<p>Once the install/setup is done, any (or all) of these may be moved
-elsewhere and replaced by symlinks.  The most common reason for
-locating <code>~/repositories</code> somewhere else is disk space, but FHS
-compliance could also be a reason.</p>
-
+<p>Once the install/setup is done, any (or all) of these may be moved elsewhere and replaced by symlinks. The most common reason for locating <code>~/repositories</code> somewhere else is disk space, but FHS compliance could also be a reason.</p>
 <p>In addition, the following are of interest:</p>
-
 <ul>
-<li><code>~/.ssh</code> -- if you're using ssh (as opposed to http), since this is where
-the <code>authorized_keys</code> file is kept
-</li>
+<li><code>~/.ssh</code> -- if you're using ssh (as opposed to http), since this is where the <code>authorized_keys</code> file is kept</li>
 </ul>
-
-<h2>special files</h2>
-
-<p>You may want to backup the contents of <code>~/.gitolite/logs</code> if you care about
-auditability etc.</p>
-
-<h2>gitolite software</h2>
-
+<h2 id="special-files"><span class="header-section-number">1.1</span> special files</h2>
+<p>You may want to backup the contents of <code>~/.gitolite/logs</code> if you care about auditability etc.</p>
+<h2 id="gitolite-software"><span class="header-section-number">1.2</span> gitolite software</h2>
 <p>The above list does not include the gitolite software itself.</p>
-
-<p>Gitolite offers you 3 ways to install software.  After cloning the gitolite
-sources, run the install command in it with a <code>-h</code> argument to see what they
-are.  Where the actual software is found depends on that.</p>
+<p>Gitolite offers you 3 ways to install software. After cloning the gitolite sources, run the install command in it with a <code>-h</code> argument to see what they are. Where the actual software is found depends on that.</p>
+</body>
+</html>

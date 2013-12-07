@@ -1,41 +1,23 @@
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>customising gitolite</title>
-<style>
-    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
-    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
-    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
-    h4          { background: #ffb; text-color: #000; }
-    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
-    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-</style>
-<style>
-   body{counter-reset: section}
-   h1{counter-reset: sub-section}
-   h2{counter-reset: composite}
-   h3{counter-reset: detail}
-
-   h1:before {
-     counter-increment: section;
-     content: counter(section) ". ";
-   }
-   h2:before {
-     counter-increment: sub-section;
-     content: counter(section) "." counter(sub-section) ". ";
-   }
-   h3:before {
-     counter-increment: composite;
-     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
-   }
-   h4:before {
-     counter-increment: detail;
-     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
-   }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
 </head>
-
+<body>
 <p style="text-align:center">
     <a href="master-toc.html">master TOC</a>
 |
@@ -46,270 +28,119 @@
     <a href="index.html#license">license</a>
 </p>
 <p style="text-align:center">
-<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+<font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1>customising gitolite</h1>
+<div id="TOC">
+<ul>
+<li><a href="#customising-gitolite"><span class="toc-section-number">1</span> customising gitolite</a><ul>
+<li><a href="#ncintro"><span class="toc-section-number">1.1</span> introduction</a></li>
+<li><a href="#ncloc"><span class="toc-section-number">1.2</span> locations...</a><ul>
+<li><a href="#for-non-core-programs-shipped-with-gitolite"><span class="toc-section-number">1.2.1</span> ...for non-core programs shipped with gitolite</a></li>
+<li><a href="#localcode"><span class="toc-section-number">1.2.2</span> ...for <em>your</em> non-core programs</a></li>
+<li><a href="#pushcode"><span class="toc-section-number">1.2.3</span> using the gitolite-admin repo to manage non-core code</a></li>
+</ul></li>
+<li><a href="#nctypes"><span class="toc-section-number">1.3</span> types of non-core programs</a><ul>
+<li><a href="#commands"><span class="toc-section-number">1.3.1</span> gitolite &quot;commands&quot;</a></li>
+<li><a href="#hooks"><span class="toc-section-number">1.3.2</span> hooks and gitolite</a></li>
+<li><a href="#sugar"><span class="toc-section-number">1.3.3</span> syntactic sugar</a></li>
+<li><a href="#triggers"><span class="toc-section-number">1.3.4</span> triggers</a></li>
+<li><a href="#vrefs"><span class="toc-section-number">1.3.5</span> VREFs</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="customising-gitolite"><a href="#customising-gitolite"><span class="header-section-number">1</span> customising gitolite</a></h1>
+<!-- pandoc: toc -->
 
-<p>Much of gitolite (g3)'s functionality comes from programs and scripts that are
-not considered "core".  This keeps the core simpler, and allows you to enhance
-gitolite for your own purposes without too much fuss.  (As an extreme example,
-even mirroring is not in core now!)</p>
-
+<p>Much of gitolite (g3)'s functionality comes from programs and scripts that are not considered &quot;core&quot;. This keeps the core simpler, and allows you to enhance gitolite for your own purposes without too much fuss. (As an extreme example, even mirroring is not in core now!)</p>
 <p>Here's how to find out more:</p>
-
 <ul>
-<li><p>this document describes the types of non-core programs and how/where to
-install your own</p></li>
-<li><p>the <a href="dev-notes.html">developer notes</a> page tells you how to write your own
-non-core programs</p></li>
-<li><p>the <a href="non-core.html">list of non-core programs</a> talks about what's already
-shipped with gitolite, with a brief description of each</p></li>
+<li><p>this document describes the types of non-core programs and how/where to install your own</p></li>
+<li><p>the <a href="dev-notes.html">developer notes</a> page tells you how to write your own non-core programs</p></li>
+<li><p>the <a href="non-core.html">list of non-core programs</a> talks about what's already shipped with gitolite, with a brief description of each</p></li>
 </ul>
-
 <hr />
-
-<ul>
-<li><a href="cust.html">customising gitolite</a>
-<ul>
-<li><a href="cust.html#ncintro">introduction</a>
-</li>
-<li><a href="cust.html#ncloc">locations...</a>
-<ul>
-<li>...for non-core programs shipped with gitolite
-</li>
-<li><a href="cust.html#localcode">...for <em>your</em> non-core programs</a>
-</li>
-<li><a href="cust.html#pushcode">using the gitolite-admin repo to manage non-core code</a>
-<ul>
-<li><strong>SECURITY</strong> note on this mode of managing non-core code
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="cust.html#nctypes">types of non-core programs</a>
-<ul>
-<li><a href="cust.html#commands">gitolite "commands"</a>
-</li>
-<li><a href="cust.html#hooks">hooks and gitolite</a>
-<ul>
-<li><a href="cust.html#rsh">repo-specific hooks</a>
-</li>
-</ul>
-</li>
-<li><a href="cust.html#sugar">syntactic sugar</a>
-</li>
-<li>triggers
-</li>
-<li>VREFs
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-<hr />
-
-<h2><a name="ncintro"></a> introduction</h2>
-
+<h2 id="ncintro"><a href="#ncintro"><span class="header-section-number">1.1</span> introduction</a></h2>
 <p>There are 5 basic types of non-core programs.</p>
-
 <ul>
-<li><em>Commands</em> can be run from the shell command line.  Among those, the ones
-in the ENABLE list in the rc file can also be run remotely.
-</li>
-<li><em>Hooks</em> are standard git hooks.
-</li>
-<li><em>Sugar scripts</em> change the conf language for your convenience.  The word
-sugar comes from "syntactic sugar".
-</li>
-<li><em>Triggers</em> are to gitolite what hooks are to git.  I just chose a
-different name to avoid confusion and constant disambiguation in the docs.
-</li>
-<li><strong>VREFs</strong> are extensions to the access control check part of gitolite.
-</li>
+<li><em>Commands</em> can be run from the shell command line. Among those, the ones in the ENABLE list in the rc file can also be run remotely.</li>
+<li><em>Hooks</em> are standard git hooks.</li>
+<li><em>Sugar scripts</em> change the conf language for your convenience. The word sugar comes from &quot;syntactic sugar&quot;.</li>
+<li><em>Triggers</em> are to gitolite what hooks are to git. I just chose a different name to avoid confusion and constant disambiguation in the docs.</li>
+<li><strong>VREFs</strong> are extensions to the access control check part of gitolite.</li>
 </ul>
-
-<h2><a name="ncloc"></a> locations...</h2>
-
-<h3>...for non-core programs shipped with gitolite</h3>
-
-<p><code>gitolite query-rc GL_BINDIR</code> will tell you where shipped non-core programs
-reside.  Within that directory, the subdirectories of interest are:</p>
-
+<h2 id="ncloc"><a href="#ncloc"><span class="header-section-number">1.2</span> locations...</a></h2>
+<h3 id="for-non-core-programs-shipped-with-gitolite"><a href="#for-non-core-programs-shipped-with-gitolite"><span class="header-section-number">1.2.1</span> ...for non-core programs shipped with gitolite</a></h3>
+<p><code>gitolite query-rc GL_BINDIR</code> will tell you where shipped non-core programs reside. Within that directory, the subdirectories of interest are:</p>
 <ul>
-<li><code>commands</code> for commands.
-</li>
-<li><code>syntactic-sugar</code> for sugar scripts.
-</li>
-<li><code>triggers</code> and <code>lib/Gitolite/Triggers</code> for triggers (<a href="triggers.html">this</a> will
-explain the difference).
-</li>
-<li><code>VREF</code> for <a href="vref.html">VREFs</a>.
-</li>
+<li><code>commands</code> for commands.</li>
+<li><code>syntactic-sugar</code> for sugar scripts.</li>
+<li><code>triggers</code> and <code>lib/Gitolite/Triggers</code> for triggers (<a href="triggers.html">this</a> will explain the difference).</li>
+<li><code>VREF</code> for <a href="vref.html">VREFs</a>.</li>
 </ul>
-
-<h3><a name="localcode"></a> ...for <em>your</em> non-core programs</h3>
-
-<p>If you want to add your own non-core programs, or even <em>override</em> the shipped
-ones with your own, you can.</p>
-
-<p>Put your programs in some convenient directory and use the <code>LOCAL_CODE</code> rc
-variable to tell gitolite where that is.  <strong>Please supply the FULL path</strong> to
-this variable.</p>
-
+<h3 id="localcode"><a href="#localcode"><span class="header-section-number">1.2.2</span> ...for <em>your</em> non-core programs</a></h3>
+<p>If you want to add your own non-core programs, or even <em>override</em> the shipped ones with your own, you can.</p>
+<p>Put your programs in some convenient directory and use the <code>LOCAL_CODE</code> rc variable to tell gitolite where that is. <strong>Please supply the FULL path</strong> to this variable.</p>
 <p>Within that directory, you can use any or all of these subdirectories:</p>
-
 <ul>
-<li><code>commands</code>
-</li>
-<li><code>hooks/common</code> (see note below)
-</li>
-<li><code>syntactic-sugar</code>
-</li>
-<li><code>triggers</code> and <code>lib/Gitolite/Triggers</code>
-</li>
-<li><code>VREF</code>
-</li>
+<li><code>commands</code></li>
+<li><code>hooks/common</code> (see note below)</li>
+<li><code>syntactic-sugar</code></li>
+<li><code>triggers</code> and <code>lib/Gitolite/Triggers</code></li>
+<li><code>VREF</code></li>
 </ul>
-
-<p>Note: the <code>hooks/common</code> directory is a bit special.  If you add new hooks to
-this, you must run either <code>gitolite setup</code>, or at least <code>gitolite setup
---hooks-only</code>.</p>
-
-<h3><a name="pushcode"></a> using the gitolite-admin repo to manage non-core code</h3>
-
-<p>The location given in <code>LOCAL_CODE</code> could be anywhere on disk, like say
-<code>$ENV{HOME}/local</code>.</p>
-
-<p>However, some administrators find it convenient to use the admin repo to
-manage this code as well, getting the benefits of versioning them as well as
-making changes to them without having to log on to the server.</p>
-
-<p>To do this, simply point <code>LOCAL_CODE</code> to someplace inside <code>$GL_ADMIN_BASE</code>
-(i.e., <code>$HOME/.gitolite</code>) in the rc file.</p>
-
+<p>Note: the <code>hooks/common</code> directory is a bit special. If you add new hooks to this, you must run either <code>gitolite setup</code>, or at least <code>gitolite setup --hooks-only</code>.</p>
+<h3 id="pushcode"><a href="#pushcode"><span class="header-section-number">1.2.3</span> using the gitolite-admin repo to manage non-core code</a></h3>
+<p>The location given in <code>LOCAL_CODE</code> could be anywhere on disk, like say <code>$ENV{HOME}/local</code>.</p>
+<p>However, some administrators find it convenient to use the admin repo to manage this code as well, getting the benefits of versioning them as well as making changes to them without having to log on to the server.</p>
+<p>To do this, simply point <code>LOCAL_CODE</code> to someplace inside <code>$GL_ADMIN_BASE</code> (i.e., <code>$HOME/.gitolite</code>) in the rc file.</p>
 <p>If you want to do this, I <strong>strongly</strong> suggest:</p>
-
-<pre><code>LOCAL_CODE                  =&gt;  "$ENV{HOME}/.gitolite/local",
-</code></pre>
-
-<p>Then you create a directory called "local" in your gitolite clone, and put
-stuff there (e.g., VREFs go in <code>local/VREF</code>, and commands in
-<code>local/commands</code>).</p>
-
-<p>(Note: when you do this, gitolite takes care of running <code>gitolite setup
---hooks-only</code> when you change any hooks and push).</p>
-
-<h4><strong>SECURITY</strong> note on this mode of managing non-core code</h4>
-
-<p><strong>In this mode, anyone who can push changes to the admin repo will effectively
-be able to run any arbitrary command on the server.</strong></p>
-
-<p>This may not matter to many (small) sites, but a large site with lots of
-administrators may want to keep the two rights (i.e., "right to push to the
-gitolite-admin repo" and "right to run arbitrary programs on the server")
-separate.</p>
-
-<h2><a name="nctypes"></a> types of non-core programs</h2>
-
-<h3><a name="commands"></a> gitolite "commands"</h3>
-
-<p>Gitolite comes with several commands that users can run.  Remote users run
-commands by saying:</p>
-
-<pre><code>ssh git@host command-name [args...]
-</code></pre>
-
+<pre><code>LOCAL_CODE                  =&gt;  &quot;$ENV{HOME}/.gitolite/local&quot;,</code></pre>
+<p>Then you create a directory called &quot;local&quot; in your gitolite clone, and put stuff there (e.g., VREFs go in <code>local/VREF</code>, and commands in <code>local/commands</code>).</p>
+<p>(Note: when you do this, gitolite takes care of running <code>gitolite setup --hooks-only</code> when you change any hooks and push).</p>
+<h4 id="security-note-on-this-mode-of-managing-non-core-code"><a href="#security-note-on-this-mode-of-managing-non-core-code"><span class="header-section-number">1.2.3.1</span> <strong>SECURITY</strong> note on this mode of managing non-core code</a></h4>
+<p><strong>In this mode, anyone who can push changes to the admin repo will effectively be able to run any arbitrary command on the server.</strong></p>
+<p>This may not matter to many (small) sites, but a large site with lots of administrators may want to keep the two rights (i.e., &quot;right to push to the gitolite-admin repo&quot; and &quot;right to run arbitrary programs on the server&quot;) separate.</p>
+<h2 id="nctypes"><a href="#nctypes"><span class="header-section-number">1.3</span> types of non-core programs</a></h2>
+<h3 id="commands"><a href="#commands"><span class="header-section-number">1.3.1</span> gitolite &quot;commands&quot;</a></h3>
+<p>Gitolite comes with several commands that users can run. Remote users run commands by saying:</p>
+<pre><code>ssh git@host command-name [args...]</code></pre>
 <p>while on the server you can run</p>
-
-<pre><code>gitolite command [args...]
-</code></pre>
-
-<p>Very few commands are designed to be run both ways, but it can be done, by
-checking for the presence of env var <code>GL_USER</code>.</p>
-
+<pre><code>gitolite command [args...]</code></pre>
+<p>Very few commands are designed to be run both ways, but it can be done, by checking for the presence of env var <code>GL_USER</code>.</p>
 <p>All commands respond to a single <code>-h</code> option with a suitable message.</p>
-
-<p>You can get a <strong>list of available commands</strong> by using the <code>help</code> command.
-Naturally, a remote user will see a much smaller list than the server user.</p>
-
-<p>You allow a command to be run from remote clients by adding its name to (or
-uncommenting it if it's already added but commented out) the ENABLE list in
-the <a href="rc.html">rc</a> file.</p>
-
-<h3><a name="hooks"></a> hooks and gitolite</h3>
-
+<p>You can get a <strong>list of available commands</strong> by using the <code>help</code> command. Naturally, a remote user will see a much smaller list than the server user.</p>
+<p>You allow a command to be run from remote clients by adding its name to (or uncommenting it if it's already added but commented out) the ENABLE list in the <a href="rc.html">rc</a> file.</p>
+<h3 id="hooks"><a href="#hooks"><span class="header-section-number">1.3.2</span> hooks and gitolite</a></h3>
 <p>You can install any hooks except these:</p>
-
 <ul>
-<li><p>(all repos) gitolite reserves the <code>update</code> hook.  See the "update hook"
-section in <a href="dev-notes.html">dev-notes</a> if you want additional update hook functionality.</p></li>
+<li><p>(all repos) gitolite reserves the <code>update</code> hook. See the &quot;update hook&quot; section in <a href="dev-notes.html">dev-notes</a> if you want additional update hook functionality.</p></li>
 <li><p>(gitolite-admin repo only) gitolite reserves the <code>post-update</code> hook.</p></li>
 </ul>
-
-<p>How/where to install them is described in detail in the "locations" section
-above, especially <a href="cust.html#localcode">this</a> and <a href="cust.html#pushcode">this</a>.  The summary is that
-you put them in the "hooks/common" sub-directory within the directory whose
-name is given in the <code>LOCAL_CODE</code> rc variable, then run <code>gitolite setup</code>.</p>
-
-<h4><a name="rsh"></a> repo-specific hooks</h4>
-
+<p>How/where to install them is described in detail in the &quot;locations&quot; section above, especially <a href="cust.html#localcode">this</a> and <a href="cust.html#pushcode">this</a>. The summary is that you put them in the &quot;hooks/common&quot; sub-directory within the directory whose name is given in the <code>LOCAL_CODE</code> rc variable, then run <code>gitolite setup</code>.</p>
+<h4 id="rsh"><a href="#rsh"><span class="header-section-number">1.3.2.1</span> repo-specific hooks</a></h4>
 <p>If you want to add hooks only to specific repos, do this:</p>
-
 <ul>
-<li><p>create a directory called <code>hooks/repo-specific</code> in the location specified
-by the <a href="cust.html#localcode"><code>LOCAL_CODE</code></a> rc variable</p></li>
-<li><p>add your hooks here, with descriptive names (i.e., not "post-receive",
-etc., but maybe "jenkins" or "deploy" or whatever)</p></li>
-<li><p>uncomment the 'repo-specific-hooks' line in the rc file or add it to the
-ENABLE list if it doesn't exist.</p>
-
-<p>If your rc file does not have an ENABLE list, you need to add this to the
-POST_COMPILE and the POST_CREATE lists.  Click <a href="triggers.html#addtrig">here</a> for more on
-all this.</p></li>
+<li><p>create a directory called <code>hooks/repo-specific</code> in the location specified by the <a href="cust.html#localcode"><code>LOCAL_CODE</code></a> rc variable</p></li>
+<li><p>add your hooks here, with descriptive names (i.e., not &quot;post-receive&quot;, etc., but maybe &quot;jenkins&quot; or &quot;deploy&quot; or whatever)</p></li>
+<li><p>uncomment the 'repo-specific-hooks' line in the rc file or add it to the ENABLE list if it doesn't exist.</p>
+<p>If your rc file does not have an ENABLE list, you need to add this to the POST_COMPILE and the POST_CREATE lists. Click <a href="triggers.html#addtrig">here</a> for more on all this.</p></li>
 <li><p>now add lines like this to your conf file:</p>
-
 <pre><code>repo    foo
     RW+     =   @all
-    option hook.post-receive    =   deploy
-</code></pre>
-
-<p>The syntax should be fairly obvious, but just to be clear, in this case a
-symlink called "post-receive" will be placed in foo.git/hooks, pointing to
-the executable called "deploy" in hooks/repo-specific in the local-code
-area.</p>
-
+    option hook.post-receive    =   deploy</code></pre>
+<p>The syntax should be fairly obvious, but just to be clear, in this case a symlink called &quot;post-receive&quot; will be placed in foo.git/hooks, pointing to the executable called &quot;deploy&quot; in hooks/repo-specific in the local-code area.</p>
 <p><strong>WARNING</strong>: if the hook already exists, it is silently overwritten.</p>
-
-<p><strong>WARNING</strong>: once the hook is placed, you can't remove it through
-gitolite.  That is, removing the option line won't do anything.  You'll
-have to go to the server and remove it manually.  (You could, as a simple
-work-around, create a "no-op" script that just does "exit 0", and change
-the option line to point the hook to that, so it <em>effectively</em> gets
-deleted!).</p></li>
+<p><strong>WARNING</strong>: once the hook is placed, you can't remove it through gitolite. That is, removing the option line won't do anything. You'll have to go to the server and remove it manually. (You could, as a simple work-around, create a &quot;no-op&quot; script that just does &quot;exit 0&quot;, and change the option line to point the hook to that, so it <em>effectively</em> gets deleted!).</p></li>
 </ul>
-
-<h3><a name="sugar"></a> syntactic sugar</h3>
-
-<p>Sugar scripts help you change the perceived syntax of the conf language.  The
-base syntax of the language is very simple, so sugar scripts take something
-<em>else</em> and convert it into that.</p>
-
-<p>That way, the admin sees additional features (like allowing continuation
-lines), while the parser in the core gitolite engine does not change.</p>
-
-<p>If you want to write your own sugar scripts, please read the "your own sugar"
-section in <a href="dev-notes.html">dev-notes</a> first then email me.</p>
-
-<p>You enable a sugar script by uncommenting the feature name in the ENABLE list
-in the rc file.</p>
-
-<h3>triggers</h3>
-
+<h3 id="sugar"><a href="#sugar"><span class="header-section-number">1.3.3</span> syntactic sugar</a></h3>
+<p>Sugar scripts help you change the perceived syntax of the conf language. The base syntax of the language is very simple, so sugar scripts take something <em>else</em> and convert it into that.</p>
+<p>That way, the admin sees additional features (like allowing continuation lines), while the parser in the core gitolite engine does not change.</p>
+<p>If you want to write your own sugar scripts, please read the &quot;your own sugar&quot; section in <a href="dev-notes.html">dev-notes</a> first then email me.</p>
+<p>You enable a sugar script by uncommenting the feature name in the ENABLE list in the rc file.</p>
+<h3 id="triggers"><a href="#triggers"><span class="header-section-number">1.3.4</span> triggers</a></h3>
 <p>Triggers have their own <a href="triggers.html">document</a>.</p>
-
-<h3>VREFs</h3>
-
+<h3 id="vrefs"><a href="#vrefs"><span class="header-section-number">1.3.5</span> VREFs</a></h3>
 <p>VREFs also have their own <a href="vref.html">document</a>.</p>
+</body>
+</html>

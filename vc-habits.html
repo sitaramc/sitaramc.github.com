@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
+</head>
+<body>
+<p style="text-align:center">
+    <a href="index.html">git notes main page</a>
+|
+<a href="gitolite/index.html"><strong>gitolite</strong> main page</a>
+|
+    <a href="license.html">license</a>
+</p>
+<h2 id="version-control-habits-of-good-developers" class="unnumbered">version control habits of good developers</h2>
+<p>.@gray&lt;(not necessarily git-specific)&gt;@</p>
+<p>This article is based on <a href="http://blog.bstpierre.org/version-control-habits">http://blog.bstpierre.org/version-control-habits</a> -- a blog post that is well worth checking out, especially if you want more details. However, this article represents my priorities on this matter, and most of the words are mine.</p>
+<ul>
+<li><p><strong>USE IT</strong>! If you don't use version control you should get out of the software development profession!</p></li>
+<li><p><strong>check-in often</strong>: check-in when some logical unit of work is done (compiles OK after major changes, or some feature is complete, or some test was passed, etc.). &quot;going home for the day&quot; is NOT a logical unit of work; ideally you should not treat the version control system as a &quot;backup mechanism&quot;. If you do this sort of time-based check-in, &quot;<em>the danger is that if you have to revert because you've made some disastrous changes, you won't have a sane state to revert to</em>.&quot;</p></li>
+<li><strong>check-in bite sized chunks</strong>: large check-ins are hard to review, and harder to revert
+<ul>
+<li>if you check-in 20 &quot;logical units of work&quot; in one shot, and the 3rd and the 14th are bad, you'll have to revert the entire check-in, remove changes 3 and 14, and then check-in again. If you checked them all in separately, you can revert just the changes that were not acceptable, while retaining all the other stuff</li>
+<li>if the &quot;feature&quot; is too large, create a branch and check-in locally</li>
+<li>however, check-ins should be <strong>atomic</strong> -- for instance, a related change in 2 &quot;.c&quot; files and a &quot;.h&quot; file should not become 3 check-ins if those changes all depend on each other.</li>
+</ul></li>
+<li><strong>make sure you include everything that is needed to rebuild the project</strong>: (this is more for single-developer projects) since we don't want to check-in binary files like executables and libraries, we normally set up the VCS to ignore some files based on extension or whatever. This list has to be made carefully, and reviewed once in a while, otherwise something that is important to the build may get left out!
+<ul>
+<li>in git, you can temporarily rename the .gitignore file and then do a &quot;git status&quot; (or run &quot;git gui&quot;) to see the files that git is ignoring</li>
+<li>or you can clone the entire project into a new directory and see if it compiles</li>
+<li><p>or you can run:</p>
+<pre><code>git ls-files --exclude-standard -o -i</code></pre></li>
+</ul></li>
+<li><p><strong>take backups</strong>! Don't use the version control system as a backup medium</p></li>
+<li><p><strong>keep &quot;data&quot; outside the &quot;source&quot; tree</strong>: putting data in the same directory as the source tree is a very bad practice, and in fact I expect seasoned programmers who are reading this to go &quot;huh? somebody actually does stupid things like that?&quot; :-) Small amounts of textual data used to trigger specific tests are OK, and may even benefit from version control in the sense that a test suite is an integral part of any software with longevity. But anything larger than that, and more so if they are binary blobs, should NOT be in the repository.</p></li>
+<li><p><strong>don't break the build</strong>!</p></li>
+<li><p><strong>update (&quot;git pull&quot;) regularly</strong>: otherwise, you risk a large effort in resolving conflicts when you eventually do pull</p></li>
+<li><p><strong>write good check-in comments</strong>: this helps people understand the evolution of the project much better over a long period of time. Don't forget the second purpose of a VCS is annotation: who changed it, what did they change, and <strong>why</strong>. There's more on this in the next section.</p></li>
+<li><strong>use branches or holding areas</strong>: branching and merging is cheap and easy, and helps you keep things separate in your own mind too. Having a hierarchy of branches is very useful. For instance:
+<ul>
+<li>&quot;master&quot; is what is pulled from/pushed to the repository, &quot;work&quot; is where you do the day-to-day development, &quot;ut&quot; is where you unit test, pulling specific commits from &quot;work&quot; for a build and a test, &quot;st-it&quot; is for integration test/system test, and so on.</li>
+<li>in git, it's easy to use the &quot;gitk&quot; gui to pick individual changes from another branch into the current one</li>
+</ul></li>
+</ul>
+<h3 id="write-useful-readable-commit-messages" class="unnumbered">write useful, readable, commit messages</h3>
+<p>A good description of this is at <a href="http://www.tpope.net/node/106">http://www.tpope.net/node/106</a>. But briefly, try and stick to the following guidelines:</p>
+<ul>
+<li>the first line of the commit message (often called a &quot;subject&quot;) should be a <em>summary</em> of the entire commit</li>
+<li>it should not be more than about 70 characters long</li>
+<li>it should include any reference info (like bug number, issue number, etc) if applicable</li>
+<li>the rest of the message (&quot;body&quot;) can be pretty much anything, but leave a blank line between the &quot;subject&quot; and the &quot;body&quot;</li>
+</ul>
+<p>Git uses the &quot;subject&quot; part in many places and it is very useful to have a short, meaningful subject line for each commit.</p>
+<p>Needless to say, these guidelines are easier to follow if you follow the earlier ones; for example, it's easier to write a useful commit message if you have not dumped four unrelated changes into the same commit ;-)</p>
+</body>
+</html>

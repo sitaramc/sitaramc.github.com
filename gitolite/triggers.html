@@ -1,41 +1,23 @@
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>gitolite triggers</title>
-<style>
-    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
-    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
-    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
-    h4          { background: #ffb; text-color: #000; }
-    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
-    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-</style>
-<style>
-   body{counter-reset: section}
-   h1{counter-reset: sub-section}
-   h2{counter-reset: composite}
-   h3{counter-reset: detail}
-
-   h1:before {
-     counter-increment: section;
-     content: counter(section) ". ";
-   }
-   h2:before {
-     counter-increment: sub-section;
-     content: counter(section) "." counter(sub-section) ". ";
-   }
-   h3:before {
-     counter-increment: composite;
-     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
-   }
-   h4:before {
-     counter-increment: detail;
-     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
-   }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
 </head>
-
+<body>
 <p style="text-align:center">
     <a href="master-toc.html">master TOC</a>
 |
@@ -46,42 +28,28 @@
     <a href="index.html#license">license</a>
 </p>
 <p style="text-align:center">
-<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+<font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1>gitolite triggers</h1>
-
+<div id="TOC">
 <ul>
-<li><a href="triggers.html">gitolite triggers</a>
-<ul>
-<li>intro and sample rc excerpt
-</li>
-<li>types of trigger programs
-</li>
-<li>manually firing triggers
-</li>
-<li>common arguments
-</li>
-<li>trigger-specific arguments and other details
-</li>
-<li><a href="triggers.html#addtrig">adding your own scripts to a trigger</a>
-<ul>
-<li>displaying the resulting trigger list
-</li>
+<li><a href="#gitolite-triggers"><span class="toc-section-number">1</span> gitolite triggers</a><ul>
+<li><a href="#intro-and-sample-rc-excerpt"><span class="toc-section-number">1.1</span> intro and sample rc excerpt</a></li>
+<li><a href="#types-of-trigger-programs"><span class="toc-section-number">1.2</span> types of trigger programs</a></li>
+<li><a href="#manually-firing-triggers"><span class="toc-section-number">1.3</span> manually firing triggers</a></li>
+<li><a href="#common-arguments"><span class="toc-section-number">1.4</span> common arguments</a></li>
+<li><a href="#trigger-specific-arguments-and-other-details"><span class="toc-section-number">1.5</span> trigger-specific arguments and other details</a></li>
+<li><a href="#addtrig"><span class="toc-section-number">1.6</span> adding your own scripts to a trigger</a><ul>
+<li><a href="#displaying-the-resulting-trigger-list"><span class="toc-section-number">1.6.1</span> displaying the resulting trigger list</a></li>
+</ul></li>
+<li><a href="#tips"><span class="toc-section-number">1.7</span> tips</a></li>
+</ul></li>
 </ul>
-</li>
-<li>tips
-</li>
-</ul>
-</li>
-</ul>
+</div>
+<h1 id="gitolite-triggers"><a href="#gitolite-triggers"><span class="header-section-number">1</span> gitolite triggers</a></h1>
+<!-- pandoc: toc -->
 
-<h2>intro and sample rc excerpt</h2>
-
-<p>Gitolite fires off external commands at several different times.  The <a href="rc.html">rc</a>
-file specifies what commands to run at each trigger point, but for
-illustration, here's an excerpt.  <strong>Note that as of v3.4, this is <em>not</em> how
-the rc file looks like externally.  Please see <a href="triggers.html#addtrig">this</a> for more</strong>.</p>
-
+<h2 id="intro-and-sample-rc-excerpt"><a href="#intro-and-sample-rc-excerpt"><span class="header-section-number">1.1</span> intro and sample rc excerpt</a></h2>
+<p>Gitolite fires off external commands at several different times. The <a href="rc.html">rc</a> file specifies what commands to run at each trigger point, but for illustration, here's an excerpt. <strong>Note that as of v3.4, this is <em>not</em> how the rc file looks like externally. Please see <a href="triggers.html#addtrig">this</a> for more</strong>.</p>
 <pre><code>%RC = (
 
     &lt;...several lines later...&gt;
@@ -103,249 +71,113 @@ the rc file looks like externally.  Please see <a href="triggers.html#addtrig">t
             'post-compile/update-git-configs',
             'post-compile/update-gitweb-access-list',
             'post-compile/update-git-daemon-access-list',
-        ],
-</code></pre>
-
-<p>(As you can see, post-create runs 3 programs that also run from post-compile.
-This is perfectly fine, by the way)</p>
-
-<h2>types of trigger programs</h2>
-
-<p>There are two types of trigger programs.  Standalone scripts are placed in
-src/triggers or its subdirectories.  They are invoked by being added to a
-trigger list (using the path after "src/triggers/", as you can see).  Such
-scripts are quick and easy to write in any language of your choice.</p>
-
-<p>Triggers written as perl modules are placed in src/lib/Gitolite/Triggers.
-They are invoked by being listed with the package+function name, although even
-here the 'Gitolite::Triggers' part is skipped.  Perl modules have to follow
-some conventions (see some of the shipped modules to ideas) but the advantage
-is that they can set environment variables and change the argument list of the
-gitolite-shell program that invokes them.</p>
-
-<p>If this does not make sense, please examine a default install of gitolite,
-paying attention to:</p>
-
+        ],</code></pre>
+<p>(As you can see, post-create runs 3 programs that also run from post-compile. This is perfectly fine, by the way)</p>
+<h2 id="types-of-trigger-programs"><a href="#types-of-trigger-programs"><span class="header-section-number">1.2</span> types of trigger programs</a></h2>
+<p>There are two types of trigger programs. Standalone scripts are placed in src/triggers or its subdirectories. They are invoked by being added to a trigger list (using the path after &quot;src/triggers/&quot;, as you can see). Such scripts are quick and easy to write in any language of your choice.</p>
+<p>Triggers written as perl modules are placed in src/lib/Gitolite/Triggers. They are invoked by being listed with the package+function name, although even here the 'Gitolite::Triggers' part is skipped. Perl modules have to follow some conventions (see some of the shipped modules to ideas) but the advantage is that they can set environment variables and change the argument list of the gitolite-shell program that invokes them.</p>
+<p>If this does not make sense, please examine a default install of gitolite, paying attention to:</p>
 <ul>
-<li>the path names in various trigger lists in the rc file
-</li>
-<li>corresponding path names in the src/ directory in gitolite source
-</li>
-<li>and for perl modules, the package names and function names within.
-</li>
+<li>the path names in various trigger lists in the rc file</li>
+<li>corresponding path names in the src/ directory in gitolite source</li>
+<li>and for perl modules, the package names and function names within.</li>
 </ul>
-
-<h2>manually firing triggers</h2>
-
-<p>...from the server command line is easy.  For example:</p>
-
-<pre><code>gitolite trigger POST_COMPILE
-</code></pre>
-
-<p>However if the triggered code depends on arguments (see next section) this
-won't work.  (The <code>POST_COMPILE</code> trigger programs all just happen to not
-require any arguments, so it works).</p>
-
-<h2>common arguments</h2>
-
+<h2 id="manually-firing-triggers"><a href="#manually-firing-triggers"><span class="header-section-number">1.3</span> manually firing triggers</a></h2>
+<p>...from the server command line is easy. For example:</p>
+<pre><code>gitolite trigger POST_COMPILE</code></pre>
+<p>However if the triggered code depends on arguments (see next section) this won't work. (The <code>POST_COMPILE</code> trigger programs all just happen to not require any arguments, so it works).</p>
+<h2 id="common-arguments"><a href="#common-arguments"><span class="header-section-number">1.4</span> common arguments</a></h2>
 <p>Triggers receive the following arguments:</p>
-
-<ol>
-<li><p>any arguments mentioned in the rc file (for an example, see the renice
-command)</p></li>
-<li><p>the name of the trigger as a string (example, <code>"POST_COMPILE"</code>), so you
-can call the same program from multiple triggers and it can know where it
-was called from,</p></li>
-<li><p>followed by zero or more arguments specific to the trigger, as given in
-the next section.</p></li>
+<ol style="list-style-type: decimal">
+<li><p>any arguments mentioned in the rc file (for an example, see the renice command)</p></li>
+<li><p>the name of the trigger as a string (example, <code>&quot;POST_COMPILE&quot;</code>), so you can call the same program from multiple triggers and it can know where it was called from,</p></li>
+<li><p>followed by zero or more arguments specific to the trigger, as given in the next section.</p></li>
 </ol>
-
-<h2>trigger-specific arguments and other details</h2>
-
-<p>Here are the <strong>rest of</strong> the arguments for each trigger, plus a brief
-description of when the trigger runs:</p>
-
+<h2 id="trigger-specific-arguments-and-other-details"><a href="#trigger-specific-arguments-and-other-details"><span class="header-section-number">1.5</span> trigger-specific arguments and other details</a></h2>
+<p>Here are the <strong>rest of</strong> the arguments for each trigger, plus a brief description of when the trigger runs:</p>
 <ul>
-<li><p><code>INPUT</code> runs before pretty much anything else.  INPUT trigger scripts
-<em>must</em> be in perl, since they manipulate the arguments to and the
-environment of the 'gitolite-shell' program itself.  Most commonly they
-will read/change <code>@ARGV</code>, and/or <code>$ENV{SSH_ORIGINAL_COMMAND}</code>.</p>
-
-<p>There are certain conventions to adhere to; please see some of the shipped
-samples or ask me if you need help writing your own.</p></li>
-<li><p><code>ACCESS_1</code> runs after the first access check.  Extra arguments:</p>
-
+<li><p><code>INPUT</code> runs before pretty much anything else. INPUT trigger scripts <em>must</em> be in perl, since they manipulate the arguments to and the environment of the 'gitolite-shell' program itself. Most commonly they will read/change <code>@ARGV</code>, and/or <code>$ENV{SSH_ORIGINAL_COMMAND}</code>.</p>
+<p>There are certain conventions to adhere to; please see some of the shipped samples or ask me if you need help writing your own.</p></li>
+<li><code>ACCESS_1</code> runs after the first access check. Extra arguments:
 <ul>
-<li>repo
-</li>
-<li>user
-</li>
-<li>'R' or 'W'
-</li>
-<li>'any'
-</li>
-<li>result (see notes below)
-</li>
+<li>repo</li>
+<li>user</li>
+<li>'R' or 'W'</li>
+<li>'any'</li>
+<li>result (see notes below)</li>
 </ul>
-
-<p>'result' is the return value of the access() function.  If it contains the
-uppercase word "DENIED", the access was rejected.  Otherwise it is the
-refex that caused the access to succeed.</p>
-
-<p><em>Please note that if access is rejected, gitolite-shell will die as soon
-as it returns from the trigger</em>.</p></li>
-<li><p><code>ACCESS_2</code> runs after the second access check, which is invoked by the
-update hook to check the ref.  Extra arguments:</p>
-
+<p>'result' is the return value of the access() function. If it contains the uppercase word &quot;DENIED&quot;, the access was rejected. Otherwise it is the refex that caused the access to succeed.</p>
+<p><em>Please note that if access is rejected, gitolite-shell will die as soon as it returns from the trigger</em>.</p></li>
+<li><code>ACCESS_2</code> runs after the second access check, which is invoked by the update hook to check the ref. Extra arguments:
 <ul>
-<li>repo
-</li>
-<li>user
-</li>
-<li>any of W, +, C, D, WM, +M, CM, DM
-</li>
-<li>the ref being updated (e.g., 'refs/heads/master')
-</li>
-<li>result
-</li>
-<li>old SHA
-</li>
-<li>new SHA
-</li>
+<li>repo</li>
+<li>user</li>
+<li>any of W, +, C, D, WM, +M, CM, DM</li>
+<li>the ref being updated (e.g., 'refs/heads/master')</li>
+<li>result</li>
+<li>old SHA</li>
+<li>new SHA</li>
 </ul>
-
-<p><code>ACCESS_2</code> also runs on each <a href="vref.html">VREF</a> that gets checked.  In this case
-the "ref" argument will start with "VREF/", and the last two arguments
-won't be passed.</p>
-
-<p>'result' is similar to <code>ACCESS_1</code>, except that it is the <em>update hook</em>
-which dies as soon as access is rejected for the ref or any of the VREFs.
-Control then returns to git, and then to gitolite-shell, so the <code>POST_GIT</code>
-trigger <em>will</em> run.</p></li>
-<li><p><code>PRE_GIT</code> and <code>POST_GIT</code> run just before and after the git command.
-Extra arguments:</p>
-
+<p><code>ACCESS_2</code> also runs on each <a href="vref.html">VREF</a> that gets checked. In this case the &quot;ref&quot; argument will start with &quot;VREF/&quot;, and the last two arguments won't be passed.</p>
+<p>'result' is similar to <code>ACCESS_1</code>, except that it is the <em>update hook</em> which dies as soon as access is rejected for the ref or any of the VREFs. Control then returns to git, and then to gitolite-shell, so the <code>POST_GIT</code> trigger <em>will</em> run.</p></li>
+<li><code>PRE_GIT</code> and <code>POST_GIT</code> run just before and after the git command. Extra arguments:
 <ul>
-<li>repo
-</li>
-<li>user
-</li>
-<li>'R' or 'W'
-</li>
-<li>'any'
-</li>
-<li>the git command ('git-receive-pack', 'git-upload-pack', or
-'git-upload-archive') being invoked.
-</li>
+<li>repo</li>
+<li>user</li>
+<li>'R' or 'W'</li>
+<li>'any'</li>
+<li>the git command ('git-receive-pack', 'git-upload-pack', or 'git-upload-archive') being invoked.</li>
 </ul>
-
-<p><strong>NOTE</strong> that the <code>POST_GIT</code> trigger has no way of knowing if the push
-succeeded, because 'git-shell' (or maybe 'git-receive-pack', I don't know)
-exits cleanly even if the update hook died.</p></li>
-<li><p><code>PRE_CREATE</code> and <code>POST_CREATE</code> run just before and after a new "<a href="wild.html">wild</a>"
-repo is created by user action.  In addition, any command that creates a
-repo (like 'fork') or potentially changes permissions (like 'perms') may
-choose to run <code>POST_CREATE</code>.  Extra arguments:</p>
-
+<p><strong>NOTE</strong> that the <code>POST_GIT</code> trigger has no way of knowing if the push succeeded, because 'git-shell' (or maybe 'git-receive-pack', I don't know) exits cleanly even if the update hook died.</p></li>
+<li><code>PRE_CREATE</code> and <code>POST_CREATE</code> run just before and after a new &quot;<a href="wild.html">wild</a>&quot; repo is created by user action. In addition, any command that creates a repo (like 'fork') or potentially changes permissions (like 'perms') may choose to run <code>POST_CREATE</code>. Extra arguments:
 <ul>
-<li>repo
-</li>
-<li>user
-</li>
+<li>repo</li>
+<li>user</li>
 <li>invoking operation
 <ul>
-<li>'R' for fetch/clone/ls-remote, 'W' for push
-</li>
-<li>can also be anything set by the external command running the
-trigger (e.g., see the perms and fork commands).  This lets the
-trigger code know how it was invoked.
-</li>
-</ul>
-</li>
-</ul>
-
-<p>They are also run when a <em>normal</em> repo is created (say by adding a "repo
-foo" line to the conf file).  This case has only one extra argument:</p>
-
-<ul>
-<li>repo
-</li>
+<li>'R' for fetch/clone/ls-remote, 'W' for push</li>
+<li>can also be anything set by the external command running the trigger (e.g., see the perms and fork commands). This lets the trigger code know how it was invoked.</li>
 </ul></li>
-<li><p><code>POST_COMPILE</code> runs after an admin push has successfully "compiled" the
-config file.  By default, the next thing is to update the ssh authkeys
-file, then all the 'git-config's, gitweb access, and daemon access.</p>
-
+</ul>
+They are also run when a <em>normal</em> repo is created (say by adding a &quot;repo foo&quot; line to the conf file). This case has only one extra argument:
+<ul>
+<li>repo</li>
+</ul></li>
+<li><p><code>POST_COMPILE</code> runs after an admin push has successfully &quot;compiled&quot; the config file. By default, the next thing is to update the ssh authkeys file, then all the 'git-config's, gitweb access, and daemon access.</p>
 <p>No extra arguments.</p></li>
 </ul>
-
-<h2><a name="addtrig"></a> adding your own scripts to a trigger</h2>
-
-<p>For gitolite v3.3 or less, adding your own scripts to a trigger list was
-simply a matter of finding the trigger name in the rc file and adding an entry
-to it.  Even for gitolite v3.4 or higher, if your rc file was created before
-v3.4, <em>it will continue to work, and you can continue to add triggers to it
-the same way as before</em>.</p>
-
-<p>However, if you installed gitolite v3.4 or higher, you will see a different rc
-file syntax.  This new rc file does not have trigger lists, but a simple list
-of "features" within a list called "ENABLE" in the rc file; you simply comment
-out or uncomment appropriate entries, and gitolite will <em>internally</em> create
-the trigger lists correctly.</p>
-
-<p>...which is fine for triggers that are shipped with gitolite, but now you're
-wondering how to add your own.</p>
-
+<h2 id="addtrig"><a href="#addtrig"><span class="header-section-number">1.6</span> adding your own scripts to a trigger</a></h2>
+<p>For gitolite v3.3 or less, adding your own scripts to a trigger list was simply a matter of finding the trigger name in the rc file and adding an entry to it. Even for gitolite v3.4 or higher, if your rc file was created before v3.4, <em>it will continue to work, and you can continue to add triggers to it the same way as before</em>.</p>
+<p>However, if you installed gitolite v3.4 or higher, you will see a different rc file syntax. This new rc file does not have trigger lists, but a simple list of &quot;features&quot; within a list called &quot;ENABLE&quot; in the rc file; you simply comment out or uncomment appropriate entries, and gitolite will <em>internally</em> create the trigger lists correctly.</p>
+<p>...which is fine for triggers that are shipped with gitolite, but now you're wondering how to add your own.</p>
 <p>The answer is: same as before.</p>
-
-<p>Here's an example.  Let's say you wrote yourself a trigger script called
-'foo', to be invoked from the <code>POST_CREATE</code> trigger list.  With the old
-format, you'd find the following lines in the rc file:</p>
-
+<p>Here's an example. Let's say you wrote yourself a trigger script called 'foo', to be invoked from the <code>POST_CREATE</code> trigger list. With the old format, you'd find the following lines in the rc file:</p>
 <pre><code>POST_CREATE                 =&gt;
     [
         'post-compile/update-git-configs',
         'post-compile/update-gitweb-access-list',
         'post-compile/update-git-daemon-access-list',
-    ],
-</code></pre>
-
+    ],</code></pre>
 <p>and you'd simply add a line for 'foo' in that list.</p>
-
-<p>With the new format, since there is no <code>POST_CREATE</code> trigger list defined in
-the rc file, you'll need to add all this:</p>
-
+<p>With the new format, since there is no <code>POST_CREATE</code> trigger list defined in the rc file, you'll need to add all this:</p>
 <pre><code>POST_CREATE                 =&gt;
     [
         'foo'
-    ],
-</code></pre>
-
+    ],</code></pre>
 <p>instead of just the 'foo' line.</p>
-
-<p>Since the ENABLE list pulls in the rest of the trigger entries, this will be
-<em>effectively</em> as if you had done this in a v3.3 rc file:</p>
-
+<p>Since the ENABLE list pulls in the rest of the trigger entries, this will be <em>effectively</em> as if you had done this in a v3.3 rc file:</p>
 <pre><code>POST_CREATE                 =&gt;
     [
         'foo',
         'post-compile/update-git-configs',
         'post-compile/update-gitweb-access-list',
         'post-compile/update-git-daemon-access-list',
-    ],
-</code></pre>
-
+    ],</code></pre>
 <p>As you can see, the 'foo' gets added to the top of the list.</p>
-
-<h3>displaying the resulting trigger list</h3>
-
-<p>You can use the 'gitolite query-rc' command to see what the trigger list
-actually looks like.  For example:</p>
-
-<pre><code>gitolite query-rc POST_CREATE
-</code></pre>
-
-<h2>tips</h2>
-
-<p>If you have code that latches onto more than one trigger, collecting data
-(such as for logging), then the outputs may be intermixed.  You can record the
-value of the environment variable <code>GL_TID</code> to tie together related entries.</p>
+<h3 id="displaying-the-resulting-trigger-list"><a href="#displaying-the-resulting-trigger-list"><span class="header-section-number">1.6.1</span> displaying the resulting trigger list</a></h3>
+<p>You can use the 'gitolite query-rc' command to see what the trigger list actually looks like. For example:</p>
+<pre><code>gitolite query-rc POST_CREATE</code></pre>
+<h2 id="tips"><a href="#tips"><span class="header-section-number">1.7</span> tips</a></h2>
+<p>If you have code that latches onto more than one trigger, collecting data (such as for logging), then the outputs may be intermixed. You can record the value of the environment variable <code>GL_TID</code> to tie together related entries.</p>
+</body>
+</html>

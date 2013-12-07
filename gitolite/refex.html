@@ -1,41 +1,23 @@
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>matching a ref and a refex</title>
-<style>
-    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
-    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
-    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
-    h4          { background: #ffb; text-color: #000; }
-    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
-    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-</style>
-<style>
-   body{counter-reset: section}
-   h1{counter-reset: sub-section}
-   h2{counter-reset: composite}
-   h3{counter-reset: detail}
-
-   h1:before {
-     counter-increment: section;
-     content: counter(section) ". ";
-   }
-   h2:before {
-     counter-increment: sub-section;
-     content: counter(section) "." counter(sub-section) ". ";
-   }
-   h3:before {
-     counter-increment: composite;
-     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
-   }
-   h4:before {
-     counter-increment: detail;
-     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
-   }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
 </head>
-
+<body>
 <p style="text-align:center">
     <a href="master-toc.html">master TOC</a>
 |
@@ -46,45 +28,26 @@
     <a href="index.html#license">license</a>
 </p>
 <p style="text-align:center">
-<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+<font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h2><a name="refex"></a> matching a ref and a refex</h2>
-
-<p>A refex is a word I made up to mean "a regex that matches a ref".  If you know
-<a href="regex.html">regular expressions</a> you're halfway there.</p>
-
+<h2 id="matching-a-ref-and-a-refex"><span class="header-section-number">0.1</span> matching a ref and a refex</h2>
+<p>A refex is a word I made up to mean &quot;a regex that matches a ref&quot;. If you know <a href="regex.html">regular expressions</a> you're halfway there.</p>
 <p>In addition:</p>
-
 <ul>
-<li><p>If no refex is supplied, it defaults to <code>refs/.*</code>, for example in a rule
-like this:</p>
-
-<pre><code>RW              =   alice
-</code></pre></li>
-<li><p>A refex not starting with <code>refs/</code> <font color="gray">(or <code>VREF/</code>)</font>
-is assumed to start with <code>refs/heads/</code>.  This means normal branches can be
-conveniently written like this:</p>
-
+<li><p>If no refex is supplied, it defaults to <code>refs/.*</code>, for example in a rule like this:</p>
+<pre><code>RW              =   alice</code></pre></li>
+<li><p>A refex not starting with <code>refs/</code> <font color="gray">(or <code>VREF/</code>)</font> is assumed to start with <code>refs/heads/</code>. This means normal branches can be conveniently written like this:</p>
 <pre><code>RW  master      =   alice
-# becomes 'refs/heads/master' internally
-</code></pre>
-
+# becomes 'refs/heads/master' internally</code></pre>
 <p>while tags will need to be fully qualified</p>
-
-<pre><code>RW  refs/tags/v[0-9]    =   bob
-</code></pre></li>
-<li><p>A refex is implicitly anchored at the start, but not at the end.  In
-regular expression lingo, a <code>^</code> is assumed at the start (but no <code>$</code> at the
-end is assumed).  So a refex of <code>master</code> will match all these:</p>
-
+<pre><code>RW  refs/tags/v[0-9]    =   bob</code></pre></li>
+<li><p>A refex is implicitly anchored at the start, but not at the end. In regular expression lingo, a <code>^</code> is assumed at the start (but no <code>$</code> at the end is assumed). So a refex of <code>master</code> will match all these:</p>
 <pre><code>refs/heads/master
 refs/heads/master1
 refs/heads/master2
-refs/heads/master/full
-</code></pre>
-
+refs/heads/master/full</code></pre>
 <p>If you want to restrict the match to just the one specific ref, use</p>
-
-<pre><code>RW  master$     =   alice
-</code></pre></li>
+<pre><code>RW  master$     =   alice</code></pre></li>
 </ul>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
+</head>
+<body>
+<p style="text-align:center">
+    <a href="index.html">git notes main page</a>
+|
+<a href="gitolite/index.html"><strong>gitolite</strong> main page</a>
+|
+    <a href="license.html">license</a>
+</p>
+<div id="TOC">
+<ul>
+<li><a href="#sizing-a-server-for-git">sizing a server for git</a><ul>
+<li><a href="#bandwidth-usage">bandwidth usage:</a></li>
+<li><a href="#cpu-usage">CPU usage</a></li>
+<li><a href="#memory">memory</a></li>
+<li><a href="#disk">disk</a></li>
+<li><a href="#repack"><span class="toc-section-number">0.1</span> stressing out a git server {-}</a></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="sizing-a-server-for-git" class="unnumbered"><a href="#sizing-a-server-for-git">sizing a server for git</a></h1>
+<!-- pandoc: toc -->
+
+<p><strong>Update Dec 2013</strong>: this was written some years ago; the measurements could only have gotten better now...</p>
+<hr />
+<p>How big a server do you need to host git repos? These are my current thoughts on this, and they're essentially what I sent in an internal email to someone at work who asked about that as well as network bandwidth concerns when the server is used from multiple sites over a WAN.</p>
+<p>Note: the specific question also asked how many &quot;concurrent&quot; users a git server with a given spec could handle. However, a typical developer will only interact with the git server on average 2-6 times a day, with each interaction lasting at most for a few seconds. That's it!</p>
+<p>This is why &quot;concurrent users&quot; is not a meaningful measure, unless everyone hits &quot;push&quot; or &quot;pull&quot; at exactly the same time :-)</p>
+<p>Anyway, here are some details, from the point of view of a typical &quot;enterprise&quot; use of a VCS. Be sure to read the last section on the <a href="#repack">one operation</a> that <em>can</em> stress out a git server.</p>
+<h2 id="bandwidth-usage" class="unnumbered"><a href="#bandwidth-usage">bandwidth usage:</a></h2>
+<ul>
+<li><p>the initial clone (like when a new team member joins the project) transfers data about the size of the repository. This is highly compressed but it could still be large.</p>
+<p>Just as a point of reference, I pulled down the entire Linux kernel repository just now. It was 310 MB and took about 20 minutes to come in on my home DSL line here.</p>
+<p>Please note this is about 4 years and 3 months worth of changes on a project with hundreds of active developers; you have to ask yourself if your project is really that large.</p></li>
+<li><p>after the initial clone, regular updates (git pull/fetch) take very little time.</p>
+<p>Again, to give you a point of reference, I had an older copy of the linux kernel tree that was last updated 6 days ago. I just pulled down those 6 days worth of changes, and the actual data trasferred was about 400 KB (yes, <strong>kilo</strong> bytes, for 6 days of changes in a very active project)</p></li>
+<li><p>if you're worried that the initial clone will be a killer when an entire remote site (with, say, 50 people) joins the repository, don't worry. Git has ways to get around that also, if you are worried about it.</p>
+<p>There's a command called &quot;git bundle&quot; which lets you package up the entire repository into one file, which you can transfer one time to the other site. At the other site, they share that bundle file on their LAN (instead of each person essentially getting the same file on the WAN), and clone from it. After the clone is done, you make a one-line change to the config file (change the URL to point to the real server instead of a local file!) and it's done.</p>
+<p>What all this means is, for the cost of one extra command on the server and one extra command on each client, you have &quot;seeded&quot; an entire site with just one download :-)</p></li>
+</ul>
+<h2 id="cpu-usage" class="unnumbered"><a href="#cpu-usage">CPU usage</a></h2>
+<p>Git does take some CPU time to pack up a repository, especially to supply an initial clone. Even in the initial clone, on a decent dual-core machine it will be as fast as the hard disk can read the repository data, which means pretty fast. On subsequent pull/push operations, it is very fast.</p>
+<p>The CPU-bound operations in day to day git operations are</p>
+<ul>
+<li>compressing each file (aka &quot;blob&quot;) using zlib</li>
+<li>computing deltas (differences) between objects to optimise sending data when someone clones or pulls</li>
+</ul>
+<p>Zlib is quite efficiently coded, and besides, is so widely used in so many other parts of a modern operating system, that it is not much of an issue.</p>
+<p>Computing deltas is definitely more CPU hungry (as well as memory hungry), but -- except on the initial clone -- it happens incrementally so any decent/recent dual-core CPU should be able to handle it very fast.</p>
+<blockquote>
+<hr />
+<p>^^Further details on this, courtesy charon on #git:</p>
+</blockquote>
+<blockquote>
+<p>Even when computing deltas to send, git reuses packs. This means that objects that are already packed are not delta compressed again -- send-pack just uses the existing delta-compressed form. Anyway it doesn't really send the <em>entire</em> pack, only the parts that are relevant, so this works fine.</p>
+</blockquote>
+<blockquote>
+<p>As a result, cpu usage on the server is now mostly in the &quot;counting objects&quot; phase (i.e., figuring out what to send), which is not much of a load.^^</p>
+</blockquote>
+<h2 id="memory" class="unnumbered"><a href="#memory">memory</a></h2>
+<p>A machine with about 512 MB <strong><em>free</em></strong> RAM will probably work fine for most development style repositories. In practice this means about 1 GB total RAM, assuming no other big programs are running. Note that all this is transient use -- there is no &quot;long running background process&quot; in a normal git install that sits around hogging memory. If no one is accessing the repository (push/pull/clone), then no memory is used.</p>
+<p>The only time you get into memory problems under normal use is if you have files that are really large, like more than 50 MB or so. (We're not talking about total repo size here; we're talking one individual file). If you have any such files in the repo (or worse, many such files), it may be a good idea to run some benchmarks first. [I'm being very conservative here; in practice I'm sure much larger files can be used without trouble but at some point it will cause problems. That may be 100MB, or 250MB, or whatever but it will happen...]</p>
+<p>Otherwise there's nothing inherently in git to gobble up memory except the <a href="#repack">repack</a> operation mentioned in the last section.</p>
+<h2 id="disk" class="unnumbered"><a href="#disk">disk</a></h2>
+<p>As I mentioned in one of my presentations, git takes about 1/20th the size of an SVN repository, so this should not be a concern. However, this does assume the &quot;repack&quot; operation referred to below is being run at least once a month or so.</p>
+<h2 id="repack"><a href="#repack"><span class="header-section-number">0.1</span> stressing out a git server {-}</a></h2>
+<p>The only time git does anything that seriously stresses the machine (in <strong><em>all respects</em></strong>, not just CPU) is a &quot;repack&quot; operation that (by default) runs very rarely. You can, if you wish, set a config variable to make it never happen automatically, and just do it manually about once a month, or by cron at 4am on Sunday, or whatever suits you.</p>
+<p>I tried a full repack of the linux kernel tree on my desktop, and it took approximately 700 MB of RAM, 5:20 minutes elapsed time, and 7:04 minutes of CPU time (CPU time is more than elapsed time because parts of this repacking are multi-threaded).</p>
+<p>So -- if you schedule it at night or Sunday morning or whatever, you'll be fine. Don't worry about it...</p>
+</body>
+</html>

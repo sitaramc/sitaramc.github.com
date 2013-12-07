@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
+</head>
+<body>
+<p style="text-align:center">
+    <a href="master-toc.html">master TOC</a>
+|
+    <a href="index.html">main page</a>
+|
+    <a href="gitolite.html">single-page</a>
+|
+    <a href="index.html#license">license</a>
+</p>
+<p style="text-align:center">
+<font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+</p>
+<h1 id="gitolite-book-outline"><span class="header-section-number">1</span> Gitolite book outline</h1>
+<h2 id="chapter-1-what-is-gitolite-pages-6"><span class="header-section-number">1.1</span> Chapter 1: What is Gitolite? (pages: 6)</h2>
+<p>This chapter briefly describes what is gitolite and why you might need it. It will also show how to create a &quot;throwaway&quot; installation to play with.</p>
+<ul>
+<li>Common Access Control needs</li>
+<li>Access Control provided by git and the OS</li>
+<li>Access Control example with gitolite</li>
+<li>A selection of other gitolite &quot;power&quot; features</li>
+<li>Trying out gitolite</li>
+</ul>
+<h2 id="chapter-2-installing-gitolite-pages-5"><span class="header-section-number">1.2</span> Chapter 2: Installing Gitolite (pages: 5)</h2>
+<p>This chapter will cover a fresh installation from source.</p>
+<ul>
+<li>Server pre-requisites</li>
+<li>Getting the source</li>
+<li>Running the install step</li>
+<li>Running the setup step</li>
+<li>Checking your new installation</li>
+</ul>
+<p>By the end of this chapter, the user has a working installation of gitolite.</p>
+<h2 id="chapter-3-your-users-and-gitolite-pages-8"><span class="header-section-number">1.3</span> Chapter 3: Your users and gitolite (pages: 8)</h2>
+<p>This chapter will cover what you need to tell your users about the gitolite system you're managing and how they should use it.</p>
+<ul>
+<li>Accessing Gitolite</li>
+<li>Getting information from Gitolite</li>
+<li>Running Gitolite commands</li>
+<li>Getting help</li>
+<li>Troubleshooting SSH issues</li>
+</ul>
+<h2 id="chapter-4-adding-and-removing-users-pages-8"><span class="header-section-number">1.4</span> Chapter 4: Adding and removing users (pages: 8)</h2>
+<p>This chapter will show you how to manage users on your Gitolite system.</p>
+<ul>
+<li>Adding users</li>
+<li>Authentication versus Authorisation</li>
+<li>Users with more than one pubkey</li>
+<li>Giving some users a &quot;shell&quot;</li>
+<li>Diagnosing pubkey problems</li>
+</ul>
+<h2 id="chapter-5-adding-and-removing-repos-pages-4"><span class="header-section-number">1.5</span> Chapter 5: Adding and removing repos (pages: 4)</h2>
+<p>This chapter will cover managing repositories on your Gitolite system.</p>
+<ul>
+<li>Adding new repositories</li>
+<li>Adding your existing repositories</li>
+<li>Migrating repositories from older gitolite</li>
+<li>Common problems and troubleshooting</li>
+</ul>
+<h2 id="chapter-6-basic-access-control-pages-6"><span class="header-section-number">1.6</span> Chapter 6: Basic Access Control (pages: 6)</h2>
+<p>This chapter will show how to let different users have different levels of access to the repositories on the system.</p>
+<ul>
+<li>Basic access control examples</li>
+<li>Syntax of the conf file</li>
+<li>Gitolite access control rules</li>
+<li>Branch level access control and refexes</li>
+<li>User and repo groups</li>
+<li>Rule accumulation</li>
+</ul>
+<h2 id="chapter-7-advanced-access-control-and-configuration-pages-10"><span class="header-section-number">1.7</span> Chapter 7: Advanced Access Control and Configuration (pages: 10)</h2>
+<p>This chapter will talk about some advanced features of Gitolite that make the administrator's job easier in many ways.</p>
+<ul>
+<li>Personal branches</li>
+<li>Types of write operations</li>
+<li>Gitweb and git-daemon</li>
+<li>Applying &quot;deny&quot; rules during the pre-git access check</li>
+<li>Git &quot;config&quot; and Gitolite &quot;options&quot;</li>
+<li>Introduction to VREFs</li>
+</ul>
+<h2 id="chapter-8-allowing-users-to-create-their-own-repos-pages-6"><span class="header-section-number">1.8</span> Chapter 8: Allowing users to create their own repos (pages: 6)</h2>
+<p>This chapter will explain the widely used &quot;wild repos&quot; feature, with some common use cases and examples.</p>
+<ul>
+<li>What are &quot;wild&quot; repos</li>
+<li>Writing a wild repo specification</li>
+<li>Roles</li>
+<li>Explaining wild repos to your users</li>
+<li>Managing an entire site with just wild repos!</li>
+</ul>
+<h2 id="chapter-9-customising-gitolite-pages-4"><span class="header-section-number">1.9</span> Chapter 9: Customising Gitolite (pages: 4)</h2>
+<p>This chapter describes the &quot;non-core&quot; parts of Gitolite and what they do. It then goes into how you can customise these scripts or write your own.</p>
+<ul>
+<li>&quot;Core&quot; and &quot;non-core&quot; Gitolite</li>
+<li>Some shipped examples of non-core features</li>
+<li>Customising non-core programs for your site</li>
+<li>Writing your own non-core programs</li>
+</ul>
+<h2 id="chapter-10-vrefs-pages-6"><span class="header-section-number">1.10</span> Chapter 10: VREfs (pages: 6)</h2>
+<p>This chapter will delve into the powerful VREF feature, using several existing VREF scripts to illustrate. It will also show how to create your own VREFs with a few examples.</p>
+<ul>
+<li>Adding additional update hooks</li>
+<li>VREF concepts and terminology</li>
+<li>Fallthru in VREF rules</li>
+<li>Arguments passed to a VREF</li>
+<li>Designing a VREF</li>
+<li>Writing and testing VREFs</li>
+</ul>
+<h2 id="chapter-11-mirroring-pages-8"><span class="header-section-number">1.11</span> Chapter 11: Mirroring (pages: 8)</h2>
+<p>Gitolite's mirroring feature is very powerful, and very useful for large multi-site installations. This chapter will show how to set up mirroring with an example of 3 sites, and describe how to use gitolite mirroring optimally.</p>
+<ul>
+<li>Gitolite mirroring concepts</li>
+<li>Initial setup</li>
+<li>HOSTNAME substitution and local repos</li>
+<li>Allowing slaves to redirect pushes</li>
+<li>Manual synchronisation</li>
+<li>Switching to a different master</li>
+</ul>
+</body>
+</html>

@@ -1,41 +1,23 @@
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Making repositories available to both ssh and http mode clients</title>
-<style>
-    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
-    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
-    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
-    h4          { background: #ffb; text-color: #000; }
-    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
-    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-</style>
-<style>
-   body{counter-reset: section}
-   h1{counter-reset: sub-section}
-   h2{counter-reset: composite}
-   h3{counter-reset: detail}
-
-   h1:before {
-     counter-increment: section;
-     content: counter(section) ". ";
-   }
-   h2:before {
-     counter-increment: sub-section;
-     content: counter(section) "." counter(sub-section) ". ";
-   }
-   h3:before {
-     counter-increment: composite;
-     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
-   }
-   h4:before {
-     counter-increment: detail;
-     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
-   }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
 </head>
-
+<body>
 <p style="text-align:center">
     <a href="master-toc.html">master TOC</a>
 |
@@ -46,79 +28,48 @@
     <a href="index.html#license">license</a>
 </p>
 <p style="text-align:center">
-<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+<font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1>Making repositories available to both ssh and http mode clients</h1>
-
-<p>Copyright Thomas Hager (duke at sigsegv dot at).  Licensed under CC-BY-NC-SA
-unported 3.0, http://creativecommons.org/licenses/by-nc-sa/3.0/</p>
-
+<h1 id="making-repositories-available-to-both-ssh-and-http-mode-clients"><span class="header-section-number">1</span> Making repositories available to both ssh and http mode clients</h1>
+<p>Copyright Thomas Hager (duke at sigsegv dot at). Licensed under CC-BY-NC-SA unported 3.0, http://creativecommons.org/licenses/by-nc-sa/3.0/</p>
 <p>Assumptions:</p>
-
 <ul>
-<li>Apache 2.x with CGI and Suexec support installed.
-</li>
-<li>Git and Gitolite installed with user "git" and group "git", and pubkey SSH
-access configured and working.
-</li>
-<li>Git plumbing installed to /usr/libexec/git-core
-</li>
-<li>Gitolite base located at /opt/git
-</li>
-<li>Apache <code>DOCUMENT_ROOT</code> set to /var/www
-</li>
-<li>Apache runs with user www and group www
-</li>
+<li>Apache 2.x with CGI and Suexec support installed.</li>
+<li>Git and Gitolite installed with user &quot;git&quot; and group &quot;git&quot;, and pubkey SSH access configured and working.</li>
+<li>Git plumbing installed to /usr/libexec/git-core</li>
+<li>Gitolite base located at /opt/git</li>
+<li>Apache <code>DOCUMENT_ROOT</code> set to /var/www</li>
+<li>Apache runs with user www and group www</li>
 </ul>
-
 <p>Please adjust the instructions below to reflect your setup (users and paths).</p>
-
 <p>Edit your .gitolite.rc and add</p>
-
-<pre><code>$ENV{PATH} .= ":/opt/git/bin";
-</code></pre>
-
+<pre><code>$ENV{PATH} .= &quot;:/opt/git/bin&quot;;</code></pre>
 <p>at the very top (as described in <code>t/smart-http.root-setup</code>).</p>
-
 <p>Next, check which document root your Apache's suexec accepts:</p>
-
 <pre><code># suexec -V
- -D AP_DOC_ROOT="/var/www"
+ -D AP_DOC_ROOT=&quot;/var/www&quot;
  -D AP_GID_MIN=100
- -D AP_HTTPD_USER="www"
- -D AP_LOG_EXEC="/var/log/apache/suexec.log"
- -D AP_SAFE_PATH="/usr/local/bin:/usr/bin:/bin"
+ -D AP_HTTPD_USER=&quot;www&quot;
+ -D AP_LOG_EXEC=&quot;/var/log/apache/suexec.log&quot;
+ -D AP_SAFE_PATH=&quot;/usr/local/bin:/usr/bin:/bin&quot;
  -D AP_UID_MIN=100
- -D AP_USERDIR_SUFFIX="public_html"
-</code></pre>
-
+ -D AP_USERDIR_SUFFIX=&quot;public_html&quot;</code></pre>
 <p>We're interested in <code>AP_DOC_ROOT</code>, which is set to <code>/var/www</code> in our case.</p>
-
 <p>Create a <code>bin</code> and a <code>git</code> directory in <code>AP_DOC_ROOT</code>:</p>
-
 <pre><code>install -d -m 0755 -o git -g git /var/www/bin
-install -d -m 0755 -o www -g www /var/www/git
-</code></pre>
-
+install -d -m 0755 -o www -g www /var/www/git</code></pre>
 <p><code>/var/www/git</code> is just a dummy directory used as Apache's document root (see below).</p>
-
-<p>Next, create a shell script inside <code>/var/www/bin</code> named <code>gitolite-suexec-wrapper.sh</code>,
-with mode <strong>0700</strong> and owned by user and group <strong>git</strong>. Add the following content:</p>
-
+<p>Next, create a shell script inside <code>/var/www/bin</code> named <code>gitolite-suexec-wrapper.sh</code>, with mode <strong>0700</strong> and owned by user and group <strong>git</strong>. Add the following content:</p>
 <pre><code>#!/bin/bash
 #
 # Suexec wrapper for gitolite-shell
 #
 
-export GIT_PROJECT_ROOT="/opt/git/repositories"
-export GITOLITE_HTTP_HOME="/opt/git"
+export GIT_PROJECT_ROOT=&quot;/opt/git/repositories&quot;
+export GITOLITE_HTTP_HOME=&quot;/opt/git&quot;
 
-exec ${GITOLITE_HTTP_HOME}/gitolite-source/src/gitolite-shell
-</code></pre>
-
-<p>Edit your Apache's config to add http pull/push support, preferably in
-a dedicated <code>VirtualHost</code> section:</p>
-
+exec ${GITOLITE_HTTP_HOME}/gitolite-source/src/gitolite-shell</code></pre>
+<p>Edit your Apache's config to add http pull/push support, preferably in a dedicated <code>VirtualHost</code> section:</p>
 <pre><code>&lt;VirtualHost *:80&gt;
     ServerName        git.example.com
     ServerAlias       git
@@ -138,15 +89,12 @@ a dedicated <code>VirtualHost</code> section:</p>
 
     &lt;Location /git&gt;
         AuthType Basic
-        AuthName "Git Access"
+        AuthName &quot;Git Access&quot;
         Require valid-user
         AuthUserFile /etc/apache/git.passwd
     &lt;/Location&gt;
-&lt;/VirtualHost&gt;
-</code></pre>
-
-<p>This Apache config is just an example, you probably should adapt the authentication
-section and use https instead of http!</p>
-
-<p>Finally, add an <code>R = daemon</code> access rule to all repositories you want to
-make available via http.</p>
+&lt;/VirtualHost&gt;</code></pre>
+<p>This Apache config is just an example, you probably should adapt the authentication section and use https instead of http!</p>
+<p>Finally, add an <code>R = daemon</code> access rule to all repositories you want to make available via http.</p>
+</body>
+</html>

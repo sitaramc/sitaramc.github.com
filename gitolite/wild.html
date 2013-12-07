@@ -1,41 +1,23 @@
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>"wild" repos (user created repos)</title>
-<style>
-    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
-    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
-    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
-    h4          { background: #ffb; text-color: #000; }
-    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
-    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-</style>
-<style>
-   body{counter-reset: section}
-   h1{counter-reset: sub-section}
-   h2{counter-reset: composite}
-   h3{counter-reset: detail}
-
-   h1:before {
-     counter-increment: section;
-     content: counter(section) ". ";
-   }
-   h2:before {
-     counter-increment: sub-section;
-     content: counter(section) "." counter(sub-section) ". ";
-   }
-   h3:before {
-     counter-increment: composite;
-     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
-   }
-   h4:before {
-     counter-increment: detail;
-     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
-   }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
 </head>
-
+<body>
 <p style="text-align:center">
     <a href="master-toc.html">master TOC</a>
 |
@@ -46,66 +28,37 @@
     <a href="index.html#license">license</a>
 </p>
 <p style="text-align:center">
-<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+<font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1>"wild" repos (user created repos)</h1>
-
+<div id="TOC">
 <ul>
-<li><a href="wild.html">"wild" repos (user created repos)</a>
-<ul>
-<li>quick introduction
-</li>
-<li>(admin) declaring wild repos in the conf file
-</li>
-<li><a href="wild.html#create">(user) creating a specific repo</a>
-</li>
-<li>a slightly different example
-</li>
-<li>repo patterns
-<ul>
-<li>pattern versus normal repo
-</li>
-<li>line-anchored regexes
-</li>
+<li><a href="#wild-repos-user-created-repos"><span class="toc-section-number">1</span> &quot;wild&quot; repos (user created repos)</a><ul>
+<li><a href="#quick-introduction"><span class="toc-section-number">1.1</span> quick introduction</a></li>
+<li><a href="#admin-declaring-wild-repos-in-the-conf-file"><span class="toc-section-number">1.2</span> (admin) declaring wild repos in the conf file</a></li>
+<li><a href="#create"><span class="toc-section-number">1.3</span> (user) creating a specific repo</a></li>
+<li><a href="#a-slightly-different-example"><span class="toc-section-number">1.4</span> a slightly different example</a></li>
+<li><a href="#repo-patterns"><span class="toc-section-number">1.5</span> repo patterns</a><ul>
+<li><a href="#pattern-versus-normal-repo"><span class="toc-section-number">1.5.1</span> pattern versus normal repo</a></li>
+<li><a href="#line-anchored-regexes"><span class="toc-section-number">1.5.2</span> line-anchored regexes</a></li>
+</ul></li>
+<li><a href="#roles"><span class="toc-section-number">1.6</span> roles</a><ul>
+<li><a href="#adding-other-roles"><span class="toc-section-number">1.6.1</span> adding other roles</a></li>
+<li><a href="#setting-default-roles"><span class="toc-section-number">1.6.2</span> setting default roles</a></li>
+<li><a href="#specifying-owners"><span class="toc-section-number">1.6.3</span> specifying owners</a></li>
+</ul></li>
+<li><a href="#listing-wild-repos"><span class="toc-section-number">1.7</span> listing wild repos</a></li>
+<li><a href="#deleting-a-wild-repo"><span class="toc-section-number">1.8</span> deleting a wild repo</a></li>
+</ul></li>
 </ul>
-</li>
-<li><a href="wild.html#roles">roles</a>
-<ul>
-<li>adding other roles
-<ul>
-<li><a href="wild.html#rolenamewarn"><font color="red"><strong>IMPORTANT WARNING ABOUT THIS FEATURE</strong></font></a>
-</li>
-</ul>
-</li>
-<li>setting default roles
-</li>
-<li>specifying owners
-</li>
-</ul>
-</li>
-<li>listing wild repos
-</li>
-<li>deleting a wild repo
-</li>
-</ul>
-</li>
-</ul>
+</div>
+<h1 id="wild-repos-user-created-repos"><a href="#wild-repos-user-created-repos"><span class="header-section-number">1</span> &quot;wild&quot; repos (user created repos)</a></h1>
+<!-- pandoc: toc -->
 
-<h2>quick introduction</h2>
-
-<p>The wildrepos feature allows you to specify access control rules using regular
-expression patterns, so you can have many actual repos being served by a
-single set of rules in the config file.  The regex pattern can also include
-the word <code>CREATOR</code> in it, allowing you to parametrise the name of the user
-creating the repo.</p>
-
-<p>See the section on "repo patterns" later for additional information on what
-counts as a "wild" repo pattern and how it is matched.</p>
-
-<h2>(admin) declaring wild repos in the conf file</h2>
-
+<h2 id="quick-introduction"><a href="#quick-introduction"><span class="header-section-number">1.1</span> quick introduction</a></h2>
+<p>The wildrepos feature allows you to specify access control rules using regular expression patterns, so you can have many actual repos being served by a single set of rules in the config file. The regex pattern can also include the word <code>CREATOR</code> in it, allowing you to parametrise the name of the user creating the repo.</p>
+<p>See the section on &quot;repo patterns&quot; later for additional information on what counts as a &quot;wild&quot; repo pattern and how it is matched.</p>
+<h2 id="admin-declaring-wild-repos-in-the-conf-file"><a href="#admin-declaring-wild-repos-in-the-conf-file"><span class="header-section-number">1.2</span> (admin) declaring wild repos in the conf file</a></h2>
 <p>Here's an example:</p>
-
 <pre><code>@prof       =   u1
 @TAs        =   u2 u3
 @students   =   u4 u5 u6
@@ -114,109 +67,52 @@ repo    assignments/CREATOR/a[0-9][0-9]
     C   =   @students
     RW+ =   CREATOR
     RW  =   WRITERS @TAs
-    R   =   READERS @prof
-</code></pre>
-
-<p>Note the "C" permission.  This is a standalone "C", which gives the named
-users the right to <em>create a repo</em>.  <font color="gray">This is not to be
-confused with the "RWC" or its variants described elsewhere, which are about
-<em>branches</em>, not <em>repos</em>.</font></p>
-
-<h2><a name="create"></a> (user) creating a specific repo</h2>
-
-<p>For now, ignore the special usernames READERS and WRITERS, and just create a
-new repo, as user "u4" (a student):</p>
-
+    R   =   READERS @prof</code></pre>
+<p>Note the &quot;C&quot; permission. This is a standalone &quot;C&quot;, which gives the named users the right to <em>create a repo</em>. <font color="gray">This is not to be confused with the &quot;RWC&quot; or its variants described elsewhere, which are about <em>branches</em>, not <em>repos</em>.</font></p>
+<h2 id="create"><a href="#create"><span class="header-section-number">1.3</span> (user) creating a specific repo</a></h2>
+<p>For now, ignore the special usernames READERS and WRITERS, and just create a new repo, as user &quot;u4&quot; (a student):</p>
 <pre><code>$ git clone git@server:assignments/u4/a12
 Initialized empty Git repository in /home/sitaram/a12/.git/
 Initialized empty Git repository in /home/git/repositories/assignments/u4/a12.git/
-warning: You appear to have cloned an empty repository.
-</code></pre>
-
+warning: You appear to have cloned an empty repository.</code></pre>
 <p>Notice the <em>two</em> empty repo inits, and the order in which they occur ;-)</p>
-
-<h2>a slightly different example</h2>
-
-<p>Here's how the same example would look if you did not want the CREATOR's name
-to be part of the actual repo name.</p>
-
+<h2 id="a-slightly-different-example"><a href="#a-slightly-different-example"><span class="header-section-number">1.4</span> a slightly different example</a></h2>
+<p>Here's how the same example would look if you did not want the CREATOR's name to be part of the actual repo name.</p>
 <pre><code>repo    assignments/a[0-9][0-9]
     C   =   @students
     RW+ =   CREATOR
     RW  =   WRITERS @TAs
-    R   =   READERS @prof
-</code></pre>
-
-<p>We haven't changed anything except the repo name pattern.  This means that the
-first student that creates, say, <code>assignments/a12</code> becomes the owner.
-Mistakes (such as claiming a12 instead of a13) need to be rectified by an
-admin logging on to the back end, though it's not too difficult.</p>
-
+    R   =   READERS @prof</code></pre>
+<p>We haven't changed anything except the repo name pattern. This means that the first student that creates, say, <code>assignments/a12</code> becomes the owner. Mistakes (such as claiming a12 instead of a13) need to be rectified by an admin logging on to the back end, though it's not too difficult.</p>
 <p>You could also repace the C line like this:</p>
-
-<pre><code>    C   =   @TAs
-</code></pre>
-
+<pre><code>    C   =   @TAs</code></pre>
 <p>and have a TA create the repos in advance.</p>
-
-<h2>repo patterns</h2>
-
-<h3>pattern versus normal repo</h3>
-
-<p>Due to projects like <code>gtk+</code>, the <code>+</code> character is now considered a valid
-character for an <em>ordinary</em> repo.  Therefore, a pattern like <code>foo/.+</code> does not
-look like a regex to gitolite.  Use <code>foo/..*</code> if you want that.</p>
-
-<p>Also, <code>..*</code> by itself is not considered a valid repo pattern.  Try
-<code>[a-zA-Z0-9].*</code>.  <code>CREATOR/..*</code> will also work.</p>
-
-<h3>line-anchored regexes</h3>
-
+<h2 id="repo-patterns"><a href="#repo-patterns"><span class="header-section-number">1.5</span> repo patterns</a></h2>
+<h3 id="pattern-versus-normal-repo"><a href="#pattern-versus-normal-repo"><span class="header-section-number">1.5.1</span> pattern versus normal repo</a></h3>
+<p>Due to projects like <code>gtk+</code>, the <code>+</code> character is now considered a valid character for an <em>ordinary</em> repo. Therefore, a pattern like <code>foo/.+</code> does not look like a regex to gitolite. Use <code>foo/..*</code> if you want that.</p>
+<p>Also, <code>..*</code> by itself is not considered a valid repo pattern. Try <code>[a-zA-Z0-9].*</code>. <code>CREATOR/..*</code> will also work.</p>
+<h3 id="line-anchored-regexes"><a href="#line-anchored-regexes"><span class="header-section-number">1.5.2</span> line-anchored regexes</a></h3>
 <p>A regex like</p>
-
-<pre><code>repo assignments/S[0-9]+/A[0-9]+
-</code></pre>
-
-<p>would match <code>assignments/S02/A37</code>.  It will not match <code>assignments/S02/ABC</code>,
-or <code>assignments/S02/a37</code>, obviously.</p>
-
-<p>But you may be surprised to find that it does not match even
-<code>assignments/S02/A37/B99</code>.  This is because internally, gitolite
-<em>line-anchors</em> the given regex; so that regex actually becomes
-<code>^assignments/S[0-9]+/A[0-9]+$</code> -- notice the line beginning and ending
-metacharacters.</p>
-
+<pre><code>repo assignments/S[0-9]+/A[0-9]+</code></pre>
+<p>would match <code>assignments/S02/A37</code>. It will not match <code>assignments/S02/ABC</code>, or <code>assignments/S02/a37</code>, obviously.</p>
+<p>But you may be surprised to find that it does not match even <code>assignments/S02/A37/B99</code>. This is because internally, gitolite <em>line-anchors</em> the given regex; so that regex actually becomes <code>^assignments/S[0-9]+/A[0-9]+$</code> -- notice the line beginning and ending metacharacters.</p>
 <blockquote>
-  <hr />
-  
-  <p><em>Side-note: contrast with refexes</em></p>
-  
-  <p>Just for interest, note that this is in contrast to the refexes for the
-    normal "branch" permissions, as described in <code>doc/gitolite.conf.mkd</code> and
-    elsewhere.  These "refexes" are only anchored at the start; a pattern like
-    <code>refs/heads/master</code> actually can match <code>refs/heads/master01/bar</code> as well,
-    even if no one will actually push such a branch!  You can anchor both
-    sides if you really care, by using <code>master$</code> instead of <code>master</code>, but that
-    is <em>not</em> the default for refexes.</p>
-  
-  <hr />
+<hr />
 </blockquote>
-
-<h2><a name="roles"></a> roles</h2>
-
-<p>The tokens READERS and WRITERS are called "role" names.  The access rules in
-the conf file decide what permissions these roles have, but they don't say
-what users are in each of these roles.</p>
-
-<p>That needs to be done by the creator of the repo, using the <code>perms</code> command.
-You can run <code>ssh git@host perms -h</code> for detailed help, but in brief, that
-command lets you give and take away roles to users.  <a href="user.html#perms">This</a> has some
-more detail.</p>
-
-<h3>adding other roles</h3>
-
+<blockquote>
+<p><em>Side-note: contrast with refexes</em></p>
+</blockquote>
+<blockquote>
+<p>Just for interest, note that this is in contrast to the refexes for the normal &quot;branch&quot; permissions, as described in <code>doc/gitolite.conf.mkd</code> and elsewhere. These &quot;refexes&quot; are only anchored at the start; a pattern like <code>refs/heads/master</code> actually can match <code>refs/heads/master01/bar</code> as well, even if no one will actually push such a branch! You can anchor both sides if you really care, by using <code>master$</code> instead of <code>master</code>, but that is <em>not</em> the default for refexes.</p>
+</blockquote>
+<blockquote>
+<hr />
+</blockquote>
+<h2 id="roles"><a href="#roles"><span class="header-section-number">1.6</span> roles</a></h2>
+<p>The tokens READERS and WRITERS are called &quot;role&quot; names. The access rules in the conf file decide what permissions these roles have, but they don't say what users are in each of these roles.</p>
+<p>That needs to be done by the creator of the repo, using the <code>perms</code> command. You can run <code>ssh git@host perms -h</code> for detailed help, but in brief, that command lets you give and take away roles to users. <a href="user.html#perms">This</a> has some more detail.</p>
+<h3 id="adding-other-roles"><a href="#adding-other-roles"><span class="header-section-number">1.6.1</span> adding other roles</a></h3>
 <p>If you want to have more than just the 2 default roles, say something like:</p>
-
 <pre><code>repo foo/..*
   C                 =   u1
   RW    refs/tags/  =   TESTERS
@@ -224,62 +120,27 @@ more detail.</p>
   RW+               =   WRITERS
   RW                =   INTERNS
   R                 =   READERS
-  RW+D              =   MANAGERS
-</code></pre>
-
-<p>You can add the new names to the ROLES hash in the <code>~/.gitolite.rc</code> file; see
-comments in that file for how to do that.  Be sure to run the 2 commands
-mentioned there after you have added the roles.</p>
-
-<h4><a name="rolenamewarn"></a> <font color="red"><strong>IMPORTANT WARNING ABOUT THIS FEATURE</strong></font></h4>
-
-<p>Please make sure that none of the role names conflict with any of the user
-names or group names in the system.  For example, if you have a user called
-"foo" or a group called "@foo", make sure you do not include "foo" as a valid
-role in the ROLES hash.</p>
-
-<p>You can keep things sane by using UPPERCASE names for roles, while keeping all
-your user and group names lowercase; then you don't have to worry about this
-problem.</p>
-
-<h3>setting default roles</h3>
-
-<p>You can setup some default role assignments as soon as a new wild repo is
-created.</p>
-
+  RW+D              =   MANAGERS</code></pre>
+<p>You can add the new names to the ROLES hash in the <code>~/.gitolite.rc</code> file; see comments in that file for how to do that. Be sure to run the 2 commands mentioned there after you have added the roles.</p>
+<h4 id="rolenamewarn"><a href="#rolenamewarn"><span class="header-section-number">1.6.1.1</span> <font color="red"><strong>IMPORTANT WARNING ABOUT THIS FEATURE</strong></font></a></h4>
+<p>Please make sure that none of the role names conflict with any of the user names or group names in the system. For example, if you have a user called &quot;foo&quot; or a group called &quot;@foo&quot;, make sure you do not include &quot;foo&quot; as a valid role in the ROLES hash.</p>
+<p>You can keep things sane by using UPPERCASE names for roles, while keeping all your user and group names lowercase; then you don't have to worry about this problem.</p>
+<h3 id="setting-default-roles"><a href="#setting-default-roles"><span class="header-section-number">1.6.2</span> setting default roles</a></h3>
+<p>You can setup some default role assignments as soon as a new wild repo is created.</p>
 <p>Here's how:</p>
-
 <ul>
-<li><p>enable the 'set-default-roles' feature in the rc file by uncommenting it
-if it is already present or adding it to the ENABLE list if it is not.</p></li>
-<li><p>supply a set of default role assignments for a wild repo pattern by adding
-lines like this to the repo config para:</p>
-
+<li><p>enable the 'set-default-roles' feature in the rc file by uncommenting it if it is already present or adding it to the ENABLE list if it is not.</p></li>
+<li><p>supply a set of default role assignments for a wild repo pattern by adding lines like this to the repo config para:</p>
 <pre><code>option default.roles-1  =   READERS @all
-option default.roles-2  =   WRITERS @senior-devs
-</code></pre></li>
+option default.roles-2  =   WRITERS @senior-devs</code></pre></li>
 </ul>
-
-<p>This will then behave as if the <a href="user.html#perms">perms</a> command was used immediately after
-the repo was created to add those two role assignments.</p>
-
-<p>If you want to simulate the old (pre v3.5) <code>DEFAULT_ROLE_PERMS</code> rc file
-variable, just add them under a <code>repo @all</code> line.  (Remember that this only
-affects newly created wild repos, despite the '@all' name).</p>
-
-<h3>specifying owners</h3>
-
+<p>This will then behave as if the <a href="user.html#perms">perms</a> command was used immediately after the repo was created to add those two role assignments.</p>
+<p>If you want to simulate the old (pre v3.5) <code>DEFAULT_ROLE_PERMS</code> rc file variable, just add them under a <code>repo @all</code> line. (Remember that this only affects newly created wild repos, despite the '@all' name).</p>
+<h3 id="specifying-owners"><a href="#specifying-owners"><span class="header-section-number">1.6.3</span> specifying owners</a></h3>
 <p>See the section on <code>OWNER_ROLENAME</code> in the <a href="rc.html">rc file documentation</a>.</p>
-
-<h2>listing wild repos</h2>
-
-<p>In order to see what repositories were created from a wildcard, use the 'info'
-command.  Try <code>ssh git@host info -h</code> to get help on the info command.</p>
-
-<h2>deleting a wild repo</h2>
-
-<p>Run the whimsically named "D" command -- try <code>ssh git@host D -h</code> for more info
-on how to delete a wild repo.  (Yes the command is "D"; it's meant to be a
-counterpart to the "C" permission that allowed you to create the repo in the
-first place).  Of course this only works if your admin has enabled the command
-(gitolite ships with the command disabled for remote use).</p>
+<h2 id="listing-wild-repos"><a href="#listing-wild-repos"><span class="header-section-number">1.7</span> listing wild repos</a></h2>
+<p>In order to see what repositories were created from a wildcard, use the 'info' command. Try <code>ssh git@host info -h</code> to get help on the info command.</p>
+<h2 id="deleting-a-wild-repo"><a href="#deleting-a-wild-repo"><span class="header-section-number">1.8</span> deleting a wild repo</a></h2>
+<p>Run the whimsically named &quot;D&quot; command -- try <code>ssh git@host D -h</code> for more info on how to delete a wild repo. (Yes the command is &quot;D&quot;; it's meant to be a counterpart to the &quot;C&quot; permission that allowed you to create the repo in the first place). Of course this only works if your admin has enabled the command (gitolite ships with the command disabled for remote use).</p>
+</body>
+</html>

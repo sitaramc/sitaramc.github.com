@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
+</head>
+<body>
+<p style="text-align:center">
+    <a href="index.html">git notes main page</a>
+|
+<a href="gitolite/index.html"><strong>gitolite</strong> main page</a>
+|
+    <a href="license.html">license</a>
+</p>
+<h1 id="why-the-indexstaging-area-is-so-useful" class="unnumbered">Why the index/staging area is so useful</h1>
+<blockquote>
+<p>Newcomers to git often ask why there is such a thing as the index, and what use is it. They'd rather just do <code>git add -A; git commit</code> each time to avoid thinking about the index at all, because it seems like one extra (and needless) complication.</p>
+</blockquote>
+<blockquote>
+<p>So... what use is this, apart from confusing you with multiple names like index, staging area, and cache?</p>
+</blockquote>
+<h2 id="what-is-the-index" class="unnumbered">what is the index</h2>
+<p>The index (or any of its other names) is essentially a &quot;holding area&quot; for changes that will be committed when you next do <code>git commit</code>. That is, unlike other VCSs, a &quot;commit&quot; operation does not simply take the current working tree and check it as-is into the repository. The index allows you to control what parts of the working tree go into the repository on the next &quot;commit&quot; operation.</p>
+<p>That should be sufficient background to appreciate (in abstract terms) the following discussion.</p>
+<h2 id="staging-helps-you-split-up-one-large-change-into-multiple-commits" class="unnumbered">staging helps you split up one large change into multiple commits</h2>
+<p>Let's say you worked on a large-ish change, involving a lot of files and quite a few different subtasks. You didn't actually commit any of these -- you were &quot;in the zone&quot;, as they say, and you didn't want to think about splitting up the commits the right way just then. (And you're smart enough not to make the whole thing on honking big commit!)</p>
+<p>Now the change is all tested and working, you need to commit all this properly, in several clean commits each focused on one aspect of the code changes.</p>
+<p>With the index, just stage each set of changes and commit until no more changes are pending. Really works well with <code>git gui</code> if you're into that too, or you can use <code>git add -p</code> or, with newer gits, <code>git add -e</code>.</p>
+<h2 id="staging-helps-in-reviewing-changes" class="unnumbered">staging helps in reviewing changes</h2>
+<p>Staging helps you &quot;check off&quot; individual changes as you review a complex commit, and to concentrate on the stuff that has not yet passed your review. Let me explain.</p>
+<p>Before you commit, you'll probably review the whole change by using <code>git diff</code>. If you stage each change as you review it, you'll find that you can concentrate better on the changes that are not yet staged.</p>
+<p><code>git gui</code> is great here. It's two left panes show unstaged and staged changes respectively, and you can move files between those two panes (stage/unstage) just by clicking on the icon to the left of the filename.</p>
+<p>Even better, you can even stage <em>partial changes</em> to a file. In the right pane of <code>git gui</code>, right click on a change that you approve of and choose &quot;stage hunk&quot;. <em>Just that change</em> (not the entire file) is now staged; in fact, if there are other, unstaged, changes in that same file, you'll find that the file now appears on <em>both</em> top and bottom left panes!</p>
+<p><sup><sup>[Do remember, however, that if the change is really complex maybe you should split it into multiple commits!]</sup></sup></p>
+<h2 id="staging-helps-when-a-merge-has-conflicts" class="unnumbered">staging helps when a merge has conflicts</h2>
+<p>When a merge happens, changes that merge cleanly are updated both in the staging area as well as in your work tree. Only changes that did not merge cleanly (i.e., caused a conflict) will show up when you do a <code>git diff</code>, or in the top left pane of <code>git gui</code>.</p>
+<p>Again, this lets you concentrate on the stuff that needs your attention -- the merge conflicts.</p>
+<h2 id="staging-helps-you-keep-extra-local-files-hanging-around" class="unnumbered">staging helps you keep extra local files hanging around</h2>
+<p>Usually, files that should not be committed go into <code>.gitignore</code> or the local variant, <code>.git/info/exclude</code>.</p>
+<p>However, sometimes you want a local change to a file that cannot be excluded (which is not good practice but can happen sometimes). For example, perhaps you upgraded your build environment and it now requires an extra flag or option for compatibility, but if you commit the change to the Makefile, the other developers will have a problem.</p>
+<p>Of course you have to discuss with your team and work out a more permanent solution, but right now, you <em>need</em> that change in your working tree to do <em>any</em> work at all!</p>
+<p>Another situation could be that you want a new local file that is temporary, and you don't want to bother with the ignore mechanism. This may be some test data, a log file or trace file, or a temporary shell script to automate some test... whatever.</p>
+<p>In git, all you have to do is never to stage that file or that change. That's it.</p>
+<h2 id="staging-helps-you-sneak-in-small-changes--" class="unnumbered">staging helps you sneak in small changes ;-)</h2>
+<p>Let's say you're in the middle of a somewhat large-ish change and you are told about a very important bug that needs to be fixed asap.</p>
+<p>The usual recommendation is to do this on a separate branch, but let's say this fix is really just a line or two, and can be tested just as easily without affecting your current work.</p>
+<p>With git, you can quickly make and commit <em>only that change</em>, without committing all the other stuff you're still working on.</p>
+<p>Again, if you use <code>git gui</code>, whatever's on the bottom left pane gets committed, so just make sure only that change gets there and commit, then push!</p>
+<h3 id="a-word-of-warning..." class="unnumbered">a word of warning...</h3>
+<p>While the first 3 use cases are perfectly legitimate and useful uses of the index, this last example could be dangerous if you get carried away. You might end up committing something that is not tested <em>exactly</em>, because you tested with the contents of the work tree, which is not the same as the index that is being committed.</p>
+<p>Of course, using a powerful DVCS does not absolve you from the responsibility of thinking :-) So if you want to be 100% sure, there is a simple way to test only the staged code:</p>
+<pre><code># stash away the changes to git-tracked files that you have not staged yet
+git stash save --keep-index
+# now do your tests on the exact stuff being committed
+make; make test     # etc...
+# when satisfied, commmit
+git commit
+
+# now bring the stashed changes back to continue normal work
+git stash pop</code></pre>
+<p>If you need to understand how/why this works, <script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x73;&#x69;&#116;&#x61;&#114;&#x61;&#x6d;&#x63;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'ask me'+'<\/'+'a'+'>');
+// -->
+</script><noscript>ask me (sitaramc at gmail dot com)</noscript>, otherwise just use it and be happy :-)</p>
+</body>
+</html>

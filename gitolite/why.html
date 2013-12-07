@@ -1,41 +1,23 @@
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>why might you need gitolite</title>
-<style>
-    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
-    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
-    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
-    h4          { background: #ffb; text-color: #000; }
-    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
-    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-</style>
-<style>
-   body{counter-reset: section}
-   h1{counter-reset: sub-section}
-   h2{counter-reset: composite}
-   h3{counter-reset: detail}
-
-   h1:before {
-     counter-increment: section;
-     content: counter(section) ". ";
-   }
-   h2:before {
-     counter-increment: sub-section;
-     content: counter(section) "." counter(sub-section) ". ";
-   }
-   h3:before {
-     counter-increment: composite;
-     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
-   }
-   h4:before {
-     counter-increment: detail;
-     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
-   }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
 </head>
-
+<body>
 <p style="text-align:center">
     <a href="master-toc.html">master TOC</a>
 |
@@ -46,51 +28,29 @@
     <a href="index.html#license">license</a>
 </p>
 <p style="text-align:center">
-<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+<font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1>why might you need gitolite</h1>
-
+<div id="TOC">
 <ul>
-<li><a href="why.html">why might you need gitolite</a>
-<ul>
-<li>basic use case
-</li>
-<li><a href="why.html#alt">alternatives</a>
-<ul>
-<li>unix permissions and ACLs
-</li>
-<li><a href="why.html#gcr">Gerrit Code Review</a>
-</li>
-<li>gitorious and others
-</li>
+<li><a href="#why-might-you-need-gitolite"><span class="toc-section-number">1</span> why might you need gitolite</a><ul>
+<li><a href="#basic-use-case"><span class="toc-section-number">1.1</span> basic use case</a></li>
+<li><a href="#alt"><span class="toc-section-number">1.2</span> alternatives</a><ul>
+<li><a href="#unix-permissions-and-acls"><span class="toc-section-number">1.2.1</span> unix permissions and ACLs</a></li>
+<li><a href="#gcr"><span class="toc-section-number">1.2.2</span> Gerrit Code Review</a></li>
+<li><a href="#gitorious-and-others"><span class="toc-section-number">1.2.3</span> gitorious and others</a></li>
+</ul></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
+</div>
+<h1 id="why-might-you-need-gitolite"><a href="#why-might-you-need-gitolite"><span class="header-section-number">1</span> why might you need gitolite</a></h1>
+<!-- pandoc: toc -->
 
-<hr />
-
-<p>Git by itself does not do any access control -- it relies on the transport
-medium to do authentication ("who are you?"), and on OS file permissions to do
-authorisation ("what are you allowed to do?").</p>
-
-<p>Git also comes with a program called "git-shell" which can act as a restricted
-login shell if you don't want users getting a proper shell.  Using this and
-judicious use of Unix groups, you can allow some people read-only access while
-others get read-write access, etc.  This is probably sufficient if your needs
-are simple and don't change too often.</p>
-
+<p>Git by itself does not do any access control -- it relies on the transport medium to do authentication (&quot;who are you?&quot;), and on OS file permissions to do authorisation (&quot;what are you allowed to do?&quot;).</p>
+<p>Git also comes with a program called &quot;git-shell&quot; which can act as a restricted login shell if you don't want users getting a proper shell. Using this and judicious use of Unix groups, you can allow some people read-only access while others get read-write access, etc. This is probably sufficient if your needs are simple and don't change too often.</p>
 <p>However, gitolite does this much better, and offers many more features.</p>
-
-<h2>basic use case</h2>
-
-<p>Gitolite is useful in any server that is going to host multiple git
-repositories, each with many developers, where "anyone can do anything to any
-repo" is not a good idea.  Here're two examples to illustrate.</p>
-
+<h2 id="basic-use-case"><a href="#basic-use-case"><span class="header-section-number">1.1</span> basic use case</a></h2>
+<p>Gitolite is useful in any server that is going to host multiple git repositories, each with many developers, where &quot;anyone can do anything to any repo&quot; is not a good idea. Here're two examples to illustrate.</p>
 <p>Example 1, 3 repos, 3 developers with different levels of access to each repo:</p>
-
 <pre><code>repo foo
     RW+     =   alice
     R       =   bob
@@ -101,83 +61,35 @@ repo bar
 
 repo baz
     RW+     =   carol
-    R       =   alice bob
-</code></pre>
-
-<p>Example 2, one repo, but different levels of access to different branches and
-tags for different developers:</p>
-
+    R       =   alice bob</code></pre>
+<p>Example 2, one repo, but different levels of access to different branches and tags for different developers:</p>
 <pre><code>repo foo
     RW+ master                  =   alice
     RW+ dev/                    =   bob
-    RW  refs/heads/tags/v[0-9]  =   ashok
-</code></pre>
-
-<h2><a name="alt"></a> alternatives</h2>
-
-<h3>unix permissions and ACLs</h3>
-
-<p>If you're a masochist, you could probably do example 1 with Unix permissions
-and facls.  But you can't do example 2 -- git is not designed to allow that!</p>
-
+    RW  refs/heads/tags/v[0-9]  =   ashok</code></pre>
+<h2 id="alt"><a href="#alt"><span class="header-section-number">1.2</span> alternatives</a></h2>
+<h3 id="unix-permissions-and-acls"><a href="#unix-permissions-and-acls"><span class="header-section-number">1.2.1</span> unix permissions and ACLs</a></h3>
+<p>If you're a masochist, you could probably do example 1 with Unix permissions and facls. But you can't do example 2 -- git is not designed to allow that!</p>
 <p>Here are some other disadvantages of the Unix ACL method:</p>
-
 <ul>
-<li>Every user needs a userid and password on the server.
-</li>
-<li>Changing access rights involves complex <code>usermod -G ...</code> mumblings
-(I.e., the "pain" mentioned above is not a one-time pain!)
-</li>
-<li><em>Viewing</em> the current set of permissions requires running multiple
-commands to list directories and their permissions/ownerships, users and
-their group memberships, and then correlating all these manually.
-</li>
-<li>Auditing historical permissions or permission changes is impossible.
-</li>
+<li>Every user needs a userid and password on the server.</li>
+<li>Changing access rights involves complex <code>usermod -G ...</code> mumblings (I.e., the &quot;pain&quot; mentioned above is not a one-time pain!)</li>
+<li><em>Viewing</em> the current set of permissions requires running multiple commands to list directories and their permissions/ownerships, users and their group memberships, and then correlating all these manually.</li>
+<li>Auditing historical permissions or permission changes is impossible.</li>
 </ul>
-
-<h3><a name="gcr"></a> Gerrit Code Review</h3>
-
-<p>The best real alternative to gitolite is Gerrit Code Review.  If code review
-is an essential part of your workflow, you should use Gerrit.</p>
-
+<h3 id="gcr"><a href="#gcr"><span class="header-section-number">1.2.2</span> Gerrit Code Review</a></h3>
+<p>The best real alternative to gitolite is Gerrit Code Review. If code review is an essential part of your workflow, you should use Gerrit.</p>
 <p>Here're some high level differences between gitolite and Gerrit:</p>
-
 <p><strong>Size</strong>: 3000+ lines of perl versus of 56,000+ lines of Java</p>
-
-<p><strong>Architecture</strong>: Gitolite sits on top of "standard" git and openssh, which
-are assumed to already be installed.  Gerrit includes its own git stack (jgit)
-and sshd (Apache Mina).  In Java tradition, they all come bundled together.</p>
-
-<p>(Corollary: As far as I know jgit does not support the same hooks that 'man
-githooks' talks about).</p>
-
+<p><strong>Architecture</strong>: Gitolite sits on top of &quot;standard&quot; git and openssh, which are assumed to already be installed. Gerrit includes its own git stack (jgit) and sshd (Apache Mina). In Java tradition, they all come bundled together.</p>
+<p>(Corollary: As far as I know jgit does not support the same hooks that 'man githooks' talks about).</p>
 <p>Gitolite uses a plain text config file; gerrit uses a database.</p>
-
-<p><strong>User view</strong>: Gitolite is invisible to users except when access is denied.  I
-think Gerrit is much more visible to devs.</p>
-
-<p>On a related note, gitolite does not do anything special with signed or
-annotated tags, nor does it check author/committer identity.  However, it is
-trivial to add your own code to do either (or if someone contributes it, to
-just "enable" what ships with gitolite in a disabled state).</p>
-
-<h3>gitorious and others</h3>
-
-<p>Anecdotally, gitorious is very hard to install.  Comparison with gitolite may
-be useless because I believe it doesn't have branch/tag level access control.
-However, I can't confirm or deny this because I can't find any documentation
-on the website.  In addition, the main website hides the source code very
-well, so you already have a challenge!  [The only link I could find was tucked
-away at the bottom of the About page, in the License section].</p>
-
-<p>Gitorious has several, much newer, competitors offering web-based management,
-issue tracker, wiki, and so on; try googling for gitlab, gitblit, and
-rhodecode.</p>
-
-<p>However, to the best of my knowledge none of them offer branch level access
-controls (please tell me if you know different), which, since it is the main
-reason I wrote gitolite, makes them all somewhat moot.</p>
-
-<p>They are also unlikely to be as <a href="cust.html">customisable</a> as gitolite is, if you
-care about that sort of thing.</p>
+<p><strong>User view</strong>: Gitolite is invisible to users except when access is denied. I think Gerrit is much more visible to devs.</p>
+<p>On a related note, gitolite does not do anything special with signed or annotated tags, nor does it check author/committer identity. However, it is trivial to add your own code to do either (or if someone contributes it, to just &quot;enable&quot; what ships with gitolite in a disabled state).</p>
+<h3 id="gitorious-and-others"><a href="#gitorious-and-others"><span class="header-section-number">1.2.3</span> gitorious and others</a></h3>
+<p>Anecdotally, gitorious is very hard to install. Comparison with gitolite may be useless because I believe it doesn't have branch/tag level access control. However, I can't confirm or deny this because I can't find any documentation on the website. In addition, the main website hides the source code very well, so you already have a challenge! [The only link I could find was tucked away at the bottom of the About page, in the License section].</p>
+<p>Gitorious has several, much newer, competitors offering web-based management, issue tracker, wiki, and so on; try googling for gitlab, gitblit, and rhodecode.</p>
+<p>However, to the best of my knowledge none of them offer branch level access controls (please tell me if you know different), which, since it is the main reason I wrote gitolite, makes them all somewhat moot.</p>
+<p>They are also unlikely to be as <a href="cust.html">customisable</a> as gitolite is, if you care about that sort of thing.</p>
+</body>
+</html>

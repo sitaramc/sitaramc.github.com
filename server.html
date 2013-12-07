@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
+</head>
+<body>
+<p style="text-align:center">
+    <a href="index.html">git notes main page</a>
+|
+<a href="gitolite/index.html"><strong>gitolite</strong> main page</a>
+|
+    <a href="license.html">license</a>
+</p>
+<h1 id="git-on-the-server" class="unnumbered">git on the server</h1>
+<p><code>git</code> is a <em>distributed</em> version control system (DVCS), and every developer thus has his/her own repository. A central server is therefore not a technical requirement, but more of a practical and/or administrative one, if at least as a place for the &quot;official&quot; version of your repo.</p>
+<p>I have only 2 things to say about the server environment:</p>
+<ul>
+<li><p>install Gitolite</p></li>
+<li><p>for additional piece of mind, set the following</p>
+<pre><code>git config core.logAllRefUpdatess true
+git config transfer.fsckObjects   true</code></pre></li>
+</ul>
+<h2 id="protocols-that-git-uses" class="unnumbered">protocols that git uses</h2>
+<p>Git uses the following protocols to access remote repositories; example URLs are given in parentheses:</p>
+<ul>
+<li><p><strong>ssh</strong> (<code>ssh://user@my.server/path/to/repo</code>). Authentication is handled by ssh. See the section on &quot;gitolite and other tools&quot; for authorisation.</p></li>
+<li><p><strong>http/https</strong>: (<code>http://my.server/path/to/repo</code>). Authentication is handled by the web server. Authorisation <em>can</em> be handled by gitolite if you're using &quot;smart http&quot; (see 'man git-http-backend').</p></li>
+<li><p><strong>local file system</strong>: (<code>file:///path/to/repo</code>). Authentication is not relevant (you're already logged in).</p>
+<p>Authorisation is handled by OS file-system permissions, but there's a little twist. Using OS permissions, or even filesystem ACLs, you can only get repo-level granularity for reads and writes (i.e., you can say Alice can read the repo, Bob can read and write, and Carol cannot do either, but that;s it).</p></li>
+<li><p><strong>git</strong>: (<code>git://my.server/path/to/repo</code>). This is an <em>UNAUTHENTICATED</em> protocol, useful only for allowing clones of publicly accessible repos. If they can reach port 9418 on your server, they can get it. Pushes are disabled by default, and -- needless to say -- you must <em>NEVER</em> enable them!</p>
+<p>This protocol is handled by the special 'git-daemon' program, which you can run either directly or via inetd/xinetd. Please see its man page etc for details.</p></li>
+</ul>
+<h2 id="gitolite-and-other-tools-for-authorisation" class="unnumbered">gitolite and other tools for authorisation</h2>
+<p>There are many situations where you need to establish limits on what someone can do. When you have a number of developers, with varying levels of experience and expertise, accessing a number of repos, and different branches in different repos have different levels of &quot;importance&quot;, you need some serious authorisation tool.</p>
+<p><a href="http://github.com/sitaramc/gitolite">Gitolite</a> is the best such tool I know (blame author bias if you don't agree!). It comes with a <a href="http://sitaramc.github.com/gitolite/index.html#qi">quick install</a> section, plus lots and lots of <a href="http://gitolite.com/gitolite">documentation</a>.</p>
+<p>Other tools exist, but they are all web-based. &quot;Gerrit code review&quot; is the most powerful of the free ones, but it's much more focused on (and much more useful for) code review / workflow enforcement. Less capable tools are gitorious, gitlab, and so on (I don't believe any of them has the kind of branch level and file/directory level access controls that Gitolite has).</p>
+<p>For open source projects or if you don't mind paying a small amount of money, Github is very nice. (Gitolite's primary host is Github, and I have no other relationship with them than being a free user). Github's access control is not at all fine-grained so it's best if it's used only as a &quot;meeting point&quot; server for your team, and not as a &quot;source of truth&quot;.</p>
+</body>
+</html>

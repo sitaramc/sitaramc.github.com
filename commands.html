@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
+</head>
+<body>
+<p style="text-align:center">
+    <a href="index.html">git notes main page</a>
+|
+<a href="gitolite/index.html"><strong>gitolite</strong> main page</a>
+|
+    <a href="license.html">license</a>
+</p>
+<div id="TOC">
+<ul>
+<li><a href="#useful-commands">useful commands</a><ul>
+<li><a href="#grep">grep</a></li>
+<li><a href="#log-and-show">log and show</a></li>
+<li><a href="#reflog">reflog</a></li>
+<li><a href="#show-branch">show-branch</a></li>
+<li><a href="#cherry-not-cherry-pick">cherry (not cherry-pick)</a></li>
+<li><a href="#cat-file-repo-object-and-ls-tree-tree-object">cat-file (repo object) and ls-tree (tree object)</a></li>
+<li><a href="#ls-files">ls-files</a></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="useful-commands" class="unnumbered"><a href="#useful-commands">useful commands</a></h1>
+<!-- pandoc: toc -->
+
+<h2 id="grep" class="unnumbered"><a href="#grep">grep</a></h2>
+<p><code>git grep</code> is very, <strong>very</strong>, powerful. It has pretty much all the normal grep options, plus:</p>
+<ul>
+<li>doesn't search files that are not revisioned (untracked, excluded/ignored, etc)</li>
+<li>with <code>--cached</code>, looks only in the cache</li>
+<li>with one or more ref names, searched only within those revisions</li>
+<li>can take a pattern, like <code>*.c</code>, to restrict the files searched</li>
+<li><p>can do <code>--and</code>, <code>--or</code>, <code>--not</code>, etc with patterns. This is a pretty big wow. As <a href="http://gitster.livejournal.com/27674.html">http://gitster.livejournal.com/27674.html</a> says:</p>
+<pre><code>git grep -e ';;' --and --not -e 'for *(.*;;' -- '*.c'</code></pre>
+<p>which searches for ';;' in all C files, unless they occur in a typical <code>for (;;) {</code> type of construct.</p></li>
+<li><p>finally, there's a somewhat gratuitously thrown in <code>--all-match</code> option, which says &quot;match any of these strings, but print matches only from files that have <em>all</em> of them&quot;. I wonder whose scratch that was... ;-)</p></li>
+</ul>
+<h2 id="log-and-show" class="unnumbered"><a href="#log-and-show">log and show</a></h2>
+<ul>
+<li><p><code>git lga</code> is pretty cool; lga is an alias in my config for</p>
+<pre><code>log --graph --pretty=oneline --abbrev-commit --decorate --all</code></pre></li>
+<li><p>Check the logs to see what's happened recently</p>
+<pre><code>git log [--stat] -[p] [-n &lt;number of commits to show&gt;]
+git log &quot;@{yesterday}..&quot;
+    # note the suffix &quot;..&quot;, since the default is prefix &quot;..&quot;, which is
+    # probably not what you want
+git log somefile.c</code></pre></li>
+<li><p><code>git show</code> is almost an alias for <code>git log -p -n 1</code>. In general, <code>git     show</code> does the right thing: shows a commit as a commit, a tree as a plain &quot;ls&quot;, etc. But if you're printing a large blob you better use a pager or redirect!</p>
+<pre><code>git show [ HEAD^ | HEAD^^ | HEAD@{3} | origin | origin/master | etc ]
+git show 7a8b9c     # or some hex number; shows you the object
+git show HEAD~3:file.c  # get file.c from 3 versions back</code></pre></li>
+</ul>
+<h2 id="reflog" class="unnumbered"><a href="#reflog">reflog</a></h2>
+<p>...see this more detailed <a href="reflog.html">note</a></p>
+<h2 id="show-branch" class="unnumbered"><a href="#show-branch">show-branch</a></h2>
+<ul>
+<li><code>git show-branch -a</code> is useful to get a bird's eye view of all your branches and their topological relationships.</li>
+<li><code>git show-branch -gN</code> (N is some number) shows you reflog info for the current branch, including topological relationships and relative time. This is useful if you had a lot of rebases or amended commits and you think you might need one of them back :-) See <a href="reflog.html">reflog</a> for more on this</li>
+<li><p>if you need serious troubleshooting with branches, use the following. It may be useful in some contexts where <code>git lg</code> is too complex to figure out what tip contains what commit, and you are unable to use gitk</p>
+<pre><code>git show-branch $(git show-ref -h |cut -c41-)</code></pre></li>
+</ul>
+<h2 id="cherry-not-cherry-pick" class="unnumbered"><a href="#cherry-not-cherry-pick">cherry (not cherry-pick)</a></h2>
+<ul>
+<li><p>summary: <code>+</code> shows you commits you have that the 'upstream' doesn't</p>
+<pre><code>git cherry -v upstream [head]</code></pre></li>
+<li>detail: for every commit in 'head' that doesn't exist in 'upstream'
+<ul>
+<li>prefix <code>-</code> if there is at least an <em>equivalent</em> commit</li>
+<li>prefix <code>+</code> if there's not even that</li>
+</ul></li>
+<li>TIP: if you're trying to cut some branches (like <code>git branch --merged</code>)
+<ul>
+<li>put the candidate to be cut <strong>on the right side</strong>, and</li>
+<li>make sure there are no <code>+</code>s in the output</li>
+</ul></li>
+</ul>
+<h2 id="cat-file-repo-object-and-ls-tree-tree-object" class="unnumbered"><a href="#cat-file-repo-object-and-ls-tree-tree-object">cat-file (repo object) and ls-tree (tree object)</a></h2>
+<p>Note: I'm not sure what, if any, is the difference between <code>show</code> and <code>cat-file -p</code> for &quot;blob&quot; objects. For commits there is a subtle difference. (Try it)</p>
+<pre><code># any object
+git cat-file [ -t | -s | -p ] 789abc
+    # find the type or size of an object, or pretty print it
+    # If it's a blob, I'd use use &quot;git show&quot; until we find out what
+    # &quot;pretty&quot; means for arbitrary blobs :-)
+git cat-file blob 789abc        # cat the object
+
+# any tree
+git ls-tree         # files and directories, top level only
+git ls-tree -l      # also show the size of the object
+git ls-tree -d      # only directories
+git ls-tree -r      # recurse, only files
+git ls-tree -r -d   # recurse, only directories
+git ls-tree -r -t   # recurse, both directories and files</code></pre>
+<h2 id="ls-files" class="unnumbered"><a href="#ls-files">ls-files</a></h2>
+<p>To get listings of various types of files, use <code>git ls-files</code>. The common but less intuitive ones are shown here, the rest can be had from the man page:</p>
+<pre><code># deleted files and modified files (deleted files are also counted as
+# modified, so may come up twice...
+git ls-files -d -m
+# what's in the index; includes files that were &quot;git add&quot;ed
+git ls-files -s
+# conflicted files
+git ls-files -u
+# &quot;other files&quot;; includes EVERYthing not in d/m/s, I think
+# seems to be equal to untracked + ignored
+git ls-files -o
+# untracked files only
+git ls-files --exclude-standard -o
+# ignored files only
+git ls-files --exclude-standard -o -i</code></pre>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
+</head>
+<body>
+<p style="text-align:center">
+    <a href="index.html">git notes main page</a>
+|
+<a href="gitolite/index.html"><strong>gitolite</strong> main page</a>
+|
+    <a href="license.html">license</a>
+</p>
+<h2 id="tips-for-legacy-vcs-migrants" class="unnumbered">tips for legacy VCS migrants!</h2>
+<ul>
+<li><p><strong>gotcha</strong>: <code>git add somefile</code> adds the <strong>current</strong> content of <code>somefile</code> to the staging area. Changes made after this do not affect <code>git commit</code> unless you again do a <code>git add</code> or use the <code>-a</code> option to <code>git commit</code>.</p></li>
+<li><p><strong>gotcha</strong>: <code>commit</code> means to your local repo, not to the &quot;server&quot;!</p></li>
+<li><p>these commands/options effectively bypass the &quot;index&quot; or &quot;staging area&quot;, <strong>but the INDEX is really a wonderful concept, and you really should not bypass it like this</strong>. See <a href="uses-of-index.html">why the index is useful</a> or <a href="http://blogs.gnome.org/newren/2007/12/08/limbo-why-users-are-more-error-prone-with-git-than-other-vcses/">http://blogs.gnome.org/newren/2007/12/08/limbo-why-users-are-more-error-prone-with-git-than-other-vcses/</a></p>
+<pre><code>git diff HEAD       # to see changes you made
+git add             # to tell git about new files...
+git commit -a       # ...and let git figure out changed and deleted files before committing</code></pre></li>
+<li><p>CVS equivalence</p>
+<pre><code>CVS                 GIT
+---                 ---
+checkout            clone
+update              pull
+checkin             commit + push
+add                 add
+remove              rm
+???                 mv   </code></pre></li>
+</ul>
+</body>
+</html>

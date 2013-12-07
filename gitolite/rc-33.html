@@ -1,41 +1,23 @@
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>the v3.0 to v3.3 "rc" file (`$HOME/.gitolite.rc`)</title>
-<style>
-    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
-    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
-    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
-    h4          { background: #ffb; text-color: #000; }
-    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
-    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-</style>
-<style>
-   body{counter-reset: section}
-   h1{counter-reset: sub-section}
-   h2{counter-reset: composite}
-   h3{counter-reset: detail}
-
-   h1:before {
-     counter-increment: section;
-     content: counter(section) ". ";
-   }
-   h2:before {
-     counter-increment: sub-section;
-     content: counter(section) "." counter(sub-section) ". ";
-   }
-   h3:before {
-     counter-increment: composite;
-     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
-   }
-   h4:before {
-     counter-increment: detail;
-     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
-   }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
 </head>
-
+<body>
 <p style="text-align:center">
     <a href="master-toc.html">master TOC</a>
 |
@@ -46,121 +28,48 @@
     <a href="index.html#license">license</a>
 </p>
 <p style="text-align:center">
-<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+<font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1>the v3.0 to v3.3 "rc" file (<code>$HOME/.gitolite.rc</code>)</h1>
-
+<h1 id="the-v3.0-to-v3.3-rc-file-home.gitolite.rc"><span class="header-section-number">1</span> the v3.0 to v3.3 &quot;rc&quot; file (<code>$HOME/.gitolite.rc</code>)</h1>
 <p><strong>NOTE 1</strong>: if you're using v3.4 and above, see <a href="rc.html">this</a>.</p>
-
-<p><strong>NOTE 2</strong>: if you're migrating from g2, there are some settings that MUST be
-dealt with <strong>before</strong> running <code>gitolite setup</code>; please read the
-<a href="migr.html">migration</a> page and linked pages, and especially the one on "presetting
-the rc file"</p>
-
+<p><strong>NOTE 2</strong>: if you're migrating from g2, there are some settings that MUST be dealt with <strong>before</strong> running <code>gitolite setup</code>; please read the <a href="migr.html">migration</a> page and linked pages, and especially the one on &quot;presetting the rc file&quot;</p>
 <hr />
-
 <p>The rc file for g3 is <em>quite</em> different from that of g2.</p>
-
-<p>As before, it is designed to be the only thing unique to your site for most
-setups.  What is new is that it is easy to extend it when new needs come up,
-without having to touch core gitolite.</p>
-
-<p>The rc file is perl code, but you do NOT need to know perl to edit it.  Just
-mind the commas, use single quotes unless you know what you're doing, and make
-sure the brackets and braces stay matched up!</p>
-
-<p>Please look at the <code>~/.gitolite.rc</code> file that gets installed when you setup
-gitolite.  As you can see there are 3 types of variables in it:</p>
-
+<p>As before, it is designed to be the only thing unique to your site for most setups. What is new is that it is easy to extend it when new needs come up, without having to touch core gitolite.</p>
+<p>The rc file is perl code, but you do NOT need to know perl to edit it. Just mind the commas, use single quotes unless you know what you're doing, and make sure the brackets and braces stay matched up!</p>
+<p>Please look at the <code>~/.gitolite.rc</code> file that gets installed when you setup gitolite. As you can see there are 3 types of variables in it:</p>
 <ul>
-<li>simple variables (like <code>UMASK</code>)
-</li>
-<li>lists (like <code>POST_COMPILE</code>, <code>POST_CREATE</code>)
-</li>
-<li>hashes (like <code>ROLES</code>, <code>COMMANDS</code>)
-</li>
+<li>simple variables (like <code>UMASK</code>)</li>
+<li>lists (like <code>POST_COMPILE</code>, <code>POST_CREATE</code>)</li>
+<li>hashes (like <code>ROLES</code>, <code>COMMANDS</code>)</li>
 </ul>
-
-<p>While some of the variables are documented in this file, many of them are not.
-Their purposes are to be found in each of their individual documentation files
-around; start with <a href="cust.html">customising gitolite</a>.  If a setting is used by an
-external command then running that command with '-h' may give you additional
-information.</p>
-
-<h2>specific variables</h2>
-
+<p>While some of the variables are documented in this file, many of them are not. Their purposes are to be found in each of their individual documentation files around; start with <a href="cust.html">customising gitolite</a>. If a setting is used by an external command then running that command with '-h' may give you additional information.</p>
+<h2 id="specific-variables"><span class="header-section-number">1.1</span> specific variables</h2>
 <ul>
 <li><p><code>$UMASK</code>, octal, default <code>0077</code></p>
-
-<p>The default UMASK that gitolite uses makes all the repos and their
-contents have <code>rwx------</code> permissions.  People who want to run gitweb
-realise that this will not do.</p>
-
-<p>The correct way to deal with this is to give this variable a value like
-<code>0027</code> (note the syntax: the leading 0 is required), and then make the
-user running the webserver (apache, www-data, whatever) a member of the
-'git' group.</p>
-
-<p>If you've already installed gitolite then existing files will have to be
-fixed up manually (for a umask or 0027, that would be <code>chmod -R g+rX</code>).
-This is because umask only affects permissions on newly created files, not
-existing ones.</p></li>
+<p>The default UMASK that gitolite uses makes all the repos and their contents have <code>rwx------</code> permissions. People who want to run gitweb realise that this will not do.</p>
+<p>The correct way to deal with this is to give this variable a value like <code>0027</code> (note the syntax: the leading 0 is required), and then make the user running the webserver (apache, www-data, whatever) a member of the 'git' group.</p>
+<p>If you've already installed gitolite then existing files will have to be fixed up manually (for a umask or 0027, that would be <code>chmod -R g+rX</code>). This is because umask only affects permissions on newly created files, not existing ones.</p></li>
 <li><p><code>$GIT_CONFIG_KEYS</code>, string, default empty</p>
-
 <p>This setting allows the repo admin to define acceptable gitconfig keys.</p>
-
-<p>Gitolite allows you to set git config values using the "config" keyword;
-see <a href="git-config.html">here</a> for details and syntax.</p>
-
-<p>However, if you are in an installation where the repo admin does not (and
-should not) have shell access to the server, then allowing him to set
-arbitrary repo config options <em>may</em> be a security risk -- some config
-settings allow executing arbitrary commands!</p>
-
-<p>You have 3 choices.  By default <code>$GIT_CONFIG_KEYS</code> is left empty, which
-completely disables this feature (meaning you cannot set git configs via
-the repo config).</p>
-
-<p>The second choice is to give it a space separated list of settings you
-consider safe.  (These are actually treated as a set of <a href="regex.html">regular
-expression</a> patterns, and any one of them must match).</p>
-
+<p>Gitolite allows you to set git config values using the &quot;config&quot; keyword; see <a href="git-config.html">here</a> for details and syntax.</p>
+<p>However, if you are in an installation where the repo admin does not (and should not) have shell access to the server, then allowing him to set arbitrary repo config options <em>may</em> be a security risk -- some config settings allow executing arbitrary commands!</p>
+<p>You have 3 choices. By default <code>$GIT_CONFIG_KEYS</code> is left empty, which completely disables this feature (meaning you cannot set git configs via the repo config).</p>
+<p>The second choice is to give it a space separated list of settings you consider safe. (These are actually treated as a set of <a href="regex.html">regular expression</a> patterns, and any one of them must match).</p>
 <p>For example:</p>
-
-<pre><code>$GIT_CONFIG_KEYS = 'core\.logAllRefUpdates core\..*compression';
-</code></pre>
-
-<p>Each pattern should match the <em>whole</em> key (in other words, there
-is an implicit <code>^</code> at the start of each pattern, and a <code>$</code> at the
-end).</p>
-
-<p>The third choice (which you may have guessed already if you're familiar
-with regular expressions) is to allow anything and everything:
-<code>$GIT_CONFIG_KEYS = '.*';</code></p></li>
+<pre><code>$GIT_CONFIG_KEYS = 'core\.logAllRefUpdates core\..*compression';</code></pre>
+<p>Each pattern should match the <em>whole</em> key (in other words, there is an implicit <code>^</code> at the start of each pattern, and a <code>$</code> at the end).</p>
+<p>The third choice (which you may have guessed already if you're familiar with regular expressions) is to allow anything and everything: <code>$GIT_CONFIG_KEYS = '.*';</code></p></li>
 <li><p><code>ROLES</code>, hash, default keys 'READERS' and 'WRITERS'</p>
-
-<p>This specifies the role names allowed to be used by users running the
-<a href="user.html#perms">perms</a> command.  The <a href="wild.html">wild</a> repos doc has more info on roles.</p></li>
+<p>This specifies the role names allowed to be used by users running the <a href="user.html#perms">perms</a> command. The <a href="wild.html">wild</a> repos doc has more info on roles.</p></li>
 <li><p><code>DEFAULT_ROLE_PERMS</code>, string, default undef</p>
-
 <p>This sets default wildcard permissions for newly created wildcard repos.</p>
-
-<p>If set, this value will be used as the default role permissions for new
-wildcard repositories. The user can change this value with the perms
-command as desired after repository creation; it is only a default.</p>
-
-<p>Please be aware this is potentially a multi-line variable.  In most
-setups, it will be left undefined.  Some installations may benefit from
-setting it to <code>READERS @all</code>.</p>
-
-<p>If you want multiple roles to be assigned by default, here is how.  Note
-double quotes this time, due to the embedded newline, which in turn
-require the '@' to be escaped:</p>
-
-<pre><code>DEFAULT_ROLE_PERMS  =&gt;  "READERS \@all\nWRITERS \@senior_devs",
-</code></pre></li>
+<p>If set, this value will be used as the default role permissions for new wildcard repositories. The user can change this value with the perms command as desired after repository creation; it is only a default.</p>
+<p>Please be aware this is potentially a multi-line variable. In most setups, it will be left undefined. Some installations may benefit from setting it to <code>READERS @all</code>.</p>
+<p>If you want multiple roles to be assigned by default, here is how. Note double quotes this time, due to the embedded newline, which in turn require the '@' to be escaped:</p>
+<pre><code>DEFAULT_ROLE_PERMS  =&gt;  &quot;READERS \@all\nWRITERS \@senior_devs&quot;,</code></pre></li>
 <li><p><code>LOCAL_CODE</code>, string</p>
-
-<p>This is described in more detail <a href="cust.html#localcode">here</a>.  Please be aware
-<strong>this must be a FULL path</strong>, not a relative path.</p></li>
+<p>This is described in more detail <a href="cust.html#localcode">here</a>. Please be aware <strong>this must be a FULL path</strong>, not a relative path.</p></li>
 </ul>
+</body>
+</html>

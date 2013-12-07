@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
+</head>
+<body>
+<p style="text-align:center">
+    <a href="index.html">git notes main page</a>
+|
+<a href="gitolite/index.html"><strong>gitolite</strong> main page</a>
+|
+    <a href="license.html">license</a>
+</p>
+<h1 id="corruption-in-a-git-repository"><span class="header-section-number">1</span> corruption in a git repository</h1>
+<p>For now, this is just loosely formatted text, maybe like a series of case studies.</p>
+<p>IMPORTANT NOTE: <code>git fsck --full</code> is needed to reliably find repo corruption</p>
+<h2 id="case-1-kolkata-korruption----2-missing-tree-objects"><span class="header-section-number">1.1</span> case 1: Kolkata Korruption -- 2 missing tree objects</h2>
+<p>UPDATE 2013-01-11 13:28 Fri</p>
+<p>This should be MUCH easier</p>
+<pre><code>on bad:
+    git fsck | grep -v dangling | cut -f3 -d' '
+
+then double check it's a list of SHAs
+
+on good, with this list:
+    git pack-objects --revs pack &lt; list
+
+then copy the two pack* files (pack and idx) to the bad repo's
+objects/pack directory.
+
+That should be it.</code></pre>
+<p>what finally worked:</p>
+<pre><code># on some good repo
+TYPE=$(git cat-file -t $BADOBJSHA)
+git cat-file $TYPE $BADOBJSHA &gt; file
+
+# copy file to bad repo
+git hash-object -t $TYPE -w --stdin &lt; file</code></pre>
+<p>However, this may not always work; it is not certain that hash-object will <em>replace</em> a corrupted object (as opposed to creating a <em>missing</em> object). So try that, <em>as well as</em> this (generic object):</p>
+<pre><code># on some good repo
+echo $object | git pack-objects --revs pack
+# will create two files named pack-*.{idx,pack}</code></pre>
+<p>confirm:</p>
+<pre><code>git verify-pack -v pack-*.idx | grep $object
+# should also contain all sub objects</code></pre>
+<p>copy:</p>
+<pre><code>pack* to $bad_repo/[.git?]/objects/pack</code></pre>
+<p>repack:</p>
+<pre><code>repack -a -d</code></pre>
+<p>(you could also do &quot;unpack-objects&quot; I guess)</p>
+</body>
+</html>

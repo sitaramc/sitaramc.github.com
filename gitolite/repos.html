@@ -1,41 +1,23 @@
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>adding and removing repos</title>
-<style>
-    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
-    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
-    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
-    h4          { background: #ffb; text-color: #000; }
-    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
-    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-</style>
-<style>
-   body{counter-reset: section}
-   h1{counter-reset: sub-section}
-   h2{counter-reset: composite}
-   h3{counter-reset: detail}
-
-   h1:before {
-     counter-increment: section;
-     content: counter(section) ". ";
-   }
-   h2:before {
-     counter-increment: sub-section;
-     content: counter(section) "." counter(sub-section) ". ";
-   }
-   h3:before {
-     counter-increment: composite;
-     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
-   }
-   h4:before {
-     counter-increment: detail;
-     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
-   }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
 </head>
-
+<body>
 <p style="text-align:center">
     <a href="master-toc.html">master TOC</a>
 |
@@ -46,70 +28,42 @@
     <a href="index.html#license">license</a>
 </p>
 <p style="text-align:center">
-<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+<font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1>adding and removing repos</h1>
-
-<p><strong>NOTE</strong>: this page describes how to add new repos.  To bring already existing
-repos into gitolite control, click <a href="rare.html#existing">here</a>.</p>
-
+<h1 id="adding-and-removing-repos"><span class="header-section-number">1</span> adding and removing repos</h1>
+<p><strong>NOTE</strong>: this page describes how to add new repos. To bring already existing repos into gitolite control, click <a href="rare.html#existing">here</a>.</p>
 <blockquote>
-  <hr />
-  
-  <p><em>WARNING: Do NOT add new repos or users manually on the server.  Gitolite
-    users, repos, and access rules are maintained by making changes to a
-    special repo called 'gitolite-admin' and pushing those changes to the
-    server.</em></p>
-  
-  <hr />
+<hr />
 </blockquote>
-
-<p>Just as for <a href="users.html">users</a>, all operations are in a clone of the gitolite-admin
-repo.</p>
-
-<p>To <strong>add</strong> a new repo, edit <code>conf/gitolite.conf</code> and add it, along with at
-least one user with some permissions.  Or add it to an existing repo line:</p>
-
+<blockquote>
+<p><em>WARNING: Do NOT add new repos or users manually on the server. Gitolite users, repos, and access rules are maintained by making changes to a special repo called 'gitolite-admin' and pushing those changes to the server.</em></p>
+</blockquote>
+<blockquote>
+<hr />
+</blockquote>
+<p>Just as for <a href="users.html">users</a>, all operations are in a clone of the gitolite-admin repo.</p>
+<p>To <strong>add</strong> a new repo, edit <code>conf/gitolite.conf</code> and add it, along with at least one user with some permissions. Or add it to an existing repo line:</p>
 <pre><code>repo gitolite tsh gitpod
     RW+     =   sitaram
     RW  dev =   alice bob
-    R       =   @all
-</code></pre>
-
-<p>The "repo" line can have any number of repo names or repo group names in it.
-However, it can only be one line; this will not work</p>
-
+    R       =   @all</code></pre>
+<p>The &quot;repo&quot; line can have any number of repo names or repo group names in it. However, it can only be one line; this will not work</p>
 <pre><code>repo foo
 repo bar    # WRONG; 'foo' is now forgotten
-    RW      =   alice
-</code></pre>
-
+    RW      =   alice</code></pre>
 <p>If you have too many, use a group name:</p>
-
 <pre><code>@myrepos    =   foo
 @myrepos    =   bar
 
 repo @myrepos
-    RW      =   alice
-</code></pre>
-
-<p>Finally, you add, commit, and push this change.  Gitolite will create a bare,
-empty, repo on the server that is ready to be cloned.</p>
-
-<p><strong>Removing</strong> a repo is not so straightforward.  You certainly must remove the
-appropriate lines from the <code>conf/gitolite.conf</code> file, but gitolite will not
-automatically delete the repo from the server.  You have to log on to the
-server and do the dirty deed yourself :-)</p>
-
-<p>It is best to make the change in the conf file, push it, and <em>then</em> go to the
-server and do what you need to.</p>
-
-<p><strong>Renaming</strong> a repo is also not automatic.  Here's what you do (and the order
-is important):</p>
-
+    RW      =   alice</code></pre>
+<p>Finally, you add, commit, and push this change. Gitolite will create a bare, empty, repo on the server that is ready to be cloned.</p>
+<p><strong>Removing</strong> a repo is not so straightforward. You certainly must remove the appropriate lines from the <code>conf/gitolite.conf</code> file, but gitolite will not automatically delete the repo from the server. You have to log on to the server and do the dirty deed yourself :-)</p>
+<p>It is best to make the change in the conf file, push it, and <em>then</em> go to the server and do what you need to.</p>
+<p><strong>Renaming</strong> a repo is also not automatic. Here's what you do (and the order is important):</p>
 <ul>
-<li>Go to the server and rename the repo at the Unix command line.
-</li>
-<li>Change the name in the conf/gitolite.conf file and add/commit/push.
-</li>
+<li>Go to the server and rename the repo at the Unix command line.</li>
+<li>Change the name in the conf/gitolite.conf file and add/commit/push.</li>
 </ul>
+</body>
+</html>

@@ -1,41 +1,23 @@
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>g3 development status</title>
-<style>
-    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
-    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
-    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
-    h4          { background: #ffb; text-color: #000; }
-    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
-    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-</style>
-<style>
-   body{counter-reset: section}
-   h1{counter-reset: sub-section}
-   h2{counter-reset: composite}
-   h3{counter-reset: detail}
-
-   h1:before {
-     counter-increment: section;
-     content: counter(section) ". ";
-   }
-   h2:before {
-     counter-increment: sub-section;
-     content: counter(section) "." counter(sub-section) ". ";
-   }
-   h3:before {
-     counter-increment: composite;
-     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
-   }
-   h4:before {
-     counter-increment: detail;
-     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
-   }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
 </head>
-
+<body>
 <p style="text-align:center">
     <a href="master-toc.html">master TOC</a>
 |
@@ -46,67 +28,38 @@
     <a href="index.html#license">license</a>
 </p>
 <p style="text-align:center">
-<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+<font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1><a name="dev-status"></a> g3 development status</h1>
-
+<h1 id="g3-development-status"><span class="header-section-number">1</span> g3 development status</h1>
 <p>Not yet done (will be tackled in this order unless someone asks):</p>
-
 <ul>
-<li>mechanism for ADCs using unchecked arguments -- this is not just a matter
-of writing it; I have to think about <em>how</em> it will be done.  (AFAIK the
-only tool affected is git-annexe; if there are more let me know)
-</li>
+<li>mechanism for ADCs using unchecked arguments -- this is not just a matter of writing it; I have to think about <em>how</em> it will be done. (AFAIK the only tool affected is git-annexe; if there are more let me know)</li>
 </ul>
-
 <p>Help needed:</p>
-
 <ul>
-<li>I'd like distro packagers to play with it and help with migration advice
-for distro-upgrades
-</li>
-<li>rsync
-</li>
-<li>git-annexe support (but this has a pre-requisite in the previous list)
-</li>
+<li>I'd like distro packagers to play with it and help with migration advice for distro-upgrades</li>
+<li>rsync</li>
+<li>git-annexe support (but this has a pre-requisite in the previous list)</li>
 </ul>
-
-<p>Won't be done unless someone asks (saw no evidence that anyone used them in g2
-anyway!):</p>
-
+<p>Won't be done unless someone asks (saw no evidence that anyone used them in g2 anyway!):</p>
 <ul>
-<li>mob branches
-</li>
-<li>password access
-</li>
-<li>some of the more arcane rc variables!
-</li>
-<li>specific ADCs -- there are too many for me to bother without applying
-Pareto somewhere, so I choose to not do any and wait for people to ask :-)
-</li>
+<li>mob branches</li>
+<li>password access</li>
+<li>some of the more arcane rc variables!</li>
+<li>specific ADCs -- there are too many for me to bother without applying Pareto somewhere, so I choose to not do any and wait for people to ask :-)</li>
 </ul>
-
 <p>Done:</p>
-
 <ul>
-<li>core code
-</li>
-<li>test suite
-</li>
-<li>mirroring
-</li>
-<li>documentation
-</li>
-<li>migration documentation
-</li>
-<li>distro packaging instructions
-</li>
-<li>migration advice for common cases
-</li>
-<li>smart http
-</li>
-<li>svnserve
-</li>
-<li>htpasswd
-</li>
+<li>core code</li>
+<li>test suite</li>
+<li>mirroring</li>
+<li>documentation</li>
+<li>migration documentation</li>
+<li>distro packaging instructions</li>
+<li>migration advice for common cases</li>
+<li>smart http</li>
+<li>svnserve</li>
+<li>htpasswd</li>
 </ul>
+</body>
+</html>

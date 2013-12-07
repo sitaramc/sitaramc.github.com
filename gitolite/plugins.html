@@ -1,41 +1,23 @@
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>gitolite plugins</title>
-<style>
-    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
-    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
-    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
-    h4          { background: #ffb; text-color: #000; }
-    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
-    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-</style>
-<style>
-   body{counter-reset: section}
-   h1{counter-reset: sub-section}
-   h2{counter-reset: composite}
-   h3{counter-reset: detail}
-
-   h1:before {
-     counter-increment: section;
-     content: counter(section) ". ";
-   }
-   h2:before {
-     counter-increment: sub-section;
-     content: counter(section) "." counter(sub-section) ". ";
-   }
-   h3:before {
-     counter-increment: composite;
-     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
-   }
-   h4:before {
-     counter-increment: detail;
-     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
-   }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
 </head>
-
+<body>
 <p style="text-align:center">
     <a href="master-toc.html">master TOC</a>
 |
@@ -46,17 +28,11 @@
     <a href="index.html#license">license</a>
 </p>
 <p style="text-align:center">
-<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+<font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1>gitolite plugins</h1>
-
-<p>It's not hard to create a "plugin" mechanism to allow arbitrary extra features
-to be just dropped into gitolite.  All that is needed is for the code to
-respect the directory hierarchy described in the <a href="cust.html#localcode">local code</a>
-section of the <a href="cust.html">customisation</a> document.</p>
-
+<h1 id="gitolite-plugins"><span class="header-section-number">1</span> gitolite plugins</h1>
+<p>It's not hard to create a &quot;plugin&quot; mechanism to allow arbitrary extra features to be just dropped into gitolite. All that is needed is for the code to respect the directory hierarchy described in the <a href="cust.html#localcode">local code</a> section of the <a href="cust.html">customisation</a> document.</p>
 <p>Here's a sample (you'll find this specific set in <code>contrib/local</code>):</p>
-
 <pre><code>commands/
 \-- cmd-1*
 hooks/
@@ -70,87 +46,49 @@ register.d/
 |-- acc-2-report*
 \-- cmd-1*
 triggers/
-\-- acc-2-report*
-</code></pre>
-
+\-- acc-2-report*</code></pre>
 <p>Plugins need to be <strong>registered</strong> if they include a command and/or a trigger.</p>
-
-<p>The Oxford English Dictionary describes "Registration code" as:</p>
-
+<p>The Oxford English Dictionary describes &quot;Registration code&quot; as:</p>
 <blockquote>
-  <p>a fancy phrase that means "a line or two of perl code that the plugin
-    developer must write because the plugin user is too lazy to <code>vi
-    ~/.gitolite.rc</code> and add a line or two".</p>
+<p>a fancy phrase that means &quot;a line or two of perl code that the plugin developer must write because the plugin user is too lazy to <code>vi   ~/.gitolite.rc</code> and add a line or two&quot;.</p>
 </blockquote>
-
-<p>All registration code lives in <code>register.d</code>.  Take a look at the two samples
-provided.  Note that only commands and triggers need to be registered; hooks
-don't need to be.</p>
-
-<p>Post-update hooks live in <code>hooks/common/post-update.d</code>.  Post-receive hooks
-have not been implemented yet; see the comments in the stub for what to do.</p>
-
+<p>All registration code lives in <code>register.d</code>. Take a look at the two samples provided. Note that only commands and triggers need to be registered; hooks don't need to be.</p>
+<p>Post-update hooks live in <code>hooks/common/post-update.d</code>. Post-receive hooks have not been implemented yet; see the comments in the stub for what to do.</p>
 <p>Everything requires <code>chmod +x</code> to run.</p>
-
-<p>People who keep saying "gitolite should have a plugin framework" <strong>please
-note</strong> that the only new code here (as opposed to dummy/demo code which you
-will replace with your own) are these two driver programs:</p>
-
+<p>People who keep saying &quot;gitolite should have a plugin framework&quot; <strong>please note</strong> that the only new code here (as opposed to dummy/demo code which you will replace with your own) are these two driver programs:</p>
 <ul>
 <li><p>the <code>register</code> code:</p>
-
-<pre><code>for my $r (glob( "$RC{LOCAL_CODE}/register.d/*" )) {
+<pre><code>for my $r (glob( &quot;$RC{LOCAL_CODE}/register.d/*&quot; )) {
     do $r if -x $r;
-}
-</code></pre></li>
+}</code></pre></li>
 <li><p>the <code>hooks/common/post-update</code> code:</p>
-
 <pre><code>for i in hooks/post-update.d/*
 do
-    [ -x $i ] &amp;&amp; $i "$@"
-done
-</code></pre></li>
+    [ -x $i ] &amp;&amp; $i &quot;$@&quot;
+done</code></pre></li>
 </ul>
-
 <p>Everything else <strong>was already in place in gitolite</strong>.</p>
-
-<h2>instructions for installing plugins</h2>
-
+<h2 id="instructions-for-installing-plugins"><span class="header-section-number">1.1</span> instructions for installing plugins</h2>
 <p>Assuming the plugin follows the directory structure shown, do the following:</p>
-
 <p>One-time setup:</p>
-
 <ul>
 <li><p>on your server, add the following line to the <a href="rc.html">rc</a> file</p>
-
-<pre><code>LOCAL_CODE =&gt; "$ENV{HOME}/.gitolite/local",
-</code></pre>
-
-<p>within the <code>%RC</code> block, for example just after the <code>%RC = (</code> line.  (More
-background and additional info <a href="cust.html#pushcode">here</a>).</p></li>
-<li><p>also add the following line to the end of <code>~/.gitolite.rc</code>, just before
-the <code>1;</code> line near the end:</p>
-
-<pre><code>do "$RC{LOCAL_CODE}/register";
-</code></pre></li>
-<li><p>in your gitolite-admin repo clone, run <code>mkdir -p local/hooks/common</code> to
-hold the post-update driver code.</p></li>
+<pre><code>LOCAL_CODE =&gt; &quot;$ENV{HOME}/.gitolite/local&quot;,</code></pre>
+<p>within the <code>%RC</code> block, for example just after the <code>%RC = (</code> line. (More background and additional info <a href="cust.html#pushcode">here</a>).</p></li>
+<li><p>also add the following line to the end of <code>~/.gitolite.rc</code>, just before the <code>1;</code> line near the end:</p>
+<pre><code>do &quot;$RC{LOCAL_CODE}/register&quot;;</code></pre></li>
+<li><p>in your gitolite-admin repo clone, run <code>mkdir -p local/hooks/common</code> to hold the post-update driver code.</p></li>
 <li><p>copy the two drivers:</p>
-
 <pre><code>cp  &lt;gitolite&gt;/contrib/local/register                   &lt;gitolite-admin&gt;/local
-cp  &lt;gitolite&gt;/contrib/local/hooks/common/post-update   &lt;gitolite-admin&gt;/local/hooks/common
-</code></pre>
-
-<p>where <code>&lt;gitolite&gt;</code> is your gitolite source code repo clone, and
-<code>&lt;gitolite-admin&gt;</code> is your gitolite-admin repo clone.</p></li>
+cp  &lt;gitolite&gt;/contrib/local/hooks/common/post-update   &lt;gitolite-admin&gt;/local/hooks/common</code></pre>
+<p>where <code>&lt;gitolite&gt;</code> is your gitolite source code repo clone, and <code>&lt;gitolite-admin&gt;</code> is your gitolite-admin repo clone.</p></li>
 <li><p>add, commit, and push</p></li>
 </ul>
-
 <p>Once for each plugin, or each time a plugin is updated:</p>
-
 <ul>
 <li><p>drop the plugin into <code>&lt;gitolite-admin&gt;/local</code></p></li>
 <li><p>add, commit, and push</p></li>
 </ul>
-
 <p>Done.</p>
+</body>
+</html>

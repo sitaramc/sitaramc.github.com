@@ -1,41 +1,23 @@
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>idiot-proof setup for gitolite</title>
-<style>
-    body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
-    h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
-    h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
-    h3          { background: #ffb; text-color: #000; margin-left: -10px; }
-    h4          { background: #ffb; text-color: #000; }
-    code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-    pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
-    pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-</style>
-<style>
-   body{counter-reset: section}
-   h1{counter-reset: sub-section}
-   h2{counter-reset: composite}
-   h3{counter-reset: detail}
-
-   h1:before {
-     counter-increment: section;
-     content: counter(section) ". ";
-   }
-   h2:before {
-     counter-increment: sub-section;
-     content: counter(section) "." counter(sub-section) ". ";
-   }
-   h3:before {
-     counter-increment: composite;
-     content: counter(section) "." counter(sub-section) "." counter(composite) ". ";
-   }
-   h4:before {
-     counter-increment: detail;
-     content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) ". ";
-   }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  </style>
 </head>
-
+<body>
 <p style="text-align:center">
     <a href="master-toc.html">master TOC</a>
 |
@@ -46,215 +28,113 @@
     <a href="index.html#license">license</a>
 </p>
 <p style="text-align:center">
-<font color="gray">This is for gitolite "g3"; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
+<font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1>idiot-proof setup for gitolite</h1>
+<div id="TOC">
+<ul>
+<li><a href="#idiot-proof-setup-for-gitolite"><span class="toc-section-number">1</span> idiot-proof setup for gitolite</a><ul>
+<li><a href="#pre-requisites"><span class="toc-section-number">1.1</span> pre-requisites</a></li>
+<li><a href="#additional-restrictions-that-seem-unnecessary"><span class="toc-section-number">1.2</span> additional restrictions that seem unnecessary</a></li>
+<li><a href="#no-support-for-this-document"><span class="toc-section-number">1.3</span> no support for this document</a></li>
+<li><a href="#assumptions"><span class="toc-section-number">1.4</span> assumptions</a></li>
+<li><a href="#installation-tasks"><span class="toc-section-number">1.5</span> installation tasks</a></li>
+<li><a href="#administration-tasks"><span class="toc-section-number">1.6</span> administration tasks</a></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="idiot-proof-setup-for-gitolite"><a href="#idiot-proof-setup-for-gitolite"><span class="header-section-number">1</span> idiot-proof setup for gitolite</a></h1>
+<!-- pandoc: toc -->
 
 <p>If I gave you this link to read, it most likely means either:</p>
-
 <ul>
-<li>(most common reason) you got really confused by <a href="ssh.html">ssh</a>
-</li>
-<li>(a bit less common) you got confused by how to administer users and repos
-using gitolite
-</li>
+<li>(most common reason) you got really confused by <a href="ssh.html">ssh</a></li>
+<li>(a bit less common) you got confused by how to administer users and repos using gitolite</li>
 </ul>
-
-<p>Don't take the title personally.  The "idiot" in the title is indeed a real
-person who once bugged me so much I wrote this for him.  However, I have since
-realised that this is also useful for (a) people for whom English is not the
-first language and (b) people who really should not be doing technical work at
-this level, but are forced to do it by circumstances.</p>
-
+<p>Don't take the title personally. The &quot;idiot&quot; in the title is indeed a real person who once bugged me so much I wrote this for him. However, I have since realised that this is also useful for (a) people for whom English is not the first language and (b) people who really should not be doing technical work at this level, but are forced to do it by circumstances.</p>
+<h2 id="pre-requisites"><a href="#pre-requisites"><span class="header-section-number">1.1</span> pre-requisites</a></h2>
 <ul>
-<li><a href="ips.html">idiot-proof setup for gitolite</a>
+<li>any Linux machine on which git has already been installed</li>
+<li>probably any BSD or legacy system like Solaris will also work, but I have not tested them
 <ul>
-<li>pre-requisites
-</li>
-<li>additional restrictions that seem unnecessary
-</li>
-<li>no support for this document
-</li>
-<li>assumptions
-</li>
-<li>installation tasks
-</li>
-<li>administration tasks
-</li>
+<li>I do not consider Apple devices to be Unix enough; it should work, but please do not ask me for help if it does not.</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-
-<h2>pre-requisites</h2>
-
+<h2 id="additional-restrictions-that-seem-unnecessary"><a href="#additional-restrictions-that-seem-unnecessary"><span class="header-section-number">1.2</span> additional restrictions that seem unnecessary</a></h2>
+<p>People who <strong>do</strong> understand ssh will realise that this document contains many extra restrictions and constraints that are not actually needed. That's the whole point -- I'm compensating for lack of ssh knowledge by removing things that trip people up.</p>
+<h2 id="no-support-for-this-document"><a href="#no-support-for-this-document"><span class="header-section-number">1.3</span> no support for this document</a></h2>
+<p>If even this document does not help you install gitolite, I probably cannot help you. Either you did not follow the instructions carefully <font color="gray">(maybe some task has to be run on your workstation, but you ran it on the server, or you ran something as root when it should be as the hosting user, etc.)</font>, or your environment is far too different from standard Unix, or you have some other problem. In any case, it is not something I can help with. Sorry.</p>
+<h2 id="assumptions"><a href="#assumptions"><span class="header-section-number">1.4</span> assumptions</a></h2>
 <ul>
-<li>any Linux machine on which git has already been installed
-</li>
-<li>probably any BSD or legacy system like Solaris will also work, but I have
-not tested them
-<ul>
-<li>I do not consider Apple devices to be Unix enough; it should work, but
-please do not ask me for help if it does not.
-</li>
-</ul>
-</li>
-</ul>
-
-<h2>additional restrictions that seem unnecessary</h2>
-
-<p>People who <strong>do</strong> understand ssh will realise that this document contains many
-extra restrictions and constraints that are not actually needed.  That's the
-whole point -- I'm compensating for lack of ssh knowledge by removing things
-that trip people up.</p>
-
-<h2>no support for this document</h2>
-
-<p>If even this document does not help you install gitolite, I probably cannot
-help you.  Either you did not follow the instructions carefully <font
-color="gray">(maybe some task has to be run on your workstation, but you ran
-it on the server, or you ran something as root when it should be as the
-hosting user, etc.)</font>, or your environment is far too different from
-standard Unix, or you have some other problem.  In any case, it is not
-something I can help with.  Sorry.</p>
-
-<h2>assumptions</h2>
-
-<ul>
-<li><p>your name is Ron.  Substitute accordingly in the instructions below.</p></li>
+<li><p>your name is Ron. Substitute accordingly in the instructions below.</p></li>
 <li><p>you have a workstation.</p></li>
 <li><p>you have a server called <code>server</code>.</p></li>
 <li><p>you have root access on this server.</p></li>
 </ul>
-
-<h2>installation tasks</h2>
-
-<ol>
-<li><p>Create a new userid on the server, say <code>git</code>.  This will be the <strong>hosting
-user</strong>.  ("hosting user" means when you're done installing, your users
-will use URLs like <code>git@server:reponame</code> or <code>ssh://git@server/reponame</code>).</p>
-
+<h2 id="installation-tasks"><a href="#installation-tasks"><span class="header-section-number">1.5</span> installation tasks</a></h2>
+<ol style="list-style-type: decimal">
+<li><p>Create a new userid on the server, say <code>git</code>. This will be the <strong>hosting user</strong>. (&quot;hosting user&quot; means when you're done installing, your users will use URLs like <code>git@server:reponame</code> or <code>ssh://git@server/reponame</code>).</p>
 <p><strong>Make sure this is a NEW userid</strong>.</p>
-
 <p>If the name you want already exists, then:</p>
-
 <ul>
-<li>log in as root
-</li>
-<li>if you have any data on that user's HOME directory save it somewhere
-else
-</li>
-<li>delete the userid
-</li>
-<li>completely wipe out (erase) the home directory of the user (since on
-most systems merely deleting the user does not remove the home
-directory)
-</li>
-<li>re-create the userid again
-</li>
+<li>log in as root</li>
+<li>if you have any data on that user's HOME directory save it somewhere else</li>
+<li>delete the userid</li>
+<li>completely wipe out (erase) the home directory of the user (since on most systems merely deleting the user does not remove the home directory)</li>
+<li>re-create the userid again</li>
 </ul></li>
-<li><p>If you don't already have one, make yourself an ssh keypair <strong>on your
-workstation</strong>.</p>
-
-<p>Do NOT add this public key to the authorised keys file on the newly
-created hosting user!</p>
-
-<p>Your ONLY access to the new (<code>git</code>) userid should be by logging onto the
-server as root, then running <code>su - git</code>.</p></li>
-<li><p>Now copy the pubkey from your workstation (<code>~/.ssh/id_rsa.pub</code>) to the
-server as <code>/tmp/ron.pub</code>.  (Your name is Ron, remember?)</p></li>
+<li><p>If you don't already have one, make yourself an ssh keypair <strong>on your workstation</strong>.</p>
+<p>Do NOT add this public key to the authorised keys file on the newly created hosting user!</p>
+<p>Your ONLY access to the new (<code>git</code>) userid should be by logging onto the server as root, then running <code>su - git</code>.</p></li>
+<li><p>Now copy the pubkey from your workstation (<code>~/.ssh/id_rsa.pub</code>) to the server as <code>/tmp/ron.pub</code>. (Your name is Ron, remember?)</p></li>
 <li><p>Log on to the server as root.</p></li>
 <li><p>Switch to the <code>git</code> user:</p>
-
-<pre><code>su - git
-</code></pre></li>
+<pre><code>su - git</code></pre></li>
 <li><p>Clone the gitolite source code</p>
-
-<pre><code>git clone git://github.com/sitaramc/gitolite
-</code></pre></li>
+<pre><code>git clone git://github.com/sitaramc/gitolite</code></pre></li>
 <li><p>Install it</p>
-
 <pre><code>cd $HOME
 mkdir -p bin
-gitolite/install -to $HOME/bin
-</code></pre></li>
+gitolite/install -to $HOME/bin</code></pre></li>
 <li><p>Set it up</p>
-
 <pre><code>cd $HOME
-$HOME/bin/gitolite setup -pk /tmp/ron.pub
-</code></pre></li>
+$HOME/bin/gitolite setup -pk /tmp/ron.pub</code></pre></li>
 <li><p>Now go to your workstation and type in</p>
-
-<pre><code>git ls-remote git@server:gitolite-admin
-</code></pre>
-
+<pre><code>git ls-remote git@server:gitolite-admin</code></pre>
 <p>This should return something like</p>
-
 <pre><code>9dd8aab60bac5e54ccf887a87b4f3d35c96b05e4    HEAD
-9dd8aab60bac5e54ccf887a87b4f3d35c96b05e4    refs/heads/master
-</code></pre>
-
+9dd8aab60bac5e54ccf887a87b4f3d35c96b05e4    refs/heads/master</code></pre>
 <p>(do I have to mention that your SHAs will be different?)</p></li>
 </ol>
-
-<h2>administration tasks</h2>
-
-<p>Most day-to-day administration is done by making changes to a clone of the
-gitolite-admin repo and pushing.  (There are some things that are done by
-editing <code>$HOME/.gitolite.rc</code> on the server, but those are too advanced for
-this tutorial so we will ignore that).</p>
-
-<ol>
+<h2 id="administration-tasks"><a href="#administration-tasks"><span class="header-section-number">1.6</span> administration tasks</a></h2>
+<p>Most day-to-day administration is done by making changes to a clone of the gitolite-admin repo and pushing. (There are some things that are done by editing <code>$HOME/.gitolite.rc</code> on the server, but those are too advanced for this tutorial so we will ignore that).</p>
+<ol style="list-style-type: decimal">
 <li><p>To start administering gitolite, clone the gitolite-admin repo:</p>
-
-<pre><code>git clone git@server:gitolite-admin
-</code></pre></li>
+<pre><code>git clone git@server:gitolite-admin</code></pre></li>
 <li><p>Now go to the new directory this creates, and look around:</p>
-
 <pre><code>cd gitolite-admin
-ls -A
-</code></pre>
-
+ls -A</code></pre>
 <p>which gives you</p>
-
-<pre><code>conf/  .git/  keydir/
-</code></pre>
-
-<p>Ignoring the ".git" and exploring further:</p>
-
-<pre><code>ls -A conf keydir
-</code></pre>
-
+<pre><code>conf/  .git/  keydir/</code></pre>
+<p>Ignoring the &quot;.git&quot; and exploring further:</p>
+<pre><code>ls -A conf keydir</code></pre>
 <p>which says:</p>
-
 <pre><code>conf:
 gitolite.conf
 
-
 keydir:
-ron.pub
-</code></pre></li>
-<li><p>Let's say you want to add your colleague Alice.  She has sent you her ssh
-public key by email (the file is called <code>id_rsa.pub</code>).  Save this file as
-/tmp/alice.pub, then do this:</p>
-
+ron.pub</code></pre></li>
+<li><p>Let's say you want to add your colleague Alice. She has sent you her ssh public key by email (the file is called <code>id_rsa.pub</code>). Save this file as /tmp/alice.pub, then do this:</p>
 <pre><code># still in your gitolite-admin clone, from the previous step
 cp /tmp/alice.pub keydir
 git add keydir
 git commit -m 'new user alice'
-git push
-</code></pre></li>
-<li><p>Well, that might not be sufficient.  There aren't any new repos for alice
-to play with, yet.  So here's what you do: edit "conf/gitolite.conf" and
-add something like to the end:</p>
-
+git push</code></pre></li>
+<li><p>Well, that might not be sufficient. There aren't any new repos for alice to play with, yet. So here's what you do: edit &quot;conf/gitolite.conf&quot; and add something like to the end:</p>
 <pre><code>repo foo
     RW+     =   alice
-    R       =   ron
-</code></pre>
-
-<p>Save the file, then <code>git add conf; git commit -m 'new repo foo'; git
-push</code>.</p>
-
-<p>This will automatically the brand new repo called "foo" on the server, and
-alice will be able to clone from it, or push anything to it.</p></li>
+    R       =   ron</code></pre>
+<p>Save the file, then <code>git add conf; git commit -m 'new repo foo'; git push</code>.</p>
+<p>This will automatically the brand new repo called &quot;foo&quot; on the server, and alice will be able to clone from it, or push anything to it.</p></li>
 </ol>
+</body>
+</html>
