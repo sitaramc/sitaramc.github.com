@@ -12,6 +12,8 @@ git add -A .
     git log --format=%h\ %s -1 github/master
 ) | git commit -F -
 
+[ -n "$1" ] && git commit --amend -m "$1"
+
 git status
 
 git log --stat -1
