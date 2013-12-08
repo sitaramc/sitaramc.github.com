@@ -7,7 +7,7 @@
   <title></title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
-      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; max-width: 800px; }
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; }
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
       h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
       h3          { background: #ffb; text-color: #000; margin-left: -10px; }
@@ -47,5 +47,8 @@
 <h2 id="gitolite-software"><span class="header-section-number">1.2</span> gitolite software</h2>
 <p>The above list does not include the gitolite software itself.</p>
 <p>Gitolite offers you 3 ways to install software. After cloning the gitolite sources, run the install command in it with a <code>-h</code> argument to see what they are. Where the actual software is found depends on that.</p>
+<h2 id="inside-a-gitolite-repo"><span class="header-section-number">1.3</span> inside a &quot;gitolite repo&quot;</h2>
+<p>A gitolite repo is just like a normal bare repo on any normal git server. There are a few extra files placed in the repo directory whose names start with &quot;gl-&quot;, and there is also an update hook placed in the hooks subdirectory, but that's about it, for the most part.</p>
+<p>In other words, you can treat a gitolite-managed repo just like any other bare repo as long as you leave those files alone.</p>
 </body>
 </html>
