@@ -7,14 +7,35 @@
   <title></title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
-      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; }
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
+  
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  
+      td          { vertical-align: top }
+  
+      .red        { color: red }
+      .blue       { color: blue }
+      .green      { color: green }
+      .gray       { color: gray }
+  
+      .box        { background-color:#e0e0e0 }
+      .bg-red     { background-color:#ffe0e0 }
+      .bg-green   { background-color:#e0ffe0 }
+      .bg-blue    { background-color:#e0e0ff }
+  
+      /* couldn't resist the name! */
+      .wd40       { width: 40% !important }
+  
+      .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25% }
+      .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25% }
+  </style>
+  <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
       h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
       h3          { background: #ffb; text-color: #000; margin-left: -10px; }
       h4          { background: #ffb; text-color: #000; }
-      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
-      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
   </style>
 </head>
 <body>
@@ -33,18 +54,18 @@
 <h1 id="hosting-git-repositories" class="unnumbered">Hosting git repositories</h1>
 <table cellspacing="20">
 
-<tr><td width="70%" valign="top">
+<tr><td width="70%">
 
 <p>Gitolite allows you to setup git hosting on a central server, with fine-grained access control and many more powerful features.</p>
 <p>Here's more on <a href="index.html#what">what</a> it is, <a href="how.html">how</a> it works, <a href="why.html">why</a> you might need it, and <a href="who.html">who</a> else is using it.</p>
-</td><td valign="top">
+</td><td>
 
 <p>You may also want to look at these <strong>graphical overviews of the documentation</strong>: <a href="basic.html">basic</a> and <a href="advanced.html">advanced</a>.</p>
 </td></tr></table>
 
 <table cellspacing="10">
 
-<tr><td width="50%" valign="top">
+<tr><td width="50%">
 
 <h4 id="what" class="unnumbered">What is gitolite?</h4>
 <p>Gitolite is an access control layer on top of git. Here are the features that most people see:</p>
@@ -63,7 +84,7 @@
 <li>Can be installed without root access, assuming git and perl are already installed.</li>
 <li>Authentication is most commonly done using sshd, but you can also use <a href="http.html">http</a> if you prefer (this may require root access).</li>
 </ul>
-</td><td valign="top">
+</td><td>
 
 <h4 id="ql" class="unnumbered">quick links</h4>
 <ul>
@@ -89,7 +110,7 @@
 
 <table cellspacing="10">
 
-<tr><td width="50%" valign="top">
+<tr><td width="50%">
 
 <h4 id="contact" class="unnumbered">contact and support</h4>
 <ul>
@@ -105,7 +126,7 @@
 <li><p>IRC: #git and #gitolite on freenode. Note that I live in India (UTC+0530 time zone). <strong>Please do not ask questions on IRC if you cannot stay connected for a few hours at least. Use the mailing list instead.</strong></p></li>
 <li><p>author: sitaramc@gmail.com, but please <strong>DO NOT</strong> use this for general support questions. Subscribe to the list and ask there instead.</p></li>
 </ul>
-</td><td valign="top">
+</td><td>
 
 <h4 id="license" class="unnumbered">license</h4>
 <p>This documentation, which is maintained separately from the main gitolite source code, is copyright Sitaram Chamarty and is provided under a <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.</p>

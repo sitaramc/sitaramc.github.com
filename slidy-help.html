@@ -7,14 +7,35 @@
   <title></title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
-      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: sans-serif; }
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
+  
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  
+      td          { vertical-align: top }
+  
+      .red        { color: red }
+      .blue       { color: blue }
+      .green      { color: green }
+      .gray       { color: gray }
+  
+      .box        { background-color:#e0e0e0 }
+      .bg-red     { background-color:#ffe0e0 }
+      .bg-green   { background-color:#e0ffe0 }
+      .bg-blue    { background-color:#e0e0ff }
+  
+      /* couldn't resist the name! */
+      .wd40       { width: 40% !important }
+  
+      .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25% }
+      .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25% }
+  </style>
+  <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
       h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
       h3          { background: #ffb; text-color: #000; margin-left: -10px; }
       h4          { background: #ffb; text-color: #000; }
-      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
-      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
   </style>
 </head>
 <body>
@@ -28,9 +49,9 @@
 <h2 id="help-for-html-slidy" class="unnumbered">help for HTML Slidy</h2>
 <p><a href="http://www.w3.org/Talks/Tools/Slidy2/Overview.html">HTML Slidy</a> is a simple presentation software from the W3C. Although there's a help button in the footer of each presentation, it's missing some important stuff.</p>
 <p>Here's a smaller but more complete summary.</p>
-<table><tr><td valign="top">
+<table><tr><td>
 
-<p><font color="blue"><strong>Navigation</strong></font></p>
+<p><span class="blue"><strong>Navigation</strong></span></p>
 <ul>
 <li><strong>Next slide</strong>: right arrow, page down, space, or left click</li>
 <li><strong>Prev slide</strong>: left arrow, page up</li>
@@ -39,12 +60,12 @@
 <li><strong>First slide</strong>: home</li>
 <li><strong>Last slide</strong>: end</li>
 </ul>
-</td><td valign="top">
+</td><td>
 
 <p>    </p>
-</td><td valign="top">
+</td><td>
 
-<p><font color="blue"><strong>Display</strong></font></p>
+<p><span class="blue"><strong>Display</strong></span></p>
 <ul>
 <li><strong>Toggle footer</strong>: &quot;F&quot; key</li>
 <li><strong>Toggle Current versus <em>All</em> slides</strong>: &quot;A&quot; key</li>
@@ -54,6 +75,6 @@
 </ul>
 </td></tr></table>
 
-<p><font color="blue"><strong>To search</strong></font> for stuff in the full document using your browser's Ctrl-F, first view all slides (press the &quot;A&quot; key).</p>
+<p><span class="blue"><strong>To search</strong></span> for stuff in the full document using your browser's Ctrl-F, first view all slides (press the &quot;A&quot; key).</p>
 </body>
 </html>
