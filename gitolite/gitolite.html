@@ -87,7 +87,7 @@ branches (cache, namespaces) are left out.
 
 <p>Gitolite allows you to setup git hosting on a central server, with fine-grained access control and many more powerful features.</p>
 <p>Here's more on <a href="#what">what</a> it is, <a href="#how">how</a> it works, <a href="#why">why</a> you might need it, and <a href="#who">who</a> else is using it.</p>
-</td><td>
+</td><td class="box">
 
 <p>You may also want to look at these <strong>graphical overviews of the documentation</strong>: <a href="basic.html">basic</a> and <a href="advanced.html">advanced</a>.</p>
 </td></tr></table>
@@ -2626,13 +2626,27 @@ Authenticating with public key &quot;My Key&quot; from agent</code></pre>
 <p>This document was written by Thomas Berezansky (tsbere (at) mvlc (dot) org) in the hopes that it would be useful to those using putty on windows and wishing to use git/gitolite with their putty keys and sessions.</p>
 <h1 id="s8"><span class="header-section-number">8</span> odds and ends</h1>
 <h2 id="how"><span class="header-section-number">8.1</span> authentication and authorization in gitolite</h2>
-<h2 id="preface"><span class="header-section-number">8.2</span> preface</h2>
-<h3 id="using-this-slideshow"><span class="header-section-number">8.2.1</span> using this slideshow</h3>
+<h3 id="viewing-this-slideshow"><span class="header-section-number">8.1.1</span> (viewing this slideshow)</h3>
 <!-- pandoc: slidy-2 -->
 
-<p>This is a &quot;Slidy&quot; presentation. Use the <span class="blue">left/right</span> arrow keys to go from slide to slide, and the <span class="blue">up/down</span> arrow keys to scroll within a slide.</p>
-<p>The &quot;help&quot; button you see in the footer misses some important stuff, so here's a <a href="../slidy-help.html">quick, half-page, help on slidy</a>.</p>
-<h3 id="authentication-versus-authorisation"><span class="header-section-number">8.2.2</span> authentication versus authorisation</h3>
+<p>This presentation uses <a href="http://www.w3.org/Talks/Tools/Slidy2/Overview.html">HTML Slidy</a>, a simple presentation software from the W3C. Although there's a help button in the footer of each presentation, it's missing some important stuff, so here's a smaller but more complete summary of the keyboard controls.</p>
+<table><tr><td>
+
+<p><span class="blue"><strong>Navigation</strong></span></p>
+<p>  <strong>Next slide</strong>: right arrow, page down, space<br />  <strong>Prev slide</strong>: left arrow, page up</p>
+<p>  <strong>Down within slide</strong>: down arrow<br />  <strong>Up within slide</strong>: up arrow</p>
+<p>  <strong>First slide</strong>: home<br />  <strong>Last slide</strong>: end</p>
+</td><td>
+
+<p><span class="blue"><strong>Display</strong></span></p>
+<p>  <strong>Smaller font</strong>: &quot;S&quot; or &quot;&lt;&quot; key<br />  <strong>Larger font</strong>: &quot;B&quot; or &quot;&gt;&quot; key</p>
+<p>  <strong>Toggle Current versus <em>All</em> slides</strong>: &quot;A&quot; key<br />  <strong>Toggle Table of Contents popup</strong>: &quot;C&quot; key<br />  <strong>Toggle footer</strong>: &quot;F&quot; key</p>
+</td></tr></table>
+
+<p><span class="blue"><strong>To search</strong></span> for stuff in the full document using your browser's Ctrl-F, first view all slides (press the &quot;A&quot; key).</p>
+<!-- end slidy help -->
+
+<h3 id="authentication-versus-authorisation"><span class="header-section-number">8.1.2</span> authentication versus authorisation</h3>
 <p>Before we start, we need to be clear about the difference between <em>authentication</em> and <em>authorisation</em>.</p>
 <table><tr><td width="50%" bgcolor="FFF0F0">
 
@@ -2654,21 +2668,21 @@ Authenticating with public key &quot;My Key&quot; from agent</code></pre>
 </ul>
 </td></tr></table>
 
-<h3 id="git-over-plain-ssh"><span class="header-section-number">8.2.3</span> git over plain ssh</h3>
+<h3 id="git-over-plain-ssh"><span class="header-section-number">8.1.3</span> git over plain ssh</h3>
 <p>First, we'll recap how git works over plain ssh.</p>
 <div class="figure">
 <img src="data:image/png;base64,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" />
 </div>
 <p>The client user <em>authenticates</em> herself to the server using any method supported by ssh -- password or ssh public key. It does not matter to either the git client or the git server how that happens; that's entirely between ssh and sshd (the ssh daemon or server).</p>
 <p>There is no <em>authorisation</em> in this mode, other than any file system permissions that the OS may enforce.</p>
-<h3 id="how-does-gitolite-work"><span class="header-section-number">8.2.4</span> how does gitolite work?</h3>
+<h3 id="how-does-gitolite-work"><span class="header-section-number">8.1.4</span> how does gitolite work?</h3>
 <p>Gitolite adds an extra layer in between the sshd and the git-receive-pack (or git-upload-pack, for read operations), to check if the access is allowed and abort if needed. Gitolite also installs its own update hook (see <code>man githooks</code>) in every repository to check branches being pushed.</p>
 <p>This means gitolite does <strong>two</strong> authorisation checks, as you will see.</p>
 <p>Gitolite also requires that the authentication <strong>must</strong> happen using an ssh public key. We'll see why as we go along.</p>
 <p>Here's a series of pictures that show how gitolite works. We're using a &quot;git push&quot; example; the only difference for a fetch or clone is that instead of <code>git-receive-pack</code> it'd call <code>git-upload-pack</code>, and the last check (update hook) does not apply.</p>
 <p><span class="blue"><strong>Terminology reminder</strong>: &quot;ref&quot; in git parlance means &quot;branch or tag&quot;. At least in this document that's what we mean :-)</span></p>
 <hr />
-<h4 id="the-diagrams..."><span class="header-section-number">8.2.4.1</span> the diagrams...</h4>
+<h4 id="the-diagrams..."><span class="header-section-number">8.1.4.1</span> the diagrams...</h4>
 <p>The diagrams were originally drawn to be self-contained. On a first pass you can simply ignore the text on each page, and come back to it later for the finer points.</p>
 <p>Experts: yes, I know I simplified the ssh part a lot. If you can find fault with these pictures, you're not the target audience :-)</p>
 <hr />
@@ -2721,21 +2735,16 @@ Authenticating with public key &quot;My Key&quot; from agent</code></pre>
 <p>For a read (git-upload-pack), that is the end of the story.</p>
 <p>For a write, git will invoke the update hook for each branch or tag pushed. (See <code>man githooks</code> for details).</p>
 <p>This update hook, of course, has been installed by gitolite, and it proceeds to check if</p>
-<ul>
-<li>this user (alice, bob, ...)</li>
-<li>is allowed to do this (create, fast-forward push, non-fast-forward push, or delete)</li>
-<li>to this branch or tag (master, refs/tags/v1.0, ...)</li>
-<li>in this repo.</li>
-</ul>
+<p>  - this user (alice, bob, ...)<br />  - is allowed to do this (create, fast-forward push, non-fast-forward push, or delete)<br />  - to this branch or tag (master, refs/tags/v1.0, ...)<br />  - in this repo.</p>
 <p>This is the <strong>second authorisation check</strong> that gitolite does.</p>
 <p>If it is not allowed, the update hooks exits with an error, and git will abort the push (for that ref; other refs sent in the same push may be OK).</p>
-<h2 id="why"><span class="header-section-number">8.3</span> why might you need gitolite</h2>
+<h2 id="why"><span class="header-section-number">8.2</span> why might you need gitolite</h2>
 <!-- pandoc: toc -->
 
 <p>Git by itself does not do any access control -- it relies on the transport medium to do authentication (&quot;who are you?&quot;), and on OS file permissions to do authorisation (&quot;what are you allowed to do?&quot;).</p>
 <p>Git also comes with a program called &quot;git-shell&quot; which can act as a restricted login shell if you don't want users getting a proper shell. Using this and judicious use of Unix groups, you can allow some people read-only access while others get read-write access, etc. This is probably sufficient if your needs are simple and don't change too often.</p>
 <p>However, gitolite does this much better, and offers many more features.</p>
-<h3 id="basic-use-case"><span class="header-section-number">8.3.1</span> basic use case</h3>
+<h3 id="basic-use-case"><span class="header-section-number">8.2.1</span> basic use case</h3>
 <p>Gitolite is useful in any server that is going to host multiple git repositories, each with many developers, where &quot;anyone can do anything to any repo&quot; is not a good idea. Here're two examples to illustrate.</p>
 <p>Example 1, 3 repos, 3 developers with different levels of access to each repo:</p>
 <pre><code>repo foo
@@ -2754,8 +2763,8 @@ repo baz
     RW+ master                  =   alice
     RW+ dev/                    =   bob
     RW  refs/heads/tags/v[0-9]  =   ashok</code></pre>
-<h3 id="alt"><span class="header-section-number">8.3.2</span> alternatives</h3>
-<h4 id="unix-permissions-and-acls"><span class="header-section-number">8.3.2.1</span> unix permissions and ACLs</h4>
+<h3 id="alt"><span class="header-section-number">8.2.2</span> alternatives</h3>
+<h4 id="unix-permissions-and-acls"><span class="header-section-number">8.2.2.1</span> unix permissions and ACLs</h4>
 <p>If you're a masochist, you could probably do example 1 with Unix permissions and facls. But you can't do example 2 -- git is not designed to allow that!</p>
 <p>Here are some other disadvantages of the Unix ACL method:</p>
 <ul>
@@ -2764,7 +2773,7 @@ repo baz
 <li><em>Viewing</em> the current set of permissions requires running multiple commands to list directories and their permissions/ownerships, users and their group memberships, and then correlating all these manually.</li>
 <li>Auditing historical permissions or permission changes is impossible.</li>
 </ul>
-<h4 id="gcr"><span class="header-section-number">8.3.2.2</span> Gerrit Code Review</h4>
+<h4 id="gcr"><span class="header-section-number">8.2.2.2</span> Gerrit Code Review</h4>
 <p>The best real alternative to gitolite is Gerrit Code Review. If code review is an essential part of your workflow, you should use Gerrit.</p>
 <p>Here're some high level differences between gitolite and Gerrit:</p>
 <p><strong>Size</strong>: 3000+ lines of perl versus of 56,000+ lines of Java</p>
@@ -2773,12 +2782,12 @@ repo baz
 <p>Gitolite uses a plain text config file; gerrit uses a database.</p>
 <p><strong>User view</strong>: Gitolite is invisible to users except when access is denied. I think Gerrit is much more visible to devs.</p>
 <p>On a related note, gitolite does not do anything special with signed or annotated tags, nor does it check author/committer identity. However, it is trivial to add your own code to do either (or if someone contributes it, to just &quot;enable&quot; what ships with gitolite in a disabled state).</p>
-<h4 id="gitorious-and-others"><span class="header-section-number">8.3.2.3</span> gitorious and others</h4>
+<h4 id="gitorious-and-others"><span class="header-section-number">8.2.2.3</span> gitorious and others</h4>
 <p>Anecdotally, gitorious is very hard to install. Comparison with gitolite may be useless because I believe it doesn't have branch/tag level access control. However, I can't confirm or deny this because I can't find any documentation on the website. In addition, the main website hides the source code very well, so you already have a challenge! [The only link I could find was tucked away at the bottom of the About page, in the License section].</p>
 <p>Gitorious has several, much newer, competitors offering web-based management, issue tracker, wiki, and so on; try googling for gitlab, gitblit, and rhodecode.</p>
 <p>However, to the best of my knowledge none of them offer branch level access controls (please tell me if you know different), which, since it is the main reason I wrote gitolite, makes them all somewhat moot.</p>
 <p>They are also unlikely to be as <a href="#cust">customisable</a> as gitolite is, if you care about that sort of thing.</p>
-<h2 id="who"><span class="header-section-number">8.4</span> who uses gitolite</h2>
+<h2 id="who"><span class="header-section-number">8.3</span> who uses gitolite</h2>
 <p>[Note that most of the users who are listed in this document are still using v2.x, presumably because it's working fine for them and there's no compelling reason to upgrade, and I still support v2 at least for critical issues].</p>
 <blockquote>
 <blockquote>
@@ -2799,7 +2808,7 @@ repo baz
 <hr />
 <p>A general note: if you see the list of high-profile users above, you will see that gitolite benefits as much as they do; possibly more.</p>
 <p>color me happy...</p>
-<h2 id="g3why"><span class="header-section-number">8.5</span> why a completely new version?</h2>
+<h2 id="g3why"><span class="header-section-number">8.4</span> why a completely new version?</h2>
 <p>Gitolite started life as 400 lines of perl written on a weekend because I was quickly losing control of my projects at work, exacerbated by git newbies doing all the wrong things. I really needed it!</p>
 <p>That little 400 line thing is now a huge bunch of programs that do all sorts of things (I mean, rsync access control in a git related program? WTF!), because it kinda just <em>grew</em> while I wasn't looking.</p>
 <p>So, briefly, here are the advantages of g3:</p>
@@ -2836,7 +2845,7 @@ repo baz
 </ul>
 <p>Anyway you get the idea.</p>
 <p>The point is not that you can do all these cool tricks. The point is they are possible because of the redesign. There is no way on God's green earth I could have done this with the old code.</p>
-<h2 id="dev-status"><span class="header-section-number">8.6</span> g3 development status</h2>
+<h2 id="dev-status"><span class="header-section-number">8.5</span> g3 development status</h2>
 <p>Not yet done (will be tackled in this order unless someone asks):</p>
 <ul>
 <li>mechanism for ADCs using unchecked arguments -- this is not just a matter of writing it; I have to think about <em>how</em> it will be done. (AFAIK the only tool affected is git-annexe; if there are more let me know)</li>
@@ -2867,7 +2876,7 @@ repo baz
 <li>svnserve</li>
 <li>htpasswd</li>
 </ul>
-<h2 id="files"><span class="header-section-number">8.7</span> files involved in gitolite</h2>
+<h2 id="files"><span class="header-section-number">8.6</span> files involved in gitolite</h2>
 <p>Gitolite creates and uses the following files and directories:</p>
 <ul>
 <li><code>~/repositories</code> -- the actual (bare) repositories are here</li>
@@ -2879,15 +2888,15 @@ repo baz
 <ul>
 <li><code>~/.ssh</code> -- if you're using ssh (as opposed to http), since this is where the <code>authorized_keys</code> file is kept</li>
 </ul>
-<h3 id="special-files"><span class="header-section-number">8.7.1</span> special files</h3>
+<h3 id="special-files"><span class="header-section-number">8.6.1</span> special files</h3>
 <p>You may want to backup the contents of <code>~/.gitolite/logs</code> if you care about auditability etc.</p>
-<h3 id="gitolite-software"><span class="header-section-number">8.7.2</span> gitolite software</h3>
+<h3 id="gitolite-software"><span class="header-section-number">8.6.2</span> gitolite software</h3>
 <p>The above list does not include the gitolite software itself.</p>
 <p>Gitolite offers you 3 ways to install software. After cloning the gitolite sources, run the install command in it with a <code>-h</code> argument to see what they are. Where the actual software is found depends on that.</p>
-<h3 id="inside-a-gitolite-repo"><span class="header-section-number">8.7.3</span> inside a &quot;gitolite repo&quot;</h3>
+<h3 id="inside-a-gitolite-repo"><span class="header-section-number">8.6.3</span> inside a &quot;gitolite repo&quot;</h3>
 <p>A gitolite repo is just like a normal bare repo on any normal git server. There are a few extra files placed in the repo directory whose names start with &quot;gl-&quot;, and there is also an update hook placed in the hooks subdirectory, but that's about it, for the most part.</p>
 <p>In other words, you can treat a gitolite-managed repo just like any other bare repo as long as you leave those files alone.</p>
-<h2 id="regex"><span class="header-section-number">8.8</span> extremely brief regex overview</h2>
+<h2 id="regex"><span class="header-section-number">8.7</span> extremely brief regex overview</h2>
 <p>Regexes are powerful. Gitolite uses that power as much as it can. If you can't handle that power, hire someone who can and become a manager.</p>
 <p>That said, here's a very quick overview of the highlights.</p>
 <p><code>^</code> and <code>$</code> are called &quot;anchors&quot;. They anchor the match to the beginning and end of the string respectively.</p>
@@ -2900,9 +2909,9 @@ foo$    matches any string ending with 'foo'
 <p><code>*</code>, <code>?</code>, and <code>+</code> are quantifiers. They apply to the previous token. <code>a*</code> means &quot;zero or more 'a' characters&quot;. Similarly <code>a+</code> means &quot;one or more&quot;, and <code>a?</code> means &quot;zero or one&quot;.</p>
 <p>As a result, <code>.*</code> means &quot;any number (including zero) of any character&quot;.</p>
 <p>The previous token need not be a single character; you can use parens to make it longer. <code>(foo)+</code> matches one or more &quot;foo&quot;, (like &quot;foo&quot;, &quot;foofoo&quot;, &quot;foofoofoo&quot;, etc.)</p>
-<h2 id="perf"><span class="header-section-number">8.9</span> gitolite performance</h2>
+<h2 id="perf"><span class="header-section-number">8.8</span> gitolite performance</h2>
 <p>TOP TIP: If you have more than 2000 or so repos, then you should be using v3.2 or later; there was a bit of code that went in there that makes a <em>huge</em> difference for really large sites.</p>
-<h3 id="tips-for-performance-worriers"><span class="header-section-number">8.9.1</span> tips for performance worriers</h3>
+<h3 id="tips-for-performance-worriers"><span class="header-section-number">8.8.1</span> tips for performance worriers</h3>
 <p>Gitolite is pretty efficient in most cases, and generally nothing needs to be done. If you think you have a performance problem, let me know on the mailing list. Meanwhile, here are some tips:</p>
 <ul>
 <li><p>Look in the gitolite log file after any operation that you think ran slowly. In particular, pushing to the admin repo, or a user creating a new wild repo, might be a little slow, and the log file will tell you a bit more detail on what took time.</p></li>
@@ -2913,7 +2922,7 @@ foo$    matches any string ending with 'foo'
 <p>Scripts invoked via <code>POST_CREATE</code> <em>do</em> get information about what repo has just been created. However, the gitweb and daemon scripts are not set to take advantage of this, only the git-config one is. So use the git-config script as an example, and/or read the <a href="#triggers">triggers</a> documentation, and fix the other two programs.</p>
 <p>(This should be easy enough for the daemon update, but the gitweb update may be a little more tricky, since it may involve <em>deleting</em> lines from the &quot;projects.list&quot; file.)</p></li>
 </ul>
-<h3 id="why-theres-really-no-need-to-worry"><span class="header-section-number">8.9.2</span> why there's really no need to worry!</h3>
+<h3 id="why-theres-really-no-need-to-worry"><span class="header-section-number">8.8.2</span> why there's really no need to worry!</h3>
 <p>In general, gitolite has a constant overhead of about 0.2 seconds on my laptop. There really is nothing to optimise, but you can comment out some triggers as the previous section said.</p>
 <p>Here's the big-O stuff:</p>
 <ul>
@@ -2931,10 +2940,10 @@ foo$    matches any string ending with 'foo'
 <p>&quot;rule parse time&quot; is where it makes a difference. There are 2 files gitolite parses on each &quot;access&quot;: <code>~/.gitolite/conf/gitolite.conf-compiled.pm</code> and <code>~/repositories/your_repo.git/gl-conf</code>. The former contains O(N + M + G*A) lines. In addition, the gl-conf files contains about &quot;A&quot; lines (remember we called it an average), which is negligible.</p>
 <p>In practice, you can't measure this at a scale that a developer running a &quot;git push&quot; might even pretend to notice, unless you have more than, say, 5000 repos or so. On my testbed of 11,100 repos, where the compiled.pm is almost 0.7 MB, it takes less than 0.2 seconds to do this.</p>
 <p>And on a busy system, when that file will be pretty much always in cache, it's even less.</p>
-<h3 id="the-only-thing-that-will-take-more-time"><span class="header-section-number">8.9.3</span> the only thing that will take more time</h3>
+<h3 id="the-only-thing-that-will-take-more-time"><span class="header-section-number">8.8.3</span> the only thing that will take more time</h3>
 <p>Literally, the only thing that will take time is something like &quot;ssh git@host info&quot; because it finds all possible repos and for each of them it tries to check the access. On that same test bed, therefore, this ends up reading all 11,100 &quot;gl-conf&quot; files.</p>
 <p>On my laptop this takes about 14 seconds. In contrast, a normal git operation (clone, pull, push, etc) is so small it is hard to measure without software.</p>
-<h2 id="README-emacs"><span class="header-section-number">8.10</span> Emacs major mode for gitolite.conf</h2>
+<h2 id="README-emacs"><span class="header-section-number">8.9</span> Emacs major mode for gitolite.conf</h2>
 <p><a href="http://www.gnu.org/software/emacs">Emacs</a> major mode for <code>gitolite.conf</code> can be found here:</p>
 <ul>
 <li><a href="http://github.com/llloret/gitolite-emacs">GitHub</a></li>
