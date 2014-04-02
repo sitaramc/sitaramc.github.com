@@ -64,7 +64,7 @@
 </ul></li>
 </ul>
 </div>
-<h1 id="pre-migration-checklist"><a href="#pre-migration-checklist"><span class="header-section-number">1</span> pre-migration checklist</a></h1>
+<h1 id="pre-migration-checklist"><span class="header-section-number">1</span> pre-migration checklist</h1>
 <!-- pandoc: toc -->
 
 <p><font color="red"> <strong>This document is a <em>MUST</em> read if you are currently using g2 and want to move to g3.</strong> </font></p>
@@ -84,9 +84,9 @@
 <hr />
 </blockquote>
 <p>The <code>check-g2-compat</code> program attempts to identify any <em>big</em> issues you will be facing; run that first. See <a href="g2migr.html#cg2c">later</a> in this page for what its messages mean. If it does not report any issues, your migrate will probably go quickly. I still suggest you go through the links below in case that program missed something.</p>
-<h2 id="incompatible-features"><a href="#incompatible-features"><span class="header-section-number">1.1</span> incompatible features</a></h2>
+<h2 id="incompatible-features"><span class="header-section-number">1.1</span> incompatible features</h2>
 <p>Here's a list of incompatible features and what you need to do to migrate. Some of them have links where there is more detail than I want to put here.</p>
-<h3 id="high-impact"><a href="#high-impact"><span class="header-section-number">1.1.1</span> high impact</a></h3>
+<h3 id="high-impact"><span class="header-section-number">1.1.1</span> high impact</h3>
 <p>(serious loss of functionality and/or access control compromised)</p>
 <ul>
 <li><p><a href="g2incompat.html#g2i-name"><code>NAME/</code></a> rules: thes need to change to <code>VREF/NAME/</code>, and you need to add a deny rule at the end because fallthru is &quot;success&quot; for all <a href="vref.html">VREFs</a> now, including the &quot;NAME&quot; VREF.</p></li>
@@ -94,7 +94,7 @@
 <li><p>There are several important differences in mirroring. You can start from scratch by reading the new <a href="mirroring.html">mirroring</a> doc or <a href="g2incompat.html#g2i-mirroring">migrate</a> (carefully!).</p></li>
 <li><p><code>ADMIN_POST_UPDATE_CHAINS_TO</code> -- <strong>dropped</strong>. Add your script to the <code>POST_COMPILE</code> trigger chain. Your script won't be getting the arguments that <em>git</em> sends to the post-update hook, but for the admin repo the only argument that even comes in (or is significant) is &quot;refs/heads/master&quot; anyway.</p></li>
 <li><p><code>GL_ALL_INCLUDES_SPECIAL</code> -- <strong>dropped</strong>, <strong>requires presetting</strong>.</p>
-<p>@all always includes gitweb and daemon now. Use <a href="rules.html#deny-rules">deny-rules</a> if you want to say <code>R = @all</code> but not have the repo(s) be visible to gitweb or daemon.</p></li>
+<p><span class="citation">@all</span> always includes gitweb and daemon now. Use <a href="rules.html#deny-rules">deny-rules</a> if you want to say <code>R = @all</code> but not have the repo(s) be visible to gitweb or daemon.</p></li>
 <li><p><code>GL_NO_CREATE_REPOS</code> -- <strong>dropped</strong>. If you think you need this, email me. I know one group who does need this so I will be putting it in eventually but not right away. It's almost certain to be renamed anyway.</p></li>
 <li><p><code>GL_NO_DAEMON_NO_GITWEB</code> <strong>dropped</strong>, <strong>requires presetting</strong>. Default will clobber your projects.list file and git-daemon-export-ok files.</p>
 <p>Comment out the 'daemon' and 'gitweb' lines in the ENABLE list in the rc file. As you can see, gitweb and daemon can now be separately disabled, instead of both being tied to the same setting.</p></li>
@@ -107,7 +107,7 @@
 <pre><code>$ENV{PATH} = &quot;/some/non-standard/path:$ENV{PATH}&quot;;
 1;</code></pre></li>
 </ul>
-<h3 id="medium-impact"><a href="#medium-impact"><span class="header-section-number">1.1.2</span> medium impact</a></h3>
+<h3 id="medium-impact"><span class="header-section-number">1.1.2</span> medium impact</h3>
 <p>(important functionality lost, but access control not compromised)</p>
 <ul>
 <li><p><code>GL_ADMINDIR</code> -- <strong>dropped</strong>, is now at a fixed location: <code>~/.gitolite</code>. If you want it somewhere else go ahead and move it, then place a symlink from the assumed location to the real one.</p></li>
@@ -115,7 +115,7 @@
 <li><p><code>GL_WILDREPOS_DEFPERMS</code> -- is gone; see <a href="wild.html#roles">roles</a> for how to do this.</p></li>
 <li><p><code>REPO_BASE</code> -- <strong>dropped</strong>, is now at a fixed location: <code>~/repositories</code>. If you want it somewhere else go ahead and move it, then place a symlink from the assumed location to the real one.</p></li>
 </ul>
-<h3 id="low-impact"><a href="#low-impact"><span class="header-section-number">1.1.3</span> low impact</a></h3>
+<h3 id="low-impact"><span class="header-section-number">1.1.3</span> low impact</h3>
 <p>(ancillary, non-core, or minor functionality lost)</p>
 <ul>
 <li><p>Built-in command <code>expand</code> -- <strong>dropped</strong>. The 'info' command shows you both normal and wild repos now. The output format is also much simpler.</p></li>
@@ -141,7 +141,7 @@
 <li><p><code>REPO_UMASK</code> -- is now <code>UMASK</code>.</p></li>
 <li><p><code>WEB_INTERFACE</code> and <code>GITWEB_URI_ESCAPE</code> -- <strong>dropped</strong>. Patches to the update program to directly do those things are welcome. Personally, I think people who use spaces and other funky characters in dir/file names should be shot but no one listens to me anyway.</p></li>
 </ul>
-<h2 id="cg2c"><a href="#cg2c"><span class="header-section-number">1.2</span> using the &quot;check-g2-compat&quot; program</a></h2>
+<h2 id="cg2c"><span class="header-section-number">1.2</span> using the &quot;check-g2-compat&quot; program</h2>
 <p>This program checks a few things only, not everything. In particular, it looks for settings and status that might:</p>
 <ul>
 <li>make g3 unusable for lots of users</li>
@@ -173,7 +173,7 @@ done 2&gt;/dev/null</code></pre>
 <pre><code>find `gitolite query-rc GL_REPO_BASE` -name gl-perms |
     xargs perl -pi -e 's/\bR\b/READERS/;s/\bRW\b/WRITERS/'</code></pre></li>
 </ul>
-<h2 id="rc-preset"><a href="#rc-preset"><span class="header-section-number">1.3</span> presetting the rc file</a></h2>
+<h2 id="rc-preset"><span class="header-section-number">1.3</span> presetting the rc file</h2>
 <p>Some rc settings in the older gitolite are such that you cannot directly run <code>gitolite setup</code> when you're ready to migrate. <strong>Doing that will clobber something important</strong>. You have to create a default rc file, edit it appropriately, and <em>then</em> run <code>gitolite setup</code>.</p>
 <p>The most serious example of this is <code>GL_NO_SETUP_AUTHKEYS</code>, which tells the (old) gitolite that you want to manage <code>~/.ssh/authorized_keys</code> yourself and it should not fiddle with it.</p>
 <p>If you don't preset the rc (in this case, by commenting out the 'ssh-authkeys' line) <strong>before</strong> running <code>gitolite setup</code>, <strong>your <code>~/.ssh/authorized_keys</code> file will get clobbered</strong>.</p>

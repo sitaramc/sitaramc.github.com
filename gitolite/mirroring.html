@@ -67,7 +67,7 @@
 </ul></li>
 </ul>
 </div>
-<h1 id="mirroring-using-gitolite"><a href="#mirroring-using-gitolite"><span class="header-section-number">1</span> mirroring using gitolite</a></h1>
+<h1 id="mirroring-using-gitolite"><span class="header-section-number">1</span> mirroring using gitolite</h1>
 <!-- pandoc: toc -->
 
 <p><font color="red"><strong>WARNING</strong> existing gitolite mirroring users please note: <strong>there are <a href="g2incompat.html#g2i-mirroring">significant changes</a></strong> in syntax and usage compared to g2. If you're not the kind who reads documentation before doing serious system admin things, well... good luck!</font></p>
@@ -87,7 +87,7 @@
 <li><p>Pushes to a slave can be transparently forwarded to the real master.</p>
 <p>Your developers need not worry about where a repo's master is -- they just write to their local mirror for <em>all</em> repos, even if their local mirror is only a slave for some.</p></li>
 </ul>
-<h2 id="caveats"><a href="#caveats"><span class="header-section-number">1.1</span> caveats</a></h2>
+<h2 id="caveats"><span class="header-section-number">1.1</span> caveats</h2>
 <ul>
 <li><p>Mirroring will never <em>create</em> a repo on a slave; it has to exist and be prepared to receive updates from the master.</p>
 <p>However, there is limited support for auto-creating wild card repos and sending 'perms' info across, with the following caveats at present. (Some of this text won't make sense unless you know what those features are).</p>
@@ -104,9 +104,9 @@
 <li><p>If you ever do a <a href="emergencies.html#bypass">bypass push</a>, mirroring will not work. Mirroring checks also will not work -- for example, you can push to a slave, which is not usually a good idea. So don't bypass gitolite if the repo is mirrored!</p></li>
 <li><p>From v3.5.3 on, gitolite uses an asynchronous push to the slaves, so that the main push returns immediately, without waiting for the slave pushes to complete. Keep this in mind if you're writing scripts that do a push, and then read one of the slaves immediately -- you will need to add a few seconds of sleep in your script.</p></li>
 </ul>
-<h2 id="setting-up-mirroring"><a href="#setting-up-mirroring"><span class="header-section-number">1.2</span> setting up mirroring</a></h2>
+<h2 id="setting-up-mirroring"><span class="header-section-number">1.2</span> setting up mirroring</h2>
 <p>This is in two parts: the initial setup and the rc file, followed by the conf file settings and syntax.</p>
-<h3 id="the-initial-setup-and-the-rc-filerc"><a href="#the-initial-setup-and-the-rc-filerc"><span class="header-section-number">1.2.1</span> the initial setup and the <a href="rc.html">rc file</a></a></h3>
+<h3 id="the-initial-setup-and-the-rc-filerc"><span class="header-section-number">1.2.1</span> the initial setup and the <a href="rc.html">rc file</a></h3>
 <p>On <strong>each</strong> server:</p>
 <ul>
 <li><p>Install gitolite normally. Make clones of the server's 'gitolite-admin' repo on your workstation so you can admin them all from one place.</p></li>
@@ -132,7 +132,7 @@ ssh phobos info
 <p>because on the first push to the master it will update all the slaves anyway.</p></li>
 <li><p>When that is all done and tested, <strong>enable mirroring</strong> by going through the rc file and uncommenting all the lines mentioning <code>Mirroring</code>.</p></li>
 </ul>
-<h3 id="conf-file-settings-and-syntax"><a href="#conf-file-settings-and-syntax"><span class="header-section-number">1.2.2</span> conf file settings and syntax</a></h3>
+<h3 id="conf-file-settings-and-syntax"><span class="header-section-number">1.2.2</span> conf file settings and syntax</h3>
 <p>Mirroring is defined by the following <a href="options.html">options</a>. You can have different settings for different repos, and of course some repos may not have any mirror options at all -- they are then purely local.</p>
 <pre><code>repo foo
     ...access rules...
@@ -146,7 +146,7 @@ ssh phobos info
     option mirror.slaves-2   =   io europa
     option mirror.slaves-3   =   ganymede callisto</code></pre>
 <p>Do not repeat a key; then only the last line for that key will be effective.</p>
-<h2 id="redirected-pushes"><a href="#redirected-pushes"><span class="header-section-number">1.3</span> redirected pushes</a></h2>
+<h2 id="redirected-pushes"><span class="header-section-number">1.3</span> redirected pushes</h2>
 <p><strong>Please read carefully; there are security implications if you enable this for mirrors NOT under your control</strong>.</p>
 <p>Normally, a master, (and <em>only</em> a master), pushes to a slave, and the slaves are &quot;read-only&quot; to the users. Gitolite allows a <em>slave</em> to receive pushes from a user and transparently redirect them to the <em>master</em>.</p>
 <p>This simplifies things for users in complex setups, letting them use their local mirror for both fetch and push access to all repos.</p>
@@ -157,7 +157,7 @@ ssh phobos info
 option mirror.redirectOK    =   phobos deimos</code></pre>
 <p>The first syntax trusts all valid slaves to redirect user pushes, while the second one trusts only some slaves.</p>
 <p>Note that you cannot redirect gitolite commands (like perms, etc).</p>
-<h2 id="sync"><a href="#sync"><span class="header-section-number">1.4</span> manually synchronising a slave repo</a></h2>
+<h2 id="sync"><span class="header-section-number">1.4</span> manually synchronising a slave repo</h2>
 <p>You can use the <code>gitolite mirror push</code> command on a master to manually synchronise any of its slaves. Try it with <code>-h</code> to get usage info.</p>
 <p>Tip: if you want to do this to all the slaves, try this:</p>
 <pre><code>for s in `gitolite git-config -r reponame mirror.slave | cut -f3`
@@ -165,16 +165,16 @@ do
     gitolite mirror push $s reponame
 done</code></pre>
 <p>This command can also be run remotely; run <code>ssh git@host mirror -h</code> for details.</p>
-<h2 id="HOSTNAME"><a href="#HOSTNAME"><span class="header-section-number">1.5</span> appendix A: HOSTNAME substitution</a></h2>
+<h2 id="HOSTNAME"><span class="header-section-number">1.5</span> appendix A: HOSTNAME substitution</h2>
 <p>Wherever gitolite sees the word <code>%HOSTNAME</code>, it will replace it with the HOSTNAME supplied in the rc file, if one was supplied. This lets you maintain configurations for all servers in one repo, yet have them act differently on different servers, by saying something like:</p>
 <pre><code>subconf &quot;%HOSTNAME/*.conf&quot;</code></pre>
 <p>You can use it in other places also, for example:</p>
 <pre><code>RW+     VREF/NAME/subs/%HOSTNAME/       =   @%HOSTNAME-admins</code></pre>
-<p>(you still have to define @mars-admins, @phobos-admins, etc., but the actual VREF is now one line instead of one for each server!)</p>
-<h2 id="appendix-b-efficiency-versus-paranoia"><a href="#appendix-b-efficiency-versus-paranoia"><span class="header-section-number">1.6</span> appendix B: efficiency versus paranoia</a></h2>
+<p>(you still have to define <span class="citation">@mars-admins</span>, <span class="citation">@phobos-admins</span>, etc., but the actual VREF is now one line instead of one for each server!)</p>
+<h2 id="appendix-b-efficiency-versus-paranoia"><span class="header-section-number">1.6</span> appendix B: efficiency versus paranoia</h2>
 <p>If you're paranoid enough to use mirrors, you should be paranoid enough to set this on each server, despite the possible CPU overhead:</p>
 <pre><code>git config --global receive.fsckObjects true</code></pre>
-<h2 id="appendix-c-moving-the-admin-repo-to-a-different-master"><a href="#appendix-c-moving-the-admin-repo-to-a-different-master"><span class="header-section-number">1.7</span> appendix C: moving the admin repo to a different master</a></h2>
+<h2 id="appendix-c-moving-the-admin-repo-to-a-different-master"><span class="header-section-number">1.7</span> appendix C: moving the admin repo to a different master</h2>
 <p>Moving only some repos (other than the gitolite-admin repo) to a different master is easy. Just make the change in the gitolite.conf file, add, commit, and push.</p>
 <p>Even for the gitolite-admin repo, if the current master is ok, it's the same thing; just make the change and push <em>to the current master</em>. Subsequent pushes will go to the new master, of course.</p>
 <p>But if the current master is already dead, there's a bit of a catch-22. You can't push to the master because it is dead, and you can't push to any slave because they won't accept updates from anywhere but the server they think is the master.</p>

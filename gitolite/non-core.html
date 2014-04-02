@@ -64,7 +64,7 @@
 </ul></li>
 </ul>
 </div>
-<h1 id="non-core-features-shipped-with-gitolite"><a href="#non-core-features-shipped-with-gitolite"><span class="header-section-number">1</span> non-core features shipped with gitolite</a></h1>
+<h1 id="non-core-features-shipped-with-gitolite"><span class="header-section-number">1</span> non-core features shipped with gitolite</h1>
 <!-- pandoc: toc -->
 
 <p><strong>Important Notes on &quot;non-core&quot; features</strong>:</p>
@@ -79,7 +79,7 @@
 <li><p>Non-core code is <strong>meant</strong> to be <a href="cust.html#localcode">localised for your site</a> if you don't like what the shipped version does. You can even maintain it <a href="cust.html#pushcode">within your gitolite-admin repo</a> if you wish.</p></li>
 </ol>
 <hr />
-<h2 id="commands"><a href="#commands"><span class="header-section-number">1.1</span> commands</a></h2>
+<h2 id="commands"><span class="header-section-number">1.1</span> commands</h2>
 <p>This is a list of commands that are available in gitolite, with brief descriptions and, if available, a link to more detailed information. Note that in most cases running it with <code>-h</code> will give you enough to work with.</p>
 <p>Also note that not all of these commands are available remotely.</p>
 <p>(The more common/important commands are in bold).</p>
@@ -106,14 +106,14 @@
 <li><em>who-pushed</em> -- determine who pushed a given commit</li>
 <li><em>writable</em> -- disable/enable writes to specific repo (or all repos, if you're an admin)</li>
 </ul>
-<h2 id="syntactic-sugar"><a href="#syntactic-sugar"><span class="header-section-number">1.2</span> syntactic sugar</a></h2>
+<h2 id="syntactic-sugar"><span class="header-section-number">1.2</span> syntactic sugar</h2>
 <p>The following &quot;sugar&quot; programs are available:</p>
 <ul>
 <li><em>continuation-lines</em> -- allow C-style backslash escaped continuation lines in the conf file</li>
 <li><em>keysubdirs-as-groups</em> -- use the last component of the sub-directory name within keydir as a group name</li>
 <li><strong>macros</strong> -- simple line-wise macro processor</li>
 </ul>
-<h2 id="triggers"><a href="#triggers"><span class="header-section-number">1.3</span> triggers</a></h2>
+<h2 id="triggers"><span class="header-section-number">1.3</span> triggers</h2>
 <p>Here's a list of <strong>features</strong> that are enabled by <a href="triggers.html">triggers</a>, or a combination of a trigger and something else, like a command.</p>
 <ul>
 <li><em>Alias</em> -- allow repos to have aliases</li>
@@ -138,7 +138,7 @@
 <li>update-git-daemon-access-list -- create/delete the 'git-daemon-export-ok' files in each repo as needed</li>
 <li>update-gitweb-access-list -- create the &quot;projects.list&quot; file that gitweb uses to determine what repos to show/not show</li>
 </ul>
-<h2 id="vrefs"><a href="#vrefs"><span class="header-section-number">1.4</span> VREFs</a></h2>
+<h2 id="vrefs"><span class="header-section-number">1.4</span> VREFs</h2>
 <p>VREFs are a complex topic and have their <a href="vref.html">own page</a> with lots more details. However, here's a list of VREFs shipped with gitolite:</p>
 <ul>
 <li><em><a href="vref.html#COUNT">COUNT</a></em> -- restrict pushes by number of changed or new files pushed</li>
@@ -150,9 +150,9 @@
 <li><em>refex-expr</em> -- (in combination with the refex-expr trigger) logical expressions over refexes, like &quot;refex-1 and not refex-2&quot;. (Example: changing file 'foo' but not on 'master' branch)</li>
 <li><em><a href="vref.html#votes">VOTES</a></em> -- voting on commits a la gerrit</li>
 </ul>
-<h2 id="details-on-some-non-core-programs"><a href="#details-on-some-non-core-programs"><span class="header-section-number">1.5</span> details on some non-core programs</a></h2>
+<h2 id="details-on-some-non-core-programs"><span class="header-section-number">1.5</span> details on some non-core programs</h2>
 <p>These non-core programs needed more detail than could be provided in the source code, but did not fit anywhere else neatly enough.</p>
-<h3 id="partial-copy"><a href="#partial-copy"><span class="header-section-number">1.5.1</span> partial-copy: selective read control for branches</a></h3>
+<h3 id="partial-copy"><span class="header-section-number">1.5.1</span> partial-copy: selective read control for branches</h3>
 <p>Git (and therefore gitolite) cannot do selective read control -- allowing someone to read branch A but not branch B. It's the entire repo or nothing.</p>
 <p><font color="gray">(Side note: Gerrit Code Review can do that, but that is because they have their own git stack (and their own sshd, and so on) all in one big Java program. Gerrit is <em>really</em> useful if you want code review to be part of the access control decision) </font></p>
 <p>Gitolite can now help you do this. Note that this is only for branches; you can't do this for files and directories.</p>

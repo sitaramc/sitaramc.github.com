@@ -70,11 +70,11 @@
 </ul></li>
 </ul>
 </div>
-<h1 id="migration-example"><a href="#migration-example"><span class="header-section-number">1</span> migration example</a></h1>
+<h1 id="migration-example"><span class="header-section-number">1</span> migration example</h1>
 <!-- pandoc: toc -->
 
 <p>This shows what a typical migration would look like, using a test setup.</p>
-<h2 id="existing-setup"><a href="#existing-setup"><span class="header-section-number">1.1</span> existing setup</a></h2>
+<h2 id="existing-setup"><span class="header-section-number">1.1</span> existing setup</h2>
 <p>The existing gitolite is the latest in the &quot;g2&quot; (v2.x) branch.</p>
 <p>First, the rc file has the following lines different from the default:</p>
 <pre><code>-$GL_WILDREPOS = 0;
@@ -127,14 +127,14 @@ repositories/baz/u3.git/config-[gitweb]
 repositories/baz/u3.git/config-     owner = u3
 repositories/baz/u3.git/config:[foo]
 repositories/baz/u3.git/config-     bar = baz</code></pre>
-<h2 id="preparing-for-the-migration"><a href="#preparing-for-the-migration"><span class="header-section-number">1.2</span> preparing for the migration</a></h2>
-<h3 id="getting-g3"><a href="#getting-g3"><span class="header-section-number">1.2.1</span> getting g3</a></h3>
+<h2 id="preparing-for-the-migration"><span class="header-section-number">1.2</span> preparing for the migration</h2>
+<h3 id="getting-g3"><span class="header-section-number">1.2.1</span> getting g3</h3>
 <p>Fortunately this is easy here; I just happened to have the repo already fetched so I just had to switch branches. You may have to 'git clone ...' from github.</p>
 <pre><code>$ cd gitolite
 $ git checkout master
 Branch master set up to track remote branch master from origin.
 Switched to a new branch 'master'</code></pre>
-<h3 id="run-check-g2-compat"><a href="#run-check-g2-compat"><span class="header-section-number">1.2.2</span> run check-g2-compat</a></h3>
+<h3 id="run-check-g2-compat"><span class="header-section-number">1.2.2</span> run check-g2-compat</h3>
 <p>This is a quick and dirty program to catch some of the big issues.</p>
 <pre><code>$ cd
 $ gitolite/check-g2-compat
@@ -157,9 +157,9 @@ checking repos...
 WARNING     found 3 gl-creater files; see docs
 
 ...all done...</code></pre>
-<h2 id="the-actual-migration"><a href="#the-actual-migration"><span class="header-section-number">1.3</span> the actual migration</a></h2>
+<h2 id="the-actual-migration"><span class="header-section-number">1.3</span> the actual migration</h2>
 <p>Here's the actual migration, step by step</p>
-<h3 id="step-1"><a href="#step-1"><span class="header-section-number">1.3.1</span> step 1</a></h3>
+<h3 id="step-1"><span class="header-section-number">1.3.1</span> step 1</h3>
 <pre><code>$ ls -a bin
 .                gl-admin-push    gl-install       gl-setup-authkeys  gl-VREF-DUPKEYS
 ..               gl-auth-command  gl-mirror-push   gl-system-install  gl-VREF-EMAIL_CHECK
@@ -184,9 +184,9 @@ done.
 $ rm -rf repositories/gitolite-admin.git/</code></pre>
 <p>Since I'm not interested in preserving the logs and don't have any custom hooks:</p>
 <pre><code>$ rm -rf .gitolite</code></pre>
-<h3 id="step-2"><a href="#step-2"><span class="header-section-number">1.3.2</span> step 2</a></h3>
+<h3 id="step-2"><span class="header-section-number">1.3.2</span> step 2</h3>
 <p>I have no variables that <em>must</em> be preset, since the report by <code>check-g2-compat</code> is clear.</p>
-<h3 id="step-3"><a href="#step-3"><span class="header-section-number">1.3.3</span> step 3</a></h3>
+<h3 id="step-3"><span class="header-section-number">1.3.3</span> step 3</h3>
 <p>Here we install the new gitolite. Remember we already got the new software (in order to run 'check-g2-compat').</p>
 <p>Just check that bin is empty, then run 'install -ln' from the gitolite source tree:</p>
 <pre><code>$ ls -al bin
@@ -202,7 +202,7 @@ lrwxrwxrwx 1 git git   30 Apr 24 11:01 gitolite -&gt; /home/git/gitolite/src/git
 <p>OK that went well. Now setup gitolite. You don't need a key here; just use a random name:</p>
 <pre><code>$ gitolite setup -a admin
 Initialized empty Git repository in /home/git/repositories/gitolite-admin.git/</code></pre>
-<h3 id="step-4"><a href="#step-4"><span class="header-section-number">1.3.4</span> step 4</a></h3>
+<h3 id="step-4"><span class="header-section-number">1.3.4</span> step 4</h3>
 <p>Now go to your old clone, and push it:</p>
 <pre><code>$ cd old.ga
 $ gitolite push -f
@@ -235,7 +235,7 @@ Total 1 (delta 0), reused 0 (delta 0)
 Unpacking objects: 100% (1/1), done.
 To /home/git/repositories/gitolite-admin.git
    1474770..4c2b41d  master -&gt; master</code></pre>
-<h3 id="step-5"><a href="#step-5"><span class="header-section-number">1.3.5</span> step 5</a></h3>
+<h3 id="step-5"><span class="header-section-number">1.3.5</span> step 5</h3>
 <p>The only thing left is to fix up the gl-creater files:</p>
 <pre><code>$ cd $HOME/repositories
 $ find . -type d -name &quot;*.git&quot; -prune | while read r
@@ -243,7 +243,7 @@ $ find . -type d -name &quot;*.git&quot; -prune | while read r
 &gt;     mv $r/gl-creater $r/gl-creator
 &gt; done 2&gt;/dev/null</code></pre>
 <p>And we're done!</p>
-<h2 id="checking-things-out"><a href="#checking-things-out"><span class="header-section-number">1.4</span> checking things out</a></h2>
+<h2 id="checking-things-out"><span class="header-section-number">1.4</span> checking things out</h2>
 <p>Let's see what repos u3 has:</p>
 <pre><code># as user 'u3'
 ssh git@server info

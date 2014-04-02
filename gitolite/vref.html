@@ -81,7 +81,7 @@
 </ul></li>
 </ul>
 </div>
-<h1 id="virtual-refs"><a href="#virtual-refs"><span class="header-section-number">1</span> virtual refs</a></h1>
+<h1 id="virtual-refs"><span class="header-section-number">1</span> virtual refs</h1>
 <!-- pandoc: toc -->
 
 <p><strong>IMPORTANT</strong>: fallthru is success in VREFs, unlike the normal refs. That won't make sense until you read further, but I had to put it up here for folks who stop reading halfway!</p>
@@ -94,13 +94,13 @@
     -   VREF/COUNT/5        =   @junior-devs
     -   VREF/NAME/Makefile  =   @junior-devs</code></pre>
 <hr />
-<h2 id="basic-use"><a href="#basic-use"><span class="header-section-number">1.1</span> basic use</a></h2>
+<h2 id="basic-use"><span class="header-section-number">1.1</span> basic use</h2>
 <p>Normally, rules deal with branches and tags (which git collectively calls &quot;refs&quot;). The &quot;ref&quot; is a property of the push which gitolite checks against the set of rules.</p>
 <p>VREFs (&quot;virtual refs&quot;) are other properties of a push that gitolite can be told to check, in addition to the normal ref. For example, &quot;this push has more than 5 changed files&quot; could be one property. Or &quot;this push changed the file called Makefile&quot; could be another.</p>
 <p>The simplest way to use them is as <em>additional</em> &quot;deny&quot; rules to fail a push that might otherwise have passed. This is what the example at the top shows. Using VREFs like this does not require any great understanding of, or thinking about, how they work under the hood.</p>
-<h2 id="advanced-use"><a href="#advanced-use"><span class="header-section-number">1.2</span> advanced use</a></h2>
+<h2 id="advanced-use"><span class="header-section-number">1.2</span> advanced use</h2>
 <p>More complex uses are possible, but may be harder to understand. You may want to experiment with the rules to solidify your understanding as you read this.</p>
-<h3 id="differences-from-normal-refs"><a href="#differences-from-normal-refs"><span class="header-section-number">1.2.1</span> differences from normal refs</a></h3>
+<h3 id="differences-from-normal-refs"><span class="header-section-number">1.2.1</span> differences from normal refs</h3>
 <p>We know where normal refs (like &quot;refs/heads/master&quot; or &quot;refs/tags/v1.0&quot;) come from -- they are supplied by git itself when it calls the update hook.</p>
 <p>VREFs have two differences with normal refs:</p>
 <ul>
@@ -115,7 +115,7 @@
 <p>We'll talk about the generaton later, but for the check, a VREF dies (and kills the push) <em>only</em> if it meets an explicit deny rule (&quot;-&quot;). Fallthru does <em>not</em> cause failure of a VREF.</p>
 <p><a href="refex.html">refex</a> and <a href="rules.html">rules</a> still apply, but several parts of the latter are just not relevant to VREFs (since VREFs only run from the update hook). Plus of course, as we said, fallthru is not a failure now.</p></li>
 </ul>
-<h3 id="generating-virtual-refs"><a href="#generating-virtual-refs"><span class="header-section-number">1.2.2</span> generating virtual refs</a></h3>
+<h3 id="generating-virtual-refs"><span class="header-section-number">1.2.2</span> generating virtual refs</h3>
 <p>Gitolite uses the VREF rules themselves to help it generate the virtual refs.</p>
 <p>Specifically, it looks at each rule that contains a VREF (there are 2 in the above example) and calls a VREF-maker for each of them.</p>
 <p>We'll take the COUNT example rule above.</p>
@@ -128,15 +128,15 @@
 </ul>
 <p>It should exit with an exit code of zero in either case.</p>
 <p>If it exits with a non-zero, the push dies regardless of what is printed (see &quot;mimicking a plain old update hook&quot; for why this is useful).</p>
-<h2 id="more-details-and-nuances"><a href="#more-details-and-nuances"><span class="header-section-number">1.3</span> more details and nuances</a></h2>
-<h3 id="mimicking-a-plain-old-update-hook"><a href="#mimicking-a-plain-old-update-hook"><span class="header-section-number">1.3.1</span> mimicking a plain old update hook</a></h3>
+<h2 id="more-details-and-nuances"><span class="header-section-number">1.3</span> more details and nuances</h2>
+<h3 id="mimicking-a-plain-old-update-hook"><span class="header-section-number">1.3.1</span> mimicking a plain old update hook</h3>
 <p>If the VREF maker exists with a non-zero exit code, then regardless of what it prints or does not, the push dies.</p>
 <p>This is just like a plain 'update' hook. Since the first 3 arguments (see later) are also the same that a plain 'update' hook receives, you can actually use any existing update hook as a VREF-maker.</p>
 <p>To repurpose an existing update hook as a VREF-maker, just copy it to the VREF directory (again, see <a href="cust.html">here</a> for actual locations on disk). Then add this rule to your repos:</p>
 <pre><code>repo foo    # or maybe even 'repo @all'
     -   VREF/my-update-hook     =   @all</code></pre>
 <p>That's it.</p>
-<h3 id="what-if-the-vref-maker-prints-a-different-vref"><a href="#what-if-the-vref-maker-prints-a-different-vref"><span class="header-section-number">1.3.2</span> what if the VREF-maker prints a different VREF?</a></h3>
+<h3 id="what-if-the-vref-maker-prints-a-different-vref"><span class="header-section-number">1.3.2</span> what if the VREF-maker prints a different VREF?</h3>
 <p>Unless you know what you're upto, don't do that.</p>
 <p>But it's allowed and the behaviour is defined. The VREF-maker for the NAME VREF is a good example. It ignores the arguments and just makes VREFs out of the name of every file that was changed in the push.</p>
 <p>Here's another example. Consider the problem of not allowing pushes at specific times. Let's say repo 'foo' cannot be pushed between 4 and 7pm, and repo 'bar' can only be pushed before 9am. And of course all this only applies to the junior developers, the poor guys!</p>
@@ -154,7 +154,7 @@ repo bar
 <p>In this example, we write the &quot;Hour&quot; VREF-maker to <em>ignore the argument passed</em> and just print <code>VREF/Hour/NN</code> where NN can be between 00 to 23 inclusive and of course represents the current hour.</p>
 <p>if foo is pushed at 6:30pm, the VREF-maker prints VREF/Hour/18, which satisfies the third rule and is rejected.</p>
 <p>If bar is pushed at, say, 7:20am, the vref printed is VREF/Hour/07, which does not match any of the rules. And fallthru is success so it passes.</p>
-<h3 id="vref-fallthru"><a href="#vref-fallthru"><span class="header-section-number">1.3.3</span> why is fallthru considered success with VREFs</a></h3>
+<h3 id="vref-fallthru"><span class="header-section-number">1.3.3</span> why is fallthru considered success with VREFs</h3>
 <p>Virtual refs are <strong>best used</strong> (1) as additional &quot;deny&quot; rules, performing extra checks that core gitolite cannot. You usually want such extra checks only for some people.</p>
 <p>When fallthru is success, you can simply <em>ignore</em> all the other users (for whom such additional checks are not needed).</p>
 <p>If fallthru were to be considered 'failure', you'd be forced to add a &quot;success rule&quot; like this for <em>every</em> vref you used in this repo, in each case listing every user who was not already mentioned in the context of that vref:</p>
@@ -164,13 +164,13 @@ repo bar
 <pre><code>RW+ VREF/NAME/Makefile      =   @senior-devs
 -   VREF/NAME/Makefile      =   @all</code></pre>
 <p></font></p>
-<h3 id="what-if-the-vref-maker-prints-something-thats-not-even-a-vref"><a href="#what-if-the-vref-maker-prints-something-thats-not-even-a-vref"><span class="header-section-number">1.3.4</span> what if the VREF-maker prints something that's not even a VREF?</a></h3>
+<h3 id="what-if-the-vref-maker-prints-something-thats-not-even-a-vref"><span class="header-section-number">1.3.4</span> what if the VREF-maker prints something that's not even a VREF?</h3>
 <p>The VREF-maker can print anything it wants to STDOUT. Lines not starting with <code>VREF/</code> are printed as is (so your VREF-maker can do mostly-normal printing to STDOUT). This is especially useful if you've turned an existing update hook into a VREF-maker, and it prints stuff but you don't want to touch the code.</p>
 <p>For lines starting with <code>VREF/</code>, the first word in each such line will be treated as a virtual ref, while the rest, if any, is a message to be added to the standard &quot;...DENIED...&quot; message that gitolite will print if that refex matches and the rule is a deny rule.</p>
-<h3 id="in-what-order-are-vref-makers-called"><a href="#in-what-order-are-vref-makers-called"><span class="header-section-number">1.3.5</span> in what order are VREF-makers called?</a></h3>
+<h3 id="in-what-order-are-vref-makers-called"><span class="header-section-number">1.3.5</span> in what order are VREF-makers called?</h3>
 <p>VREF-makers are called in the sequence in which they appear in the conf file.</p>
 <p>There are some optimisations to prevent calling the same VREF-maker with the same arguments more than once, and the VREF-maker code for the NAME VREF (which is special) is called only once regardless of how many times it appears but these details should not concern anyone but a developer.</p>
-<h3 id="vref-args"><a href="#vref-args"><span class="header-section-number">1.3.6</span> what arguments are passed to the vref-maker?</a></h3>
+<h3 id="vref-args"><span class="header-section-number">1.3.6</span> what arguments are passed to the vref-maker?</h3>
 <ul>
 <li><p>Arguments <strong>1, 2, 3</strong>: the 'ref', 'oldsha', and 'newsha' that git passed to the update hook (see 'man githooks').</p>
 <p>This, combined with the fact that non-zero exits are detected, mean that you can simply use an existing update.secondary as a VREF-maker as-is, no changes needed.</p></li>
@@ -181,8 +181,8 @@ repo bar
 <li><p>Arguments <strong>8 onward</strong>: are the split out (by <code>/</code>) portions of the refex, excluding the first two components. In our example they would be <code>3</code> followed by <code>NEWFILES</code>.</p></li>
 </ul>
 <p>Yes, argument 7 is redundant if you have 8 and 9. It's meant to make it easy to write vref-maker scripts in any language. See script examples in source.</p>
-<h2 id="vref-makers-shipped-with-gitolite"><a href="#vref-makers-shipped-with-gitolite"><span class="header-section-number">1.4</span> VREF-makers shipped with gitolite</a></h2>
-<h3 id="NAME"><a href="#NAME"><span class="header-section-number">1.4.1</span> restricting pushes by dir/file name</a></h3>
+<h2 id="vref-makers-shipped-with-gitolite"><span class="header-section-number">1.4</span> VREF-makers shipped with gitolite</h2>
+<h3 id="NAME"><span class="header-section-number">1.4.1</span> restricting pushes by dir/file name</h3>
 <p>The &quot;NAME&quot; VREF allows you to restrict pushes by the names of dirs and files changed. (Side note: the NAME VREF is the only one directly implemented within the update hook, so you won't find it in the VREF directory).</p>
 <p>Here's an example. Say you don't want junior developers pushing changes to the Makefile, because it's quite complex:</p>
 <pre><code>repo foo
@@ -204,7 +204,7 @@ VREF/NAME/dir-2/file-3
         RW+ VREF/NAME/CHANGELOG         =   QA-guy
         RW+ VREF/NAME/ReleaseNotes/     =   QA-guy
         -   VREF/NAME/                  =   QA-guy</code></pre>
-<h3 id="COUNT"><a href="#COUNT"><span class="header-section-number">1.4.2</span> number of changed or new files</a></h3>
+<h3 id="COUNT"><span class="header-section-number">1.4.2</span> number of changed or new files</h3>
 <p>The COUNT VREF is used like this:</p>
 <pre><code>-   VREF/COUNT/9                    =   @junior-developers</code></pre>
 <p>In response, if anyone in the user list pushes a commit series that changes more than 9 files, a vref of &quot;VREF/COUNT/9&quot; is returned. Gitolite uses that as a &quot;ref&quot; to match against all the rules, hits the same rule that invoked it, and denies the request.</p>
@@ -212,24 +212,24 @@ VREF/NAME/dir-2/file-3
 <p>COUNT can take one more argument:</p>
 <pre><code>-   VREF/COUNT/9/NEWFILES           =   @junior-developers</code></pre>
 <p>This is the same as before, but have to be more than 9 <em>new</em> files not just changed files.</p>
-<h3 id="advanced-filetype-detection"><a href="#advanced-filetype-detection"><span class="header-section-number">1.4.3</span> advanced filetype detection</a></h3>
+<h3 id="advanced-filetype-detection"><span class="header-section-number">1.4.3</span> advanced filetype detection</h3>
 <p>Note: this is more for illustration than use; it's rather specific to one of the projects I manage but the idea is the important thing.</p>
 <p>Sometimes a file has a standard extension (that cannot be 'gitignore'd), but it is actually automatically generated. Here's one way to catch it:</p>
 <pre><code> -   VREF/FILETYPE/AUTOGENERATED     =   @all</code></pre>
 <p>You can look at <code>src/VREF/FILETYPE</code> to see how it handles the 'AUTOGENERATED' option. You could also have a more generic option, like perhaps BINARY, and handle that in the FILETYPE vref too.</p>
-<h3 id="checking-author-email"><a href="#checking-author-email"><span class="header-section-number">1.4.4</span> checking author email</a></h3>
+<h3 id="checking-author-email"><span class="header-section-number">1.4.4</span> checking author email</h3>
 <p>Some people want to ensure that &quot;you can only push your own commits&quot;.</p>
 <p>If you force it on everyone, this is a very silly idea (see &quot;Philosophical Notes&quot; section of <code>src/VREF/EMAIL-CHECK</code>).</p>
 <p>But there may be value in enforcing it just for the junior developers.</p>
 <p>The neat thing is that the existing <code>contrib/update.email-check</code> was just copied to <code>src/VREF/EMAIL-CHECK</code> and it works, because VREFs get the same first 3 arguments and those are all that it cares about. (Note: you have to change one subroutine in that script if you want to use it)</p>
-<h3 id="votes"><a href="#votes"><span class="header-section-number">1.4.5</span> voting on commits</a></h3>
+<h3 id="votes"><span class="header-section-number">1.4.5</span> voting on commits</h3>
 <p>Although gitolite can't/won't do the whole &quot;code review + workflow enforcement&quot; thing that Gerrit Code Review does, a basic implementation of voting on a commit is surprisingly easy. See src/VREF/VOTES for details (and note that the actual <em>code</em> is just 2-3 lines; the rest is inline documentation).</p>
-<h2 id="other-ideas----code-welcome"><a href="#other-ideas----code-welcome"><span class="header-section-number">1.5</span> other ideas -- code welcome!</a></h2>
-<h3 id="no-non-merge-first-parents"><a href="#no-non-merge-first-parents"><span class="header-section-number">1.5.1</span> &quot;no non-merge first-parents&quot;</a></h3>
+<h2 id="other-ideas----code-welcome"><span class="header-section-number">1.5</span> other ideas -- code welcome!</h2>
+<h3 id="no-non-merge-first-parents"><span class="header-section-number">1.5.1</span> &quot;no non-merge first-parents&quot;</h3>
 <p>Shruggar on #gitolite wanted this. Possible code to implement it would be something like this (untested)</p>
 <pre><code>[ -z &quot;$(git rev-list --first-parent --no-merges $2..$3)&quot; ]</code></pre>
 <p>This can be implemented using <code>src/VREF/MERGE-CHECK</code> as a model. That script does what the 'M' qualifier does in access rules (see last part of <a href="write-types.html">this</a>), although the syntax to be used in conf/gitolite will be quite different.</p>
-<h3 id="other-ideas-for-vrefs"><a href="#other-ideas-for-vrefs"><span class="header-section-number">1.5.2</span> other ideas for VREFs</a></h3>
+<h3 id="other-ideas-for-vrefs"><span class="header-section-number">1.5.2</span> other ideas for VREFs</h3>
 <p>Here are some more ideas:</p>
 <ul>
 <li>Number of commits (<code>git rev-list --count $old $new</code>).</li>

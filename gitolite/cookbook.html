@@ -80,15 +80,15 @@
 </ul></li>
 </ul>
 </div>
-<h1 id="gitolite-cookbook"><a href="#gitolite-cookbook"><span class="header-section-number">1</span> gitolite cookbook</a></h1>
+<h1 id="gitolite-cookbook"><span class="header-section-number">1</span> gitolite cookbook</h1>
 <!-- pandoc: toc -->
 
 <p>Documentation is meant to be as complete as possible, which means it attempts to cover all situations and scenarios. That makes it harder to read.</p>
 <p>However, if you make some assumptions, remove the rationale, justification, exceptions and special cases, etc., and generally just say <em>what</em> is to be done rather than explain <em>why</em>, many tasks can be described very easily.</p>
 <p>Maybe this will help. If you run into problems, please check the main documentation before asking for help. In particular, the <a href="basic.html">basic</a> and <a href="advanced.html">advanced</a> graphical overviews of the documentation may be useful.</p>
 <hr />
-<h2 id="cb-admin"><a href="#cb-admin"><span class="header-section-number">1.1</span> administration</a></h2>
-<h3 id="separating-key-admin-from-repo-admin"><a href="#separating-key-admin-from-repo-admin"><span class="header-section-number">1.1.1</span> separating &quot;key admin&quot; from &quot;repo admin&quot;</a></h3>
+<h2 id="cb-admin"><span class="header-section-number">1.1</span> administration</h2>
+<h3 id="separating-key-admin-from-repo-admin"><span class="header-section-number">1.1.1</span> separating &quot;key admin&quot; from &quot;repo admin&quot;</h3>
 <p>In gitolite, the person who controls the keys is the most powerful -- because he can always add his own key in your name :-)</p>
 <p>Traditionally, the same person also administers repos and permissions. But sometimes you want to separate them. The following should work:</p>
 <ul>
@@ -103,8 +103,8 @@
 include &quot;actual.conf&quot;</code></pre></li>
 <li><p>then let the repo-manager manage everything through &quot;actual.conf&quot;.</p></li>
 </ul>
-<h2 id="cb-access"><a href="#cb-access"><span class="header-section-number">1.2</span> access</a></h2>
-<h3 id="looking-up-repo-access-from-external-tools"><a href="#looking-up-repo-access-from-external-tools"><span class="header-section-number">1.2.1</span> looking up repo access from external tools</a></h3>
+<h2 id="cb-access"><span class="header-section-number">1.2</span> access</h2>
+<h3 id="looking-up-repo-access-from-external-tools"><span class="header-section-number">1.2.1</span> looking up repo access from external tools</h3>
 <p>There are two supported interfaces for this, one in perl and one in shell. Other languages should probably use the shell mode. (The shell mode has a very convenient &quot;batch&quot; mode if you need to check many repos at once).</p>
 <p><strong>Perl interface</strong>: A good intro to this, including a link to code, using gitweb as an example can be found by looking for 'repo-specific authorisation in gitweb' in the page on <a href="external.html">interfacing with external tools</a>. Some notes:</p>
 <ul>
@@ -120,23 +120,23 @@ then
 then
     ...</code></pre>
 <p>(note that you must use the full ref name; just 'master' won't do).</p>
-<h3 id="providing-access-to-external-tools"><a href="#providing-access-to-external-tools"><span class="header-section-number">1.2.2</span> providing access to external tools</a></h3>
+<h3 id="providing-access-to-external-tools"><span class="header-section-number">1.2.2</span> providing access to external tools</h3>
 <p>Giving external tools (like apache) access to gitolite repositories involves making sure that the unix owner/group and permissions settings allow this. This is all described in the UMASK section in the documentation on the <a href="rc.html">rc file</a>, because that's the only setting that gitolite controls; every thing else is pure Unix.</p>
-<h2 id="cb-commands"><a href="#cb-commands"><span class="header-section-number">1.3</span> commands</a></h2>
-<h3 id="adding-your-own-commands"><a href="#adding-your-own-commands"><span class="header-section-number">1.3.1</span> adding your own commands</a></h3>
+<h2 id="cb-commands"><span class="header-section-number">1.3</span> commands</h2>
+<h3 id="adding-your-own-commands"><span class="header-section-number">1.3.1</span> adding your own commands</h3>
 <p>To add a command, say <code>foo</code>, do this:</p>
 <ol style="list-style-type: decimal">
 <li><p>add this line in the rc file, within the <code>$RC</code> block, if it's not already present:</p>
 <pre><code>LOCAL_CODE =&gt; &quot;$ENV{HOME}/local&quot;,</code></pre></li>
 <li><p>copy the program <code>foo</code> into <code>$HOME/local/commands</code>. (Don't forget the <code>chmod +x</code>!)</p></li>
 </ol>
-<h3 id="making-commands-available-to-remote-users"><a href="#making-commands-available-to-remote-users"><span class="header-section-number">1.3.2</span> making commands available to remote users</a></h3>
+<h3 id="making-commands-available-to-remote-users"><span class="header-section-number">1.3.2</span> making commands available to remote users</h3>
 <p>Once you do the above, <code>foo</code> is available as <code>gitolite foo</code>. To make it available to remote users (as <code>ssh git@host foo</code>), add the line:</p>
 <pre><code>`foo`,</code></pre>
 <p>(including the comma at the end) to the ENABLE list in the rc file.</p>
-<h2 id="cb-hooks"><a href="#cb-hooks"><span class="header-section-number">1.4</span> hooks</a></h2>
+<h2 id="cb-hooks"><span class="header-section-number">1.4</span> hooks</h2>
 <p>The main documentation for this feature starts <a href="cust.html#hooks">here</a>.</p>
-<h3 id="adding-your-own-update-hooks"><a href="#adding-your-own-update-hooks"><span class="header-section-number">1.4.1</span> adding your own update hooks</a></h3>
+<h3 id="adding-your-own-update-hooks"><span class="header-section-number">1.4.1</span> adding your own update hooks</h3>
 <p>You have some update hooks (for example crlf checking) that you want to include in gitolite. Assuming the hook itself is tested and works as a normal <strong>git</strong> update hook does (i.e., conforms to what <code>man githooks</code> says an update hook should do), here's how to do this.</p>
 <ol style="list-style-type: decimal">
 <li><p>add this line in the rc file, within the <code>$RC</code> block, if it's not already present:</p>
@@ -155,7 +155,7 @@ chmod +x local/VREF/crlf</code></pre></li>
     -   VREF/crlf       =   @all</code></pre>
 <p>Either way, add/commit/push the change to the gitolite-admin repo.</p></li>
 </ol>
-<h3 id="adding-other-non-update-hooks"><a href="#adding-other-non-update-hooks"><span class="header-section-number">1.4.2</span> adding other (non-update) hooks</a></h3>
+<h3 id="adding-other-non-update-hooks"><span class="header-section-number">1.4.2</span> adding other (non-update) hooks</h3>
 <p>Say you want other hooks, like a post-receive hook. Here's how:</p>
 <ol style="list-style-type: decimal">
 <li><p>add this line in the rc file, within the <code>$RC</code> block, if it's not already present:</p>
@@ -168,7 +168,7 @@ cp your-post-receive-hook local/hooks/common/post-receive
 chmod +x local/hooks/common/post-receive</code></pre></li>
 <li><p>run <code>gitolite setup</code> to have the hooks propagate to existing repos (repos created after this will get them anyway).</p></li>
 </ol>
-<h3 id="variation-custom-hooks-only-for-some-repos"><a href="#variation-custom-hooks-only-for-some-repos"><span class="header-section-number">1.4.3</span> variation: custom hooks only for some repos</a></h3>
+<h3 id="variation-custom-hooks-only-for-some-repos"><span class="header-section-number">1.4.3</span> variation: custom hooks only for some repos</h3>
 <p>If the hook is an update hook, you implement it as a VREF, and simply change <code>repo @all</code> in step 3 in the update hook section above to <code>repo @repolist</code> or whatever.</p>
 <p>For the other hooks this is not possible. You have to either install the hooks <em>manually</em> on the repos you want them on, or -- better still -- you do something like this:</p>
 <ol style="list-style-type: decimal">
@@ -179,14 +179,14 @@ chmod +x local/hooks/common/post-receive</code></pre></li>
 gitolite list-memberships -r $GL_REPO | grep -x @foo &gt;/dev/null || exit 0</code></pre></li>
 <li><p>now add your hook as described in earlier steps</p></li>
 </ol>
-<h2 id="cb-vrefs"><a href="#cb-vrefs"><span class="header-section-number">1.5</span> VREFs</a></h2>
-<h3 id="adding-your-own-vrefs"><a href="#adding-your-own-vrefs"><span class="header-section-number">1.5.1</span> adding your own VREFs</a></h3>
+<h2 id="cb-vrefs"><span class="header-section-number">1.5</span> VREFs</h2>
+<h3 id="adding-your-own-vrefs"><span class="header-section-number">1.5.1</span> adding your own VREFs</h3>
 <p>Adding VREFs is the same as adding the update hook, so please see the section on &quot;adding your own update hooks&quot; above.</p>
-<h3 id="example-vrefs"><a href="#example-vrefs"><span class="header-section-number">1.5.2</span> example VREFs</a></h3>
+<h3 id="example-vrefs"><span class="header-section-number">1.5.2</span> example VREFs</h3>
 <p>However, <em>writing</em> a proper VREF is not the same as writing a normal git &quot;update hook&quot;. A proper VREF does more than just take 3 arguments, do something, and exit with a non-zero exit code for failure.</p>
 <p>A VREF is called with at least 4 more arguments after the 3 that git itself defines for an update hook, plus usually at least one or two more. It also returns a lot more meaningful results via STDOUT.</p>
 <p>Here are some examples. I also advise you to keep a browser tab open to the doc on <a href="vref.html#vref-args">VREF arguments</a> as you look at these.</p>
-<h4 id="example-1-restricting-by-day-of-week"><a href="#example-1-restricting-by-day-of-week"><span class="header-section-number">1.5.2.1</span> example 1: restricting by day of week</a></h4>
+<h4 id="example-1-restricting-by-day-of-week"><span class="header-section-number">1.5.2.1</span> example 1: restricting by day of week</h4>
 <p>Here's the conf extract to say &quot;junior devs can only push on weekdays&quot;:</p>
 <pre><code>repo foo
     -   VREF/DAY/Sat    =   @junior-devs
@@ -196,7 +196,7 @@ gitolite list-memberships -r $GL_REPO | grep -x @foo &gt;/dev/null || exit 0</co
 echo VREF/DAY/`date +%a`</code></pre>
 <p>On encountering the VREF rules (i.e., when a junior dev tries to access this repo), gitolite calls the &quot;DAY&quot; VREF-maker. The code within the VREF maker simply echoes something like &quot;VREF/DAY/Mon&quot;, where the last part is whatever the actual day of the week happens to be.</p>
 <p>This output is then treated as a virtual ref and matched against the rules. On a Monday to Friday, nothing happens, because the VREFs generated do not match any deny rules (or indeed any rules at all). On weekends, they do match, and the access is denied.</p>
-<h4 id="example-2-restricting-by-source-ip-address"><a href="#example-2-restricting-by-source-ip-address"><span class="header-section-number">1.5.2.2</span> example 2: restricting by source IP address</a></h4>
+<h4 id="example-2-restricting-by-source-ip-address"><span class="header-section-number">1.5.2.2</span> example 2: restricting by source IP address</h4>
 <p>This one restricts junior developers to access this repo only from a specific network block. The conf file here is slightly different. We know that the VREF-maker will return with <em>some</em> network address (as you'll see in the code later), so we set it up so that the correct network block is allowed and anything else is disallowed:</p>
 <pre><code>repo foo
     RW+ VREF/FROM/192.168.48.0/23   =   @junior-devs
@@ -217,8 +217,8 @@ echo VREF/FROM/$NETWORK/$9</code></pre>
 <p>For a source IP of 192.168.49.97, this runs <code>ipcalc -n 192.168.49.97/23</code>, which gives the network address 192.168.48.0. The echo then just sends back VREF/FROM/192.168.48.0/23. This VREF matches the RW+ line.</p>
 <p>But if the IP is, say, 192.168.45.67, running <code>ipcalc -n 192.168.45.67/23</code> gives you 192.168.44.0. The echo then send back VREF/FROM/192.18.44.0/23, which won't match the RW+ line, but will match the next one (remember the rules for <a href="refex.html">refex</a> matching?) and thus deny access.</p>
 <p>(One thing that may not be obvious in this specific example is that you have to be careful when constructing the VREF rule. For any VREF/FROM/A/B, the result of running <code>ipcalc -n A/B</code> must be A, otherwise this won't work. That is, the bits of the network address after the network bits must be zero).</p>
-<h2 id="cb-move"><a href="#cb-move"><span class="header-section-number">1.6</span> moving stuff around</a></h2>
-<h3 id="moving-a-gitolite-install-from-one-machine-to-another"><a href="#moving-a-gitolite-install-from-one-machine-to-another"><span class="header-section-number">1.6.1</span> moving a gitolite install from one machine to another</a></h3>
+<h2 id="cb-move"><span class="header-section-number">1.6</span> moving stuff around</h2>
+<h3 id="moving-a-gitolite-install-from-one-machine-to-another"><span class="header-section-number">1.6.1</span> moving a gitolite install from one machine to another</h3>
 <p>Assuming you're not making a version change, this is what you need to do:</p>
 <ul>
 <li><p>clone the latest gitolite-admin repo to your workstation</p></li>
