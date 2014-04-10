@@ -153,6 +153,17 @@
 <p>The syntax should be fairly obvious, but just to be clear, in this case a symlink called &quot;post-receive&quot; will be placed in foo.git/hooks, pointing to the executable called &quot;deploy&quot; in hooks/repo-specific in the local-code area.</p>
 <p><strong>WARNING</strong>: if the hook already exists, it is silently overwritten.</p>
 <p><strong>WARNING</strong>: once the hook is placed, you can't remove it through gitolite. That is, removing the option line won't do anything. You'll have to go to the server and remove it manually. (You could, as a simple work-around, create a &quot;no-op&quot; script that just does &quot;exit 0&quot;, and change the option line to point the hook to that, so it <em>effectively</em> gets deleted!).</p></li>
+<li><p>more recent versions of gitolite allow you to assign multiple targets for each hook. For example, you could say</p>
+<pre><code>repo    foo
+    option hook.post-receive    =   deploy mail-admins</code></pre>
+<p>where &quot;deploy&quot; and &quot;mail-admins&quot; are pieces of code that do whatever their names suggest, and both are, independently, candidates for being run from a post-receive hook.</p>
+<p>When you do this, gitolite does whatever is needed to run each of them as independent post-receive hooks (including sending them info over their STDIN as documented in 'man githooks').</p></li>
+<li><p>again, more recent versions of gitolite will allow you to change these hooks by saying:</p>
+<pre><code>repo    foo
+    option hook.post-receive    =   deploy mail-admins</code></pre>
+<p>or delete all of them by saying:</p>
+<pre><code>repo    foo
+    option hook.post-receive    =   &quot;&quot;</code></pre></li>
 </ul>
 <h3 id="sugar"><span class="header-section-number">1.3.3</span> syntactic sugar</h3>
 <p>Sugar scripts help you change the perceived syntax of the conf language. The base syntax of the language is very simple, so sugar scripts take something <em>else</em> and convert it into that.</p>
