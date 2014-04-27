@@ -111,7 +111,14 @@ repo foo
 </ul>
 <p>The <a href="refex.html">refex</a> field is ignored for this check. (Git does not support distinguishing one ref from another for access control during read operations).</p>
 <h4 id="deny-rules"><span class="header-section-number">1.2.1.1</span> read access respecting deny rules</h4>
-<p>Deny rules (the &quot;-&quot; permission) are ignored by default. In our example, line 3 does not prevent wally from cloning the repo, because line 4 permits it.</p>
+<p>When the ref is not known, deny rules (the &quot;-&quot; permission) are ignored by default. In our example, line 3 does not prevent wally from cloning the repo, because line 4 permits it.</p>
+<table><tr><td width="15%" class="box gray">
+
+<p><strong>TIP</strong></p>
+<p>When is the ref not known?</p>
+<p>It is not known for read access. For write access, the ref is not known during the &quot;pre-git&quot; access check, i.e., before we call git-receive-pack.</p>
+</td><td>
+
 <p>You can change that by using the <code>deny-rules</code> <a href="options.html">option</a>. If this option is active for a repo then this is the flow for access checking:</p>
 <ul>
 <li><p>go through the <a href="rules.html#rule-accum">accumulated</a> rule list for the repo in the sequence they appear in the conf file</p></li>
@@ -123,6 +130,8 @@ repo foo
 </ul></li>
 <li><p>If no rule ends with a decision, (&quot;fallthru&quot;), deny access</p></li>
 </ul>
+</td></tr></table>
+
 <p>Apart from the extra check for deny rules, there is another very subtle but important difference here: the order of the rules matters now, where previously it did not.</p>
 <p>Later in this document are a couple of <a href="rules.html#deny-rules-ex">examples</a> showing this option in use.</p>
 <h3 id="write-access----push"><span class="header-section-number">1.2.2</span> write access -- push</h3>

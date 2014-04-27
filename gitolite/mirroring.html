@@ -61,8 +61,8 @@
 <li><a href="#the-initial-setup-and-the-rc-filerc"><span class="toc-section-number">1.2.1</span> the initial setup and the <a href="rc.html">rc file</a></a></li>
 <li><a href="#conf-file-settings-and-syntax"><span class="toc-section-number">1.2.2</span> conf file settings and syntax</a></li>
 </ul></li>
-<li><a href="#redirected-pushes"><span class="toc-section-number">1.3</span> redirected pushes</a></li>
-<li><a href="#sync"><span class="toc-section-number">1.4</span> manually synchronising a slave repo</a></li>
+<li><a href="#sync"><span class="toc-section-number">1.3</span> manually synchronising a slave repo</a></li>
+<li><a href="#redirected-pushes"><span class="toc-section-number">1.4</span> redirected pushes</a></li>
 <li><a href="#HOSTNAME"><span class="toc-section-number">1.5</span> appendix A: HOSTNAME substitution</a></li>
 <li><a href="#appendix-b-efficiency-versus-paranoia"><span class="toc-section-number">1.6</span> appendix B: efficiency versus paranoia</a></li>
 <li><a href="#appendix-c-moving-the-admin-repo-to-a-different-master"><span class="toc-section-number">1.7</span> appendix C: moving the admin repo to a different master</a></li>
@@ -148,7 +148,20 @@ ssh phobos info
     option mirror.slaves-2   =   io europa
     option mirror.slaves-3   =   ganymede callisto</code></pre>
 <p>Do not repeat a key; then only the last line for that key will be effective.</p>
-<h2 id="redirected-pushes"><span class="header-section-number">1.3</span> redirected pushes</h2>
+<h4 id="v3.6-preventing-automatic-sync"><span class="header-section-number">1.2.2.1</span> <font class="gray">(v3.6+)</font> preventing automatic sync</h4>
+<p>Sometimes you don't want a repo to be mirrored automatically (as soon as someone pushes to the master) to all the slaves. For whatever reasons, you have some slaves for whom you would like to trigger the sync later (and you don't mind the fact that those slaves is out of sync until then).</p>
+<p>To make that happen, use option lines like this instead of those shown above:</p>
+<pre><code>    option mirror.slaves.nosync-1   =   phobos deimos</code></pre>
+<p>Except for the addition of a <code>.nosync</code> just after <code>slaves</code>, all the other rules are the same as before.</p>
+<h2 id="sync"><span class="header-section-number">1.3</span> manually synchronising a slave repo</h2>
+<p>You can use the <code>gitolite mirror push</code> command on a master to manually synchronise any of its slaves. Try it with <code>-h</code> to get usage info.</p>
+<p>Tip: if you want to do this to all the slaves, try this:</p>
+<pre><code>for s in `gitolite git-config -r reponame mirror.slave | cut -f3`
+do
+    gitolite mirror push $s reponame
+done</code></pre>
+<p>This command can also be run remotely; run <code>ssh git@host mirror -h</code> for details.</p>
+<h2 id="redirected-pushes"><span class="header-section-number">1.4</span> redirected pushes</h2>
 <p><strong>Please read carefully; there are security implications if you enable this for mirrors NOT under your control</strong>.</p>
 <p>Normally, a master, (and <em>only</em> a master), pushes to a slave, and the slaves are &quot;read-only&quot; to the users. Gitolite allows a <em>slave</em> to receive pushes from a user and transparently redirect them to the <em>master</em>.</p>
 <p>This simplifies things for users in complex setups, letting them use their local mirror for both fetch and push access to all repos.</p>
@@ -159,14 +172,6 @@ ssh phobos info
 option mirror.redirectOK    =   phobos deimos</code></pre>
 <p>The first syntax trusts all valid slaves to redirect user pushes, while the second one trusts only some slaves.</p>
 <p>Note that you cannot redirect gitolite commands (like perms, etc).</p>
-<h2 id="sync"><span class="header-section-number">1.4</span> manually synchronising a slave repo</h2>
-<p>You can use the <code>gitolite mirror push</code> command on a master to manually synchronise any of its slaves. Try it with <code>-h</code> to get usage info.</p>
-<p>Tip: if you want to do this to all the slaves, try this:</p>
-<pre><code>for s in `gitolite git-config -r reponame mirror.slave | cut -f3`
-do
-    gitolite mirror push $s reponame
-done</code></pre>
-<p>This command can also be run remotely; run <code>ssh git@host mirror -h</code> for details.</p>
 <h2 id="HOSTNAME"><span class="header-section-number">1.5</span> appendix A: HOSTNAME substitution</h2>
 <p>Wherever gitolite sees the word <code>%HOSTNAME</code>, it will replace it with the HOSTNAME supplied in the rc file, if one was supplied. This lets you maintain configurations for all servers in one repo, yet have them act differently on different servers, by saying something like:</p>
 <pre><code>subconf &quot;%HOSTNAME/*.conf&quot;</code></pre>

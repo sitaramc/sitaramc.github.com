@@ -758,7 +758,14 @@ repo foo
 </ul>
 <p>The <a href="#refex">refex</a> field is ignored for this check. (Git does not support distinguishing one ref from another for access control during read operations).</p>
 <h5 id="deny-rules"><span class="header-section-number">2.6.2.1.1</span> read access respecting deny rules</h5>
-<p>Deny rules (the &quot;-&quot; permission) are ignored by default. In our example, line 3 does not prevent wally from cloning the repo, because line 4 permits it.</p>
+<p>When the ref is not known, deny rules (the &quot;-&quot; permission) are ignored by default. In our example, line 3 does not prevent wally from cloning the repo, because line 4 permits it.</p>
+<table><tr><td width="15%" class="box gray">
+
+<p><strong>TIP</strong></p>
+<p>When is the ref not known?</p>
+<p>It is not known for read access. For write access, the ref is not known during the &quot;pre-git&quot; access check, i.e., before we call git-receive-pack.</p>
+</td><td>
+
 <p>You can change that by using the <code>deny-rules</code> <a href="#options">option</a>. If this option is active for a repo then this is the flow for access checking:</p>
 <ul>
 <li><p>go through the <a href="#rule-accum">accumulated</a> rule list for the repo in the sequence they appear in the conf file</p></li>
@@ -770,6 +777,8 @@ repo foo
 </ul></li>
 <li><p>If no rule ends with a decision, (&quot;fallthru&quot;), deny access</p></li>
 </ul>
+</td></tr></table>
+
 <p>Apart from the extra check for deny rules, there is another very subtle but important difference here: the order of the rules matters now, where previously it did not.</p>
 <p>Later in this document are a couple of <a href="#deny-rules-ex">examples</a> showing this option in use.</p>
 <h4 id="write-access----push"><span class="header-section-number">2.6.2.2</span> write access -- push</h4>
@@ -1261,7 +1270,20 @@ ssh phobos info
     option mirror.slaves-2   =   io europa
     option mirror.slaves-3   =   ganymede callisto</code></pre>
 <p>Do not repeat a key; then only the last line for that key will be effective.</p>
-<h3 id="redirected-pushes"><span class="header-section-number">4.2.3</span> redirected pushes</h3>
+<h5 id="v3.6-preventing-automatic-sync"><span class="header-section-number">4.2.2.2.1</span> <font class="gray">(v3.6+)</font> preventing automatic sync</h5>
+<p>Sometimes you don't want a repo to be mirrored automatically (as soon as someone pushes to the master) to all the slaves. For whatever reasons, you have some slaves for whom you would like to trigger the sync later (and you don't mind the fact that those slaves is out of sync until then).</p>
+<p>To make that happen, use option lines like this instead of those shown above:</p>
+<pre><code>    option mirror.slaves.nosync-1   =   phobos deimos</code></pre>
+<p>Except for the addition of a <code>.nosync</code> just after <code>slaves</code>, all the other rules are the same as before.</p>
+<h3 id="sync"><span class="header-section-number">4.2.3</span> manually synchronising a slave repo</h3>
+<p>You can use the <code>gitolite mirror push</code> command on a master to manually synchronise any of its slaves. Try it with <code>-h</code> to get usage info.</p>
+<p>Tip: if you want to do this to all the slaves, try this:</p>
+<pre><code>for s in `gitolite git-config -r reponame mirror.slave | cut -f3`
+do
+    gitolite mirror push $s reponame
+done</code></pre>
+<p>This command can also be run remotely; run <code>ssh git@host mirror -h</code> for details.</p>
+<h3 id="redirected-pushes"><span class="header-section-number">4.2.4</span> redirected pushes</h3>
 <p><strong>Please read carefully; there are security implications if you enable this for mirrors NOT under your control</strong>.</p>
 <p>Normally, a master, (and <em>only</em> a master), pushes to a slave, and the slaves are &quot;read-only&quot; to the users. Gitolite allows a <em>slave</em> to receive pushes from a user and transparently redirect them to the <em>master</em>.</p>
 <p>This simplifies things for users in complex setups, letting them use their local mirror for both fetch and push access to all repos.</p>
@@ -1272,14 +1294,6 @@ ssh phobos info
 option mirror.redirectOK    =   phobos deimos</code></pre>
 <p>The first syntax trusts all valid slaves to redirect user pushes, while the second one trusts only some slaves.</p>
 <p>Note that you cannot redirect gitolite commands (like perms, etc).</p>
-<h3 id="sync"><span class="header-section-number">4.2.4</span> manually synchronising a slave repo</h3>
-<p>You can use the <code>gitolite mirror push</code> command on a master to manually synchronise any of its slaves. Try it with <code>-h</code> to get usage info.</p>
-<p>Tip: if you want to do this to all the slaves, try this:</p>
-<pre><code>for s in `gitolite git-config -r reponame mirror.slave | cut -f3`
-do
-    gitolite mirror push $s reponame
-done</code></pre>
-<p>This command can also be run remotely; run <code>ssh git@host mirror -h</code> for details.</p>
 <h3 id="HOSTNAME"><span class="header-section-number">4.2.5</span> appendix A: HOSTNAME substitution</h3>
 <p>Wherever gitolite sees the word <code>%HOSTNAME</code>, it will replace it with the HOSTNAME supplied in the rc file, if one was supplied. This lets you maintain configurations for all servers in one repo, yet have them act differently on different servers, by saying something like:</p>
 <pre><code>subconf &quot;%HOSTNAME/*.conf&quot;</code></pre>
