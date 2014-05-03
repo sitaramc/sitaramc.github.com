@@ -91,8 +91,9 @@
 </ul>
 <h2 id="caveats"><span class="header-section-number">1.1</span> caveats</h2>
 <ul>
-<li><p>Mirroring will never <em>create</em> a repo on a slave; it has to exist and be prepared to receive updates from the master.</p>
-<p>However, there is limited support for auto-creating wild card repos and sending 'perms' info across, with the following caveats at present. (Some of this text won't make sense unless you know what those features are).</p>
+<li><p>Mirroring by itself will never <em>create</em> a repo on a slave; it has to exist and be prepared to receive updates from the master.</p>
+<p>The simplest way to ensure your repos exist on the slaves also is to mirror the special gitolite-admin repo as well, and this is what most sites do.</p></li>
+<li><p>There is limited support for auto-creating wild card repos and sending 'perms' info across, with the following caveats at present. (Some of this text won't make sense unless you know what those features are).</p>
 <ul>
 <li><p><em>WARNING: it does NOT make sense to mirror wild repos in setups where the authentication data is not the same (i.e., where &quot;alice&quot; on the master and &quot;alice&quot; on a slave maybe totally different people)</em>.</p></li>
 <li><p>This has only been minimally tested. For example, complex setups or asymmetric configs on master and slave, etc. have NOT been tested.</p></li>
@@ -148,7 +149,7 @@ ssh phobos info
     option mirror.slaves-2   =   io europa
     option mirror.slaves-3   =   ganymede callisto</code></pre>
 <p>Do not repeat a key; then only the last line for that key will be effective.</p>
-<h4 id="v3.6-preventing-automatic-sync"><span class="header-section-number">1.2.2.1</span> <font class="gray">(v3.6+)</font> preventing automatic sync</h4>
+<h4 id="v3.6-preventing-automatic-sync"><span class="header-section-number">1.2.2.1</span> <span class="gray">(v3.6+)</span> preventing automatic sync</h4>
 <p>Sometimes you don't want a repo to be mirrored automatically (as soon as someone pushes to the master) to all the slaves. For whatever reasons, you have some slaves for whom you would like to trigger the sync later (and you don't mind the fact that those slaves is out of sync until then).</p>
 <p>To make that happen, use option lines like this instead of those shown above:</p>
 <pre><code>    option mirror.slaves.nosync-1   =   phobos deimos</code></pre>
@@ -165,13 +166,17 @@ done</code></pre>
 <p><strong>Please read carefully; there are security implications if you enable this for mirrors NOT under your control</strong>.</p>
 <p>Normally, a master, (and <em>only</em> a master), pushes to a slave, and the slaves are &quot;read-only&quot; to the users. Gitolite allows a <em>slave</em> to receive pushes from a user and transparently redirect them to the <em>master</em>.</p>
 <p>This simplifies things for users in complex setups, letting them use their local mirror for both fetch and push access to all repos.</p>
-<p>Just remember that if you do this, <strong>authentication</strong> happens on the slave, but <strong>authorisation</strong> is on the master. The master is trusting the slave to authenticate the user correctly, <em>and</em> use the same authentication data (i.e., user alice on the slave should be guaranteed to be the same as user alice on the master).</p>
-<p>Please note that the part of the authorisation that happens before passing control to git-receive-pack (see the <a href="rules.html">access rules</a> page) will happen on the slave as well.</p>
 <p>The syntax for enabling this is one of these:</p>
 <pre><code>option mirror.redirectOK    =   all
 option mirror.redirectOK    =   phobos deimos</code></pre>
 <p>The first syntax trusts all valid slaves to redirect user pushes, while the second one trusts only some slaves.</p>
-<p>Note that you cannot redirect gitolite commands (like perms, etc).</p>
+<p><strong>IMPORTANT NOTES</strong></p>
+<ul>
+<li><p>This only works for ssh-based setups; you cannot use this feature in http mode.</p></li>
+<li><p><strong>Authentication</strong> happens on the slave, but <strong>authorisation</strong> is on the master. The master is trusting the slave to authenticate the user correctly, <em>and</em> use the same authentication data (i.e., user alice on the slave should be guaranteed to be the same as user alice on the master).</p></li>
+<li><p>The part of the authorisation that happens before passing control to git-receive-pack (see the <a href="rules.html">access rules</a> page) will happen on the slave as well.</p></li>
+<li><p>You cannot redirect gitolite commands (like perms, etc).</p></li>
+</ul>
 <h2 id="HOSTNAME"><span class="header-section-number">1.5</span> appendix A: HOSTNAME substitution</h2>
 <p>Wherever gitolite sees the word <code>%HOSTNAME</code>, it will replace it with the HOSTNAME supplied in the rc file, if one was supplied. This lets you maintain configurations for all servers in one repo, yet have them act differently on different servers, by saying something like:</p>
 <pre><code>subconf &quot;%HOSTNAME/*.conf&quot;</code></pre>

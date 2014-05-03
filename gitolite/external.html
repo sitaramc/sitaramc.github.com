@@ -53,7 +53,22 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
+<div id="TOC">
+<ul>
+<li><a href="#interfacing-with-external-tools"><span class="toc-section-number">1</span> interfacing with external tools</a><ul>
+<li><a href="#gitweb"><span class="toc-section-number">1.1</span> gitweb</a><ul>
+<li><a href="#umask"><span class="toc-section-number">1.1.1</span> changing the UMASK</a></li>
+<li><a href="#repo-specific-authorisation-in-gitweb"><span class="toc-section-number">1.1.2</span> repo-specific authorisation in gitweb</a></li>
+<li><a href="#protecting-gitolite-admin-from-gitweb"><span class="toc-section-number">1.1.3</span> protecting gitolite-admin from gitweb</a></li>
+</ul></li>
+<li><a href="#git-daemon"><span class="toc-section-number">1.2</span> git-daemon</a></li>
+<li><a href="#tips"><span class="toc-section-number">1.3</span> tips</a></li>
+</ul></li>
+</ul>
+</div>
 <h1 id="interfacing-with-external-tools"><span class="header-section-number">1</span> interfacing with external tools</h1>
+<!-- pandoc: toc -->
+
 <blockquote>
 <hr />
 </blockquote>
@@ -91,6 +106,8 @@ category    =   some category</code></pre></li>
 <p>Gitweb has a feature whereby it will call a (perl) function that you supply, passing it the full path to the repo being accessed. If the remote user is authenticated, the username will be available, so your function can take those two pieces of information and return true or false to allow or deny the repository access.</p>
 <p>If you want to use gitolite's access rules in making this determination, you will first have to ensure that the HTTP username (i.e., the username known to apache/gitweb) is the same as the gitolite username. If you're using gitolite's <a href="http.html">http</a> mode, this is probably already true, but if you're using the more widely used ssh mode, you'll have to make sure they match.</p>
 <p>You then need to add <a href="gitweb.conf.html">this code</a> to your gitweb.conf.</p>
+<h3 id="protecting-gitolite-admin-from-gitweb"><span class="header-section-number">1.1.3</span> protecting gitolite-admin from gitweb</h3>
+<p>There's an example that illustrates how to do this in the section that shows <a href="rules.html#deny-rules-ex">deny-rules option examples</a>.</p>
 <h2 id="git-daemon"><span class="header-section-number">1.2</span> git-daemon</h2>
 <p>Any repo readable by the special user <code>daemon</code> is deemed to be readable by git-daemon. For each of these repos, an empty file called <code>git-daemon-export-ok</code> is created in the repository (i.e., the <code>repo.git</code> directory inside <code>$HOME/repositories</code>).</p>
 <h2 id="tips"><span class="header-section-number">1.3</span> tips</h2>

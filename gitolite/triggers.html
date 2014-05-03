@@ -117,7 +117,7 @@
 <li><p>followed by zero or more arguments specific to the trigger, as given in the next section.</p></li>
 </ol>
 <h2 id="trigger-specific-arguments-and-other-details"><span class="header-section-number">1.5</span> trigger-specific arguments and other details</h2>
-<p>Here are the <strong>rest of</strong> the arguments for each trigger, plus a brief description of when the trigger runs:</p>
+<p>Here are the <strong>rest of</strong> the arguments for each trigger, plus a brief description of when the trigger runs. (Note that when the repo name is passed in as an argument, it is without the '.git' suffix).</p>
 <ul>
 <li><p><code>INPUT</code> runs before pretty much anything else. INPUT trigger scripts <em>must</em> be in perl, since they manipulate the arguments to and the environment of the 'gitolite-shell' program itself. Most commonly they will read/change <code>@ARGV</code>, and/or <code>$ENV{SSH_ORIGINAL_COMMAND}</code>.</p>
 <p>There are certain conventions to adhere to; please see some of the shipped samples or ask me if you need help writing your own.</p></li>

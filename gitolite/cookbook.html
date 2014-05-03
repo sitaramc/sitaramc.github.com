@@ -87,6 +87,7 @@
 
 <p>Documentation is meant to be as complete as possible, which means it attempts to cover all situations and scenarios. That makes it harder to read.</p>
 <p>However, if you make some assumptions, remove the rationale, justification, exceptions and special cases, etc., and generally just say <em>what</em> is to be done rather than explain <em>why</em>, many tasks can be described very easily.</p>
+<p>Or, if the main documentation already does that, a cookbook may help you find it faster, simply because it's organised differently.</p>
 <p>Maybe this will help. If you run into problems, please check the main documentation before asking for help. In particular, the <a href="basic.html">basic</a> and <a href="advanced.html">advanced</a> graphical overviews of the documentation may be useful.</p>
 <hr />
 <h2 id="cb-admin"><span class="header-section-number">1.1</span> administration</h2>
@@ -221,13 +222,6 @@ echo VREF/FROM/$NETWORK/$9</code></pre>
 <p>(One thing that may not be obvious in this specific example is that you have to be careful when constructing the VREF rule. For any VREF/FROM/A/B, the result of running <code>ipcalc -n A/B</code> must be A, otherwise this won't work. That is, the bits of the network address after the network bits must be zero).</p>
 <h2 id="cb-move"><span class="header-section-number">1.6</span> moving stuff around</h2>
 <h3 id="moving-a-gitolite-install-from-one-machine-to-another"><span class="header-section-number">1.6.1</span> moving a gitolite install from one machine to another</h3>
-<p>Assuming you're not making a version change, this is what you need to do:</p>
-<ul>
-<li><p>clone the latest gitolite-admin repo to your workstation</p></li>
-<li><p>install gitolite normally on the new machine, using the same public key <em>and</em> name for the admin as on the old machine when running the <code>gitolite     setup -pk</code> command.</p></li>
-<li><p>copy over your <code>~/.gitolite.rc</code> file from the old machine to the new</p></li>
-<li><p>run <code>gitolite setup</code> (on the server)</p></li>
-<li><p>go to the gitolite-admin clone you made in step 1, add or change the remote to point to the new machine, and <code>git push -f</code></p></li>
-</ul>
+<p>See <a href="rare.html#moving">moving servers</a>.</p>
 </body>
 </html>

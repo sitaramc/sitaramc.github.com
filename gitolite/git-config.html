@@ -61,7 +61,7 @@
 </ul></li>
 <li><a href="#substituting-the-repo-name-and-the-creator-name"><span class="toc-section-number">1.2</span> substituting the repo name and the creator name</a></li>
 <li><a href="#override_conf"><span class="toc-section-number">1.3</span> overriding config values</a></li>
-<li><a href="#compensating-for-unsafe_patt"><span class="toc-section-number">1.4</span> compensating for <code>UNSAFE_PATT</code></a></li>
+<li><a href="#unsafe-patt"><span class="toc-section-number">1.4</span> compensating for UNSAFE_PATT</a></li>
 </ul></li>
 </ul>
 </div>
@@ -117,7 +117,7 @@ repo customer-project
     config hooks.mailinglist = &quot;&quot;
     config hooks.emailprefix = &quot;&quot;</code></pre>
 <p>As you can see, the general idea is to place the most generic ones (<code>repo @all</code>, or repo patterns like <code>repo foo.*</code>) first, and place more specific ones later to override the generic settings.</p>
-<h2 id="compensating-for-unsafe_patt"><span class="header-section-number">1.4</span> compensating for <code>UNSAFE_PATT</code></h2>
+<h2 id="unsafe-patt"><span class="header-section-number">1.4</span> compensating for UNSAFE_PATT</h2>
 <p>Gitolite, by default, does not allow the following characters in the value of a config variable: <code>` ~ # $ &amp; ( ) | ; &lt; &gt;</code>. This is due to unspecified paranoia (and arguably only applies if your gitolite admin folks do not, and should not, have shell access to the server); see <a href="https://groups.google.com/d/topic/gitolite/9WNsA-Axmg4/discussion">this discussion</a> for some context. This restriction is enforced by a regex called <code>UNSAFE_PATT</code>, whose default value is <code>[`~#\$\&amp;()|;&lt;&gt;]</code>.</p>
 <p>You can override this by placing a modified version in the rc file. For example, if you wanted to allow this (which contais a semicolon):</p>
 <pre><code>config hooks.showrev = &quot;git show -C %s; echo&quot;</code></pre>
@@ -127,13 +127,23 @@ repo customer-project
 <p>Here's a better way:</p>
 <ul>
 <li><p>in the rc file, add the following within the '%RC' hash (for example, just after the UMASK line would do fine):</p>
-<pre><code>SAFE_CONFIG                 =&gt;
-    {
-        SHOWREV             =&gt;  &quot;git show -C %s; echo&quot;
-    },</code></pre></li>
+<pre><code>SAFE_CONFIG =&gt; {
+    SHOWREV         =&gt;  &quot;git show -C %s; echo&quot;
+},</code></pre></li>
 <li><p>in your gitolite.conf file, add this instead of the line we saw earlier:</p>
 <pre><code>config hooks.showrev = %SHOWREV</code></pre></li>
 </ul>
 <p>This mechanism allows you to add any number of <strong>specific</strong> violations to the <code>UNSAFE_PATT</code> rule instead of denaturing the pattern itself and potentially allowing something that could be used by a repo admin to obtain shell access at some later point in time.</p>
+<p>A similar problem arises with email addresses, which contain the <code>&lt;</code> and <code>&gt;</code> characters. Here's how to deal with that easily:</p>
+<ul>
+<li><p>in the rc file:</p>
+<pre><code>SAFE_CONFIG =&gt; {
+    LT              =&gt;  '&lt;',
+    GT              =&gt;  '&gt;',
+},</code></pre></li>
+<li><p>in the gitolite.conf file:</p>
+<pre><code>config hooks.mailinglist = &quot;Sitaram Chamarty %LTsitaramc@gmail.com%GT&quot;</code></pre></li>
+</ul>
+<p>Admittedly, that looks a wee bit ugly, but it gets the job done without having to remove angle brackets from UNSAFE_PATT.</p>
 </body>
 </html>

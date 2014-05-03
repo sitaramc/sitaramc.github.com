@@ -60,6 +60,7 @@
 <li><a href="#how-are-the-rules-checked"><span class="toc-section-number">1.2</span> how are the rules checked</a><ul>
 <li><a href="#read-access----clone-fetch-archive"><span class="toc-section-number">1.2.1</span> read access -- clone, fetch, archive</a></li>
 <li><a href="#write-access----push"><span class="toc-section-number">1.2.2</span> write access -- push</a></li>
+<li><a href="#rule-info"><span class="toc-section-number">1.2.3</span> <span class="gray">(v3.6+)</span> tracing rule flow (debugging rules)</a></li>
 </ul></li>
 <li><a href="#permsum"><span class="toc-section-number">1.3</span> summary of permissions</a></li>
 <li><a href="#additional-topics"><span class="toc-section-number">1.4</span> additional topics</a><ul>
@@ -152,6 +153,9 @@ repo foo
 <li><p>If no rule ends with a decision, (&quot;fallthru&quot;), deny access</p></li>
 </ul>
 <p>Now all you need is to understand how <a href="refex.html">refex</a> matching happens and how the permissions match the various <a href="write-types.html">types of write operations</a>.</p>
+<h3 id="rule-info"><span class="header-section-number">1.2.3</span> <span class="gray">(v3.6+)</span> tracing rule flow (debugging rules)</h3>
+<p>If you've tried reading all this and still have trouble with rules, you can use the 'gitolite access' command (directly on the server) to help.</p>
+<p>The access command's '-s' option helps debug rule flow. Like all gitolite commands, it responds to a single argument of '-h' with a reasonably detailed usage message if you need some more details.</p>
 <h2 id="permsum"><span class="header-section-number">1.3</span> summary of permissions</h2>
 <p>The full set of permissions, in regex syntax, is <code>-|R|RW+?C?D?M?</code>. This expands to one of <code>-</code>, <code>R</code>, <code>RW</code>, <code>RW+</code>, <code>RWC</code>, <code>RW+C</code>, <code>RWD</code>, <code>RW+D</code>, <code>RWCD</code>, or <code>RW+CD</code>, all but the first two optionally followed by an <code>M</code>. And by now you know what they all mean.</p>
 <h2 id="additional-topics"><span class="header-section-number">1.4</span> additional topics</h2>
@@ -201,7 +205,7 @@ repo foo
 <p>This is what we meant by &quot;repo, or a group that it is a member of, or a (<a href="wild.html">wild</a> repo) pattern that matches it, or a group that contains a pattern that matches it&quot;, up at the top of this document.</p>
 <h3 id="deny-rules-ex"><span class="header-section-number">1.4.2</span> examples of deny rules</h3>
 <p><strong>example 1</strong></p>
-<pre><code> 1  @secret = secret/one secret/two [...]
+<pre><code> 1  @secret = gitolite-admin secret-repo/one secret-repo/two [...]
 
  2  # put this at or near the top of the conf file, or at least before any
  3  # rules that give 'gitweb' and 'daemon' any kind of access
@@ -214,7 +218,7 @@ repo foo
  9      R   =   gitweb daemon
 
 10  &lt;...other rules...&gt;</code></pre>
-<p>In this example, we have lots of repos, which should all be accessible by gitweb or daemon, so we want the convenience provided by lines 8 and 9 (we don't want to put line 9 in <em>each</em> repo). However, we also have some secret repos, which we are able to list explicitly in some way, and we want to prevent gitweb or daemon from seeing them.</p>
+<p>In this example, we have lots of repos, which should all be accessible by gitweb or daemon, so we want the convenience provided by lines 8 and 9 (we don't want to put line 9 in <em>each</em> repo). However, we also have some secret repos (maybe the gitolite-admin repo and some others), which we want to prevent gitweb or daemon from seeing, and which we are able to list explicitly in some way.</p>
 <p>Therefore we apply the &quot;deny-rules&quot; option to just those repos, and ensure that the first rule encountered by these two &quot;users&quot; for those repos is a deny rule. This makes gitolite deny read access to those users for those repos.</p>
 <p><strong>example 2</strong></p>
 <p>In this example the &quot;open&quot; repos are fewer in number, so it is the opposite situation to the above in terms of our ability to enumerate all the repos.</p>

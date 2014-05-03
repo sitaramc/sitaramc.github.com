@@ -53,7 +53,17 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
+<div id="TOC">
+<ul>
+<li><a href="#rare-or-one-time-activities"><span class="toc-section-number">1</span> rare or one-time activities</a><ul>
+<li><a href="#existing"><span class="toc-section-number">1.1</span> moving existing repos into gitolite</a></li>
+<li><a href="#moving"><span class="toc-section-number">1.2</span> moving servers</a></li>
+</ul></li>
+</ul>
+</div>
 <h1 id="rare-or-one-time-activities"><span class="header-section-number">1</span> rare or one-time activities</h1>
+<!-- pandoc: toc -->
+
 <h2 id="existing"><span class="header-section-number">1.1</span> moving existing repos into gitolite</h2>
 <p><strong>WARNINGS</strong></p>
 <ul>
@@ -83,12 +93,13 @@
 <p>This is adapted from the &quot;migrating&quot; section of the <a href="install.html">install</a> page; if you're actually <em>migrating</em> from g2 please go there!</p>
 <p>Nothing in any of the gitolite install/setup/etc will ever touch the <em>data</em> in any repository except the gitolite-admin repo. The only thing it will normally touch is the <code>update</code> hook. So one fool-proof way of &quot;moving&quot; servers is this (untested but should work; feedback appreciated):</p>
 <ol style="list-style-type: decimal">
+<li><p>Clone the latest gitolite-admin repo from the old server to your workstation.</p></li>
 <li><p>Install gitolite on the new server, using the same key for the admin as for the old server.</p></li>
 <li><p>Copy the <a href="rc.html">rc</a> file from the old server, overwriting this one.</p></li>
 <li><p><a href="special.html#writable">Disable</a> the old server so people won't push to it.</p></li>
 <li><p>Copy all the repos over from the old server, including gitolite-admin. Make sure the files end up with the right ownership and permissions; if not, chown/chmod them.</p></li>
 <li><p>Run <code>gitolite setup</code>.</p></li>
-<li><p>On a clone of the old gitolite-admin, add a new remote (or change an existing one) to point to the new server. Then <code>git push -f</code> to this remote.</p></li>
+<li><p>Go to the clone you made in step 1, add a new remote (or change an existing one) to point to the new server, then <code>git push -f</code> to it.</p></li>
 </ol>
 </body>
 </html>
