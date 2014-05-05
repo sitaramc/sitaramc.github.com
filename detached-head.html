@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>detached HEAD explained</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -46,11 +46,13 @@
 |
     <a href="license.html">license</a>
 </p>
-<h1 id="detached-head-explained" class="unnumbered">detached HEAD explained</h1>
+<div id="header">
+<h1 class="title">detached HEAD explained</h1>
+</div>
 <p>Git has something called a 'detached HEAD' that bears some explanation. You are told 'do not commit on a detached HEAD', and it is not always clear what or why this is.</p>
 <hr />
 <p><font color="red">This document is here for historical reasons, and because it provides a nice analogy. However, <a href="gcs.html">git concepts simplified</a> should be a much nicer read for most people. It has a lot of nice pictures, and it also touches upon many other issues, not just on detached HEADs.</font></p>
-<h2 id="the-analogy" class="unnumbered">the analogy</h2>
+<h1 id="the-analogy"><span class="header-section-number">1</span> the analogy</h1>
 <p>Forget git for a bit and think about linked lists from your data structures course. Specifically, consider a <em>singly linked</em> list, where each node is created as a &quot;child&quot; of some existing node, and contains a link to that &quot;parent&quot; node. <font color="gray">The words &quot;child&quot; and &quot;parent&quot; are chosen to be similar to git's nomenclature for the relationship between a commit and its predecessor commit(s).</font></p>
 <p>As with any list, you have a pointer to the node at the top of the list (we'll call this pointer <code>list_top</code>). This would be the most recently created node, and so there's a chain of &quot;parent&quot; links that can take you all the way to the first node created.</p>
 <p>And you know how to add a new node to this linked list. In pseudo-code:</p>
@@ -73,7 +75,7 @@ temp2.parent = temp;        // fill in the backlink
 temp = temp2;               // move list head to new node</code></pre>
 <p>This is the same code as before, except temp has taken the place of <code>list_top</code> this time.</p>
 <p>But 'temp' is a temporary variable, and unless you somehow save its value into some 'global' (or 'static') variable, you risk losing that commit you just made, oops, I mean the new node you added to the linked list :-)</p>
-<h2 id="reality-check" class="unnumbered">reality check</h2>
+<h1 id="reality-check"><span class="header-section-number">2</span> reality check</h1>
 <p>A previous version of this article took the analogy too far into git territory, and I did not realise how many facts about git I had passed over/simplified until an extended review on irc by <em>doener</em> and <em>jsquared</em>.</p>
 <p>So we'll <em>git real</em>, if you'll pardon the weak pun, and get on with understanding a 'detached HEAD'.</p>
 <p>In git, commits always go on top of HEAD. In terms of our linked list analogy, they 'insert a new commit at HEAD'.</p>
@@ -86,12 +88,12 @@ git checkout HEAD~2         # grandparent of current HEAD
 git checkout origin/master  # a non-local branch
 git checkout tagname        # since you cant commit to a tag!</code></pre>
 <p>These will all make <code>.git/HEAD</code> contain the actual (40-hex-digit) hash of the corresponding commit instead of some string like <code>ref: refs/heads/branch</code>.</p>
-<h3 id="re-attaching-the-head" class="unnumbered">re-attaching the HEAD</h3>
+<h2 id="re-attaching-the-head"><span class="header-section-number">2.1</span> re-attaching the HEAD</h2>
 <p>If you made the classic error of checking out a remote branch (like <code>git checkout origin/master</code>) and making a few commits on it before realising something was wrong, you can recover quite easily:</p>
 <pre><code>git checkout -b newbranch
 # or, in 2 steps: git branch newbranch; git checkout newbranch</code></pre>
 <p>To go back to the linked list analogy way up there, you just created a new 'global' variable to save off the value of 'temp' before some other operation overwrote it.</p>
-<h3 id="auld-lang-syne" class="unnumbered">Auld Lang Syne</h3>
+<h2 id="auld-lang-syne"><span class="header-section-number">2.2</span> Auld Lang Syne</h2>
 <p>What if you didn't realise this, and -- after making those commits -- blithely switched to another branch:</p>
 <pre><code>git checkout someoldbranch</code></pre>
 <p>HEAD is now a symbolic reference to 'someoldbranch', and its previous value (the SHA-1 representing the top commit you made on the detached HEAD) has now been overwritten.</p>
@@ -117,7 +119,7 @@ c55900c... HEAD@{23 minutes ago}: commit (amend): 0-terminology: the malloc anal
 <pre><code>git branch thank_God_its_safe 7fdae94
 # like 'thank_God_its_safe = 0x7fdae94815d6c676742c9984132b7b9e71a57f98'
 git checkout thank_God_its_safe</code></pre>
-<h3 id="reality-check----conclusion" class="unnumbered">reality check -- conclusion</h3>
+<h2 id="reality-check----conclusion"><span class="header-section-number">2.3</span> reality check -- conclusion</h2>
 <p>There are a few other points that don't fit the simple 'linked list' analogy, or present some additional information that may be useful:</p>
 <ul>
 <li><p>a commit 'tree' is really more of a graph. A 'directed acyclic graph', to be precise.</p></li>
@@ -126,7 +128,7 @@ git checkout thank_God_its_safe</code></pre>
 <li><p>apart from the reflog for HEAD, git also stores a reflog for each local branch (recording commits, rebases, merges, and so on) and each remote branch (recording pulls/fetches mainly). The HEAD reflog is effectively a superset of the reflogs of all the local branches, with some extra detail (like individual steps within a rebase, for instance).</p></li>
 </ul>
 <hr />
-<h3 id="footnotes" class="unnumbered">footnotes</h3>
+<h2 id="footnotes"><span class="header-section-number">2.4</span> footnotes</h2>
 <p><a name="fn"><sup>[1] Curiously, <code>git checkout master^0</code> also gets you a detached HEAD. The command actually says &quot;switch to the commit that master currently points to&quot;. Now you'd think, since 'master' and 'HEAD' are currently pointing at the same commit, it shouldn't be a detached HEAD, but the point is not that they happen to be pointing to the same commit. The point is that HEAD is no longer a symbolic ref (containing something like <code>ref: refs/heads/master</code>) and instead contains an explicit SHA-1 in it.</sup></p>
 </body>
 </html>

@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>the missing gitk documentation</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -46,25 +46,23 @@
 |
     <a href="license.html">license</a>
 </p>
+<div id="header">
+<h1 class="title">the missing gitk documentation</h1>
+</div>
 <div id="TOC">
 <ul>
-<li><a href="#the-missing-gitk-documentation"><span class="toc-section-number">1</span> the missing gitk documentation</a><ul>
-<li><a href="#colors-and-bold"><span class="toc-section-number">1.1</span> colors and bold</a></li>
-<li><a href="#repository-operations"><span class="toc-section-number">1.2</span> repository operations</a></li>
-<li><a href="#the-main-menu"><span class="toc-section-number">1.3</span> the main menu</a></li>
-<li><a href="#browsing-the-commit-list-top-pane"><span class="toc-section-number">1.4</span> browsing the commit list (top pane)</a></li>
-<li><a href="#browsing-the-diff"><span class="toc-section-number">1.5</span> browsing the diff</a><ul>
-<li><a href="#running-a-diff-between-two-arbitrary-commits"><span class="toc-section-number">1.5.1</span> running a diff between two arbitrary commits</a></li>
+<li><a href="#colors-and-bold"><span class="toc-section-number">1</span> colors and bold</a></li>
+<li><a href="#repository-operations"><span class="toc-section-number">2</span> repository operations</a></li>
+<li><a href="#the-main-menu"><span class="toc-section-number">3</span> the main menu</a></li>
+<li><a href="#browsing-the-commit-list-top-pane"><span class="toc-section-number">4</span> browsing the commit list (top pane)</a></li>
+<li><a href="#browsing-the-diff"><span class="toc-section-number">5</span> browsing the diff</a><ul>
+<li><a href="#running-a-diff-between-two-arbitrary-commits"><span class="toc-section-number">5.1</span> running a diff between two arbitrary commits</a></li>
 </ul></li>
-<li><a href="#searching-for-commits"><span class="toc-section-number">1.6</span> searching for commits</a></li>
-<li><a href="#navigating-the-commit-tree"><span class="toc-section-number">1.7</span> navigating the commit tree</a></li>
-<li><a href="#some-other-tricks"><span class="toc-section-number">1.8</span> some other tricks</a></li>
-</ul></li>
+<li><a href="#searching-for-commits"><span class="toc-section-number">6</span> searching for commits</a></li>
+<li><a href="#navigating-the-commit-tree"><span class="toc-section-number">7</span> navigating the commit tree</a></li>
+<li><a href="#some-other-tricks"><span class="toc-section-number">8</span> some other tricks</a></li>
 </ul>
 </div>
-<h1 id="the-missing-gitk-documentation"><a href="#the-missing-gitk-documentation"><span class="header-section-number">1</span> the missing gitk documentation</a></h1>
-<!-- pandoc: toc -->
-
 <p><code>gitk</code> is a very powerful GUI tool. It's one of those rare beasts where the pretty stuff is not just a crutch for the command-line-ignorant -- it actually does really useful things that just cannot be done in a CLI.</p>
 <p>Sadly, it is woefully undocumented. Scratch that, it's almost <em>completely</em> undocumented.</p>
 <p>This is my attempt to do something about that. Strictly speaking, you can explore the UI and find all these features yourself, and indeed, if you find any that are not listed here, please <script type="text/javascript">
@@ -73,7 +71,7 @@ h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x73;&#x
 document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'email me'+'<\/'+'a'+'>');
 // -->
 </script><noscript>email me (sitaramc at gmail dot com)</noscript>.</p>
-<h2 id="colors-and-bold"><a href="#colors-and-bold"><span class="header-section-number">1.1</span> colors and bold</a></h2>
+<h1 id="colors-and-bold"><span class="header-section-number">1</span> colors and bold</h1>
 <ul>
 <li>local branch names are in a green background</li>
 <li>remote branch names are in a mixed orange/green background</li>
@@ -82,7 +80,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'email me'+'<\/'+'a'+'>');
 <li>a yellow dot marks the current HEAD</li>
 <li>a yellow square marks commits which have &quot;notes&quot; ('man git-notes' for what that means)</li>
 </ul>
-<h2 id="repository-operations"><a href="#repository-operations"><span class="header-section-number">1.2</span> repository operations</a></h2>
+<h1 id="repository-operations"><span class="header-section-number">2</span> repository operations</h1>
 <p>All these are from the commit list (the top pane):</p>
 <ul>
 <li>right clicking on a commit message
@@ -98,21 +96,21 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'email me'+'<\/'+'a'+'>');
 <li>remove the branch</li>
 </ul></li>
 </ul>
-<h2 id="the-main-menu"><a href="#the-main-menu"><span class="header-section-number">1.3</span> the main menu</a></h2>
+<h1 id="the-main-menu"><span class="header-section-number">3</span> the main menu</h1>
 <ul>
 <li><p>reload: if you're doing stuff on the command line in another screen, and want those changes reflected in gitk, hit <code>F5</code>.</p>
 <p><code>F5</code> updates the refs and shows you their new values <em>while still showing you the old ones</em>. It is most useful after operations like rebase, because you can compare the previous branch head with the new one.</p>
 <p>(<code>Ctrl-F5</code>, on the other hand, is a total refresh, throwing away everything that was previously shown.)</p></li>
 <li><p>list/choose references: to quickly go to a particular reference, hit <code>F2</code>. If there are too many, you can specify a glob pattern in the box at the bottom to subset the list. Clicking on a reference takes the main window to that reference. The list window will stay open so you can click on other refs.</p></li>
 </ul>
-<h2 id="browsing-the-commit-list-top-pane"><a href="#browsing-the-commit-list-top-pane"><span class="header-section-number">1.4</span> browsing the commit list (top pane)</a></h2>
+<h1 id="browsing-the-commit-list-top-pane"><span class="header-section-number">4</span> browsing the commit list (top pane)</h1>
 <p>Many of these functions also have character key bindings. For example &quot;n&quot; acts the same as a &quot;down arrow&quot;. I'm not listing those; if you need them, look in the source code for a series of <code>bindkey</code> statements and match them up with the others. It's not hard, and you don't need to know Tcl. (I don't).</p>
 <ul>
 <li>up/down arrow keys, pageup/down: obvious</li>
 <li>left/right arrow keys: previous/next commit in browse history (think web browser's back/forward)</li>
 <li>shift-up/down: find previous/next match (see <a href="#sfc">searching for commits</a> below)</li>
 </ul>
-<h2 id="browsing-the-diff"><a href="#browsing-the-diff"><span class="header-section-number">1.5</span> browsing the diff</a></h2>
+<h1 id="browsing-the-diff"><span class="header-section-number">5</span> browsing the diff</h1>
 <p>At any time, the bottom left pane shows a &quot;diff&quot;, usually of the current commit shown in the top pane. The bottom right pane (by default) shows a list of files in this &quot;diff&quot;.</p>
 <p><a name="bcpc"></p>
 <ul>
@@ -122,7 +120,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'email me'+'<\/'+'a'+'>');
 <li>&quot;b&quot;: ditto, but previous file</li>
 <li>click a file in the bottom right pane: scrolls the left pane to show that file's changes</li>
 </ul>
-<h3 id="running-a-diff-between-two-arbitrary-commits"><a href="#running-a-diff-between-two-arbitrary-commits"><span class="header-section-number">1.5.1</span> running a diff between two arbitrary commits</a></h3>
+<h2 id="running-a-diff-between-two-arbitrary-commits"><span class="header-section-number">5.1</span> running a diff between two arbitrary commits</h2>
 <ul>
 <li>left click on the &quot;new&quot; commit</li>
 <li>navigate using the scrollbar (no keyboard shortcut, AFAICT) to some other commit</li>
@@ -130,7 +128,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'email me'+'<\/'+'a'+'>');
 </ul>
 <p>Now you can browse that diff using the keyboard or mouse. Note that any movement that selects a different commit (like pressing an arrow key) will change the view to show that commit, so while examining this &quot;diff&quot;, stick to <a href="#bcpc">these keys</a>.</p>
 <p><a name="sfc"></p>
-<h2 id="searching-for-commits"><a href="#searching-for-commits"><span class="header-section-number">1.6</span> searching for commits</a></h2>
+<h1 id="searching-for-commits"><span class="header-section-number">6</span> searching for commits</h1>
 <p>Here're some ways to search for commits. The commits that result will become highlighted in bold, so you can see them in the context of their surrounding changes. You can navigate between matches using the shift-up/down-arrow keys.</p>
 <p>There is a widget to the left of the search box that controls what type of search you do. By default it is set to &quot;containing:&quot;, which searches the commit message.</p>
 <ul>
@@ -140,7 +138,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'email me'+'<\/'+'a'+'>');
 <li><p>searching by changed text: set the search type widget to &quot;adding/removing string:&quot;, then type in a search text.</p></li>
 </ul>
 <p>Now that you've understood that widget, take a look at the others on the right also; they're fairly self-explanatory. Note that the last widget (All fields, Headlines, Comments, Author, Committer) is only valid when the type of search widget shows &quot;containing:&quot;.</p>
-<h2 id="navigating-the-commit-tree"><a href="#navigating-the-commit-tree"><span class="header-section-number">1.7</span> navigating the commit tree</a></h2>
+<h1 id="navigating-the-commit-tree"><span class="header-section-number">7</span> navigating the commit tree</h1>
 <p>There are several ways to navigate the tree quickly.</p>
 <ul>
 <li><p>the diff pane always shows all the parents and children of the current commit. Click on any of the hashes to go there. Some of the text from the commit message of those hashes is also shown, to give you an idea of what that is.</p></li>
@@ -149,7 +147,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'email me'+'<\/'+'a'+'>');
 <li><p>as above, but if you click on the <em>arrowhead</em>, you will be taken to the portion of the tree where the other end of the arrowhead would go to. Your &quot;current&quot; commit is still the same; this is just a way of &quot;connecting&quot; two pieces of the graph that are otherwise too far away.</p></li>
 <li><p>&quot;Follows:&quot; and &quot;Precedes:&quot; show the nearest tag before and after the commit for each branch that the commit is a part of. For example, if you find the commit for a bugfix or a feature you want, this will tell you the minimum version you should upgrade to.</p></li>
 </ul>
-<h2 id="some-other-tricks"><a href="#some-other-tricks"><span class="header-section-number">1.8</span> some other tricks</a></h2>
+<h1 id="some-other-tricks"><span class="header-section-number">8</span> some other tricks</h1>
 <ul>
 <li><p>expand the diff view by using the spin control that says &quot;Lines of context&quot;; the default value is 3.</p></li>
 <li><p>find the &quot;origin&quot; of any line visible in the &quot;diff&quot; pane by right clicking and choosing &quot;Show origin of this line&quot;. This does not make sense for lines prefixed by a plus sign of course.</p></li>

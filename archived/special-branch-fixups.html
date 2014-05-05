@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>fixing-up common and customer branches</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -46,24 +46,26 @@
 |
     <a href="license.html">license</a>
 </p>
-<h1 id="fixing-up-common-and-customer-branches"><span class="header-section-number">1</span> fixing-up common and customer branches</h1>
+<div id="header">
+<h1 class="title">fixing-up common and customer branches</h1>
+</div>
 <p>The following document explains how to maintain a 'common' branch, with one or more 'customer specific' branches that hang off of the common branch. The inspiration was a question about maintaining 'work' and 'home' configurations which differ slightly from a 'common' configuration, which leads to the same sort of problem.</p>
 <p>In an ideal world, you'd keep 'common' development in the 'common' branch, and 'customer specific' development in the corresponding customer branches. In the real world, often the separation was not done properly in advance, (maybe it was not known, or maybe for initial testing reasons it had to be done in one branch, or whatever), and so you now have a mix of 'common' and 'special' changes all together.</p>
 <p><strong>This article describes one way to 'fix up' such a mixed development into the proper form</strong>.</p>
-<h2 id="the-basic-rules"><span class="header-section-number">1.1</span> The basic rules</h2>
+<h1 id="the-basic-rules"><span class="header-section-number">1</span> The basic rules</h1>
 <p>The basic rules are best described by Junio in <a href="http://permalink.gmane.org/gmane.comp.version-control.git/110489">http://permalink.gmane.org/gmane.comp.version-control.git/110489</a></p>
 <ul>
 <li>You make edits to common files only on the common branch.</li>
 <li>You merge from common to deployment, never the other way.</li>
 </ul>
 <p>This document shows how one might do that. [Junio also helped with comments on a previous draft of this text. However, any errors or other problems that remain are mine.]</p>
-<h2 id="terminology"><span class="header-section-number">1.2</span> Terminology</h2>
+<h1 id="terminology"><span class="header-section-number">2</span> Terminology</h1>
 <p>We use the following terminology:</p>
 <p>'common' is the branch representing the base product. All regular customers get this version.</p>
 <p>'special' is a branch for a specific customer. This customer needs changes unique to his environment, which should not be merged back into the common branch. However, this branch must regularly get the benefit of changes in the mainline 'common' branch. (This is the genesis of the two rules above).</p>
 <p>If you have more than one special customer the same logic will apply for each of them separately, although if you have too many such customers you may also want to look at <a href="http://gitster.livejournal.com/26540.html">Never merging back</a> for an additional tip on this.</p>
-<h2 id="the-nitty-gritty"><span class="header-section-number">1.3</span> The nitty gritty</h2>
-<h3 id="before-you-start"><span class="header-section-number">1.3.1</span> Before you start</h3>
+<h1 id="the-nitty-gritty"><span class="header-section-number">3</span> The nitty gritty</h1>
+<h2 id="before-you-start"><span class="header-section-number">3.1</span> Before you start</h2>
 <p>The history looks like this in the beginning:</p>
 <pre><code>-----o          &lt;- special branch (current)
     /
@@ -80,7 +82,7 @@
 <pre><code>-----o--A--B1--2--3--C          &lt;- &quot;TEMP&quot; branch (current)
     /                                            
 ---o--X--Y                      &lt;- common</code></pre>
-<h3 id="separating-common-and-special"><span class="header-section-number">1.3.2</span> Separating 'common' and 'special'</h3>
+<h2 id="separating-common-and-special"><span class="header-section-number">3.2</span> Separating 'common' and 'special'</h2>
 <p>The first thing to do is to tease the tangled commits apart using rebase.</p>
 <p>Using <code>git rebase -i special</code>, get the topology into this shape. Note that we have split the &quot;B1&quot; commit into B and 1 separately. <code>git help rebase</code> has a very simple and clear section on splitting commits, so I will not detail that here.</p>
 <pre><code>-----o--A--B--C--1--2--3        &lt;- &quot;TEMP&quot; branch (current)
@@ -89,7 +91,7 @@
 <p>At this point, the tree that results should be identical to the one you started this exercise with, so ideally there should be no need to test. You can, if you wish, check that the trees are indeed the same</p>
 <pre><code>git diff TEMP@{1} TEMP</code></pre>
 <p>The <code>@{1}</code> notation specifies the shape of the TEMP branch before the rebase started.</p>
-<h3 id="utcb"><span class="header-section-number">1.3.3</span> Updating and testing the 'common' branch</h3>
+<h2 id="utcb"><span class="header-section-number">3.3</span> Updating and testing the 'common' branch</h2>
 <p>Now switch to the 'common' branch and cherry pick the changes that belong on 'common'. The simplest way to cherry pick is gitk.</p>
 <pre><code>git checkout common
 gitk
@@ -99,7 +101,7 @@ gitk
     /                                              
 ---o--X--Y--A'--B'--C'          &lt;- common (current)</code></pre>
 <p>Be sure you test the new functionality before proceeding. This test will likely be different from your tests on the TEMP branch, because only part of the new code in TEMP goes to 'common'. If the test failed or required fixups, do them in the context of the 'common' case only, right here on the 'common' branch. <strong>Note that this affects the rebase coming up later!</strong></p>
-<h3 id="merging-common-into-special"><span class="header-section-number">1.3.4</span> Merging 'common' into 'special'</h3>
+<h2 id="merging-common-into-special"><span class="header-section-number">3.4</span> Merging 'common' into 'special'</h2>
 <p>Once that test is done, merge from 'common' to 'special'</p>
 <pre><code>git checkout special
 git merge common</code></pre>
@@ -109,7 +111,7 @@ git merge common</code></pre>
  ----o-----------------o    &lt;- special (current)
     /                 /
 ---o--X--Y--A'--B'--C'</code></pre>
-<h3 id="fixing-up-special"><span class="header-section-number">1.3.5</span> Fixing up 'special'</h3>
+<h2 id="fixing-up-special"><span class="header-section-number">3.5</span> Fixing up 'special'</h2>
 <p>Now all we need is to get commits 1, 2, and 3 onto 'special'. Although this is easiest done by using 'rebase', that will only work if your <a href="#utcb">updating and testing on 'common'</a> did not cause any changes or fixups (that is, the changes A, B, and C are still identical to the changes A', B', and C'.</p>
 <p>In the general case, therefore, cherry-pick is better, as long as you make sure you don't miss any commits:</p>
 <pre><code>gitk
@@ -120,7 +122,7 @@ git merge common</code></pre>
  ----o-----------------o
     /                 /
 ---o--X--Y--A'--B'--C'</code></pre>
-<h3 id="final-sanity-check"><span class="header-section-number">1.3.6</span> Final sanity check</h3>
+<h2 id="final-sanity-check"><span class="header-section-number">3.6</span> Final sanity check</h2>
 <p>At this point you should <em>definitely</em> re-test all the changes you made, to make sure nothing got missed out. If there were no 'X' and 'Y' commits on the 'commits' branch, you could try</p>
 <pre><code>git diff TEMP special</code></pre>
 <p>to check that the tree is still the same as before. But again, in the general case, you probably will have commits 'X' and 'Y' included so it is necessary to re-test.</p>

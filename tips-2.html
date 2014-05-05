@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>slightly more advanced tips</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -46,18 +46,16 @@
 |
     <a href="license.html">license</a>
 </p>
+<div id="header">
+<h1 class="title">slightly more advanced tips</h1>
+</div>
 <div id="TOC">
 <ul>
-<li><a href="#slightly-more-advanced-tips">slightly more advanced tips</a><ul>
 <li><a href="#how-to-remember-what-...-does">how to remember what &quot;...&quot; does</a></li>
 <li><a href="#easy-way-to-remember-what-git-resets-softhardmixed-do">Easy way to remember what git reset's soft/hard/mixed do</a></li>
-</ul></li>
 </ul>
 </div>
-<h1 id="slightly-more-advanced-tips" class="unnumbered"><a href="#slightly-more-advanced-tips">slightly more advanced tips</a></h1>
-<!-- pandoc: toc -->
-
-<h2 id="how-to-remember-what-...-does" class="unnumbered"><a href="#how-to-remember-what-...-does">how to remember what &quot;...&quot; does</a></h2>
+<h1 id="how-to-remember-what-...-does" class="unnumbered">how to remember what &quot;...&quot; does</h1>
 <p>Git's &quot;...&quot; operator is confusing, because it does different things in git diff and git log. Here's something that may help you reason it out.</p>
 <p>To start with, these points are fundamental:</p>
 <ul>
@@ -82,7 +80,7 @@
 <li>so you show the commits between the common ancestor and A, <em>as well as</em> between the common ancestor and B</li>
 </ul>
 <p>So: <code>git log CA(A,B)..A</code> PLUS <code>git log CA(A,B)..B</code></p>
-<h2 id="easy-way-to-remember-what-git-resets-softhardmixed-do" class="unnumbered"><a href="#easy-way-to-remember-what-git-resets-softhardmixed-do">Easy way to remember what git reset's soft/hard/mixed do</a></h2>
+<h1 id="easy-way-to-remember-what-git-resets-softhardmixed-do" class="unnumbered">Easy way to remember what git reset's soft/hard/mixed do</h1>
 <p>^^loosely based on <a href="http://gitster.livejournal.com/25150.html">http://gitster.livejournal.com/25150.html</a>^^</p>
 <p>Assume you start from a &quot;everything is committed and golden&quot; state. Let's pretend you came to this starting point via a <code>git checkout</code>: and then you edit a bunch of stuff, compile/test, and then <code>git add</code> and <code>git commit</code>:</p>
 <pre><code>$ git checkout mywork

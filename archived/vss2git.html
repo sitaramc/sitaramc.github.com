@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>converting Visual Source Shredder to GIT</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -46,10 +46,12 @@
 |
     <a href="license.html">license</a>
 </p>
-<h1 id="converting-visual-source-shredder-to-git"><span class="header-section-number">1</span> converting Visual Source Shredder to GIT</h1>
+<div id="header">
+<h1 class="title">converting Visual Source Shredder to GIT</h1>
+</div>
 <p>[Thanks to http://martinfowler.com/bliki/VersionControlTools.html for the new expansion of VSS]</p>
 <p>This is a 2 step process. For large values of 2, as they say :) But the nice thing is it can all be done in Linux; no need to use a Windows machine as long as you have a copy of the full VSS repo.</p>
-<h2 id="build-vss2svn"><span class="header-section-number">1.1</span> build vss2svn</h2>
+<h1 id="build-vss2svn"><span class="header-section-number">1</span> build vss2svn</h1>
 <p>The base for all this is <a href="http://www.pumacode.org/projects/vss2svn">http://www.pumacode.org/projects/vss2svn</a>. What I did is the following:</p>
 <ul>
 <li><p>download the latest vss2svn (this includes ssphys also):</p>
@@ -63,18 +65,18 @@ perl Build.PL
 sudo ./Build install</code></pre></li>
 </ul>
 <p>And that should be that...</p>
-<h2 id="run-vss2svn"><span class="header-section-number">1.2</span> run vss2svn</h2>
+<h1 id="run-vss2svn"><span class="header-section-number">2</span> run vss2svn</h1>
 <p>This should be easy enough, for most normal repos. You need to get the entire VSS repo onto your system (the one that contains something called 'srcsafe.ini'). Put that in some &quot;work&quot; directory, and do this:</p>
 <pre><code>vss2svn.pl --vssdir PATH_TO_VSS_REPO --revtimerange 60</code></pre>
 <p>I have no idea how to deal with labels etc., properly in this command, but the basic stuff should work fine.</p>
-<h2 id="load-the-svn-dump-file"><span class="header-section-number">1.3</span> load the SVN dump file</h2>
+<h1 id="load-the-svn-dump-file"><span class="header-section-number">3</span> load the SVN dump file</h1>
 <p>The previous step should produce just an SVN dump file, which you need to load, and that gives you an SVN repo.</p>
 <pre><code>svnadmin create svnrepo
 svnadmin load svnrepo &lt; SVN_DUMPFILE</code></pre>
 <p>You may want to checkout this repo and at least see what &quot;projects&quot; it has, because I do not know any other way of doing this if you don't already know (from the VSS side).</p>
 <pre><code>mkdir svnco
 svn checkout file://$PWD/svnrepo svnco</code></pre>
-<h2 id="convert-svn-to-git"><span class="header-section-number">1.4</span> convert svn to git</h2>
+<h1 id="convert-svn-to-git"><span class="header-section-number">4</span> convert svn to git</h1>
 <p>This is, naturally, the easiest of all, especially if you don't intend to go back :)</p>
 <pre><code>mkdir gitrepo
 cd gitrepo
@@ -83,13 +85,13 @@ git svn clone file://PATH_TO_SVN_REPO</code></pre>
 <p>So do it this way:</p>
 <pre><code>git svn clone file://PATH_TO_SVN_REPO/projectname
     # for each project</code></pre>
-<h2 id="checking-the-results"><span class="header-section-number">1.5</span> checking the results</h2>
-<h3 id="tags"><span class="header-section-number">1.5.1</span> tags</h3>
+<h1 id="checking-the-results"><span class="header-section-number">5</span> checking the results</h1>
+<h2 id="tags"><span class="header-section-number">5.1</span> tags</h2>
 <p>Tags (labels in VSS) don't seem to carry across properly.</p>
-<p>^<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> My idea of a tag is a symbolic name for a certain revision, so if you check it out you should see approximately the same number of files that the repo had around that time frame. What I actually see is that the number of files representing the various tags (as seen from an SVN checkout) range from 5% to 75% of the actual number of files in the repo! So -- until I see a VSS repo where the tags are actually used (and I mean <em>used</em>, as in, &quot;these tags do get <em>checked out</em> when needed; they're not just for show!&quot;) I'm not going to worry about it.^^</p>
-<h3 id="deleted-files"><span class="header-section-number">1.5.2</span> deleted files</h3>
+<p>^<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> My idea of a tag is a symbolic name for a certain revision, so if you check it out you should see approximately the same number of files that the repo had around that time frame. What I actually see is that the number of files representing the various tags (as seen from an SVN checkout) range from 5% to 75% of the actual number of files in the repo! So -- until I see a VSS repo where the tags are actually used (and I mean <em>used</em>, as in, &quot;these tags do get <em>checked out</em> when needed; they're not just for show!&quot;) I'm not going to worry about it.^^</p>
+<h2 id="deleted-files"><span class="header-section-number">5.2</span> deleted files</h2>
 <p>I've also not tested if renamed/deleted files etc also work OK, but I think they ought to.</p>
-<h3 id="that-damn-crlf-thing"><span class="header-section-number">1.5.3</span> that damn CRLF thing</h3>
+<h2 id="that-damn-crlf-thing"><span class="header-section-number">5.3</span> that damn CRLF thing</h2>
 <p>When you do it this way, you don't have an opportunity to fix the CRLFs as they go in -- they'll all go into the repo as CRLF. If you try to force it on the &quot;git svn clone&quot; itself (by prepping a blank git repo with <code>git config core.autocrlf input</code> and then svn-cloning into that), you get checksum errors!</p>
 <p>You have to do this after the fact. Here's the sequence:</p>
 <pre><code>git config --unset core.autocrlf
@@ -100,14 +102,14 @@ git config --unset core.autocrlf</code></pre>
 <p>The first 'unset' is just a precaution. If you do a checkout with autocrlf set to input, the work tree will immediately look dirty, so the filter-branch will refuse to run. So you checkout under &quot;default&quot; conditions, then set the autocrlf config, then run the tree filter.</p>
 <p>The last 'unset' is required; you really don't want autocrlf to be anything on a Unix box.</p>
 <p>Note: in theory, a dummy filter that does nothing <em>should</em> work. But it seems to miss a lot of files, which still go in with CRLFs. Doing an explicit touch seems to be the only way. I have no idea why this is so.</p>
-<h3 id="bottom-line"><span class="header-section-number">1.5.4</span> bottom line</h3>
+<h2 id="bottom-line"><span class="header-section-number">5.4</span> bottom line</h2>
 <p>Anyway, your bottom line should be:</p>
 <ol style="list-style-type: decimal">
 <li><em>confirm that the tip is OK</em>: make sure that the actual trees generated at the tip of the git repository match those in a fresh &quot;get&quot; from the corresponding project in VSS</li>
 <li><em>try to confirm past history is OK</em>: if possible, make the same check for a couple of intermediate revisions also</li>
 <li><em>save the VSS repo</em> in a read-only location for future reference, should there ever (much later in time) be a question on the accuracy of the history at some revision that was not explicitly checked during the migration.</li>
 </ol>
-<h2 id="alternative-method-using-perl-on-windows"><span class="header-section-number">1.6</span> alternative method using perl on windows</h2>
+<h1 id="alternative-method-using-perl-on-windows"><span class="header-section-number">6</span> alternative method using perl on windows</h1>
 <p>There is another method, achieved by hacking a perl script that was supposed to convert <a href="http://www.riseup.com/~brettw/dev/VSS2Subversion.html">to SVN</a>, to make it go <a href="../tools/vss2git.pl">to git</a> instead. Pros and cons:</p>
 <ul>
 <li>(+) no CRLF problem</li>
@@ -119,9 +121,9 @@ git config --unset core.autocrlf</code></pre>
 </ul>
 <p>One reason why I'm keeping this around is if a VSS repo is corrupt enough (and it seems that happens quite often) then maybe only the original VSS can read it. To recover usable data from such an instance may be a futile attempt but no harm keeping two tools around...!</p>
 <hr />
-<h2 id="appendices"><span class="header-section-number">1.7</span> Appendices</h2>
+<h1 id="appendices"><span class="header-section-number">7</span> Appendices</h1>
 <p><font size="-1"></p>
-<h3 id="perlmodinstalls"><span class="header-section-number">1.7.1</span> installing the perl modules</h3>
+<h2 id="perlmodinstalls"><span class="header-section-number">7.1</span> installing the perl modules</h2>
 <p>Note: I <em>did</em> indeed have to install DBD::SQLite2 manually. Also, Text::Glob had to be installed using <code>perl -MCPAN -e shell</code> followed by <code>install Text::Glob</code>; for some reason the &quot;-e install ...&quot; thing didn't work</p>
 <pre><code>for m in Module::Build XML::Simple Time::CTime DBD::SQLite2 DBI Tie::IxHash Text::Glob Data::UUID; do
    perl -MCPAN -e &quot;install $m&quot;
@@ -140,7 +142,7 @@ cd Config-Ini-1.08
 perl Makefile.PL
 make
 make install</code></pre>
-<h3 id="libboostpatch"><span class="header-section-number">1.7.2</span> patch for libboost 1.36</h3>
+<h2 id="libboostpatch"><span class="header-section-number">7.2</span> patch for libboost 1.36</h2>
 <pre><code>commit 4a3a283593bf8a991e0553e3ac3252c75a1349db
 Author: Sitaram Chamarty &lt;sitaramc@gmail.com&gt;
 Date:   Thu Apr 16 09:27:00 2009 +0530

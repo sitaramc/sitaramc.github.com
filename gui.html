@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>git's native GUI tools</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -46,19 +46,17 @@
 |
     <a href="license.html">license</a>
 </p>
+<div id="header">
+<h1 class="title">git's native GUI tools</h1>
+</div>
 <div id="TOC">
 <ul>
-<li><a href="#gits-native-gui-tools">git's native GUI tools</a><ul>
 <li><a href="#git-gui">git gui</a></li>
 <li><a href="#gitk">gitk</a></li>
 <li><a href="#where-you-really-need-the-command-line">where you <em>really</em> need the command line</a></li>
 <li><a href="#further-reading">further reading</a></li>
-</ul></li>
 </ul>
 </div>
-<h1 id="gits-native-gui-tools" class="unnumbered"><a href="#gits-native-gui-tools">git's native GUI tools</a></h1>
-<!-- pandoc: toc -->
-
 <p>Git comes with 3 GUI tools, but two of them are a bit more important than the third so we'll focus on those for now.</p>
 <p>These two tools are very powerful; if you don't like the command line, you can quite easily stick to them and get by for most purposes. Briefly, they are:</p>
 <ul>
@@ -66,7 +64,7 @@
 <li><code>gitk</code> to get a bird's eye view your current branch, or <code>gitk --all</code> to view all branches, local and remote</li>
 </ul>
 <p>Git's GUI interfaces let you do almost anything that you <strong>normally</strong> need to do -- all the simple straightforward things as well as some sophisticated things.</p>
-<h2 id="git-gui" class="unnumbered"><a href="#git-gui">git gui</a></h2>
+<h1 id="git-gui" class="unnumbered">git gui</h1>
 <p><code>git gui</code> shows you the current state of your work area with respect to the currently checked-out branch. In the top left pane, it shows you what files are changed with respect to the last commit. In the bottom left pane it shows you what files have been marked &quot;ready for commit&quot; -- only these changes will go into the next commit if you commit now.</p>
 <p>(Git allows you to keep some changes &quot;pending&quot;, without committing them. The &quot;ready to commit&quot; part is called the &quot;index&quot;, &quot;staging area&quot;, or &quot;cache&quot; in the documentation, so the bottom left pane is showing you what is in the &quot;index&quot;. Check out <a href="uses-of-index.html">why the index is useful</a> for more).</p>
 <p>In either case, the changes made to the currently selected file are shown on the right pane.</p>
@@ -76,7 +74,7 @@
 <li>you can also type in a suitable commit message and click the &quot;commit&quot; button. This commits the change to your local repository</li>
 <li>you can also &quot;push&quot; the changes to some central repository so that others can pull them</li>
 </ul>
-<h2 id="gitk" class="unnumbered"><a href="#gitk">gitk</a></h2>
+<h1 id="gitk" class="unnumbered">gitk</h1>
 <p><code>gitk</code> (or <code>gitk --all</code>, which is what I use more often) shows you a visual tree of all the commits that have happened on this repository. It is a very powerful tool, allowing you to do all sorts of things like</p>
 <ul>
 <li>create a new branch</li>
@@ -89,9 +87,9 @@
 <li>search for commits based on all sorts of criteria</li>
 </ul>
 <p>There's a much more detailed description of <a href="gitk.html">gitk's features</a> if you need it.</p>
-<h2 id="where-you-really-need-the-command-line" class="unnumbered"><a href="#where-you-really-need-the-command-line">where you <em>really</em> need the command line</a></h2>
+<h1 id="where-you-really-need-the-command-line" class="unnumbered">where you <em>really</em> need the command line</h1>
 <p>One common task that is needlessly complex in both the GUIs is <code>git pull</code>. In a properly setup repository that has been cloned from the project master or something like that, getting the latest changes is just a matter of typing <code>git pull</code>. In <code>git gui</code>, described above, this takes 4 steps, although there is a reason for that complexity :-)</p>
-<h2 id="further-reading" class="unnumbered"><a href="#further-reading">further reading</a></h2>
+<h1 id="further-reading" class="unnumbered">further reading</h1>
 <p>There's a really thorough introduction to these tools, including lots of screenshots, at <a href="http://nathanj.github.com/gitguide/">http://nathanj.github.com/gitguide/</a>. The page has an excellent example &quot;project&quot; that is simple enough that you can concentrate on the git features being demonstrated, and the author goes into quite a few things you can do with the GUI tools.</p>
 <p>Some minor caveats:</p>
 <ul>

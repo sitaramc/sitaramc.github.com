@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>gardening tips -- grafting branches</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -46,14 +46,16 @@
 |
     <a href="license.html">license</a>
 </p>
-<h1 id="gardening-tips----grafting-branches"><span class="header-section-number">1</span> gardening tips -- grafting branches</h1>
+<div id="header">
+<h1 class="title">gardening tips -- grafting branches</h1>
+</div>
 <p><sup>[If you think the jokes are bad, you don't know me very well. Clearly that is <em>your</em> fault, not mine :-)]</sup></p>
 <hr />
 <p>Even people who consider themselves really good gardeners shy away from grafting. Wikipedia says &quot;For successful grafting to take place, the vascular cambium tissues of the stock and scion plants must be placed in contact with each other. Both tissues must be kept alive until the graft has taken, usually a period of a few weeks.&quot; That sounds... difficult.</p>
 <p>Fortunately, Grum on IRC explained to me that all that is bunkum in git. Git has no issues with tissues, and if Linus had to wait a few weeks for a graft to &quot;take&quot;, we'd still be at kernel level 2.2 or something.</p>
 <p>So, here's the long and short of grafting in git. Enjoy! (And thank Grum with a ++ next time you see him on #git!).</p>
 <p>Note: The following description will use the word &quot;line&quot; to mean &quot;a long chain of commits with no branch or merge within it&quot;. In <code>gitk --all</code>, it is literally a straight line.</p>
-<h2 id="connecting-two-unrelated-lines"><span class="header-section-number">1.1</span> connecting two unrelated lines</h2>
+<h1 id="connecting-two-unrelated-lines"><span class="header-section-number">1</span> connecting two unrelated lines</h1>
 <p>Let's say you have the following history, with two unrelated lines of development (quite easily achieved by just fetching from some other repo that has no common commits with yours!).</p>
 <p>^^(By the way, how can you tell they are unrelated? Easy -- just look at the break in the graph connector after &quot;a1&quot;!)^^</p>
 <pre><code>$ git log --graph '--pretty=tformat:%H %d %s %n'  --all
@@ -132,7 +134,7 @@ git reset --hard original/refs/heads/a-m</code></pre>
 <p>But if everything worked out, and the new tree looks good, you would type, <strong>very carefully</strong>:</p>
 <pre><code>rm -rf .git/refs/original/</code></pre>
 <p>That's it! ^^</p>
-<h2 id="breaking-a-line-into-two..."><span class="header-section-number">1.2</span> breaking a line into two...</h2>
+<h1 id="breaking-a-line-into-two..."><span class="header-section-number">2</span> breaking a line into two...</h1>
 <p>What other tricks can you get up to?</p>
 <p>How about taking this:</p>
 <pre><code>$ g log --graph '--pretty=tformat:%H %d %s %n'  --all
@@ -175,7 +177,7 @@ git reset --hard original/refs/heads/a-m</code></pre>
 <p>How? Just:</p>
 <pre><code>$ echo 8e48f4975469c9c9c5de644eb8eff1e165241b09 &gt; .git/info/grafts</code></pre>
 <p>We've made &quot;a6&quot; what is called a &quot;root&quot; commit -- it has no parent. Of course, if you do this without giving &quot;a5&quot; (&quot;a6&quot;'s original parent) a proper name, &quot;a5&quot; will become unreachable. Which is why we gave it a name.</p>
-<h2 id="and-joining-them-parallely-branch-merge"><span class="header-section-number">1.3</span> ...and joining them parallely (branch + merge)</h2>
+<h1 id="and-joining-them-parallely-branch-merge"><span class="header-section-number">3</span> ...and joining them parallely (branch + merge)</h1>
 <p>Or how about not just breaking them and leaving them separate, but taking the pieces and putting them <em>parallel</em> to each other, with the tops and bottoms joined:</p>
 <pre><code>$ echo 6071135a250f9870aa8211eb871b4ac5d8e7e585 \
 bb1cd6894bf5a073a80fb67575adb504539fca86 &gt; .git/info/grafts

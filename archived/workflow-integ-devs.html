@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>dev/integ workflow</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -46,10 +46,12 @@
 |
     <a href="license.html">license</a>
 </p>
-<h1 id="devinteg-workflow"><span class="header-section-number">1</span> dev/integ workflow</h1>
-<h2 id="workflow"><span class="header-section-number">1.1</span> workflow</h2>
+<div id="header">
+<h1 class="title">dev/integ workflow</h1>
+</div>
+<h1 id="workflow"><span class="header-section-number">1</span> workflow</h1>
 <p>This is one possible workflow for dev/integ using gitolite. It assumes that there is one &quot;integrator&quot; and N developers &quot;dev1&quot;, ... &quot;devN&quot;.</p>
-<h3 id="branches"><span class="header-section-number">1.1.1</span> branches</h3>
+<h2 id="branches"><span class="header-section-number">1.1</span> branches</h2>
 <ul>
 <li><p><code>integ</code> -- a branch that is <code>R</code> (readonly) for devs, <code>RW+</code> for integrator. This branch will always be kept in a compilable, basically runnable, state by the integrator. The history of this branch will be kept reasonably clean.</p>
 <p>Each developer will start a new piece of work or task using <code>integ</code> as a starting point, and making sure that when he submits his work it builds upon this stable point.</p></li>
@@ -57,12 +59,12 @@
 <p>branches under the <code>dev/devX/</code> hierarchy belong to the developer called <code>devX</code>. He submits his work to the integrator by pushing to one such branch and emailing the integrator the branch name (say <code>dev/sitaram/issue3423</code> or <code>dev/someone-else/bugfix-2321</code></p></li>
 <li><p>master -- a branch that is even more sacred than <code>integ</code>. Its usage and role are optional in the below described flow, but it can be used to filter <code>integ</code> even more, maybe based on some EQA (External Quality Assurance) perhaps. If so, it's name can be changed to reflect that</p></li>
 </ul>
-<h3 id="assumptions-startup"><span class="header-section-number">1.1.2</span> assumptions / startup:</h3>
+<h2 id="assumptions-startup"><span class="header-section-number">1.2</span> assumptions / startup:</h2>
 <ul>
 <li>a repo is created</li>
 <li>the code is kept in a branch called <code>integ</code>, even if it is bare minimum code in the beginning</li>
 </ul>
-<h3 id="developer-workflow"><span class="header-section-number">1.1.3</span> developer workflow</h3>
+<h2 id="developer-workflow"><span class="header-section-number">1.3</span> developer workflow</h2>
 <p>We use a sample developer called dev5 in the examples below.</p>
 <p>dev5 gets some work/spec/issue to work on. He is given, or chooses, a short name for the work he is doing. Examples:</p>
 <pre><code>xyz-module-error-23
@@ -123,7 +125,7 @@ git rebase origin/integ</code></pre>
 <pre><code>git push origin issue-3394:dev/dev5/issue-3394/v1</code></pre></li>
 <li><p>send email to integrator asking him to pull and test <code>dev/dev5/issue-3394/v1</code></p></li>
 </ul>
-<h3 id="integrator"><span class="header-section-number">1.1.4</span> integrator</h3>
+<h2 id="integrator"><span class="header-section-number">1.4</span> integrator</h2>
 <ul>
 <li><p>receive mail from dev5 saying <code>issue-3394</code> is done and ready</p></li>
 <li><p>clone repo if not already done</p></li>
@@ -144,7 +146,7 @@ git merge origin/dev/dev5/issue-3394
 git branch -D test_integ_issue-3394</code></pre>
 <p>This issue (3394) is now closed, unless there is a regression later. It has been integrated successfully, and dev5 can be assigned some other task.</p></li>
 </ul>
-<h2 id="gitolite-advanced-features-supporing-this-flow"><span class="header-section-number">1.2</span> gitolite advanced features supporing this flow</h2>
+<h1 id="gitolite-advanced-features-supporing-this-flow"><span class="header-section-number">2</span> gitolite advanced features supporing this flow</h1>
 <p>Here's a typical gitolite conf file:</p>
 <pre><code>@myteam = dev1 dev2 ... devN
 

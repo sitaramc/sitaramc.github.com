@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>corruption in a git repository</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -46,24 +46,12 @@
 |
     <a href="license.html">license</a>
 </p>
-<h1 id="corruption-in-a-git-repository"><span class="header-section-number">1</span> corruption in a git repository</h1>
+<div id="header">
+<h1 class="title">corruption in a git repository</h1>
+</div>
 <p>For now, this is just loosely formatted text, maybe like a series of case studies.</p>
 <p>IMPORTANT NOTE: <code>git fsck --full</code> is needed to reliably find repo corruption</p>
-<h2 id="case-1-kolkata-korruption----2-missing-tree-objects"><span class="header-section-number">1.1</span> case 1: Kolkata Korruption -- 2 missing tree objects</h2>
-<p>UPDATE 2013-01-11 13:28 Fri</p>
-<p>This should be MUCH easier</p>
-<pre><code>on bad:
-    git fsck | grep -v dangling | cut -f3 -d' '
-
-then double check it's a list of SHAs
-
-on good, with this list:
-    git pack-objects --revs pack &lt; list
-
-then copy the two pack* files (pack and idx) to the bad repo's
-objects/pack directory.
-
-That should be it.</code></pre>
+<h1 id="case-1-kolkata-korruption----2-missing-tree-objects"><span class="header-section-number">1</span> case 1: Kolkata Korruption -- 2 missing tree objects</h1>
 <p>what finally worked:</p>
 <pre><code># on some good repo
 TYPE=$(git cat-file -t $BADOBJSHA)

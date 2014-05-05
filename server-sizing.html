@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>sizing a server for git</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -46,27 +46,25 @@
 |
     <a href="license.html">license</a>
 </p>
+<div id="header">
+<h1 class="title">sizing a server for git</h1>
+</div>
 <div id="TOC">
 <ul>
-<li><a href="#sizing-a-server-for-git">sizing a server for git</a><ul>
 <li><a href="#bandwidth-usage">bandwidth usage:</a></li>
 <li><a href="#cpu-usage">CPU usage</a></li>
 <li><a href="#memory">memory</a></li>
 <li><a href="#disk">disk</a></li>
-<li><a href="#repack"><span class="toc-section-number">0.1</span> stressing out a git server {-}</a></li>
-</ul></li>
+<li><a href="#repack">stressing out a git server</a></li>
 </ul>
 </div>
-<h1 id="sizing-a-server-for-git" class="unnumbered"><a href="#sizing-a-server-for-git">sizing a server for git</a></h1>
-<!-- pandoc: toc -->
-
 <p><strong>Update Dec 2013</strong>: this was written some years ago; the measurements could only have gotten better now...</p>
 <hr />
 <p>How big a server do you need to host git repos? These are my current thoughts on this, and they're essentially what I sent in an internal email to someone at work who asked about that as well as network bandwidth concerns when the server is used from multiple sites over a WAN.</p>
 <p>Note: the specific question also asked how many &quot;concurrent&quot; users a git server with a given spec could handle. However, a typical developer will only interact with the git server on average 2-6 times a day, with each interaction lasting at most for a few seconds. That's it!</p>
 <p>This is why &quot;concurrent users&quot; is not a meaningful measure, unless everyone hits &quot;push&quot; or &quot;pull&quot; at exactly the same time :-)</p>
 <p>Anyway, here are some details, from the point of view of a typical &quot;enterprise&quot; use of a VCS. Be sure to read the last section on the <a href="#repack">one operation</a> that <em>can</em> stress out a git server.</p>
-<h2 id="bandwidth-usage" class="unnumbered"><a href="#bandwidth-usage">bandwidth usage:</a></h2>
+<h1 id="bandwidth-usage" class="unnumbered">bandwidth usage:</h1>
 <ul>
 <li><p>the initial clone (like when a new team member joins the project) transfers data about the size of the repository. This is highly compressed but it could still be large.</p>
 <p>Just as a point of reference, I pulled down the entire Linux kernel repository just now. It was 310 MB and took about 20 minutes to come in on my home DSL line here.</p>
@@ -77,7 +75,7 @@
 <p>There's a command called &quot;git bundle&quot; which lets you package up the entire repository into one file, which you can transfer one time to the other site. At the other site, they share that bundle file on their LAN (instead of each person essentially getting the same file on the WAN), and clone from it. After the clone is done, you make a one-line change to the config file (change the URL to point to the real server instead of a local file!) and it's done.</p>
 <p>What all this means is, for the cost of one extra command on the server and one extra command on each client, you have &quot;seeded&quot; an entire site with just one download :-)</p></li>
 </ul>
-<h2 id="cpu-usage" class="unnumbered"><a href="#cpu-usage">CPU usage</a></h2>
+<h1 id="cpu-usage" class="unnumbered">CPU usage</h1>
 <p>Git does take some CPU time to pack up a repository, especially to supply an initial clone. Even in the initial clone, on a decent dual-core machine it will be as fast as the hard disk can read the repository data, which means pretty fast. On subsequent pull/push operations, it is very fast.</p>
 <p>The CPU-bound operations in day to day git operations are</p>
 <ul>
@@ -96,13 +94,13 @@
 <blockquote>
 <p>As a result, cpu usage on the server is now mostly in the &quot;counting objects&quot; phase (i.e., figuring out what to send), which is not much of a load.^^</p>
 </blockquote>
-<h2 id="memory" class="unnumbered"><a href="#memory">memory</a></h2>
+<h1 id="memory" class="unnumbered">memory</h1>
 <p>A machine with about 512 MB <strong><em>free</em></strong> RAM will probably work fine for most development style repositories. In practice this means about 1 GB total RAM, assuming no other big programs are running. Note that all this is transient use -- there is no &quot;long running background process&quot; in a normal git install that sits around hogging memory. If no one is accessing the repository (push/pull/clone), then no memory is used.</p>
 <p>The only time you get into memory problems under normal use is if you have files that are really large, like more than 50 MB or so. (We're not talking about total repo size here; we're talking one individual file). If you have any such files in the repo (or worse, many such files), it may be a good idea to run some benchmarks first. [I'm being very conservative here; in practice I'm sure much larger files can be used without trouble but at some point it will cause problems. That may be 100MB, or 250MB, or whatever but it will happen...]</p>
 <p>Otherwise there's nothing inherently in git to gobble up memory except the <a href="#repack">repack</a> operation mentioned in the last section.</p>
-<h2 id="disk" class="unnumbered"><a href="#disk">disk</a></h2>
+<h1 id="disk" class="unnumbered">disk</h1>
 <p>As I mentioned in one of my presentations, git takes about 1/20th the size of an SVN repository, so this should not be a concern. However, this does assume the &quot;repack&quot; operation referred to below is being run at least once a month or so.</p>
-<h2 id="repack"><a href="#repack"><span class="header-section-number">0.1</span> stressing out a git server {-}</a></h2>
+<h1 id="repack" class="unnumbered">stressing out a git server</h1>
 <p>The only time git does anything that seriously stresses the machine (in <strong><em>all respects</em></strong>, not just CPU) is a &quot;repack&quot; operation that (by default) runs very rarely. You can, if you wish, set a config variable to make it never happen automatically, and just do it manually about once a month, or by cron at 4am on Sunday, or whatever suits you.</p>
 <p>I tried a full repack of the linux kernel tree on my desktop, and it took approximately 700 MB of RAM, 5:20 minutes elapsed time, and 7:04 minutes of CPU time (CPU time is more than elapsed time because parts of this repacking are multi-threaded).</p>
 <p>So -- if you schedule it at night or Sunday morning or whatever, you'll be fine. Don't worry about it...</p>

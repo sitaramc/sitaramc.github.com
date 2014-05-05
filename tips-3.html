@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>advanced tips</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -46,9 +46,11 @@
 |
     <a href="license.html">license</a>
 </p>
+<div id="header">
+<h1 class="title">advanced tips</h1>
+</div>
 <div id="TOC">
 <ul>
-<li><a href="#advanced-tips">advanced tips</a><ul>
 <li><a href="#backing-up-work-in-progress">backing up work in progress</a></li>
 <li><a href="#conflicts-on-pullmerge">conflicts on pull/merge</a></li>
 <li><a href="#log-pickaxe-and-blame">log pickaxe and blame</a></li>
@@ -58,13 +60,9 @@
 <li><a href="#the-gui-way">the GUI way</a></li>
 <li><a href="#the-command-line-way">the command line way</a></li>
 </ul></li>
-</ul></li>
 </ul>
 </div>
-<h1 id="advanced-tips" class="unnumbered"><a href="#advanced-tips">advanced tips</a></h1>
-<!-- pandoc: toc -->
-
-<h2 id="backing-up-work-in-progress" class="unnumbered"><a href="#backing-up-work-in-progress">backing up work in progress</a></h2>
+<h1 id="backing-up-work-in-progress" class="unnumbered">backing up work in progress</h1>
 <p>This is how you can backup everything on your local repo that is not already on one of your remotes, including all untracked files not covered by the ignore mechanism. I use a script based on this to save my work to a remote server at regular intervals, in case of a disaster (hardware failure, etc) on the regular desktop.</p>
 <pre><code># sort of like stash; untracked files also saved
 git commit --allow-empty -m wip-index-state
@@ -84,7 +82,7 @@ git branch -D wip-backup
 
 # copy that file wherever you want, however you want...
 rsync /tmp/sos.bdl bkphost:   # or scp, or whatever</code></pre>
-<h2 id="conflicts-on-pullmerge" class="unnumbered"><a href="#conflicts-on-pullmerge">conflicts on pull/merge</a></h2>
+<h1 id="conflicts-on-pullmerge" class="unnumbered">conflicts on pull/merge</h1>
 <ul>
 <li>try <code>gitk --merge conflicted_path</code></li>
 <li><code>git diff MERGE_HEAD...HEAD</code> (note the <em>three</em> dots) shows you differences between the common ancestor and your HEAD.</li>
@@ -93,19 +91,19 @@ rsync /tmp/sos.bdl bkphost:   # or scp, or whatever</code></pre>
 <li><p>you can tell git blame to only show important changes, like so (pity it does not work with the GUI blame)</p>
 <pre><code>git blame -C $(git merge-base HEAD MERGE_HEAD).. conflicted_path</code></pre></li>
 </ul>
-<h2 id="log-pickaxe-and-blame" class="unnumbered"><a href="#log-pickaxe-and-blame">log pickaxe and blame</a></h2>
+<h1 id="log-pickaxe-and-blame" class="unnumbered">log pickaxe and blame</h1>
 <ul>
 <li><p>finding out when a particular change happened or who made it</p>
 <pre><code>git log -S&quot;some code line&quot; file.c   # why is this called pickaxe search?
 git blame -b file.c</code></pre></li>
 </ul>
-<h2 id="what-are-all-these-heads" class="unnumbered"><a href="#what-are-all-these-heads">what are all these &quot;HEAD&quot;s?</a></h2>
+<h1 id="what-are-all-these-heads" class="unnumbered">what are all these &quot;HEAD&quot;s?</h1>
 <ul>
 <li><code>ORIG_HEAD</code>: pull or merge (or anything that moves HEAD drastically) leave a copy of the old head with this name. Reset can use it if needed. (see <code>man git-reset</code>). <code>reset</code> itself copies the old <code>HEAD</code> to <code>ORIG_HEAD</code>, though that seems less useful</li>
 <li><code>FETCH_HEAD</code>: records the branch you fetched from a remote repository with your last 'git-fetch' invocation</li>
 <li><code>MERGE_HEAD</code> records the commit(s) you are merging into your branch when you run 'git-merge'</li>
 </ul>
-<h2 id="garbage-collection" class="unnumbered"><a href="#garbage-collection">garbage collection</a></h2>
+<h1 id="garbage-collection" class="unnumbered">garbage collection</h1>
 <p>NOTE: this section is old; I have not looked at it with respect to recent git versions.</p>
 <ul>
 <li>Warning: <code>git gc --prune</code> is dangerous if others may be pushing to the repo at the same time!</li>
@@ -119,13 +117,13 @@ git prune           # kills loose garbage</code></pre></li>
 # use branchname(s) instead of --all
 # units can be seconds, minutes, etc</code></pre></li>
 </ul>
-<h2 id="recovering-a-dropped-stash" class="unnumbered"><a href="#recovering-a-dropped-stash">recovering a dropped stash:</a></h2>
-<h3 id="the-gui-way" class="unnumbered"><a href="#the-gui-way">the GUI way</a></h3>
+<h1 id="recovering-a-dropped-stash" class="unnumbered">recovering a dropped stash:</h1>
+<h2 id="the-gui-way" class="unnumbered">the GUI way</h2>
 <p>You dropped a stash that was created recently, and now you want to recover it. As long as you did not do a garbage collection in between, this should work:</p>
 <pre><code>gitk $(git fsck | grep commit | cut -f3 -d' ') --since='1 week ago'</code></pre>
 <p>The part within the parenthesis finds all unreachable commit objects and returns their hashes. If you never did a garbage collect there might be too many false positives so the <code>--since</code> clause (which you can adjust to whatever you want of course; mine is just an example) limits the display to commits created recently.</p>
 <p>A &quot;stash&quot; has a very recognisable, triangular, shape in the commit DAG, and with gitk you can visually find stashes really fast. For me, this is the kind of task that <em>calls out</em> for a GUI -- infrequently required, no conceivable need to automate, and containing data that stands out visually.</p>
-<h3 id="the-command-line-way" class="unnumbered"><a href="#the-command-line-way">the command line way</a></h3>
+<h2 id="the-command-line-way" class="unnumbered">the command line way</h2>
 <p>Writing something longer than that for a problem that occurs once in a blue moon is not my style (very low ROI!), but doener gave me this:</p>
 <pre><code>git fsck --unreachable | grep commit | cut -d\  -f3 |
 xargs git log --no-walk --merges --grep='^\(WIP on \|On \)\((no branch)\|[^ ]\+\):'</code></pre>

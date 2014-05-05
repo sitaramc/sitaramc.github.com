@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>all about branches and product maintenance</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -46,25 +46,27 @@
 |
     <a href="license.html">license</a>
 </p>
-<h1 id="all-about-branches-and-product-maintenance"><span class="header-section-number">1</span> all about branches and product maintenance</h1>
+<div id="header">
+<h1 class="title">all about branches and product maintenance</h1>
+</div>
 <p><strong>CVS/SVN folks -- please read this first</strong></p>
 <p>SVN and CVS treat a branch as another subdirectory of your project. Conversely, you can also pretend a subdirectory is a branch. In other words, branches (and tags) share the same namespace as the subdirectories of your project.</p>
 <p>This is not the right way to think of branches. <strong>A branch is merely an alternate reality for your project</strong>. That's the simplest way to put it. Each commit is a &quot;snapshot&quot; of the state of your code at a certain point in time, and each branch (consisting of a series of commits) represents a different timeline than the other branches do.</p>
 <p>Thus, branches and subdirectories have <em>nothing</em> to do with each other.</p>
 <hr />
-<h2 id="local-and-remote-branches"><span class="header-section-number">1.1</span> local and remote branches</h2>
+<h1 id="local-and-remote-branches"><span class="header-section-number">1</span> local and remote branches</h1>
 <p>The git repository is really just a DAG (directed acyclic graph) of commits. Each commits points to its parent or parents (merge commits have more than one parent). A branch in git is merely a pointer to some commit in the DAG.</p>
 <p>When you checkout a branch, git simply makes your working tree look like the files that existed when that commit was made, and makes a note that this is your &quot;current&quot; branch. When you make a commit on top of this, git updates this current branch to point to the new &quot;head&quot; commit. This is conceptually the same as adding a new item to a linked list and moving the &quot;head&quot; pointer to the new item, if you remember your data structures course from many years ago.</p>
 <p>A developer's repository will typically have several branches residing in it, although of course only one is &quot;checked out&quot; at any given time into the working tree.</p>
 <p>Apart from local branches (like <code>master</code>, <code>next</code>, and maybe <code>v1.2</code>, <code>some-new-feature</code>), etc., you will also have a set of branches called <strong>origin/branchname</strong> (example: <code>origin/master</code>). These are <em>your copy</em> of the corresponding branch from the &quot;origin&quot; server. You should never commit to them directly.</p>
 <p>And the most important thing is, you can have any other branches you wish! Go wild -- no one will stop you, and it's quite difficult to lose data so have fun!</p>
-<h2 id="topic-branches"><span class="header-section-number">1.2</span> topic branches</h2>
+<h1 id="topic-branches"><span class="header-section-number">2</span> topic branches</h1>
 <p>As you read about workflows in modern VCSs, you'll often hear about topic branches. According to the <a href="http://www.kernel.org/pub/software/scm/git/docs/gitglossary.html#def_topic_branch">git glossary</a>, a topic branch is:</p>
 <blockquote>
 <p><em>A regular git branch that is used by a developer to identify a conceptual line of development. Since branches are very easy and inexpensive, it is often desirable to have several small branches that each contain very well defined concepts or small incremental yet related changes.</em></p>
 </blockquote>
 <p>A topic branch could represent any self-contained, pretty much independent-of-others, line of development. A specific bug, a new feature, a refactor, a set of enhancements to a core feature, etc., can all be managed as topics in their own right.</p>
-<h2 id="product-maintenance"><span class="header-section-number">1.3</span> product maintenance</h2>
+<h1 id="product-maintenance"><span class="header-section-number">3</span> product maintenance</h1>
 <p>Let's say your version tree looks like this:</p>
 <pre><code>V3---o---o---o---o---o---V4---o---o--- (master)
  \                        \
@@ -93,7 +95,7 @@
 <li>periodically, V3maint is merged into both V4maint as well as to V3only</li>
 </ul>
 <p>Note that V3only will never get merged into V4maint or V3maint, preserving the condition that commits made in V3only are not picked up by the newer versions.</p>
-<h2 id="throwaway-integration-branches"><span class="header-section-number">1.4</span> throwaway integration branches</h2>
+<h1 id="throwaway-integration-branches"><span class="header-section-number">4</span> throwaway integration branches</h1>
 <p>In all the above discussion, we kept saying &quot;merge X into Y&quot;. Which is all very well if things go fine, but how do you back out if something went wrong?</p>
 <p>The answer is something called a &quot;throwaway integration branch&quot;.</p>
 <p>We'll use an analogy to understand this. Let's say you're writing a function to insert a bunch of items into a linked list. And let's say it's a complex function, and at the start, you're not sure if it's going to succeed, and you want the &quot;head&quot; pointer to be updated only if the whole thing succeeds.</p>

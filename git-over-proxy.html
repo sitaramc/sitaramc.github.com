@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>How to use git over an HTTP proxy, with socat</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -46,28 +46,26 @@
 |
     <a href="license.html">license</a>
 </p>
+<div id="header">
+<h1 class="title">How to use git over an HTTP proxy, with socat</h1>
+</div>
 <div id="TOC">
 <ul>
-<li><a href="#how-to-use-git-over-an-http-proxy-with-socat">How to use git over an HTTP proxy, with socat</a><ul>
 <li><a href="#a-word-about-socat">a word about socat</a></li>
 <li><a href="#proxying-the-git-protocol">proxying the <strong>git</strong> protocol</a></li>
 <li><a href="#proxying-the-ssh-protocol">proxying the <strong>ssh</strong> protocol</a><ul>
 <li><a href="#ssh-proxy-using-corkscrew-instead-of-socat">ssh proxy using corkscrew instead of socat</a></li>
 <li><a href="#extra-coolness-for-github">extra coolness for github</a></li>
 </ul></li>
-</ul></li>
 </ul>
 </div>
-<h1 id="how-to-use-git-over-an-http-proxy-with-socat" class="unnumbered"><a href="#how-to-use-git-over-an-http-proxy-with-socat">How to use git over an HTTP proxy, with socat</a></h1>
-<!-- pandoc: toc -->
-
 <p>Corporate firewalls and proxy typically block both of these (and often a lot more); here's how to get around them.</p>
 <p>If you're tracking a public repo, you will need to use the &quot;git&quot; protocol, because the &quot;http&quot; protocol is not very efficient, and/or requires some special handling on the server side. If you're pushing code to a public repo, you <strong>definitely</strong> need to use the &quot;ssh&quot; protocol.</p>
-<h2 id="a-word-about-socat" class="unnumbered"><a href="#a-word-about-socat">a word about socat</a></h2>
+<h1 id="a-word-about-socat" class="unnumbered">a word about socat</h1>
 <p>I will be using &quot;socat&quot;, an absolute corker of a program that does so many things it's incredible! Other people use corkscrew, ssh-https-tunnel, etc., which are all specialised for just one purpose. I prefer socat, and once you spend the 2-3 years :-) needed to read the man page, you will see why!</p>
 <p>The basic idea is that you will somehow invoke socat, which will negotiate with the HTTP(S) proxy server using the CONNECT method to get you a clean pipe to the server on the far side.</p>
 <p>However, do note that socat does have one disadvantage: the passwords to your proxy server are visible in to local users running <code>ps -ef</code> or something. I don't care since I don't have anyone else logging into my desktop, and the ability to use a program I already have anyway (socat) is more important.</p>
-<h2 id="proxying-the-git-protocol" class="unnumbered"><a href="#proxying-the-git-protocol">proxying the <strong>git</strong> protocol</a></h2>
+<h1 id="proxying-the-git-protocol" class="unnumbered">proxying the <strong>git</strong> protocol</h1>
 <p>When I want to download a public repo, I just type</p>
 <pre><code>proxied_git clone ...repo...
 proxied_git pull</code></pre>
@@ -94,7 +92,7 @@ EOF
 <li>you could permanently set the environment variable if <strong>all</strong> your git repos are remote (very unlikely)</li>
 </ul>
 <p>One thing you <em>cannot</em> do is to roll the entire socat command into the environment variable. Git passes the host and port as two arguments to the proxy command, but socat expects them in the syntax you see above, so you <em>will</em> need to wrap it in a script as I have done. I guess you could argue that this is a point in favour of corkscrew etc. ;-)</p>
-<h2 id="proxying-the-ssh-protocol" class="unnumbered"><a href="#proxying-the-ssh-protocol">proxying the <strong>ssh</strong> protocol</a></h2>
+<h1 id="proxying-the-ssh-protocol" class="unnumbered">proxying the <strong>ssh</strong> protocol</h1>
 <p>The git protocol is handled directly by git (duh!), but if you use the ssh protocol, it invokes ssh explicitly (again, duh!).</p>
 <p>Ssh already has this sort of stuff built-in, so you simply add a few lines to your <code>~/.ssh/config</code></p>
 <pre><code>host gh
@@ -104,7 +102,7 @@ EOF
     proxycommand socat - PROXY:your.proxy.ip:%h:%p,proxyport=3128,proxyauth=user:pwd</code></pre>
 <p>Now you can just say (for example):</p>
 <pre><code>git clone gh:sitaramc/git-notes.git</code></pre>
-<h3 id="ssh-proxy-using-corkscrew-instead-of-socat" class="unnumbered"><a href="#ssh-proxy-using-corkscrew-instead-of-socat">ssh proxy using corkscrew instead of socat</a></h3>
+<h2 id="ssh-proxy-using-corkscrew-instead-of-socat" class="unnumbered">ssh proxy using corkscrew instead of socat</h2>
 <ul>
 <li>download and install corkscrew (<a href="http://www.agroman.net/corkscrew/">http://www.agroman.net/corkscrew/</a>)</li>
 <li>create a file (eg., ~/.ssh/myauth) and put your http proxy username and password as &quot;username:password&quot; in it and save it.</li>
@@ -117,7 +115,7 @@ EOF
     port 22
     proxycommand corkscrew your.proxy.ip 3128 %h %p ~/.ssh/myauth</code></pre></li>
 </ul>
-<h3 id="extra-coolness-for-github" class="unnumbered"><a href="#extra-coolness-for-github">extra coolness for github</a></h3>
+<h2 id="extra-coolness-for-github" class="unnumbered">extra coolness for github</h2>
 <p>Noting that many corporate firewalls block access to the CONNECT method on ports other than 443, the good folks at github have an ssh server listening on 443 if you use the host &quot;ssh.github.com&quot;, so you can replace the hostname and the port in the above ssh config stanza as appropriate, and you're all set</p>
 </body>
 </html>
