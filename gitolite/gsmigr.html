@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>migrating from gitosis to gitolite</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -53,7 +53,9 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1 id="migrating-from-gitosis-to-gitolite"><span class="header-section-number">1</span> migrating from gitosis to gitolite</h1>
+<div id="header">
+<h1 class="title">migrating from gitosis to gitolite</h1>
+</div>
 <p>[2012-04-09] Modified for gitolite g3. These instructions have not really been tested with g3, but are expected to work.</p>
 <p>Migrating from gitosis to gitolite is fairly easy, because the basic design is the same.</p>
 <p>There's only one thing that might trip up people: the userid. Gitosis uses <code>gitosis</code>. Gitolite can use any userid you want; most of the documentation uses <code>git</code>, while DEB/RPM packages use <code>gitolite</code>.</p>

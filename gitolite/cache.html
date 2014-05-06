@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>gitolite and the (redis) cache</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -53,14 +53,16 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1 id="gitolite-and-the-redis-cache"><span class="header-section-number">1</span> gitolite and the (redis) cache</h1>
+<div id="header">
+<h1 class="title">gitolite and the (redis) cache</h1>
+</div>
 <p>There's now a branch of gitolite called &quot;redis&quot; that uses the Redis in-memory key-value database to speed up some parts of gitolite.</p>
 <p>To install it, just install redis, then the perl driver &quot;Redis.pm&quot;. Then install this branch of gitolite in the normal manner. Redis will start automatically and the right things will happen (but see caveats below).</p>
 <p>Support for this branch is limited to verifiable gitolite bugs, if you find any; I can't help you with redis itself.</p>
 <hr />
 <p>First, the warnings/caveats. If you ever kill the redis-server be sure to also remove the socket file <code>~/.redis-gitolite.sock</code>. Conversely if you ever remove the sock file be sure to kill the process also. Otherwise you get weird behaviour, including possible hangs. (If things don't seem to work, the first thing to do is to kill all 'redis-server's on that userid and remove <code>~/.redis-gitolite.*</code>, then try again.)</p>
 <p><strong>Note</strong>: To the best of my knowledge, this cannot result in wrong data being passed to gitolite, causing a security breach. If anyone has time I'd appreciate a review of the code -- it's not too big, the diff is only about 180 lines, and most of that is a new file of 140 or so lines.</p>
-<h2 id="details"><span class="header-section-number">1.1</span> details</h2>
+<h1 id="details"><span class="header-section-number">1</span> details</h1>
 <p>During normal operation, (i.e., normal user executing a normal git operation on a repo), there are a couple of places where gitolite is somewhat wasteful, because each run, being a <em>separate</em> program, recomputes the same things.</p>
 <p>The first instance of wasted effort occurs only in really large setups. The <code>~/.gitolite/conf/gitolite.conf-compiled.pm</code> file, which is read every time gitolite is invoked, probably contains a lot of stuff that is not relevant to the repo currently being accessed, and thus is a waste of time to parse.</p>
 <p>Worse, for write operations this whole thing happens again, since the update hook is, for all practical purposes, a completely separate program, and thus has to read all the same stuff again.</p>

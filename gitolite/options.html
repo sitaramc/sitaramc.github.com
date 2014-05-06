@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>gitolite options</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -53,7 +53,9 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1 id="gitolite-options"><span class="header-section-number">1</span> gitolite options</h1>
+<div id="header">
+<h1 class="title">gitolite options</h1>
+</div>
 <p>Some gitolite features are enabled, or gitolite's behaviour changed, by setting &quot;options&quot;.</p>
 <p>A line like 'option foo = 1' is really just syntactic sugar for 'config gitolite-options.foo = 1', so everything in the <a href="git-config.html">git-config</a> page also applies here (especially the bit about <a href="git-config.html#override_conf">overriding config values</a>).</p>
 <p><strong>However</strong>, these values are <strong>not</strong> written into git's own <code>config</code> file, so git (or other programs running <code>git config</code>) will not see them. You can only query them using <code>gitolite git-config</code>, where they will appear in full in the output.</p>

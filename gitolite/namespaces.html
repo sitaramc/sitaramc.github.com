@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>namespace support in gitolite</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -53,20 +53,22 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1 id="namespace-support-in-gitolite"><span class="header-section-number">1</span> namespace support in gitolite</h1>
+<div id="header">
+<h1 class="title">namespace support in gitolite</h1>
+</div>
 <p><em>This feature is only available in the 'namespaces' branch until enough people test it and tell me it works fine</em>.</p>
 <p><strong>AVOID NASTY SURPRISES!</strong> Please read the entire document before attempting to use or install this. Most non-core features of gitolite do not work with namespaces, and, worse, many of them will <em>fail silently</em>. There are also security issuess you need to be aware of.</p>
-<h2 id="background"><span class="header-section-number">1.1</span> background</h2>
+<h1 id="background"><span class="header-section-number">1</span> background</h1>
 <p>In many projects, developers need to push their work to some central place for others to fetch. Namespaces allow you to give each developer what looks like her own repo or set of repos, while combining all these logical repos into one physical repo on the server. This saves a lot of disk space if they all share a lot of common history.</p>
 <p>The logical repos look like normal repos to a git <em>client</em>; all the magic is on the server side. (But see the &quot;WARNINGS&quot; section).</p>
-<h2 id="terminology"><span class="header-section-number">1.2</span> terminology</h2>
+<h1 id="terminology"><span class="header-section-number">2</span> terminology</h1>
 <p>There is one repo that is special, and several others that depend upon it or use it. Depending on context, we use one of the following names:</p>
 <ul>
 <li>storage context: backing repo/real repo, and logical repos</li>
 <li><a href="http://git-scm.com/book/en/Distributed-Git-Distributed-Workflows#Integration-Manager-Workflow">workflow</a> context: blessed repo and developer repos</li>
 </ul>
 <p><font color="gray">In addition, in the gitolite context you could say that the blessed repo is a normal (not &quot;wild&quot;) repo and the logical repos are <a href="wild.html">wild</a> repos, since that is the most convenient way to set this up. However, it is not mandatory -- you can have a wild repo as a backing repo, and/or a normal repo as a logical repo if you wish.</font></p>
-<h2 id="setup"><span class="header-section-number">1.3</span> setup</h2>
+<h1 id="setup"><span class="header-section-number">3</span> setup</h1>
 <p>First, add the following lines to the rc file, as indicated:</p>
 <pre><code># add this line as the *last* item in the PRE_GIT trigger list.  In
 # particular, it should be *after* the Mirroring::pre_git line if you're
@@ -89,11 +91,11 @@ repo    CREATOR/[a-zA-Z0-9].*
     RW+     =   CREATOR
     R       =   READERS @all
     option namespace.pattern = %/* is @1 in @2</code></pre>
-<h2 id="use"><span class="header-section-number">1.4</span> use</h2>
+<h1 id="use"><span class="header-section-number">4</span> use</h1>
 <p>A developer doesn't have to do anything differently. She will still run, e.g., <code>git clone git@host:alice/linux</code> to auto-create and clone a <a href="wild.html">wild</a> repo for herself, then add a remote to the &quot;backing&quot; repo, fetch it, start working, and eventually push her work to alice/linux.</p>
 <p>However, she might notice some differences. To begin with, her first push of an enormous code base, to what she thought was an empty repo on the server, might go surprisingly fast :)</p>
 <p>Secondly, a lot of <em>gitolite</em> commands (and other features) won't work. See the &quot;WARNINGS&quot; section below for more.</p>
-<h2 id="details"><span class="header-section-number">1.5</span> details</h2>
+<h1 id="details"><span class="header-section-number">5</span> details</h1>
 <p>The option line above has 3 parts separated by the words &quot;is&quot; and &quot;in&quot;:</p>
 <pre><code>&lt;pattern&gt; is &lt;namespace&gt; in &lt;backing repo&gt;</code></pre>
 <p>When a user attempts to access a logical repo (say &quot;alice/linux&quot;), the namespace pattern for that repo is applied to the repo name as follows:</p>
@@ -141,8 +143,8 @@ option namespace.pattern-3 = %/%/* is @1/@3 in @2</code></pre>
 <p>If you try 'alice/gitolite/foo' in this setup, it will only match the 3rd pattern. The backing repo name will be 'gitolite', which probably doesn't exist, and git will complain.</p>
 <p>Also, without rule 3, trying a repo with more than 2 components won't work. Gitolite will complain that no namespace options matched. This would indicate a discrepancy between the <code>repo [...]</code> line governing those options and the options themselves; you need to fine tune one or the others to fix things.</p></li>
 </ul>
-<h2 id="warnings"><span class="header-section-number">1.6</span> WARNINGS</h2>
-<h3 id="security"><span class="header-section-number">1.6.1</span> SECURITY</h3>
+<h1 id="warnings"><span class="header-section-number">6</span> WARNINGS</h1>
+<h2 id="security"><span class="header-section-number">6.1</span> SECURITY</h2>
 <p><strong>First and most important</strong>, please read 'man gitnamespaces' for important security information about namespaces.</p>
 <p>Secondly, please note that gitolite's access control decisions are made based on the repo name that the user supplies, even if that is only a logical repo. E.g., in a sequence like this:</p>
 <pre><code>git clone git@server:alice/linux                        # 1
@@ -153,7 +155,7 @@ git checkout master
 git push origin master                                  # 3</code></pre>
 <p>Lines 1 and 3 use the access list for the logical repo (&quot;alice/linux&quot;) to allow or reject a push, while line 2, which is directly contacting the &quot;backing&quot; repo, use that repo's access rules.</p>
 <p>In particular, Alice does <strong>not</strong> need write access to the backing repo for the push to succeed!</p>
-<h3 id="gitolite-functionality"><span class="header-section-number">1.6.2</span> gitolite functionality</h3>
+<h2 id="gitolite-functionality"><span class="header-section-number">6.2</span> gitolite functionality</h2>
 <p>Most things you're used to in gitolite won't work with logical repos. From the client point of view, <strong>the only features guaranteed to work on logical repos are</strong>:</p>
 <ul>
 <li>normal git operations (clone, fetch, push)</li>
@@ -168,9 +170,9 @@ git push origin master                                  # 3</code></pre>
 <li>anything that expects to be recorded somewhere in the bare repo directory.</li>
 <li>...and anything else not explicitly listed as &quot;working&quot; in this doc ;-)</li>
 </ul>
-<h3 id="gitolite-functionality----mirroring"><span class="header-section-number">1.6.3</span> gitolite functionality -- mirroring</h3>
+<h2 id="gitolite-functionality----mirroring"><span class="header-section-number">6.3</span> gitolite functionality -- mirroring</h2>
 <p>Mirroring works, but <strong>all the logical repos and the backing repo should have the same mirroring setup</strong>. I.e., which server is the master, who are the slaves, are redirects allowed, if so from where, etc., etc., etc., should all have the same values for all of them. I cannot over-emphasise the importance of this for proper mirroring.</p>
-<h2 id="other-notes"><span class="header-section-number">1.7</span> other notes</h2>
+<h1 id="other-notes"><span class="header-section-number">7</span> other notes</h1>
 <p>The &quot;backing repo&quot; needs to exist. If it is itself a <a href="wild.html">wild</a> repo, it must be auto-created <em>before</em> a logical repo that hangs off of it is accessed.</p>
 <p>The logical repo must also be mentioned in the gitolite.conf file in some way, as you saw in the example. Access control decisions are made based on this one, not the backing repo.</p>
 <p>One <em>quirk</em> is that, if the logical repo is a wild repo, then an actual repo with that name <em>is</em> created on disk. Gitolite needs a place to keep its repo-specific permissions so it has to do that. You will find, however, that the objects directory is pretty much empty, even after a lot of activity.</p>

@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>migrating</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -53,18 +53,20 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1 id="migrating"><span class="header-section-number">1</span> migrating</h1>
+<div id="header">
+<h1 class="title">migrating</h1>
+</div>
 <p><font color="gray">This section is about migrating from older gitolite to &quot;g3&quot;. If you're migrating from gitosis, see <a href="gsmigr.html">here</a>.</font></p>
 <p>First things first: g2 will be supported for a good long time for critical bugs, although enhancements and new features won't happen.</p>
 <p>If you're an existing (gitolite v1.x or v2.x) user, and wish to migrate , here are the steps:</p>
-<h2 id="pre-migration-checks"><span class="header-section-number">1.1</span> pre-migration checks</h2>
+<h1 id="pre-migration-checks"><span class="header-section-number">1</span> pre-migration checks</h1>
 <ol style="list-style-type: decimal">
 <li><p>Check the <a href="dev-status.html">dev-status</a> page to make sure all the features you want have been implemented in g3.</p></li>
 <li><p>Read the <a href="g2migr.html">pre-migration</a> page to see what changes affect you and your users, and how much time it might take you to migrate. (The closer you were to a default install of the old gitolite, the less time a migration will take.)</p>
 <p>This includes at least running <code>check-g2-compat</code> to see what are the big issues you might need to address during the migration.</p>
 <p>In particular, note if you use any variables that the pre-migration checklist describes as &quot;requires presetting&quot;.</p></li>
 </ol>
-<h2 id="the-actual-migration"><span class="header-section-number">1.2</span> the actual migration</h2>
+<h1 id="the-actual-migration"><span class="header-section-number">2</span> the actual migration</h1>
 <p>(Note: You may also like the <a href="g2migr-example.html">example migration</a> page).</p>
 <p><strong>Note</strong>: nothing in any of the gitolite install/setup/etc will ever touch the <em>data</em> in any repository except the gitolite-admin repo. The only thing it will normally touch in normal repos is the <code>update</code> hook.</p>
 <p><strong>Note: all migration happens on the server; you do not need your workstation</strong>.</p>

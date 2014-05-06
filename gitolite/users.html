@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>adding and removing users</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -53,7 +53,9 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1 id="adding-and-removing-users"><span class="header-section-number">1</span> adding and removing users</h1>
+<div id="header">
+<h1 class="title">adding and removing users</h1>
+</div>
 <p>Strictly speaking, gitolite doesn't know where users come from. If that surprises you, read <a href="auth.html">this</a>. However, gitolite does help with ssh-based authentication, so here's some info on adding and removing users.</p>
 <blockquote>
 <hr />
@@ -69,9 +71,9 @@
 <p>To <strong>remove</strong> a user, <code>git rm keydir/alice.pub</code>.</p>
 <p>In both cases, you must commit and push. On receiving the push, gitolite will carry out the changes specified.</p>
 <p>The user name is simply the base name of the public key file name. So 'alice.pub', 'foo/alice.pub' and 'bar/alice.pub', all resolve to user &quot;alice&quot;.</p>
-<h2 id="multi-key"><span class="header-section-number">1.1</span> multiple keys per user</h2>
+<h1 id="multi-key"><span class="header-section-number">1</span> multiple keys per user</h1>
 <p>The simplest and most understandable is to put their keys in different subdirectories, (alice.pub, home/alice.pub, laptop/alice.pub, etc). This can be any depth -- only the last component (the actual pubkey file name) is all that matters.</p>
-<h3 id="old-style-multi-keys"><span class="header-section-number">1.1.1</span> old style multi-keys</h3>
+<h2 id="old-style-multi-keys"><span class="header-section-number">1.1</span> old style multi-keys</h2>
 <p>There is another way that involves creating key files like <code>alice@home.pub</code> and <code>alice@laptop.pub</code>, but there is a complication because gitolite also allows <em>full email addresses</em> as user names. (I.e., <code>sitaramc@gmail.com.pub</code> denotes the user called <code>sitaramc@gmail.com</code>).</p>
 <p>This older method of enabling multi-keys was developed to deal with that. It will continue to work and be supported in <em>code</em>, simply because I prefer it. But I will not accept questions or doc patches for it, because it seems it is too difficult to understand for a lot of people. This table of sample pubkey filenames and the corresponding derived usernames is all you get:</p>
 <ul>

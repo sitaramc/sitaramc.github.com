@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>basic syntax</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -53,7 +53,9 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1 id="basic-syntax"><span class="header-section-number">1</span> basic syntax</h1>
+<div id="header">
+<h1 class="title">basic syntax</h1>
+</div>
 <p>In general, everything is <strong>space separated</strong>; there are no commas, semicolons, etc., in the syntax.</p>
 <p><strong>Comments</strong> are in the usual shell-ish style.</p>
 <p><strong>User names</strong> and <strong>repo names</strong> are as simple as possible; they must start with an alphanumeric, but after that they can also contain <code>.</code>, <code>_</code>, or <code>-</code>.</p>
@@ -62,7 +64,7 @@
 <p>Reponames can contain <code>/</code> characters (this allows you to put your repos in a tree-structure for convenience).</p>
 <p>There are no continuation lines by default. You do not need them; the section on <a href="groups.html">groups</a> will tell you how you can break up large lists of names in a group definition into multiple lines.</p>
 <p><font color="gray">If you <em>must</em> have them, you can optionally enable them; see the syntactic <a href="cust.html#sugar">sugar</a> section.</font></p>
-<h2 id="include"><span class="header-section-number">1.1</span> include files</h2>
+<h1 id="include"><span class="header-section-number">1</span> include files</h1>
 <p>Gitolite allows you to break up the configuration into multiple files and include them in the main file for convenience.</p>
 <pre><code>include     &quot;foo.conf&quot;</code></pre>
 <p>will include the contents of the file &quot;foo.conf&quot;.</p>

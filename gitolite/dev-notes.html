@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>notes for developers</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -53,33 +53,34 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
+<div id="header">
+<h1 class="title">notes for developers</h1>
+</div>
 <div id="TOC">
 <ul>
-<li><a href="#notes-for-developers"><span class="toc-section-number">1</span> notes for developers</a><ul>
-<li><a href="#environment-variables-and-other-inputs"><span class="toc-section-number">1.1</span> environment variables and other inputs</a></li>
-<li><a href="#apis"><span class="toc-section-number">1.2</span> APIs</a><ul>
-<li><a href="#the-shell-api"><span class="toc-section-number">1.2.1</span> the shell API</a></li>
-<li><a href="#the-perl-api"><span class="toc-section-number">1.2.2</span> the perl API</a></li>
+<li><a href="#environment-variables-and-other-inputs"><span class="toc-section-number">1</span> environment variables and other inputs</a></li>
+<li><a href="#apis"><span class="toc-section-number">2</span> APIs</a><ul>
+<li><a href="#the-shell-api"><span class="toc-section-number">2.1</span> the shell API</a></li>
+<li><a href="#the-perl-api"><span class="toc-section-number">2.2</span> the perl API</a></li>
 </ul></li>
-<li><a href="#writing-your-own..."><span class="toc-section-number">1.3</span> writing your own...</a><ul>
-<li><a href="#commands"><span class="toc-section-number">1.3.1</span> ...commands</a></li>
-<li><a href="#hooks"><span class="toc-section-number">1.3.2</span> ...hooks</a></li>
-<li><a href="#trigger-programs"><span class="toc-section-number">1.3.3</span> ...trigger programs</a></li>
-<li><a href="#sugar"><span class="toc-section-number">1.3.4</span> ...&quot;sugar&quot;</a></li>
+<li><a href="#writing-your-own..."><span class="toc-section-number">3</span> writing your own...</a><ul>
+<li><a href="#commands"><span class="toc-section-number">3.1</span> ...commands</a></li>
+<li><a href="#hooks"><span class="toc-section-number">3.2</span> ...hooks</a><ul>
+<li><a href="#anything-but-the-update-hook"><span class="toc-section-number">3.2.1</span> anything but the update hook</a></li>
+<li><a href="#update-hook"><span class="toc-section-number">3.2.2</span> update hook</a></li>
 </ul></li>
-<li><a href="#appendix-1-notes-on-the-input-trigger"><span class="toc-section-number">1.4</span> appendix 1: notes on the INPUT trigger</a></li>
-<li><a href="#rsev"><span class="toc-section-number">1.5</span> appendix 2: repo-specific environment variables</a></li>
-<li><a href="#lff"><span class="toc-section-number">1.6</span> appendix 3: log file format</a></li>
+<li><a href="#trigger-programs"><span class="toc-section-number">3.3</span> ...trigger programs</a></li>
+<li><a href="#sugar"><span class="toc-section-number">3.4</span> ...&quot;sugar&quot;</a></li>
 </ul></li>
+<li><a href="#appendix-1-notes-on-the-input-trigger"><span class="toc-section-number">4</span> appendix 1: notes on the INPUT trigger</a></li>
+<li><a href="#rsev"><span class="toc-section-number">5</span> appendix 2: repo-specific environment variables</a></li>
+<li><a href="#lff"><span class="toc-section-number">6</span> appendix 3: log file format</a></li>
 </ul>
 </div>
-<h1 id="notes-for-developers"><span class="header-section-number">1</span> notes for developers</h1>
-<!-- pandoc: toc -->
-
 <p>Gitolite has a huge bunch of existing features that gradually need to be moved over. Plus you may want to write your own programs to interact with it.</p>
 <p><strong>This document is about <em>writing</em> hooks, commands, triggers, VREFS, and sugar scripts. <em>Installing</em> them, including &quot;where and how&quot;, is described <a href="cust.html#localcode">here</a></strong>.</p>
 <p>Note: the <a href="cust.html">customisation</a> document is the starting point for all information about customising gitolite.</p>
-<h2 id="environment-variables-and-other-inputs"><span class="header-section-number">1.1</span> environment variables and other inputs</h2>
+<h1 id="environment-variables-and-other-inputs"><span class="header-section-number">1</span> environment variables and other inputs</h1>
 <p>In general, the following environment variables should always be available:</p>
 <pre><code>GL_BINDIR
 GL_REPO_BASE
@@ -87,8 +88,8 @@ GL_ADMIN_BASE</code></pre>
 <p>In addition, commands invoked by a remote client also have <code>GL_USER</code>, while hooks have <code>GL_USER</code> as well as <code>GL_REPO</code>.</p>
 <p>A special form of the <a href="options.html">option</a> syntax can be used to set <a href="dev-notes.html#rsev">repo-specific environment variables</a>.</p>
 <p>Finally, note that triggers get a lot of relevant information from gitolite as arguments; see <a href="triggers.html">here</a> for details.</p>
-<h2 id="apis"><span class="header-section-number">1.2</span> APIs</h2>
-<h3 id="the-shell-api"><span class="header-section-number">1.2.1</span> the shell API</h3>
+<h1 id="apis"><span class="header-section-number">2</span> APIs</h1>
+<h2 id="the-shell-api"><span class="header-section-number">2.1</span> the shell API</h2>
 <p>The following commands exist to help you write shell scripts that interact easily with gitolite. Each of them responds to <code>-h</code> so please run that for more info.</p>
 <ul>
 <li><p><code>gitolite access</code> to check access rights given repo, user, type of access (R, W, ...) and refname (optional). Example use: src/commands/desc.</p></li>
@@ -97,16 +98,16 @@ GL_ADMIN_BASE</code></pre>
 <li><p><code>gitolite query-rc</code> to check the value of an RC variable. Example use: src/commands/desc.</p></li>
 </ul>
 <p>In addition, you can also look at the comments in src/lib/Gitolite/Easy.pm (the perl API module) for ideas.</p>
-<h3 id="the-perl-api"><span class="header-section-number">1.2.2</span> the perl API</h3>
+<h2 id="the-perl-api"><span class="header-section-number">2.2</span> the perl API</h2>
 <p>...is implemented by Gitolite::Easy; the comments in src/lib/Gitolite/Easy.pm serve as documentation.</p>
 <p>Note that some of the perl functions called by Easy.pm will change the current directory to something else, without saving and restoring the directory. Patches (to Easy.pm <em>only</em>) welcome.</p>
-<h2 id="writing-your-own..."><span class="header-section-number">1.3</span> writing your own...</h2>
-<h3 id="commands"><span class="header-section-number">1.3.1</span> ...commands</h3>
+<h1 id="writing-your-own..."><span class="header-section-number">3</span> writing your own...</h1>
+<h2 id="commands"><span class="header-section-number">3.1</span> ...commands</h2>
 <p>Commands are standalone programs, in any language you like. They simply receive the arguments you append. In addition, the env var <code>GL_USER</code> is available if it is being run remotely. src/commands/desc is the best example at present.</p>
-<h3 id="hooks"><span class="header-section-number">1.3.2</span> ...hooks</h3>
-<h4 id="anything-but-the-update-hook"><span class="header-section-number">1.3.2.1</span> anything but the update hook</h4>
+<h2 id="hooks"><span class="header-section-number">3.2</span> ...hooks</h2>
+<h3 id="anything-but-the-update-hook"><span class="header-section-number">3.2.1</span> anything but the update hook</h3>
 <p>If you want to add any hook other than the update hook, 'man githooks' is all you need.</p>
-<h4 id="update-hook"><span class="header-section-number">1.3.2.2</span> update hook</h4>
+<h3 id="update-hook"><span class="header-section-number">3.2.2</span> update hook</h3>
 <p>If you want to add additional <code>update</code> hook functionality, do this:</p>
 <ul>
 <li><p>Write and test your update hook separately from gitolite.</p></li>
@@ -118,13 +119,13 @@ GL_ADMIN_BASE</code></pre>
 </ul>
 <p>As you probably guessed, you can make your additional update hooks more selective, applying them only to some repos / users / combinations.</p>
 <p>Note: a normal update hook expects 3 arguments (ref, old SHA, new SHA). A VREF will get those three, followed by at least 4 more. Your VREF should just ignore the extra args.</p>
-<h3 id="trigger-programs"><span class="header-section-number">1.3.3</span> ...trigger programs</h3>
+<h2 id="trigger-programs"><span class="header-section-number">3.3</span> ...trigger programs</h2>
 <p>Trigger programs run at specific points in gitolite's execution, with specific arguments being passed to them. See the <a href="triggers.html">triggers</a> page for details.</p>
 <p>You can write programs that are both manually runnable as well as callable by trigger events, especially if they don't <em>need</em> any arguments.</p>
-<h3 id="sugar"><span class="header-section-number">1.3.4</span> ...&quot;sugar&quot;</h3>
+<h2 id="sugar"><span class="header-section-number">3.4</span> ...&quot;sugar&quot;</h2>
 <p>Syntactic sugar helpers are NOT complete, standalone, programs. They must include a perl sub called <code>sugar_script</code> that takes in a listref, and returns a listref. The listrefs point to a list that contains the entire conf file (with all <a href="syntax.html#include">include</a> processing already done). You create a new list with contents modified as you like and return a ref to it.</p>
 <p>There are a couple of examples in src/syntactic-sugar.</p>
-<h2 id="appendix-1-notes-on-the-input-trigger"><span class="header-section-number">1.4</span> appendix 1: notes on the INPUT trigger</h2>
+<h1 id="appendix-1-notes-on-the-input-trigger"><span class="header-section-number">4</span> appendix 1: notes on the INPUT trigger</h1>
 <p>Note: some of this won't make sense if you haven't read about <a href="triggers.html">triggers</a>.</p>
 <p>The INPUT trigger sequence is designed to set or change environment variables or the argument list. (Side note: this means INPUT triggers have to be written as perl modules; they cannot be standalone scripts). This is a very powerful idea so an extended description may be useful.</p>
 <p>Sshd invokes gitolite-shell with the SSH_ORIGINAL_COMMAND env var containing the git/gitolite command and one argument: the gitolite username.</p>
@@ -140,7 +141,7 @@ GL_ADMIN_BASE</code></pre>
 <p><em>(This is a very nice and simple example of how you can implement features by latching onto multiple events and sharing data to do something)</em>.</p>
 <p>You can even change the reponame the user sees, behind his back. Alias.pm handles that.</p>
 <p>Finally, as an exercise for the reader, consider how you would create a brand new env var that contains the <em>comment</em> field of the ssh pubkey that was used to gain access, using the information <a href="sts.html#kfn">here</a>.</p>
-<h2 id="rsev"><span class="header-section-number">1.5</span> appendix 2: repo-specific environment variables</h2>
+<h1 id="rsev"><span class="header-section-number">5</span> appendix 2: repo-specific environment variables</h1>
 <p>A special form of the <a href="options.html">option</a> syntax can be used to set repo-specific environment variables that are visible to gitolite triggers and any git hooks you may install.</p>
 <p>For example, let's say you installed a post-update hook that initiates a CI job. By default, of course, this hook will be active for <em>all</em> gitolite-managed repos. However, you only want it to run for some specific repos, say r1, r2, and r4.</p>
 <p>To do that, first add this to the gitolite.conf:</p>
@@ -165,7 +166,7 @@ repo r1 r2 r4
 then
     ...</code></pre>
 <p>The new method is much more convenient, as you can see.</font></p>
-<h2 id="lff"><span class="header-section-number">1.6</span> appendix 3: log file format</h2>
+<h1 id="lff"><span class="header-section-number">6</span> appendix 3: log file format</h1>
 <p>Here's a brief description of gitolite's log file format. All fields are tab separated.</p>
 <p>There are two kinds of lines in the log file:</p>
 <ul>

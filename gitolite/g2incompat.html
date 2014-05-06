@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>incompatibility with g2</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -53,15 +53,17 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1 id="g2incompat"><span class="header-section-number">1</span> incompatibility with g2</h1>
+<div id="header">
+<h1 class="title">incompatibility with g2</h1>
+</div>
 <p>This page expands on some incompatibilities that were only briefly mentioned in the <a href="g2migr.html">pre-migration</a> page.</p>
-<h2 id="g2i-name"><span class="header-section-number">1.1</span> NAME rules</h2>
+<h1 id="g2i-name"><span class="header-section-number">1</span> NAME rules</h1>
 <ol style="list-style-type: decimal">
 <li><p>NAME/ rules must be changed to VREF/NAME/</p></li>
 <li><p>Fallthru on all VREFs is &quot;success&quot; now, so any NAME/ rules you have <strong>MUST</strong> change the ruleset in some way to maintain the same restrictions. The simplest is to add the following line to the end of each repo's rule list:</p>
 <pre><code>-   VREF/NAME/       =   @all</code></pre></li>
 </ol>
-<h2 id="g2i-subconf"><span class="header-section-number">1.2</span> subconf command in admin repo</h2>
+<h1 id="g2i-subconf"><span class="header-section-number">2</span> subconf command in admin repo</h1>
 <p>(This is also affected by the previous issue, 'NAME rules'; please read that as well).</p>
 <p>If you're using delegation in your admin conf setup, please add the following lines to the end of the gitolite-admin rules in your conf/gitolite.conf file:</p>
 <pre><code>repo gitolite-admin
@@ -73,11 +75,11 @@ subconf &quot;fragments/*.conf&quot;</code></pre>
 <p><strong>Virtual refs are best used as additional &quot;deny&quot; rules</strong>, performing extra checks that core gitolite cannot.</p>
 </blockquote>
 <p>The second part explicitly says when and where to include the subconf files. (Before subconf was invented, this used to happen implicitly at the end of the main conf file, and was hardcoded to that specific glob.)</p>
-<h2 id="g2i-gl-time"><span class="header-section-number">1.3</span> gl-time for performance measurement</h2>
+<h1 id="g2i-gl-time"><span class="header-section-number">3</span> gl-time for performance measurement</h1>
 <p>If you've been using gl-time for performance measurement, there's a much better system available now.</p>
 <p>gl-time used to only log elapsed time. The new 'CpuTime' trigger module shipped with gitolite, if enabled in the rc file, can also report CPU times using perl's 'times()' function. See comments within that file and in the default rc file that contain the word &quot;cpu&quot;, for more details.</p>
 <p>Further, you can copy that module with a different name, add your own functionality, and invoke <em>that</em> from the rc file instead.</p>
-<h2 id="g2i-mirroring"><span class="header-section-number">1.4</span> changes in mirroring setup</h2>
+<h1 id="g2i-mirroring"><span class="header-section-number">4</span> changes in mirroring setup</h1>
 <p>There are several changes with regard to mirroring:</p>
 <ul>
 <li><p>There is no 'post-receive' hook to be installed. Mirroring is handled by g3's <a href="triggers.html">triggers</a> mechanism. Gitolite triggers are enabled by adding (or uncommenting, in this case) appropriate lines in the rc file.</p>

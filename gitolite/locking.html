@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>locking binary files</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -53,34 +53,32 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
+<div id="header">
+<h1 class="title">locking binary files</h1>
+</div>
 <div id="TOC">
 <ul>
-<li><a href="#locking-binary-files"><span class="toc-section-number">1</span> locking binary files</a><ul>
-<li><a href="#problem-description"><span class="toc-section-number">1.1</span> problem description</a></li>
-<li><a href="#adminsetup"><span class="toc-section-number">1.2</span> admin/setup</a></li>
-<li><a href="#user-view"><span class="toc-section-number">1.3</span> user view</a></li>
-<li><a href="#detailed-example"><span class="toc-section-number">1.4</span> detailed example</a></li>
-</ul></li>
+<li><a href="#problem-description"><span class="toc-section-number">1</span> problem description</a></li>
+<li><a href="#adminsetup"><span class="toc-section-number">2</span> admin/setup</a></li>
+<li><a href="#user-view"><span class="toc-section-number">3</span> user view</a></li>
+<li><a href="#detailed-example"><span class="toc-section-number">4</span> detailed example</a></li>
 </ul>
 </div>
-<h1 id="locking-binary-files"><span class="header-section-number">1</span> locking binary files</h1>
-<!-- pandoc: toc -->
-
 <p>Locking is useful to make sure that binary files (office docs, images, ...) don't get into a merge state. (<font color="gray">If you think it's not a big deal, you have never manually merged independent changes to an ODT or something!</font>)</p>
 <p>When git is used in a truly distributed fashion, locking is impossible. However, in most corporate setups, there is a single central server acting as the canonical source of truth and collaboration point for all developers. In this situation it should be possible to at least prevent commits from being pushed that contains changes to files locked by someone else.</p>
 <p>The two &quot;lock&quot; programs (one a command that a user uses, and one a VREF that the admin adds to a repo's access rules) together attempt to achieve this.</p>
 <p>Of course, locking by itself is not quite enough. You may still get into merge situations if you make changes in branches. For best results you should actually keep all the binary files in their own branch, separate from the ones containing source code.</p>
 <hr />
-<h2 id="problem-description"><span class="header-section-number">1.1</span> problem description</h2>
+<h1 id="problem-description"><span class="header-section-number">1</span> problem description</h1>
 <p>Our users are alice, bob, and carol. Our repo is foo. It has some &quot;odt&quot; files in the &quot;doc/&quot; directory. We want to make sure these odt files never get into a &quot;merge&quot; situation.</p>
-<h2 id="adminsetup"><span class="header-section-number">1.2</span> admin/setup</h2>
+<h1 id="adminsetup"><span class="header-section-number">2</span> admin/setup</h1>
 <p>First, someone with shell access to the server must add 'lock' to the ENABLE list in the rc file.</p>
 <p>Next, the gitolite.conf file should have something like this:</p>
 <pre><code>repo foo
     &lt;...other rules...&gt;
     -   VREF/lock      =   @all</code></pre>
 <p>However, see below for the difference between &quot;RW&quot; and &quot;RW+&quot; from the point of view of this feature and adjust permissions accordingly.</p>
-<h2 id="user-view"><span class="header-section-number">1.3</span> user view</h2>
+<h1 id="user-view"><span class="header-section-number">3</span> user view</h1>
 <p>Here's a summary:</p>
 <ul>
 <li>Any user with &quot;W&quot; permissions to any branch in the repo can &quot;lock&quot; any file. Once locked, no other user can push changes to that file, <em>in any branch</em>, until it is unlocked.</li>
@@ -93,7 +91,7 @@
 <li>Finish the editing task as quickly as possible, then commit, push, and unlock the file(s) so others are not needlessly blocked.</li>
 <li>Understand that breaking a lock require additional, (out of band) communication. It is upto the team's policies what that entails.</li>
 </ul>
-<h2 id="detailed-example"><span class="header-section-number">1.4</span> detailed example</h2>
+<h1 id="detailed-example"><span class="header-section-number">4</span> detailed example</h1>
 <p>Alice declares her intent to work on &quot;d1.odt&quot;:</p>
 <pre><code>$ git pull
 $ ssh git@host lock -l foo doc/d1.odt</code></pre>

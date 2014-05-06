@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>access rules</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -53,28 +53,28 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
+<div id="header">
+<h1 class="title">access rules</h1>
+</div>
 <div id="TOC">
 <ul>
-<li><a href="#access-rules"><span class="toc-section-number">1</span> access rules</a><ul>
-<li><a href="#what-do-rules-look-like"><span class="toc-section-number">1.1</span> what do rules look like</a></li>
-<li><a href="#how-are-the-rules-checked"><span class="toc-section-number">1.2</span> how are the rules checked</a><ul>
-<li><a href="#read-access----clone-fetch-archive"><span class="toc-section-number">1.2.1</span> read access -- clone, fetch, archive</a></li>
-<li><a href="#write-access----push"><span class="toc-section-number">1.2.2</span> write access -- push</a></li>
-<li><a href="#rule-info"><span class="toc-section-number">1.2.3</span> <span class="gray">(v3.6+)</span> tracing rule flow (debugging rules)</a></li>
+<li><a href="#what-do-rules-look-like"><span class="toc-section-number">1</span> what do rules look like</a></li>
+<li><a href="#how-are-the-rules-checked"><span class="toc-section-number">2</span> how are the rules checked</a><ul>
+<li><a href="#read-access----clone-fetch-archive"><span class="toc-section-number">2.1</span> read access -- clone, fetch, archive</a><ul>
+<li><a href="#deny-rules"><span class="toc-section-number">2.1.1</span> read access respecting deny rules</a></li>
 </ul></li>
-<li><a href="#permsum"><span class="toc-section-number">1.3</span> summary of permissions</a></li>
-<li><a href="#additional-topics"><span class="toc-section-number">1.4</span> additional topics</a><ul>
-<li><a href="#rule-accum"><span class="toc-section-number">1.4.1</span> rule accumulation</a></li>
-<li><a href="#deny-rules-ex"><span class="toc-section-number">1.4.2</span> examples of deny rules</a></li>
+<li><a href="#write-access----push"><span class="toc-section-number">2.2</span> write access -- push</a></li>
+<li><a href="#rule-info"><span class="toc-section-number">2.3</span> <span class="gray">(v3.6+)</span> tracing rule flow (debugging rules)</a></li>
 </ul></li>
+<li><a href="#permsum"><span class="toc-section-number">3</span> summary of permissions</a></li>
+<li><a href="#additional-topics"><span class="toc-section-number">4</span> additional topics</a><ul>
+<li><a href="#rule-accum"><span class="toc-section-number">4.1</span> rule accumulation</a></li>
+<li><a href="#deny-rules-ex"><span class="toc-section-number">4.2</span> examples of deny rules</a></li>
 </ul></li>
 </ul>
 </div>
-<h1 id="access-rules"><span class="header-section-number">1</span> access rules</h1>
-<!-- pandoc: toc -->
-
 <p><strong>NOTE</strong>: In the following description, &quot;user&quot; means &quot;user or a <a href="groups.html">group</a> that he/she is a member of&quot;, and &quot;repo&quot; means &quot;repo, or a group that it is a member of, or a (<a href="wild.html">wild</a> repo) pattern that matches it, or a group that contains a pattern that matches it&quot;.</p>
-<h2 id="what-do-rules-look-like"><span class="header-section-number">1.1</span> what do rules look like</h2>
+<h1 id="what-do-rules-look-like"><span class="header-section-number">1</span> what do rules look like</h1>
 <p>Here's an example ruleset.</p>
 <pre><code>@staff          =   dilbert alice wally bob
 
@@ -96,9 +96,9 @@ repo foo
 <p>There are also other, less commonly used, <a href="write-types.html">types of permissions</a>.</p>
 <p>A <a href="refex.html">refex</a> is an expression that matches the ref (i.e., branch or tag) being pushed.</p>
 <p><font color="gray">You can also use <a href="vref.html">virtual refs</a> to perform extra checks and controls that you can't do with just the normal ref (like refs/heads/master) being pushed. The most common example is restricting pushes by dir/file name, but there are lots of other possibilities.</font></p>
-<h2 id="how-are-the-rules-checked"><span class="header-section-number">1.2</span> how are the rules checked</h2>
+<h1 id="how-are-the-rules-checked"><span class="header-section-number">2</span> how are the rules checked</h1>
 <p>Note that gitolite first <a href="rules.html#rule-accum">accumulates the rules</a> before checking access.</p>
-<h3 id="read-access----clone-fetch-archive"><span class="header-section-number">1.2.1</span> read access -- clone, fetch, archive</h3>
+<h2 id="read-access----clone-fetch-archive"><span class="header-section-number">2.1</span> read access -- clone, fetch, archive</h2>
 <p>Read access is checked only once, just before passing control to git-upload-pack or git-archive-pack. At this point gitolite only knows the repo name, the user name, and the fact that it is a read operation.</p>
 <p>Here's the default flow:</p>
 <ul>
@@ -111,7 +111,7 @@ repo foo
 <li><p>If no rule ends with a decision, (&quot;fallthru&quot;), deny access</p></li>
 </ul>
 <p>The <a href="refex.html">refex</a> field is ignored for this check. (Git does not support distinguishing one ref from another for access control during read operations).</p>
-<h4 id="deny-rules"><span class="header-section-number">1.2.1.1</span> read access respecting deny rules</h4>
+<h3 id="deny-rules"><span class="header-section-number">2.1.1</span> read access respecting deny rules</h3>
 <p>When the ref is not known, deny rules (the &quot;-&quot; permission) are ignored by default. In our example, line 3 does not prevent wally from cloning the repo, because line 4 permits it.</p>
 <table><tr><td width="15%" class="box gray">
 
@@ -135,7 +135,7 @@ repo foo
 
 <p>Apart from the extra check for deny rules, there is another very subtle but important difference here: the order of the rules matters now, where previously it did not.</p>
 <p>Later in this document are a couple of <a href="rules.html#deny-rules-ex">examples</a> showing this option in use.</p>
-<h3 id="write-access----push"><span class="header-section-number">1.2.2</span> write access -- push</h3>
+<h2 id="write-access----push"><span class="header-section-number">2.2</span> write access -- push</h2>
 <p>Write access is checked twice, once before passing control to git-receive-pack, and once from within the update hook.</p>
 <p>The first check is identical to the one for read access, except of course the permission field must contain a &quot;W&quot;. As before, deny rules are ignored, and you can override that using the <a href="rules.html#deny-rules">deny-rules</a> option. The <a href="refex.html">refex</a> field is also ignored, because at this point we don't know what refs are going to be pushed.</p>
 <p>The <strong>second check</strong> happens from within the update hook. Deny rules <em>are</em> considered, which in turn means the <em>sequence</em> of the rules matters.</p>
@@ -153,13 +153,13 @@ repo foo
 <li><p>If no rule ends with a decision, (&quot;fallthru&quot;), deny access</p></li>
 </ul>
 <p>Now all you need is to understand how <a href="refex.html">refex</a> matching happens and how the permissions match the various <a href="write-types.html">types of write operations</a>.</p>
-<h3 id="rule-info"><span class="header-section-number">1.2.3</span> <span class="gray">(v3.6+)</span> tracing rule flow (debugging rules)</h3>
+<h2 id="rule-info"><span class="header-section-number">2.3</span> <span class="gray">(v3.6+)</span> tracing rule flow (debugging rules)</h2>
 <p>If you've tried reading all this and still have trouble with rules, you can use the 'gitolite access' command (directly on the server) to help.</p>
 <p>The access command's '-s' option helps debug rule flow. Like all gitolite commands, it responds to a single argument of '-h' with a reasonably detailed usage message if you need some more details.</p>
-<h2 id="permsum"><span class="header-section-number">1.3</span> summary of permissions</h2>
+<h1 id="permsum"><span class="header-section-number">3</span> summary of permissions</h1>
 <p>The full set of permissions, in regex syntax, is <code>-|R|RW+?C?D?M?</code>. This expands to one of <code>-</code>, <code>R</code>, <code>RW</code>, <code>RW+</code>, <code>RWC</code>, <code>RW+C</code>, <code>RWD</code>, <code>RW+D</code>, <code>RWCD</code>, or <code>RW+CD</code>, all but the first two optionally followed by an <code>M</code>. And by now you know what they all mean.</p>
-<h2 id="additional-topics"><span class="header-section-number">1.4</span> additional topics</h2>
-<h3 id="rule-accum"><span class="header-section-number">1.4.1</span> rule accumulation</h3>
+<h1 id="additional-topics"><span class="header-section-number">4</span> additional topics</h1>
+<h2 id="rule-accum"><span class="header-section-number">4.1</span> rule accumulation</h2>
 <p>Gitolite was meant to collect rules from multiple places and apply them all in sequence. For example, if you have the following (we've added line numbers to aid later explanation):</p>
 <pre><code> 1  # we have 3 specifically named FOSS projects, but we also consider any
  2  # project in the foss/ directory to be FOSS.
@@ -203,7 +203,7 @@ repo foo
     ...some rules...</code></pre>
 <p>then, because this repo fits the pattern <code>foss/..*</code>, it is considered part of the <span class="citation">@FOSS-projects</span> group, so all the rules that apply to that group are in play when someone accesses foss/apache.</p>
 <p>This is what we meant by &quot;repo, or a group that it is a member of, or a (<a href="wild.html">wild</a> repo) pattern that matches it, or a group that contains a pattern that matches it&quot;, up at the top of this document.</p>
-<h3 id="deny-rules-ex"><span class="header-section-number">1.4.2</span> examples of deny rules</h3>
+<h2 id="deny-rules-ex"><span class="header-section-number">4.2</span> examples of deny rules</h2>
 <p><strong>example 1</strong></p>
 <pre><code> 1  @secret = gitolite-admin secret-repo/one secret-repo/two [...]
 

@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>gitolite plugins</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -53,7 +53,9 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1 id="gitolite-plugins"><span class="header-section-number">1</span> gitolite plugins</h1>
+<div id="header">
+<h1 class="title">gitolite plugins</h1>
+</div>
 <p>It's not hard to create a &quot;plugin&quot; mechanism to allow arbitrary extra features to be just dropped into gitolite. All that is needed is for the code to respect the directory hierarchy described in the <a href="cust.html#localcode">local code</a> section of the <a href="cust.html">customisation</a> document.</p>
 <p>Here's a sample (you'll find this specific set in <code>contrib/local</code>):</p>
 <pre><code>commands/
@@ -91,7 +93,7 @@ do
 done</code></pre></li>
 </ul>
 <p>Everything else <strong>was already in place in gitolite</strong>.</p>
-<h2 id="instructions-for-installing-plugins"><span class="header-section-number">1.1</span> instructions for installing plugins</h2>
+<h1 id="instructions-for-installing-plugins"><span class="header-section-number">1</span> instructions for installing plugins</h1>
 <p>Assuming the plugin follows the directory structure shown, do the following:</p>
 <p>One-time setup:</p>
 <ul>

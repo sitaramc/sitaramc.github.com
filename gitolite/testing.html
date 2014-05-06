@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>trying out gitolite safely</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -53,8 +53,10 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1 id="trying-out-gitolite-safely"><span class="header-section-number">1</span> trying out gitolite safely</h1>
-<h2 id="trying"><span class="header-section-number">1.1</span> trying out gitolite</h2>
+<div id="header">
+<h1 class="title">trying out gitolite safely</h1>
+</div>
+<h1 id="trying"><span class="header-section-number">1</span> trying out gitolite</h1>
 <p><font color="red"><strong>WARNING: this will clobber <a href="testing.html#clobber">these files and directories</a> in your <code>$HOME</code>. If in doubt, use a throwaway userid</strong>.</font></p>
 <p>It's easy to take gitolite for a trial run, in ssh mode, and play with all of its features (except mirroring).</p>
 <p>Create a <strong>throw-away userid</strong>, log in to it, then run these commands:</p>
@@ -67,7 +69,7 @@ prove t/ssh*</code></pre>
 <p>Don't forget that the client and the server are all on the same user on the same machine; we're <em>simulating</em> 7 gitolite users using ssh keys! (How? Maybe <code>~/.ssh/config</code> will give you a hint).</p>
 <p>URLs look like <code>user:repo</code>, so for example you can clone the admin repo by <code>git clone admin:gitolite-admin</code>. Remote commands look like <code>ssh u1 info</code>.</p>
 <p>So start by cloning the admin repo, and try out whatever you want!</p>
-<h2 id="testing-gitolite"><span class="header-section-number">1.2</span> testing gitolite</h2>
+<h1 id="testing-gitolite"><span class="header-section-number">2</span> testing gitolite</h1>
 <p><font color="red"><strong>WARNING: this will clobber <a href="testing.html#clobber">these files and directories</a> in your <code>$HOME</code>. If in doubt, use a throwaway userid</strong>.</font></p>
 <p>Trying out gitolite safely is really a subset of running the test suite. If you want to run the full test suite, just do as above, except instead of running <code>prove t/ssh*</code> you just run <code>prove</code>.</p>
 <p>The test suite should run fine on most recent Linuxes and Unixes. Although gitolite itself should work fine with any git after 1.6.6 or so, the test suite requires git 1.7.8 or later.</p>
@@ -79,7 +81,7 @@ prove t/ssh*</code></pre>
 <p>Gitolite's test suite is mostly written using <a href="http://github.com/sitaramc/tsh">tsh</a> -- the &quot;testing shell&quot;. Take a look at some of the scripts and you will see what it looks like. It has a few quirks and nuances, but it's fine for what I need here.</p>
 <p>The tests also use a somewhat convoluted system of environment variables in order to run <em>entirely</em> as a local user, without going through ssh at all. This lets a complete test suite run in about a fifth or less of the time it would otherwise take.</p>
 <p>If you think that defeats the purpose of the testing, you haven't read <a href="auth.html">this</a> yet.</p>
-<h2 id="clobber"><span class="header-section-number">1.3</span> appendix a -- the clobber list</h2>
+<h1 id="clobber"><span class="header-section-number">3</span> appendix a -- the clobber list</h1>
 <p>When you use either of these methods (i.e., trying out gitolite or running the test suite), the following files and directories in your $HOME are potentially clobbered.</p>
 <pre><code>.gitconfig
 .gitolite/

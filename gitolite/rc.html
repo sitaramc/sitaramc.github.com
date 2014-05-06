@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>the &quot;rc&quot; file ($HOME/.gitolite.rc)</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -53,7 +53,9 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1 id="the-rc-file-home.gitolite.rc"><span class="header-section-number">1</span> the &quot;rc&quot; file (<code>$HOME/.gitolite.rc</code>)</h1>
+<div id="header">
+<h1 class="title">the &quot;rc&quot; file (<code>$HOME/.gitolite.rc</code>)</h1>
+</div>
 <p><strong>IMPORTANT</strong>: if you have a v3.0-v3.3 rc file it will still work. In fact internally the v3.4 rc file data gets converted to the v3.3 format. So just because you upgraded gitolite doesn't mean you have to change your rc file!</p>
 <p><strong>v3.3 or before</strong>: <a href="rc-33.html">this</a> is the document you need.</p>
 <p><strong>NOTE 2</strong>: if you're migrating from g2, there are some settings that MUST be dealt with <strong>before</strong> running <code>gitolite setup</code>; please read the <a href="migr.html">migration</a> page and linked pages, and especially the one on &quot;presetting the rc file&quot;</p>
@@ -68,7 +70,7 @@
 <li>and one large list of features to be enabled (<code>ENABLE</code>)</li>
 </ul>
 <p>While some of the variables are documented in this file, many of them are not. Their purposes are to be found in each of their individual documentation files around; start with <a href="cust.html">customising gitolite</a>. If a setting is used by an external command then running that command with '-h' may give you additional information.</p>
-<h2 id="specific-variables"><span class="header-section-number">1.1</span> specific variables</h2>
+<h1 id="specific-variables"><span class="header-section-number">1</span> specific variables</h1>
 <ul>
 <li><p><code>$UMASK</code>, octal, default <code>0077</code></p>
 <p>The default UMASK that gitolite uses makes all the repos and their contents have <code>rwx------</code> permissions. People who want to run gitweb (or cgit, redmine, etc) realise that this will not do.</p>

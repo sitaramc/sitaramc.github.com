@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>help for emergencies</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -53,26 +53,24 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
+<div id="header">
+<h1 class="title">help for emergencies</h1>
+</div>
 <div id="TOC">
 <ul>
-<li><a href="#help-for-emergencies"><span class="toc-section-number">1</span> help for emergencies</a><ul>
-<li><a href="#installsetup-issues"><span class="toc-section-number">1.1</span> install/setup issues</a></li>
-<li><a href="#lost-key"><span class="toc-section-number">1.2</span> lost admin key/access</a></li>
-<li><a href="#bypass"><span class="toc-section-number">1.3</span> bypassing gitolite</a></li>
-<li><a href="#botch"><span class="toc-section-number">1.4</span> botched something?</a><ul>
-<li><a href="#fixing-botched-repos"><span class="toc-section-number">1.4.1</span> fixing botched repos</a></li>
-<li><a href="#clean"><span class="toc-section-number">1.4.2</span> cleaning out a botched install</a></li>
+<li><a href="#installsetup-issues"><span class="toc-section-number">1</span> install/setup issues</a></li>
+<li><a href="#lost-key"><span class="toc-section-number">2</span> lost admin key/access</a></li>
+<li><a href="#bypass"><span class="toc-section-number">3</span> bypassing gitolite</a></li>
+<li><a href="#botch"><span class="toc-section-number">4</span> botched something?</a><ul>
+<li><a href="#fixing-botched-repos"><span class="toc-section-number">4.1</span> fixing botched repos</a></li>
+<li><a href="#clean"><span class="toc-section-number">4.2</span> cleaning out a botched install</a></li>
 </ul></li>
-<li><a href="#ce"><span class="toc-section-number">1.5</span> common errors</a></li>
-<li><a href="#ue"><span class="toc-section-number">1.6</span> uncommon errors</a></li>
-<li><a href="#nonstd"><span class="toc-section-number">1.7</span> non-standard configs that'll trip you up</a></li>
-<li><a href="#ngp"><span class="toc-section-number">1.8</span> things that are not gitolite problems</a></li>
-</ul></li>
+<li><a href="#ce"><span class="toc-section-number">5</span> common errors</a></li>
+<li><a href="#ue"><span class="toc-section-number">6</span> uncommon errors</a></li>
+<li><a href="#nonstd"><span class="toc-section-number">7</span> non-standard configs that'll trip you up</a></li>
+<li><a href="#ngp"><span class="toc-section-number">8</span> things that are not gitolite problems</a></li>
 </ul>
 </div>
-<h1 id="help-for-emergencies"><span class="header-section-number">1</span> help for emergencies</h1>
-<!-- pandoc: toc -->
-
 <blockquote>
 <hr />
 </blockquote>
@@ -82,17 +80,17 @@
 <blockquote>
 <hr />
 </blockquote>
-<h2 id="installsetup-issues"><span class="header-section-number">1.1</span> install/setup issues</h2>
+<h1 id="installsetup-issues"><span class="header-section-number">1</span> install/setup issues</h1>
 <p>Most install/setup issues are caused by lack of ssh knowledge. Ssh is a complex beast, and -- unless you are using the <a href="http.html">http</a> mode -- can cause problems for people who are not familiar with its quirks.</p>
 <p><strong>Be prepared to spend some time reading the <a href="ssh.html">ssh</a> documentation that comes with gitolite</strong>.</p>
-<h2 id="lost-key"><span class="header-section-number">1.2</span> lost admin key/access</h2>
+<h1 id="lost-key"><span class="header-section-number">2</span> lost admin key/access</h1>
 <p>If you lost your gitolite <strong>admin</strong> key or access, here's what you do. We'll assume your username is 'alice'.</p>
 <ul>
 <li><p>Make yourself a new keypair and copy the public key to the server as 'alice.pub'.</p></li>
 <li><p>Log on to the server, and run <code>gitolite setup -pk alice.pub</code>.</p></li>
 </ul>
 <p>That's it; the new alice.pub file replaces whatever existed in the repo before.</p>
-<h2 id="bypass"><span class="header-section-number">1.3</span> bypassing gitolite</h2>
+<h1 id="bypass"><span class="header-section-number">3</span> bypassing gitolite</h1>
 <p>You may have lost access because of a conf file error, in which case the above trick won't help. What you want is to make changes to the repo (or perhaps just rewind) and push that. Here's how to do that:</p>
 <ul>
 <li><p>Log on to the server.</p></li>
@@ -101,15 +99,15 @@
 <li><p>Run <code>gitolite push</code> (or possibly <code>gitolite push -f</code>). Note that's 'gitolite push', not 'git push'.</p></li>
 </ul>
 <p><font color="red"> <strong>NOTE</strong>: gitolite does <strong>no access checking</strong> when you do this! </font></p>
-<h2 id="botch"><span class="header-section-number">1.4</span> botched something?</h2>
-<h3 id="fixing-botched-repos"><span class="header-section-number">1.4.1</span> fixing botched repos</h3>
+<h1 id="botch"><span class="header-section-number">4</span> botched something?</h1>
+<h2 id="fixing-botched-repos"><span class="header-section-number">4.1</span> fixing botched repos</h2>
 <p>If you copied some repos from somewhere else, or mucked with the hooks for some reason, or deleted any gitolite-specific files, or tried any other &quot;behind the scenes&quot; stunts, the quickest, sanest, way to fix everything up is:</p>
 <ul>
 <li>make sure any new repos you copied in are mentioned in the gitolite.conf in some 'repo' line and the change pushed</li>
 <li>then run <code>gitolite setup</code> on the server</li>
 </ul>
 <p>If the repo you botched is a wild repo, please ask on the mailing list or on IRC (see <a href="index.html#contact">contact</a>).</p>
-<h3 id="clean"><span class="header-section-number">1.4.2</span> cleaning out a botched install</h3>
+<h2 id="clean"><span class="header-section-number">4.2</span> cleaning out a botched install</h2>
 <p>If you've read the <a href="files.html">files involved in gitolite</a> page, you probably know the answer, but here's a list of files and directories to deal with:</p>
 <ul>
 <li><p><strong>Gitolite sources</strong> -- can be found by running <code>which gitolite</code>. If it's a symlink, go to its target directory.</p></li>
@@ -121,7 +119,7 @@
 <li><p><strong>Ssh stuff</strong> -- exercise caution when doing this, but in general it should be safe to delete all lines between the &quot;gitolite start&quot; and &quot;gitolite end&quot; markers in <code>$HOME/.ssh/authorized_keys</code>.</p>
 <p>Gitolite does not touch any other files in the ssh directory.</p></li>
 </ul>
-<h2 id="ce"><span class="header-section-number">1.5</span> common errors</h2>
+<h1 id="ce"><span class="header-section-number">5</span> common errors</h1>
 <ul>
 <li><p><code>WARNING: keydir/&lt;yourname&gt;.pub duplicates a non-gitolite key, sshd will ignore it</code></p>
 <p>You used a key that is already set to give you shell access. You cannot use the same key to get shell access as well as access gitolite repos.</p>
@@ -132,9 +130,9 @@
 <p>Solution: same as for the previous bullet.</p>
 <p>NOTE: If you really <em>must</em> do it, and this is a one-time thing, you can try <code>gitolite push</code> instead of <code>git push</code>. <strong>BUT</strong>... this defeats all gitolite access control, so if you're going to do this often, maybe you don't need gitolite!</p></li>
 </ul>
-<h2 id="ue"><span class="header-section-number">1.6</span> uncommon errors</h2>
+<h1 id="ue"><span class="header-section-number">6</span> uncommon errors</h1>
 <p>(This page intentionally left blank)</p>
-<h2 id="nonstd"><span class="header-section-number">1.7</span> non-standard configs that'll trip you up</h2>
+<h1 id="nonstd"><span class="header-section-number">7</span> non-standard configs that'll trip you up</h1>
 <ul>
 <li><p>if your 'git' binary is in a non-PATH location, or you have more than one version and want a specific one to be picked up, you will have to add a line like this at the end of the rc file (outside the <code>%RC</code> hash, but before the<code>1;</code> line):</p>
 <pre><code>$ENV{PATH} = &quot;/your/git/path:$ENV{PATH}&quot;;</code></pre></li>
@@ -143,7 +141,7 @@
 <li><p>having the home directory in a partition that is mounted noexec.</p></li>
 <li><p>having the default shell be something like /bin/false, and/or not having the default shell be part of /etc/shells.</p></li>
 </ul>
-<h2 id="ngp"><span class="header-section-number">1.8</span> things that are not gitolite problems</h2>
+<h1 id="ngp"><span class="header-section-number">8</span> things that are not gitolite problems</h1>
 <p>There are several things that appear to be gitolite problems but are not. I cannot help with most of these (although the good folks on irc or the mailing list -- see <a href="index.html#contact">contact</a> -- might be able to; they certainly appear to have a lot more patience than I do, bless 'em!)</p>
 <ul>
 <li><p><strong>Client side software</strong></p>

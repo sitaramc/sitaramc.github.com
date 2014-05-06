@@ -53,8 +53,6 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<!-- master mode -->
-
 <!--
 NOTE: ips, locking, progit, sskm, plus any mkds that belong to specific
 branches (cache, namespaces) are left out.
@@ -82,7 +80,7 @@ branches (cache, namespaces) are left out.
 <p>Enjoy!</p>
 <hr />
 <h1 id="s1"><span class="header-section-number">1</span> basics, quick links, and help</h1>
-<h2 id="index"><span class="header-section-number">1.1</span> Hosting git repositories {-}</h2>
+<h2 id="index"><span class="header-section-number">1.1</span> Hosting git repositories</h2>
 <table cellspacing="20">
 
 <tr><td width="50%">
@@ -239,8 +237,6 @@ git clone git@host:gitolite-admin.git
 <p>If this step succeeds, you can add <a href="#users">users</a>, <a href="#repos">repos</a>, or anything else described <a href="#adminrepo">here</a>.</p>
 <p>If this step fails, be sure to look at the <a href="#ssh">ssh</a> documentation before asking for help. (A very basic first step is to run <code>ssh git@host info</code>; <a href="#info">this</a> page tells you what to expect).</p>
 <h2 id="user"><span class="header-section-number">1.4</span> what users (not admins) need to know about gitolite</h2>
-<!-- pandoc: toc -->
-
 <p>...written for the one guy in the world no one will think of as &quot;just a normal user&quot; ;-)</p>
 <hr />
 <h3 id="accessing-gitolite"><span class="header-section-number">1.4.1</span> accessing gitolite</h3>
@@ -375,8 +371,6 @@ repo @myrepos
 <p>From v3.5.3 on, however, in a simplistic attempt to help people tearing their hair out because of a typo, gitolite will warn if a group is not defined when it is used. (So if you defined it later, either ignore the warning or move the definition up).</p>
 <p>Note that these warnings do NOT appear if you're <a href="#ldap">getting user group info from LDAP</a>.</p>
 <h2 id="emergencies"><span class="header-section-number">1.8</span> help for emergencies</h2>
-<!-- pandoc: toc -->
-
 <blockquote>
 <hr />
 </blockquote>
@@ -521,8 +515,6 @@ hooks/update</code></pre></li>
 <p>This is the first step in using gitolite, and happens on the server. It is followed by <a href="#setup">setup</a>, then <a href="#clone">clone</a>.</p>
 <hr />
 <h3 id="nnc"><span class="header-section-number">2.1.1</span> notes and naming conventions</h3>
-<!-- pandoc: toc -->
-
 <p>Gitolite uses a single &quot;real&quot; (i.e., unix) user to provide secure access to git repos to any number of &quot;virtual&quot; users, without giving them a shell.</p>
 <p>The real user used is called the <strong>hosting user</strong>. Typically this user is <em>git</em>, and that is what we will use throughout the documentation. However RPMs and DEBs create a user called <em>gitolite</em> for this, so adjust instructions and examples accordingly.</p>
 <p><strong>Unless otherwise stated, everything in this page is to be done by logging in as this &quot;hosting user&quot;</strong>.</p>
@@ -726,8 +718,6 @@ gitolite/install -to /usr/local/gitolite/bin</code></pre>
 <li><a href="#wild">&quot;Wild&quot;</a> repos -- ad hoc, user-created, repos.</li>
 </ul>
 <h2 id="rules"><span class="header-section-number">2.6</span> access rules</h2>
-<!-- pandoc: toc -->
-
 <p><strong>NOTE</strong>: In the following description, &quot;user&quot; means &quot;user or a <a href="#groups">group</a> that he/she is a member of&quot;, and &quot;repo&quot; means &quot;repo, or a group that it is a member of, or a (<a href="#wild">wild</a> repo) pattern that matches it, or a group that contains a pattern that matches it&quot;.</p>
 <h3 id="what-do-rules-look-like"><span class="header-section-number">2.6.1</span> what do rules look like</h3>
 <p>Here's an example ruleset.</p>
@@ -891,7 +881,7 @@ repo @open
     # make sure you do not set deny-rules to 1 for these repos later</code></pre>
 <p>To see why this works, you need to remember that for <a href="#options">options</a> and <a href="#git-config">config</a> lines, a later setting <a href="#override_conf">overrides</a> earlier ones. So we set it to 1 for all repos, then selectively set it to 0 for some.</p>
 <p>This means the &quot;deny-rules&quot; option applies to <em>all the repos except the &quot;open&quot; repos</em>. For such repos, the first rule encountered by gitweb and daemon is a deny rule, so they are denied read access.</p>
-<h3 id="refex"><span class="header-section-number">2.6.5</span> matching a ref and a refex</h3>
+<h2 id="refex"><span class="header-section-number">2.7</span> matching a ref and a refex</h2>
 <p>A refex is a word I made up to mean &quot;a regex that matches a ref&quot;. If you know <a href="#regex">regular expressions</a> you're halfway there.</p>
 <p>In addition:</p>
 <ul>
@@ -910,7 +900,7 @@ refs/heads/master/full</code></pre>
 <p>If you want to restrict the match to just the one specific ref, use</p>
 <pre><code>RW  master$     =   alice</code></pre></li>
 </ul>
-<h2 id="write-types"><span class="header-section-number">2.7</span> different types of write operations</h2>
+<h2 id="write-types"><span class="header-section-number">2.8</span> different types of write operations</h2>
 <p>Git supplies enough information to the update hook to be able to distinguish several types of writes.</p>
 <p>The most common are:</p>
 <ul>
@@ -973,8 +963,6 @@ refs/heads/master/full</code></pre>
 <p>This is described in more detail <a href="#localcode">here</a>. Please be aware <strong>this must be a FULL path</strong>, not a relative path.</p></li>
 </ul>
 <h2 id="git-config"><span class="header-section-number">3.2</span> &quot;git-config&quot; keys and values</h2>
-<!-- pandoc: toc -->
-
 <p>Here's all you want to know about setting repo-specific git-config values.</p>
 <p>(Original version thanks to teemu dot matilainen at iki dot fi)</p>
 <blockquote>
@@ -1076,8 +1064,6 @@ repo @g
 repo r2
     option gitweb = &quot;&quot;</code></pre>
 <h2 id="external"><span class="header-section-number">3.4</span> interfacing with external tools</h2>
-<!-- pandoc: toc -->
-
 <blockquote>
 <hr />
 </blockquote>
@@ -1127,8 +1113,6 @@ category    =   some category</code></pre></li>
 <p>Also see <a href="#deny-rules">this</a> for a twist on that.</p>
 <h1 id="s4"><span class="header-section-number">4</span> wild repos, mirroring, and other features</h1>
 <h2 id="wild"><span class="header-section-number">4.1</span> &quot;wild&quot; repos (user created repos)</h2>
-<!-- pandoc: toc -->
-
 <h3 id="quick-introduction"><span class="header-section-number">4.1.1</span> quick introduction</h3>
 <p>The wildrepos feature allows you to specify access control rules using regular expression patterns, so you can have many actual repos being served by a single set of rules in the config file. The regex pattern can also include the word <code>CREATOR</code> in it, allowing you to parametrise the name of the user creating the repo.</p>
 <p>See the section on &quot;repo patterns&quot; later for additional information on what counts as a &quot;wild&quot; repo pattern and how it is matched.</p>
@@ -1218,8 +1202,6 @@ option default.roles-2  =   WRITERS @senior-devs</code></pre></li>
 <h3 id="deleting-a-wild-repo"><span class="header-section-number">4.1.8</span> deleting a wild repo</h3>
 <p>Run the whimsically named &quot;D&quot; command -- try <code>ssh git@host D -h</code> for more info on how to delete a wild repo. (Yes the command is &quot;D&quot;; it's meant to be a counterpart to the &quot;C&quot; permission that allowed you to create the repo in the first place). Of course this only works if your admin has enabled the command (gitolite ships with the command disabled for remote use).</p>
 <h2 id="mirroring"><span class="header-section-number">4.2</span> mirroring using gitolite</h2>
-<!-- pandoc: toc -->
-
 <p><font color="red"><strong>WARNING</strong> existing gitolite mirroring users please note: <strong>there are <a href="#g2i-mirroring">significant changes</a></strong> in syntax and usage compared to g2. If you're not the kind who reads documentation before doing serious system admin things, well... good luck!</font></p>
 <hr />
 <p>Mirroring is simple: you have one &quot;master&quot; server and one or more &quot;slave&quot; servers. The slaves get updates only from the master; to the rest of the world they are at best read-only.</p>
@@ -1407,8 +1389,6 @@ subconf &quot;frob/*.conf&quot;
 <p>Gitolite's &quot;userids&quot; all live in the same namespace. This is unlikely to change, so please don't ask -- it gets real complicated to do otherwise. Allowing sub-admins to add users means username collisions, which also means security problems (admin-A creates a pubkey for Admin-B, thus gaining access to all of Admin-B's stuff).</p>
 <p>If you feel the need to delegate even that, please just go the whole hog and give them separate gitolite instances (i.e., running under different gitolite hosting users)!</p>
 <h2 id="special"><span class="header-section-number">4.4</span> special features and setups</h2>
-<!-- pandoc: toc -->
-
 <hr />
 <h3 id="elsewhere"><span class="header-section-number">4.4.1</span> putting 'repositories' and '.gitolite' somewhere else</h3>
 <p>Gitolite insists that the &quot;repositories&quot; and &quot;.gitolite&quot; directories be in <code>$HOME</code>. If you want them somewhere else:</p>
@@ -1459,8 +1439,6 @@ subconf &quot;frob/*.conf&quot;
 <p>Of course you can get much more creative if you add a few more roles (see &quot;roles&quot; in <a href="#wild">this</a> page).</p>
 <p><font color="gray">(I prefer using some prefix, say &quot;u&quot;, as in <code>repo u/CREATOR/..*</code>. This helps to keep user-created repos separate, and avoid name clashes in some far-fetched scenarios).</font></p>
 <h2 id="rare"><span class="header-section-number">4.5</span> rare or one-time activities</h2>
-<!-- pandoc: toc -->
-
 <h3 id="existing"><span class="header-section-number">4.5.1</span> moving existing repos into gitolite</h3>
 <p><strong>WARNINGS</strong></p>
 <ul>
@@ -1605,8 +1583,6 @@ exec ${GITOLITE_HTTP_HOME}/gitolite-source/src/gitolite-shell</code></pre>
 <p>Finally, add an <code>R = daemon</code> access rule to all repositories you want to make available via http.</p>
 <h1 id="s6"><span class="header-section-number">6</span> customising gitolite</h1>
 <h2 id="cust"><span class="header-section-number">6.1</span> customising gitolite</h2>
-<!-- pandoc: toc -->
-
 <p>Much of gitolite (g3)'s functionality comes from programs and scripts that are not considered &quot;core&quot;. This keeps the core simpler, and allows you to enhance gitolite for your own purposes without too much fuss. (As an extreme example, even mirroring is not in core now!)</p>
 <p>Here's how to find out more:</p>
 <ul>
@@ -1709,8 +1685,6 @@ exec ${GITOLITE_HTTP_HOME}/gitolite-source/src/gitolite-shell</code></pre>
 <h4 id="vrefs"><span class="header-section-number">6.1.3.5</span> VREFs</h4>
 <p>VREFs also have their own <a href="#vref">document</a>.</p>
 <h2 id="non-core"><span class="header-section-number">6.2</span> non-core features shipped with gitolite</h2>
-<!-- pandoc: toc -->
-
 <p><strong>Important Notes on &quot;non-core&quot; features</strong>:</p>
 <ol style="list-style-type: decimal">
 <li><p>The <a href="#cust">customisation</a> document is the starting point for all information about customising gitolite.</p></li>
@@ -1828,8 +1802,6 @@ repo foo-partialcopy-1
 <li><p>Also not tested with mirroring, or with wild card repos.</p></li>
 </ul>
 <h2 id="dev-notes"><span class="header-section-number">6.3</span> notes for developers</h2>
-<!-- pandoc: toc -->
-
 <p>Gitolite has a huge bunch of existing features that gradually need to be moved over. Plus you may want to write your own programs to interact with it.</p>
 <p><strong>This document is about <em>writing</em> hooks, commands, triggers, VREFS, and sugar scripts. <em>Installing</em> them, including &quot;where and how&quot;, is described <a href="#localcode">here</a></strong>.</p>
 <p>Note: the <a href="#cust">customisation</a> document is the starting point for all information about customising gitolite.</p>
@@ -2002,8 +1974,6 @@ git-receive-pack 'reponame'</code></pre>
 </ul></li>
 </ul>
 <h2 id="vref"><span class="header-section-number">6.4</span> virtual refs</h2>
-<!-- pandoc: toc -->
-
 <p><strong>IMPORTANT</strong>: fallthru is success in VREFs, unlike the normal refs. That won't make sense until you read further, but I had to put it up here for folks who stop reading halfway!</p>
 <hr />
 <p>VREFs are a mechanism to add additional constraints to a push.</p>
@@ -2161,8 +2131,6 @@ VREF/NAME/dir-2/file-3
 </ul>
 <p>Note that pretty much anything that involves <code>$oldsha..$newsha</code> will have to deal with the issue that when you push a new tag or branch, the &quot;old&quot; part is all 0's, and unless you consider <code>--all</code> existing branches and tags it becomes meaningless in terms of &quot;number of new files&quot; etc.</p>
 <h2 id="triggers"><span class="header-section-number">6.5</span> gitolite triggers</h2>
-<!-- pandoc: toc -->
-
 <h3 id="intro-and-sample-rc-excerpt"><span class="header-section-number">6.5.1</span> intro and sample rc excerpt</h3>
 <p>Gitolite fires off external commands at several different times. The <a href="#rc">rc</a> file specifies what commands to run at each trigger point, but for illustration, here's an excerpt. <strong>Note that as of v3.4, this is <em>not</em> how the rc file looks like externally. Please see <a href="#addtrig">this</a> for more</strong>.</p>
 <pre><code>%RC = (
@@ -2338,8 +2306,6 @@ They are also run when a <em>normal</em> repo is created (say by adding a &quot;
 <p>Now you can use those groupnames in access rules in gitolite, because the user is a member of those groups as well as any normal gitolite groups you may have added him to in the conf file.</p>
 <p>Caution: your program must do its own logging if you want the audit trail of &quot;why/how did this user get access to this repo at this time?&quot; to resolve properly. Gitolite does not do any logging of the results of the queries because for people who don't need it that would be a huge waste.</p>
 <h2 id="glssh"><span class="header-section-number">7.3</span> how gitolite uses ssh</h2>
-<!-- pandoc: toc -->
-
 <p>Although other forms of authentications exist (see the document on <a href="#auth">authentication versus authorisation</a>), ssh is the one that most git users use.</p>
 <p><strong><em>Therefore, gitolite is (usually) heavily dependent on ssh</em></strong>.</p>
 <p>Most people didn't realise this, and even if they did they don't know ssh well enough to help themselves. If you don't understand how ssh public key authentication works, or how the <code>~/.ssh/authorized_keys</code> file can be used to restrict users, etc., you will have endless amounts of trouble getting gitolite to work, because you'll be attacking the wrong problem.</p>
@@ -2386,8 +2352,6 @@ command=&quot;[path]/gitolite-shell usertwo&quot;,[more options] ssh-rsa AAAAB3N
 <p>When gitolite is told to create a new repository (by the admin), it installs a special update hook. This hook takes all the information presented, looks at the config file, and decides to allow or reject the update.</p>
 <p>And that's basically it.</p>
 <h2 id="sts"><span class="header-section-number">7.4</span> ssh troubleshooting and tips</h2>
-<!-- pandoc: toc -->
-
 <p><strong>This document must be read in full the first time. If you start from some nice looking section in the middle it may not help you unless you're already an expert at ssh</strong>.</p>
 <p>This document should help you troubleshoot ssh-related problems in installing and accessing gitolite. It also has a section of random ssh-related tips and tricks that gitolite can do.</p>
 <hr />
@@ -2691,8 +2655,6 @@ Authenticating with public key &quot;My Key&quot; from agent</code></pre>
 <h1 id="s8"><span class="header-section-number">8</span> odds and ends</h1>
 <h2 id="how"><span class="header-section-number">8.1</span> authentication and authorization in gitolite</h2>
 <h3 id="viewing-this-slideshow"><span class="header-section-number">8.1.1</span> (viewing this slideshow)</h3>
-<!-- pandoc: slidy-2 -->
-
 <p>This presentation uses <a href="http://www.w3.org/Talks/Tools/Slidy2/Overview.html">HTML Slidy</a>, a simple presentation software from the W3C. Although there's a help button in the footer of each presentation, it's missing some important stuff, so here's a smaller but more complete summary of the keyboard controls.</p>
 <table><tr><td>
 
@@ -2803,8 +2765,6 @@ Authenticating with public key &quot;My Key&quot; from agent</code></pre>
 <p>This is the <strong>second authorisation check</strong> that gitolite does.</p>
 <p>If it is not allowed, the update hooks exits with an error, and git will abort the push (for that ref; other refs sent in the same push may be OK).</p>
 <h2 id="why"><span class="header-section-number">8.2</span> why might you need gitolite</h2>
-<!-- pandoc: toc -->
-
 <p>Git by itself does not do any access control -- it relies on the transport medium to do authentication (&quot;who are you?&quot;), and on OS file permissions to do authorisation (&quot;what are you allowed to do?&quot;).</p>
 <p>Git also comes with a program called &quot;git-shell&quot; which can act as a restricted login shell if you don't want users getting a proper shell. Using this and judicious use of Unix groups, you can allow some people read-only access while others get read-write access, etc. This is probably sufficient if your needs are simple and don't change too often.</p>
 <p>However, gitolite does this much better, and offers many more features.</p>
@@ -3064,8 +3024,6 @@ foo$    matches any string ending with 'foo'
 </ol>
 <p>You're done.</p>
 <h2 id="g2migr"><span class="header-section-number">9.2</span> pre-migration checklist</h2>
-<!-- pandoc: toc -->
-
 <p><font color="red"> <strong>This document is a <em>MUST</em> read if you are currently using g2 and want to move to g3.</strong> </font></p>
 <hr />
 <p>First things first: g2 will be supported for a good long time for critical bugs, although enhancements and new features won't happen.</p>
@@ -3232,8 +3190,6 @@ option mirror.slaves        =   frodo gollum</code></pre>
 <li><p>The external command to resync mirrors is 'mirror', run just like any other <a href="#commands">command</a>. In particular, you can run <code>gitolite mirror     -h</code> to get help. It cannot be run from a slave to ask a master to push (unlike in the old system) but what's more convenient is that any user who has any access to the master can run it remotely (if you allow it) to invoke a push.</p></li>
 </ul>
 <h2 id="g2migr-example"><span class="header-section-number">9.4</span> migration example</h2>
-<!-- pandoc: toc -->
-
 <p>This shows what a typical migration would look like, using a test setup.</p>
 <h3 id="existing-setup"><span class="header-section-number">9.4.1</span> existing setup</h3>
 <p>The existing gitolite is the latest in the &quot;g2&quot; (v2.x) branch.</p>

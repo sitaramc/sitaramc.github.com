@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>delegating access control responsibilities</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -53,11 +53,13 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1 id="delegating-access-control-responsibilities"><span class="header-section-number">1</span> delegating access control responsibilities</h1>
+<div id="header">
+<h1 class="title">delegating access control responsibilities</h1>
+</div>
 <p>Delegation allows you to divide up a large conf file into smaller groups of repos (called <strong>subconf</strong>s) and hand over responsibility to manage them to <strong>sub-admin</strong>s. Gitolite can prevent one sub-admin from being able to set access rules for any other sub-admin's repos.</p>
 <p>Delegation is achieved by combining two gitolite features: <a href="deleg.html#subconf">subconf</a> and the <a href="vref.html#NAME">NAME VREF</a>.</p>
 <p>To understand delegation, read both those links then come back to this example.</p>
-<h2 id="example"><span class="header-section-number">1.1</span> example</h2>
+<h1 id="example"><span class="header-section-number">1</span> example</h1>
 <pre><code>@webbrowsers        = firefox lynx browsers/..*
 @webservers         = apache nginx servers/..*
 @malwares           = conficker storm ms/..*
@@ -75,7 +77,7 @@ repo gitolite-admin
 <p>Finally, you tell gitolite to pull in these files using the &quot;subconf&quot; command</p>
 <pre><code>subconf &quot;subs/*.conf&quot;</code></pre>
 <p>And that's it.</p>
-<h2 id="subconf"><span class="header-section-number">1.2</span> the subconf command</h2>
+<h1 id="subconf"><span class="header-section-number">2</span> the subconf command</h1>
 <p>Subconf is exactly like the include command in syntax:</p>
 <pre><code>subconf &quot;foo.conf&quot;</code></pre>
 <p>but while reading the included file (as well as anything included from it), gitolite sets the &quot;subconf name&quot; to &quot;foo&quot;.</p>
@@ -91,7 +93,7 @@ repo gitolite-admin
 <pre><code>@foo    =   aa bb cc/..*</code></pre>
 <p>then the subconf can only accept repo statements that refer to 'foo', '<span class="citation">@foo</span>', 'aa', 'bb', or any repo whose name starts with 'cc/'.</p>
 <p><strong>Note</strong>: the subconf name &quot;master&quot; is special; it is the default subconf in effect for the main conf file and has no restrictions.</p>
-<h3 id="how-the-subconf-name-is-derived"><span class="header-section-number">1.2.1</span> how the &quot;subconf name&quot; is derived</h3>
+<h2 id="how-the-subconf-name-is-derived"><span class="header-section-number">2.1</span> how the &quot;subconf name&quot; is derived</h2>
 <p>For subconf lines that look just like include statements, i.e.,</p>
 <pre><code>subconf &quot;foo/bar.conf&quot;
 subconf &quot;frob/*.conf&quot;
@@ -100,13 +102,13 @@ subconf &quot;frob/*.conf&quot;
 <p>A variation of subconf exists that can explicitly state the subconf name:</p>
 <pre><code>subconf foo &quot;frob/*.conf&quot;</code></pre>
 <p>In this variation, regardless of what file in &quot;frob/&quot; is being read, the subconf name in effect is &quot;foo&quot;.</p>
-<h2 id="security-notes"><span class="header-section-number">1.3</span> security notes</h2>
-<h3 id="group-names"><span class="header-section-number">1.3.1</span> group names</h3>
+<h1 id="security-notes"><span class="header-section-number">3</span> security notes</h1>
+<h2 id="group-names"><span class="header-section-number">3.1</span> group names</h2>
 <p>You can use &quot;<span class="citation">@group</span>&quot;s defined in the main config file but do not attempt to redefine or extend them in your own subconf file. If you must extend a group (say <code>@foo</code>) defined in the main config file, do this:</p>
 <pre><code>@myfoo  =   @foo
 # now do whatever you want with @myfoo</code></pre>
 <p>Group names you define in your subconf will not clash even if the exact same name is used in another subconf file, so you need not worry about that.</p>
-<h3 id="delegating-pubkeys"><span class="header-section-number">1.3.2</span> delegating pubkeys</h3>
+<h2 id="delegating-pubkeys"><span class="header-section-number">3.2</span> delegating pubkeys</h2>
 <p>Short answer: not gonna happen.</p>
 <p>The delegation feature is meant only for access control rules, not pubkeys. Adding/removing pubkeys is a much more significant event than changing branch level permissions for people already on staff, and only the main admin should be allowed to do it.</p>
 <p>Gitolite's &quot;userids&quot; all live in the same namespace. This is unlikely to change, so please don't ask -- it gets real complicated to do otherwise. Allowing sub-admins to add users means username collisions, which also means security problems (admin-A creates a pubkey for Admin-B, thus gaining access to all of Admin-B's stuff).</p>

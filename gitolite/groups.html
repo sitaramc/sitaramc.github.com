@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <title>group definitions</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -53,7 +53,9 @@
 <p style="text-align:center">
 <font color="gray">This is for gitolite &quot;g3&quot;; for older (v2.x) documentation click <a href="http://sitaramc.github.com/gitolite/g2/master-toc.html">here</a></font>
 </p>
-<h1 id="group-definitions"><span class="header-section-number">1</span> group definitions</h1>
+<div id="header">
+<h1 class="title">group definitions</h1>
+</div>
 <p>You can group repos or users for convenience. The syntax is the same for both and does not distinguish; until you <em>use</em> the group name it could really be either.</p>
 <p>Here's an example:</p>
 <pre><code>@developers     =   dilbert alice wally</code></pre>
@@ -68,9 +70,9 @@
 @developers     =   wally
 
 # wally is NOT part of @staff</code></pre>
-<h2 id="special-group-all"><span class="header-section-number">1.1</span> special group <code>@all</code></h2>
+<h1 id="special-group-all"><span class="header-section-number">1</span> special group <code>@all</code></h1>
 <p><code>@all</code> is a special group name that is often convenient to use if you really mean &quot;all repos&quot; or &quot;all users&quot;.</p>
-<h2 id="warnings-on-undefined-groups"><span class="header-section-number">1.2</span> warnings on undefined groups</h2>
+<h1 id="warnings-on-undefined-groups"><span class="header-section-number">2</span> warnings on undefined groups</h1>
 <p>Gitolite cannot truly catch undefined groups because the conf parser is 1-pass, and you're allowed to define a group <em>after</em> it is used, like so:</p>
 <pre><code>repo foo
     RW  =   @foo
