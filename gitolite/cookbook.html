@@ -72,7 +72,8 @@
 <li><a href="#cb-hooks"><span class="toc-section-number">4</span> hooks</a><ul>
 <li><a href="#adding-your-own-update-hooks"><span class="toc-section-number">4.1</span> adding your own update hooks</a></li>
 <li><a href="#adding-other-non-update-hooks"><span class="toc-section-number">4.2</span> adding other (non-update) hooks</a></li>
-<li><a href="#variation-custom-hooks-only-for-some-repos"><span class="toc-section-number">4.3</span> variation: custom hooks only for some repos</a></li>
+<li><a href="#variation-maintain-these-hooks-in-the-gitolite-admin-repo"><span class="toc-section-number">4.3</span> variation: maintain these hooks in the gitolite-admin repo</a></li>
+<li><a href="#v3.6-variation-repo-specific-hooks"><span class="toc-section-number">4.4</span> <span class="gray">(v3.6+)</span> variation: repo-specific hooks</a></li>
 </ul></li>
 <li><a href="#cb-vrefs"><span class="toc-section-number">5</span> VREFs</a><ul>
 <li><a href="#adding-your-own-vrefs"><span class="toc-section-number">5.1</span> adding your own VREFs</a></li>
@@ -130,7 +131,7 @@ then
 <h2 id="adding-your-own-commands"><span class="header-section-number">3.1</span> adding your own commands</h2>
 <p>To add a command, say <code>foo</code>, do this:</p>
 <ol style="list-style-type: decimal">
-<li><p>add this line in the rc file, within the <code>$RC</code> block, if it's not already present:</p>
+<li><p>add this line in the rc file, within the <code>%RC</code> block, if it's not already present:</p>
 <pre><code>LOCAL_CODE =&gt; &quot;$ENV{HOME}/local&quot;,</code></pre></li>
 <li><p>copy the program <code>foo</code> into <code>$HOME/local/commands</code>. (Don't forget the <code>chmod +x</code>!)</p></li>
 </ol>
@@ -141,9 +142,9 @@ then
 <h1 id="cb-hooks"><span class="header-section-number">4</span> hooks</h1>
 <p>The main documentation for this feature starts <a href="cust.html#hooks">here</a>.</p>
 <h2 id="adding-your-own-update-hooks"><span class="header-section-number">4.1</span> adding your own update hooks</h2>
-<p>You have some update hooks (for example crlf checking) that you want to include in gitolite. Assuming the hook itself is tested and works as a normal <strong>git</strong> update hook does (i.e., conforms to what <code>man githooks</code> says an update hook should do), here's how to do this.</p>
+<p>You have some update hooks (for example crlf checking) that you want to include in gitolite. Assuming the hook itself is tested and works as a normal <strong>git</strong> update hook does (i.e., conforms to what <code>man githooks</code> says an update hook should do), here's how to do this:</p>
 <ol style="list-style-type: decimal">
-<li><p>add this line in the rc file, within the <code>$RC</code> block, if it's not already present:</p>
+<li><p>add this line in the rc file, within the <code>%RC</code> block, if it's not already present:</p>
 <pre><code>LOCAL_CODE =&gt; &quot;$ENV{HOME}/local&quot;,</code></pre></li>
 <li><p>copy your update hook to a subdirectory called VREF under this directory, giving it a suitable name (let's say &quot;crlf&quot;):</p>
 <pre><code># log on to server
@@ -162,7 +163,7 @@ chmod +x local/VREF/crlf</code></pre></li>
 <h2 id="adding-other-non-update-hooks"><span class="header-section-number">4.2</span> adding other (non-update) hooks</h2>
 <p>Say you want other hooks, like a post-receive hook. Here's how:</p>
 <ol style="list-style-type: decimal">
-<li><p>add this line in the rc file, within the <code>$RC</code> block, if it's not already present:</p>
+<li><p>add this line in the rc file, within the <code>%RC</code> block, if it's not already present:</p>
 <pre><code>LOCAL_CODE =&gt; &quot;$ENV{HOME}/local&quot;,</code></pre></li>
 <li><p>put your hooks into that directory, in a sub-sub-directory called &quot;hooks/common&quot;:</p>
 <pre><code># log on to server
@@ -172,16 +173,31 @@ cp your-post-receive-hook local/hooks/common/post-receive
 chmod +x local/hooks/common/post-receive</code></pre></li>
 <li><p>run <code>gitolite setup</code> to have the hooks propagate to existing repos (repos created after this will get them anyway).</p></li>
 </ol>
-<h2 id="variation-custom-hooks-only-for-some-repos"><span class="header-section-number">4.3</span> variation: custom hooks only for some repos</h2>
-<p>If the hook is an update hook, you implement it as a VREF, and simply change <code>repo @all</code> in step 3 in the update hook section above to <code>repo @repolist</code> or whatever.</p>
-<p>For the other hooks this is not possible. You have to either install the hooks <em>manually</em> on the repos you want them on, or -- better still -- you do something like this:</p>
+<h2 id="variation-maintain-these-hooks-in-the-gitolite-admin-repo"><span class="header-section-number">4.3</span> variation: maintain these hooks in the gitolite-admin repo</h2>
+<p>If you want to maintain these update hooks (VREFs) or non-update hooks (post-update, pre-receive, post-receive) in the gitolite-admin repo, instead of having to log on to the server and make changes, the procedure is almost the same except for the following differences:</p>
 <ol style="list-style-type: decimal">
-<li><p>in the conf file, add a groupname for the set of repos you want:</p>
-<pre><code>@foo = list of repos</code></pre></li>
-<li><p>write your hook code with this at the top:</p>
-<pre><code># check if @foo is in the list of groups of which $GL_REPO is a member
-gitolite list-memberships -r $GL_REPO | grep -x @foo &gt;/dev/null || exit 0</code></pre></li>
-<li><p>now add your hook as described in earlier steps</p></li>
+<li><p>the line to be added to the rc file is this:</p>
+<pre><code>LOCAL_CODE =&gt; &quot;$rc{GL_ADMIN_BASE}/local&quot;,</code></pre></li>
+<li><p>the hooks/scripts are to be added inside your gitolite-admin clone, not on the server. That is, whereever the above two sections say &quot;cd $HOME&quot;, you should read it as &quot;cd /path/to/your/gitolite-admin-clone&quot;.</p></li>
+<li><p>add/commit/push as usual.</p></li>
+</ol>
+<p>For update hooks, you will of course need to add VREF rule lines to appropriate repos in the conf file. For non-update hooks, you <strong>don't</strong> need to run 'gitolite setup' on the server.</p>
+<h2 id="v3.6-variation-repo-specific-hooks"><span class="header-section-number">4.4</span> <span class="gray">(v3.6+)</span> variation: repo-specific hooks</h2>
+<p>Until now, the non-update hooks you specified apply to all repos. Here's how to apply them only to certain repos:</p>
+<ol style="list-style-type: decimal">
+<li><p>add this line in the rc file, within the <code>%RC</code> block, if it's not already present:</p>
+<pre><code>LOCAL_CODE =&gt; &quot;$rc{GL_ADMIN_BASE}/local&quot;,</code></pre></li>
+<li><p>put your hooks into your gitolite-admin clone, as follows:</p>
+<pre><code># on your workstation
+cd /path/to/your/gitolite-admin-clone
+mkdir -p local/hooks/repo-specific</code></pre>
+<p>Now add your hooks to that directory, but instead of using the git &quot;standard&quot; names (pre-receive, post-receive, post-update), you use descriptive names (e.g. &quot;deploy&quot;, &quot;RSS-post&quot;, etc).</p></li>
+<li><p>add them to the repos you want them to be active in, in your conf file. For example:</p>
+<pre><code>repo foo
+    option hook.post-update     =   jenkins
+repo bar @baz
+    option hook.post-update     =   deploy RSS-post</code></pre></li>
+<li><p>add, commit, and push the admin repo.</p></li>
 </ol>
 <h1 id="cb-vrefs"><span class="header-section-number">5</span> VREFs</h1>
 <h2 id="adding-your-own-vrefs"><span class="header-section-number">5.1</span> adding your own VREFs</h2>
