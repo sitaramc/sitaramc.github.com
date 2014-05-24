@@ -118,10 +118,9 @@
 <h2 id="pushcode"><span class="header-section-number">2.3</span> using the gitolite-admin repo to manage non-core code</h2>
 <p>The location given in <code>LOCAL_CODE</code> could be anywhere on disk, like say <code>$ENV{HOME}/local</code>.</p>
 <p>However, some administrators find it convenient to use the admin repo to manage this code as well, getting the benefits of versioning them as well as making changes to them without having to log on to the server.</p>
-<p>To do this, simply point <code>LOCAL_CODE</code> to someplace inside <code>$GL_ADMIN_BASE</code> (i.e., <code>$HOME/.gitolite</code>) in the rc file.</p>
-<p>If you want to do this, I <strong>strongly</strong> suggest:</p>
-<pre><code>LOCAL_CODE                  =&gt;  &quot;$ENV{HOME}/.gitolite/local&quot;,</code></pre>
-<p>Then you create a directory called &quot;local&quot; in your gitolite clone, and put stuff there (e.g., VREFs go in <code>local/VREF</code>, and commands in <code>local/commands</code>).</p>
+<p>To do this, simply point <code>LOCAL_CODE</code> to someplace inside <code>$GL_ADMIN_BASE</code> in the rc file. I <strong>strongly</strong> suggest:</p>
+<pre><code>LOCAL_CODE                  =&gt;  &quot;$rc{GL_ADMIN_BASE}/local&quot;,</code></pre>
+<p>Then you create a directory called &quot;local&quot; in your gitolite clone, and put stuff there (e.g., VREFs go in <code>local/VREF</code>, and commands in <code>local/commands</code>). Thus, when you push the admin repo, the files will land up, with the correct paths, in the location pointed to by LOCAL_CODE.</p>
 <p>(Note: when you do this, gitolite takes care of running <code>gitolite setup --hooks-only</code> when you change any hooks and push).</p>
 <h3 id="security-note-on-this-mode-of-managing-non-core-code"><span class="header-section-number">2.3.1</span> <strong>SECURITY</strong> note on this mode of managing non-core code</h3>
 <p><strong>In this mode, anyone who can push changes to the admin repo will effectively be able to run any arbitrary command on the server.</strong></p>
@@ -147,7 +146,7 @@
 <p>If you want to add hooks only to specific repos, you can just do it manually if you wish -- just log on to the server and add hooks (except update hook and, for the special gitolite-admin repo, the post-update hook -- touch these and all bets on gitolite's functionality are off).</p>
 <p>However, if you want to do that from within gitolite, and thus keep everything together, you can do that also. Here's how.</p>
 <ul>
-<li><p>create a directory called <code>hooks/repo-specific</code> in the location specified by the <a href="cust.html#localcode"><code>LOCAL_CODE</code></a> rc variable</p></li>
+<li><p>create a directory called <code>hooks/repo-specific</code> in whatever location you decided to use for your non-core code (i.e., direct on the server, or within the gitolite-admin repo)</p></li>
 <li><p>add your hooks here, with descriptive names (i.e., not &quot;post-receive&quot;, etc., but maybe &quot;jenkins&quot; or &quot;deploy&quot; or whatever)</p></li>
 <li><p>uncomment the 'repo-specific-hooks' line in the rc file or add it to the ENABLE list if it doesn't exist.</p>
 <p>If your rc file does not have an ENABLE list, you need to add this to the POST_COMPILE and the POST_CREATE lists. Click <a href="triggers.html#addtrig">here</a> for more on all this.</p></li>
