@@ -1294,7 +1294,13 @@ ssh phobos info
 <p>To make that happen, use option lines like this instead of those shown above:</p>
 <pre><code>    option mirror.slaves.nosync-1   =   phobos deimos</code></pre>
 <p>Except for the addition of a <code>.nosync</code> just after <code>slaves</code>, all the other rules are the same as before.</p>
-<h3 id="sync"><span class="header-section-number">4.2.3</span> manually synchronising a slave repo</h3>
+<h3 id="v3.6.1-mirroring-failures"><span class="header-section-number">4.2.3</span> <span class="gray">(v3.6.1+)</span> mirroring failures</h3>
+<p>Since mirror pushes happen asynchronously (i.e, the user who originally pushed does not have to wait for the mirrors to be synced), any mirror push failures are not immediately visible to a human being, although you will find them if you look in gitolite's log files.</p>
+<p>Therefore, when the output of the mirror push to some slave contains the word &quot;fatal&quot;, gitolite saves the output. This saved output is printed to STDERR when any user attempts to clone/fetch/push the repo on the master server for that repo. The hope is that someone will alert an admin to look at the problem. This will continue to happen until the error condition is cleared (i.e., a successful mirror push happens to that specific slave).</p>
+<p><span class="gray">Note: since only a successful push can clear the error status, it follows that if a mirror push failed due to an invalid hostname, that status file will need to be manually deleted from the server. Look in the bare repo directory on the server, for one or more files whose names start with 'gl-slave' and delete the appropriate one.</span></p>
+<p>If you don't want these unexpected reports confusing users (or programs!), simply create a new rc variable called HUSH_MIRROR_STATUS and set it to 1. <span class="gray">(If you're not sure where in the rc file this should go, I suggest putting it right after the HOSTNAME variable).</span></p>
+<p>You can see the mirror status of any repo using the 'mirror status' command; the command line help for the mirror command ('gitolite mirror -h' or 'ssh git@host mirror -h') has details.</p>
+<h3 id="sync"><span class="header-section-number">4.2.4</span> manually synchronising a slave repo</h3>
 <p>You can use the <code>gitolite mirror push</code> command on a master to manually synchronise any of its slaves. Try it with <code>-h</code> to get usage info.</p>
 <p>Tip: if you want to do this to all the slaves, try this:</p>
 <pre><code>for s in `gitolite git-config -r reponame mirror.slave | cut -f3`
@@ -1302,7 +1308,7 @@ do
     gitolite mirror push $s reponame
 done</code></pre>
 <p>This command can also be run remotely; run <code>ssh git@host mirror -h</code> for details.</p>
-<h3 id="redirected-pushes"><span class="header-section-number">4.2.4</span> redirected pushes</h3>
+<h3 id="redirected-pushes"><span class="header-section-number">4.2.5</span> redirected pushes</h3>
 <p><strong>Please read carefully; there are security implications if you enable this for mirrors NOT under your control</strong>.</p>
 <p>Normally, a master, (and <em>only</em> a master), pushes to a slave, and the slaves are &quot;read-only&quot; to the users. Gitolite allows a <em>slave</em> to receive pushes from a user and transparently redirect them to the <em>master</em>.</p>
 <p>This simplifies things for users in complex setups, letting them use their local mirror for both fetch and push access to all repos.</p>
@@ -1317,16 +1323,16 @@ option mirror.redirectOK    =   phobos deimos</code></pre>
 <li><p>The part of the authorisation that happens before passing control to git-receive-pack (see the <a href="#rules">access rules</a> page) will happen on the slave as well.</p></li>
 <li><p>You cannot redirect gitolite commands (like perms, etc).</p></li>
 </ul>
-<h3 id="HOSTNAME"><span class="header-section-number">4.2.5</span> appendix A: HOSTNAME substitution</h3>
+<h3 id="HOSTNAME"><span class="header-section-number">4.2.6</span> appendix A: HOSTNAME substitution</h3>
 <p>Wherever gitolite sees the word <code>%HOSTNAME</code>, it will replace it with the HOSTNAME supplied in the rc file, if one was supplied. This lets you maintain configurations for all servers in one repo, yet have them act differently on different servers, by saying something like:</p>
 <pre><code>subconf &quot;%HOSTNAME/*.conf&quot;</code></pre>
 <p>You can use it in other places also, for example:</p>
 <pre><code>RW+     VREF/NAME/subs/%HOSTNAME/       =   @%HOSTNAME-admins</code></pre>
 <p>(you still have to define <span class="citation">@mars-admins</span>, <span class="citation">@phobos-admins</span>, etc., but the actual VREF is now one line instead of one for each server!)</p>
-<h3 id="appendix-b-efficiency-versus-paranoia"><span class="header-section-number">4.2.6</span> appendix B: efficiency versus paranoia</h3>
+<h3 id="appendix-b-efficiency-versus-paranoia"><span class="header-section-number">4.2.7</span> appendix B: efficiency versus paranoia</h3>
 <p>If you're paranoid enough to use mirrors, you should be paranoid enough to set this on each server, despite the possible CPU overhead:</p>
 <pre><code>git config --global receive.fsckObjects true</code></pre>
-<h3 id="appendix-c-moving-the-admin-repo-to-a-different-master"><span class="header-section-number">4.2.7</span> appendix C: moving the admin repo to a different master</h3>
+<h3 id="appendix-c-moving-the-admin-repo-to-a-different-master"><span class="header-section-number">4.2.8</span> appendix C: moving the admin repo to a different master</h3>
 <p>Moving only some repos (other than the gitolite-admin repo) to a different master is easy. Just make the change in the gitolite.conf file, add, commit, and push.</p>
 <p>Even for the gitolite-admin repo, if the current master is ok, it's the same thing; just make the change and push <em>to the current master</em>. Subsequent pushes will go to the new master, of course.</p>
 <p>But if the current master is already dead, there's a bit of a catch-22. You can't push to the master because it is dead, and you can't push to any slave because they won't accept updates from anywhere but the server they think is the master.</p>
@@ -1905,7 +1911,7 @@ then
 <p>There are two kinds of lines in the log file:</p>
 <ul>
 <li><p>third field non-empty: actual log lines. These are documented below.</p></li>
-<li><p>third field empty (i.e., two tabs after the second field): informational output. These are NOT documented and may change without notice. They can be turned off completely by setting the RC variable <code>LOG_EXTRA</code> to 0.</p></li>
+<li><p>third field empty (i.e., two tabs after the second field): extra output to help diagnose problems. These are NOT documented and may change without notice. They can be turned off completely by setting the RC variable <code>LOG_EXTRA</code> to 0.</p></li>
 </ul>
 <p>For all types of log lines, the first two fields are:</p>
 <ul>
@@ -1982,6 +1988,24 @@ git-receive-pack 'reponame'</code></pre>
 <li>field 5 to end: arguments supplied to gitolite command, one per field</li>
 </ul></li>
 </ul>
+<h3 id="appendix-4-v3.6.1-syslog"><span class="header-section-number">6.3.7</span> appendix 4: <span class="gray">(v3.6.1+)</span> syslog</h3>
+<p>Gitolite allows you to send log entries to syslog. To do that, uncomment one of the commented out values for LOG_DEST in the rc file. If your rc file does not have any such lines, add one of the following lines just after the LOG_EXTRA line:</p>
+<pre><code># use this to log only to syslog
+LOG_DEST                        =&gt; 'syslog',
+
+# use this to log to syslog and the normal gitolite log
+LOG_DEST                        =&gt; 'syslog,normal',</code></pre>
+<p>Please note:</p>
+<ul>
+<li><p>The first two fields described in the previous section (time, TID) are different. Syslog takes care of putting in the time, and the TID is appended to the ident, so instead of just 'gitolite', you get 'gitolite[$GL_TID]'.</p>
+<p>This means actual log lines will look something like this, since syslog appends the actual PID to the ident as well:</p>
+<pre><code>Jun  3 09:26:11 sita-lt gitolite[14950][14950]: ssh ARGV=admin  SOC=git-receive-pack 'gitolite-admin'   FROM=::1
+Jun  3 09:26:11 sita-lt gitolite[14950][14950]: pre_git gitolite-admin  admin   W   any refs/.*
+Jun  3 09:26:11 sita-lt gitolite[14950][14991]: update  gitolite-admin  admin   W   refs/heads/master   [snip]
+Jun  3 09:26:13 sita-lt gitolite[14950][14950]: END</code></pre></li>
+<li><p>Normal log messages use the 'info' priority, while LOG_EXTRA messages (see previous section) use the 'debug' priority.</p>
+<p>It may be useful to send the debug output to a different output file. Unlike in the normal gitolite logs, where there is an extra tab character (or, an empty field, depending on how you look at it), the syslog lines do not let you easily distinguish between the main log lines and the LOG_EXTRA lines.</p></li>
+</ul>
 <h2 id="vref"><span class="header-section-number">6.4</span> virtual refs</h2>
 <p><strong>IMPORTANT</strong>: fallthru is success in VREFs, unlike the normal refs. That won't make sense until you read further, but I had to put it up here for folks who stop reading halfway!</p>
 <hr />
@@ -1990,13 +2014,21 @@ git-receive-pack 'reponame'</code></pre>
 <p>To disallow junior developers from changing more than five files, or from touching the Makefile, you can do this:</p>
 <pre><code>repo foo
     RW+                     =   @all-devs
+
     -   VREF/COUNT/5        =   @junior-devs
     -   VREF/NAME/Makefile  =   @junior-devs</code></pre>
 <hr />
-<h3 id="basic-use"><span class="header-section-number">6.4.1</span> basic use</h3>
+<h3 id="basic-use-and-understanding"><span class="header-section-number">6.4.1</span> basic use and understanding</h3>
 <p>Normally, rules deal with branches and tags (which git collectively calls &quot;refs&quot;). The &quot;ref&quot; is a property of the push which gitolite checks against the set of rules.</p>
-<p>VREFs (&quot;virtual refs&quot;) are other properties of a push that gitolite can be told to check, in addition to the normal ref. For example, &quot;this push has more than 5 changed files&quot; could be one property. Or &quot;this push changed the file called Makefile&quot; could be another.</p>
-<p>The simplest way to use them is as <em>additional</em> &quot;deny&quot; rules to fail a push that might otherwise have passed. This is what the example at the top shows. Using VREFs like this does not require any great understanding of, or thinking about, how they work under the hood.</p>
+<p>VREFs (&quot;virtual refs&quot;) are other properties of a push that gitolite can be told to check, in addition to the normal ref. For example, &quot;this push has more than 5 changed files&quot; could be one property. Or &quot;this push changed the file called Makefile&quot; could be another. These properties are represented as &quot;virtual refs&quot; that start with &quot;VREF/&quot;. (Recall that &quot;normal&quot; refs start with &quot;refs/&quot;).</p>
+<p>The simplest way to use them is as <em>additional</em> &quot;deny&quot; rules to fail a push that might otherwise have passed. This is what the example at the top shows.</p>
+<p>It helps to separate VREF rules from normal rules, since no access rule can match both a normal ref and a VREF. Here's a good way to structure your rules:</p>
+<ul>
+<li><p>Put your normal ref rules first. These apply to the branch name or tag name that git itself knows about and sends to gitolite's update hook.</p>
+<p>Fallthru is failure here, which means the ref being pushed <strong>must</strong> match some rule in this set for the push to succeed.</p></li>
+<li><p>Put your VREF rules next. These apply to the virtual refs you want to use as additional checks for the push.</p>
+<p>Fallthru is success here, which means the (virtual) ref must be <strong>explicitly denied</strong> in order for the push to fail.</p></li>
+</ul>
 <h3 id="advanced-use"><span class="header-section-number">6.4.2</span> advanced use</h3>
 <p>More complex uses are possible, but may be harder to understand. You may want to experiment with the rules to solidify your understanding as you read this.</p>
 <h4 id="differences-from-normal-refs"><span class="header-section-number">6.4.2.1</span> differences from normal refs</h4>
@@ -2041,12 +2073,14 @@ git-receive-pack 'reponame'</code></pre>
 <p>Here's another example. Consider the problem of not allowing pushes at specific times. Let's say repo 'foo' cannot be pushed between 4 and 7pm, and repo 'bar' can only be pushed before 9am. And of course all this only applies to the junior developers, the poor guys!</p>
 <pre><code>repo foo
     RW+                         =   @all
+
     -   VREF/Hour/16            =   @junior-devs
     -   VREF/Hour/17            =   @junior-devs
     -   VREF/Hour/18            =   @junior-devs
 
 repo bar
     RW+                         =   @all
+
     -   VREF/Hour/09            =   @junior-devs
     -   VREF/Hour/1[0-9]        =   @junior-devs
     -   VREF/Hour/2[0-9]        =   @junior-devs</code></pre>

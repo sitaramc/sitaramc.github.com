@@ -58,7 +58,7 @@
 </div>
 <div id="TOC">
 <ul>
-<li><a href="#basic-use"><span class="toc-section-number">1</span> basic use</a></li>
+<li><a href="#basic-use-and-understanding"><span class="toc-section-number">1</span> basic use and understanding</a></li>
 <li><a href="#advanced-use"><span class="toc-section-number">2</span> advanced use</a><ul>
 <li><a href="#differences-from-normal-refs"><span class="toc-section-number">2.1</span> differences from normal refs</a></li>
 <li><a href="#generating-virtual-refs"><span class="toc-section-number">2.2</span> generating virtual refs</a></li>
@@ -91,13 +91,21 @@
 <p>To disallow junior developers from changing more than five files, or from touching the Makefile, you can do this:</p>
 <pre><code>repo foo
     RW+                     =   @all-devs
+
     -   VREF/COUNT/5        =   @junior-devs
     -   VREF/NAME/Makefile  =   @junior-devs</code></pre>
 <hr />
-<h1 id="basic-use"><span class="header-section-number">1</span> basic use</h1>
+<h1 id="basic-use-and-understanding"><span class="header-section-number">1</span> basic use and understanding</h1>
 <p>Normally, rules deal with branches and tags (which git collectively calls &quot;refs&quot;). The &quot;ref&quot; is a property of the push which gitolite checks against the set of rules.</p>
-<p>VREFs (&quot;virtual refs&quot;) are other properties of a push that gitolite can be told to check, in addition to the normal ref. For example, &quot;this push has more than 5 changed files&quot; could be one property. Or &quot;this push changed the file called Makefile&quot; could be another.</p>
-<p>The simplest way to use them is as <em>additional</em> &quot;deny&quot; rules to fail a push that might otherwise have passed. This is what the example at the top shows. Using VREFs like this does not require any great understanding of, or thinking about, how they work under the hood.</p>
+<p>VREFs (&quot;virtual refs&quot;) are other properties of a push that gitolite can be told to check, in addition to the normal ref. For example, &quot;this push has more than 5 changed files&quot; could be one property. Or &quot;this push changed the file called Makefile&quot; could be another. These properties are represented as &quot;virtual refs&quot; that start with &quot;VREF/&quot;. (Recall that &quot;normal&quot; refs start with &quot;refs/&quot;).</p>
+<p>The simplest way to use them is as <em>additional</em> &quot;deny&quot; rules to fail a push that might otherwise have passed. This is what the example at the top shows.</p>
+<p>It helps to separate VREF rules from normal rules, since no access rule can match both a normal ref and a VREF. Here's a good way to structure your rules:</p>
+<ul>
+<li><p>Put your normal ref rules first. These apply to the branch name or tag name that git itself knows about and sends to gitolite's update hook.</p>
+<p>Fallthru is failure here, which means the ref being pushed <strong>must</strong> match some rule in this set for the push to succeed.</p></li>
+<li><p>Put your VREF rules next. These apply to the virtual refs you want to use as additional checks for the push.</p>
+<p>Fallthru is success here, which means the (virtual) ref must be <strong>explicitly denied</strong> in order for the push to fail.</p></li>
+</ul>
 <h1 id="advanced-use"><span class="header-section-number">2</span> advanced use</h1>
 <p>More complex uses are possible, but may be harder to understand. You may want to experiment with the rules to solidify your understanding as you read this.</p>
 <h2 id="differences-from-normal-refs"><span class="header-section-number">2.1</span> differences from normal refs</h2>
@@ -142,12 +150,14 @@
 <p>Here's another example. Consider the problem of not allowing pushes at specific times. Let's say repo 'foo' cannot be pushed between 4 and 7pm, and repo 'bar' can only be pushed before 9am. And of course all this only applies to the junior developers, the poor guys!</p>
 <pre><code>repo foo
     RW+                         =   @all
+
     -   VREF/Hour/16            =   @junior-devs
     -   VREF/Hour/17            =   @junior-devs
     -   VREF/Hour/18            =   @junior-devs
 
 repo bar
     RW+                         =   @all
+
     -   VREF/Hour/09            =   @junior-devs
     -   VREF/Hour/1[0-9]        =   @junior-devs
     -   VREF/Hour/2[0-9]        =   @junior-devs</code></pre>

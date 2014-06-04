@@ -75,6 +75,7 @@
 <li><a href="#appendix-1-notes-on-the-input-trigger"><span class="toc-section-number">4</span> appendix 1: notes on the INPUT trigger</a></li>
 <li><a href="#rsev"><span class="toc-section-number">5</span> appendix 2: repo-specific environment variables</a></li>
 <li><a href="#lff"><span class="toc-section-number">6</span> appendix 3: log file format</a></li>
+<li><a href="#appendix-4-v3.6.1-syslog"><span class="toc-section-number">7</span> appendix 4: <span class="gray">(v3.6.1+)</span> syslog</a></li>
 </ul>
 </div>
 <p>Gitolite has a huge bunch of existing features that gradually need to be moved over. Plus you may want to write your own programs to interact with it.</p>
@@ -171,7 +172,7 @@ then
 <p>There are two kinds of lines in the log file:</p>
 <ul>
 <li><p>third field non-empty: actual log lines. These are documented below.</p></li>
-<li><p>third field empty (i.e., two tabs after the second field): informational output. These are NOT documented and may change without notice. They can be turned off completely by setting the RC variable <code>LOG_EXTRA</code> to 0.</p></li>
+<li><p>third field empty (i.e., two tabs after the second field): extra output to help diagnose problems. These are NOT documented and may change without notice. They can be turned off completely by setting the RC variable <code>LOG_EXTRA</code> to 0.</p></li>
 </ul>
 <p>For all types of log lines, the first two fields are:</p>
 <ul>
@@ -247,6 +248,24 @@ git-receive-pack 'reponame'</code></pre>
 <li>field 4: 'gitolite'</li>
 <li>field 5 to end: arguments supplied to gitolite command, one per field</li>
 </ul></li>
+</ul>
+<h1 id="appendix-4-v3.6.1-syslog"><span class="header-section-number">7</span> appendix 4: <span class="gray">(v3.6.1+)</span> syslog</h1>
+<p>Gitolite allows you to send log entries to syslog. To do that, uncomment one of the commented out values for LOG_DEST in the rc file. If your rc file does not have any such lines, add one of the following lines just after the LOG_EXTRA line:</p>
+<pre><code># use this to log only to syslog
+LOG_DEST                        =&gt; 'syslog',
+
+# use this to log to syslog and the normal gitolite log
+LOG_DEST                        =&gt; 'syslog,normal',</code></pre>
+<p>Please note:</p>
+<ul>
+<li><p>The first two fields described in the previous section (time, TID) are different. Syslog takes care of putting in the time, and the TID is appended to the ident, so instead of just 'gitolite', you get 'gitolite[$GL_TID]'.</p>
+<p>This means actual log lines will look something like this, since syslog appends the actual PID to the ident as well:</p>
+<pre><code>Jun  3 09:26:11 sita-lt gitolite[14950][14950]: ssh ARGV=admin  SOC=git-receive-pack 'gitolite-admin'   FROM=::1
+Jun  3 09:26:11 sita-lt gitolite[14950][14950]: pre_git gitolite-admin  admin   W   any refs/.*
+Jun  3 09:26:11 sita-lt gitolite[14950][14991]: update  gitolite-admin  admin   W   refs/heads/master   [snip]
+Jun  3 09:26:13 sita-lt gitolite[14950][14950]: END</code></pre></li>
+<li><p>Normal log messages use the 'info' priority, while LOG_EXTRA messages (see previous section) use the 'debug' priority.</p>
+<p>It may be useful to send the debug output to a different output file. Unlike in the normal gitolite logs, where there is an extra tab character (or, an empty field, depending on how you look at it), the syslog lines do not let you easily distinguish between the main log lines and the LOG_EXTRA lines.</p></li>
 </ul>
 </body>
 </html>

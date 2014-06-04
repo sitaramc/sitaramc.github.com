@@ -65,11 +65,12 @@
 <li><a href="#v3.6-preventing-automatic-sync"><span class="toc-section-number">2.2.1</span> <span class="gray">(v3.6+)</span> preventing automatic sync</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#sync"><span class="toc-section-number">3</span> manually synchronising a slave repo</a></li>
-<li><a href="#redirected-pushes"><span class="toc-section-number">4</span> redirected pushes</a></li>
-<li><a href="#HOSTNAME"><span class="toc-section-number">5</span> appendix A: HOSTNAME substitution</a></li>
-<li><a href="#appendix-b-efficiency-versus-paranoia"><span class="toc-section-number">6</span> appendix B: efficiency versus paranoia</a></li>
-<li><a href="#appendix-c-moving-the-admin-repo-to-a-different-master"><span class="toc-section-number">7</span> appendix C: moving the admin repo to a different master</a></li>
+<li><a href="#v3.6.1-mirroring-failures"><span class="toc-section-number">3</span> <span class="gray">(v3.6.1+)</span> mirroring failures</a></li>
+<li><a href="#sync"><span class="toc-section-number">4</span> manually synchronising a slave repo</a></li>
+<li><a href="#redirected-pushes"><span class="toc-section-number">5</span> redirected pushes</a></li>
+<li><a href="#HOSTNAME"><span class="toc-section-number">6</span> appendix A: HOSTNAME substitution</a></li>
+<li><a href="#appendix-b-efficiency-versus-paranoia"><span class="toc-section-number">7</span> appendix B: efficiency versus paranoia</a></li>
+<li><a href="#appendix-c-moving-the-admin-repo-to-a-different-master"><span class="toc-section-number">8</span> appendix C: moving the admin repo to a different master</a></li>
 </ul>
 </div>
 <p><font color="red"><strong>WARNING</strong> existing gitolite mirroring users please note: <strong>there are <a href="g2incompat.html#g2i-mirroring">significant changes</a></strong> in syntax and usage compared to g2. If you're not the kind who reads documentation before doing serious system admin things, well... good luck!</font></p>
@@ -154,7 +155,13 @@ ssh phobos info
 <p>To make that happen, use option lines like this instead of those shown above:</p>
 <pre><code>    option mirror.slaves.nosync-1   =   phobos deimos</code></pre>
 <p>Except for the addition of a <code>.nosync</code> just after <code>slaves</code>, all the other rules are the same as before.</p>
-<h1 id="sync"><span class="header-section-number">3</span> manually synchronising a slave repo</h1>
+<h1 id="v3.6.1-mirroring-failures"><span class="header-section-number">3</span> <span class="gray">(v3.6.1+)</span> mirroring failures</h1>
+<p>Since mirror pushes happen asynchronously (i.e, the user who originally pushed does not have to wait for the mirrors to be synced), any mirror push failures are not immediately visible to a human being, although you will find them if you look in gitolite's log files.</p>
+<p>Therefore, when the output of the mirror push to some slave contains the word &quot;fatal&quot;, gitolite saves the output. This saved output is printed to STDERR when any user attempts to clone/fetch/push the repo on the master server for that repo. The hope is that someone will alert an admin to look at the problem. This will continue to happen until the error condition is cleared (i.e., a successful mirror push happens to that specific slave).</p>
+<p><span class="gray">Note: since only a successful push can clear the error status, it follows that if a mirror push failed due to an invalid hostname, that status file will need to be manually deleted from the server. Look in the bare repo directory on the server, for one or more files whose names start with 'gl-slave' and delete the appropriate one.</span></p>
+<p>If you don't want these unexpected reports confusing users (or programs!), simply create a new rc variable called HUSH_MIRROR_STATUS and set it to 1. <span class="gray">(If you're not sure where in the rc file this should go, I suggest putting it right after the HOSTNAME variable).</span></p>
+<p>You can see the mirror status of any repo using the 'mirror status' command; the command line help for the mirror command ('gitolite mirror -h' or 'ssh git@host mirror -h') has details.</p>
+<h1 id="sync"><span class="header-section-number">4</span> manually synchronising a slave repo</h1>
 <p>You can use the <code>gitolite mirror push</code> command on a master to manually synchronise any of its slaves. Try it with <code>-h</code> to get usage info.</p>
 <p>Tip: if you want to do this to all the slaves, try this:</p>
 <pre><code>for s in `gitolite git-config -r reponame mirror.slave | cut -f3`
@@ -162,7 +169,7 @@ do
     gitolite mirror push $s reponame
 done</code></pre>
 <p>This command can also be run remotely; run <code>ssh git@host mirror -h</code> for details.</p>
-<h1 id="redirected-pushes"><span class="header-section-number">4</span> redirected pushes</h1>
+<h1 id="redirected-pushes"><span class="header-section-number">5</span> redirected pushes</h1>
 <p><strong>Please read carefully; there are security implications if you enable this for mirrors NOT under your control</strong>.</p>
 <p>Normally, a master, (and <em>only</em> a master), pushes to a slave, and the slaves are &quot;read-only&quot; to the users. Gitolite allows a <em>slave</em> to receive pushes from a user and transparently redirect them to the <em>master</em>.</p>
 <p>This simplifies things for users in complex setups, letting them use their local mirror for both fetch and push access to all repos.</p>
@@ -177,16 +184,16 @@ option mirror.redirectOK    =   phobos deimos</code></pre>
 <li><p>The part of the authorisation that happens before passing control to git-receive-pack (see the <a href="rules.html">access rules</a> page) will happen on the slave as well.</p></li>
 <li><p>You cannot redirect gitolite commands (like perms, etc).</p></li>
 </ul>
-<h1 id="HOSTNAME"><span class="header-section-number">5</span> appendix A: HOSTNAME substitution</h1>
+<h1 id="HOSTNAME"><span class="header-section-number">6</span> appendix A: HOSTNAME substitution</h1>
 <p>Wherever gitolite sees the word <code>%HOSTNAME</code>, it will replace it with the HOSTNAME supplied in the rc file, if one was supplied. This lets you maintain configurations for all servers in one repo, yet have them act differently on different servers, by saying something like:</p>
 <pre><code>subconf &quot;%HOSTNAME/*.conf&quot;</code></pre>
 <p>You can use it in other places also, for example:</p>
 <pre><code>RW+     VREF/NAME/subs/%HOSTNAME/       =   @%HOSTNAME-admins</code></pre>
 <p>(you still have to define <span class="citation">@mars-admins</span>, <span class="citation">@phobos-admins</span>, etc., but the actual VREF is now one line instead of one for each server!)</p>
-<h1 id="appendix-b-efficiency-versus-paranoia"><span class="header-section-number">6</span> appendix B: efficiency versus paranoia</h1>
+<h1 id="appendix-b-efficiency-versus-paranoia"><span class="header-section-number">7</span> appendix B: efficiency versus paranoia</h1>
 <p>If you're paranoid enough to use mirrors, you should be paranoid enough to set this on each server, despite the possible CPU overhead:</p>
 <pre><code>git config --global receive.fsckObjects true</code></pre>
-<h1 id="appendix-c-moving-the-admin-repo-to-a-different-master"><span class="header-section-number">7</span> appendix C: moving the admin repo to a different master</h1>
+<h1 id="appendix-c-moving-the-admin-repo-to-a-different-master"><span class="header-section-number">8</span> appendix C: moving the admin repo to a different master</h1>
 <p>Moving only some repos (other than the gitolite-admin repo) to a different master is easy. Just make the change in the gitolite.conf file, add, commit, and push.</p>
 <p>Even for the gitolite-admin repo, if the current master is ok, it's the same thing; just make the change and push <em>to the current master</em>. Subsequent pushes will go to the new master, of course.</p>
 <p>But if the current master is already dead, there's a bit of a catch-22. You can't push to the master because it is dead, and you can't push to any slave because they won't accept updates from anywhere but the server they think is the master.</p>
