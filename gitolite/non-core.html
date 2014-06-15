@@ -126,8 +126,7 @@
 <li><em>RefexExpr</em> -- (in combination with VREF/refex-expr) logical expressions over refexes, like &quot;refex-1 and not refex-2&quot;. (Example: changing file 'foo' but not on 'master' branch)</li>
 <li><em>renice</em> -- renice the git operation</li>
 <li><em>RepoUmask</em> -- repo-specific umask settings</li>
-<li><em>Shell</em> -- see &quot;giving shell access to gitolite users&quot; in the <a href="sts.html">ssh troubleshooting and tips</a> page. This also need the 'ssh-authkeys-shell-users' trigger to be enabled.</li>
-<li><em>ssh-authkeys-shell-users</em> -- see 'Shell' entry just above</li>
+<li><em>Shell</em> -- see &quot;giving shell access to gitolite users&quot; in the <a href="sts.html">ssh troubleshooting and tips</a> page. (Internally enables the 'ssh-authkeys-shell-users' trigger also).</li>
 <li><em>ssh-authkeys-split</em> -- split pubkey files with multiple keys into separate files with one pubkey each</li>
 <li><em>update-description-file</em> -- if you want the 'description' file to be updated instead of the 'gitweb.description' config entry (e.g. cgit users)</li>
 <li><em>upstream</em> -- manage local, gitolite-controlled, copies of read-only upstream repos</li>

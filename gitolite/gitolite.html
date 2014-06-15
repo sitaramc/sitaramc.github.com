@@ -1759,8 +1759,7 @@ exec ${GITOLITE_HTTP_HOME}/gitolite-source/src/gitolite-shell</code></pre>
 <li><em>RefexExpr</em> -- (in combination with VREF/refex-expr) logical expressions over refexes, like &quot;refex-1 and not refex-2&quot;. (Example: changing file 'foo' but not on 'master' branch)</li>
 <li><em>renice</em> -- renice the git operation</li>
 <li><em>RepoUmask</em> -- repo-specific umask settings</li>
-<li><em>Shell</em> -- see &quot;giving shell access to gitolite users&quot; in the <a href="#sts">ssh troubleshooting and tips</a> page. This also need the 'ssh-authkeys-shell-users' trigger to be enabled.</li>
-<li><em>ssh-authkeys-shell-users</em> -- see 'Shell' entry just above</li>
+<li><em>Shell</em> -- see &quot;giving shell access to gitolite users&quot; in the <a href="#sts">ssh troubleshooting and tips</a> page. (Internally enables the 'ssh-authkeys-shell-users' trigger also).</li>
 <li><em>ssh-authkeys-split</em> -- split pubkey files with multiple keys into separate files with one pubkey each</li>
 <li><em>update-description-file</em> -- if you want the 'description' file to be updated instead of the 'gitweb.description' config entry (e.g. cgit users)</li>
 <li><em>upstream</em> -- manage local, gitolite-controlled, copies of read-only upstream repos</li>
@@ -2457,14 +2456,18 @@ command=&quot;[path]/gitolite-shell usertwo&quot;,[more options] ssh-rsa AAAAB3N
 <h3 id="random-tips-tricks-and-notes"><span class="header-section-number">7.4.4</span> random tips, tricks, and notes</h3>
 <h4 id="giving-shell"><span class="header-section-number">7.4.4.1</span> giving shell access to gitolite users</h4>
 <p>Thanks to an idea from Jesse Keating, a single key can allow both gitolite access <em>and</em> shell access.</p>
-<p>To do this:</p>
-<ul>
-<li><p>add the list of users who will have shell access -- one username per line, no extra whitespace -- to a plain text file of your choice.</p></li>
-<li><p>put the name of this file in a new rc variable <code>SHELL_USERS_LIST</code>. For example it could be</p>
-<pre><code>SHELL_USERS_LIST        =&gt;  &quot;$ENV{HOME}/.gitolite.shell-users&quot;,</code></pre></li>
-<li><p>enable the trigger by uncommenting the 'Shell' line in the ENABLE list.</p></li>
-</ul>
+<p><span class="gray">(v3.6.1+)</span> There are two ways to do this, both require uncommenting and editing the 'Shell' line in the ENABLE list in the rc file.</p>
+<p>If you have only a few users who need to get shell access, edit the line to look like this (note the trailing comma!):</p>
+<pre><code>'Shell alice bob',</code></pre>
+<p>If you have lots of users, add them to some file accessible to gitolite, (one per line, no extra whitespace), then specify the full path of the file. For example:</p>
+<pre><code>&quot;Shell $ENV{HOME}/.gitolite.shell-users&quot;,</code></pre>
+<p>(Note in this case we have to use double quotes since we are using a variable that needs to be interpolated into the value).</p>
 <p>Then run <code>gitolite compile; gitolite trigger POST_COMPILE</code> or push a dummy change to the admin repo.</p>
+<h5 id="the-shell_users_list"><span class="header-section-number">7.4.4.1.1</span> the SHELL_USERS_LIST</h5>
+<p>If you're using gitolite v3.6 or below, it's slightly different. You have to enable the trigger by uncommenting the 'Shell' line in the ENABLE list, but you cannot list the users directly on the 'Shell' line in the rc file, nor can you put the file name on that line. Instead, you have to go to the variables section in the rc file and set the SHELL_USERS_LIST variable to the filename. For example:</p>
+<pre><code>SHELL_USERS_LIST        =&gt;  &quot;$ENV{HOME}/.gitolite.shell-users&quot;,</code></pre>
+<p>Then run <code>gitolite compile; gitolite trigger POST_COMPILE</code> or push a dummy change to the admin repo.</p>
+<p><strong>NOTE</strong>: to maintain backward compatibility, this method will continue to work in 3.6.*, but when 3.7 is released (whenever that may be), it will not work, and you will have to use the new syntax described above.</p>
 <h4 id="kfn"><span class="header-section-number">7.4.4.2</span> distinguishing one key from another</h4>
 <p>Since a user can have <a href="#multi-key">more than one key</a>, it is sometimes useful to distinguish one key from another. Sshd does not tell you even the fingerprint of the key that finally matched, so normally all you have is the <code>GL_USER</code> env var.</p>
 <p>However, if you replace</p>
