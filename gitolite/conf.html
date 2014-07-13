@@ -323,7 +323,7 @@
 <p><span class="box-r">You might recall from the <a href="basic-admin.html">basic administration</a> page that this file is part of the gitolite-admin repo. You need to clone that repo, make and commit changes to this file, and push the commits back.</span></p>
 <p>The <code>conf/gitolite.conf</code> file (often called just &quot;the conf file&quot; for short) is one of the two most important files in gitolite. It specifies repo names and access rules, as well as repo options of various kinds and git-config values.</p>
 <p>Pretty much all day-to-day management, except <a href="basic-admin.html#users">managing users</a>, happens from this file.</p>
-<p>We'll use the following example to describe it's features.</p>
+<p>We'll use the following example to describe it's features. <span class="gray">(A tip of the hat to Teemu Matilainen's gitolite vim-syntax file for the colors.)</span></p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Comment"># sample conf/gitolite.conf file</span>
 
@@ -464,7 +464,7 @@
 
 </div>
 
-<p>You've seen some simple rules so far, for example in the <a href="basic-admin.html">basic administration</a> page. Here's a slightly more complex one, just for illustration. <span class="gray">(A tip of the hat to Teemu Matilainen's gitolite vim-syntax file for the colors.)</span></p>
+<p>You've seen some simple rules so far, for example in the <a href="basic-admin.html">basic administration</a> page. Here's a slightly more complex one, just for illustration.</p>
 <p>A &quot;repo&quot; line names one or more repos, and is followed by one or more rule lines. All the rules from then till the next &quot;repo&quot; line apply to the repo(s) specified in the repo line -- in this example, the 'foo' and 'bar' repos.</p>
 <p>Each rule line has a &quot;permission&quot; field, zero or more &quot;refex&quot;es, and one or more user or user group name after the equal sign.</p>
 <p><span class="gray">The &quot;repo&quot; line can also have repo groups, as we have seen in the section on <a href="#groups">groups</a> above. Also, it can have regular expressions that match multiple repos.</span></p>
