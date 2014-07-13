@@ -19,6 +19,7 @@
       .blue       { color: blue }
       .green      { color: green }
       .gray       { color: gray }
+      .pink       { color: pink }
   
       .box        { background-color:#e0e0e0 }
       .bg-red     { background-color:#ffe0e0 }
@@ -28,8 +29,19 @@
       /* couldn't resist the name! */
       .wd40       { width: 40% !important }
   
-      .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25% }
-      .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25% }
+      .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
+      .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
+  
+      .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
+      .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
+  
+      .sidebar {
+          margin-left: 4px;
+          width: 25%;
+          float: right;
+          border: 4px solid #fff;
+      }
+  
   </style>
   <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -40,7 +52,7 @@
 </head>
 <body>
 <p style="text-align:center">
-    <a href="index.html">git notes main page</a>
+    <a href="index2.html">git notes main page</a>
 |
 <a href="gitolite/index.html"><strong>gitolite</strong> main page</a>
 |
@@ -100,12 +112,12 @@
 <ul>
 <li><p>a <strong>commit</strong> records the content of the working tree at a point in time</p></li>
 <li><p>every commit in git is represented by a globally unique 160-bit value (40 hex digits) which is a cryptographically secure hash of the commit data. This is often called the <strong>SHA</strong> or SHA-1, after the algorithm used.</p>
-<p><span class="gray">[&quot;Globally unique&quot; means no other commit in any other repository in any other project anywhere in the world will have the same SHA. You can become very, very, famous in the cryptography world if you find two different commits with the same SHA :-)]</span></p></li>
+<p>.<span class="citation">@gray</span>&lt;[&quot;Globally unique&quot; means no other commit in any other repository in any other project anywhere in the world will have the same SHA. You can become very, very, famous in the cryptography world if you find two different commits with the same SHA :-)]&gt;@</p></li>
 </ul>
 <h2 id="parent-commits-commit-tree"><span class="header-section-number">2.3</span> parent commits, commit tree</h2>
 <ul>
 <li><p>most commits build on top of one or more previous commits, called <strong>parents</strong>. Normal commits have only one parent, while &quot;merge&quot; commits have two. The very first commit in the tree has no parents; this is called a &quot;root commit&quot;.</p>
-<p><span class="gray">[A repo can have more than one &quot;root commit&quot;, but this is rare.]</span></p></li>
+<p>.<span class="citation">@gray</span>&lt;[A repo can have more than one &quot;root commit&quot;, but this is rare.]&gt;@</p></li>
 <li><p>every commit records the SHAs of its parent(s). It's as if every commit has an arrow pointing to its parents, like a back pointer in a linked list</p>
 <ul>
 <li>thus, merge commits have two arrows pointing out</li>
@@ -126,7 +138,7 @@
 <ul>
 <li><p>you can start from a commit X and follow the parent SHAs (&quot;arrows&quot;) until you come to a root commit. The commits you found in this process are all said to be <strong>reachable</strong> from X</p></li>
 <li><p>if you have commit X in some other repo, git guarantees that that repo also has all these &quot;reachable&quot; commits.</p>
-<p><span class="gray">[If you know about grafts or shallow clones, you're too advanced to be reading this document ;-)]</span></p></li>
+<p>.<span class="citation">@gray</span>&lt;[If you know about grafts or shallow clones, you're too advanced to be reading this document ;-)]&gt;@</p></li>
 <li><p>when you merge a branch into the currently checked out branch, git uses reachability to determine what commits to actually bring in. All the commits reachable from the branch being merged, which are not already reachable from the current branch, are pulled in and applied</p></li>
 </ul>
 <h2 id="master-head"><span class="header-section-number">2.6</span> master, HEAD</h2>

@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Notes on Git</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
+  
+      code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+      pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
+      pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
+  
+      td          { vertical-align: top }
+  
+      .red        { color: red }
+      .blue       { color: blue }
+      .green      { color: green }
+      .gray       { color: gray }
+      .pink       { color: pink }
+  
+      .box        { background-color:#e0e0e0 }
+      .bg-red     { background-color:#ffe0e0 }
+      .bg-green   { background-color:#e0ffe0 }
+      .bg-blue    { background-color:#e0e0ff }
+  
+      /* couldn't resist the name! */
+      .wd40       { width: 40% !important }
+  
+      .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
+      .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
+  
+      .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
+      .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
+  
+      .sidebar {
+          margin-left: 4px;
+          width: 25%;
+          float: right;
+          border: 4px solid #fff;
+      }
+  
+  </style>
+  <style>
+      h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
+      h2          { background: #ffb; text-color: #000; margin-left: -20px;   border-top:    3px  solid #ddd; }
+      h3          { background: #ffb; text-color: #000; margin-left: -10px; }
+      h4          { background: #ffb; text-color: #000; }
+  </style>
+</head>
+<body>
+<p style="text-align:center">
+    <a href="index2.html">git notes main page</a>
+|
+<a href="gitolite/index.html"><strong>gitolite</strong> main page</a>
+|
+    <a href="license.html">license</a>
+</p>
+<div id="header">
+<h1 class="title">Notes on Git</h1>
+</div>
+<table><tr><td>
+
+<p>Git is a <strong>Distributed</strong> Version Control System. Most VCSs you know (like CVS, Subversion, Clearcase, Perforce, and VSS) are centralised. A Distributed VCS allows you to make frequent, local, commits to checkpoint your work while you're still perfecting the code -- you cannot do this with a centralised VCS.</p>
+<p>These are my notes about git. I started writing them for my own understanding, almost like cheat sheets, but they may be useful for others also.</p>
+</td><td>
+
+<p><font color="red" size="+1"></p>
+<blockquote>
+<hr>
+  
+<strong>Looking for gitolite documentation? Click <a href="gitolite/index.html">here</a></strong>.
+<hr>
+
+</blockquote>
+<p></font></p>
+</td></tr></table>
+
+<table cellspacing="10">
+
+<tr><td>
+
+<h3 id="why-git" class="unnumbered">Why git?</h3>
+<p>Why is git so popular? If you're just curious, but not curious enough to dig in like a developer, maybe <a href="git-lfy.html">this article</a>, which I wrote in 2008, will help.</p>
+<h3 id="what-is-git" class="unnumbered">What is git?</h3>
+<p>If you want to understand git, we have .<span class="citation">@red</span>&lt;<strong>slideshows</strong>&gt;@.</p>
+<ul>
+<li>an <a href="vc.html">introduction</a> to version control and the central concepts behind git -- for those who have never used <em>any</em> version control tool.</li>
+<li>what makes <a href="git.html">git</a> so powerful -- for those who know something about version control but not git.</li>
+</ul>
+<h3 id="git-usage" class="unnumbered">git usage</h3>
+<p>In the <a href="usage.html">&quot;git usage&quot;</a> page you will find various tips and traps, information for command line and GUI users, Windows users, running a git server, plus a quick set of hints for people familiar with traditional VCSs like SVN and CVS.</p>
+</td><td>
+
+<h3 id="popular-links" class="unnumbered">Popular links</h3>
+<p>These links show up several times a day on #git (the git channel on IRC)</p>
+<ul>
+<li>git as a <a href="deploy.html">deployment</a> tool</li>
+<li><a href="gcs.html">Git concepts simplified</a> has lots of diagrams explaining git</li>
+<li><a href="tias.html">Try it and see!</a> -- shows how easy it is to safely try out almost any git feature on your own userid</li>
+</ul>
+<h3 id="other-write-ups" class="unnumbered">Other write-ups</h3>
+<p>A whole bunch of <a href="articles.html">other articles</a> on git</p>
+<h3 id="refreshers" class="unnumbered">Refreshers</h3>
+<p>Git and DVCS <a href="terminology.html">terminology</a></p>
+</td></tr></table>
+
+<hr />
+<p>.<span class="citation">@gray&lt;There</span> are also some <a href="archived/index.html">older articles and write-ups</a> that may still be relevant and useful, but I have not revisited them for a while now. Caveat reader!&gt;@</p>
+<hr />
+<h1 id="license" class="unnumbered">License</h1>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Copyright Sitaram Chamarty, sitaramc@gmail.com. This documentation is provided under a <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.</li>
+</ol>
+</body>
+</html>

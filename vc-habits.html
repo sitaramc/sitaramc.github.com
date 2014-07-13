@@ -19,6 +19,7 @@
       .blue       { color: blue }
       .green      { color: green }
       .gray       { color: gray }
+      .pink       { color: pink }
   
       .box        { background-color:#e0e0e0 }
       .bg-red     { background-color:#ffe0e0 }
@@ -28,8 +29,19 @@
       /* couldn't resist the name! */
       .wd40       { width: 40% !important }
   
-      .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25% }
-      .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25% }
+      .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
+      .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
+  
+      .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
+      .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
+  
+      .sidebar {
+          margin-left: 4px;
+          width: 25%;
+          float: right;
+          border: 4px solid #fff;
+      }
+  
   </style>
   <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -40,14 +52,14 @@
 </head>
 <body>
 <p style="text-align:center">
-    <a href="index.html">git notes main page</a>
+    <a href="index2.html">git notes main page</a>
 |
 <a href="gitolite/index.html"><strong>gitolite</strong> main page</a>
 |
     <a href="license.html">license</a>
 </p>
 <h1 id="version-control-habits-of-good-developers" class="unnumbered">version control habits of good developers</h1>
-<p>.<span class="citation">@gray</span>&lt;(not necessarily git-specific)&lt;/span&gt;</p>
+<p>.<span class="citation">@gray</span>&lt;(not necessarily git-specific)&gt;@</p>
 <p>This article is based on <a href="http://blog.bstpierre.org/version-control-habits">http://blog.bstpierre.org/version-control-habits</a> -- a blog post that is well worth checking out, especially if you want more details. However, this article represents my priorities on this matter, and most of the words are mine.</p>
 <ul>
 <li><p><strong>USE IT</strong>! If you don't use version control you should get out of the software development profession!</p></li>
