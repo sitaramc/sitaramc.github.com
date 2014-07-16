@@ -85,10 +85,11 @@
 </ul></li>
 <li><a href="#more-details-and-nuances"><span class="toc-section-number">4</span> more details and nuances</a><ul>
 <li><a href="#mimicking-a-plain-old-update-hook"><span class="toc-section-number">4.1</span> mimicking a plain old update hook</a></li>
-<li><a href="#vref-fallthru"><span class="toc-section-number">4.2</span> why is fallthru considered success with VREFs</a></li>
-<li><a href="#what-if-the-vref-maker-prints-something-thats-not-even-a-virtual-ref"><span class="toc-section-number">4.3</span> what if the VREF-maker prints something that's not even a virtual ref?</a></li>
-<li><a href="#in-what-order-are-vref-makers-called"><span class="toc-section-number">4.4</span> in what order are VREF-makers called?</a></li>
-<li><a href="#vref-args"><span class="toc-section-number">4.5</span> what arguments are passed to the vref-maker?</a></li>
+<li><a href="#what-if-the-vref-maker-prints-a-different-virtual-ref"><span class="toc-section-number">4.2</span> what if the VREF-maker prints a different virtual ref?</a></li>
+<li><a href="#vref-fallthru"><span class="toc-section-number">4.3</span> why is fallthru considered success with VREFs</a></li>
+<li><a href="#what-if-the-vref-maker-prints-something-thats-not-even-a-virtual-ref"><span class="toc-section-number">4.4</span> what if the VREF-maker prints something that's not even a virtual ref?</a></li>
+<li><a href="#in-what-order-are-vref-makers-called"><span class="toc-section-number">4.5</span> in what order are VREF-makers called?</a></li>
+<li><a href="#vref-args"><span class="toc-section-number">4.6</span> what arguments are passed to the vref-maker?</a></li>
 </ul></li>
 <li><a href="#vref-makers-shipped-with-gitolite"><span class="toc-section-number">5</span> VREF-makers shipped with gitolite</a><ul>
 <li><a href="#NAME"><span class="toc-section-number">5.1</span> restricting pushes by dir/file name</a></li>
@@ -396,7 +397,9 @@
 <p>If the VREF maker exists with a non-zero exit code, then regardless of what it prints or does not, the push dies.</p>
 <p>This is just like a plain 'update' hook. Since the first 3 arguments (see later) are also the same that a plain 'update' hook receives, you can actually use any existing update hook as a VREF-maker.</p>
 <div style="overflow: auto">
+
 <div class="fl-r">
+
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Type">repo </span>foo   <span class="Comment"> # or maybe even 'repo @all'</span>
 <span class="Statement">    -</span><span class="Constant">   VREF/my-update-hook     </span>=<span class="WarningMsg">   @all</span>
@@ -406,13 +409,18 @@
 
 <p>To repurpose an existing update hook as a VREF-maker, just copy it to the VREF directory (again, see <a href="non-core.html">here</a> for actual locations on disk). Then add this rule to your repos:</p>
 </div>
+
 <p>That's it.</p>
-<h2><span class="header-section-number">4.1</span> what if the VREF-maker prints a different virtual ref?</h2>
+<h2 id="what-if-the-vref-maker-prints-a-different-virtual-ref"><span class="header-section-number">4.2</span> what if the VREF-maker prints a different virtual ref?</h2>
 <p>Unless you know what you're upto, don't do that.</p>
 <p>But it's allowed and the behaviour is defined. The VREF-maker for the NAME VREF is a good example. It ignores the arguments and just makes VREFs out of the name of every file that was changed in the push.</p>
-<div style="overflow: auto">
+<table><tr><td>
 
-<div class="fl-r">
+<p>Here's another example. Consider the problem of not allowing pushes at specific times. Let's say repo 'foo' cannot be pushed between 4 and 7pm, and repo 'bar' can only be pushed before 9am. And of course all this only applies to the junior developers, the poor guys!</p>
+<p>In this example, we write the &quot;Hour&quot; VREF-maker to <em>ignore the argument passed</em> and just print <code>VREF/Hour/NN</code> where NN can be between 00 to 23 inclusive and of course represents the current hour.</p>
+<p>If foo is pushed at 6:30pm, the VREF-maker prints VREF/Hour/18, which satisfies the third rule and is rejected.</p>
+<p>If bar is pushed at, say, 7:20am, the vref printed is VREF/Hour/07, which does not match any of the rules. And fallthru is success so it passes.</p>
+</td><td>
 
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Type">repo </span>foo
@@ -430,14 +438,9 @@
 <span class="Statement">    -</span><span class="Constant">   VREF/Hour/2[0-9]        </span>=<span class="WarningMsg">   @junior-devs</span>
 </pre>
 
-</div>
+</td></tr></table>
 
-<p>Here's another example. Consider the problem of not allowing pushes at specific times. Let's say repo 'foo' cannot be pushed between 4 and 7pm, and repo 'bar' can only be pushed before 9am. And of course all this only applies to the junior developers, the poor guys!</p>
-<p>In this example, we write the &quot;Hour&quot; VREF-maker to <em>ignore the argument passed</em> and just print <code>VREF/Hour/NN</code> where NN can be between 00 to 23 inclusive and of course represents the current hour.</p>
-<p>If foo is pushed at 6:30pm, the VREF-maker prints VREF/Hour/18, which satisfies the third rule and is rejected.</p>
-<p>If bar is pushed at, say, 7:20am, the vref printed is VREF/Hour/07, which does not match any of the rules. And fallthru is success so it passes.</p>
-</div>
-<h2 id="vref-fallthru"><span class="header-section-number">4.2</span> why is fallthru considered success with VREFs</h2>
+<h2 id="vref-fallthru"><span class="header-section-number">4.3</span> why is fallthru considered success with VREFs</h2>
 <p>Virtual refs are <strong>best used</strong> (1) as <strong>additional</strong> &quot;deny&quot; rules, performing extra checks that core gitolite cannot. You usually want such extra checks only for some people.</p>
 <p>When fallthru is success, you can simply <em>ignore</em> all the other users (for whom such additional checks are not needed).</p>
 <p>If fallthru were to be considered 'failure', you'd be forced to add a &quot;success rule&quot; like this for <em>every</em> virtual ref you used in this repo, in each case listing every user who was not already mentioned in the context of that vref:</p>
@@ -453,13 +456,13 @@
 </pre>
 
 <p></font></p>
-<h2 id="what-if-the-vref-maker-prints-something-thats-not-even-a-virtual-ref"><span class="header-section-number">4.3</span> what if the VREF-maker prints something that's not even a virtual ref?</h2>
+<h2 id="what-if-the-vref-maker-prints-something-thats-not-even-a-virtual-ref"><span class="header-section-number">4.4</span> what if the VREF-maker prints something that's not even a virtual ref?</h2>
 <p>The VREF-maker can print anything it wants to STDOUT. Lines not starting with <code>VREF/</code> are printed as is (so your VREF-maker can do mostly-normal printing to STDOUT). This is especially useful if you've turned an existing update hook into a VREF-maker, and it prints stuff meant for the user, but you don't want to touch the code.</p>
 <p>For lines starting with <code>VREF/</code>, the first word in each such line will be treated as a virtual ref, while the rest, if any, is a message to be added to the standard &quot;...DENIED...&quot; message that gitolite will print if that refex matches and the rule is a deny rule.</p>
-<h2 id="in-what-order-are-vref-makers-called"><span class="header-section-number">4.4</span> in what order are VREF-makers called?</h2>
+<h2 id="in-what-order-are-vref-makers-called"><span class="header-section-number">4.5</span> in what order are VREF-makers called?</h2>
 <p>VREF-makers are called in the sequence in which they appear in the conf file.</p>
 <p>There are some optimisations to prevent calling the same VREF-maker with the same arguments more than once, and the VREF-maker code for the NAME VREF (which is special) is called only once regardless of how many times it appears but these details should not concern anyone but a developer.</p>
-<h2 id="vref-args"><span class="header-section-number">4.5</span> what arguments are passed to the vref-maker?</h2>
+<h2 id="vref-args"><span class="header-section-number">4.6</span> what arguments are passed to the vref-maker?</h2>
 <ul>
 <li><p>Arguments <strong>1, 2, 3</strong>: the 'ref', 'oldsha', and 'newsha' that git passed to the update hook (see 'man githooks').</p>
 <p>This, combined with the fact that non-zero exits are detected, mean that you can simply use an existing update.secondary as a VREF-maker as-is, no changes needed.</p></li>
