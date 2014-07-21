@@ -296,13 +296,19 @@
 <li><a href="regex.html">regular expressions</a></li>
 <li><a href="no-way.html">no way!</a></li>
 </ul>
+<hr />
+<center>
+<span class="red"><strong>Contributed docs</strong></span>
+</center>
+
+<hr />
 <p>Contributed software, tools, and documentation</p>
 <ul>
-<li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
-<li><a href="putty.html">putty and msysgit</a></li>
 <li><a href="ssh-and-http.html">combining ssh and http mode</a></li>
+<li><a href="putty.html">putty and msysgit</a></li>
 <li><a href="sskm.html">changing keys -- self service key management</a></li>
 <li><a href="ukm.html">user key management</a></li>
+<li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
 </ul>
 </div>
 
@@ -325,8 +331,13 @@
 </ul>
 <h1 id="ncloc"><span class="header-section-number">2</span> locations...</h1>
 <h2 id="for-non-core-programs-shipped-with-gitolite"><span class="header-section-number">2.1</span> ...for non-core programs shipped with gitolite</h2>
-<div style="overflow: auto">
-<pre style="float: right; font-family: 'Andale mono',monospace; margin-top: 0; font-weight: bold; padding: 4px; color: #ffffff; background-color: #000000;">
+<table><tr><td>
+
+<p><code>gitolite query-rc GL_BINDIR</code> will tell you where gitolite's code has been installed. That directory should look like this. Among these, the directories in green are considered &quot;non-core&quot;, while the ones in red are considered &quot;core&quot;. In addition, the two files &quot;gitolite&quot; and &quot;gitolite-shell&quot; in src are also considered &quot;core&quot;</p>
+<p>You might notice that there are two locations for <a href="triggers.html">triggers</a>; that is simply because there are two types of them. You might also notice that there is no place for hooks -- gitolite doesn't <em>ship</em> with any hooks that are non-core.</p>
+</td><td>
+
+<pre style="font-family: 'Andale mono',monospace; margin-top: 0; font-weight: bold; padding: 4px; color: #ffffff; background-color: #000000;">
 
 .
 ├──<span style="color: #00ff00">commands</span>
@@ -342,11 +353,18 @@
 
 </pre>
 
-<p><code>gitolite query-rc GL_BINDIR</code> will tell you where gitolite's code has been installed. That directory should look like this. Among these, the directories in green are considered &quot;non-core&quot;, while the ones in red are considered &quot;core&quot;. In addition, the two files &quot;gitolite&quot; and &quot;gitolite-shell&quot; in src are also considered &quot;core&quot;</p>
-<p>You might notice that there are two locations for <a href="triggers.html">triggers</a>; that is simply because there are two types of them. You might also notice that there is no place for hooks -- gitolite doesn't <em>ship</em> with any hooks that are non-core.</p>
-</div>
+</td></tr></table>
+
 <h2 id="localcode"><span class="header-section-number">2.2</span> ...for <em>your</em> non-core programs</h2>
-<div style="overflow: auto">
+<table><tr><td>
+
+<p>If you want to add your own non-core programs, or even <em>override</em> the shipped ones with your own, you can.</p>
+<p>Put your programs in some convenient directory and use the <code>LOCAL_CODE</code> rc variable to tell gitolite where that is. <strong>Please supply the FULL path</strong> to this variable. (You'll find the rc file already has examples lines, commented out, so it's easy to know where to put it and what syntax to use).</p>
+<p>Within that directory, you can use any or all of the subdirectories shown here.</p>
+<p>If you add a program in your local code directory with the same name as a shipped program, gitolite uses your version.</p>
+<p><span class="gray">Notice that there are two directories related to hooks here, neither of which exist in the shipped non-core code. Also, the <code>hooks/common</code> directory is a bit special. If you add new hooks to this, you must run <code>gitolite setup</code>, or at least <code>gitolite setup --hooks-only</code>.</span></p>
+</td><td>
+
 <pre style="float: right; font-family: 'Andale mono',monospace; margin-top: 0; font-weight: bold; padding: 4px; color: #ffffff; background-color: #000000;">
 
 .
@@ -363,14 +381,9 @@
 
 </pre>
 
-<p>If you want to add your own non-core programs, or even <em>override</em> the shipped ones with your own, you can.</p>
-<p>Put your programs in some convenient directory and use the <code>LOCAL_CODE</code> rc variable to tell gitolite where that is. <strong>Please supply the FULL path</strong> to this variable. (You'll find the rc file already has examples lines, commented out, so it's easy to know where to put it and what syntax to use).</p>
-<p>Within that directory, you can use any or all of the subdirectories shown here.</p>
-<p>If you add a program in your local code directory with the same name as a shipped program, gitolite uses your version.</p>
-<p><span class="gray">Notice that there are two directories related to hooks here, neither of which exist in the shipped non-core code. Also, the <code>hooks/common</code> directory is a bit special. If you add new hooks to this, you must run <code>gitolite setup</code>, or at least <code>gitolite setup --hooks-only</code>.</span></p>
-</div>
+</td></tr></table>
+
 <h2 id="pushcode"><span class="header-section-number">2.3</span> using the gitolite-admin repo to manage non-core code</h2>
-<div style="overflow: auto">
 <div class="box-r" style="margin-left:4px; width: 33%">
 <p><span class="red"><strong>IMPORTANT SECURITY NOTE</strong></span></p>
 <p><strong>In this mode, anyone who can push changes to the admin repo will effectively be able to run any arbitrary command on the server.</strong> See <a href="rc.html#privesc">gitolite admin and shell access</a> for more background.</p>
@@ -381,7 +394,6 @@
 <pre><code>LOCAL_CODE  =&gt;  &quot;$rc{GL_ADMIN_BASE}/local&quot;,</code></pre>
 <p>Then you create a directory called &quot;local&quot; in your gitolite clone, and create the directory structure (shown in the previous section) within that directory. Thus, when you push the admin repo, the files will land up, with the correct paths, in the location pointed to by LOCAL_CODE.</p>
 <p>(Note: when you do this, gitolite takes care of running <code>gitolite setup --hooks-only</code> when you change any hooks and push).</p>
-</div>
 <h1 id="nctypes"><span class="header-section-number">3</span> types of non-core programs</h1>
 <h2 id="commands"><span class="header-section-number">3.1</span> gitolite &quot;commands&quot;</h2>
 <p>Gitolite comes with several commands that users can run. Remote users run commands by saying:</p>

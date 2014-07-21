@@ -80,6 +80,7 @@
 <li><a href="#clone-the-gitolite-admin-repo"><span class="toc-section-number">1</span> clone the gitolite-admin repo</a></li>
 <li><a href="#users"><span class="toc-section-number">2</span> add/remove users</a><ul>
 <li><a href="#multi-key"><span class="toc-section-number">2.1</span> multiple keys per user</a></li>
+<li><a href="#old-style-multi-keys"><span class="toc-section-number">2.2</span> old style multi-keys</a></li>
 </ul></li>
 <li><a href="#repos"><span class="toc-section-number">3</span> add, remove, and rename repos</a><ul>
 <li><a href="#removingrenaming-a-repo"><span class="toc-section-number">3.1</span> removing/renaming a repo</a></li>
@@ -289,13 +290,19 @@
 <li><a href="regex.html">regular expressions</a></li>
 <li><a href="no-way.html">no way!</a></li>
 </ul>
+<hr />
+<center>
+<span class="red"><strong>Contributed docs</strong></span>
+</center>
+
+<hr />
 <p>Contributed software, tools, and documentation</p>
 <ul>
-<li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
-<li><a href="putty.html">putty and msysgit</a></li>
 <li><a href="ssh-and-http.html">combining ssh and http mode</a></li>
+<li><a href="putty.html">putty and msysgit</a></li>
 <li><a href="sskm.html">changing keys -- self service key management</a></li>
 <li><a href="ukm.html">user key management</a></li>
+<li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
 </ul>
 </div>
 
@@ -329,8 +336,8 @@
 <h2 id="multi-key"><span class="header-section-number">2.1</span> multiple keys per user</h2>
 <p>You can put pubkeys in subdirectories within &quot;keydir/&quot;, because the user name is simply the <em>base name</em> of the public key file name. That is, 'keydir/alice.pub', 'keydir/home/alice.pub', 'keydir/laptop/alice.pub', (or even 'keydir/work/desktop/alice.pub' -- any number of subdirectory levels are OK) all resolve to user &quot;alice&quot;.</p>
 <p>This is the simplest and most understandable way to allow multiple keys per user.</p>
+<h2 id="old-style-multi-keys"><span class="header-section-number">2.2</span> old style multi-keys</h2>
 <div style="color: gray">
-<h2><span class="header-section-number">2.1</span> old style multi-keys</h2>
 <p>There is another way that involves creating key files like <code>alice@home.pub</code> and <code>alice@laptop.pub</code>, but there is a complication because gitolite also allows <em>full email addresses</em> as user names. (I.e., <code>sitaramc@gmail.com.pub</code> denotes the user called <code>sitaramc@gmail.com</code>).</p>
 <p>This older method of enabling multi-keys was developed to deal with that. It will continue to work and be supported in <em>code</em>, simply because I prefer it. But I will not accept questions or doc patches for it, because it seems it is too difficult to understand for a lot of people. This table of sample pubkey filenames and the corresponding derived usernames is all you get:</p>
 <ul>

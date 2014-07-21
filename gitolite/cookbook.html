@@ -308,13 +308,19 @@
 <li><a href="regex.html">regular expressions</a></li>
 <li><a href="no-way.html">no way!</a></li>
 </ul>
+<hr />
+<center>
+<span class="red"><strong>Contributed docs</strong></span>
+</center>
+
+<hr />
 <p>Contributed software, tools, and documentation</p>
 <ul>
-<li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
-<li><a href="putty.html">putty and msysgit</a></li>
 <li><a href="ssh-and-http.html">combining ssh and http mode</a></li>
+<li><a href="putty.html">putty and msysgit</a></li>
 <li><a href="sskm.html">changing keys -- self service key management</a></li>
 <li><a href="ukm.html">user key management</a></li>
+<li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
 </ul>
 </div>
 
@@ -326,9 +332,7 @@
 <h1 id="cb-admin"><span class="header-section-number">1</span> administration</h1>
 <h2 id="separating-key-admin-from-repo-admin"><span class="header-section-number">1.1</span> separating &quot;key admin&quot; from &quot;repo admin&quot;</h2>
 <p>In gitolite, the person who controls the keys is the most critical in terms of security -- because he can always add his own key in your name :-)</p>
-<div style="overflow: auto">
-
-<div class="fl-r">
+<table><tr><td>
 
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Type">repo </span>gitolite-admin
@@ -341,11 +345,11 @@
 <span class="PreProc">include </span><span class="Constant">&quot;actual.conf&quot;</span>
 </pre>
 
-</div>
+</td><td>
 
 <p>Traditionally, the same person also administers repos and permissions. But sometimes you want to separate them.</p>
 <p>To separate those roles, put the following in conf/gitolite.conf, and let the repo-manager manage everything through &quot;actual.conf&quot;:</p>
-</div>
+</td></tr></table>
 
 <h1 id="cb-access"><span class="header-section-number">2</span> access</h1>
 <h2 id="looking-up-repo-access-from-external-tools"><span class="header-section-number">2.1</span> looking up repo access from external tools</h2>
@@ -363,7 +367,7 @@ then
 <pre><code>if gitolite access -q reponame username W master
 then
     ...</code></pre>
-<p><span class="gray">If your gitolite is older than v3.6, you must use the full ref name; just 'master' won't do).</p>
+<p><span class="gray">If your gitolite is older than v3.6, you must use the full ref name; just 'master' won't do.</span></p>
 <h2 id="allowing-access-by-other-programs"><span class="header-section-number">2.2</span> allowing access by other programs</h2>
 <p>Giving external tools (like apache) access to gitolite repositories involves making sure that the unix owner/group and permissions settings allow this. This is all described in the UMASK section in the page on the <a href="rc.html">rc file</a>, because that's the only setting that gitolite controls; every thing else is pure Unix.</p>
 <h1 id="cb-commands"><span class="header-section-number">3</span> commands</h1>
