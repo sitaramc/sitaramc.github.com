@@ -440,7 +440,7 @@
 </ul></li>
 <li><a href="#otherauth"><span class="toc-section-number">4.2.2</span> using other authentication systems with gitolite</a></li>
 </ul></li>
-<li><a href="#testing"><span class="toc-section-number">4.3</span> trying out and testing gitolite</a><ul>
+<li><a href="#testing"><span class="toc-section-number">4.3</span> testing gitolite</a><ul>
 <li><a href="#testing-gitolite"><span class="toc-section-number">4.3.1</span> testing gitolite</a></li>
 <li><a href="#clobber"><span class="toc-section-number">4.3.2</span> appendix 1 -- the clobber list</a></li>
 </ul></li>
@@ -622,6 +622,7 @@
 <h3 id="dl" class="unnumbered">download</h3>
 <p>Gitolite can be downloaded from <code>git://github.com/sitaramc/gitolite</code> or <code>https://code.google.com/p/gitolite/</code>.</p>
 <p>If your Unix-fu and ssh-fu are good, installing gitolite is as simple as copying your public key over to the hosting user, and running a couple of commands, as the <a href="#qi">quick install</a> section of the install page shows.</p>
+<p><span class="red">If you're installing via your package manager, make sure you get the correct version; see the <a href="#install">install</a> page for details.</span></p>
 <h3 id="rtfm" class="unnumbered">documentation</h3>
 <div class="green box-r" style="padding: 10px">
 <p><strong>New (April 2014): There's a <a href="http://www.packtpub.com/gitolite-essentials/book">book on gitolite</a> out</strong>. I've received some emails over the years asking where to donate for gitolite to show your appreciation, and I've always refused politely. Well, if you insist... buy the book :-)</p>
@@ -915,7 +916,7 @@ If you're using gitolite and find it very useful in some way, I would love to de
 <ul>
 <li>Any Unix system with a posix compatible &quot;sh&quot; and a <strong>sane</strong> file system.</li>
 <li>Git version 1.6.6 or later.</li>
-<li>Perl 5.8.8 or later.</li>
+<li>Perl 5.8.8 or later (see <a href="https://lwn.net/Articles/348084/">https://lwn.net/Articles/348084/</a> if this does not seem to be enough).</li>
 <li>Openssh (almost any version). Optional if you're using <a href="#http">smart http</a>.</li>
 <li>A dedicated Unix userid to be the hosting user, usually &quot;git&quot; but it can be any user, even your own normal one. (If you're using an RPM/DEB the install probably created one called &quot;gitolite&quot;).</li>
 </ul>
@@ -950,7 +951,8 @@ prove t/ssh*</code></pre>
 <h2 id="install"><span class="header-section-number">2.1</span> install and setup</h2>
 <p><span class="box-r"><strong>NOTE</strong>: this page is about an ssh mode installation. There's a different page for <a href="#http">http mode</a> installation if you need that.</span></p>
 <p>This page talks about installing the software and setting it up. The install step gets the code to where you want it. The setup step creates the files and directories gitolite needs, including the special gitolite-admin repo, and makes you an administrator so you can manage it remotely.</p>
-<p><span class="red"><strong>NOTE</strong>: if you're looking to migrate from one of the older versions of gitolite, instructions are <a href="#migr">here</a>.</span></p>
+<p><span class="red"><strong>NOTE</strong> on package manager installs</span>: make sure you get gitolite <strong>v3.x</strong>. The correct package you want may be called &quot;gitolite3&quot;, even though &quot;gitolite&quot; also exists. If you want to know what the latest gitolite version is, the gitolite <a href="https://github.com/sitaramc/gitolite/blob/master/CHANGELOG">CHANGELOG</a> will tell you.</p>
+<p><span class="red"><strong>NOTE</strong> on upgrades from v1 or v2</span>: upgrading from v1 or v2 is reasonably easy, but, sadly, cannot be automated. Instructions are <a href="#migr">here</a>.</p>
 <h3 id="qi"><span class="header-section-number">2.1.1</span> quick install+setup for experts</h3>
 <p>If your Unix-fu and ssh-fu are good, just copy your ssh public key (i.e., the <code>~/.ssh/id_rsa.pub</code> file) from your workstation to the hosting user, then do something like this:</p>
 <pre><code>su - git
@@ -2146,6 +2148,8 @@ chmod +x local/hooks/common/post-receive</code></pre></li>
 <ol style="list-style-type: decimal">
 <li><p>add this line in the rc file, within the <code>%RC</code> block, if it's not already present, or uncomment it if it's already present and commented out:</p>
 <pre><code>LOCAL_CODE =&gt; &quot;$rc{GL_ADMIN_BASE}/local&quot;,</code></pre></li>
+<li><p>uncomment the 'repo-specific-hooks' line in the rc file or add it to the ENABLE list if it doesn't exist.</p>
+<p>If your rc file does not have an ENABLE list, you need to add this to the POST_COMPILE and the POST_CREATE lists. Click <a href="#addtrig">here</a> for more on all this.</p></li>
 <li><p>put your hooks into your gitolite-admin clone, as follows:</p>
 <pre><code># on your workstation
 cd /path/to/your/gitolite-admin-clone
@@ -3338,7 +3342,7 @@ carol   doc/d1.odt      (Sun May 27 18:17:03 2012)      (locked by alice at Sun 
 <ul>
 <li><p>This page describes the types of non-core programs and how/where to install code that is specific to your site.</p></li>
 <li><p>The <a href="#dev-notes">developer notes</a> page tells you how to write your own non-core programs.</p></li>
-<li><p>The <a href="#non-core">list of non-core programs</a> talks about what's already shipped with gitolite, with a brief description of each.</p></li>
+<li><p>The <a href="#list-non-core">list of non-core programs</a> talks about what's already shipped with gitolite, with a brief description of each.</p></li>
 </ul>
 <hr />
 <h3 id="ncintro"><span class="header-section-number">3.13.1</span> core versus non-core</h3>
@@ -3856,7 +3860,8 @@ Extra arguments for wild repo creation:
 <p>These non-core programs needed more detail than could be provided in the source code, but did not fit anywhere else neatly enough.</p>
 <h4 id="partial-copy"><span class="header-section-number">3.16.5.1</span> partial-copy: selective read control for branches</h4>
 <p>Git (and therefore gitolite) cannot do selective read control -- allowing someone to read branch A but not branch B. It's the entire repo or nothing.</p>
-<p><font color="gray">(Side note: Gerrit Code Review can do that, but that is because they have their own git stack (and their own sshd, and so on) all in one big Java program. Gerrit is <em>really</em> useful if you want code review to be part of the access control decision) </font></p>
+<p><span class="box-r">Gerrit Code Review can do that, but that is because they have their own git (as well as their own sshd, and so on). If code review is part of your access control decision, you really should consider Gerrit anyway.</span></p>
+<p>The standard answer you get when you ask is &quot;use separate repos&quot; (where one contains all the branches, and one contains a subset of the branches). This is nice in theory but in practice, when people are potentially <em>pushing</em> to both repos, you need to figure out how to keep them in sync.</p>
 <p>Gitolite can now help you do this. Note that this is only for branches; you can't do this for files and directories.</p>
 <p>Here's how:</p>
 <ol style="list-style-type: decimal">
@@ -3984,7 +3989,7 @@ Extra arguments for wild repo creation:
 <p>However, it has to be an authentication system that is compatible with sshd or httpd in some form. Why? Because the git <em>client</em> accessing the server only knows those 2 protocols to &quot;speak git&quot;. (Well, the <code>git://</code> protocol is unauthenticated, and <code>file://</code> doesn't really apply to this discussion, so we're ignoring those).</p>
 <p>For example, let's say you have an LDAP-based authentication system somewhere. It is possible to make apache use that to authenticate users, so when a user accesses a git url using <code>http://sitaram:password@git.example.com/repo</code>, it is LDAP that does the actual authentication. [I wouldn't know how to do it but I know it is possible. Patches to this doc explaining how are welcome!]</p>
 <p>There are also ssh daemons that use LDAP to store the authorised keys (instead of putting them all in <code>~/.ssh/authorized_keys</code>). The clients will still need to generate keypairs and send them to the admin, but they can be more centrally stored and perhaps used by other programs or tools simultaneously, which can be useful.</p>
-<h2 id="testing"><span class="header-section-number">4.3</span> trying out and testing gitolite</h2>
+<h2 id="testing"><span class="header-section-number">4.3</span> testing gitolite</h2>
 <h3 id="testing-gitolite"><span class="header-section-number">4.3.1</span> testing gitolite</h3>
 <p><font color="red"><strong>WARNING: this will clobber <a href="#clobber">these files and directories</a> in your <code>$HOME</code>. Ideally, you should use a throwaway userid</strong>.</font></p>
 <p>Running gitolite's test suite is really just a superset of [trying it out safely<a href="#trying">trying</a>.</p>

@@ -390,7 +390,8 @@
 <p>These non-core programs needed more detail than could be provided in the source code, but did not fit anywhere else neatly enough.</p>
 <h2 id="partial-copy"><span class="header-section-number">5.1</span> partial-copy: selective read control for branches</h2>
 <p>Git (and therefore gitolite) cannot do selective read control -- allowing someone to read branch A but not branch B. It's the entire repo or nothing.</p>
-<p><font color="gray">(Side note: Gerrit Code Review can do that, but that is because they have their own git stack (and their own sshd, and so on) all in one big Java program. Gerrit is <em>really</em> useful if you want code review to be part of the access control decision) </font></p>
+<p><span class="box-r">Gerrit Code Review can do that, but that is because they have their own git (as well as their own sshd, and so on). If code review is part of your access control decision, you really should consider Gerrit anyway.</span></p>
+<p>The standard answer you get when you ask is &quot;use separate repos&quot; (where one contains all the branches, and one contains a subset of the branches). This is nice in theory but in practice, when people are potentially <em>pushing</em> to both repos, you need to figure out how to keep them in sync.</p>
 <p>Gitolite can now help you do this. Note that this is only for branches; you can't do this for files and directories.</p>
 <p>Here's how:</p>
 <ol style="list-style-type: decimal">
