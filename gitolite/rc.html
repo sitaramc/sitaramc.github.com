@@ -336,7 +336,7 @@
 <p>This is described in more detail <a href="non-core.html#localcode">here</a>. Please be aware <strong>this must be a FULL path</strong>, not a relative path.</p></li>
 </ul>
 <h1 id="privesc"><span class="header-section-number">2</span> security note: gitolite admin and shell access</h1>
-<p><span class="box-r">If you <em>must</em> revision control it, you can. Just add it to your admin repo, push the change, then replace <code>~/.gitolite.rc</code> with a symlink <code>~/.gitolite/.gitolite.rc</code>.</span></p>
+<p><span class="box-r">If you <em>must</em> revision control it, you can. Just add it to your admin repo, push the change, then replace <code>~/.gitolite.rc</code> with a symlink to <code>~/.gitolite/.gitolite.rc</code>.</span></p>
 <p>People sometimes ask why this file is also not revision controlled. Here's why.</p>
 <p>Gitolite maintains a clear distinction between</p>
 <ul>
