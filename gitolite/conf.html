@@ -367,6 +367,7 @@
 <li><p>You can also use a glob (<code>include &quot;*.conf&quot;</code>), or put your include files into subdirectories of &quot;conf&quot; (<code>include &quot;foo/bar.conf&quot;</code>), or both (<code>include &quot;repos/*.conf&quot;</code>).</p></li>
 <li><p>Included files are always searched from the gitolite-admin repo's &quot;conf/&quot; directory, unless you supplied an absolute path. (Note: in the interests of cloning the admin-repo sanely you should avoid absolute paths!)</p></li>
 <li><p>If you ended up recursing, files that have been already processed once are skipped, with a warning.</p></li>
+<li><p>It is not a fatal error for an include file to be missing. If it is a glob, you won't even get a warning.</p></li>
 </ul>
 <p><font color="gray">Advanced users: <code>subconf</code>, a command that is very closely related to <code>include</code>, is documented <a href="deleg.html#subconf">here</a>.</font></p>
 <p><strong>Please note</strong> that whenever you see &quot;the <code>conf/gitolite.conf</code> file&quot; or &quot;the conf file&quot; in gitolite documentation, it means the combined text after the include processing is done.</p>

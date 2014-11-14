@@ -451,9 +451,10 @@ option mirror.redirectOK    =   phobos deimos
 <h1 id="HOSTNAME"><span class="header-section-number">7</span> appendix A: HOSTNAME substitution</h1>
 <p>Wherever gitolite sees the word <code>%HOSTNAME</code>, it will replace it with the HOSTNAME supplied in the rc file, if one was supplied. This lets you maintain configurations for all servers in one repo, yet have them act differently on different servers, by saying something like:</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
-<span class="PreProc">subconf </span><span class="Constant">&quot;%HOSTNAME/*.conf&quot;</span>
+<span class="PreProc">include </span><span class="Constant">&quot;%HOSTNAME/*.conf&quot;</span>
 </pre>
 
+<p>(See <a href="conf.html#include">include</a> for more on the 'include' command).</p>
 <p>You can use it in other places also, for example:</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Statement">RW+</span><span class="Constant">     VREF/NAME/subs/%HOSTNAME/       </span>=   <span class="Identifier">@</span><span class="Error">%</span><span class="Identifier">HOSTNAME-admins</span>

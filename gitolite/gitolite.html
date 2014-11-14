@@ -524,7 +524,9 @@
 <li><a href="#typical-causes"><span class="toc-section-number">4.13.6.1</span> typical cause(s)</a></li>
 </ul></li>
 <li><a href="#stsapp3"><span class="toc-section-number">4.13.7</span> appendix 3: ssh client may not be offering the right key</a></li>
-<li><a href="#ssh-ha"><span class="toc-section-number">4.13.8</span> appendix 4: ssh host aliases</a></li>
+<li><a href="#ssh-ha"><span class="toc-section-number">4.13.8</span> appendix 4: ssh host aliases</a><ul>
+<li><a href="#more-than-one-keypair"><span class="toc-section-number">4.13.8.1</span> more than one keypair</a></li>
+</ul></li>
 <li><a href="#ybpfail"><span class="toc-section-number">4.13.9</span> appendix 5: why bypassing gitolite causes a problem</a></li>
 </ul></li>
 <li><a href="#why-v3"><span class="toc-section-number">4.14</span> why a completely new version?</a></li>
@@ -1232,6 +1234,7 @@ sitaramc@gmail.com@desktop.pub          sitaramc@gmail.com</code></pre></li>
 <li><p>You can also use a glob (<code>include &quot;*.conf&quot;</code>), or put your include files into subdirectories of &quot;conf&quot; (<code>include &quot;foo/bar.conf&quot;</code>), or both (<code>include &quot;repos/*.conf&quot;</code>).</p></li>
 <li><p>Included files are always searched from the gitolite-admin repo's &quot;conf/&quot; directory, unless you supplied an absolute path. (Note: in the interests of cloning the admin-repo sanely you should avoid absolute paths!)</p></li>
 <li><p>If you ended up recursing, files that have been already processed once are skipped, with a warning.</p></li>
+<li><p>It is not a fatal error for an include file to be missing. If it is a glob, you won't even get a warning.</p></li>
 </ul>
 <p><font color="gray">Advanced users: <code>subconf</code>, a command that is very closely related to <code>include</code>, is documented <a href="#subconf">here</a>.</font></p>
 <p><strong>Please note</strong> that whenever you see &quot;the <code>conf/gitolite.conf</code> file&quot; or &quot;the conf file&quot; in gitolite documentation, it means the combined text after the include processing is done.</p>
@@ -3007,9 +3010,10 @@ option mirror.redirectOK    =   phobos deimos
 <h3 id="HOSTNAME"><span class="header-section-number">3.7.7</span> appendix A: HOSTNAME substitution</h3>
 <p>Wherever gitolite sees the word <code>%HOSTNAME</code>, it will replace it with the HOSTNAME supplied in the rc file, if one was supplied. This lets you maintain configurations for all servers in one repo, yet have them act differently on different servers, by saying something like:</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
-<span class="PreProc">subconf </span><span class="Constant">&quot;%HOSTNAME/*.conf&quot;</span>
+<span class="PreProc">include </span><span class="Constant">&quot;%HOSTNAME/*.conf&quot;</span>
 </pre>
 
+<p>(See <a href="#include">include</a> for more on the 'include' command).</p>
 <p>You can use it in other places also, for example:</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Statement">RW+</span><span class="Constant">     VREF/NAME/subs/%HOSTNAME/       </span>=   <span class="Identifier">@</span><span class="Error">%</span><span class="Identifier">HOSTNAME-admins</span>
@@ -4850,7 +4854,25 @@ chmod -R go-rwx .ssh</code></pre></li>
 
 <p>Now you can simply use the one word <code>gitolite</code> (which is the host alias we defined here) and ssh will infer all those details defined under it -- just say <code>ssh gitolite</code> and <code>git clone gitolite:reponame</code> and things will work.</p>
 <p>(By the way, the 'port' and 'identityfile' lines are needed only if you have non-default values, although I put them in anyway just to be complete).</p>
+<h4 id="more-than-one-keypair"><span class="header-section-number">4.13.8.1</span> more than one keypair</h4>
 <p>If you have <em>more than one</em> pubkey with access to the <em>same</em> server, you <strong>must</strong> use this method to make git pick up the right key. There is no other way to do this, as far as I know.</p>
+<p>A typical example would be if you wanted shell access to the gitolite server using one keypair, and gitolite-mediated access using another. Here's how I do that, where my &quot;id_rsa&quot; keypair has shell access, and my &quot;sitaram&quot; keypair has gitolite access:</p>
+<pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
+<span class="Type">host</span> gitolite
+    <span class="Statement">user</span> git
+    <span class="Statement">hostname</span> <span class="Constant">gitolite.mydomain.com</span>
+    <span class="Statement">port</span> <span class="Constant">22</span>
+    <span class="Statement">identityfile</span> ~/.ssh/sitaram
+
+<span class="Type">host</span> gitolite-sh
+    <span class="Statement">user</span> git
+    <span class="Statement">hostname</span> <span class="Constant">gitolite.mydomain.com</span>
+    <span class="Statement">port</span> <span class="Constant">22</span>
+    <span class="Statement">identityfile</span> ~/.ssh/id_rsa
+</pre>
+
+<p>Then I would use &quot;ssh gitolite-ssh&quot; to get a command line, and use the host alias &quot;gitolite&quot; in git clone and other commands, as well as for gitolite commands (like &quot;ssh gitolite info&quot;).</p>
+<p>Just to be clear, please note that this assumes the authorized keys file on the gitolite hosting user has my &quot;id_rsa.pub&quot; line, <strong>without</strong> the gitolite related forced command and options.</p>
 <h3 id="ybpfail"><span class="header-section-number">4.13.9</span> appendix 5: why bypassing gitolite causes a problem</h3>
 <p>When you bypass gitolite, you end up running your normal shell instead of the special gitolite entry point script <code>gitolite-shell</code>.</p>
 <p>This means commands (like 'info') are interpreted by the shell instead of gitolite.</p>
