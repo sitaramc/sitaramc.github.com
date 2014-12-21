@@ -335,7 +335,7 @@
 <span class="Statement">    R</span><span class="Constant">       </span>=   user3
 </pre>
 
-<p>If that's all it had, you really can't do much. Any changes to access must be done by the administrator. (Note that &quot;CREATOR&quot; is a reserved word that gets expanded to your userid in some way, so the admin can literally add just the first three lines, and <em>every</em> authenticated user now has his own personal repo namespace, starting with <code>pub/&lt;username&gt;/</code>).</p>
+<p>If that's all it had, you really can't do much. Any changes to access must be done by the administrator. (Note that &quot;CREATOR&quot; is a reserved word that gets expanded to your userid in some way, so the admin can literally add just the first three lines, and <em>every</em> user listed in the second line (or <em>every authenticated user</em>, if you specified <code>@all</code> there) has his own personal repo namespace, starting with <code>pub/&lt;username&gt;/</code>).</p>
 <p>To give some flexibility to users, the admin could add rules like this:</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Statement">RW</span><span class="Constant">      </span>=   <span class="PreProc">WRITERS</span>

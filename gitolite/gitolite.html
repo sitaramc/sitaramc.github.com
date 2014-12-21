@@ -1716,9 +1716,9 @@ refs/.*</code></pre>
 </ul>
 <p>Sometimes you want to allow people to push, but not <em>create</em> a ref. Or rewind, but not <em>delete</em> a ref. The <code>C</code> and <code>D</code> qualifiers help here.</p>
 <ul>
-<li><p>When a rule specifies <code>RWC</code> or <code>RW+C</code>, then <em>rules that do NOT have the C qualifier will no longer permit <strong>creating</strong> a ref</em>.</p>
+<li><p>If a rule specifies <code>RWC</code> or <code>RW+C</code>, then <em>rules that do NOT have the C qualifier will no longer permit <strong>creating</strong> a ref</em>.</p>
 <p><font color="gray">Please do not confuse this with the standalone <code>C</code> permission that allows someone to <a href="#create">create</a> a <strong>repo</strong></font></p></li>
-<li><p>When a rule specifies <code>RWD</code> or <code>RW+D</code>, then <em>rules that do NOT have the D qualifier will no longer permit <strong>deleting</strong> a ref</em>.</p></li>
+<li><p>If a rule specifies <code>RWD</code> or <code>RW+D</code>, then <em>rules that do NOT have the D qualifier will no longer permit <strong>deleting</strong> a ref</em>.</p></li>
 </ul>
 <p>Note: These two can be combined, so you can have <code>RWCD</code> and <code>RW+CD</code> as well.</p>
 <p>One very rare need is to reject merge commits (a commit series that is not a straight line of commits). The <code>M</code> qualifier helps here:</p>
@@ -1810,7 +1810,7 @@ refs/.*</code></pre>
 <span class="Statement">    R</span><span class="Constant">       </span>=   user3
 </pre>
 
-<p>If that's all it had, you really can't do much. Any changes to access must be done by the administrator. (Note that &quot;CREATOR&quot; is a reserved word that gets expanded to your userid in some way, so the admin can literally add just the first three lines, and <em>every</em> authenticated user now has his own personal repo namespace, starting with <code>pub/&lt;username&gt;/</code>).</p>
+<p>If that's all it had, you really can't do much. Any changes to access must be done by the administrator. (Note that &quot;CREATOR&quot; is a reserved word that gets expanded to your userid in some way, so the admin can literally add just the first three lines, and <em>every</em> user listed in the second line (or <em>every authenticated user</em>, if you specified <code>@all</code> there) has his own personal repo namespace, starting with <code>pub/&lt;username&gt;/</code>).</p>
 <p>To give some flexibility to users, the admin could add rules like this:</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Statement">RW</span><span class="Constant">      </span>=   <span class="PreProc">WRITERS</span>
@@ -1915,10 +1915,10 @@ refs/.*</code></pre>
 <ul>
 <li><p>If your 'git' binary is in a non-PATH location, or you have more than one version and want a specific one to be picked up, you will have to add a line like this at the end of the rc file (outside the <code>%RC</code> hash, but before the <code>1;</code> line):</p>
 <pre><code>$ENV{PATH} = &quot;/your/git/path:$ENV{PATH}&quot;;</code></pre></li>
-<li><p>If you have your sshd configured to put the authorized_keys file somewhere other than the default (which is in .ssh in the <a href="#hu">hosting user</a>'s home directory).</p></li>
-<li><p>Having sshd setup to not allow incoming ssh for the hosting user. Check things like 'Allowusers' setting in /etc/ssh/sshd_config etc.</p></li>
-<li><p>Having the home directory in a partition that is mounted noexec.</p></li>
-<li><p>Having the default shell be something like /bin/false, and/or not having the default shell be part of /etc/shells.</p></li>
+<li><p>If you have your sshd configured to put the authorized_keys file somewhere other than the default (which is in .ssh in the <a href="#hu">hosting user</a>'s home directory), you'll probably have to roll your own ssh handling, either disabling 'ssh-authkeys' in the rc file, or building on that somehow (maybe a post-processing step that copies the relevant auth keys lines from the default file to the other).</p></li>
+<li><p>If you have sshd setup to not allow incoming ssh for the hosting user, gitolite won't work. Check things like 'Allowusers' setting in /etc/ssh/sshd_config etc. to make sure.</p></li>
+<li><p>If you have the home directory in a partition that is mounted noexec, gitolite won't work. I believe it would be sufficient if the &quot;.gitolite&quot; directory were moved to a different mount and symlinked, but please test thoroughly. A failure to execute a hook does not throw up any errors or warnings for you to notice!</p></li>
+<li><p>If the default shell is something like /bin/false, and/or not listed in /etc/shells, there might be problems.</p></li>
 </ul>
 <h3 id="ngp"><span class="header-section-number">2.6.8</span> things that are not gitolite problems</h3>
 <p>There are several things that appear to be gitolite problems but are not. I cannot help with most of these (although the good folks on irc or the mailing list -- see <a href="#contact">contact</a> -- might be able to; they certainly appear to have a lot more patience than I do, bless 'em!)</p>

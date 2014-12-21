@@ -849,9 +849,9 @@ refs/.*</code></pre>
 </ul>
 <p>Sometimes you want to allow people to push, but not <em>create</em> a ref. Or rewind, but not <em>delete</em> a ref. The <code>C</code> and <code>D</code> qualifiers help here.</p>
 <ul>
-<li><p>When a rule specifies <code>RWC</code> or <code>RW+C</code>, then <em>rules that do NOT have the C qualifier will no longer permit <strong>creating</strong> a ref</em>.</p>
+<li><p>If a rule specifies <code>RWC</code> or <code>RW+C</code>, then <em>rules that do NOT have the C qualifier will no longer permit <strong>creating</strong> a ref</em>.</p>
 <p><font color="gray">Please do not confuse this with the standalone <code>C</code> permission that allows someone to <a href="wild.html#create">create</a> a <strong>repo</strong></font></p></li>
-<li><p>When a rule specifies <code>RWD</code> or <code>RW+D</code>, then <em>rules that do NOT have the D qualifier will no longer permit <strong>deleting</strong> a ref</em>.</p></li>
+<li><p>If a rule specifies <code>RWD</code> or <code>RW+D</code>, then <em>rules that do NOT have the D qualifier will no longer permit <strong>deleting</strong> a ref</em>.</p></li>
 </ul>
 <p>Note: These two can be combined, so you can have <code>RWCD</code> and <code>RW+CD</code> as well.</p>
 <p>One very rare need is to reject merge commits (a commit series that is not a straight line of commits). The <code>M</code> qualifier helps here:</p>
