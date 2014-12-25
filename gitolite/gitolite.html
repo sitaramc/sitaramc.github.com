@@ -159,7 +159,7 @@
 <li><a href="#refex"><span class="toc-section-number">2.3.4.1.2</span> the &quot;refex&quot; field</a></li>
 <li><a href="#useruser-group-list"><span class="toc-section-number">2.3.4.1.3</span> user/user group list</a></li>
 </ul></li>
-<li><a href="#rule-accumulation"><span class="toc-section-number">2.3.4.2</span> rule accumulation</a><ul>
+<li><a href="#accum"><span class="toc-section-number">2.3.4.2</span> rule accumulation</a><ul>
 <li><a href="#defining-user-and-repo"><span class="toc-section-number">2.3.4.2.1</span> defining &quot;user&quot; and &quot;repo&quot;</a></li>
 </ul></li>
 <li><a href="#when-does-gitolite-check-access"><span class="toc-section-number">2.3.4.3</span> when does gitolite check access?</a></li>
@@ -235,8 +235,11 @@
 <li><a href="#example-2-restricting-by-source-ip-address"><span class="toc-section-number">2.8.5.2.2</span> example 2: restricting by source IP address</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#cb-move"><span class="toc-section-number">2.8.6</span> moving stuff around</a><ul>
-<li><a href="#moving-a-gitolite-install-from-one-machine-to-another"><span class="toc-section-number">2.8.6.1</span> moving a gitolite install from one machine to another</a></li>
+<li><a href="#wild-repos"><span class="toc-section-number">2.8.6</span> wild repos</a><ul>
+<li><a href="#making-exceptions-for-specific-instances-of-a-wild-repo"><span class="toc-section-number">2.8.6.1</span> making exceptions for <em>specific</em> instances of a wild repo</a></li>
+</ul></li>
+<li><a href="#cb-move"><span class="toc-section-number">2.8.7</span> moving stuff around</a><ul>
+<li><a href="#moving-a-gitolite-install-from-one-machine-to-another"><span class="toc-section-number">2.8.7.1</span> moving a gitolite install from one machine to another</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -1388,7 +1391,7 @@ refs/heads/master/full</code></pre>
 <h5 id="useruser-group-list"><span class="header-section-number">2.3.4.1.3</span> user/user group list</h5>
 <p>Like the repos on the repo line, you can have any number of user names and/or user group names on the rule line. (However, please note that there is no concept of regular expressions for user names).</p>
 <p><strong>SECTION SUMMARY</strong>: at this point you know that each rule basically specifies a repo, user, permission, and a &quot;refex&quot;.</p>
-<h4 id="rule-accumulation"><span class="header-section-number">2.3.4.2</span> rule accumulation</h4>
+<h4 id="accum"><span class="header-section-number">2.3.4.2</span> rule accumulation</h4>
 <table><tr><td>
 
 <p><em>All</em> the rules for a repo need not be specified in one place. For example, you might see something like this, perhaps at the top or bottom of the conf file:</p>
@@ -2218,8 +2221,37 @@ echo VREF/FROM/$NETWORK/$9
 <p>For a source IP of 192.168.49.97, this runs <code>ipcalc -n 192.168.49.97/23</code>, which gives the network address 192.168.48.0. The echo then just sends back VREF/FROM/192.168.48.0/23. This VREF matches the RW+ line.</p>
 <p>But if the IP is, say, 192.168.45.67, running <code>ipcalc -n 192.168.45.67/23</code> gives you 192.168.44.0. The echo then send back VREF/FROM/192.18.44.0/23, which won't match the RW+ line, but will match the next one and thus deny access.</p>
 <p>(One thing that may not be obvious in this specific example is that you have to be careful when constructing the VREF rule. For any VREF/FROM/A/B, the result of running <code>ipcalc -n A/B</code> must be A, otherwise this won't work. That is, the bits of the network address after the network bits must be zero).</p>
-<h3 id="cb-move"><span class="header-section-number">2.8.6</span> moving stuff around</h3>
-<h4 id="moving-a-gitolite-install-from-one-machine-to-another"><span class="header-section-number">2.8.6.1</span> moving a gitolite install from one machine to another</h4>
+<h3 id="wild-repos"><span class="header-section-number">2.8.6</span> wild repos</h3>
+<h4 id="making-exceptions-for-specific-instances-of-a-wild-repo"><span class="header-section-number">2.8.6.1</span> making exceptions for <em>specific</em> instances of a wild repo</h4>
+<p>Sometimes you want to specify rules or config for specific instances of a wild repo, while still leaving it to be created by a user in the normal way.</p>
+<p>This <strong>will not</strong> work:</p>
+<pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
+<span class="Type">repo </span><span class="Special">foo/..*</span>
+<span class="Statement">    C</span><span class="Constant">                   </span>=   blah blah
+<span class="Statement">    RW+</span><span class="Constant">                 </span>=   <span class="PreProc">CREATOR</span>
+<span class="Statement">    RW</span><span class="Constant">                  </span>=   <span class="PreProc">WRITERS</span>
+<span class="Statement">    R</span><span class="Constant">                   </span>=   <span class="PreProc">READERS</span>
+
+<span class="Comment"># this does </span><span class="Todo">NOT</span><span class="Comment"> work</span>
+<span class="Type">repo </span>foo/special-1
+<span class="Statement">    RW+</span><span class="Constant">                 </span>=   sitaram
+    option  foo.bar     =   baz
+</pre>
+
+<p>The repo will be created as a <strong>normal</strong> (not wild) repo as soon as you push, which means you can't run the <a href="#perms">perms</a> command on it to add people to the READERS and WRITERS <a href="#roles">roles</a>, or do other things that wild repos allow.</p>
+<p>The mental nudge you need to deal with this is to think what you would do if you had to write the same rule for more than one repo, say, any repo starting with &quot;foo/special-&quot; followed by a number. You'd use a pattern. And a pattern prevents an ordinary repo from being created.</p>
+<p>So do this:</p>
+<pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
+<span class="Comment"># this will work</span>
+<span class="Type">repo </span><span class="Special">foo/special-[1]</span>
+<span class="Statement">    RW+</span><span class="Constant">                 </span>=   sitaram
+    option  foo.bar     =   baz
+</pre>
+
+<p>Using a pattern for just one repo might sound like a kludge, but it's perfectly valid and supported.</p>
+<p>Note that you do NOT need a &quot;C&quot; rule in there, since the pattern is a subset of the previous one (<code>foo/..*</code>), everything there applies to this repo also. If you're not sure why that is, you may need to read up on <a href="#accum">rule accumulation</a>.</p>
+<h3 id="cb-move"><span class="header-section-number">2.8.7</span> moving stuff around</h3>
+<h4 id="moving-a-gitolite-install-from-one-machine-to-another"><span class="header-section-number">2.8.7.1</span> moving a gitolite install from one machine to another</h4>
 <p>See <a href="#moving">moving servers</a>.</p>
 <h1 id="advanced"><span class="header-section-number">3</span> advanced</h1>
 <h2 id="git-config"><span class="header-section-number">3.1</span> specifying &quot;git-config&quot; keys and values</h2>
