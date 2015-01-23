@@ -3491,7 +3491,7 @@ carol   doc/d1.odt      (Sun May 27 18:17:03 2012)      (locked by alice at Sun 
 
 <p>The syntax should be fairly obvious, but just to be clear, in this case a symlink called &quot;post-receive&quot; will be placed in foo.git/hooks, pointing to the executable called &quot;deploy&quot; in hooks/repo-specific in the local-code area.</p>
 <p><strong>WARNING</strong>: if the hook already exists, it is silently overwritten.</p>
-<p><strong>WARNING</strong>: once the hook is placed, you can't remove it through gitolite. That is, removing the option line won't do anything. You'll have to go to the server and remove it manually. (You could, as a simple work-around, create a &quot;no-op&quot; script that just does &quot;exit 0&quot;, and change the option line to point the hook to that, so it <em>effectively</em> gets deleted!).</p></li>
+<p><strong>WARNING</strong>: <span class="gray">(v3.5.x or below)</span> once the hook is placed, you can't remove it through gitolite. That is, removing the option line won't do anything. You'll have to go to the server and remove it manually.</p></li>
 <li><span class="gray">(v3.6+)</span> You can assign multiple targets for each hook. For example, you could say
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Type">    repo </span>   foo
