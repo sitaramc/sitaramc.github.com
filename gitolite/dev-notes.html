@@ -325,6 +325,7 @@
 <pre><code>GL_BINDIR
 GL_REPO_BASE
 GL_ADMIN_BASE</code></pre>
+<p><code>GL_BINDIR</code> is loosely equivalent to GIT_EXEC_PATH in git. <code>GL_REPO_BASE</code> is always $HOME/repositories, and <code>GL_ADMIN_BASE</code> is $HOME/.gitolite. (You might ask why, if they're fixed values, do we need those variables. Good question... next!)</p>
 <p>In addition, commands invoked by a remote client also have <code>GL_USER</code>, while hooks have <code>GL_USER</code> as well as <code>GL_REPO</code>.</p>
 <p>A special form of the <a href="options.html">option</a> syntax can be used to set <a href="#rsev">repo-specific environment variables</a>.</p>
 <p>Finally, note that triggers get a lot of relevant information from gitolite as arguments; see <a href="triggers.html">here</a> for details.</p>
