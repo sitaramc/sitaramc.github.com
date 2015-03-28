@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <title>Concepts and Terminology</title>
+  <title>Concepts, Conventions, and Terminology</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
@@ -73,14 +73,15 @@
 -->
 </style>
 <div id="header">
-<h1 class="title">Concepts and Terminology</h1>
+<h1 class="title">Concepts, Conventions, and Terminology</h1>
 </div>
 <div id="TOC">
 <ul>
 <li><a href="#auth"><span class="toc-section-number">1</span> authentication and authorisation</a></li>
 <li><a href="#ssh-mode-and-http-mode"><span class="toc-section-number">2</span> ssh mode and http mode</a></li>
-<li><a href="#hu"><span class="toc-section-number">3</span> hosting user</a></li>
-<li><a href="#the-special-gitolite-admin-repo"><span class="toc-section-number">4</span> the special gitolite-admin repo</a></li>
+<li><a href="#hu"><span class="toc-section-number">3</span> the &quot;hosting user&quot;</a></li>
+<li><a href="#lrepo"><span class="toc-section-number">4</span> the &quot;logical repo name&quot;</a></li>
+<li><a href="#the-special-gitolite-admin-repo"><span class="toc-section-number">5</span> the special gitolite-admin repo</a></li>
 </ul>
 </div>
 <script type="text/javascript">
@@ -322,12 +323,15 @@
 <p>Git allows authenticated remote access using these two mechanisms: ssh and http. Gitolite supports both.</p>
 <p>Ssh mode is much easier to install and setup; most systems already have whatever you need, and -- except for creating the &quot;hosting user&quot; -- you don't need to do anything as root. However, your users have to generate an ssh keypair for themselves (using &quot;ssh-keygen&quot;) if they don't already have a keypair, and they have to send you the public key (the file ending in &quot;.pub&quot;), which you add to gitolite.</p>
 <p>Http mode requires a bit more work in terms of setting things up. Once setup, however, it may be a little easier for your users. Authentication is by username + password, which, although much less secure than RSA keypairs, is conceptually easier for users.</p>
-<h1 id="hu"><span class="header-section-number">3</span> hosting user</h1>
+<h1 id="hu"><span class="header-section-number">3</span> the &quot;hosting user&quot;</h1>
 <p>When you install gitolite in ssh mode, you pick one specific user on the Unix system to be the &quot;hosting user&quot;. This is the user whose name goes into the repo URLs your users will be cloning, for example <code>ssh://git@server/repo</code>, or the simpler form <code>git@server:repo</code>.</p>
 <p><span class="box-r">If you're wondering how it distinguishes between different users when they are all logging into &quot;git&quot;, the <a href="ssh.html">ssh</a> page has all that and much more!</span></p>
 <p><em>Usually</em>, this is &quot;git&quot;, and that is what we assume in this documentation. However, it can actually be any user on the system, and I think both the Fedora RPM and the Debian DEB use &quot;gitolite&quot;, so adjust instructions and examples accordingly. <strong>Unless otherwise stated, everything that we do &quot;on the server&quot; is done in this userid (for ssh mode installations).</strong></p>
 <p>Of course you can have any number of &quot;hosting users&quot;, but that's rare.</p>
-<h1 id="the-special-gitolite-admin-repo"><span class="header-section-number">4</span> the special gitolite-admin repo</h1>
+<h1 id="lrepo"><span class="header-section-number">4</span> the &quot;logical repo name&quot;</h1>
+<p>Gitolite refers to repos using a logical repo name, which is whatever name you specified in the gitolite.conf file (described later). The actual repo will be in <code>$HOME/repositories</code>, and will have a &quot;.git&quot; suffix. So, for example, the logical repo name &quot;foo&quot; will be <code>$HOME/repositories/foo.git</code> on disk, and &quot;bar/baz&quot; will be <code>$HOME/repositories/bar/baz.git</code>. The logical repo name is what you must use for all interactions with gitolite (within the conf file, repo name arguments to gitolite commands or API functions, etc.) unless specifically documented otherwise.</p>
+<p>One exception: you're allowed to add the &quot;.git&quot; extension in git commands (clone, fetch, push, ls-remote, archive) if you wish, because git itself allows it, and we'd like to be as transparent as possible. The <code>$HOME/repositories</code> prefix should never be specified. If you do specify it, and things appear to work, <a href="sts.html#ybpfail">something is wrong!</a>.</p>
+<h1 id="the-special-gitolite-admin-repo"><span class="header-section-number">5</span> the special gitolite-admin repo</h1>
 <p>Gitolite manages git repos. Among them is a repo called &quot;gitolite-admin&quot;, which is a very special repository that helps you add and remove users and repos, as well as define access rules for them. <strong>Most day-to-day management of gitolite is done by cloning this repository, making changes to it, and pushing the changes back to the server.</strong></p>
 <p>Specifically, it contains a directory called &quot;keydir&quot;, in which you place files with names like &quot;alice.pub&quot;, &quot;bob.pub&quot;, etc. These are the public keys of you and your users.</p>
 <table><tr><td>

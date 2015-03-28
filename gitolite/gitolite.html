@@ -107,11 +107,12 @@
 <li><a href="#who-uses-it"><span class="toc-section-number">1.2.4</span> who uses it?</a></li>
 <li><a href="#license"><span class="toc-section-number">1.2.5</span> license</a></li>
 </ul></li>
-<li><a href="#concepts"><span class="toc-section-number">1.3</span> Concepts and Terminology</a><ul>
+<li><a href="#concepts"><span class="toc-section-number">1.3</span> Concepts, Conventions, and Terminology</a><ul>
 <li><a href="#auth"><span class="toc-section-number">1.3.1</span> authentication and authorisation</a></li>
 <li><a href="#ssh-mode-and-http-mode"><span class="toc-section-number">1.3.2</span> ssh mode and http mode</a></li>
-<li><a href="#hu"><span class="toc-section-number">1.3.3</span> hosting user</a></li>
-<li><a href="#the-special-gitolite-admin-repo"><span class="toc-section-number">1.3.4</span> the special gitolite-admin repo</a></li>
+<li><a href="#hu"><span class="toc-section-number">1.3.3</span> the &quot;hosting user&quot;</a></li>
+<li><a href="#lrepo"><span class="toc-section-number">1.3.4</span> the &quot;logical repo name&quot;</a></li>
+<li><a href="#the-special-gitolite-admin-repo"><span class="toc-section-number">1.3.5</span> the special gitolite-admin repo</a></li>
 </ul></li>
 <li><a href="#req"><span class="toc-section-number">1.4</span> Before you start...</a><ul>
 <li><a href="#your-skills"><span class="toc-section-number">1.4.1</span> your skills</a></li>
@@ -848,7 +849,7 @@ If you're using gitolite and find it very useful in some way, I would love to de
   <hr />
 
 </blockquote>
-<h2 id="concepts"><span class="header-section-number">1.3</span> Concepts and Terminology</h2>
+<h2 id="concepts"><span class="header-section-number">1.3</span> Concepts, Conventions, and Terminology</h2>
 <p><span class="box-r">I assume you're at least somewhat familiar with <strong>git</strong> itself. If not, the <a href="#req">&quot;what you need&quot;</a> page has a list of topics that you should be familiar with.</span></p>
 <p>This page will help newcomers get used to what we're talking about elsewhere. Any time you hear a word or phrase you're not familiar with, this is the page that will help you figure it out.</p>
 <p>It also contains a collection of extra background information that some of the main sections may gloss over, such as for example the section on &quot;how does gitolite-admin work?&quot;</p>
@@ -867,12 +868,15 @@ If you're using gitolite and find it very useful in some way, I would love to de
 <p>Git allows authenticated remote access using these two mechanisms: ssh and http. Gitolite supports both.</p>
 <p>Ssh mode is much easier to install and setup; most systems already have whatever you need, and -- except for creating the &quot;hosting user&quot; -- you don't need to do anything as root. However, your users have to generate an ssh keypair for themselves (using &quot;ssh-keygen&quot;) if they don't already have a keypair, and they have to send you the public key (the file ending in &quot;.pub&quot;), which you add to gitolite.</p>
 <p>Http mode requires a bit more work in terms of setting things up. Once setup, however, it may be a little easier for your users. Authentication is by username + password, which, although much less secure than RSA keypairs, is conceptually easier for users.</p>
-<h3 id="hu"><span class="header-section-number">1.3.3</span> hosting user</h3>
+<h3 id="hu"><span class="header-section-number">1.3.3</span> the &quot;hosting user&quot;</h3>
 <p>When you install gitolite in ssh mode, you pick one specific user on the Unix system to be the &quot;hosting user&quot;. This is the user whose name goes into the repo URLs your users will be cloning, for example <code>ssh://git@server/repo</code>, or the simpler form <code>git@server:repo</code>.</p>
 <p><span class="box-r">If you're wondering how it distinguishes between different users when they are all logging into &quot;git&quot;, the <a href="#ssh">ssh</a> page has all that and much more!</span></p>
 <p><em>Usually</em>, this is &quot;git&quot;, and that is what we assume in this documentation. However, it can actually be any user on the system, and I think both the Fedora RPM and the Debian DEB use &quot;gitolite&quot;, so adjust instructions and examples accordingly. <strong>Unless otherwise stated, everything that we do &quot;on the server&quot; is done in this userid (for ssh mode installations).</strong></p>
 <p>Of course you can have any number of &quot;hosting users&quot;, but that's rare.</p>
-<h3 id="the-special-gitolite-admin-repo"><span class="header-section-number">1.3.4</span> the special gitolite-admin repo</h3>
+<h3 id="lrepo"><span class="header-section-number">1.3.4</span> the &quot;logical repo name&quot;</h3>
+<p>Gitolite refers to repos using a logical repo name, which is whatever name you specified in the gitolite.conf file (described later). The actual repo will be in <code>$HOME/repositories</code>, and will have a &quot;.git&quot; suffix. So, for example, the logical repo name &quot;foo&quot; will be <code>$HOME/repositories/foo.git</code> on disk, and &quot;bar/baz&quot; will be <code>$HOME/repositories/bar/baz.git</code>. The logical repo name is what you must use for all interactions with gitolite (within the conf file, repo name arguments to gitolite commands or API functions, etc.) unless specifically documented otherwise.</p>
+<p>One exception: you're allowed to add the &quot;.git&quot; extension in git commands (clone, fetch, push, ls-remote, archive) if you wish, because git itself allows it, and we'd like to be as transparent as possible. The <code>$HOME/repositories</code> prefix should never be specified. If you do specify it, and things appear to work, <a href="#ybpfail">something is wrong!</a>.</p>
+<h3 id="the-special-gitolite-admin-repo"><span class="header-section-number">1.3.5</span> the special gitolite-admin repo</h3>
 <p>Gitolite manages git repos. Among them is a repo called &quot;gitolite-admin&quot;, which is a very special repository that helps you add and remove users and repos, as well as define access rules for them. <strong>Most day-to-day management of gitolite is done by cloning this repository, making changes to it, and pushing the changes back to the server.</strong></p>
 <p>Specifically, it contains a directory called &quot;keydir&quot;, in which you place files with names like &quot;alice.pub&quot;, &quot;bob.pub&quot;, etc. These are the public keys of you and your users.</p>
 <table><tr><td>
@@ -3532,7 +3536,7 @@ or delete all of them by saying:
 GL_REPO_BASE
 GL_ADMIN_BASE</code></pre>
 <p><code>GL_BINDIR</code> is loosely equivalent to GIT_EXEC_PATH in git. <code>GL_REPO_BASE</code> is always $HOME/repositories, and <code>GL_ADMIN_BASE</code> is $HOME/.gitolite. (You might ask why, if they're fixed values, do we need those variables. Good question... next!)</p>
-<p>In addition, commands invoked by a remote client also have <code>GL_USER</code>, while hooks have <code>GL_USER</code> as well as <code>GL_REPO</code>.</p>
+<p>In addition, commands invoked by a remote client also have <code>GL_USER</code>, while hooks have <code>GL_USER</code> as well as <code>GL_REPO</code> (which is the <a href="#lrepo">logical reponame</a>).</p>
 <p>A special form of the <a href="#options">option</a> syntax can be used to set <a href="#rsev">repo-specific environment variables</a>.</p>
 <p>Finally, note that triggers get a lot of relevant information from gitolite as arguments; see <a href="#triggers">here</a> for details.</p>
 <h3 id="apis"><span class="header-section-number">3.14.2</span> APIs</h3>
