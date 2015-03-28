@@ -521,11 +521,11 @@ chmod -R go-rwx .ssh</code></pre></li>
 <p>When you bypass gitolite, you end up running your normal shell instead of the special gitolite entry point script <code>gitolite-shell</code>.</p>
 <p>This means commands (like 'info') are interpreted by the shell instead of gitolite.</p>
 <p>It also means git operations look for repos in <code>$HOME</code>.</p>
-<p>However, gitolite places all your repos in a subdirectory pointed to by <code>$REPO_BASE</code> in the rc file (default: <code>repositories</code>), and internally prefixes this before calling the actual git command you invoked. Thus, the pathname of the repo that you use on the client is almost never the correct pathname on the server. (This is by design. Don't argue...)</p>
+<p>However, gitolite places all your repos in <code>~/repositories</code>, and internally prefixes this before calling the actual git command you invoked. Thus, the pathname of the repo that you use on the client is almost never the correct pathname on the server. (This is by design. Don't argue...)</p>
 <p>This means that, you get 2 kinds of errors if you bypass gitolite</p>
 <ul>
 <li><p>When you use <code>git@server:reponame</code> with a key that bypasses gitolite (i.e., gets you a shell), this prefixing does not happen, and so the repo is not found. Neither a clone/fetch nor a push will work.</p></li>
-<li><p>Conversely, consider <code>git@server:repositories/reponame.git</code>. The clone operation will work -- you're using the full Unix path, (assuming default <code>$REPO_BASE</code> setting), and so the shell finds the repo where you said it would be. However, when you push, gitolite's <strong>update hook</strong> kicks in, and fails to run because some of the environment variables it is expecting are not present.</p></li>
+<li><p>Conversely, consider <code>git@server:repositories/reponame.git</code>. The clone operation will work -- you're using the full Unix path, and so the shell finds the repo where you said it would be. However, when you push, gitolite's <strong>update hook</strong> kicks in, and fails to run because some of the environment variables it is expecting are not present.</p></li>
 </ul>
 </body>
 </html>
