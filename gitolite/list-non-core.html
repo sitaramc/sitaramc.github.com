@@ -325,6 +325,7 @@
 <p>(The more common/important commands are in bold).</p>
 <ul>
 <li><em>access</em> -- print or test access rights for repo/user</li>
+<li><em>config</em> <span class="gray">(v3.6.3+)</span> -- allow limited remote use of 'git config'</li>
 <li><em>create</em> -- create a wild repo</li>
 <li><em>creator</em> -- print or test creator name for wild repo</li>
 <li><em>D</em> -- lets you <em>D</em>elete wild repos created using the <em>C</em> permission :)</li>
@@ -336,10 +337,12 @@
 <li><strong><a href="user.html#info">info</a></strong> -- print git/gitolite version, list repos you have access to</li>
 <li><em><a href="locking.html">lock</a></em> -- lock binary files for exclusive use (in combination with the 'lock' VREF)</li>
 <li><em><a href="mirroring.html#sync">mirror</a></em> -- manually mirror a repo to a slave</li>
+<li><em>motd</em> <span class="gray">(v3.6.1+)</span> -- set/remove a message of the day, per repo or for the whole system</li>
 <li><em>option</em> <span class="gray">(v3.6.3+)</span> -- allow repo owner to set options for a repo</li>
 <li><strong><a href="user.html#perms">perms</a></strong> -- list or set permissions for wild repo</li>
 <li><em><a href="emergencies.html#bypass">push</a></em> -- push a gitolite repo locally, bypassing gitolite</li>
-<li><em>rsync</em> -- bundling support for gitolite</li>
+<li><em>readme</em> <span class="gray">(v3.6.1+)</span> -- show, remove or set the README.html file for repo.</li>
+<li><em>rsync</em> -- resumable downloads of git bundles (bundles are auto-created as needed)</li>
 <li><em>sshkeys-lint</em> -- look for potential problems in ssh keys</li>
 <li><em><a href="sskm.html">sskm</a></em> -- self-service key management</li>
 <li><em>sudo</em> -- allows an admin (i.e., someone who has push rights to the 'gitolite-admin' repo) to run any remote command as some other user. This is useful, for example, when a user claims he is unable to access a repo, and you need to check the 'info' output for him, etc. However, it does not work the other way, sorry!</li>

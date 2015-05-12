@@ -75,6 +75,14 @@
 <div id="header">
 <h1 class="title">the &quot;rc&quot; file (<code>$HOME/.gitolite.rc</code>)</h1>
 </div>
+<div id="TOC">
+<ul>
+<li><a href="#structure-of-the-rc-file"><span class="toc-section-number">1</span> structure of the rc file</a></li>
+<li><a href="#specific-variables"><span class="toc-section-number">2</span> specific variables</a></li>
+<li><a href="#privesc"><span class="toc-section-number">3</span> security note: gitolite admin and shell access</a></li>
+<li><a href="#appendix-a-upgrading-the-rc-file"><span class="toc-section-number">4</span> appendix A: upgrading the rc file</a></li>
+</ul>
+</div>
 <script type="text/javascript">
 <!--
     function hide_show(id) {
@@ -297,13 +305,14 @@
 </ul>
 </div>
 
-<p><strong>IMPORTANT</strong>: if you have a v3.0-v3.3 rc file it is documented <a href="rc-33.html">here</a>, and it will still work. In fact internally the v3.4 rc file data gets converted to the v3.3 format. That is, you don't have to upgrade your rc file just because you upgraded gitolite; you only need to do that if you wish to use any new features. There's a simple program to help you do that (<span class="gray">v3.6.1</span> -- see contrib/utils/rc-format-v3.4).</p>
+<p><strong>IMPORTANT</strong>: if you have a v3.0-v3.3 rc file it is documented <a href="rc-33.html">here</a>, and it will still work. Please see appendix A below for details.</p>
 <p><span class="gray"><strong>If you're migrating from v2</strong>, there are some settings that MUST be dealt with <strong>before</strong> running <code>gitolite setup</code>; please read the <a href="migr.html">migration</a> page and linked pages, and especially the one on &quot;presetting the rc file&quot;.</span></p>
 <hr />
 <p><span class="box-r">Note: This page has several <a href="index.html#fr">forward references</a>!</span></p>
-<p>The rc file is designed to be the only thing unique to your site for most setups. What is new is that it is easy to extend it when new needs come up, without having to touch core gitolite.</p>
+<p>The rc file is designed to be the only thing unique to your site for most setups.</p>
+<p>The rc file is well commented. Please look at the <code>~/.gitolite.rc</code> file that gets installed when you setup gitolite. <strong>You can always get a default copy for your current version by running <code>gitolite print-default-rc</code>.</strong> (Please see appendix A for upgrade instructions.)</p>
+<h1 id="structure-of-the-rc-file"><span class="header-section-number">1</span> structure of the rc file</h1>
 <p>The rc file is perl code, but you do NOT need to know perl to edit it. Just mind the commas, use single quotes unless you know what you're doing, and make sure the brackets and braces stay matched up!</p>
-<p>The rc file is well commented. Please look at the <code>~/.gitolite.rc</code> file that gets installed when you setup gitolite. You can always get a default copy for your current version by running <code>gitolite print-default-rc</code>.</p>
 <p>As you can see there are 3 types of variables in it:</p>
 <ul>
 <li>A lot of simple variables (like <code>UMASK</code>, <code>GIT_CONFIG_KEYS</code>, etc.).</li>
@@ -311,7 +320,7 @@
 <li>And one large list of features to be enabled (<code>ENABLE</code>).</li>
 </ul>
 <p>This page documents only some of them; for most of them it's best to look in the actual rc file or in each of their individual documentation files around; start with <a href="non-core.html">&quot;non-core&quot; gitolite</a>. If a setting is used by a command then running that command with '-h' may give you additional information.</p>
-<h1 id="specific-variables"><span class="header-section-number">1</span> specific variables</h1>
+<h1 id="specific-variables"><span class="header-section-number">2</span> specific variables</h1>
 <ul>
 <li><p><code>$UMASK</code>, octal, default <code>0077</code></p>
 <p>The default UMASK that gitolite uses gives <code>rwx------</code> permissions to all the repos and their contents. People who want to run gitweb (or cgit, redmine, etc) realise that this will not do.</p>
@@ -339,7 +348,7 @@
 <li><p><code>LOCAL_CODE</code>, string</p>
 <p>This is described in more detail <a href="non-core.html#localcode">here</a>. Please be aware <strong>this must be a FULL path</strong>, not a relative path.</p></li>
 </ul>
-<h1 id="privesc"><span class="header-section-number">2</span> security note: gitolite admin and shell access</h1>
+<h1 id="privesc"><span class="header-section-number">3</span> security note: gitolite admin and shell access</h1>
 <p><span class="box-r">If you <em>must</em> revision control it, you can. Just add it to your admin repo, push the change, then replace <code>~/.gitolite.rc</code> with a symlink to <code>~/.gitolite/.gitolite.rc</code>.</span></p>
 <p>People sometimes ask why this file is also not revision controlled. Here's why.</p>
 <p>Gitolite maintains a clear distinction between</p>
@@ -349,5 +358,21 @@
 </ul>
 <p>This may not matter to many (small) sites, but in large installations, the former is often a much larger set of people that you really don't want to give shell access to.</p>
 <p>Therefore, gitolite tries very hard to make sure that people in the first set are not allowed to do anything that gets them into the second set.</p>
+<h1 id="appendix-a-upgrading-the-rc-file"><span class="header-section-number">4</span> appendix A: upgrading the rc file</h1>
+<p>First, note that upgrading the rc file is always <em>optional</em>. However, it may help if you want to use any of the new features available in later gitolite releases, in the sense that the lines you need to add may already be present (commented out) in the rc file, so you just need to uncomment them instead of typing them in yourself.</p>
+<p>If you have a v3.0-v3.3 rc file it is documented <a href="rc-33.html">here</a>, and it will still work. In fact internally the v3.4 rc file data gets converted to the v3.3 format. There's a simple program to help you upgrade a v3.3 (or prior) rc file (in <span class="gray">v3.6.1+</span>, see contrib/utils/rc-format-v3.4), but it has probably not seen too much testing; please tread carefully and report any problems you find.</p>
+<p>Upgrading from any v3.4+ rc file to any later gitolite is fairly easy, though still manual. One useful aid is that, as of v3.6.4, you can run <code>gitolite query-rc -d</code> to dump the entire rc structure to STDOUT. <strong>This only requires that gitolite be v3.6.4+; your rc file can still be the old one.</strong> You can use this to confirm you did not miss something during the manual rc upgrade.</p>
+<ul>
+<li><p>dump the current rc by running <code>gitolite query-rc -d &gt; old.dump</code> (assuming you upgraded to v3.6.4 or higher)</p></li>
+<li><p>save your old rc file: `mv ~/.gitolite.rc ~/old.gitolite.rc</p></li>
+<li><p>get a &quot;default&quot; rc for your current gitolite by running</p>
+<pre><code>gitolite print-default-rc &gt; ~/.gitolite.rc</code></pre></li>
+<li><p>use your favourite diff-ing editor on the old and the new files and figure out what to carry over from the old rc file to the new one.</p>
+<pre><code>vimdiff ~/old.gitolite.rc ~/.gitolite.rc
+# maybe kdiff3 or whatever</code></pre>
+<p>This is the tricky part of course! Watch out for configs that got <em>moved</em> around, or in some cases removed completely, not just new config items.</p></li>
+<li><p>dump the new rc by running <code>gitolite query-rc -d &gt; new.dump</code></p></li>
+<li><p>compare the 2 rc dumps to make sure you've got everything covered.</p></li>
+</ul>
 </body>
 </html>

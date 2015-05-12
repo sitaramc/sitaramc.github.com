@@ -178,8 +178,10 @@
 </ul></li>
 </ul></li>
 <li><a href="#rc"><span class="toc-section-number">2.4</span> the &quot;rc&quot; file (<code>$HOME/.gitolite.rc</code>)</a><ul>
-<li><a href="#specific-variables"><span class="toc-section-number">2.4.1</span> specific variables</a></li>
-<li><a href="#privesc"><span class="toc-section-number">2.4.2</span> security note: gitolite admin and shell access</a></li>
+<li><a href="#structure-of-the-rc-file"><span class="toc-section-number">2.4.1</span> structure of the rc file</a></li>
+<li><a href="#specific-variables"><span class="toc-section-number">2.4.2</span> specific variables</a></li>
+<li><a href="#privesc"><span class="toc-section-number">2.4.3</span> security note: gitolite admin and shell access</a></li>
+<li><a href="#appendix-a-upgrading-the-rc-file"><span class="toc-section-number">2.4.4</span> appendix A: upgrading the rc file</a></li>
 </ul></li>
 <li><a href="#user"><span class="toc-section-number">2.5</span> the users' view</a><ul>
 <li><a href="#accessing-gitolite"><span class="toc-section-number">2.5.1</span> accessing gitolite</a></li>
@@ -1042,6 +1044,7 @@ gitolite/install -to /usr/local/gitolite/bin</code></pre>
 <li>Repeat the install command you used earlier (make sure you use the same arguments as before).</li>
 <li>Run <code>gitolite setup</code>.</li>
 </ul>
+<p>After you upgrade gitolite, you may also want to upgrade your rc file (<code>~/.gitolite.rc</code>). See the <a href="#rc">rc file</a> documentation for that.</p>
 <h3 id="moving"><span class="header-section-number">2.1.4</span> appendix 1: moving servers</h3>
 <!-- XXX TODO: maybe a nice picture? -->
 
@@ -1646,8 +1649,8 @@ refs/.*</code></pre>
 <p>I hope that was useful! Be sure you correlated the output of 'gitolite access -s' with the rule workflow pictures and corresponding descriptions to cement your understanding.</p>
 <h4 id="deny-rules"><span class="header-section-number">2.3.4.5</span> read access respecting deny rules</h4>
 <p><span class="box-r">Note: This section has one or more <a href="#fr">forward references</a>, referring to gitolite <a href="#options">options</a>, and the special users <a href="#gitweb-daemon">gitweb and daemon</a>).</span></p>
-<p>Observant readers will notice that in the pictures under the section &quot;when does gitolite check access&quot;, it was clear that check #2 only happens with an actual, known, ref. Yet box #3 in the &quot;putting it all together&quot; section is checking whether the ref is unknown. Why does it bother doing that?</p>
-<p>That's because there are some situations where you want even <em>read</em> access (where the ref is unknown) to use &quot;deny rules&quot;. That is, you want to say &quot;use check #2, not check #1, in gitolite-shell&quot; (i.e., the yellow boxes within the green &quot;gitolite-shell&quot; box in the &quot;when does gitolite check access&quot; section).</p>
+<p>Normally, deny rules are ignored by access check #1 (the one that runs <em>before</em> git-upload-pack or git-receive-pack is called by gitolite-shell); they apply only to check #2 (the update hook check).</p>
+<p>But sometimes you want this &quot;pre-git&quot; access check to respect deny rules; i.e., use the flow of check #2, not check #1. You tell gitolite to do this by setting the &quot;deny-rules&quot; option for the repo; when you do that, the flow of check #2 is used for both stages, before git <em>and</em> in the update hook.</p>
 <h5 id="example-1"><span class="header-section-number">2.3.4.5.1</span> example 1</h5>
 <p>Here's an example. Here, we have lots of repos, which should all be accessible by gitweb or daemon, so we want the convenience provided by lines 6 and 7 (we don't want to put line 7 in <em>each</em> repo). However, we also have some secret repos (maybe the gitolite-admin repo and some others that we will list), which we want to prevent gitweb or daemon from seeing.</p>
 <p>How do we do that?</p>
@@ -1735,13 +1738,14 @@ refs/.*</code></pre>
 <h4 id="permsum"><span class="header-section-number">2.3.5.1</span> summary of permissions</h4>
 <p>The full set of permissions, in regex syntax, is <code>-|R|RW+?C?D?M?</code>. This expands to one of <code>-</code>, <code>R</code>, <code>RW</code>, <code>RW+</code>, <code>RWC</code>, <code>RW+C</code>, <code>RWD</code>, <code>RW+D</code>, <code>RWCD</code>, or <code>RW+CD</code>, all but the first two optionally followed by an <code>M</code>.</p>
 <h2 id="rc"><span class="header-section-number">2.4</span> the &quot;rc&quot; file (<code>$HOME/.gitolite.rc</code>)</h2>
-<p><strong>IMPORTANT</strong>: if you have a v3.0-v3.3 rc file it is documented <a href="#rc-33">here</a>, and it will still work. In fact internally the v3.4 rc file data gets converted to the v3.3 format. That is, you don't have to upgrade your rc file just because you upgraded gitolite; you only need to do that if you wish to use any new features. There's a simple program to help you do that (<span class="gray">v3.6.1</span> -- see contrib/utils/rc-format-v3.4).</p>
+<p><strong>IMPORTANT</strong>: if you have a v3.0-v3.3 rc file it is documented <a href="#rc-33">here</a>, and it will still work. Please see appendix A below for details.</p>
 <p><span class="gray"><strong>If you're migrating from v2</strong>, there are some settings that MUST be dealt with <strong>before</strong> running <code>gitolite setup</code>; please read the <a href="#migr">migration</a> page and linked pages, and especially the one on &quot;presetting the rc file&quot;.</span></p>
 <hr />
 <p><span class="box-r">Note: This page has several <a href="#fr">forward references</a>!</span></p>
-<p>The rc file is designed to be the only thing unique to your site for most setups. What is new is that it is easy to extend it when new needs come up, without having to touch core gitolite.</p>
+<p>The rc file is designed to be the only thing unique to your site for most setups.</p>
+<p>The rc file is well commented. Please look at the <code>~/.gitolite.rc</code> file that gets installed when you setup gitolite. <strong>You can always get a default copy for your current version by running <code>gitolite print-default-rc</code>.</strong> (Please see appendix A for upgrade instructions.)</p>
+<h3 id="structure-of-the-rc-file"><span class="header-section-number">2.4.1</span> structure of the rc file</h3>
 <p>The rc file is perl code, but you do NOT need to know perl to edit it. Just mind the commas, use single quotes unless you know what you're doing, and make sure the brackets and braces stay matched up!</p>
-<p>The rc file is well commented. Please look at the <code>~/.gitolite.rc</code> file that gets installed when you setup gitolite. You can always get a default copy for your current version by running <code>gitolite print-default-rc</code>.</p>
 <p>As you can see there are 3 types of variables in it:</p>
 <ul>
 <li>A lot of simple variables (like <code>UMASK</code>, <code>GIT_CONFIG_KEYS</code>, etc.).</li>
@@ -1749,7 +1753,7 @@ refs/.*</code></pre>
 <li>And one large list of features to be enabled (<code>ENABLE</code>).</li>
 </ul>
 <p>This page documents only some of them; for most of them it's best to look in the actual rc file or in each of their individual documentation files around; start with <a href="#non-core">&quot;non-core&quot; gitolite</a>. If a setting is used by a command then running that command with '-h' may give you additional information.</p>
-<h3 id="specific-variables"><span class="header-section-number">2.4.1</span> specific variables</h3>
+<h3 id="specific-variables"><span class="header-section-number">2.4.2</span> specific variables</h3>
 <ul>
 <li><p><code>$UMASK</code>, octal, default <code>0077</code></p>
 <p>The default UMASK that gitolite uses gives <code>rwx------</code> permissions to all the repos and their contents. People who want to run gitweb (or cgit, redmine, etc) realise that this will not do.</p>
@@ -1777,7 +1781,7 @@ refs/.*</code></pre>
 <li><p><code>LOCAL_CODE</code>, string</p>
 <p>This is described in more detail <a href="#localcode">here</a>. Please be aware <strong>this must be a FULL path</strong>, not a relative path.</p></li>
 </ul>
-<h3 id="privesc"><span class="header-section-number">2.4.2</span> security note: gitolite admin and shell access</h3>
+<h3 id="privesc"><span class="header-section-number">2.4.3</span> security note: gitolite admin and shell access</h3>
 <p><span class="box-r">If you <em>must</em> revision control it, you can. Just add it to your admin repo, push the change, then replace <code>~/.gitolite.rc</code> with a symlink to <code>~/.gitolite/.gitolite.rc</code>.</span></p>
 <p>People sometimes ask why this file is also not revision controlled. Here's why.</p>
 <p>Gitolite maintains a clear distinction between</p>
@@ -1787,6 +1791,22 @@ refs/.*</code></pre>
 </ul>
 <p>This may not matter to many (small) sites, but in large installations, the former is often a much larger set of people that you really don't want to give shell access to.</p>
 <p>Therefore, gitolite tries very hard to make sure that people in the first set are not allowed to do anything that gets them into the second set.</p>
+<h3 id="appendix-a-upgrading-the-rc-file"><span class="header-section-number">2.4.4</span> appendix A: upgrading the rc file</h3>
+<p>First, note that upgrading the rc file is always <em>optional</em>. However, it may help if you want to use any of the new features available in later gitolite releases, in the sense that the lines you need to add may already be present (commented out) in the rc file, so you just need to uncomment them instead of typing them in yourself.</p>
+<p>If you have a v3.0-v3.3 rc file it is documented <a href="#rc-33">here</a>, and it will still work. In fact internally the v3.4 rc file data gets converted to the v3.3 format. There's a simple program to help you upgrade a v3.3 (or prior) rc file (in <span class="gray">v3.6.1+</span>, see contrib/utils/rc-format-v3.4), but it has probably not seen too much testing; please tread carefully and report any problems you find.</p>
+<p>Upgrading from any v3.4+ rc file to any later gitolite is fairly easy, though still manual. One useful aid is that, as of v3.6.4, you can run <code>gitolite query-rc -d</code> to dump the entire rc structure to STDOUT. <strong>This only requires that gitolite be v3.6.4+; your rc file can still be the old one.</strong> You can use this to confirm you did not miss something during the manual rc upgrade.</p>
+<ul>
+<li><p>dump the current rc by running <code>gitolite query-rc -d &gt; old.dump</code> (assuming you upgraded to v3.6.4 or higher)</p></li>
+<li><p>save your old rc file: `mv ~/.gitolite.rc ~/old.gitolite.rc</p></li>
+<li><p>get a &quot;default&quot; rc for your current gitolite by running</p>
+<pre><code>gitolite print-default-rc &gt; ~/.gitolite.rc</code></pre></li>
+<li><p>use your favourite diff-ing editor on the old and the new files and figure out what to carry over from the old rc file to the new one.</p>
+<pre><code>vimdiff ~/old.gitolite.rc ~/.gitolite.rc
+# maybe kdiff3 or whatever</code></pre>
+<p>This is the tricky part of course! Watch out for configs that got <em>moved</em> around, or in some cases removed completely, not just new config items.</p></li>
+<li><p>dump the new rc by running <code>gitolite query-rc -d &gt; new.dump</code></p></li>
+<li><p>compare the 2 rc dumps to make sure you've got everything covered.</p></li>
+</ul>
 <h2 id="user"><span class="header-section-number">2.5</span> the users' view</h2>
 <p><span class="box-r">Note: This page has several <a href="#fr">forward references</a>. However, I didn't want to place it too far down the list, yet at the same time it's too small to split it into two pages.</span></p>
 <p>This page talks about what gitolite looks like to non-admins, and the commands and features available to them.</p>
@@ -2045,7 +2065,7 @@ git push</code></pre></li>
     RW+     =   alice
     R       =   ron</code></pre>
 <p>Save the file, then <code>git add conf; git commit -m 'new repo foo'; git push</code>.</p>
-<p>This will automatically the brand new repo called &quot;foo&quot; on the server, and alice will be able to clone from it, or push anything to it.</p></li>
+<p>This will automatically create a brand new repo called &quot;foo&quot; on the server, and alice will be able to clone from it, or push anything to it.</p></li>
 </ol>
 <h2 id="cookbook"><span class="header-section-number">2.8</span> gitolite cookbook</h2>
 <blockquote>
@@ -3835,6 +3855,7 @@ Extra arguments for wild repo creation:
 <p>(The more common/important commands are in bold).</p>
 <ul>
 <li><em>access</em> -- print or test access rights for repo/user</li>
+<li><em>config</em> <span class="gray">(v3.6.3+)</span> -- allow limited remote use of 'git config'</li>
 <li><em>create</em> -- create a wild repo</li>
 <li><em>creator</em> -- print or test creator name for wild repo</li>
 <li><em>D</em> -- lets you <em>D</em>elete wild repos created using the <em>C</em> permission :)</li>
@@ -3846,10 +3867,12 @@ Extra arguments for wild repo creation:
 <li><strong><a href="#info">info</a></strong> -- print git/gitolite version, list repos you have access to</li>
 <li><em><a href="#locking">lock</a></em> -- lock binary files for exclusive use (in combination with the 'lock' VREF)</li>
 <li><em><a href="#sync">mirror</a></em> -- manually mirror a repo to a slave</li>
+<li><em>motd</em> <span class="gray">(v3.6.1+)</span> -- set/remove a message of the day, per repo or for the whole system</li>
 <li><em>option</em> <span class="gray">(v3.6.3+)</span> -- allow repo owner to set options for a repo</li>
 <li><strong><a href="#perms">perms</a></strong> -- list or set permissions for wild repo</li>
 <li><em><a href="#bypass">push</a></em> -- push a gitolite repo locally, bypassing gitolite</li>
-<li><em>rsync</em> -- bundling support for gitolite</li>
+<li><em>readme</em> <span class="gray">(v3.6.1+)</span> -- show, remove or set the README.html file for repo.</li>
+<li><em>rsync</em> -- resumable downloads of git bundles (bundles are auto-created as needed)</li>
 <li><em>sshkeys-lint</em> -- look for potential problems in ssh keys</li>
 <li><em><a href="#sskm">sskm</a></em> -- self-service key management</li>
 <li><em>sudo</em> -- allows an admin (i.e., someone who has push rights to the 'gitolite-admin' repo) to run any remote command as some other user. This is useful, for example, when a user claims he is unable to access a repo, and you need to check the 'info' output for him, etc. However, it does not work the other way, sorry!</li>
@@ -4037,7 +4060,7 @@ Extra arguments for wild repo creation:
 <h2 id="testing"><span class="header-section-number">4.3</span> testing gitolite</h2>
 <h3 id="testing-gitolite"><span class="header-section-number">4.3.1</span> testing gitolite</h3>
 <p><font color="red"><strong>WARNING: this will clobber <a href="#clobber">these files and directories</a> in your <code>$HOME</code>. Ideally, you should use a throwaway userid</strong>.</font></p>
-<p>Running gitolite's test suite is really just a superset of [trying it out safely<a href="#trying">trying</a>.</p>
+<p>Running gitolite's test suite is really just a superset of <a href="#trying">trying it out safely</a>.</p>
 <p>To run the full test suite, create a <strong>throw-away userid</strong>, log in to it, then run these commands:</p>
 <pre><code>git clone git://github.com/sitaramc/gitolite
 cd gitolite
