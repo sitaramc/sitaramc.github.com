@@ -121,7 +121,6 @@
     }
 -->
 </script>
-
 <style>
     #PTOC ul {
         list-style: none;
@@ -159,15 +158,12 @@
     }
 
 </style>
-
 <div id="SBTOC" class="sidebar-toc">
-
 <p><strong><span class="red">Gitolite TOC</span></strong></p>
 <hr />
 <center>
 <span class="red"><strong>Background</strong></span>
 </center>
-
 <hr />
 <p><a href="index.html">Main page</a></p>
 <ul>
@@ -207,7 +203,6 @@
 <center>
 <span class="red"><strong>Basics</strong></span>
 </center>
-
 <hr />
 <p><a href="install.html">install and setup</a></p>
 <ul>
@@ -242,7 +237,6 @@
 <center>
 <span class="red"><strong>Advanced</strong></span>
 </center>
-
 <hr />
 <p>Advanced &quot;conf file&quot; use</p>
 <ul>
@@ -273,7 +267,6 @@
 <center>
 <span class="red"><strong>Extras</strong></span>
 </center>
-
 <hr />
 <p><a href="odds-and-ends.html">Odds and Ends</a></p>
 <ul>
@@ -298,7 +291,6 @@
 <center>
 <span class="red"><strong>Contributed docs</strong></span>
 </center>
-
 <hr />
 <p>Contributed software, tools, and documentation</p>
 <ul>
@@ -309,7 +301,6 @@
 <li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
 </ul>
 </div>
-
 <p><span class="box-r">Note: This page has several <a href="index.html#fr">forward references</a>. However, I didn't want to place it too far down the list, yet at the same time it's too small to split it into two pages.</span></p>
 <p>This page talks about what gitolite looks like to non-admins, and the commands and features available to them.</p>
 <h1 id="accessing-gitolite"><span class="header-section-number">1</span> accessing gitolite</h1>
@@ -338,14 +329,12 @@
 <span class="Statement">    RW</span><span class="Constant">      </span>=   user1 user2
 <span class="Statement">    R</span><span class="Constant">       </span>=   user3
 </pre>
-
 <p>If that's all it had, you really can't do much. Any changes to access must be done by the administrator. (Note that &quot;CREATOR&quot; is a reserved word that gets expanded to your userid in some way, so the admin can literally add just the first three lines, and <em>every</em> user listed in the second line (or <em>every authenticated user</em>, if you specified <code>@all</code> there) has his own personal repo namespace, starting with <code>pub/&lt;username&gt;/</code>).</p>
 <p>To give some flexibility to users, the admin could add rules like this:</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Statement">RW</span><span class="Constant">      </span>=   <span class="PreProc">WRITERS</span>
 <span class="Statement">R</span><span class="Constant">       </span>=   <span class="PreProc">READERS</span>
 </pre>
-
 <p><span class="gray">(he could also add other <a href="wild.html#roles">roles</a> but then he needs to read the documentation).</span></p>
 <p>Once he does this, you can then use the <code>perms</code> command (run <code>ssh git@host perms -h</code> for help) to set permissions for other users by specifying which users are in the list of &quot;READERS&quot;, and which in &quot;WRITERS&quot;.</p>
 <p>If you think of READERS and WRITERS as &quot;roles&quot;, it will help. You can't change what access a role has, but you <em>can</em> say which users have that role.</p>
@@ -363,7 +352,6 @@
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Statement">    RW+</span><span class="Constant"> personal/</span><span class="PreProc">USER</span><span class="Constant">/  </span>=   <span class="Identifier">@userlist</span>
 </pre>
-
 <p>where the &quot;personal&quot; can be anything you like (but cannot be empty), and the &quot;/USER/&quot; part is <strong>necessary (including both slashes)</strong>.</p>
 <p>A user &quot;alice&quot; (if she's in the userlist) can then push any branches inside <code>personal/alice/</code>. Which means she can push <code>personal/alice/foo</code> and <code>personal/alice/bar</code>, but NOT <code>personal/alice</code>.</p>
 <p>(Background: at runtime the &quot;USER&quot; component will be replaced by the name of the invoking user. Access is determined by the right hand side, as usual).</p>

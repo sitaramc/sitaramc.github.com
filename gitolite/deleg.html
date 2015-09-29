@@ -120,7 +120,6 @@
     }
 -->
 </script>
-
 <style>
     #PTOC ul {
         list-style: none;
@@ -158,15 +157,12 @@
     }
 
 </style>
-
 <div id="SBTOC" class="sidebar-toc">
-
 <p><strong><span class="red">Gitolite TOC</span></strong></p>
 <hr />
 <center>
 <span class="red"><strong>Background</strong></span>
 </center>
-
 <hr />
 <p><a href="index.html">Main page</a></p>
 <ul>
@@ -206,7 +202,6 @@
 <center>
 <span class="red"><strong>Basics</strong></span>
 </center>
-
 <hr />
 <p><a href="install.html">install and setup</a></p>
 <ul>
@@ -241,7 +236,6 @@
 <center>
 <span class="red"><strong>Advanced</strong></span>
 </center>
-
 <hr />
 <p>Advanced &quot;conf file&quot; use</p>
 <ul>
@@ -272,7 +266,6 @@
 <center>
 <span class="red"><strong>Extras</strong></span>
 </center>
-
 <hr />
 <p><a href="odds-and-ends.html">Odds and Ends</a></p>
 <ul>
@@ -297,7 +290,6 @@
 <center>
 <span class="red"><strong>Contributed docs</strong></span>
 </center>
-
 <hr />
 <p>Contributed software, tools, and documentation</p>
 <ul>
@@ -308,7 +300,6 @@
 <li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
 </ul>
 </div>
-
 <p>Delegation allows you to divide up a large conf file into smaller groups of repos (called <strong>subconf</strong>s) and hand over responsibility to manage them to <strong>sub-admin</strong>s. Gitolite can prevent one sub-admin from being able to set access rules for any other sub-admin's repos.</p>
 <p>Delegation is achieved by combining two gitolite features: <a href="#subconf">subconf</a> and the <a href="vref.html#NAME">NAME VREF</a>.</p>
 <h1 id="example"><span class="header-section-number">1</span> example</h1>
@@ -332,7 +323,6 @@
 <span class="Comment"># pull in these files using the &quot;subconf&quot; command</span>
 <span class="PreProc">subconf </span><span class="Constant">&quot;subs/*.conf&quot;</span>
 </pre>
-
 <p>If you've read the <a href="vref.html">VREF</a> part, or at least understood how <a href="vref.html#NAME">NAME VREF</a>s work, it should be clear that, in terms of changes to the gitolite-admin repo:</p>
 <ul>
 <li>The user sitaram has no restrictins of any kind</li>
@@ -344,7 +334,6 @@
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="PreProc">subconf </span><span class="Constant">&quot;foo.conf&quot;</span>
 </pre>
-
 <p>but while reading the included file (as well as anything included from it), gitolite sets the &quot;current subconf name&quot; to &quot;foo&quot;.</p>
 <p>A &quot;subconf&quot; imposes some restrictions on what repos can be managed.</p>
 <p>For example, while the subconf name is &quot;foo&quot;, as in the above example, gitolite will only process &quot;repo&quot; lines for:</p>
@@ -358,7 +347,6 @@
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Identifier">@foo</span>    =   aa bb <span class="Special">cc/..*</span>
 </pre>
-
 <p>then the subconf can only accept repo statements that refer to 'foo', '<span class="citation">@foo</span>', 'aa', 'bb', or any repo whose name starts with 'cc/'.</p>
 <p><strong>Note</strong>: the subconf name &quot;master&quot; is special; it is the default subconf in effect for the main conf file and has no restrictions.</p>
 <h2 id="how-the-subconf-name-is-derived"><span class="header-section-number">2.1</span> how the &quot;subconf name&quot; is derived</h2>
@@ -368,13 +356,11 @@
 <span class="PreProc">subconf </span><span class="Constant">&quot;frob/*.conf&quot;</span>
    <span class="Comment"> # assume frob has files aa.conf, bb.conf</span>
 </pre>
-
 <p>the subconf name as each file is being processed is the base name of the file. This means it would be &quot;bar&quot; for the first line, &quot;aa&quot; when processing &quot;frob/aa.conf&quot;, and &quot;bb&quot; when processing &quot;frob/bb.conf&quot;.</p>
 <p>A variation of subconf exists that can explicitly state the subconf name:</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="PreProc">subconf </span>foo <span class="Constant">&quot;frob/*.conf&quot;</span>
 </pre>
-
 <p>In this variation, regardless of what file in &quot;frob/&quot; is being read, the subconf name in effect is &quot;foo&quot;.</p>
 <h1 id="security-notes"><span class="header-section-number">3</span> security notes</h1>
 <h2 id="group-names"><span class="header-section-number">3.1</span> group names</h2>
@@ -383,7 +369,6 @@
 <span class="Identifier">@myfoo</span>  =   <span class="Identifier">@foo</span>
 <span class="Comment"># now do whatever you want with @myfoo</span>
 </pre>
-
 <p>Group names you define in your subconf will not clash even if the exact same name is used in another subconf file, so you need not worry about that.</p>
 <h2 id="delegating-pubkeys"><span class="header-section-number">3.2</span> delegating pubkeys</h2>
 <p>Short answer: not gonna happen.</p>

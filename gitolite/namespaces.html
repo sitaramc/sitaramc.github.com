@@ -123,7 +123,6 @@
     }
 -->
 </script>
-
 <style>
     #PTOC ul {
         list-style: none;
@@ -161,15 +160,12 @@
     }
 
 </style>
-
 <div id="SBTOC" class="sidebar-toc">
-
 <p><strong><span class="red">Gitolite TOC</span></strong></p>
 <hr />
 <center>
 <span class="red"><strong>Background</strong></span>
 </center>
-
 <hr />
 <p><a href="index.html">Main page</a></p>
 <ul>
@@ -209,7 +205,6 @@
 <center>
 <span class="red"><strong>Basics</strong></span>
 </center>
-
 <hr />
 <p><a href="install.html">install and setup</a></p>
 <ul>
@@ -244,7 +239,6 @@
 <center>
 <span class="red"><strong>Advanced</strong></span>
 </center>
-
 <hr />
 <p>Advanced &quot;conf file&quot; use</p>
 <ul>
@@ -275,7 +269,6 @@
 <center>
 <span class="red"><strong>Extras</strong></span>
 </center>
-
 <hr />
 <p><a href="odds-and-ends.html">Odds and Ends</a></p>
 <ul>
@@ -300,7 +293,6 @@
 <center>
 <span class="red"><strong>Contributed docs</strong></span>
 </center>
-
 <hr />
 <p>Contributed software, tools, and documentation</p>
 <ul>
@@ -311,7 +303,6 @@
 <li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
 </ul>
 </div>
-
 <p><em>This feature is only available in the 'namespaces' branch until enough people test it and tell me it works fine</em>.</p>
 <p><strong>AVOID NASTY SURPRISES!</strong> Please read the entire page before attempting to use or install this. Most non-core features of gitolite do not work with namespaces, and, worse, many of them will <em>fail silently</em>. There are also security issues you need to be aware of.</p>
 <h1 id="background"><span class="header-section-number">1</span> background</h1>
@@ -349,7 +340,6 @@
 <span class="Statement">    R</span><span class="Constant">       </span>=   <span class="PreProc">READERS</span> <span class="Identifier">@all</span>
     option namespace.pattern = %/* is @1 in @2
 </pre>
-
 <h1 id="use"><span class="header-section-number">4</span> use</h1>
 <p>A developer doesn't have to do anything differently. She will still run, e.g., <code>git clone git@host:alice/linux</code> to auto-create and clone a <a href="wild.html">wild</a> repo for herself, then add a remote to the &quot;backing&quot; repo, fetch it, start working, and eventually push her work to alice/linux.</p>
 <p>However, she might notice some differences. To begin with, her first push of an enormous code base, to what she thought was an empty repo on the server, might go surprisingly fast :)</p>
@@ -367,21 +357,18 @@
 <ul>
 <li>Here's a simple one that separate the first component from the rest:
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
-    option namespace.pattern = %/* is @1 in @2
+option namespace.pattern = %/* is @1 in @2
 </pre>
-
 <p>A reponame of 'alice/linux' gives you a namespace of 'alice' and a backing reponame of 'linux'. Similarly, 'alice/linux/2.2' gives you 'alice' and 'linux/2.2' (which means a repo of that name has to exist!); notice how the asterisk grabs up all the remaining components in the repo name.</p></li>
 <li>This one separates the first, the second, and all the rest, but combines them in a different order:
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
-    option namespace.pattern = %/%/* is @1/@3 in @2
+option namespace.pattern = %/%/* is @1/@3 in @2
 </pre>
-
 <p>A reponame of 'alice/linux/2.2' gives you 'alice/2.2' and 'linux', while a reponame of 'alice/linux/2.2/smp' gives you 'alice/2.2/smp' and 'linux'.</p></li>
 <li>Here's another example on the same lines:
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
-    option namespace.pattern = %/%/%/* is @3/@2/@4 in @1
+option namespace.pattern = %/%/%/* is @3/@2/@4 in @1
 </pre>
-
 <p>A reponame of 'linux/kernel/torvalds/linux-2.6' gives you a namespace of 'torvalds/kernel/linux-2.6' and a backing repo name of 'linux'.</p></li>
 <li><p>Here's an interesting example, given in full to explain better. The basic problem is that one of our backing repos is not a simple name (like 'git' or 'linux'); it is 'sitaramc/gitolite'.</p>
 In addition, any developer-owned repo that has 3 or more components is not a fork of anything at all, and should not be subject to namespace processing (i.e., it's just a normal repo)
@@ -398,7 +385,6 @@ In addition, any developer-owned repo that has 3 or more components is not a for
     option namespace.pattern-2 = %/% is @1 in @2
     option namespace.pattern-3 = %/%/* is none in @1/@2/@3
 </pre>
-
 <p>Firstly, this shows how to specify more than one namespace pattern. Each pattern is tried in <em>lexically</em> sorted order until a match is found. (Warning: &quot;lexically sorted&quot; means 'namespace.pattern-10' sorts before 'namespace.pattern-2'!)</p>
 <p>Secondly, the example shows that you can hardcode anything, like we did for the backing reponame in pattern 1.</p>
 <p>Thirdly, it shows how you can specify a pattern that disables namespacing, like the last pattern. When the backing repo name ends up being exactly the same as the original repo name, gitolite notices this and treats it as a real repo, not as a logical repo. (If this confuses you, ignore it and use some other pattern, say <code>CREATOR/personal/..*</code> for developers personal repos, and don't give them namespace pattern options).</p>
@@ -409,11 +395,10 @@ alice/linux/2.2             -&gt;  (namespace processing disabled)
 alice/personal/foo          -&gt;  (namespace processing disabled)</code></pre></li>
 <li>Here's an example with some errors:
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
-    option namespace.pattern-1 = %/gitolite is @1 in sitaramc/gitolite
-    option namespace.pattern-2 = %/% is @1 in @2
-    option namespace.pattern-3 = %/%/* is @1/@3 in @2
+option namespace.pattern-1 = %/gitolite is @1 in sitaramc/gitolite
+option namespace.pattern-2 = %/% is @1 in @2
+option namespace.pattern-3 = %/%/* is @1/@3 in @2
 </pre>
-
 <p>If you try 'alice/gitolite/foo' in this setup, it will only match the 3rd pattern. The backing repo name will be 'gitolite', which probably doesn't exist, and git will complain.</p>
 <p>Also, without rule 3, trying a repo with more than 2 components won't work. Gitolite will complain that no namespace options matched. This would indicate a discrepancy between the <code>repo [...]</code> line governing those options and the options themselves; you need to fine tune one or the others to fix things.</p></li>
 </ul>

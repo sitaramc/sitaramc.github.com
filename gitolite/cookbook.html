@@ -145,7 +145,6 @@
     }
 -->
 </script>
-
 <style>
     #PTOC ul {
         list-style: none;
@@ -183,15 +182,12 @@
     }
 
 </style>
-
 <div id="SBTOC" class="sidebar-toc">
-
 <p><strong><span class="red">Gitolite TOC</span></strong></p>
 <hr />
 <center>
 <span class="red"><strong>Background</strong></span>
 </center>
-
 <hr />
 <p><a href="index.html">Main page</a></p>
 <ul>
@@ -231,7 +227,6 @@
 <center>
 <span class="red"><strong>Basics</strong></span>
 </center>
-
 <hr />
 <p><a href="install.html">install and setup</a></p>
 <ul>
@@ -266,7 +261,6 @@
 <center>
 <span class="red"><strong>Advanced</strong></span>
 </center>
-
 <hr />
 <p>Advanced &quot;conf file&quot; use</p>
 <ul>
@@ -297,7 +291,6 @@
 <center>
 <span class="red"><strong>Extras</strong></span>
 </center>
-
 <hr />
 <p><a href="odds-and-ends.html">Odds and Ends</a></p>
 <ul>
@@ -322,7 +315,6 @@
 <center>
 <span class="red"><strong>Contributed docs</strong></span>
 </center>
-
 <hr />
 <p>Contributed software, tools, and documentation</p>
 <ul>
@@ -333,7 +325,6 @@
 <li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
 </ul>
 </div>
-
 <p><span class="box-r">Note: This page has several <a href="index.html#fr">forward references</a>. Skip it, or maybe skim through it, on a first reading. It's more of a &quot;look at it when I have a specific need&quot; page anyway.</span></p>
 <p>Documentation is meant to be as complete as possible, which means it attempts to cover all situations and scenarios. That makes it harder to read.</p>
 <p>However, if you make some assumptions, remove the rationale, justification, exceptions and special cases, etc., and generally just say <em>what</em> is to be done rather than explain <em>why</em>, many tasks can be described very easily.</p>
@@ -342,8 +333,9 @@
 <h1 id="cb-admin"><span class="header-section-number">1</span> administration</h1>
 <h2 id="separating-key-admin-from-repo-admin"><span class="header-section-number">1.1</span> separating &quot;key admin&quot; from &quot;repo admin&quot;</h2>
 <p>In gitolite, the person who controls the keys is the most critical in terms of security -- because he can always add his own key in your name :-)</p>
-<table><tr><td>
-
+<table>
+<tr>
+<td>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Type">repo </span>gitolite-admin
 <span class="Statement">    RW+</span><span class="Constant"> </span>= key-manager repo-manager
@@ -354,13 +346,13 @@
 
 <span class="PreProc">include </span><span class="Constant">&quot;actual.conf&quot;</span>
 </pre>
-
-</td><td>
-
+</td>
+<td>
 <p>Traditionally, the same person also administers repos and permissions. But sometimes you want to separate them.</p>
 <p>To separate those roles, put the following in conf/gitolite.conf, and let the repo-manager manage everything through &quot;actual.conf&quot;:</p>
-</td></tr></table>
-
+</td>
+</tr>
+</table>
 <h1 id="cb-access"><span class="header-section-number">2</span> access</h1>
 <h2 id="looking-up-repo-access-from-external-tools"><span class="header-section-number">2.1</span> looking up repo access from external tools</h2>
 <p>There are two supported interfaces for this, one in perl and one in shell. Other languages should probably use the shell mode. (The shell mode has a very convenient &quot;batch&quot; mode if you need to check many repos at once).</p>
@@ -413,7 +405,6 @@ Alternatively, you can simply add this at the end of the gitolite.conf file:
 <span class="Type">    repo </span><span class="Identifier">@all</span>
 <span class="Statement">        -</span><span class="Constant">   VREF/crlf       </span>=<span class="WarningMsg">   @all</span>
 </pre>
-
 <p>Either way, add/commit/push the change to the gitolite-admin repo.</p></li>
 </ol>
 <h2 id="adding-other-non-update-hooks"><span class="header-section-number">4.2</span> adding other (non-update) hooks</h2>
@@ -472,13 +463,11 @@ repo bar @baz
 <span class="Statement">    -</span><span class="Constant">   VREF/DAY/Sat    </span>=<span class="WarningMsg">   @junior-devs</span>
 <span class="Statement">    -</span><span class="Constant">   VREF/DAY/Sun    </span>=<span class="WarningMsg">   @junior-devs</span>
 </pre>
-
 <p>The code for this VREF is ridiculously simple:</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Comment">#!/bin/bash</span>
 echo VREF/DAY/`date +%a`
 </pre>
-
 <p>On encountering the VREF rules (i.e., when a junior dev tries to access this repo), gitolite calls the &quot;DAY&quot; VREF-maker. The code within the VREF maker simply echoes something like &quot;VREF/DAY/Mon&quot;, where the last part is whatever the actual day of the week happens to be.</p>
 <p>This output is then treated as a virtual ref and matched against the rules. On a Monday to Friday, nothing happens, because the VREFs generated do not match any deny rules (or indeed any rules at all). On weekends, they do match, and the access is denied.</p>
 <h3 id="example-2-restricting-by-source-ip-address"><span class="header-section-number">5.2.2</span> example 2: restricting by source IP address</h3>
@@ -488,7 +477,6 @@ echo VREF/DAY/`date +%a`
 <span class="Statement">    RW+</span><span class="Constant"> VREF/FROM/192.168.48.0/23   </span>=   <span class="Identifier">@junior-devs</span>
 <span class="Statement">    -</span><span class="Constant">   VREF/FROM                   </span>=<span class="WarningMsg">   @junior-devs</span>
 </pre>
-
 <p>The code is not that complex. We take the user's actual IP address (this is available as the first word in <code>$SSH_CONNECTION</code> for ssh users, and for smart-http users, gitolite fakes it and creates that variable!). We then treat the &quot;23&quot; in the VREF rule, which appears to the code as <code>$9</code>, as the number of bits in the network address, then compute the network address for the users IP with that number of bits.</p>
 <p>This network address is then sent back. (The <code>$9</code> is added back at the end, but this is only to enable it to match the VREF rule).</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
@@ -504,7 +492,6 @@ eval `ipcalc -n $from/$9`      <span class="Comment"> # sets env var &quot;NETWO
 
 echo VREF/FROM/$NETWORK/$9
 </pre>
-
 <p>For a source IP of 192.168.49.97, this runs <code>ipcalc -n 192.168.49.97/23</code>, which gives the network address 192.168.48.0. The echo then just sends back VREF/FROM/192.168.48.0/23. This VREF matches the RW+ line.</p>
 <p>But if the IP is, say, 192.168.45.67, running <code>ipcalc -n 192.168.45.67/23</code> gives you 192.168.44.0. The echo then send back VREF/FROM/192.18.44.0/23, which won't match the RW+ line, but will match the next one and thus deny access.</p>
 <p>(One thing that may not be obvious in this specific example is that you have to be careful when constructing the VREF rule. For any VREF/FROM/A/B, the result of running <code>ipcalc -n A/B</code> must be A, otherwise this won't work. That is, the bits of the network address after the network bits must be zero).</p>
@@ -524,7 +511,6 @@ echo VREF/FROM/$NETWORK/$9
 <span class="Statement">    RW+</span><span class="Constant">                 </span>=   sitaram
     option  foo.bar     =   baz
 </pre>
-
 <p>The repo will be created as a <strong>normal</strong> (not wild) repo as soon as you push, which means you can't run the <a href="user.html#perms">perms</a> command on it to add people to the READERS and WRITERS <a href="wild.html#roles">roles</a>, or do other things that wild repos allow.</p>
 <p>The mental nudge you need to deal with this is to think what you would do if you had to write the same rule for more than one repo, say, any repo starting with &quot;foo/special-&quot; followed by a number. You'd use a pattern. And a pattern prevents an ordinary repo from being created.</p>
 <p>So do this:</p>
@@ -534,7 +520,6 @@ echo VREF/FROM/$NETWORK/$9
 <span class="Statement">    RW+</span><span class="Constant">                 </span>=   sitaram
     option  foo.bar     =   baz
 </pre>
-
 <p>Using a pattern for just one repo might sound like a kludge, but it's perfectly valid and supported.</p>
 <p>Note that you do NOT need a &quot;C&quot; rule in there, since the pattern is a subset of the previous one (<code>foo/..*</code>), everything there applies to this repo also. If you're not sure why that is, you may need to read up on <a href="conf.html#accum">rule accumulation</a>.</p>
 <h1 id="cb-move"><span class="header-section-number">7</span> moving stuff around</h1>

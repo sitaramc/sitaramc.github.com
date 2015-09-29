@@ -129,7 +129,6 @@
     }
 -->
 </script>
-
 <style>
     #PTOC ul {
         list-style: none;
@@ -167,15 +166,12 @@
     }
 
 </style>
-
 <div id="SBTOC" class="sidebar-toc">
-
 <p><strong><span class="red">Gitolite TOC</span></strong></p>
 <hr />
 <center>
 <span class="red"><strong>Background</strong></span>
 </center>
-
 <hr />
 <p><a href="index.html">Main page</a></p>
 <ul>
@@ -215,7 +211,6 @@
 <center>
 <span class="red"><strong>Basics</strong></span>
 </center>
-
 <hr />
 <p><a href="install.html">install and setup</a></p>
 <ul>
@@ -250,7 +245,6 @@
 <center>
 <span class="red"><strong>Advanced</strong></span>
 </center>
-
 <hr />
 <p>Advanced &quot;conf file&quot; use</p>
 <ul>
@@ -281,7 +275,6 @@
 <center>
 <span class="red"><strong>Extras</strong></span>
 </center>
-
 <hr />
 <p><a href="odds-and-ends.html">Odds and Ends</a></p>
 <ul>
@@ -306,7 +299,6 @@
 <center>
 <span class="red"><strong>Contributed docs</strong></span>
 </center>
-
 <hr />
 <p>Contributed software, tools, and documentation</p>
 <ul>
@@ -317,7 +309,6 @@
 <li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
 </ul>
 </div>
-
 <p>Gitolite has a huge bunch of existing features that gradually need to be moved over. Plus you may want to write your own programs to interact with it.</p>
 <p><strong>This page is about <em>writing</em> hooks, commands, triggers, VREFS, and sugar scripts. <em>Installing</em> them, including &quot;where and how&quot;, is described <a href="non-core.html#localcode">here</a></strong>.</p>
 <p>Note: the <a href="non-core.html">non-core</a> page is the starting point for all information about customising gitolite.</p>
@@ -359,8 +350,7 @@ GL_ADMIN_BASE</code></pre>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Type">    repo </span><span class="Identifier">@all</span>
 <span class="Statement">        -</span><span class="Constant">       VREF/foo        </span>=<span class="WarningMsg">   @all</span>
-</pre>
-</li>
+</pre></li>
 </ul>
 <p>As you probably guessed, you can make your additional update hooks more selective, applying them only to some repos / users / combinations.</p>
 <p>Note: a normal update hook expects 3 arguments (ref, old SHA, new SHA). A VREF will get those three, followed by at least 4 more. Your VREF should just ignore the extra args.</p>
@@ -378,7 +368,6 @@ GL_ADMIN_BASE</code></pre>
 <span class="Type">repo </span>r1 r2 r4
     option ENV.CI = 1
 </pre>
-
 <p>This creates an environment variable called <code>GL_OPTION_CI</code> with the value 1, before any trigger or hook is invoked.</p>
 <p>Note: option names <em>must</em> start with <code>ENV.</code>, followed by a seqence of characters composed of alphas, numbers, and the underscore character.</p>
 <p>Now the hook running the CI job can easily decide what to do:</p>
@@ -394,7 +383,6 @@ GL_ADMIN_BASE</code></pre>
 <span class="Type">repo </span>r1 r2 r4
     option ENV.CI = <span class="Constant">&quot;&quot;</span>
 </pre>
-
 <p>(The hook code remains the same as before.)</p>
 <p><font color="gray">Before this feature was added, you could still do this, by using the <code>gitolite git-config</code> command inside the hook code to test for options and configs set for the repo, like:</p>
 <pre><code>if gitolite git-config -q reponame gitolite-options.option-name

@@ -137,7 +137,6 @@
     }
 -->
 </script>
-
 <style>
     #PTOC ul {
         list-style: none;
@@ -175,15 +174,12 @@
     }
 
 </style>
-
 <div id="SBTOC" class="sidebar-toc">
-
 <p><strong><span class="red">Gitolite TOC</span></strong></p>
 <hr />
 <center>
 <span class="red"><strong>Background</strong></span>
 </center>
-
 <hr />
 <p><a href="index.html">Main page</a></p>
 <ul>
@@ -223,7 +219,6 @@
 <center>
 <span class="red"><strong>Basics</strong></span>
 </center>
-
 <hr />
 <p><a href="install.html">install and setup</a></p>
 <ul>
@@ -258,7 +253,6 @@
 <center>
 <span class="red"><strong>Advanced</strong></span>
 </center>
-
 <hr />
 <p>Advanced &quot;conf file&quot; use</p>
 <ul>
@@ -289,7 +283,6 @@
 <center>
 <span class="red"><strong>Extras</strong></span>
 </center>
-
 <hr />
 <p><a href="odds-and-ends.html">Odds and Ends</a></p>
 <ul>
@@ -314,7 +307,6 @@
 <center>
 <span class="red"><strong>Contributed docs</strong></span>
 </center>
-
 <hr />
 <p>Contributed software, tools, and documentation</p>
 <ul>
@@ -325,17 +317,17 @@
 <li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
 </ul>
 </div>
-
 <p><strong>IMPORTANT</strong>: fallthru is success in VREFs, unlike the normal refs. That won't make sense until you read further, but I had to put it up here for folks who stop reading halfway!</p>
 <hr />
 <p>VREFs are a mechanism to add additional constraints to a push.</p>
 <h1 id="quick-introexample"><span class="header-section-number">1</span> quick intro/example</h1>
-<table><tr><td>
-
+<table>
+<tr>
+<td>
 <p>Here's an example to start you off.</p>
 <p>To disallow junior developers from changing more than five files, or from touching the Makefile, you can do this:</p>
-</td><td>
-
+</td>
+<td>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Type">repo </span>foo
 <span class="Statement">    RW+</span><span class="Constant">                     </span>=   <span class="Identifier">@all-devs</span>
@@ -343,16 +335,18 @@
 <span class="Statement">    -</span><span class="Constant">   VREF/COUNT/5        </span>=<span class="WarningMsg">   @junior-devs</span>
 <span class="Statement">    -</span><span class="Constant">   VREF/NAME/Makefile  </span>=<span class="WarningMsg">   @junior-devs</span>
 </pre>
-
-</td></tr></table>
-
-<table><tr><td>
-
+</td>
+</tr>
+</table>
+<table>
+<tr>
+<td>
 <div class="figure">
 <img src="data:image/png;base64,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" />
-</div>
-</td><td>
 
+</div>
+</td>
+<td>
 <p>Here's a pictorial representation of what happens, at a very high level, based on the <code>VREF/COUNT/5</code> rule in the rule list above.</p>
 <ol style="list-style-type: decimal">
 <li><p>To start with, git-receive-pack calls the update hook with what we will call a &quot;real&quot; ref, something like &quot;refs/heads/master&quot;, or &quot;refs/tags/v1.0&quot; -- in general, something that starts with &quot;refs/&quot;.</p>
@@ -361,8 +355,9 @@
 <li><p>Assuming that check did not fail, the gitolite code in the update hook then starts looking at each &quot;VREF&quot; rule in the rule list that applies to that repo accessed by that user. For each one, it runs the actual VREF program whose name is given in the word after &quot;VREF/&quot;. (The rest of the words, if any, along with all sorts of other information, are supplied as <a href="#vref-args">arguments</a>).</p></li>
 <li><p>The STDOUT of the called program is captured and any line that starts with the characters &quot;VREF/&quot; is taken as a &quot;<strong>virtual</strong>&quot; ref, and is run through the same &quot;<a href="conf.html#c1c2">check #2</a>&quot;. <span class="red"><strong>The only difference is that, unlike for a regular ref, fallthru does not result in failure, but success.</strong></span></p></li>
 </ol>
-</td></tr></table>
-
+</td>
+</tr>
+</table>
 <h1 id="basic-use-and-understanding"><span class="header-section-number">2</span> basic use and understanding</h1>
 <p>Normally, rules deal with branches and tags (which git collectively calls &quot;refs&quot;). The &quot;ref&quot; is a property of the push which gitolite checks against the set of rules.</p>
 <p>&quot;Virtual refs&quot; are other properties of a push that gitolite can be told to check, in addition to the normal ref. For example, &quot;this push has more than 5 changed files&quot; could be one property. Or &quot;this push changed the file called Makefile&quot; could be another. These properties are represented as &quot;virtual refs&quot; that start with &quot;VREF/&quot;. (Recall that &quot;normal&quot; refs start with &quot;refs/&quot;).</p>
@@ -413,19 +408,19 @@
 <span class="Type">repo </span>foo   <span class="Comment"> # or maybe even 'repo @all'</span>
 <span class="Statement">    -</span><span class="Constant">   VREF/my-update-hook     </span>=<span class="WarningMsg">   @all</span>
 </pre>
-
 <p>That's it.</p>
 <h2 id="what-if-the-vref-maker-prints-a-different-virtual-ref"><span class="header-section-number">4.2</span> what if the VREF-maker prints a different virtual ref?</h2>
 <p>Unless you know what you're upto, don't do that.</p>
 <p>But it's allowed and the behaviour is defined. The VREF-maker for the NAME VREF is a good example. It ignores the arguments and just makes VREFs out of the name of every file that was changed in the push.</p>
-<table><tr><td>
-
+<table>
+<tr>
+<td>
 <p>Here's another example. Consider the problem of not allowing pushes at specific times. Let's say repo 'foo' cannot be pushed between 4 and 7pm, and repo 'bar' can only be pushed before 9am. And of course all this only applies to the junior developers, the poor guys!</p>
 <p>In this example, we write the &quot;Hour&quot; VREF-maker to <em>ignore the argument passed</em> and just print <code>VREF/Hour/NN</code> where NN can be between 00 to 23 inclusive and of course represents the current hour.</p>
 <p>If foo is pushed at 6:30pm, the VREF-maker prints VREF/Hour/18, which satisfies the third rule and is rejected.</p>
 <p>If bar is pushed at, say, 7:20am, the vref printed is VREF/Hour/07, which does not match any of the rules. And fallthru is success so it passes.</p>
-</td><td>
-
+</td>
+<td>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Type">repo </span>foo
 <span class="Statement">    RW+</span><span class="Constant">                         </span>=   <span class="Identifier">@all</span>
@@ -441,9 +436,9 @@
 <span class="Statement">    -</span><span class="Constant">   VREF/Hour/1[0-9]        </span>=<span class="WarningMsg">   @junior-devs</span>
 <span class="Statement">    -</span><span class="Constant">   VREF/Hour/2[0-9]        </span>=<span class="WarningMsg">   @junior-devs</span>
 </pre>
-
-</td></tr></table>
-
+</td>
+</tr>
+</table>
 <h2 id="vref-fallthru"><span class="header-section-number">4.3</span> why is fallthru considered success with VREFs</h2>
 <p>Virtual refs are <strong>best used</strong> (1) as <strong>additional</strong> &quot;deny&quot; rules, performing extra checks that core gitolite cannot. You usually want such extra checks only for some people.</p>
 <p>When fallthru is success, you can simply <em>ignore</em> all the other users (for whom such additional checks are not needed).</p>
@@ -451,14 +446,12 @@
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Statement">RW+</span><span class="Constant"> VREF/VREFNAME   </span>=   <span class="Identifier">@userlist</span>  <span class="Comment"> # uggh! what a pain!</span>
 </pre>
-
 <p>Worse, since every virtual ref involves calling an external program, many of these calls may be wasted.</p>
 <p><font color="gray">(1) &quot;best used as...&quot; does not mean &quot;only used as...&quot;. For example it's perfectly easy to turn this around if, instead of having a list of people who <em>do</em> need extra checks, all you have is the complementary list:</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Statement">RW+</span><span class="Constant"> VREF/NAME/Makefile      </span>=   <span class="Identifier">@senior-devs</span>
 <span class="Statement">-</span><span class="Constant">   VREF/NAME/Makefile      </span>=<span class="WarningMsg">   @all</span>
 </pre>
-
 <p></font></p>
 <h2 id="what-if-the-vref-maker-prints-something-thats-not-even-a-virtual-ref"><span class="header-section-number">4.4</span> what if the VREF-maker prints something that's not even a virtual ref?</h2>
 <p>The VREF-maker can print anything it wants to STDOUT. Lines not starting with <code>VREF/</code> are printed as is (so your VREF-maker can do mostly-normal printing to STDOUT). This is especially useful if you've turned an existing update hook into a VREF-maker, and it prints stuff meant for the user, but you don't want to touch the code.</p>
@@ -488,7 +481,6 @@
 
 <span class="Statement">        -</span><span class="Constant">   VREF/NAME/Makefile          </span>=<span class="WarningMsg">   @junior_devs</span>
 </pre>
-
 <p>When a senior dev pushes, the VREF is not invoked at all. But when a junior dev pushes, the VREF is invoked, and it returns a list of files changed <strong>as virtual refs</strong>, looking like this:</p>
 <pre><code>VREF/NAME/file-1
 VREF/NAME/dir-2/file-3
@@ -505,20 +497,17 @@ VREF/NAME/dir-2/file-3
 <span class="Statement">        RW+</span><span class="Constant"> VREF/NAME/ReleaseNotes/     </span>=   QA-guy
 <span class="Statement">        -</span><span class="Constant">   VREF/NAME/                  </span>=<span class="WarningMsg">   QA-guy</span>
 </pre>
-
 <h2 id="COUNT"><span class="header-section-number">5.2</span> number of changed or new files</h2>
 <p>The COUNT VREF is used like this:</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Statement">-</span><span class="Constant">   VREF/COUNT/9                    </span>=<span class="WarningMsg">   @junior-developers</span>
 </pre>
-
 <p>In response, if anyone in the user list pushes a commit series that changes more than 9 files, a virtual ref of &quot;VREF/COUNT/9&quot; is returned. Gitolite uses that as a &quot;ref&quot; to match against all the rules, hits the same rule that invoked it, and denies the request.</p>
 <p>If the user did not push more than 9 files, the VREF code returns nothing, and nothing happens.</p>
 <p>COUNT can take one more argument:</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Statement">-</span><span class="Constant">   VREF/COUNT/9/NEWFILES           </span>=<span class="WarningMsg">   @junior-developers</span>
 </pre>
-
 <p>This is the same as before, but have to be more than 9 <em>new</em> files not just changed files.</p>
 <h2 id="advanced-filetype-detection"><span class="header-section-number">5.3</span> advanced filetype detection</h2>
 <p>Note: this is more for illustration than use; it's rather specific to one of the projects I manage but the idea is the important thing.</p>
@@ -526,7 +515,6 @@ VREF/NAME/dir-2/file-3
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Statement"> -</span><span class="Constant">   VREF/FILETYPE/AUTOGENERATED     </span>=<span class="WarningMsg">   @all</span>
 </pre>
-
 <p>You can look at <code>src/VREF/FILETYPE</code> to see how it handles the 'AUTOGENERATED' option. You could also have a more generic option, like perhaps BINARY, and handle that in the FILETYPE vref too.</p>
 <h2 id="checking-author-email"><span class="header-section-number">5.4</span> checking author email</h2>
 <p>Some people want to ensure that &quot;you can only push your own commits&quot;.</p>

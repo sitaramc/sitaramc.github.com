@@ -108,7 +108,6 @@
     }
 -->
 </script>
-
 <style>
     #PTOC ul {
         list-style: none;
@@ -146,15 +145,12 @@
     }
 
 </style>
-
 <div id="SBTOC" class="sidebar-toc">
-
 <p><strong><span class="red">Gitolite TOC</span></strong></p>
 <hr />
 <center>
 <span class="red"><strong>Background</strong></span>
 </center>
-
 <hr />
 <p><a href="index.html">Main page</a></p>
 <ul>
@@ -194,7 +190,6 @@
 <center>
 <span class="red"><strong>Basics</strong></span>
 </center>
-
 <hr />
 <p><a href="install.html">install and setup</a></p>
 <ul>
@@ -229,7 +224,6 @@
 <center>
 <span class="red"><strong>Advanced</strong></span>
 </center>
-
 <hr />
 <p>Advanced &quot;conf file&quot; use</p>
 <ul>
@@ -260,7 +254,6 @@
 <center>
 <span class="red"><strong>Extras</strong></span>
 </center>
-
 <hr />
 <p><a href="odds-and-ends.html">Odds and Ends</a></p>
 <ul>
@@ -285,7 +278,6 @@
 <center>
 <span class="red"><strong>Contributed docs</strong></span>
 </center>
-
 <hr />
 <p>Contributed software, tools, and documentation</p>
 <ul>
@@ -296,7 +288,6 @@
 <li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
 </ul>
 </div>
-
 <p>TOP TIP: If you have more than 2000 or so repos, then you should be using v3.2 or later; there was a bit of code that went in there that makes a <em>huge</em> difference for really large sites.</p>
 <h1 id="tips-for-performance-worriers"><span class="header-section-number">1</span> tips for performance worriers</h1>
 <p>Gitolite is pretty efficient in most cases, and generally nothing needs to be done. If you think you have a performance problem, let me know on the mailing list. Meanwhile, here are some tips:</p>
@@ -313,8 +304,11 @@
 <p>In general, gitolite has a constant overhead of about 0.2 seconds on my laptop. There really is nothing to optimise, but you can comment out some triggers as the previous section said.</p>
 <p>Here's the big-O stuff:</p>
 <ul>
-<li>N = number of normal repos, each with its own set of rules. In <code>repo r1     r2 r3</code>, N = 3. Add up all such lines.</li>
-<li>G = number of groups or repo regexes. In <code>repo @g1 @g2 foo/[a-z]*</code>, G = 3.</li>
+<li>N = number of normal repos, each with its own set of rules. In <code>repo r1 r2 r3</code>, N = 3. Add up all such lines.</li>
+<li>G = number of groups or repo regexes. In <code>repo @g1 @g2 foo/[a-z]*</code>, G =
+<ol start="3" style="list-style-type: decimal">
+<li></li>
+</ol></li>
 <li>M = number of members. In <code>@g1 = r1 r2 &lt;nl&gt; @g2 = r3 r4 r5</code>, M = 5.</li>
 <li>A = average number of rule lines in each &quot;repo&quot; block. Usually about 5, maybe 10 sometimes. You may have more.</li>
 </ul>

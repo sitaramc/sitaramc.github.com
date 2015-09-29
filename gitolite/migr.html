@@ -128,7 +128,6 @@
     }
 -->
 </script>
-
 <style>
     #PTOC ul {
         list-style: none;
@@ -166,15 +165,12 @@
     }
 
 </style>
-
 <div id="SBTOC" class="sidebar-toc">
-
 <p><strong><span class="red">Gitolite TOC</span></strong></p>
 <hr />
 <center>
 <span class="red"><strong>Background</strong></span>
 </center>
-
 <hr />
 <p><a href="index.html">Main page</a></p>
 <ul>
@@ -214,7 +210,6 @@
 <center>
 <span class="red"><strong>Basics</strong></span>
 </center>
-
 <hr />
 <p><a href="install.html">install and setup</a></p>
 <ul>
@@ -249,7 +244,6 @@
 <center>
 <span class="red"><strong>Advanced</strong></span>
 </center>
-
 <hr />
 <p>Advanced &quot;conf file&quot; use</p>
 <ul>
@@ -280,7 +274,6 @@
 <center>
 <span class="red"><strong>Extras</strong></span>
 </center>
-
 <hr />
 <p><a href="odds-and-ends.html">Odds and Ends</a></p>
 <ul>
@@ -305,7 +298,6 @@
 <center>
 <span class="red"><strong>Contributed docs</strong></span>
 </center>
-
 <hr />
 <p>Contributed software, tools, and documentation</p>
 <ul>
@@ -316,7 +308,6 @@
 <li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
 </ul>
 </div>
-
 <p><span class="box-r">If you're curious why I wrote v3, and what was wrong with v2, read <a href="why-v3.html">this</a>.</span></p>
 <p>First things first: v3 came out in April 2012. v2 will continue to be supported for critical bugs, although enhancements and new features won't happen. v1 is not supported anymore.</p>
 <p>That said, if you're an existing (gitolite v1.x or v2.x) user, and wish to migrate, here are the steps:</p>
@@ -478,7 +469,7 @@ done 2&gt;/dev/null</code></pre>
 <li><p>If you're using any rc variables that the pre-migration checklist said would &quot;require presetting&quot;, then read about <a href="#rc-preset">presetting</a> the rc file, and follow those instructions to create your new rc file.</p></li>
 <li><p>Setup gitolite; see <a href="install.html#setup">setup</a>. However, the 'setup' step need not supply a private key. You can run it as <code>gitolite setup -a admin</code>.</p>
 <p>NOTE: ignore any 'split conf not set, gl-conf present...' errors at this time. You may see none, some, or many. It does not matter right now.</p></li>
-<li><p>Make sure your gitolite-admin clone has the correct pubkey for the administrator in its <code>keydir</code> directory, then run <a href="emergencies.html#bypass"><code>gitolite push     -f</code></a> to overwrite the &quot;default&quot; admin repo created by the install.</p>
+<li><p>Make sure your gitolite-admin clone has the correct pubkey for the administrator in its <code>keydir</code> directory, then run <a href="emergencies.html#bypass"><code>gitolite push -f</code></a> to overwrite the &quot;default&quot; admin repo created by the install.</p>
 <p><strong>NOTE that is <code>gitolite push</code> not <code>git push</code>!</strong></p></li>
 <li><p>Handle any errors, look for migration issues, etc., as described in the links at the top of this page.</p>
 <p>This also includes building up your new <code>~/.gitolite.rc</code> file.</p></li>
@@ -492,8 +483,7 @@ done 2&gt;/dev/null</code></pre>
 <li>Fallthru on all VREFs is &quot;success&quot; now, so any NAME/ rules you have <strong>MUST</strong> change the rule list in some way to maintain the same restrictions. The simplest is to add the following line to the end of each repo's rule list:
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Statement">    -</span><span class="Constant">   VREF/NAME/       </span>=<span class="WarningMsg">   @all</span>
-</pre>
-</li>
+</pre></li>
 </ol>
 <h2 id="g2i-subconf"><span class="header-section-number">3.2</span> subconf command in admin repo</h2>
 <p>(This is also affected by the previous issue, 'NAME rules'; please read that as well).</p>
@@ -504,7 +494,6 @@ done 2&gt;/dev/null</code></pre>
 
 <span class="PreProc">subconf </span><span class="Constant">&quot;fragments/*.conf&quot;</span>
 </pre>
-
 <p>The first part compensates for fallthru now being a success when processing <a href="vref.html">VREF</a> rules (NAME rules are just one specific VREF). Although, <strong>ideally</strong>, you should change your rule list so that you no longer require that line. As the <a href="vref.html">vref page</a> says:</p>
 <blockquote>
 <p><strong>Virtual refs are best used as additional &quot;deny&quot; rules</strong>, performing extra checks that core gitolite cannot.</p>
@@ -527,22 +516,18 @@ done 2&gt;/dev/null</code></pre>
 option mirror.master        =   sam
 option mirror.slaves        =   frodo gollum
 </pre>
-
 The redirectOK looks like this:
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 option mirror.redirectOK    =   frodo
 </pre>
-
 The special value &quot;true&quot; to say that all slaves are trusted is now &quot;all&quot;:
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 option mirror.redirectOK    =   all
-</pre>
-</li>
+</pre></li>
 <li>There are no more mirroring &quot;keys&quot;, (lists of servers named in config keys like 'gitolite.mirror.nightly', etc). You can certainly add lines like
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 option mirror.nightly       =   merry pippin
 </pre>
-
 <p>but they will not be processed by gitolite. Your cron jobs should use <code>gitolite git-config</code> to query this variable, grab the list of peers, and run <code>gitolite mirror</code> on each of them.</p></li>
 <li><p>The command to resync mirrors is 'mirror', run just like any other <a href="non-core.html#commands">command</a>. In particular, you can run <code>gitolite mirror -h</code> to get help. It cannot be run from a slave to ask a master to push (unlike in the old system) but what's more convenient is that any user who has any access to the master can run it remotely (if you allow it) to invoke a push.</p></li>
 </ul>

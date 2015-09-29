@@ -123,7 +123,6 @@
     }
 -->
 </script>
-
 <style>
     #PTOC ul {
         list-style: none;
@@ -161,15 +160,12 @@
     }
 
 </style>
-
 <div id="SBTOC" class="sidebar-toc">
-
 <p><strong><span class="red">Gitolite TOC</span></strong></p>
 <hr />
 <center>
 <span class="red"><strong>Background</strong></span>
 </center>
-
 <hr />
 <p><a href="index.html">Main page</a></p>
 <ul>
@@ -209,7 +205,6 @@
 <center>
 <span class="red"><strong>Basics</strong></span>
 </center>
-
 <hr />
 <p><a href="install.html">install and setup</a></p>
 <ul>
@@ -244,7 +239,6 @@
 <center>
 <span class="red"><strong>Advanced</strong></span>
 </center>
-
 <hr />
 <p>Advanced &quot;conf file&quot; use</p>
 <ul>
@@ -275,7 +269,6 @@
 <center>
 <span class="red"><strong>Extras</strong></span>
 </center>
-
 <hr />
 <p><a href="odds-and-ends.html">Odds and Ends</a></p>
 <ul>
@@ -300,7 +293,6 @@
 <center>
 <span class="red"><strong>Contributed docs</strong></span>
 </center>
-
 <hr />
 <p>Contributed software, tools, and documentation</p>
 <ul>
@@ -311,7 +303,6 @@
 <li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
 </ul>
 </div>
-
 <blockquote>
 <hr />
 </blockquote>
@@ -320,7 +311,6 @@
 <center>
 <span class="red"><strong>&quot;Don't Panic!&quot;</strong></span>
 </center>
-
 </blockquote>
 <p><br /></p>
 <blockquote>
@@ -340,7 +330,7 @@
 <p>You may have lost access because of a conf file error, in which case the above trick (which merely changes a pubkey) won't help. What you want is to make changes to the gitolite-admin repo (or perhaps just rewind) and push that. Here's how to do that:</p>
 <ul>
 <li><p>Log on to the server.</p></li>
-<li><p>Clone the admin repo using the full path: <code>git clone     $HOME/repositories/gitolite-admin.git temp</code>.</p></li>
+<li><p>Clone the admin repo using the full path: <code>git clone $HOME/repositories/gitolite-admin.git temp</code>.</p></li>
 <li><p>Make whatever changes you want -- add/replace a key, 'git revert' or 'git reset --hard' to an older commit, etc. Anything you need to fix the problem, really.</p></li>
 <li><p>Run <code>gitolite push</code> (or possibly <code>gitolite push -f</code>). Note that's 'gitolite push', not 'git push'.</p></li>
 </ul>

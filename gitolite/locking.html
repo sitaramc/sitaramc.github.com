@@ -116,7 +116,6 @@
     }
 -->
 </script>
-
 <style>
     #PTOC ul {
         list-style: none;
@@ -154,15 +153,12 @@
     }
 
 </style>
-
 <div id="SBTOC" class="sidebar-toc">
-
 <p><strong><span class="red">Gitolite TOC</span></strong></p>
 <hr />
 <center>
 <span class="red"><strong>Background</strong></span>
 </center>
-
 <hr />
 <p><a href="index.html">Main page</a></p>
 <ul>
@@ -202,7 +198,6 @@
 <center>
 <span class="red"><strong>Basics</strong></span>
 </center>
-
 <hr />
 <p><a href="install.html">install and setup</a></p>
 <ul>
@@ -237,7 +232,6 @@
 <center>
 <span class="red"><strong>Advanced</strong></span>
 </center>
-
 <hr />
 <p>Advanced &quot;conf file&quot; use</p>
 <ul>
@@ -268,7 +262,6 @@
 <center>
 <span class="red"><strong>Extras</strong></span>
 </center>
-
 <hr />
 <p><a href="odds-and-ends.html">Odds and Ends</a></p>
 <ul>
@@ -293,7 +286,6 @@
 <center>
 <span class="red"><strong>Contributed docs</strong></span>
 </center>
-
 <hr />
 <p>Contributed software, tools, and documentation</p>
 <ul>
@@ -304,7 +296,6 @@
 <li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
 </ul>
 </div>
-
 <p>Locking is useful to make sure that binary files (office docs, images, ...) don't get into a merge state. (<font color="gray">If you think it's not a big deal, you have never manually merged independent changes to an ODT or something!</font>)</p>
 <p><strong>When git is used in a truly distributed fashion, locking is impossible.</strong> However, in most corporate setups, there is a single central server acting as the canonical source of truth and collaboration point for all developers. In this situation it should be possible to at least prevent commits from being pushed that contains changes to files locked by someone else.</p>
 <p>The two &quot;lock&quot; programs (one a command that a user uses, and one a VREF that the admin adds to a repo's access rules) together attempt to achieve this.</p>
@@ -320,7 +311,6 @@
     ...other rules...
 <span class="Statement">    -</span><span class="Constant">   VREF/lock      </span>=<span class="WarningMsg">   @all</span>
 </pre>
-
 <p>However, see below for the difference between &quot;RW&quot; and &quot;RW+&quot; from the point of view of this feature and adjust permissions accordingly.</p>
 <h1 id="user-view"><span class="header-section-number">3</span> user view</h1>
 <p>Here's a summary:</p>

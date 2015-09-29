@@ -117,7 +117,6 @@
     }
 -->
 </script>
-
 <style>
     #PTOC ul {
         list-style: none;
@@ -155,15 +154,12 @@
     }
 
 </style>
-
 <div id="SBTOC" class="sidebar-toc">
-
 <p><strong><span class="red">Gitolite TOC</span></strong></p>
 <hr />
 <center>
 <span class="red"><strong>Background</strong></span>
 </center>
-
 <hr />
 <p><a href="index.html">Main page</a></p>
 <ul>
@@ -203,7 +199,6 @@
 <center>
 <span class="red"><strong>Basics</strong></span>
 </center>
-
 <hr />
 <p><a href="install.html">install and setup</a></p>
 <ul>
@@ -238,7 +233,6 @@
 <center>
 <span class="red"><strong>Advanced</strong></span>
 </center>
-
 <hr />
 <p>Advanced &quot;conf file&quot; use</p>
 <ul>
@@ -269,7 +263,6 @@
 <center>
 <span class="red"><strong>Extras</strong></span>
 </center>
-
 <hr />
 <p><a href="odds-and-ends.html">Odds and Ends</a></p>
 <ul>
@@ -294,7 +287,6 @@
 <center>
 <span class="red"><strong>Contributed docs</strong></span>
 </center>
-
 <hr />
 <p>Contributed software, tools, and documentation</p>
 <ul>
@@ -305,7 +297,6 @@
 <li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
 </ul>
 </div>
-
 <p>This page has a bunch of stuff that didn't seem to fit anywhere.</p>
 <h1 id="writable"><span class="header-section-number">1</span> disabling pushes to take backups</h1>
 <p>The <code>writable</code> command allows you to disable pushes to all repos or just the named repo, in order to do file-system level things to the repo directory that require it not to change, like using normal backup software.</p>
@@ -339,7 +330,6 @@
 <span class="Statement">    RW</span><span class="Constant">  </span>=   <span class="PreProc">WRITERS</span>
 <span class="Statement">    R</span><span class="Constant">   </span>=   <span class="PreProc">READERS</span>
 </pre>
-
 <p>Now users can create any repo under their own name simply by cloning it or pushing to it, then use the <a href="user.html#perms">perms</a> command to add other users to their WRITERS and READERS lists.</p>
 <p>Of course you can get much more creative if you add a few more roles (see &quot;roles&quot; in <a href="wild.html">this</a> page).</p>
 <p><font color="gray">(I prefer using some prefix, say &quot;u&quot;, as in <code>repo u/CREATOR/..*</code>. This helps to keep user-created repos separate, and avoid name clashes in some far-fetched scenarios).</font></p>

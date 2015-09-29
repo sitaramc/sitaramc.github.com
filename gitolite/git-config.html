@@ -118,7 +118,6 @@
     }
 -->
 </script>
-
 <style>
     #PTOC ul {
         list-style: none;
@@ -156,15 +155,12 @@
     }
 
 </style>
-
 <div id="SBTOC" class="sidebar-toc">
-
 <p><strong><span class="red">Gitolite TOC</span></strong></p>
 <hr />
 <center>
 <span class="red"><strong>Background</strong></span>
 </center>
-
 <hr />
 <p><a href="index.html">Main page</a></p>
 <ul>
@@ -204,7 +200,6 @@
 <center>
 <span class="red"><strong>Basics</strong></span>
 </center>
-
 <hr />
 <p><a href="install.html">install and setup</a></p>
 <ul>
@@ -239,7 +234,6 @@
 <center>
 <span class="red"><strong>Advanced</strong></span>
 </center>
-
 <hr />
 <p>Advanced &quot;conf file&quot; use</p>
 <ul>
@@ -270,7 +264,6 @@
 <center>
 <span class="red"><strong>Extras</strong></span>
 </center>
-
 <hr />
 <p><a href="odds-and-ends.html">Odds and Ends</a></p>
 <ul>
@@ -295,7 +288,6 @@
 <center>
 <span class="red"><strong>Contributed docs</strong></span>
 </center>
-
 <hr />
 <p>Contributed software, tools, and documentation</p>
 <ul>
@@ -306,7 +298,6 @@
 <li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
 </ul>
 </div>
-
 <p><span class="gray">(Original version thanks to teemu dot matilainen at iki dot fi.)</span></p>
 <blockquote>
 <hr />
@@ -327,7 +318,6 @@
 <span class="Statement">    config </span><span class="Identifier">hooks.emailprefix </span>= <span class="Constant">&quot;[gitolite] &quot;</span>
 <span class="Statement">    config </span><span class="Identifier">foo.bar </span>= <span class="Constant">&quot;&quot;</span>
 </pre>
-
 <p>This does either a plain &quot;git config section.key value&quot; (for the first 2 examples above) or &quot;git config --unset-all section.key&quot; (for the last example). Other forms of the <code>git config</code> command (<code>--add</code>, the <code>value_regex</code>, etc) are not supported.</p>
 <h2 id="an-important-warning-about-deleting-a-config-line"><span class="header-section-number">1.1</span> <span class="red">an important warning about <strong>deleting</strong> a config line</span></h2>
 <blockquote>
@@ -346,7 +336,6 @@
 <span class="Statement">    config </span><span class="Identifier">hooks.mailinglist </span>= %GL_REPO-commits@example.tld
 <span class="Statement">    config </span><span class="Identifier">hooks.emailprefix </span>= <span class="Constant">&quot;[%GL_REPO] &quot;</span>
 </pre>
-
 <h1 id="override_conf"><span class="header-section-number">3</span> overriding config values</h1>
 <p>You can repeat the 'config' line as many times as you like, and the <em>last</em> occurrence will be the one in effect. This allows you to override settings just for one project, as in this example:</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
@@ -360,14 +349,12 @@
    <span class="Comment"> # different mailing list</span>
 <span class="Statement">    config </span><span class="Identifier">hooks.mailinglist </span>= announce@customer.tld
 </pre>
-
 <p>The &quot;delete config variable&quot; syntax can also be used, if you wish:</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Type">repo </span>secret    <span class="Comment"> # no emails for this one please</span>
 <span class="Statement">    config </span><span class="Identifier">hooks.mailinglist </span>= <span class="Constant">&quot;&quot;</span>
 <span class="Statement">    config </span><span class="Identifier">hooks.emailprefix </span>= <span class="Constant">&quot;&quot;</span>
 </pre>
-
 <p>As you can see, the general idea is to place the most generic ones (<code>repo @all</code>, or repo regex like <code>repo foo.*</code>) first, and place more specific ones later to override the generic settings.</p>
 <h1 id="unsafe-patt"><span class="header-section-number">4</span> compensating for UNSAFE_PATT</h1>
 <p>An important feature in gitolite is that you can share the admin load with more people, <strong>without</strong> having to give all of them shell access on the server. Thus there are some restrictions designed to prevent someone who can push the gitolite-admin repo, from somehow managing to run arbitrary commands on the server.</p>
@@ -377,7 +364,6 @@
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Statement">config </span><span class="Identifier">hooks.showrev </span>= <span class="Constant">&quot;git show -C %s; echo&quot;</span>
 </pre>
-
 <p>There are two ways to fix this.</p>
 <p><strong>If all your admins already have shell access</strong>, you can override this by placing a modified version in the rc file. For our example, you'd just put the following line at the <strong>very end</strong> of your rc file, just before the <code>1;</code> line (notice there is no semicolon in the regex here):</p>
 <pre><code>$UNSAFE_PATT          = qr([`~#\$\&amp;()|&lt;&gt;]);</code></pre>
@@ -393,7 +379,6 @@
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Statement">    config </span><span class="Identifier">hooks.showrev </span>= %SHOWREV
 </pre>
-
 <p>This mechanism allows you to add any number of <strong>specific</strong> violations to the <code>UNSAFE_PATT</code> rule instead of denaturing the regex itself and potentially allowing something that could be (ab)used by a repo admin to obtain shell access at some later point in time.</p>
 <p>A similar problem arises with email addresses, which contain the <code>&lt;</code> and <code>&gt;</code> characters. Here's how to deal with that easily:</p>
 <ul>
@@ -407,7 +392,6 @@
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Statement">    config </span><span class="Identifier">hooks.mailinglist </span>= <span class="Constant">&quot;Sitaram Chamarty %LTsitaramc@gmail.com%GT&quot;</span>
 </pre>
-
 <p>Admittedly, that looks a wee bit ugly, but it gets the job done without having to remove angle brackets from UNSAFE_PATT.</p>
 </body>
 </html>

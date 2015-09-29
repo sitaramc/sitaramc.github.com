@@ -80,10 +80,11 @@
 <li><a href="#warnings-and-important-notes"><span class="toc-section-number">1</span> WARNINGS and important notes</a></li>
 <li><a href="#assumptions"><span class="toc-section-number">2</span> assumptions:</a></li>
 <li><a href="#instructions"><span class="toc-section-number">3</span> instructions</a></li>
-<li><a href="#making-repositories-available-to-both-ssh-and-http-mode-clients"><span class="toc-section-number">4</span> Making repositories available to both ssh and http mode clients</a></li>
-<li><a href="#usage"><span class="toc-section-number">5</span> usage</a><ul>
-<li><a href="#client-side"><span class="toc-section-number">5.1</span> client side</a></li>
-<li><a href="#server-side"><span class="toc-section-number">5.2</span> server side</a></li>
+<li><a href="#allowing-unauthenticated-access"><span class="toc-section-number">4</span> allowing unauthenticated access</a></li>
+<li><a href="#making-repositories-available-to-both-ssh-and-http-mode-clients"><span class="toc-section-number">5</span> Making repositories available to both ssh and http mode clients</a></li>
+<li><a href="#usage"><span class="toc-section-number">6</span> usage</a><ul>
+<li><a href="#client-side"><span class="toc-section-number">6.1</span> client side</a></li>
+<li><a href="#server-side"><span class="toc-section-number">6.2</span> server side</a></li>
 </ul></li>
 </ul>
 </div>
@@ -120,7 +121,6 @@
     }
 -->
 </script>
-
 <style>
     #PTOC ul {
         list-style: none;
@@ -158,15 +158,12 @@
     }
 
 </style>
-
 <div id="SBTOC" class="sidebar-toc">
-
 <p><strong><span class="red">Gitolite TOC</span></strong></p>
 <hr />
 <center>
 <span class="red"><strong>Background</strong></span>
 </center>
-
 <hr />
 <p><a href="index.html">Main page</a></p>
 <ul>
@@ -206,7 +203,6 @@
 <center>
 <span class="red"><strong>Basics</strong></span>
 </center>
-
 <hr />
 <p><a href="install.html">install and setup</a></p>
 <ul>
@@ -241,7 +237,6 @@
 <center>
 <span class="red"><strong>Advanced</strong></span>
 </center>
-
 <hr />
 <p>Advanced &quot;conf file&quot; use</p>
 <ul>
@@ -272,7 +267,6 @@
 <center>
 <span class="red"><strong>Extras</strong></span>
 </center>
-
 <hr />
 <p><a href="odds-and-ends.html">Odds and Ends</a></p>
 <ul>
@@ -297,7 +291,6 @@
 <center>
 <span class="red"><strong>Contributed docs</strong></span>
 </center>
-
 <hr />
 <p>Contributed software, tools, and documentation</p>
 <ul>
@@ -308,7 +301,6 @@
 <li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
 </ul>
 </div>
-
 <p><strong>Note</strong>: &quot;smart http&quot; refers to the feature that came with git 1.6.6, late 2009 or so. The base documentation for this is <code>man git-http-backend</code>. Do <strong>NOT</strong> read <code>Documentation/howto/setup-git-server-over-http.txt</code> and think that is the same or even relevant -- that is from 2006 and is quite different (and arguably obsolete).</p>
 <h1 id="warnings-and-important-notes"><span class="header-section-number">1</span> WARNINGS and important notes</h1>
 <ul>
@@ -325,10 +317,16 @@
 <p><span class="box-r">Note that the <code>GIT_PROJECT_ROOT</code> variable (see &quot;man git-http-backend&quot;) is no longer optional. Make sure you set it to some place outside apache's <code>DOCUMENT_ROOT</code>.</span></p>
 <p>In place of detailed instructions, there is a script called <code>t/smart-http.root-setup</code>. <strong>Do NOT run this script as is -- it is actually meant for my testing setup and deletes stuff</strong>. However, it does provide an excellent (and working!) narration of what you need to do to install gitolite in smart http mode.</p>
 <p>Make a copy of the script, go through it carefully, (possibly removing lines that delete files etc.), change values per your system, and only then run it.</p>
-<h1 id="making-repositories-available-to-both-ssh-and-http-mode-clients"><span class="header-section-number">4</span> Making repositories available to both ssh and http mode clients</h1>
+<h1 id="allowing-unauthenticated-access"><span class="header-section-number">4</span> allowing unauthenticated access</h1>
+<p>If you want users to see repos without performing any HTTP authentication, you should first decide what repos they should have unauthenticated access to:</p>
+<pre><code>repo foo bar baz        # or maybe '@all'?
+    R   =   nobody</code></pre>
+<p>Then in the rc file (<code>~/.gitolite.rc</code>), in the section marked &quot;rc variables used by various features&quot;, add this (including the trailing comma):</p>
+<pre><code>HTTP_ANON_USER      =&gt;  'nobody',</code></pre>
+<h1 id="making-repositories-available-to-both-ssh-and-http-mode-clients"><span class="header-section-number">5</span> Making repositories available to both ssh and http mode clients</h1>
 <p>This section has been contributed by Thomas Hager (duke at sigsegv dot at), and is available <a href="ssh-and-http.html">here</a>.</p>
-<h1 id="usage"><span class="header-section-number">5</span> usage</h1>
-<h2 id="client-side"><span class="header-section-number">5.1</span> client side</h2>
+<h1 id="usage"><span class="header-section-number">6</span> usage</h1>
+<h2 id="client-side"><span class="header-section-number">6.1</span> client side</h2>
 <p>Git URLs look like <code>http://user:password@server/git/reponame.git</code>.</p>
 <p>The custom commands, like &quot;info&quot;, &quot;expand&quot; should be handled as follows. The command name will come just after the <code>/git/</code>, followed by a <code>?</code>, followed by the arguments, with <code>+</code> representing a space. Here are some examples:</p>
 <pre><code># ssh git@server info
@@ -338,7 +336,7 @@ curl http://user:password@server/git/info?repopatt
 # ssh git@server info repopatt user1 user2
 curl http://user:password@server/git/info?repopatt+user1+user2</code></pre>
 <p>With a few nice shell aliases, you won't even notice the horrible convolutions here ;-) See t/smart-http for a couple of useful ones.</p>
-<h2 id="server-side"><span class="header-section-number">5.2</span> server side</h2>
+<h2 id="server-side"><span class="header-section-number">6.2</span> server side</h2>
 <p>The 'gitolite' command (for example, 'gitolite compile', 'gitolite query-rc', and so on) <em>can</em> be run on the server, but it's not straightforward. Assuming you installed exactly as given in this page, you should</p>
 <ul>
 <li>get a shell by using, say, <code>su -s /bin/bash - apache</code></li>

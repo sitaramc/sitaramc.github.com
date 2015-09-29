@@ -108,7 +108,6 @@
     }
 -->
 </script>
-
 <style>
     #PTOC ul {
         list-style: none;
@@ -146,15 +145,12 @@
     }
 
 </style>
-
 <div id="SBTOC" class="sidebar-toc">
-
 <p><strong><span class="red">Gitolite TOC</span></strong></p>
 <hr />
 <center>
 <span class="red"><strong>Background</strong></span>
 </center>
-
 <hr />
 <p><a href="index.html">Main page</a></p>
 <ul>
@@ -194,7 +190,6 @@
 <center>
 <span class="red"><strong>Basics</strong></span>
 </center>
-
 <hr />
 <p><a href="install.html">install and setup</a></p>
 <ul>
@@ -229,7 +224,6 @@
 <center>
 <span class="red"><strong>Advanced</strong></span>
 </center>
-
 <hr />
 <p>Advanced &quot;conf file&quot; use</p>
 <ul>
@@ -260,7 +254,6 @@
 <center>
 <span class="red"><strong>Extras</strong></span>
 </center>
-
 <hr />
 <p><a href="odds-and-ends.html">Odds and Ends</a></p>
 <ul>
@@ -285,7 +278,6 @@
 <center>
 <span class="red"><strong>Contributed docs</strong></span>
 </center>
-
 <hr />
 <p>Contributed software, tools, and documentation</p>
 <ul>
@@ -296,7 +288,6 @@
 <li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
 </ul>
 </div>
-
 <p>Some gitolite features are enabled, or gitolite's behaviour changed, by setting &quot;options&quot;.</p>
 <p>A line like 'option foo = 1' is really just syntactic sugar for 'config gitolite-options.foo = 1', so everything in the <a href="git-config.html">git-config</a> page also applies here (especially the bit about <a href="git-config.html#override_conf">overriding config values</a>).</p>
 <p><strong>However</strong>, these values are <strong>not</strong> written into git's own <code>config</code> file, so git (or other programs running <code>git config</code>) will not see them. You can only query them using <code>gitolite git-config</code>, where they will appear in full in the output.</p>
@@ -304,7 +295,6 @@
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 option  foo.bar     =   baz
 </pre>
-
 <p>Of course this is useless if some other part of gitolite, or some external command, is not querying for the option key 'foo.bar'!</p>
 <p>Options are therefore documented in the section/page they belong in, not here. Here are some examples, although this list is not exhaustive:</p>
 <ul>

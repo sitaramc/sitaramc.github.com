@@ -138,7 +138,6 @@
     }
 -->
 </script>
-
 <style>
     #PTOC ul {
         list-style: none;
@@ -176,15 +175,12 @@
     }
 
 </style>
-
 <div id="SBTOC" class="sidebar-toc">
-
 <p><strong><span class="red">Gitolite TOC</span></strong></p>
 <hr />
 <center>
 <span class="red"><strong>Background</strong></span>
 </center>
-
 <hr />
 <p><a href="index.html">Main page</a></p>
 <ul>
@@ -224,7 +220,6 @@
 <center>
 <span class="red"><strong>Basics</strong></span>
 </center>
-
 <hr />
 <p><a href="install.html">install and setup</a></p>
 <ul>
@@ -259,7 +254,6 @@
 <center>
 <span class="red"><strong>Advanced</strong></span>
 </center>
-
 <hr />
 <p>Advanced &quot;conf file&quot; use</p>
 <ul>
@@ -290,7 +284,6 @@
 <center>
 <span class="red"><strong>Extras</strong></span>
 </center>
-
 <hr />
 <p><a href="odds-and-ends.html">Odds and Ends</a></p>
 <ul>
@@ -315,7 +308,6 @@
 <center>
 <span class="red"><strong>Contributed docs</strong></span>
 </center>
-
 <hr />
 <p>Contributed software, tools, and documentation</p>
 <ul>
@@ -326,7 +318,6 @@
 <li><a href="README-emacs.html">emacs</a> &quot;major mode&quot;</li>
 </ul>
 </div>
-
 <p><strong>This page must be read in full the first time. If you start from some nice looking section in the middle it may not help you unless you're already an expert at ssh</strong>.</p>
 <p>This page should help you troubleshoot ssh-related problems in installing and accessing gitolite. It also has a section of random ssh-related tips and tricks that gitolite can do.</p>
 <h1 id="important----read-this-first"><span class="header-section-number">1</span> IMPORTANT -- READ THIS FIRST</h1>
@@ -374,13 +365,13 @@
 <p>[A proper gitolite key will only let you <code>git clone git@server:reponame</code> (note absence of <code>repositories/</code>)]</p></li>
 <li><p>You are able to clone repositories but are unable to push changes back (the error complains about the <code>GL_BINDIR</code> environment variable not being set or about not being able to locate <code>Gitolite/Hooks/Update.pm</code>, and the <code>hooks/update</code> failing in some way).</p>
 <p>[If you run <code>git remote -v</code> you will find that your clone URL included the <code>repositories/</code> described above!]</p></li>
-<li><p>Conversely, using the correct syntax, <code>git clone git@server:reponame</code> (note absence of <code>repositories/</code> in the URL), gets you <code>fatal: 'reponame'     does not appear to be a git repository</code>, and yet you are sure 'reponame' exists, you haven't mis-spelled it, etc.</p></li>
+<li><p>Conversely, using the correct syntax, <code>git clone git@server:reponame</code> (note absence of <code>repositories/</code> in the URL), gets you <code>fatal: 'reponame' does not appear to be a git repository</code>, and yet you are sure 'reponame' exists, you haven't mis-spelled it, etc.</p></li>
 </ul>
 <h1 id="step-by-step"><span class="header-section-number">3</span> step by step</h1>
 <p>Since I'm pretty sure at least some of you didn't bother to read the &quot;IMPORTANT: PLEASE READ FIRST&quot; section above, let me take a minute to point you there again. Especially the first bullet.</p>
 <p>Done? OK, now the general outline for ssh troubleshooting is this:</p>
 <ul>
-<li><p>Make sure the server's overall setup even <em>allows</em> pubkey based login. I.e., check that git fetch/clone/ls-remote commands or a plain <code>ssh     git@server info</code> do NOT ask for a password. If you do get asked for a password, see <a href="#stsapp1">appendix 1</a>.</p></li>
+<li><p>Make sure the server's overall setup even <em>allows</em> pubkey based login. I.e., check that git fetch/clone/ls-remote commands or a plain <code>ssh git@server info</code> do NOT ask for a password. If you do get asked for a password, see <a href="#stsapp1">appendix 1</a>.</p></li>
 <li><p>Match client-side pubkeys (<code>~/.ssh/*.pub</code>) with the server's authkeys file. To do this, run <code>sshkeys-lint</code>, which tells you in detail what key has what access. See <a href="#sshkeys-lint">appendix 2</a>.</p></li>
 <li><p>At this point, we know that we have the right key, and that if sshd receives that key, things will work. But we're not done yet. We still need to make sure that this specific key is being offered/sent by the client, instead of the default key. See <a href="#stsapp3">appendix 3</a> and <a href="#ssh-ha">appendix 4</a>.</p></li>
 </ul>
@@ -438,7 +429,7 @@
 <p>You now expect to log in without having to type in a password, but when you try, you are being asked for a password.</p>
 <p>This is a quick checklist:</p>
 <ul>
-<li><p>Make sure you're being asked for a password and not a pass<em>phrase</em>. Do not confuse or mistake a prompt saying <code>Enter passphrase for key     '/home/sitaram/.ssh/id_rsa':</code> for a password prompt from the remote server!</p>
+<li><p>Make sure you're being asked for a password and not a pass<em>phrase</em>. Do not confuse or mistake a prompt saying <code>Enter passphrase for key '/home/sitaram/.ssh/id_rsa':</code> for a password prompt from the remote server!</p>
 <p>When you create an ssh keypair using <code>ssh-keygen</code>, you have the option of protecting it with a passphrase. When you subsequently use that keypair to access a remote host, your <em>local</em> ssh client needs to unlock the corresponding private key, and ssh will probably ask for the passphrase you set when you created the keypair.</p>
 <p>You have two choices to avoid this prompt every time you try to use the private key. The first is to create keypairs <em>without</em> a passphrase (just hit enter when prompted for one). <strong>Be sure to add a passphrase later, once everything is working, using <code>ssh-keygen -p</code></strong>.</p>
 <p>The second is to use <code>ssh-agent</code> (or <code>keychain</code>, which in turn uses <code>ssh-agent</code>) or something like that to manage your keys. Other than discussing one more potential trouble-spot with ssh-agent (see below), further discussion of ssh-agent/keychain is out of scope of this page.</p></li>
@@ -495,7 +486,6 @@ chmod -R go-rwx .ssh</code></pre></li>
     <span class="Statement">port</span> <span class="Constant">22</span>
     <span class="Statement">identityfile</span> ~/.ssh/id_rsa
 </pre>
-
 <p>Now you can simply use the one word <code>gitolite</code> (which is the host alias we defined here) and ssh will infer all those details defined under it -- just say <code>ssh gitolite</code> and <code>git clone gitolite:reponame</code> and things will work.</p>
 <p>(By the way, the 'port' and 'identityfile' lines are needed only if you have non-default values, although I put them in anyway just to be complete).</p>
 <h2 id="more-than-one-keypair"><span class="header-section-number">8.1</span> more than one keypair</h2>
@@ -514,7 +504,6 @@ chmod -R go-rwx .ssh</code></pre></li>
     <span class="Statement">port</span> <span class="Constant">22</span>
     <span class="Statement">identityfile</span> ~/.ssh/id_rsa
 </pre>
-
 <p>Then I would use &quot;ssh gitolite-ssh&quot; to get a command line, and use the host alias &quot;gitolite&quot; in git clone and other commands, as well as for gitolite commands (like &quot;ssh gitolite info&quot;).</p>
 <p>Just to be clear, please note that this assumes the authorized keys file on the gitolite hosting user has my &quot;id_rsa.pub&quot; line, <strong>without</strong> the gitolite related forced command and options.</p>
 <h1 id="ybpfail"><span class="header-section-number">9</span> appendix 5: why bypassing gitolite causes a problem</h1>
