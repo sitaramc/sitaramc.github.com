@@ -370,6 +370,7 @@
 <p>(This page intentionally left blank)</p>
 <h1 id="nonstd"><span class="header-section-number">7</span> non-standard configs that'll trip you up</h1>
 <ul>
+<li><p><strong>IMPORTANT</strong>: although a default openssh config will not do this (AFAIK), <strong>do not</strong> allow the user to set environment variables if you care about security at all.</p></li>
 <li><p>If your 'git' binary is in a non-PATH location, or you have more than one version and want a specific one to be picked up, you will have to add a line like this at the end of the rc file (outside the <code>%RC</code> hash, but before the <code>1;</code> line):</p>
 <pre><code>$ENV{PATH} = &quot;/your/git/path:$ENV{PATH}&quot;;</code></pre></li>
 <li><p>If you have your sshd configured to put the authorized_keys file somewhere other than the default (which is in .ssh in the <a href="concepts.html#hu">hosting user</a>'s home directory), you'll probably have to roll your own ssh handling, either disabling 'ssh-authkeys' in the rc file, or building on that somehow (maybe a post-processing step that copies the relevant auth keys lines from the default file to the other).</p></li>

@@ -932,7 +932,10 @@ If you're using gitolite and find it very useful in some way, I would love to de
 <li>Any Unix system with a posix compatible &quot;sh&quot; and a <strong>sane</strong> file system.</li>
 <li>Git version 1.6.6 or later.</li>
 <li>Perl 5.8.8 or later (see <a href="https://lwn.net/Articles/348084/" class="uri">https://lwn.net/Articles/348084/</a> if this does not seem to be enough).</li>
-<li>Openssh (almost any version). Optional if you're using <a href="#http">smart http</a>.</li>
+<li>Openssh (almost any version). Optional if you're using <a href="#http">smart http</a>.
+<ul>
+<li><strong>IMPORTANT</strong>: although a default openssh config will not do this (AFAIK), <strong>do not</strong> allow the user to set environment variables if you care about security at all.</li>
+</ul></li>
 <li>A dedicated Unix userid to be the hosting user, usually &quot;git&quot; but it can be any user, even your own normal one. (If you're using an RPM/DEB the install probably created one called &quot;gitolite&quot;).</li>
 </ul>
 <h3 id="you-and-your-users-clients"><span class="header-section-number">1.4.3</span> you and your users' clients</h3>
@@ -1966,6 +1969,7 @@ refs/.*</code></pre>
 <p>(This page intentionally left blank)</p>
 <h3 id="nonstd"><span class="header-section-number">2.6.7</span> non-standard configs that'll trip you up</h3>
 <ul>
+<li><p><strong>IMPORTANT</strong>: although a default openssh config will not do this (AFAIK), <strong>do not</strong> allow the user to set environment variables if you care about security at all.</p></li>
 <li><p>If your 'git' binary is in a non-PATH location, or you have more than one version and want a specific one to be picked up, you will have to add a line like this at the end of the rc file (outside the <code>%RC</code> hash, but before the <code>1;</code> line):</p>
 <pre><code>$ENV{PATH} = &quot;/your/git/path:$ENV{PATH}&quot;;</code></pre></li>
 <li><p>If you have your sshd configured to put the authorized_keys file somewhere other than the default (which is in .ssh in the <a href="#hu">hosting user</a>'s home directory), you'll probably have to roll your own ssh handling, either disabling 'ssh-authkeys' in the rc file, or building on that somehow (maybe a post-processing step that copies the relevant auth keys lines from the default file to the other).</p></li>
