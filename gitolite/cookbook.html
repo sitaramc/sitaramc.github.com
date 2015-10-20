@@ -94,18 +94,21 @@
 <li><a href="#variation-maintain-these-hooks-in-the-gitolite-admin-repo"><span class="toc-section-number">4.3</span> variation: maintain these hooks in the gitolite-admin repo</a></li>
 <li><a href="#v3.6-variation-repo-specific-hooks"><span class="toc-section-number">4.4</span> <span class="gray">(v3.6+)</span> variation: repo-specific hooks</a></li>
 </ul></li>
-<li><a href="#cb-vrefs"><span class="toc-section-number">5</span> VREFs</a><ul>
-<li><a href="#adding-your-own-vrefs"><span class="toc-section-number">5.1</span> adding your own VREFs</a></li>
-<li><a href="#example-vrefs"><span class="toc-section-number">5.2</span> example VREFs</a><ul>
-<li><a href="#example-1-restricting-by-day-of-week"><span class="toc-section-number">5.2.1</span> example 1: restricting by day of week</a></li>
-<li><a href="#example-2-restricting-by-source-ip-address"><span class="toc-section-number">5.2.2</span> example 2: restricting by source IP address</a></li>
+<li><a href="#triggers"><span class="toc-section-number">5</span> triggers</a><ul>
+<li><a href="#adding-your-own-triggers"><span class="toc-section-number">5.1</span> adding your own triggers</a></li>
+</ul></li>
+<li><a href="#cb-vrefs"><span class="toc-section-number">6</span> VREFs</a><ul>
+<li><a href="#adding-your-own-vrefs"><span class="toc-section-number">6.1</span> adding your own VREFs</a></li>
+<li><a href="#example-vrefs"><span class="toc-section-number">6.2</span> example VREFs</a><ul>
+<li><a href="#example-1-restricting-by-day-of-week"><span class="toc-section-number">6.2.1</span> example 1: restricting by day of week</a></li>
+<li><a href="#example-2-restricting-by-source-ip-address"><span class="toc-section-number">6.2.2</span> example 2: restricting by source IP address</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#wild-repos"><span class="toc-section-number">6</span> wild repos</a><ul>
-<li><a href="#making-exceptions-for-specific-instances-of-a-wild-repo"><span class="toc-section-number">6.1</span> making exceptions for <em>specific</em> instances of a wild repo</a></li>
+<li><a href="#wild-repos"><span class="toc-section-number">7</span> wild repos</a><ul>
+<li><a href="#making-exceptions-for-specific-instances-of-a-wild-repo"><span class="toc-section-number">7.1</span> making exceptions for <em>specific</em> instances of a wild repo</a></li>
 </ul></li>
-<li><a href="#cb-move"><span class="toc-section-number">7</span> moving stuff around</a><ul>
-<li><a href="#moving-a-gitolite-install-from-one-machine-to-another"><span class="toc-section-number">7.1</span> moving a gitolite install from one machine to another</a></li>
+<li><a href="#cb-move"><span class="toc-section-number">8</span> moving stuff around</a><ul>
+<li><a href="#moving-a-gitolite-install-from-one-machine-to-another"><span class="toc-section-number">8.1</span> moving a gitolite install from one machine to another</a></li>
 </ul></li>
 </ul>
 </div>
@@ -449,14 +452,31 @@ repo bar @baz
     option hook.post-update     =   deploy RSS-post</code></pre></li>
 <li><p>add, commit, and push the admin repo.</p></li>
 </ol>
-<h1 id="cb-vrefs"><span class="header-section-number">5</span> VREFs</h1>
-<h2 id="adding-your-own-vrefs"><span class="header-section-number">5.1</span> adding your own VREFs</h2>
+<h1 id="triggers"><span class="header-section-number">5</span> triggers</h1>
+<h2 id="adding-your-own-triggers"><span class="header-section-number">5.1</span> adding your own triggers</h2>
+<p>First, write your trigger code, using the documentation <a href="triggers.html">here</a>. Note especially the sections &quot;common arguments&quot; and &quot;trigger-specific arguments&quot;. Look in the shipped triggers for ideas.</p>
+<p>Let's say your trigger is called <code>foo</code>, and it will be a <code>PRE_GIT</code> trigger.</p>
+<ol style="list-style-type: decimal">
+<li><p>add this line in the rc file, within the <code>%RC</code> block, if it's not already present, or uncomment it if it's already present and commented out:</p>
+<pre><code>LOCAL_CODE =&gt; &quot;$ENV{HOME}/local&quot;,</code></pre></li>
+<li><p>copy the program <code>foo</code> into <code>$HOME/local/triggers</code>. (Don't forget the <code>chmod +x</code>!)</p></li>
+<li><p>edit <code>~/.gitolite.rc</code> again, and look for a <code>PRE_GIT</code> section. If it exists, add <code>'foo',</code> (note the trailing comma!) to it. If it does not exist, add this block just before the <code>ENABLE</code> section:</p>
+<pre><code>PRE_GIT =&gt;
+[
+    'foo'
+],</code></pre>
+<p>(again, note the trailing comma at the end of the block!)</p>
+<p>After saving the file test that this went through by running <code>gitolite query-rc PRE_GIT</code>; your <code>foo</code> should be in the output list. If it's not, back up and double check your work.</p></li>
+</ol>
+<p>That should be it.</p>
+<h1 id="cb-vrefs"><span class="header-section-number">6</span> VREFs</h1>
+<h2 id="adding-your-own-vrefs"><span class="header-section-number">6.1</span> adding your own VREFs</h2>
 <p>Adding VREFs is the same as adding the update hook, so please see the section on &quot;adding your own update hooks&quot; above.</p>
-<h2 id="example-vrefs"><span class="header-section-number">5.2</span> example VREFs</h2>
+<h2 id="example-vrefs"><span class="header-section-number">6.2</span> example VREFs</h2>
 <p>However, <em>writing</em> a proper VREF is not the same as writing a normal git &quot;update hook&quot;. A proper VREF does more than just take 3 arguments, do something, and exit with a non-zero exit code for failure.</p>
 <p>A VREF is called with at least 4 more arguments after the 3 that git itself defines for an update hook, plus usually at least one or two more. It also returns a lot more meaningful results via STDOUT.</p>
 <p>Here are some examples. I also advise you to keep a browser tab open to the doc on <a href="vref.html#vref-args">VREF arguments</a> as you look at these.</p>
-<h3 id="example-1-restricting-by-day-of-week"><span class="header-section-number">5.2.1</span> example 1: restricting by day of week</h3>
+<h3 id="example-1-restricting-by-day-of-week"><span class="header-section-number">6.2.1</span> example 1: restricting by day of week</h3>
 <p>Here's the conf extract to say &quot;junior devs can only push on weekdays&quot;:</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Type">repo </span>foo
@@ -470,7 +490,7 @@ echo VREF/DAY/`date +%a`
 </pre>
 <p>On encountering the VREF rules (i.e., when a junior dev tries to access this repo), gitolite calls the &quot;DAY&quot; VREF-maker. The code within the VREF maker simply echoes something like &quot;VREF/DAY/Mon&quot;, where the last part is whatever the actual day of the week happens to be.</p>
 <p>This output is then treated as a virtual ref and matched against the rules. On a Monday to Friday, nothing happens, because the VREFs generated do not match any deny rules (or indeed any rules at all). On weekends, they do match, and the access is denied.</p>
-<h3 id="example-2-restricting-by-source-ip-address"><span class="header-section-number">5.2.2</span> example 2: restricting by source IP address</h3>
+<h3 id="example-2-restricting-by-source-ip-address"><span class="header-section-number">6.2.2</span> example 2: restricting by source IP address</h3>
 <p>This one restricts junior developers to access this repo only from a specific network block. The conf file here is slightly different. We know that the VREF-maker will return with <em>some</em> network address (as you'll see in the code later), so we set it up so that the correct network block is allowed and anything else is disallowed:</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Type">repo </span>foo
@@ -495,8 +515,8 @@ echo VREF/FROM/$NETWORK/$9
 <p>For a source IP of 192.168.49.97, this runs <code>ipcalc -n 192.168.49.97/23</code>, which gives the network address 192.168.48.0. The echo then just sends back VREF/FROM/192.168.48.0/23. This VREF matches the RW+ line.</p>
 <p>But if the IP is, say, 192.168.45.67, running <code>ipcalc -n 192.168.45.67/23</code> gives you 192.168.44.0. The echo then send back VREF/FROM/192.18.44.0/23, which won't match the RW+ line, but will match the next one and thus deny access.</p>
 <p>(One thing that may not be obvious in this specific example is that you have to be careful when constructing the VREF rule. For any VREF/FROM/A/B, the result of running <code>ipcalc -n A/B</code> must be A, otherwise this won't work. That is, the bits of the network address after the network bits must be zero).</p>
-<h1 id="wild-repos"><span class="header-section-number">6</span> wild repos</h1>
-<h2 id="making-exceptions-for-specific-instances-of-a-wild-repo"><span class="header-section-number">6.1</span> making exceptions for <em>specific</em> instances of a wild repo</h2>
+<h1 id="wild-repos"><span class="header-section-number">7</span> wild repos</h1>
+<h2 id="making-exceptions-for-specific-instances-of-a-wild-repo"><span class="header-section-number">7.1</span> making exceptions for <em>specific</em> instances of a wild repo</h2>
 <p>Sometimes you want to specify rules or config for specific instances of a wild repo, while still leaving it to be created by a user in the normal way.</p>
 <p>This <strong>will not</strong> work:</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
@@ -522,8 +542,8 @@ echo VREF/FROM/$NETWORK/$9
 </pre>
 <p>Using a pattern for just one repo might sound like a kludge, but it's perfectly valid and supported.</p>
 <p>Note that you do NOT need a &quot;C&quot; rule in there, since the pattern is a subset of the previous one (<code>foo/..*</code>), everything there applies to this repo also. If you're not sure why that is, you may need to read up on <a href="conf.html#accum">rule accumulation</a>.</p>
-<h1 id="cb-move"><span class="header-section-number">7</span> moving stuff around</h1>
-<h2 id="moving-a-gitolite-install-from-one-machine-to-another"><span class="header-section-number">7.1</span> moving a gitolite install from one machine to another</h2>
+<h1 id="cb-move"><span class="header-section-number">8</span> moving stuff around</h1>
+<h2 id="moving-a-gitolite-install-from-one-machine-to-another"><span class="header-section-number">8.1</span> moving a gitolite install from one machine to another</h2>
 <p>See <a href="install.html#moving">moving servers</a>.</p>
 </body>
 </html>
