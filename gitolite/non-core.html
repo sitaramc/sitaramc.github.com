@@ -409,6 +409,7 @@
 </ul>
 <p>How/where to install them is described in detail in the &quot;locations&quot; section above, especially <a href="#localcode">this</a> and <a href="#pushcode">this</a>. The summary is that you put them in the &quot;hooks/common&quot; sub-directory within the directory whose name is given in the <code>LOCAL_CODE</code> rc variable, then run <code>gitolite setup</code>.</p>
 <h3 id="rsh"><span class="header-section-number">3.2.1</span> repo-specific hooks</h3>
+<p><span class="red"><strong>WARNING</strong>: If your site makes a distinction between &quot;right to push the admin repo&quot; and &quot;right to run arbitrary commands on the server&quot; (i.e., if not all of your &quot;admins&quot; have shell access to the server), this is a security risk. If that is the case, <strong>do not enable this feature</strong>.</span></p>
 <p>If you want to add hooks only to specific repos, you can just do it manually if you wish -- just log on to the server and add hooks (except update hook and, for the special gitolite-admin repo, the post-update hook -- touch these and all bets on gitolite's functionality are off).</p>
 <p>However, if you want to do that from within gitolite, and thus keep everything together, you can do that also. Here's how.</p>
 <ul>
