@@ -92,7 +92,7 @@
 <li>with <code>--cached</code>, looks only in the cache</li>
 <li>with one or more ref names, searched only within those revisions</li>
 <li>can take a pattern, like <code>*.c</code>, to restrict the files searched</li>
-<li><p>can do <code>--and</code>, <code>--or</code>, <code>--not</code>, etc with patterns. This is a pretty big wow. As <a href="http://gitster.livejournal.com/27674.html">http://gitster.livejournal.com/27674.html</a> says:</p>
+<li><p>can do <code>--and</code>, <code>--or</code>, <code>--not</code>, etc with patterns. This is a pretty big wow. As <a href="http://gitster.livejournal.com/27674.html" class="uri">http://gitster.livejournal.com/27674.html</a> says:</p>
 <pre><code>git grep -e ';;' --and --not -e 'for *(.*;;' -- '*.c'</code></pre>
 <p>which searches for ';;' in all C files, unless they occur in a typical <code>for (;;) {</code> type of construct.</p></li>
 <li><p>finally, there's a somewhat gratuitously thrown in <code>--all-match</code> option, which says &quot;match any of these strings, but print matches only from files that have <em>all</em> of them&quot;. I wonder whose scratch that was... ;-)</p></li>
@@ -107,7 +107,7 @@ git log &quot;@{yesterday}..&quot;
     # note the suffix &quot;..&quot;, since the default is prefix &quot;..&quot;, which is
     # probably not what you want
 git log somefile.c</code></pre></li>
-<li><p><code>git show</code> is almost an alias for <code>git log -p -n 1</code>. In general, <code>git     show</code> does the right thing: shows a commit as a commit, a tree as a plain &quot;ls&quot;, etc. But if you're printing a large blob you better use a pager or redirect!</p>
+<li><p><code>git show</code> is almost an alias for <code>git log -p -n 1</code>. In general, <code>git show</code> does the right thing: shows a commit as a commit, a tree as a plain &quot;ls&quot;, etc. But if you're printing a large blob you better use a pager or redirect!</p>
 <pre><code>git show [ HEAD^ | HEAD^^ | HEAD@{3} | origin | origin/master | etc ]
 git show 7a8b9c     # or some hex number; shows you the object
 git show HEAD~3:file.c  # get file.c from 3 versions back</code></pre></li>
