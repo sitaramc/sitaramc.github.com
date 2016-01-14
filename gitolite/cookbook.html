@@ -444,7 +444,8 @@ chmod +x local/hooks/common/post-receive</code></pre></li>
 <pre><code># on your workstation
 cd /path/to/your/gitolite-admin-clone
 mkdir -p local/hooks/repo-specific</code></pre>
-<p>Now add your hooks to that directory, but instead of using the git &quot;standard&quot; names (pre-receive, post-receive, post-update), you use descriptive names (e.g. &quot;deploy&quot;, &quot;RSS-post&quot;, etc).</p></li>
+<p>Now add your hooks to that directory, but instead of using the git &quot;standard&quot; names (pre-receive, post-receive, post-update), you use descriptive names (e.g. &quot;deploy&quot;, &quot;RSS-post&quot;, etc).</p>
+<p><strong>For pre-receive or pre-auto-gc you should not use more than one hook. If you really need more than one, ask on the mailing list.</strong></p></li>
 <li><p>add them to the repos you want them to be active in, in your conf file. For example:</p>
 <pre><code>repo foo
     option hook.post-update     =   jenkins
