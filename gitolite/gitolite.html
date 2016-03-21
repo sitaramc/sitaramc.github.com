@@ -3981,7 +3981,8 @@ Extra arguments for wild repo creation:
    <span class="Comment"> # rules should allow @temp-emp NO ACCESS</span>
  
 <span class="Type">    repo </span>foo-partialcopy-1
-<span class="Statement">        -</span><span class="Constant">   secret-branch               </span>=<span class="WarningMsg">   @temp-emp</span>
+   <span class="Comment"> # first, a deny rule that allows no access to secret-branch</span>
+<span class="Statement">        -</span><span class="Constant">   secret-branch               </span>=<span class="WarningMsg">   @all</span>
  
    <span class="Comment"> # other rules; see notes below</span>
  
