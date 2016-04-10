@@ -353,9 +353,9 @@
 </ul></li>
 </ul></li>
 <li><a href="#cache"><span class="toc-section-number">3.9</span> gitolite and the (redis) cache</a><ul>
-<li><a href="#how"><span class="toc-section-number">3.9.1</span> how</a></li>
-<li><a href="#troubleshooting"><span class="toc-section-number">3.9.2</span> troubleshooting</a></li>
-<li><a href="#details"><span class="toc-section-number">3.9.3</span> details</a><ul>
+<li><a href="#how-does-caching-work"><span class="toc-section-number">3.9.1</span> how does caching work?</a></li>
+<li><a href="#troubleshooting-caching"><span class="toc-section-number">3.9.2</span> troubleshooting caching</a></li>
+<li><a href="#caching-details"><span class="toc-section-number">3.9.3</span> caching details</a><ul>
 <li><a href="#what-is-cached"><span class="toc-section-number">3.9.3.1</span> what is cached</a></li>
 <li><a href="#timeout"><span class="toc-section-number">3.9.3.2</span> how long is it cached</a></li>
 </ul></li>
@@ -365,7 +365,7 @@
 <li><a href="#terminology"><span class="toc-section-number">3.10.2</span> terminology</a></li>
 <li><a href="#setup"><span class="toc-section-number">3.10.3</span> setup</a></li>
 <li><a href="#use"><span class="toc-section-number">3.10.4</span> use</a></li>
-<li><a href="#details-1"><span class="toc-section-number">3.10.5</span> details</a></li>
+<li><a href="#details"><span class="toc-section-number">3.10.5</span> details</a></li>
 <li><a href="#warnings"><span class="toc-section-number">3.10.6</span> WARNINGS</a><ul>
 <li><a href="#security"><span class="toc-section-number">3.10.6.1</span> SECURITY</a></li>
 <li><a href="#gitolite-functionality"><span class="toc-section-number">3.10.6.2</span> gitolite functionality</a></li>
@@ -826,7 +826,7 @@
 </td>
 </tr>
 </table>
-<p>A more detailed explanation, with figures, is <a href="#how">here</a>.</p>
+<p>A more detailed explanation, with figures, is [here][how].</p>
 <h3 id="who-uses-it"><span class="header-section-number">1.2.4</span> who uses it?</h3>
 <p>[Note that many of the users who are listed in this page may still be using v2.x, presumably because it's working fine for them and there's no compelling reason to upgrade, and I still support v2 at least for critical issues].</p>
 <blockquote>
@@ -3170,19 +3170,20 @@ curl http://user:password@server/git/info?repopatt+user1+user2</code></pre>
 <p>and <em>then</em> you can run <code>gitolite &lt;subcommand&gt;</code></p>
 <h2 id="cache"><span class="header-section-number">3.9</span> gitolite and the (redis) cache</h2>
 <p>(requires v3.6.1)</p>
+<p><strong>WARNING: this has not been tested in a while. YMMV</strong></p>
 <p>Gitolite can optionally use the Redis in-memory key-value database for a little speed boost for really large sites.</p>
 <p>If you look in the <a href="#perf">gitolite performance</a> page, you will see, right at the bottom, that pretty much the only thing in gitolite that <em>may</em> be slow is the <a href="#info">info</a> command. The cache feature fixes that problem :-)</p>
 <p>Using Redis as the backend database is actually a bit of overkill; technically this could just as well have been done using a DBM file or SQlite or something like that, but since this is only a <em>cache</em>, an in-memory database works out better. However, Redis does have one real advantage: cache <a href="#timeout">timeout</a>s!</p>
 <p>Support for this feature is limited to verifiable gitolite bugs, if you find any; I can't help you with redis itself.</p>
-<h3 id="how"><span class="header-section-number">3.9.1</span> how</h3>
+<h3 id="how-does-caching-work"><span class="header-section-number">3.9.1</span> how does caching work?</h3>
 <p>To use this feature, just install Redis, then the perl driver &quot;Redis.pm&quot;. Install or upgrade Gitolite to the latest master, then uncomment (or add, if it doesn't exist) the following line in the rc file:</p>
 <pre><code>CACHE       =&gt;  'Redis',</code></pre>
 <p>If you're <em>adding</em> it, please add it within the %RC hash, but outside the ENABLE list. (If in doubt, add it just after the UMASK entry).</p>
 <p>Then perform some gitolite operation (anything that requires any form of access checking). Redis should start automatically and the right things should happen; see below if it does not.</p>
-<h3 id="troubleshooting"><span class="header-section-number">3.9.2</span> troubleshooting</h3>
+<h3 id="troubleshooting-caching"><span class="header-section-number">3.9.2</span> troubleshooting caching</h3>
 <p>If you ever kill the redis-server be sure to also remove the socket file <code>~/.redis-gitolite.sock</code>. Conversely if you ever remove the sock file be sure to kill the process also. Otherwise you get weird behaviour, including possible hangs. (If things don't seem to work, the first thing to do is to kill all 'redis-server's on that userid and remove <code>~/.redis-gitolite.*</code>, then try again.)</p>
 <p><strong>Note</strong>: To the best of my knowledge, this cannot result in wrong data being passed to gitolite, causing a security breach. If anyone has time I'd appreciate a review of the code.</p>
-<h3 id="details"><span class="header-section-number">3.9.3</span> details</h3>
+<h3 id="caching-details"><span class="header-section-number">3.9.3</span> caching details</h3>
 <h4 id="what-is-cached"><span class="header-section-number">3.9.3.1</span> what is cached</h4>
 <p>At present, gitolite caches only one specific function: the &quot;access()&quot; function. This is available from the shell as the 'gitolite access ...' command, as well as from perl via the &quot;Easy.pm&quot; interface; see <a href="#dev-notes">dev-notes</a> for more. It is easily the &quot;workhorse&quot; of gitolite.</p>
 <p>The cache is flushed completely when the gitolite.conf file is &quot;compiled&quot;. You might see some things running a bit slower -- at least until things settle down.</p>
@@ -3232,7 +3233,7 @@ curl http://user:password@server/git/info?repopatt+user1+user2</code></pre>
 <p>A developer doesn't have to do anything differently. She will still run, e.g., <code>git clone git@host:alice/linux</code> to auto-create and clone a <a href="#wild">wild</a> repo for herself, then add a remote to the &quot;backing&quot; repo, fetch it, start working, and eventually push her work to alice/linux.</p>
 <p>However, she might notice some differences. To begin with, her first push of an enormous code base, to what she thought was an empty repo on the server, might go surprisingly fast :)</p>
 <p>Secondly, a lot of <em>gitolite</em> commands (and other features) won't work. See the &quot;WARNINGS&quot; section below for more.</p>
-<h3 id="details-1"><span class="header-section-number">3.10.5</span> details</h3>
+<h3 id="details"><span class="header-section-number">3.10.5</span> details</h3>
 <p>The option line above has 3 parts separated by the words &quot;is&quot; and &quot;in&quot;:</p>
 <pre><code>&lt;pattern&gt; is &lt;namespace&gt; in &lt;backing repo&gt;</code></pre>
 <p>When a user attempts to access a logical repo (say &quot;alice/linux&quot;), the namespace pattern for that repo is applied to the repo name as follows:</p>

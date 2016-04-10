@@ -77,9 +77,9 @@
 </div>
 <div id="TOC">
 <ul>
-<li><a href="#how"><span class="toc-section-number">1</span> how</a></li>
-<li><a href="#troubleshooting"><span class="toc-section-number">2</span> troubleshooting</a></li>
-<li><a href="#details"><span class="toc-section-number">3</span> details</a><ul>
+<li><a href="#how-does-caching-work"><span class="toc-section-number">1</span> how does caching work?</a></li>
+<li><a href="#troubleshooting-caching"><span class="toc-section-number">2</span> troubleshooting caching</a></li>
+<li><a href="#caching-details"><span class="toc-section-number">3</span> caching details</a><ul>
 <li><a href="#what-is-cached"><span class="toc-section-number">3.1</span> what is cached</a></li>
 <li><a href="#timeout"><span class="toc-section-number">3.2</span> how long is it cached</a></li>
 </ul></li>
@@ -299,19 +299,20 @@
 </ul>
 </div>
 <p>(requires v3.6.1)</p>
+<p><strong>WARNING: this has not been tested in a while. YMMV</strong></p>
 <p>Gitolite can optionally use the Redis in-memory key-value database for a little speed boost for really large sites.</p>
 <p>If you look in the <a href="perf.html">gitolite performance</a> page, you will see, right at the bottom, that pretty much the only thing in gitolite that <em>may</em> be slow is the <a href="user.html#info">info</a> command. The cache feature fixes that problem :-)</p>
 <p>Using Redis as the backend database is actually a bit of overkill; technically this could just as well have been done using a DBM file or SQlite or something like that, but since this is only a <em>cache</em>, an in-memory database works out better. However, Redis does have one real advantage: cache <a href="#timeout">timeout</a>s!</p>
 <p>Support for this feature is limited to verifiable gitolite bugs, if you find any; I can't help you with redis itself.</p>
-<h1 id="how"><span class="header-section-number">1</span> how</h1>
+<h1 id="how-does-caching-work"><span class="header-section-number">1</span> how does caching work?</h1>
 <p>To use this feature, just install Redis, then the perl driver &quot;Redis.pm&quot;. Install or upgrade Gitolite to the latest master, then uncomment (or add, if it doesn't exist) the following line in the rc file:</p>
 <pre><code>CACHE       =&gt;  'Redis',</code></pre>
 <p>If you're <em>adding</em> it, please add it within the %RC hash, but outside the ENABLE list. (If in doubt, add it just after the UMASK entry).</p>
 <p>Then perform some gitolite operation (anything that requires any form of access checking). Redis should start automatically and the right things should happen; see below if it does not.</p>
-<h1 id="troubleshooting"><span class="header-section-number">2</span> troubleshooting</h1>
+<h1 id="troubleshooting-caching"><span class="header-section-number">2</span> troubleshooting caching</h1>
 <p>If you ever kill the redis-server be sure to also remove the socket file <code>~/.redis-gitolite.sock</code>. Conversely if you ever remove the sock file be sure to kill the process also. Otherwise you get weird behaviour, including possible hangs. (If things don't seem to work, the first thing to do is to kill all 'redis-server's on that userid and remove <code>~/.redis-gitolite.*</code>, then try again.)</p>
 <p><strong>Note</strong>: To the best of my knowledge, this cannot result in wrong data being passed to gitolite, causing a security breach. If anyone has time I'd appreciate a review of the code.</p>
-<h1 id="details"><span class="header-section-number">3</span> details</h1>
+<h1 id="caching-details"><span class="header-section-number">3</span> caching details</h1>
 <h2 id="what-is-cached"><span class="header-section-number">3.1</span> what is cached</h2>
 <p>At present, gitolite caches only one specific function: the &quot;access()&quot; function. This is available from the shell as the 'gitolite access ...' command, as well as from perl via the &quot;Easy.pm&quot; interface; see <a href="dev-notes.html">dev-notes</a> for more. It is easily the &quot;workhorse&quot; of gitolite.</p>
 <p>The cache is flushed completely when the gitolite.conf file is &quot;compiled&quot;. You might see some things running a bit slower -- at least until things settle down.</p>
