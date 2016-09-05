@@ -93,33 +93,22 @@ Sitaram Chamarty (sitaramc@gmail.com)
 <p>This slide show was all done with pandoc's slidy output mode, and a few little pre-processing tweaks. <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a> is absolutely fantastic and bloody powerful! I wish I'd discovered it sooner but now (Dec 2013) that I have, it's eliminating a lot of my home-grown scripts to do various things like this!</p>
 <p>The bulk of my tweaks are in terms of embedding <a href="http://graphviz.org/">graphviz</a> diagrams inside the main document, so there's only one file to maintain!</p>
 </div>
-<div id="basics" class="titleslide slide section level1"><h1><span class="header-section-number">2</span> basics</h1></div><div id="the-4-git-object-types" class="slide section level2">
-<h1><span class="header-section-number">2.1</span> the 4 git object types</h1>
-<p>Git keeps all its data inside a special directory called <code>.git</code> at the top level of your repository. Somewhere in there is what we will simply call the <em>object store</em> (if you're not comfortable with that phrase, pretend it's some sort of database).</p>
-<p>Git knows about 4 types of objects:</p>
+<div id="basics" class="titleslide slide section level1"><h1><span class="header-section-number">2</span> basics</h1></div><div id="what-is-a-sha" class="slide section level2">
+<h1><span class="header-section-number">2.1</span> what is a SHA</h1>
+<p>A commit is uniquely identified by a 160-bit hex value (the 'SHA'). This is computed from the following pieces of information:</p>
 <ul>
-<li><p><strong>blob</strong> -- each file that you add to the repo is turned into a blob object.</p></li>
-<li><p><strong>tree</strong> -- each directory is turned into a tree object.</p>
-<p>Obviously, a tree object can contain other tree objects and blob objects, just like a directory can contain other directories and files.</p></li>
-<li><p><strong>commit</strong> -- a commit is a snapshot of your working tree at a point in time, although it contains a lot of other information also.</p></li>
-<li><p><strong>tag</strong> -- we will see this type a bit later.</p></li>
-</ul>
-</div><div id="what-is-a-sha" class="slide section level2">
-<h1><span class="header-section-number">2.2</span> what is a SHA</h1>
-<p>A commit is uniquely identified by a 160-bit hex value (the 'SHA'). This is computed from the tree, plus the following pieces of information:</p>
-<ul>
+<li>the SHA of the &quot;tree&quot; of files and directories as they exist in that commit (details on how that SHA is computed is not relevant here)</li>
 <li>the SHA of the parent commit(s) -- every commit except the very first one in the repo has at least one parent commit that the change is based upon.</li>
 <li>the commit message -- what you type in the editor when you commit</li>
 <li>the author name/email/timestamp</li>
 <li>the committer name/email/timestamp</li>
 </ul>
-<p>(Actually, all 4 git objects types are identified by SHAs, but of course they're computed differently for each object type. However, the SHAs of the other object types are not relevant to this discussion).</p>
 <p>In the end, as I said, it's just a large, apparently random looking, number, which is actually a cryptographically-strong checksum. It's usually written out as 40 hex digits.</p>
 <p>Humans are not expected to remember this number. For the purposes of this discussion, think of it as something similar to a memory address returned by malloc().</p>
 <p>It is also GLOBALLY unique! No commit in any repo anywhere in the world will have the same SHA. (It's not a mathematical impossibility, but just so extremely improbable that we take it as fact. If you didn't understand that, just take it on faith).</p>
 <p>An example SHA: <code>a30236028b7ddd65f01321af42f904479eaff549</code></p>
 </div><div id="what-is-a-repo" class="slide section level2">
-<h1><span class="header-section-number">2.3</span> what is a repo</h1>
+<h1><span class="header-section-number">2.2</span> what is a repo</h1>
 <table>
 <tr>
 <td>
@@ -363,7 +352,15 @@ Sitaram Chamarty (sitaramc@gmail.com)
 </div>
 <div id="digressions---2" class="titleslide slide section level1"><h1><span class="header-section-number">6</span> digressions - 2</h1></div><div id="the-object-store" class="slide section level2">
 <h1><span class="header-section-number">6.1</span> the object store</h1>
-<p>Git stores all your data in an &quot;object store&quot;. There are 4 types of objects in this store: files (called &quot;blobs&quot;), trees (which are directories+files), commits, and tags. All objects are referenced by a 160-bit SHA.</p>
+<p>Git keeps all its data inside a special directory called <code>.git</code> at the top level of your repository. Somewhere in there is what we will simply call the <em>object store</em> (if you're not comfortable with that phrase, pretend it's some sort of database).</p>
+<p>Git stores all your data in this object store. There are 4 types of objects in this store:</p>
+<ul>
+<li><p><strong>blob</strong> -- each file that you add to the repo is turned into a blob object.</p></li>
+<li><p><strong>tree</strong> -- each directory is turned into a tree object.</p>
+<p>Obviously, a tree object can contain other tree objects and blob objects, just like a directory can contain other directories and files.</p></li>
+<li><p><strong>commit</strong> -- a commit is a snapshot of your working tree at a point in time, although it contains a lot of other information also.</p></li>
+<li><p><strong>tag</strong> -- an annotated tag (please see 'man git-tag' for more info) contains the SHA of the commit being tagged, some other metadata, and the message. A GPG-signed tag will also contain the GPG signature.</p></li>
+</ul>
 <p>(Details, if you like: a blob is the lowest in the hierarchy. One or more blobs and trees make a tree. A commit is a tree, plus the SHA of its parent commit(s), the commit message, author/committer names and emails, and timestamps. Under normal usage, you don't need to deal with all this).</p>
 </div><div id="what-is-a-repo-again" class="slide section level2">
 <h1><span class="header-section-number">6.2</span> what is a repo (again)</h1>
