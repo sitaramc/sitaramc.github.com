@@ -355,12 +355,12 @@
 <p>Upgrading from any v3.4+ rc file to any later gitolite is fairly easy, though still manual. One useful aid is that, as of v3.6.4, you can run <code>gitolite query-rc -d</code> to dump the entire rc structure to STDOUT. <strong>This only requires that gitolite be v3.6.4+; your rc file can still be the old one.</strong> You can use this to confirm you did not miss something during the manual rc upgrade.</p>
 <ul>
 <li><p>dump the current rc by running <code>gitolite query-rc -d &gt; old.dump</code> (assuming you upgraded to v3.6.4 or higher)</p></li>
-<li><p>save your old rc file: `mv ~/.gitolite.rc ~/old.gitolite.rc</p></li>
+<li><p>save your old rc file: <code>mv ~/.gitolite.rc ~/old.gitolite.rc</code></p></li>
 <li><p>get a &quot;default&quot; rc for your current gitolite by running</p>
 <pre><code>gitolite print-default-rc &gt; ~/.gitolite.rc</code></pre></li>
 <li><p>use your favourite diff-ing editor on the old and the new files and figure out what to carry over from the old rc file to the new one.</p>
 <pre><code>vimdiff ~/old.gitolite.rc ~/.gitolite.rc
-# maybe kdiff3 or whatever</code></pre>
+# or maybe kdiff3 or whatever</code></pre>
 <p>This is the tricky part of course! Watch out for configs that got <em>moved</em> around, or in some cases removed completely, not just new config items.</p></li>
 <li><p>dump the new rc by running <code>gitolite query-rc -d &gt; new.dump</code></p></li>
 <li><p>compare the 2 rc dumps to make sure you've got everything covered.</p></li>
