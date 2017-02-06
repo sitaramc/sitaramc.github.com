@@ -81,8 +81,9 @@
 <li><a href="#an-important-warning-about-deleting-a-config-line"><span class="toc-section-number">1.1</span> <span class="red">an important warning about <strong>deleting</strong> a config line</span></a></li>
 </ul></li>
 <li><a href="#substituting-the-repo-name-and-the-creator-name"><span class="toc-section-number">2</span> substituting the repo name and the creator name</a></li>
-<li><a href="#override_conf"><span class="toc-section-number">3</span> overriding config values</a></li>
-<li><a href="#unsafe-patt"><span class="toc-section-number">4</span> compensating for UNSAFE_PATT</a></li>
+<li><a href="#v3.6.7-expanding-a-group-name"><span class="toc-section-number">3</span> <span class="gray">(v3.6.7+)</span> expanding a group name</a></li>
+<li><a href="#override_conf"><span class="toc-section-number">4</span> overriding config values</a></li>
+<li><a href="#unsafe-patt"><span class="toc-section-number">5</span> compensating for UNSAFE_PATT</a></li>
 </ul>
 </div>
 <script type="text/javascript">
@@ -336,7 +337,17 @@
 <span class="Statement">    config </span><span class="Identifier">hooks.mailinglist </span>= %GL_REPO-commits@example.tld
 <span class="Statement">    config </span><span class="Identifier">hooks.emailprefix </span>= <span class="Constant">&quot;[%GL_REPO] &quot;</span>
 </pre>
-<h1 id="override_conf"><span class="header-section-number">3</span> overriding config values</h1>
+<h1 id="v3.6.7-expanding-a-group-name"><span class="header-section-number">3</span> <span class="gray">(v3.6.7+)</span> expanding a group name</h1>
+<p>If you add</p>
+<pre><code>EXPAND_GROUPS_IN_CONFIG     =&gt;  1,</code></pre>
+<p>to the rc file (suggested location: just after the <code>GIT_CONFIG_KEYS</code> line), then the <em>value</em> of a config line will have groupnames expanded. For example:</p>
+<pre><code>@admins = sitaramc@gmail.com jdoe@example.com
+...
+repo foo
+    ...
+    config hooks.mailinglist = @admins</code></pre>
+<p>will behave as if the two email addresses were explicitly listed in the config line. However, if there is no such group, the text will be left as-is. Also, for safety, only word characters (alphanumerics and underscore) are expected as part of the group name.</p>
+<h1 id="override_conf"><span class="header-section-number">4</span> overriding config values</h1>
 <p>You can repeat the 'config' line as many times as you like, and the <em>last</em> occurrence will be the one in effect. This allows you to override settings just for one project, as in this example:</p>
 <pre style="font-family: 'Andale mono',monospace; padding: 4px; color: #ffffff; background-color: #000000;">
 <span class="Type">repo </span><span class="Identifier">@all</span>
@@ -356,7 +367,7 @@
 <span class="Statement">    config </span><span class="Identifier">hooks.emailprefix </span>= <span class="Constant">&quot;&quot;</span>
 </pre>
 <p>As you can see, the general idea is to place the most generic ones (<code>repo @all</code>, or repo regex like <code>repo foo.*</code>) first, and place more specific ones later to override the generic settings.</p>
-<h1 id="unsafe-patt"><span class="header-section-number">4</span> compensating for UNSAFE_PATT</h1>
+<h1 id="unsafe-patt"><span class="header-section-number">5</span> compensating for UNSAFE_PATT</h1>
 <p>An important feature in gitolite is that you can share the admin load with more people, <strong>without</strong> having to give all of them shell access on the server. Thus there are some restrictions designed to prevent someone who can push the gitolite-admin repo, from somehow managing to run arbitrary commands on the server.</p>
 <p>This section is about one of these restrictions.</p>
 <p>Gitolite, by default, does not allow the following characters in the value of a config variable: <code>` ~ # $ &amp; ( ) | ; &lt; &gt;</code>. This is due to unspecified paranoia; see <a href="https://groups.google.com/d/topic/gitolite/9WNsA-Axmg4/discussion">this discussion</a> for some context. This restriction is enforced by a regex called <code>UNSAFE_PATT</code>, whose default value is <code>[`~#\$\&amp;()|;&lt;&gt;]</code>.</p>
