@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>User key management - Gitolite</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../css/gitolite.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+	
+	<script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../..">Gitolite</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="../..">home</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../../overview/">overview</a>
+</li>
+                            
+<li >
+    <a href="../../concepts/">concepts, conventions, terminology</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../../quick_install/">(unix/ssh experts) quick install and setup</a>
+</li>
+                            
+<li >
+    <a href="../../install/">normal ssh mode install and setup</a>
+</li>
+                            
+<li >
+    <a href="../../fool_proof_setup/">(if all else fails) fool-proof, step-by-step, install and setup</a>
+</li>
+                            
+<li >
+    <a href="../../http/">HTTP mode install</a>
+</li>
+                            
+<li >
+    <a href="../../migr/">migrating from v2</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+  <li class="dropdown-submenu">
+    <a href="#">basic</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../../basic-admin/">basic administration</a>
+</li>
+            
+<li >
+    <a href="../../conf/">the "conf" file (part 1)</a>
+</li>
+            
+<li >
+    <a href="../../conf-2/">the "conf" file (part 2)</a>
+</li>
+            
+<li >
+    <a href="../../rc/">the "rc" file</a>
+</li>
+            
+<li >
+    <a href="../../user/">your users' view</a>
+</li>
+    </ul>
+  </li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">advanced</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../../git-config/">setting git-config values</a>
+</li>
+            
+<li >
+    <a href="../../options/">gitolite options</a>
+</li>
+            
+<li >
+    <a href="../../wild/">ad hoc user-created ("wild") repos</a>
+</li>
+            
+<li >
+    <a href="../../vref/">virtual refs (part 1)</a>
+</li>
+            
+<li >
+    <a href="../../vref-2/">virtual refs (part 2)</a>
+</li>
+            
+<li >
+    <a href="../../deleg/">delegation of admin duties</a>
+</li>
+            
+<li >
+    <a href="../../gitweb-daemon/">gitweb and git-daemon</a>
+</li>
+            
+<li >
+    <a href="../../mirroring/">mirroring</a>
+</li>
+    </ul>
+  </li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">customise</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../../non-core/">core and "non-core" gitolite</a>
+</li>
+            
+<li >
+    <a href="../../dev-notes/">writing your own non-core code</a>
+</li>
+            
+<li >
+    <a href="../../triggers/">gitolite triggers</a>
+</li>
+            
+<li >
+    <a href="../../list-non-core/">list of non-core programs shipped with gitolite</a>
+</li>
+    </ul>
+  </li>
+                            
+<li >
+    <a href="../../cookbook/">(quick! how do I...) the cookbook</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../../emergencies/">emergency!!</a>
+</li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">ssh</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../../ssh/">ssh</a>
+</li>
+            
+<li >
+    <a href="../../glssh/">how gitolite uses ssh</a>
+</li>
+            
+<li >
+    <a href="../../sts/">ssh troubleshooting</a>
+</li>
+    </ul>
+  </li>
+                            
+<li >
+    <a href="../../regex/">regular expressions</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../../odds-and-ends/">miscellaneous features</a>
+</li>
+                            
+<li >
+    <a href="../../namespaces/">using git namespaces</a>
+</li>
+                            
+<li >
+    <a href="../../locking/">locking binary files</a>
+</li>
+                            
+<li >
+    <a href="../../testing/">testing gitolite</a>
+</li>
+                            
+<li >
+    <a href="../../package/">packaging gitolite</a>
+</li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">more about gitolite</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../../files/">gitolite files & directories</a>
+</li>
+            
+<li >
+    <a href="../../rc-33/">the 3.3 format rc file</a>
+</li>
+            
+<li >
+    <a href="../../perf/">performance</a>
+</li>
+    </ul>
+  </li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">contrib</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../ssh-and-http/">Using both ssh and http</a>
+</li>
+            
+<li >
+    <a href="../putty/">Putty and Msysgit</a>
+</li>
+            
+<li >
+    <a href="../sskm/">Self-service key management</a>
+</li>
+            
+<li class="active">
+    <a href="./">User key management</a>
+</li>
+            
+<li >
+    <a href="../README-emacs/">Emacs major mode</a>
+</li>
+    </ul>
+  </li>
+                            
+<li >
+    <a href="../../no-way/">no way!</a>
+</li>
+                        </ul>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../sskm/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../README-emacs/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#user-key-management">user key management</a></li>
+        <li class="main "><a href="#important-warning">Important Warning!</a></li>
+        <li class="main "><a href="#general-note">General note</a></li>
+        <li class="main "><a href="#who-might-be-interested">Who might be interested?</a></li>
+            <li><a href="#the-gitolite-admin">The gitolite admin</a></li>
+            <li><a href="#users-that-want-more-control-over-who-can-access-their-repositories">Users that want more control over who can access their repositories</a></li>
+            <li><a href="#users-that-want-to-manage-multiple-keys">Users that want to manage multiple keys</a></li>
+        <li class="main "><a href="#how-to-enable-user-key-management">How to enable user key management?</a></li>
+        <li class="main "><a href="#how-to-configure-user-key-management-and-who-can-use-it">How to configure user key management and who can use it?</a></li>
+            <li><a href="#super-key-managers">Super key managers</a></li>
+            <li><a href="#guest-key-managers">Guest key managers</a></li>
+            <li><a href="#self-key-managers">Self key managers</a></li>
+        <li class="main "><a href="#how-to-use-user-key-management-how-to-use-user-key-management">How to use user key management? {#how-to-use-user-key-management}</a></li>
+            <li><a href="#list-managed-keys">List managed keys</a></li>
+            <li><a href="#add-a-new-public-key">Add a new public key</a></li>
+            <li><a href="#delete-a-key">Delete a key</a></li>
+        <li class="main "><a href="#generic-errors">Generic Errors</a></li>
+        <li class="main "><a href="#glossary">Glossary</a></li>
+        <li class="main "><a href="#security-note">Security note</a></li>
+        <li class="main "><a href="#important-notes-for-the-admin">Important notes for the admin</a></li>
+        <li class="main "><a href="#ideas">Ideas</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="user-key-management">user key management<a class="headerlink" href="#user-key-management" title="Permanent link"></a></h1>
+<p>Copyright 2012-2013  Ralf Hemmecke <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#114;&#97;&#108;&#102;&#64;&#104;&#101;&#109;&#109;&#101;&#99;&#107;&#101;&#46;&#111;&#114;&#103;">&#114;&#97;&#108;&#102;&#64;&#104;&#101;&#109;&#109;&#101;&#99;&#107;&#101;&#46;&#111;&#114;&#103;</a>.</p>
+<p>Licensed under the <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons
+Attribution-NonCommercial-ShareAlike 3.0 Unported
+License</a></p>
+<p>User key management allows certain users to add and remove keys.</p>
+<p>The key management is done using a command called <code>ukm</code>. This command
+must be enabled for remote use by both the <a href="#SYSADMIN">sysadmin</a> and the
+<a href="#GA">gitolite-admin</a> (see <a href="../../non-core#gitolite-commands">here</a> for more on this) or look
+below.</p>
+<hr />
+<h1 id="important-warning">Important Warning!<a class="headerlink" href="#important-warning" title="Permanent link"></a></h1>
+<p>User key management undermines the fundamental principle of gitolite
+(see <a href="../../concepts/#authentication-and-authorisation">authentication versus authorisation</a>) by allowing certain
+users to juggle with ssh public keys. Make sure someone (sysadmin?)
+can login to the server with a <strong>password</strong>, just in case something
+breaks and the <code>.ssh/authorized_keys</code> file for the user running
+gitolite on the server is messed up.</p>
+<h1 id="general-note">General note<a class="headerlink" href="#general-note" title="Permanent link"></a></h1>
+<p>Although gitolite deals in its core only with authorisation, by
+default it uses ssh as its authentication mechanism. Sure, ssh is
+not at all part of gitolite and it can be replaced by other means, but
+still there is a directory <code>gitolite-admin/keydir</code> that is reserved
+for public ssh keys.</p>
+<p>In fact, management of <a href="../../basic-admin/#addremove-users">users</a> and <a href="../../basic-admin#multiple-keys-per-user">multiple keys</a> per
+user is not actually a gitolite administration stuff. It's external to
+gitolite. In a future version, <code>ukm</code> could be used as an equivalent of
+the <code>keydir/</code> directory from the <code>gitolite-admin</code> repo (currently it
+just manages that directory) and thus <code>ukm</code> could be seen as such an
+external tool that does what its name suggests: user (key) management.</p>
+<p>In the following description we assume that there is an entry like</p>
+<pre><code>Host gitserver
+     IdentityFile ~/.ssh/id_rsa    # choose your gitolite key here
+     HostName gitolite.example.org # location where gitolite is installed
+     User git                      # user that runs gitolite
+</code></pre>
+<p>in the client's <code>~/.ssh/config</code> file.</p>
+<h1 id="who-might-be-interested">Who might be interested?<a class="headerlink" href="#who-might-be-interested" title="Permanent link"></a></h1>
+<h2 id="the-gitolite-admin">The gitolite admin<a class="headerlink" href="#the-gitolite-admin" title="Permanent link"></a></h2>
+<p>Adding a new public key to the system means to copy the key into
+<code>gitolite/keydir</code> commit and push.</p>
+<p>With <code>ukm</code> it would be</p>
+<pre><code>cat FOO.PUB | ssh gitserver ukm add KEYID
+</code></pre>
+<p>This would be a setup where only the <a href="#GA">gitolite administrator</a>
+uses <code>ukm</code>. Not a big benefit, but <code>ukm</code> prevents adding identical
+keys under different userids. This consistency check might be an
+advantage. Furthermore, <code>ukm</code> does not allow the
+<a href="#GA">gitolite administrator</a> to remove his/her last, i.e., it
+prevents the administrator from locking him-/herself out of the
+system. (Note, we assume that the <a href="#GA">gitolite administrator</a> has no
+shell access to the server; only the <a href="#SYSADMIN">sysadmin</a> has shell
+access.)</p>
+<h2 id="users-that-want-more-control-over-who-can-access-their-repositories">Users that want more control over who can access their repositories<a class="headerlink" href="#users-that-want-more-control-over-who-can-access-their-repositories" title="Permanent link"></a></h2>
+<p>Suppose the <a href="#GA">gitolite administrator</a> of a research institute has
+set up gitolite to provide <a href="../../wild">wild repositories</a> for example with
+a <code>gitolite.conf</code> like this.</p>
+<pre><code>repo gitolite-admin
+    RW+ = gitadmin
+
+# These people are allowed to create wild repositories.
+@creators = alice bob ...
+
+# wildcard repositories for the users
+repo CREATOR/..*
+    C   = @creators
+    RW+ = CREATOR
+    RW  = WRITERS
+    R   = READERS
+</code></pre>
+<p>Researchers Alice and Bob want to write an article together. Alice
+creates a wild repository <code>alice/article</code> and adds Bob via the
+<a href="../../user/#setget-additional-permissions-for-repos-you-created">perms</a> command to the WRITERS of her repository. After a while they
+realize that Otto from another institute would be a reasonable third
+author. However, if they cannot give him write access to the
+repository, they would have to exchange the article via email. Back to
+the stone age? Better, Alice asks Otto to send her his public ssh key.
+Alice then forwards that key to the <a href="#GA">gitolite administrator</a> and
+asks him to include that key into the system. (Hopefully, all that
+didn't happen on a holiday or on the weekend.) After 3 days the
+gitolite administrater finds some time. Since he doesn't know Otto, he
+simply trusts Alice and adds the public key into the system.</p>
+<p>With <code>ukm</code> Alice can save bothering the gitolite administrator and is
+perhaps even faster in saying:</p>
+<pre><code>cat otto.pub | ssh gitserver ukm add otto@other.institute.edu
+ssh gitserver perms alice/article + WRITERS otto@other.institute.edu
+</code></pre>
+<p>The effect would be the same.</p>
+<h2 id="users-that-want-to-manage-multiple-keys">Users that want to manage multiple keys<a class="headerlink" href="#users-that-want-to-manage-multiple-keys" title="Permanent link"></a></h2>
+<p>Suppose, you have different computers and a different ssh key for each
+of them. You would like to tell gitolite that all these different keys
+belong to just one gitolite identity.</p>
+<p>Your <a href="#GA">gitolite administrator</a> creates your gitolite identity with
+one of your keys as your initial key. This key can only be managed by
+the gitolite administrator, not by you. It basically determines under
+which name you are known to gitolite.</p>
+<p>You can add new keys to this identity and remove them at your will.</p>
+<h1 id="how-to-enable-user-key-management">How to enable user key management?<a class="headerlink" href="#how-to-enable-user-key-management" title="Permanent link"></a></h1>
+<p>The <code>ukm</code> command is contributed code and lives under
+<code>contrib/commands/ukm</code> in the gitolite source tree.
+A <a href="#SYSADMIN">sysadmin</a> of the gitserver has to copy or link this
+script to the right location.</p>
+<pre><code>cd src/commands
+ln -s ../../contrib/commands/ukm .
+</code></pre>
+<p>Furthermore, a <a href="#SYSADMIN">sysadmin</a> must add the string <code>'ukm'</code> to
+the <code>ENABLE</code> array, i.e.,</p>
+<pre><code>ENABLE =&gt; [ ..., 'ukm', ... ],
+</code></pre>
+<p>in <a href="../../rc">.gitolite.rc</a>. (That's the preferred way for gitolite starting
+with version v3.4.)</p>
+<p>Instead of the above (in particular in gitolite v3.0-v3.3), add
+<code>'ukm' =&gt; 1</code> to the <code>COMMANDS</code> hash.</p>
+<pre><code>COMMANDS =&gt; {..., 'ukm' =&gt; 1, ... },
+</code></pre>
+<h1 id="how-to-configure-user-key-management-and-who-can-use-it">How to configure user key management and who can use it?<a class="headerlink" href="#how-to-configure-user-key-management-and-who-can-use-it" title="Permanent link"></a></h1>
+<p>As described above there are three main use cases for <code>ukm</code>. Each of
+them requires different values in the respective config files.</p>
+<p>There are two files where <code>ukm</code> must be configured.</p>
+<ul>
+<li><a href="../../rc">.gitolite.rc</a> (managed by a <a href="#SYSADMIN">sysadmin</a> of the gitserver)</li>
+<li><code>gitolite-admin/conf/gitolite.conf</code> (managed by a
+    <a href="#GA">gitolite administrator</a>)</li>
+</ul>
+<p>Besides <a href="#SYSADMIN">sysadmin</a> and <a href="#GA">gitolite administrator</a>, <code>ukm</code>
+knows 3 roles.</p>
+<ul>
+<li><a href="#SKM">super key manager</a></li>
+<li><a href="#GKM">guest key manager</a></li>
+<li><a href="#EKM">self key manager</a></li>
+</ul>
+<h2 id="super-key-managers"><a href="#SKM">Super key managers</a><a class="headerlink" href="#super-key-managers" title="Permanent link"></a></h2>
+<p>When <code>ukm</code> is enabled, nothing else must be configured.</p>
+<h2 id="guest-key-managers"><a href="#GKM">Guest key managers</a><a class="headerlink" href="#guest-key-managers" title="Permanent link"></a></h2>
+<p>The <a href="#GA">gitolite administrator</a> defines guest key managers by
+creating a group <code>@guest-key-managers</code> in
+<code>gitolite-admin/conf/gitolite.conf</code> and adding (trusted) users to this
+group.</p>
+<p><strong>WARNING</strong>: If the gitolite administrator includes <code>@all</code> into this
+list, it allows guests to add new public keys. If, additionally, there
+is <code>@creators=@all</code>, it basically allows the initial guest key
+managers to start a hierarchy of new users with the same rights as the
+initial users.</p>
+<p>The <a href="#SYSADMIN">system administrator</a> must configure <code>ukm</code> for
+<a href="#GKM">guest key managers</a> in <a href="../../rc">.gitolite.rc</a> by adding something
+like</p>
+<pre><code>UKM_CONFIG =&gt; { FORBIDDEN_GUEST_PATTERN =&gt; qr(FORBIDDEN-PATTERN), },
+</code></pre>
+<p>to the <code>%RC</code> hash.</p>
+<p>If <code>FORBIDDEN_GUEST_PATTERN</code> is missing, it defaults to the following.</p>
+<pre><code>FORBIDDEN_GUEST_PATTERN =&gt; qr(.)
+</code></pre>
+<p>Any <a href="#KEYID">KEYID</a> that matches this pattern is rejected, i.e., the
+default value basically allows only the <a href="#SKM">super key managers</a> to
+add/del keys.</p>
+<p>If <code>ukm</code> is supposed to work for <a href="#GKM">guest key managers</a>,
+<code>FORBIDDEN_GUEST_PATTERN</code> must be set to some reasonable value.</p>
+<p>If your company has email addresses of the form
+<code>first.last@company.com</code> you might want to write something like this</p>
+<pre><code>UKM_CONFIG =&gt; { FORBIDDEN_GUEST_PATTERN =&gt; qr(@company.com$) },
+</code></pre>
+<p>which would only allow <a href="#KEYID">KEYIDs</a> in the form of email addresses
+that do not come from your company.</p>
+<p><font color="red"><strong>For the very brave only!!!</strong></font></p>
+<p>The variable <code>REQUIRED_GUEST_PATTERN</code> is optional. It is strongly
+discouraged to set it. However, if you know, what you are doing, it
+allows for a bit more flexibility.</p>
+<p><font color="red"><strong>Don't complain if you modify the default
+value!!!</strong></font></p>
+<p><code>REQUIRED_GUEST_PATTERN</code> defaults to a regular expression that only
+allows <a href="#KEYID">KEYIDs</a> in the form of email addresses (see the source
+code if you want to see this regular expression).</p>
+<p>You can write</p>
+<pre><code>UKM_CONFIG =&gt; {
+    REQUIRED_GUEST_PATTERN  =&gt; qr(REQUIRED-PATTERN),
+    FORBIDDEN_GUEST_PATTERN =&gt; qr(FORBIDDEN-PATTERN),
+},
+</code></pre>
+<p>with the meaning that the <a href="#KEYID">KEYID</a> <strong>must match</strong></p>
+<pre><code>qr(^(REQUIRED-PATTERN)$)
+</code></pre>
+<p>(note that <code>^</code> and <code>$</code> are automatically added to the pattern) and
+<strong>must not match</strong></p>
+<pre><code>qr(FORBIDDEN-PATTERN)
+</code></pre>
+<p>in order for <code>ukm</code> to proceed with this <a href="#KEYID">KEYID</a> for a
+<a href="#GKM">guest key manager</a>.</p>
+<p>Gitolite's namespace for <a href="#USERID">USERIDs</a> is flat. The
+<code>REQUIRED_GUEST_PATTERN</code> and <code>FORBIDDEN_GUEST_PATTERN</code> serve two
+purposes.</p>
+<ol>
+<li>
+<p>Restrict permissions for what <a href="#GKM">guest key managers</a> can
+     do.</p>
+</li>
+<li>
+<p>Patterns that cannot be used for guests can still be used by
+     <a href="#SKM">super key managers</a>. In other words, those patterns are
+     reserved for in-house <a href="#USERID">USERIDs</a>.</p>
+</li>
+</ol>
+<h2 id="self-key-managers"><a href="#EKM">Self key managers</a><a class="headerlink" href="#self-key-managers" title="Permanent link"></a></h2>
+<p>The <a href="#GA">gitolite administrator</a> defines <a href="#EKM">self key managers</a> by
+creating a group <code>@self-key-managers</code> in
+<code>gitolite-admin/conf/gitolite.conf</code> and adding (trusted) users to this
+group.</p>
+<p><strong>WARNING</strong>: A <a href="#GA">gitolite administrator</a> shouldn't include <code>@all</code>
+into this list. If guest key management is enabled, then also guests
+would be allowed to add their own keys. Since
+<a href="#GKM">guest key managers</a> would have no access to those keys, only
+<a href="#GA">gitolite administrators</a> would be able to remove those
+additional keys. In fact, <code>ukm</code> was designed to allow only <strong>one</strong> key
+per guest. Don't complain, if you enable a setup where guests can have
+multiple keys. It's a security issue. (Suppose Alice has added a guest
+<code>foo@example.org</code> and MrBad generates a new ssh key and adds it under
+<code>foo@example.org@attacker</code> to the list of his guests. That would give
+MrBad all the permissions that <code>foo@example.org</code> has.)</p>
+<p>The <a href="#SYSADMIN">system administrator</a> must enable <code>ukm</code> for
+<a href="#EKM">self key managers</a> in <a href="../../rc">.gitolite.rc</a> by adding</p>
+<pre><code>UKM_CONGFIG =&gt; { SELFKEY_MANAGEMENT =&gt; 1, },
+</code></pre>
+<p>to the <code>%RC</code> hash.</p>
+<p>Since by design self keys start with an <code>@</code> sign, and thus cannot
+conflict with guest keys (which are not allowed to start with an <code>@</code>),
+there is no problem to enable self key and guest key management at the
+same time.</p>
+<pre><code>UKM_CONFIG =&gt; {
+    FORBIDDEN_GUEST_PATTERN =&gt; qr(FORBIDDEN-PATTERN),
+    SELFKEY_MANAGEMENT =&gt; 1,
+},
+</code></pre>
+<h1 id="how-to-use-user-key-management-how-to-use-user-key-management">How to use user key management? {#how-to-use-user-key-management}<a class="headerlink" href="#how-to-use-user-key-management-how-to-use-user-key-management" title="Permanent link"></a></h1>
+<p>There are three subcommands of <code>ukm</code>, namely <code>list</code> (the default),<code>add</code>, and <code>del</code>.</p>
+<p>Depending on whether or not the respective <a href="#KEYID">KEYID</a> starts with
+an <code>@</code> sign, <code>ukm</code> distinguishes between guest and self key management.
+Self keys start with <code>@</code> and are followed by letters and/or digits.</p>
+<p>For <a href="#SKM">super key managers</a> there is not such a distinction.
+Rather, the <a href="#KEYID">KEYID</a> is the full path of the actual public key
+file relative to <code>gitolite-admin/keydir/</code> with the <code>.pub</code> file
+extension removed.</p>
+<p>By convention, take as guest key the proper email address of the
+guest. That not only makes for a unique ID, it also gives you a hint
+to whom this key belongs.</p>
+<h2 id="list-managed-keys">List managed keys<a class="headerlink" href="#list-managed-keys" title="Permanent link"></a></h2>
+<p>A <a href="#GKM">guest key manager</a> and <a href="#EKM">self key manager</a> can list all
+their personally managed keys via:</p>
+<pre><code>ssh gitserver ukm
+</code></pre>
+<p>or</p>
+<pre><code>ssh gitserver ukm list
+</code></pre>
+<p>If this command is issued by a <a href="#SKM">super key manager</a>, it lists all
+keys that are stored under <code>keydir/</code>.</p>
+<p>The result will show the fingerprints of the keys, the corresponding
+<a href="#USERID">USERID</a> and the <a href="#KEYID">KEYID</a> by which one can refer to
+the key on the commandline.</p>
+<h2 id="add-a-new-public-key">Add a new public key<a class="headerlink" href="#add-a-new-public-key" title="Permanent link"></a></h2>
+<h3 id="add-a-new-key-as-a-super-key-manager">Add a new key as a super key manager<a class="headerlink" href="#add-a-new-key-as-a-super-key-manager" title="Permanent link"></a></h3>
+<p>A <a href="#SKM">super key manager</a> can nearly add any key, but <code>ukm</code> does not
+accept a different key, i.e., different fingerprint, for the same
+<a href="#KEYID">KEYID</a>. Also a double dot is not allowed in the
+<a href="#KEYID">KEYID</a>.</p>
+<h3 id="add-a-new-key-as-a-guest-key-manager">Add a new key as a guest key manager<a class="headerlink" href="#add-a-new-key-as-a-guest-key-manager" title="Permanent link"></a></h3>
+<p>The command for this is:</p>
+<pre><code>cat foo.pub | ssh gitserver ukm add foo@example.com
+</code></pre>
+<p>There are several situations when the above command fails, i.e.,
+rejects to add the key.</p>
+<ul>
+<li>
+<p>The <a href="#KEYID">KEYID</a> <code>foo@example.com</code> does not match the pattern
+    given by <code>REQUIRED_GUEST_PATTERN</code> in <code>.gitolite.rc</code>.</p>
+</li>
+<li>
+<p>The <a href="#KEYID">KEYID</a> <code>foo@example.com</code> matches the pattern given by
+    <code>FORBIDDEN_GUEST_PATTERN</code> in <code>.gitolite.rc</code>.</p>
+</li>
+<li>
+<p>The public key <code>foo.pub</code> is already known to the system and does
+    not belong to the <a href="#USERID">USERID</a> <code>foo@example.com</code>.</p>
+</li>
+<li>
+<p>The <a href="#KEYID">KEYID</a> <code>foo@example.com</code> is already in use and it
+    corresponds to a key with another public key. In other words,
+    <code>ukm</code> will not simply override a key. One has to delete the old
+    key first and then add a new one.</p>
+</li>
+<li>
+<p>The <a href="#KEYID">KEYID</a> contains a <code>/</code> character or two <code>@</code>
+    characters, i.e., guest key managers are not allowed to add
+    <a href="#MULTIKEY">multiple keys</a> for one user.</p>
+</li>
+</ul>
+<h3 id="add-a-new-key-as-a-self-key-manager">Add a new key as a self key manager<a class="headerlink" href="#add-a-new-key-as-a-self-key-manager" title="Permanent link"></a></h3>
+<p>Adding a self key is a bit more complicated, since the user must
+confirm that he/she is in possession of the corresponding private key.
+The command sequence is as follows. Note that the second call of ssh
+is done with the key <code>foo</code> and not the default ssh key.</p>
+<pre><code>cat foo.pub | ssh gitserver ukm add @two &gt; session
+cat session | ssh -i foo gitserver ukm
+</code></pre>
+<p>If you don't want to create an intermediate file call it like this:</p>
+<pre><code>cat foo.pub | ssh gitserver ukm add @two | (sleep 2; ssh -i foo gitserver ukm)
+</code></pre>
+<p>Make sure that the second ssh call only happens after the fist one has
+done its job. Otherwise you might be asked for a password of the <code>git</code>
+user on the <code>gitserver</code>.</p>
+<p>After successfully completing the first ssh call, the new key is
+scheduled for addition and a session key is returned on stdin. That
+session key must be used to confirm the addition of the new public key
+as shown above.</p>
+<h2 id="delete-a-key">Delete a key<a class="headerlink" href="#delete-a-key" title="Permanent link"></a></h2>
+<p>A <a href="#SKM">super key manager</a> can delete any key by simply giving its
+<a href="#KEYID">KEYID</a> in a command like this</p>
+<pre><code>ssh gitserver ukm del some/dir/foo@example.com
+</code></pre>
+<p>The <code>ukm</code> command, however, prevents a <a href="#SKM">super key manager</a> from
+removing his/her last key.</p>
+<h3 id="delete-a-guest-key">Delete a guest key<a class="headerlink" href="#delete-a-guest-key" title="Permanent link"></a></h3>
+<p>The command for this is:</p>
+<pre><code>ssh gitserver ukm del foo@example.com
+</code></pre>
+<p>If the given <a href="#KEYID">KEYID</a> is not among the managed keys of the user
+who issues the <code>del</code> command, the command will fail.</p>
+<p><strong>IMPORTANT!</strong> You should not forget to remove from all of your
+repositories all the permissions you gave to <code>foo@example.com</code>,
+because this key might still be managed by another
+<a href="#GKM">guest key manager</a>.</p>
+<p>You might want to run</p>
+<pre><code>ssh gitserver info -lc \
+| perl -e 'chomp($u=&lt;&gt;);$u=~s/hello //;$u=~s/,.*$//;' \
+       -e 'while(&lt;&gt;){if(/\s(\S+)\s+$u$/){print "$1\n"}}' \
+| while read r; do ssh gitserver perms $r - WRITERS foo@example.com; done
+</code></pre>
+<p>Repeat this for other roles such as <code>READERS</code> instead of <code>WRITERS</code>.</p>
+<h3 id="delete-a-self-key">Delete a self key<a class="headerlink" href="#delete-a-self-key" title="Permanent link"></a></h3>
+<p>The command for this is:</p>
+<pre><code>ssh gitserver ukm del @two
+ssh gitserver ukm del @two
+</code></pre>
+<p>Yes, you have to give that command twice. The first call will bring
+the key <code>@two</code> into a "pending-del" state. The second time, the
+command will only delete the key <code>@two</code>, if the login was <strong>not</strong> done
+with exactly that key. If logging in with the key corresponding to
+<code>@two</code>, it will bring back the <code>@two</code> key from its "pending-del" state
+to a non-pending state.</p>
+<p><strong>Note:</strong> This safety net is not absolutely necessary, since a
+<a href="#EKM">self key manager</a> is not allowed to delete his/her initial key
+(added by the <a href="#GA">gitolite administrator</a>). The command <code>ukm</code> wants
+to make sure that the user still has a key that can be used for
+login. (Think about having lost the passphrase for the initial key. --
+Maybe this over complication will be simplified in the future. Losing
+a passphrase is not a good excuse and should result in removal of the
+corresponding key from the system, i.e., contacting the
+<a href="#GA">gitolite administrator</a>.)</p>
+<h1 id="generic-errors">Generic Errors<a class="headerlink" href="#generic-errors" title="Permanent link"></a></h1>
+<p>Key management is done via creating a temporary clone of the
+<code>gitolite-admin</code> repository, changing, committing, and pushing back.
+In cases where two people are trying to modify the <code>gitolite-admin</code>
+repository at the same time, one of the push commands will most
+probably fail. Then simply redo the command after a while.</p>
+<h1 id="glossary">Glossary<a class="headerlink" href="#glossary" title="Permanent link"></a></h1>
+<ul>
+<li>
+<p><strong>sysadmin</strong><a id="SYSADMIN"></a>:
+  A person who is able to edit the <a href="../../rc">.gitolite.rc</a> file on
+  the server machine.</p>
+</li>
+<li>
+<p><strong>gitolite administrator</strong><a id="GA"></a>:
+  A user with write access to the <code>gitolite-admin</code> repositoriy.</p>
+</li>
+<li>
+<p><strong>super key manager</strong><a id="SKM"></a>:
+  A user who has write access to the <code>keydir/</code> inside the
+  <code>gitolite-admin</code> repository.
+  A <a href="#GA">gitolite administrator</a> is always a super key manager.</p>
+</li>
+</ul>
+<p>Super key managers have no restriction on how <a href="#KEYID">KEYIDs</a> must
+  look like. They can do (nearly) everything inside <code>keydir/</code> that a
+  <a href="#GA">gitolite administrator</a> can do when pushing to the
+  <code>gitolite-admin</code> repository directly.</p>
+<ul>
+<li><strong>guest key manager</strong><a id="GKM"></a>:
+  A user who is a member of the <code>@guest-key-managers</code> group.</li>
+</ul>
+<p>A guest key manager can manage a set of guest keys.</p>
+<ul>
+<li><strong>self key manager</strong><a id="EKM"></a>:
+  A user who is a member of the <code>@self-key-managers</code> group.</li>
+</ul>
+<p>A self key manager can manage a set of his/her own keys.</p>
+<ul>
+<li><strong>KEYID</strong><a id="KEYID"></a>:
+  an identifier for a key given on the command line</li>
+</ul>
+<p>The KEYID is normalized to lowercase letters.</p>
+<p>If the script is called by one of the super key managers, then the
+  KEYID is the path to the pubkey file relative to the <code>keydir/</code>
+  without the <code>.pub</code> extension.</p>
+<p>If called by a guest key manager it's an email address and if called
+  by a self key manager, it's an alphanumeric identifier allowed to with an <code>@</code>
+  prepended.</p>
+<ul>
+<li><strong>USERID</strong><a id="USERID"></a>:
+  The <a href="#KEYID">KEYID</a> given on the command line will be translated
+  into a USERID which is used inside <code>conf/gitolite.conf</code> or for the
+  <a href="../../user/#setget-additional-permissions-for-repos-you-created">perms</a> <a href="../../non-core#gitolite-commands">command</a> of gitolite.</li>
+</ul>
+<h1 id="security-note">Security note<a class="headerlink" href="#security-note" title="Permanent link"></a></h1>
+<p><a id="MULTIKEY" />
+<a href="#SKM">Super key managers</a> can basically add any key.
+<a href="#GKM">Guest key managers</a> are not allowed to add
+<a href="../../basic-admin#multiple-keys-per-user">multiple keys</a> and this restriction is hardcoded.</p>
+<p>Suppose Alice adds <code>bob.pub</code> as <code>bob@example.org</code> and David adds
+<code>eve.pub</code> under the keyid <code>bob@example.org@foo</code>. (Of course, only Eve
+and not Bob has the private key correspoinding to <code>eve.pub</code>.) This
+basically gives Eve the same rights as Bob.</p>
+<h1 id="important-notes-for-the-admin">Important notes for the admin<a class="headerlink" href="#important-notes-for-the-admin" title="Permanent link"></a></h1>
+<p>Note that <code>ukm</code> clones, changes, and pushes back the <code>gitolite-admin</code>
+repo. This means, even if you are the only administrator, you should
+never <code>git push -f</code>, because that might override something <code>ukm</code>
+did.</p>
+<h1 id="ideas">Ideas<a class="headerlink" href="#ideas" title="Permanent link"></a></h1>
+<p>The command <code>ukm</code> has been created with also having the
+<code>keysubdirs-as-groups</code> <a href="../../non-core">syntactic sugar</a> in mind. If a
+<a href="#SKM">super key manager</a> manages the respective keys in
+sub-directories with names <code>guest-key-managers/</code> and
+<code>self-key-managers/</code>, respectively, he/she can use the <code>ukm</code> command
+to control who is allowed to manage keys.</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script><div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

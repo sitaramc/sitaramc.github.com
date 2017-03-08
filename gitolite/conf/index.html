@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>the "conf" file (part 1) - Gitolite</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/gitolite.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+	
+	<script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="..">Gitolite</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="..">home</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../overview/">overview</a>
+</li>
+                            
+<li >
+    <a href="../concepts/">concepts, conventions, terminology</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../quick_install/">(unix/ssh experts) quick install and setup</a>
+</li>
+                            
+<li >
+    <a href="../install/">normal ssh mode install and setup</a>
+</li>
+                            
+<li >
+    <a href="../fool_proof_setup/">(if all else fails) fool-proof, step-by-step, install and setup</a>
+</li>
+                            
+<li >
+    <a href="../http/">HTTP mode install</a>
+</li>
+                            
+<li >
+    <a href="../migr/">migrating from v2</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+  <li class="dropdown-submenu">
+    <a href="#">basic</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../basic-admin/">basic administration</a>
+</li>
+            
+<li class="active">
+    <a href="./">the "conf" file (part 1)</a>
+</li>
+            
+<li >
+    <a href="../conf-2/">the "conf" file (part 2)</a>
+</li>
+            
+<li >
+    <a href="../rc/">the "rc" file</a>
+</li>
+            
+<li >
+    <a href="../user/">your users' view</a>
+</li>
+    </ul>
+  </li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">advanced</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../git-config/">setting git-config values</a>
+</li>
+            
+<li >
+    <a href="../options/">gitolite options</a>
+</li>
+            
+<li >
+    <a href="../wild/">ad hoc user-created ("wild") repos</a>
+</li>
+            
+<li >
+    <a href="../vref/">virtual refs (part 1)</a>
+</li>
+            
+<li >
+    <a href="../vref-2/">virtual refs (part 2)</a>
+</li>
+            
+<li >
+    <a href="../deleg/">delegation of admin duties</a>
+</li>
+            
+<li >
+    <a href="../gitweb-daemon/">gitweb and git-daemon</a>
+</li>
+            
+<li >
+    <a href="../mirroring/">mirroring</a>
+</li>
+    </ul>
+  </li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">customise</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../non-core/">core and "non-core" gitolite</a>
+</li>
+            
+<li >
+    <a href="../dev-notes/">writing your own non-core code</a>
+</li>
+            
+<li >
+    <a href="../triggers/">gitolite triggers</a>
+</li>
+            
+<li >
+    <a href="../list-non-core/">list of non-core programs shipped with gitolite</a>
+</li>
+    </ul>
+  </li>
+                            
+<li >
+    <a href="../cookbook/">(quick! how do I...) the cookbook</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../emergencies/">emergency!!</a>
+</li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">ssh</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../ssh/">ssh</a>
+</li>
+            
+<li >
+    <a href="../glssh/">how gitolite uses ssh</a>
+</li>
+            
+<li >
+    <a href="../sts/">ssh troubleshooting</a>
+</li>
+    </ul>
+  </li>
+                            
+<li >
+    <a href="../regex/">regular expressions</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../odds-and-ends/">miscellaneous features</a>
+</li>
+                            
+<li >
+    <a href="../namespaces/">using git namespaces</a>
+</li>
+                            
+<li >
+    <a href="../locking/">locking binary files</a>
+</li>
+                            
+<li >
+    <a href="../testing/">testing gitolite</a>
+</li>
+                            
+<li >
+    <a href="../package/">packaging gitolite</a>
+</li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">more about gitolite</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../files/">gitolite files & directories</a>
+</li>
+            
+<li >
+    <a href="../rc-33/">the 3.3 format rc file</a>
+</li>
+            
+<li >
+    <a href="../perf/">performance</a>
+</li>
+    </ul>
+  </li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">contrib</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../contrib/ssh-and-http/">Using both ssh and http</a>
+</li>
+            
+<li >
+    <a href="../contrib/putty/">Putty and Msysgit</a>
+</li>
+            
+<li >
+    <a href="../contrib/sskm/">Self-service key management</a>
+</li>
+            
+<li >
+    <a href="../contrib/ukm/">User key management</a>
+</li>
+            
+<li >
+    <a href="../contrib/README-emacs/">Emacs major mode</a>
+</li>
+    </ul>
+  </li>
+                            
+<li >
+    <a href="../no-way/">no way!</a>
+</li>
+                        </ul>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../basic-admin/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../conf-2/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#the-conf-file-confgitoliteconf">the "conf" file (conf/gitolite.conf)</a></li>
+        <li class="main "><a href="#basic-syntax">basic syntax</a></li>
+        <li class="main "><a href="#include-files">include files</a></li>
+        <li class="main "><a href="#group-definitions">group definitions</a></li>
+            <li><a href="#special-group-all">special group @all</a></li>
+            <li><a href="#warnings-on-undefined-groups">warnings on undefined groups</a></li>
+            <li><a href="#getting-user-group-info-from-ldap">getting user group info from LDAP</a></li>
+        <li class="main "><a href="#access-rules">access rules</a></li>
+            <li><a href="#what-does-a-rule-look-like">what does a rule look like?</a></li>
+            <li><a href="#rule-accumulation">rule accumulation</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="the-conf-file-confgitoliteconf">the "conf" file (<code>conf/gitolite.conf</code>)<a class="headerlink" href="#the-conf-file-confgitoliteconf" title="Permanent link"></a></h1>
+<p><center>(part 1)</center></p>
+<hr />
+<p><span class="box-r">You might recall from the <a href="../basic-admin">basic
+administration</a> page that this file is part of the gitolite-admin
+repo.  You need to clone that repo, make and commit changes to this file, and
+push the commits back.</span></p>
+<p>The <code>conf/gitolite.conf</code> file (often called just "the conf file" for short) is
+one of the two most important files in gitolite.  It specifies repo names and
+access rules, as well as repo options of various kinds and git-config values.</p>
+<p>Pretty much all day-to-day management, except <a href="../basic-admin/#addremove-users">managing users</a>, happens
+from this file.</p>
+<p>We'll use the following example to describe it's features.  <span class="gray">(A tip of
+the hat to Teemu Matilainen's gitolite vim-syntax file for the
+colors.)</span></p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Identifier">@staff</span>              =   dilbert alice          <span class="Comment"> # groups</span>
+<span class="Identifier">@projects</span>           =   foo bar
+
+<span class="Type">repo </span><span class="Identifier">@projects</span> baz                             <span class="Comment"> # repos</span>
+<span class="Statement">    RW+</span><span class="Constant">             </span>=   <span class="Identifier">@staff</span>                 <span class="Comment"> # rules</span>
+<span class="Statement">    -</span><span class="Constant">       master  </span>=<span class="WarningMsg">   ashok</span>
+<span class="Statement">    RW</span><span class="Constant">              </span>=   ashok
+<span class="Statement">    R</span><span class="Constant">               </span>=   wally
+
+    option deny-rules           =   1          <span class="Comment"> # options</span>
+<span class="Statement">    config </span><span class="Identifier">hooks.emailprefix    </span>= '[%GL_REPO] '<span class="Comment"> # git-config</span>
+</pre>
+
+<h1 id="basic-syntax">basic syntax<a class="headerlink" href="#basic-syntax" title="Permanent link"></a></h1>
+<p>As the example above shows, the syntax is fairly straightforward and simple.</p>
+<ul>
+<li>In general, everything is <strong>space separated</strong>; there are no commas,
+    semicolons, etc., in the syntax.</li>
+<li><strong>Comments</strong> are in the usual shell-ish style.</li>
+<li><strong>User names</strong> and <strong>repo names</strong> are as simple as possible; they must
+    start with an alphanumeric, but after that they can also contain <code>.</code>, <code>_</code>,
+    or <code>-</code>. Usernames can optionally be followed by an <code>@</code> and a domainname
+    containing at least one <code>.</code> (this allows you to use an email address as
+    someone's username).</li>
+<li><strong>Group names</strong> are like simple usernames (i.e., not email addresses) but
+    start with an <code>@</code> sign.</li>
+<li>Reponames can contain <code>/</code> characters (this allows you to put your repos in
+    a tree-structure for convenience).</li>
+<li>There are no continuation lines by default.  You do not need them; the
+    section on <a href="../conf/#group-definitions">groups</a> will tell you how you can break up large lists of
+    names in a group definition into multiple lines. <span class="gray">(But if you <em>must</em>
+    have them, you can optionally enable them; look for "continuation-lines"
+    in <code>~/.gitolite.rc</code>).</span></li>
+</ul>
+<h1 id="include-files">include files<a class="headerlink" href="#include-files" title="Permanent link"></a></h1>
+<p>Gitolite allows you to break up the configuration into multiple files and
+include them in the main file for convenience.  For example:</p>
+<pre><code>include "foo.conf"
+</code></pre>
+<p>will include the contents of the file "conf/foo.conf".</p>
+<ul>
+<li>
+<p>You can also use a glob (<code>include "*.conf"</code>), or put your include files
+    into subdirectories of "conf" (<code>include "foo/bar.conf"</code>), or both
+    (<code>include "repos/*.conf"</code>).</p>
+</li>
+<li>
+<p>Included files are always searched from the gitolite-admin repo's <code>conf/</code>
+    directory, unless you supplied an absolute path.  (Note: in the interests
+    of cloning the admin-repo sanely you should avoid absolute paths!)</p>
+</li>
+<li>
+<p>If you end up recursing, files that have been already processed once are
+    skipped, with a warning.</p>
+</li>
+<li>
+<p>It is not a fatal error for an include file to be missing.  If it is a
+    glob, you won't even get a warning.</p>
+</li>
+</ul>
+<p><font color="gray">Advanced users: <code>subconf</code>, a command that is very closely
+related to <code>include</code>, is documented <a href="../deleg#the-subconf-command">here</a>.</font></p>
+<p><strong>Please note</strong> that whenever you see "the <code>conf/gitolite.conf</code> file" or "the
+conf file" in gitolite documentation, it means the combined text after the
+include processing is done.</p>
+<h1 id="group-definitions">group definitions<a class="headerlink" href="#group-definitions" title="Permanent link"></a></h1>
+<p>You can group repos or users for convenience.  The syntax is the same for both
+and does not distinguish; until you <em>use</em> the group name it could really be
+either.</p>
+<p>Here's an example:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Identifier">@developers</span>     =   dilbert alice wally
+</pre>
+
+<p>Group definitions accumulate; this is the same as the above:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Identifier">@developers</span>     =   dilbert
+<span class="Identifier">@developers</span>     =   alice
+<span class="Identifier">@developers</span>     =   wally
+</pre>
+
+<p>You can use one group in another group definition; the values will be expanded
+immediately (meaning later additions will not appear in the second group):</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Identifier">@developers</span>     =   dilbert alice
+<span class="Identifier">@interns</span>        =   ashok
+<span class="Identifier">@staff</span>          =   <span class="Identifier">@interns</span> <span class="Identifier">@developers</span>
+<span class="Identifier">@developers</span>     =   wally
+
+<span class="Comment"># wally is </span><span class="Todo">NOT</span><span class="Comment"> part of @staff</span>
+</pre>
+
+<p>Here's a very simple but complete example of using groups:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Identifier">@developers</span>     =   dilbert alice wally
+<span class="Identifier">@foss-repos</span>     =   git gitolite
+
+<span class="Type">repo </span><span class="Identifier">@foss-repos</span>
+<span class="Statement">    RW+</span><span class="Constant">         </span>=   <span class="Identifier">@developers</span>
+</pre>
+
+<h2 id="special-group-all">special group <code>@all</code><a class="headerlink" href="#special-group-all" title="Permanent link"></a></h2>
+<p><code>@all</code> is a special group name that is often convenient to use if you really
+mean "all repos" or "all users".</p>
+<h2 id="warnings-on-undefined-groups">warnings on undefined groups<a class="headerlink" href="#warnings-on-undefined-groups" title="Permanent link"></a></h2>
+<p>Gitolite cannot truly catch undefined groups because the conf parser is
+1-pass, and you're allowed to define a group <em>after</em> it is used, like so:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Type">repo </span>foo
+<span class="Statement">    RW</span><span class="Constant">  </span>=   <span class="Identifier">@foo</span>
+<span class="Identifier">@foo</span> = u1 u2
+</pre>
+
+<p><span class="gray">(v3.5.3+)</span> However, in a simplistic attempt to help
+people tearing their hair out because of a typo, gitolite will warn if a group
+is not defined when it is used.  So if you defined it later, either ignore the
+warning or move the definition up.</p>
+<p>Note that these warnings do NOT appear if you're <a href="../conf/#getting-user-group-info-from-ldap">getting user group info from
+LDAP</a>.</p>
+<h2 id="getting-user-group-info-from-ldap">getting user group info from LDAP<a class="headerlink" href="#getting-user-group-info-from-ldap" title="Permanent link"></a></h2>
+<p>Gitolite's groups are pretty convenient, but some organisations already have
+similar (or sufficient) information in their LDAP store.</p>
+<p>Gitolite can tap into that information, with a little help.  Write a program
+which, given a username, queries your LDAP store and returns a space-separated
+list of groups that the user is a member of.  Then put the full path to this
+program in an <a class="wikilink" href="../rc/">rc</a> variable called <code>GROUPLIST_PGM</code>, like so:</p>
+<pre><code>GROUPLIST_PGM           =&gt;  '/home/git/bin/ldap-query-groups',
+</code></pre>
+<p>Now you can use those groupnames in access rules in gitolite, because the user
+is a member of those groups as well as any normal gitolite groups you may have
+added him to in the conf file.</p>
+<p>Caution: your program must do its own logging if you want the audit trail of
+"why/how did this user get access to this repo at this time?" to resolve
+properly.  Gitolite does not do any logging of the results of the queries
+because for people who don't need it that would be a huge waste.</p>
+<h1 id="access-rules">access rules<a class="headerlink" href="#access-rules" title="Permanent link"></a></h1>
+<p><span class="box-r">Some of the pictures are thanks (<em>enormous</em> thanks!) to someone who
+contributed them but does not want to be named (go figure!).  She even
+converted them to ditaa format when I asked; these are not as pretty as what
+she sent me originally but they're vim-editable in source form :-)</span></p>
+<p>This section talks about how gitolite's access rules work.  It's a <strong>very
+important</strong> section, and well worth spending some time on.</p>
+<p>Gitolite's access rules are designed to be easy to use for common situations,
+such as some of the examples you saw earlier.  However, they also pack a lot
+of power and flexibility.</p>
+<p>Access rules decide whether a particular access is allowed or denied.  An
+access is defined by four pieces of data: "reponame, username, operation, and
+ref".  Each rule also has four similar pieces of data, and of course there are
+several rules -- some people have thousands! -- in the conf file. This section
+will try and explain how these rules are used to decide if a given operation
+is to be allowed or denied.</p>
+<hr />
+<h2 id="what-does-a-rule-look-like">what does a rule look like?<a class="headerlink" href="#what-does-a-rule-look-like" title="Permanent link"></a></h2>
+<p>You've seen some simple rules so far, for example in the <a href="../basic-admin">basic
+administration</a> page.  Here's a slightly more complex one, just
+for illustration.</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Type">repo </span>foo bar
+
+<span class="Statement">    RW+</span><span class="Constant">                     </span>=   alice <span class="Identifier">@teamleads</span>
+<span class="Statement">    -</span><span class="Constant">   master              </span>=<span class="WarningMsg">   dilbert @devteam</span>
+<span class="Statement">    -</span><span class="Constant">   refs/tags/v[0-9]    </span>=<span class="WarningMsg">   dilbert @devteam</span>
+<span class="Statement">    RW+</span><span class="Constant"> dev/                </span>=   dilbert <span class="Identifier">@devteam</span>
+<span class="Statement">    RW</span><span class="Constant">                      </span>=   dilbert <span class="Identifier">@devteam</span>
+<span class="Statement">    R</span><span class="Constant">                       </span>=   <span class="Identifier">@managers</span>
+</pre>
+
+<p>A "repo" line names one or more repos, and is followed by one or more rule
+lines. All the rules from then till the next "repo" line apply to the repo(s)
+specified in the repo line -- in this example, the 'foo' and 'bar' repos.</p>
+<p>Each rule line has a "permission" field, zero or more "refex"es, and one or
+more user or user group name after the equal sign.</p>
+<p><span class="gray">The "repo" line can also have repo groups, as we have seen in the
+section on <a href="../conf/#group-definitions">groups</a> above.  Also, it can have regular expressions that match
+multiple repos.</span></p>
+<p>Before describing the various fields more formally, here's a description of
+what this specific rule list is saying:</p>
+<ul>
+<li>
+<p>alice and the team leads can do whatever they want (i.e., push, rewind, or
+    delete any branch or tag).</p>
+</li>
+<li>
+<p>dilbert and the dev team has these restrictions</p>
+<ol>
+<li>they can do anything to branches whose names start with "dev/"</li>
+<li>they can create or fast-forward push, but not rewind or delete, any
+    branch except master</li>
+<li>they can create (but not update/delete) any tag except tags starting
+    with "v" followed by a digit.</li>
+</ol>
+</li>
+<li>
+<p>managers can read the repo but they can't push anything.</p>
+</li>
+</ul>
+<p>More formally, a rule line has the following fields:</p>
+<h3 id="the-permission-field">the permission field<a class="headerlink" href="#the-permission-field" title="Permanent link"></a></h3>
+<p>The permission field gives the type of access this rule line permits. The most
+commonly used permissions are:</p>
+<ul>
+<li>R, to allow read operations only</li>
+<li>RW, to allow fast-forward push of a branch, or create new branch/tag</li>
+<li>RW+, to allow pretty much anything -- fast-forward, rewind or delete
+    branches or tags</li>
+<li><code>-</code> (the minus sign), to <strong>deny</strong> access.</li>
+</ul>
+<div class="admonition danger">
+<p>There are also other, less commonly used, <a href="../conf-2/#appendix-1-different-types-of-write-operations">types of permissions</a>.</p>
+</div>
+<h3 id="the-refex-field">the "refex" field<a class="headerlink" href="#the-refex-field" title="Permanent link"></a></h3>
+<p>You cannot write rules for all possible branch and tag names (i.e., refs) that
+users will push.  The only sensible way to do this is to use <a href="../regex">regular
+expressions</a> instead.</p>
+<p>A refex is a word I made up to mean "a regex that matches a ref".</p>
+<p>In addition:</p>
+<ul>
+<li>
+<p>If no refex is supplied, it defaults to <code>refs/.*</code>, for example in a rule
+    like this:</p>
+<pre><code>RW              =   alice
+</code></pre>
+</li>
+<li>
+<p>A refex not starting with <code>refs/</code> <span class="gray">(or <code>VREF/</code>)</span> is assumed to
+    start with <code>refs/heads/</code>.  This means normal branches can be conveniently
+    written like this:</p>
+<pre><code>RW  master      =   alice
+# becomes 'refs/heads/master' internally
+</code></pre>
+<p>while tags will need to be fully qualified</p>
+<pre><code>RW  refs/tags/v[0-9]    =   bob
+</code></pre>
+</li>
+<li>
+<p>A refex is implicitly anchored at the start, but not at the end.  In
+    regular expression lingo, a <code>^</code> is assumed at the start (but no <code>$</code> at the
+    end is assumed).  So a refex of <code>master</code> will match all these refs:</p>
+<pre><code>refs/heads/master
+refs/heads/master1
+refs/heads/master2
+refs/heads/master/full
+</code></pre>
+<p>More commonly, a refex of <code>refs/tags/v[0-9]</code> will match all versioned tags
+(i.e., not just <code>v1</code> but also <code>v12</code>, <code>v1.2</code>, <code>v12345</code>, etc.)</p>
+<p>If you want to restrict the match to just the one specific ref, add a $ at
+the end, for example:</p>
+<pre><code>RW  master$     =   alice
+</code></pre>
+</li>
+</ul>
+<p><span class="gray">You can also use <a href="../vref">virtual refs</a> to perform extra checks and
+controls that you can't do with just the normal ref (like refs/heads/master)
+being pushed.  The most common example is restricting pushes by dir/file name,
+but there are lots of other possibilities.</span></p>
+<h3 id="useruser-group-list">user/user group list<a class="headerlink" href="#useruser-group-list" title="Permanent link"></a></h3>
+<p>Like the repos on the repo line, you can have any number of user names and/or
+user group names on the rule line.  (However, please note that there is no
+concept of regular expressions for user names).</p>
+<p><strong>SECTION SUMMARY</strong>: at this point you know that each rule basically specifies
+a repo, user, permission, and a "refex".</p>
+<hr />
+<h2 id="rule-accumulation">rule accumulation<a class="headerlink" href="#rule-accumulation" title="Permanent link"></a></h2>
+<p><em>All</em> the rules for a repo need not be specified in one place.  For example,
+you might see something like this, perhaps at the top or bottom of the conf
+file:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Comment"># managers should be able to read any repo</span>
+<span class="Type">repo </span><span class="Identifier">@all</span>
+<span class="Statement">    R</span><span class="Constant">   </span>=   <span class="Identifier">@managers</span>
+</pre>
+
+<p>or perhaps this:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Comment"># anyone can clone open source repos</span>
+<span class="Type">repo </span><span class="Identifier">@FOSS</span>
+<span class="Statement">    R</span><span class="Constant">   </span>=   <span class="Identifier">@all</span>
+</pre>
+
+<p>Clearly, both these constructs affect repos which may have their own rules
+elsewhere.</p>
+<p>If a bunch of projects share some naming convention, you can specify any rules
+that are common to all of them by specifying the set of repos that are
+affected as a regular expression.  Notice that the regex can be defined
+directly in the repo line, or it can be defined in a group and the <em>group</em>
+used in the repo line; it's all the same to gitolite.</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Type">repo </span><span class="Special">FOSS/..*</span>
+   <span class="Comment"> # ...rules for repos under FOSS/</span>
+
+<span class="Identifier">@secret</span>     =   <span class="Special">secret/..*</span> <span class="Special">private/..*</span>
+<span class="Type">repo </span><span class="Identifier">@secret</span>
+   <span class="Comment"> # ...rules for repos under secret/ and private/</span>
+</pre>
+
+<p>Finally, although not very common, you can certainly do things like this:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Type">repo </span>foo
+   <span class="Comment"> # ...some rules...</span>
+
+<span class="Comment"># ...other repos and rules...</span>
+
+<span class="Type">repo </span>foo
+   <span class="Comment"> # ...more rules for foo...</span>
+</pre>
+
+<p>Note that the "other repos and rules" may indirectly include repo "foo" (for
+example it there were rules for "repo @all", or some other group that "foo"
+was a member of).</p>
+<p>When access is being checked for an operation against a repo, <strong>all the rules
+that pertain to that repo are collected, in the order they were seen in the
+conf file</strong>.</p>
+<p>Gitolite then <strong>discards those rules that do <em>not</em> apply to the user whose
+access is being checked</strong>.  (A rule applies to a user if the user's name
+appears in the rule (after the equal sign), or if he is a member of any of the
+group names that appear in the rule.)</p>
+<h3 id="defining-user-and-repo">defining "user" and "repo"<a class="headerlink" href="#defining-user-and-repo" title="Permanent link"></a></h3>
+<p>To be very specific, when we speak of "user" and "repo" in rules,</p>
+<ul>
+<li>"user" means "user or a <a href="../conf/#group-definitions">group</a> that he/she is a member of", and</li>
+<li>"repo" means "repo, or a group that it is a member of, or a regex that
+    matches it, or a group that contains a regex that matches it".</li>
+</ul></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '..';</script>
+        <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+        <script src="../js/base.js"></script><div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

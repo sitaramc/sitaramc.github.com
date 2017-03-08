@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>ad hoc user-created ("wild") repos - Gitolite</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/gitolite.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+	
+	<script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="..">Gitolite</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="..">home</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../overview/">overview</a>
+</li>
+                            
+<li >
+    <a href="../concepts/">concepts, conventions, terminology</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../quick_install/">(unix/ssh experts) quick install and setup</a>
+</li>
+                            
+<li >
+    <a href="../install/">normal ssh mode install and setup</a>
+</li>
+                            
+<li >
+    <a href="../fool_proof_setup/">(if all else fails) fool-proof, step-by-step, install and setup</a>
+</li>
+                            
+<li >
+    <a href="../http/">HTTP mode install</a>
+</li>
+                            
+<li >
+    <a href="../migr/">migrating from v2</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+  <li class="dropdown-submenu">
+    <a href="#">basic</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../basic-admin/">basic administration</a>
+</li>
+            
+<li >
+    <a href="../conf/">the "conf" file (part 1)</a>
+</li>
+            
+<li >
+    <a href="../conf-2/">the "conf" file (part 2)</a>
+</li>
+            
+<li >
+    <a href="../rc/">the "rc" file</a>
+</li>
+            
+<li >
+    <a href="../user/">your users' view</a>
+</li>
+    </ul>
+  </li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">advanced</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../git-config/">setting git-config values</a>
+</li>
+            
+<li >
+    <a href="../options/">gitolite options</a>
+</li>
+            
+<li class="active">
+    <a href="./">ad hoc user-created ("wild") repos</a>
+</li>
+            
+<li >
+    <a href="../vref/">virtual refs (part 1)</a>
+</li>
+            
+<li >
+    <a href="../vref-2/">virtual refs (part 2)</a>
+</li>
+            
+<li >
+    <a href="../deleg/">delegation of admin duties</a>
+</li>
+            
+<li >
+    <a href="../gitweb-daemon/">gitweb and git-daemon</a>
+</li>
+            
+<li >
+    <a href="../mirroring/">mirroring</a>
+</li>
+    </ul>
+  </li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">customise</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../non-core/">core and "non-core" gitolite</a>
+</li>
+            
+<li >
+    <a href="../dev-notes/">writing your own non-core code</a>
+</li>
+            
+<li >
+    <a href="../triggers/">gitolite triggers</a>
+</li>
+            
+<li >
+    <a href="../list-non-core/">list of non-core programs shipped with gitolite</a>
+</li>
+    </ul>
+  </li>
+                            
+<li >
+    <a href="../cookbook/">(quick! how do I...) the cookbook</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../emergencies/">emergency!!</a>
+</li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">ssh</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../ssh/">ssh</a>
+</li>
+            
+<li >
+    <a href="../glssh/">how gitolite uses ssh</a>
+</li>
+            
+<li >
+    <a href="../sts/">ssh troubleshooting</a>
+</li>
+    </ul>
+  </li>
+                            
+<li >
+    <a href="../regex/">regular expressions</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../odds-and-ends/">miscellaneous features</a>
+</li>
+                            
+<li >
+    <a href="../namespaces/">using git namespaces</a>
+</li>
+                            
+<li >
+    <a href="../locking/">locking binary files</a>
+</li>
+                            
+<li >
+    <a href="../testing/">testing gitolite</a>
+</li>
+                            
+<li >
+    <a href="../package/">packaging gitolite</a>
+</li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">more about gitolite</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../files/">gitolite files & directories</a>
+</li>
+            
+<li >
+    <a href="../rc-33/">the 3.3 format rc file</a>
+</li>
+            
+<li >
+    <a href="../perf/">performance</a>
+</li>
+    </ul>
+  </li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">contrib</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../contrib/ssh-and-http/">Using both ssh and http</a>
+</li>
+            
+<li >
+    <a href="../contrib/putty/">Putty and Msysgit</a>
+</li>
+            
+<li >
+    <a href="../contrib/sskm/">Self-service key management</a>
+</li>
+            
+<li >
+    <a href="../contrib/ukm/">User key management</a>
+</li>
+            
+<li >
+    <a href="../contrib/README-emacs/">Emacs major mode</a>
+</li>
+    </ul>
+  </li>
+                            
+<li >
+    <a href="../no-way/">no way!</a>
+</li>
+                        </ul>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../options/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../vref/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#wild-repos-user-created-repos">"wild" repos (user created repos)</a></li>
+        <li class="main "><a href="#quick-introexample">quick intro/example</a></li>
+        <li class="main "><a href="#declaring-wild-repos-in-the-conf-file">declaring wild repos in the conf file</a></li>
+        <li class="main "><a href="#user-creating-a-specific-repo">(user) creating a specific repo</a></li>
+        <li class="main "><a href="#a-slightly-different-example">a slightly different example</a></li>
+        <li class="main "><a href="#repo-regex-patterns">repo regex patterns</a></li>
+            <li><a href="#regex-pattern-versus-normal-repo">regex pattern versus normal repo</a></li>
+            <li><a href="#line-anchored-regexes">line-anchored regexes</a></li>
+        <li class="main "><a href="#roles">roles</a></li>
+            <li><a href="#adding-other-roles">adding other roles</a></li>
+            <li><a href="#setting-default-roles">setting default roles</a></li>
+            <li><a href="#specifying-owners">specifying owners</a></li>
+        <li class="main "><a href="#listing-wild-repos">listing wild repos</a></li>
+        <li class="main "><a href="#deleting-a-wild-repo">deleting a wild repo</a></li>
+        <li class="main "><a href="#appendix-1-owner-and-creator">appendix 1: owner and creator</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="wild-repos-user-created-repos">"wild" repos (user created repos)<a class="headerlink" href="#wild-repos-user-created-repos" title="Permanent link"></a></h1>
+<hr />
+<p>The wildrepos feature allows you to specify access control rules using regular
+expression patterns, so you can have many actual repos being served by a
+single set of rules in the config file.  The <a class="wikilink" href="../regex/">regex</a> can also include the
+word <code>CREATOR</code> in it, allowing you to parametrise the name of the user
+creating the repo.</p>
+<h1 id="quick-introexample">quick intro/example<a class="headerlink" href="#quick-introexample" title="Permanent link"></a></h1>
+<p>If you're curious about the feature but you aren't sure if you want to read
+the whole page, here's a very simple example.</p>
+<p>This is what the admin added to the conf file:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Identifier">@users</span> = u1 u2 u3
+
+<span class="Type">repo </span><span class="Special">foo/</span><span class="PreProc">CREATOR</span><span class="Special">/[a-z]..*</span>
+<span class="Statement">    C</span><span class="Constant">   </span>=   u1 u2 u3
+<span class="Statement">    RW+</span><span class="Constant"> </span>=   <span class="PreProc">CREATOR</span>
+<span class="Statement">    RW</span><span class="Constant">  </span>=   <span class="PreProc">WRITERS</span>
+<span class="Statement">    R</span><span class="Constant">   </span>=   <span class="PreProc">READERS</span>
+</pre>
+
+<p>User 'u1' then runs <code>git clone git@host:foo/u1/bar</code>, creating the repo.
+Notice the repo name matches the regex, if you substitute the user's name
+for the word CREATOR.</p>
+<p>This is the effective rule list for 'foo/u1/bar' immediately after the user
+creates it:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Type">repo </span>foo/u1/bar
+<span class="Statement">    RW+</span><span class="Constant"> </span>=   u1
+<span class="Statement">    RW</span><span class="Constant">  </span>=   <span class="PreProc">WRITERS</span>
+<span class="Statement">    R</span><span class="Constant">   </span>=   <span class="PreProc">READERS</span>
+</pre>
+
+<p>Most of this is fixed, but the creator (user 'u1') <em>can</em> use the <a href="../user/#setget-additional-permissions-for-repos-you-created">perms</a>
+command to add other users as 'READERS' or 'WRITERS'.  For example he could
+add 'u2' as a writer and 'u3' and 'u5' as readers:</p>
+<p>This is the effective rule list that applies to the repo if he does that:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Type">repo </span>foo/u1/bar
+<span class="Statement">    RW+</span><span class="Constant"> </span>=   u1
+<span class="Statement">    RW</span><span class="Constant">  </span>=   u2
+<span class="Statement">    R</span><span class="Constant">   </span>=   u3 u5
+</pre>
+
+<p>Note that both these "effective rule lists" were created without touching the
+actual conf file or any admin intervention.</p>
+<p>And that's it for our quick intro example.  The rest of this page will explain
+all this in much more detail.</p>
+<h1 id="declaring-wild-repos-in-the-conf-file">declaring wild repos in the conf file<a class="headerlink" href="#declaring-wild-repos-in-the-conf-file" title="Permanent link"></a></h1>
+<p>Here's a slightly more detailed example, starting with what the admin puts in
+the conf file:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Identifier">@prof</span>       =   u1
+<span class="Identifier">@TAs</span>        =   u2 u3
+<span class="Identifier">@students</span>   =   u4 u5 u6
+
+<span class="Type">repo </span>   <span class="Special">assignments/</span><span class="PreProc">CREATOR</span><span class="Special">/a[0-9][0-9]</span>
+<span class="Statement">    C</span><span class="Constant">   </span>=   <span class="Identifier">@students</span>
+<span class="Statement">    RW+</span><span class="Constant"> </span>=   <span class="PreProc">CREATOR</span>
+<span class="Statement">    RW</span><span class="Constant">  </span>=   <span class="PreProc">WRITERS</span> <span class="Identifier">@TAs</span>
+<span class="Statement">    R</span><span class="Constant">   </span>=   <span class="PreProc">READERS</span> <span class="Identifier">@prof</span>
+</pre>
+
+<p>Note the "C" permission.  This is a standalone "C", which gives the named
+users the right to <em>create a repo</em>.  <span class="gray">This is not to be confused with
+the "RWC" permission or its variants described <a href="../conf-2/#appendix-1-different-types-of-write-operations">elsewhere</a>, which
+are about creating <em>branches</em>, not <em>repos</em>.</span></p>
+<h1 id="user-creating-a-specific-repo">(<strong>user</strong>) creating a specific repo<a class="headerlink" href="#user-creating-a-specific-repo" title="Permanent link"></a></h1>
+<p>For now, ignore the special usernames READERS and WRITERS, and just create a
+new repo, as user "u4" (a student):</p>
+<pre><code>$ git clone git@server:assignments/u4/a12
+Initialized empty Git repository in /home/git/repositories/assignments/u4/a12.git/
+warning: You appear to have cloned an empty repository.
+</code></pre>
+<h1 id="a-slightly-different-example">a slightly different example<a class="headerlink" href="#a-slightly-different-example" title="Permanent link"></a></h1>
+<p>Here's how the same example would look if you did not want the CREATOR's name
+to be part of the actual repo name.</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Type">repo </span>   <span class="Special">assignments/a[0-9][0-9]</span>
+<span class="Statement">    C</span><span class="Constant">   </span>=   <span class="Identifier">@students</span>
+<span class="Statement">    RW+</span><span class="Constant"> </span>=   <span class="PreProc">CREATOR</span>
+<span class="Statement">    RW</span><span class="Constant">  </span>=   <span class="PreProc">WRITERS</span> <span class="Identifier">@TAs</span>
+<span class="Statement">    R</span><span class="Constant">   </span>=   <span class="PreProc">READERS</span> <span class="Identifier">@prof</span>
+</pre>
+
+<p>We haven't changed anything except the repo name regex.  This means that the
+first student that creates, say, <code>assignments/a12</code> becomes the owner.
+Mistakes (such as claiming a12 instead of a13) need to be rectified by an
+admin logging on to the back end, though it's not too difficult.</p>
+<p>You could also replace the C line like this:</p>
+<pre><code>    C   =   @TAs
+</code></pre>
+<p>and have a TA create the repos in advance.</p>
+<h1 id="repo-regex-patterns">repo regex patterns<a class="headerlink" href="#repo-regex-patterns" title="Permanent link"></a></h1>
+<h2 id="regex-pattern-versus-normal-repo">regex pattern versus normal repo<a class="headerlink" href="#regex-pattern-versus-normal-repo" title="Permanent link"></a></h2>
+<p>Due to projects like <code>gtk+</code>, the <code>+</code> character is now considered a valid
+character for an <em>ordinary</em> repo.  Therefore, a regex like <code>foo/.+</code> does not
+look like a <a class="wikilink" href="../regex/">regex</a> to gitolite.  Use <code>foo/..*</code> if you want that.</p>
+<p>Also, <code>..*</code> by itself is not considered a valid repo regex.  Try
+<code>[a-zA-Z0-9].*</code>.  <code>CREATOR/..*</code> will also work.</p>
+<h2 id="line-anchored-regexes">line-anchored regexes<a class="headerlink" href="#line-anchored-regexes" title="Permanent link"></a></h2>
+<p>A regex like</p>
+<pre><code>repo assignments/S[0-9]+/A[0-9]+
+</code></pre>
+<p>would match <code>assignments/S02/A37</code>.  It will not match <code>assignments/S02/ABC</code>,
+or <code>assignments/S02/a37</code>, obviously.</p>
+<p>But you may be surprised to find that it does not match even
+<code>assignments/S02/A37/B99</code>.  This is because internally, gitolite
+<em>line-anchors</em> the given regex; so that regex actually becomes
+<code>^assignments/S[0-9]+/A[0-9]+$</code> -- notice the line beginning and ending
+metacharacters.</p>
+<div class="admonition warning">
+<p class="admonition-title">Side-note: contrast with refexes</p>
+<p>Just for interest, note that this is in contrast to the <a href="../conf#the-refex-field">refexes</a>
+for the normal "branch" permissions. Refexes are only anchored at the
+start; a regex like <code>refs/heads/master</code> actually can match
+<code>refs/heads/master01/bar</code> as well, even if no one will actually push such
+a branch!  You can anchor both sides if you really care, by using
+<code>master$</code> instead of <code>master</code>, but that is <em>not</em> the default for refexes.</p>
+</div>
+<h1 id="roles">roles<a class="headerlink" href="#roles" title="Permanent link"></a></h1>
+<p>The words READERS and WRITERS are called "role" names.  The access rules in
+the conf file decide what permissions these roles have, but they don't say
+what users are in each of these roles.</p>
+<p>That needs to be done by the creator of the repo, using the <code>perms</code> command.
+You can run <code>ssh git@host perms -h</code> for detailed help, but in brief, that
+command lets you give and take away roles to users.  <a href="../user/#setget-additional-permissions-for-repos-you-created">This</a> has some
+more detail.</p>
+<h2 id="adding-other-roles">adding other roles<a class="headerlink" href="#adding-other-roles" title="Permanent link"></a></h2>
+<p>If you want to have more than just the 2 default roles, say something like:</p>
+<p>You can add the new names to the ROLES hash in the <a href="../rc">rc file</a>; see comments
+in that file for how to do that.  Be sure to run the 2 commands mentioned
+there after you have added the roles.</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Type">repo </span><span class="Special">foo/..*</span>
+<span class="Statement">  C</span><span class="Constant">                 </span>=   u1
+<span class="Statement">  RW</span><span class="Constant">    refs/tags/  </span>=   TESTERS
+<span class="Statement">  -</span><span class="Constant">     refs/tags/  </span>=<span class="WarningMsg">   @all</span>
+<span class="Statement">  RW+</span><span class="Constant">               </span>=   <span class="PreProc">WRITERS</span>
+<span class="Statement">  RW</span><span class="Constant">                </span>=   INTERNS
+<span class="Statement">  R</span><span class="Constant">                 </span>=   <span class="PreProc">READERS</span>
+<span class="Statement">  RW+D</span><span class="Constant">              </span>=   MANAGERS
+</pre>
+
+<h3 id="important-warning-about-this-feature"><font color="red"><strong>IMPORTANT WARNING ABOUT THIS FEATURE</strong></font><a class="headerlink" href="#important-warning-about-this-feature" title="Permanent link"></a></h3>
+<div class="admonition danger">
+<p>Please make sure that none of the role names conflict with any of the user
+names or group names in the system.  For example, if you have a user
+called "foo" or a group called "@foo", make sure you do not include "foo"
+as a valid role in the ROLES hash.</p>
+</div>
+<p>You can keep things sane by using UPPERCASE names for roles, while keeping all
+your user and group names lowercase; then you don't have to worry about this
+problem.</p>
+<h2 id="setting-default-roles">setting default roles<a class="headerlink" href="#setting-default-roles" title="Permanent link"></a></h2>
+<p>You can setup some default role assignments as soon as a new wild repo is
+created.</p>
+<p>Here's how:</p>
+<ul>
+<li>
+<p>Enable the 'set-default-roles' feature in the rc file by uncommenting it
+    if it is already present or adding it to the ENABLE list if it is not.</p>
+</li>
+<li>
+<p>Supply a set of default role assignments for a wild repo regex by adding
+    lines like this to the repo config para:</p>
+<pre><code>option default.roles-1  =   READERS @all
+option default.roles-2  =   WRITERS @senior-devs
+</code></pre>
+</li>
+</ul>
+<p>This will then behave as if the <a href="../user/#setget-additional-permissions-for-repos-you-created">perms</a> command was used immediately after
+the repo was created to add those two role assignments.</p>
+<p>If you want to simulate the old (pre v3.5) <code>DEFAULT_ROLE_PERMS</code> rc file
+variable, just add them under a <code>repo @all</code> line.  (Remember that this only
+affects newly created wild repos, despite the '@all' name).</p>
+<h2 id="specifying-owners">specifying owners<a class="headerlink" href="#specifying-owners" title="Permanent link"></a></h2>
+<p>See the section on <code>OWNER_ROLENAME</code> in the <a href="../rc">rc file page</a>.</p>
+<h1 id="listing-wild-repos">listing wild repos<a class="headerlink" href="#listing-wild-repos" title="Permanent link"></a></h1>
+<p>In order to see what repositories were created from a wildcard, use the 'info'
+command.  Try <code>ssh git@host info -h</code> to get help on the info command.</p>
+<h1 id="deleting-a-wild-repo">deleting a wild repo<a class="headerlink" href="#deleting-a-wild-repo" title="Permanent link"></a></h1>
+<p>Run the whimsically named "D" command -- try <code>ssh git@host D -h</code> for more info
+on how to delete a wild repo.  (Yes the command is "D"; it's meant to be a
+counterpart to the "C" permission that allowed you to create the repo in the
+first place).  Of course this only works if your admin has enabled the command
+(gitolite ships with the command disabled for remote use).</p>
+<h1 id="appendix-1-owner-and-creator">appendix 1: owner and creator<a class="headerlink" href="#appendix-1-owner-and-creator" title="Permanent link"></a></h1>
+<p>A wild repo is created by one specific user.  This user is usually called the
+<strong>creator</strong> of the repo: his username is placed in a file called gl-creator in
+the (bare) repo directory, any permissions given in the gitolite.conf file to
+"CREATOR" will be applicable to this user, he is the only person who can give
+permissions to other users (by running the 'perms' command), etc.</p>
+<p>But, as I said in <a href="https://groups.google.com/d/msg/gitolite/nFbnQuO0ztM/tXiVs5ah2bcJ">this mail</a>:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+    Until about a year ago, Gitolite only knew the concept of a &quot;creator&quot;, and
+    there was only one.
+
+    But then people started seeing the need for more than one &quot;owner&quot;, because
+    wild repos may be *created* by one person, but they often needed to be
+    *administered* by one of several people.
+
+    So now, even though large parts of the documentation probably conflate
+    &quot;creator&quot; and &quot;owner&quot;, you can see wild.html ([wild]) and rc.html ([rc])
+    to actually understand how this larger group become the &quot;owner&quot;.
+</pre></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '..';</script>
+        <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+        <script src="../js/base.js"></script><div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

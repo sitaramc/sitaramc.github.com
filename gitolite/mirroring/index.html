@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>mirroring - Gitolite</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/gitolite.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+	
+	<script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="..">Gitolite</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="..">home</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../overview/">overview</a>
+</li>
+                            
+<li >
+    <a href="../concepts/">concepts, conventions, terminology</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../quick_install/">(unix/ssh experts) quick install and setup</a>
+</li>
+                            
+<li >
+    <a href="../install/">normal ssh mode install and setup</a>
+</li>
+                            
+<li >
+    <a href="../fool_proof_setup/">(if all else fails) fool-proof, step-by-step, install and setup</a>
+</li>
+                            
+<li >
+    <a href="../http/">HTTP mode install</a>
+</li>
+                            
+<li >
+    <a href="../migr/">migrating from v2</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+  <li class="dropdown-submenu">
+    <a href="#">basic</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../basic-admin/">basic administration</a>
+</li>
+            
+<li >
+    <a href="../conf/">the "conf" file (part 1)</a>
+</li>
+            
+<li >
+    <a href="../conf-2/">the "conf" file (part 2)</a>
+</li>
+            
+<li >
+    <a href="../rc/">the "rc" file</a>
+</li>
+            
+<li >
+    <a href="../user/">your users' view</a>
+</li>
+    </ul>
+  </li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">advanced</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../git-config/">setting git-config values</a>
+</li>
+            
+<li >
+    <a href="../options/">gitolite options</a>
+</li>
+            
+<li >
+    <a href="../wild/">ad hoc user-created ("wild") repos</a>
+</li>
+            
+<li >
+    <a href="../vref/">virtual refs (part 1)</a>
+</li>
+            
+<li >
+    <a href="../vref-2/">virtual refs (part 2)</a>
+</li>
+            
+<li >
+    <a href="../deleg/">delegation of admin duties</a>
+</li>
+            
+<li >
+    <a href="../gitweb-daemon/">gitweb and git-daemon</a>
+</li>
+            
+<li class="active">
+    <a href="./">mirroring</a>
+</li>
+    </ul>
+  </li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">customise</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../non-core/">core and "non-core" gitolite</a>
+</li>
+            
+<li >
+    <a href="../dev-notes/">writing your own non-core code</a>
+</li>
+            
+<li >
+    <a href="../triggers/">gitolite triggers</a>
+</li>
+            
+<li >
+    <a href="../list-non-core/">list of non-core programs shipped with gitolite</a>
+</li>
+    </ul>
+  </li>
+                            
+<li >
+    <a href="../cookbook/">(quick! how do I...) the cookbook</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../emergencies/">emergency!!</a>
+</li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">ssh</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../ssh/">ssh</a>
+</li>
+            
+<li >
+    <a href="../glssh/">how gitolite uses ssh</a>
+</li>
+            
+<li >
+    <a href="../sts/">ssh troubleshooting</a>
+</li>
+    </ul>
+  </li>
+                            
+<li >
+    <a href="../regex/">regular expressions</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../odds-and-ends/">miscellaneous features</a>
+</li>
+                            
+<li >
+    <a href="../namespaces/">using git namespaces</a>
+</li>
+                            
+<li >
+    <a href="../locking/">locking binary files</a>
+</li>
+                            
+<li >
+    <a href="../testing/">testing gitolite</a>
+</li>
+                            
+<li >
+    <a href="../package/">packaging gitolite</a>
+</li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">more about gitolite</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../files/">gitolite files & directories</a>
+</li>
+            
+<li >
+    <a href="../rc-33/">the 3.3 format rc file</a>
+</li>
+            
+<li >
+    <a href="../perf/">performance</a>
+</li>
+    </ul>
+  </li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">contrib</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../contrib/ssh-and-http/">Using both ssh and http</a>
+</li>
+            
+<li >
+    <a href="../contrib/putty/">Putty and Msysgit</a>
+</li>
+            
+<li >
+    <a href="../contrib/sskm/">Self-service key management</a>
+</li>
+            
+<li >
+    <a href="../contrib/ukm/">User key management</a>
+</li>
+            
+<li >
+    <a href="../contrib/README-emacs/">Emacs major mode</a>
+</li>
+    </ul>
+  </li>
+                            
+<li >
+    <a href="../no-way/">no way!</a>
+</li>
+                        </ul>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../gitweb-daemon/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../non-core/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#mirroring-using-gitolite">mirroring using gitolite</a></li>
+        <li class="main "><a href="#quick-intro">quick intro</a></li>
+        <li class="main "><a href="#caveats">caveats</a></li>
+        <li class="main "><a href="#setting-up-mirroring">setting up mirroring</a></li>
+            <li><a href="#the-initial-setup-and-the-rc-file">the initial setup and the rc file</a></li>
+            <li><a href="#conf-file-settings-and-syntax">conf file settings and syntax</a></li>
+        <li class="main "><a href="#v361-mirroring-failures">(v3.6.1+) mirroring failures</a></li>
+        <li class="main "><a href="#manually-synchronising-a-slave-repo">manually synchronising a slave repo</a></li>
+        <li class="main "><a href="#redirected-pushes">redirected pushes</a></li>
+        <li class="main "><a href="#appendix-a-hostname-substitution">appendix A: HOSTNAME substitution</a></li>
+        <li class="main "><a href="#appendix-b-efficiency-versus-paranoia">appendix B: efficiency versus paranoia</a></li>
+        <li class="main "><a href="#appendix-c-moving-the-admin-repo-to-a-different-master">appendix C: moving the admin repo to a different master</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="mirroring-using-gitolite">mirroring using gitolite<a class="headerlink" href="#mirroring-using-gitolite" title="Permanent link"></a></h1>
+<hr />
+<div class="admonition danger">
+<p class="admonition-title">v2 mirroring users:</p>
+<!-- duplicated in migr.mkd with minor differences -->
+
+<p>There are <strong>several</strong> important differences in mirroring; it's best to
+<strong>start from a clean slate on all slaves</strong>, using this documentation.</p>
+<p>If you're not willing to do that, you may be able to use the older, more
+detailed, documentation <a href="https://github.com/sitaramc/gitolite-doc/tree/master/archive">here</a> to manage the migration.  However, I
+cannot support that (mainly due to lack of time).</p>
+</div>
+<h1 id="quick-intro">quick intro<a class="headerlink" href="#quick-intro" title="Permanent link"></a></h1>
+<p>Mirroring is simple: you have one "master" server and one or more "slave"
+servers.  The slaves get updates only from the master; to the rest of the
+world they are at best read-only.</p>
+<p>In the following picture, each box (A, B, C, ...) is a repo.  The master
+server for a repo is colored red, slaves are green.  Users only push to a
+master server (red), and the master server then does a <code>git push --mirror</code> to
+the slaves.  The arrows show this mirror push.</p>
+<p><img alt="" src="../mi02.png" /></p>
+<p>Here's a more complete description of what gitolite can do:</p>
+<ul>
+<li>
+<p>Different masters and sets of slaves for different repos.</p>
+<p>This lets you do things like:</p>
+<ul>
+<li>Use the server closest to <em>most</em> of its developers as the master for
+    that repo.</li>
+<li>Mirror a repo to only some of the servers.</li>
+<li>Have repos that are purely local to a server (not mirrored at all).</li>
+<li>Push to a slave on demand or via cron (helps deal with bandwidth or
+    connectivity constraints).</li>
+</ul>
+<p>All this is possible whether or not the gitolite-admin repo is mirrored --
+that is, all servers have the <em>exact same</em> gitolite-admin repo or not.</p>
+</li>
+<li>
+<p>Pushes to a slave can be transparently forwarded to the real master.</p>
+<p>Your developers need not worry about where a repo's master is -- they just
+write to their local mirror for <em>all</em> repos, even if their local mirror is
+only a slave for some.</p>
+</li>
+</ul>
+<h1 id="caveats">caveats<a class="headerlink" href="#caveats" title="Permanent link"></a></h1>
+<ul>
+<li>
+<p>Mirroring by itself will never <em>create</em> a repo on a slave; it has to exist
+    and be prepared to receive updates from the master.</p>
+<p>The simplest way to ensure your repos exist on the slaves also is to
+mirror the special gitolite-admin repo as well, and this is what most
+sites do.</p>
+</li>
+<li>
+<p>There is limited support for auto-creating wild card repos and sending
+    'perms' info across, with the following caveats at present.  (Some of this
+    text won't make sense unless you know what those features are).</p>
+<ul>
+<li>
+<p><em><span class="red">WARNING</span>: it does NOT make sense to mirror
+    wild repos in setups where the authentication data is not the same
+    (i.e., where "alice" on the master and "alice" on a slave maybe
+    totally different people)</em>.</p>
+</li>
+<li>
+<p>This has only been minimally tested.  For example, complex setups or
+    asymmetric configs on master and slave, etc. have NOT been tested.</p>
+</li>
+<li>
+<p>Permission changes will only propagate on the next 'git push'.  Of
+    course, if you know the name of the slave server, you can run</p>
+<pre><code>ssh git@host mirror push slave-server-name repo-name
+</code></pre>
+</li>
+<li>
+<p>Using 'perms' on a slave is allowed but will neither propagate nor
+    persist.  They will be overwritten by whatever perms the master has
+    (even if it is an empty set) on the next 'git push'.</p>
+</li>
+<li>
+<p>As with lots of extra features in gitolite, smart http support is not
+    on my radar.  Don't ask.</p>
+</li>
+</ul>
+<p>Please test it out and let me know if something surprising happens.  Be
+aware that I have been known to claim bugs are features if I don't have
+time to fix them immediately :-)</p>
+</li>
+<li>
+<p>Mirroring is only for git repos.  Ancillary files like gl-creator and
+    gl-perms in the repo directory are not mirrored; you must do that
+    separately.  Files in the admin directory (like log files) are also not
+    mirrored.</p>
+</li>
+<li>
+<p>If you ever do a <a href="../emergencies/#bypassing-gitolite">bypass push</a>, mirroring will not work.
+    Mirroring checks also will not work -- for example, you can push to a
+    slave, which is not usually a good idea.  So don't bypass gitolite if the
+    repo is mirrored!</p>
+</li>
+<li>
+<p>From v3.5.3 on, gitolite uses an asynchronous push to the slaves, so that
+    the main push returns immediately, without waiting for the slave pushes to
+    complete.  Keep this in mind if you're writing scripts that do a push, and
+    then read one of the slaves immediately -- you will need to add a few
+    seconds of sleep in your script.</p>
+</li>
+</ul>
+<h1 id="setting-up-mirroring">setting up mirroring<a class="headerlink" href="#setting-up-mirroring" title="Permanent link"></a></h1>
+<p>This is in two parts: the initial setup and the rc file, followed by the conf
+file settings and syntax.</p>
+<h2 id="the-initial-setup-and-the-rc-file">the initial setup and the <a href="../rc">rc file</a><a class="headerlink" href="#the-initial-setup-and-the-rc-file" title="Permanent link"></a></h2>
+<p>On <strong>each</strong> server:</p>
+<ul>
+<li>
+<p>Install gitolite normally.  Make clones of the server's 'gitolite-admin'
+    repo on your workstation so you can admin them all from one place.</p>
+</li>
+<li>
+<p>Give the server a short, simple, "hostname" and set the HOSTNAME in the
+    rc file (i.e., <code>~/.gitolite.rc</code> on the server) to this name, for example
+    'mars'.  <em>Note: this has nothing to do with the hostname of the server in
+    networking or DNS terms, or in OS terms.  This is internal to gitolite</em>.</p>
+</li>
+<li>
+<p>Run ssh-keygen if needed and get an ssh key pair for the server.  Copy the
+    public key to a common area and name it after the host, but with 'server-'
+    prefixed.  For example, the pubkey for server 'mars' must be stored as
+    'server-mars.pub'.</p>
+</li>
+<li>
+<p>Copy all keys to all the admin repo clones on your workstation and and add
+    them as usual.  This is an <code>O(N^2)</code> operation ;-)</p>
+<p>You may have guessed that the prefix 'server-' is special, and
+distinguishes a human user from a mirroring peer.</p>
+</li>
+<li>
+<p>Create "host" aliases to refer to all other machines.  See <a href="../sts#appendix-4-ssh-host-aliases">here</a>
+    for what/how.</p>
+<p>The host alias for a host (in all other machines' <code>~/.ssh/config</code> files)
+MUST be the same as the <code>HOSTNAME</code> in the referred host's
+<code>~/.gitolite.rc</code>.  Gitolite mirroring <strong>requires</strong> this consistency in
+naming; things will NOT work otherwise.</p>
+<p>Normally you should be able to build one common file and append it to all
+the servers' <code>~/.ssh/config</code> files.</p>
+</li>
+<li>
+<p>The following <strong>MUST</strong> work for <strong>each pair</strong> of servers that must talk to
+    each other:</p>
+<pre><code># on server mars
+ssh phobos info
+# the response MUST start with "hello, server-mars..."
+</code></pre>
+<p>Note the exact syntax used; variations like "ssh git@phobos.example.com
+info" are NOT sufficient.  That is why you need the ssh host aliases.</p>
+<p>Check this command from <em>everywhere to everywhere else</em>, and make sure you
+get expected results.  <strong>Do NOT proceed otherwise.</strong></p>
+</li>
+<li>
+<p>Setup the gitolite.conf file on all the servers.  If the slaves are to be
+    exact copies of the master, you need to do the complete configuration only
+    on the master; the slaves can have just this because on the first push to
+    the master it will update all the slaves anyway:</p>
+<p><pre style="color: #ffffff; background-color: #000000;">
+<span class="Type">repo </span>gitolite-admin
+<span class="Statement">    RW+</span><span class="Constant">     </span>=   some-local-admin</p>
+<pre><code>option mirror.master    =   mars
+option mirror.slaves    =   phobos
+</code></pre>
+</pre>
+
+</li>
+<li>
+<p>When that is all done and tested, <strong>enable mirroring</strong> by going through
+    the rc file and uncommenting all the lines mentioning <code>Mirroring</code>.</p>
+</li>
+<li>
+<p>If you wish to allow your users to run the mirror command remotely
+    (usually <em>not</em> required), you need to enable it just like any other
+    command that is not enabled by default; see <a href="../non-core#gitolite-commands">gitolite commands</a>
+    for how.</p>
+</li>
+</ul>
+<h2 id="conf-file-settings-and-syntax">conf file settings and syntax<a class="headerlink" href="#conf-file-settings-and-syntax" title="Permanent link"></a></h2>
+<p>Mirroring is defined by the following <a class="wikilink" href="../options/">options</a>.  You can have different
+settings for different repos, and of course some repos may not have any mirror
+options at all -- they are then purely local.</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Type">repo </span>foo
+    ...access rules...
+
+    option mirror.master        =   mars
+    option mirror.slaves        =   phobos deimos
+    option mirror.redirectOK    =   all
+</pre>
+
+<p>The first line is easy, since a repo can have only one master.</p>
+<p>The second is a space separated list of hosts that are all slaves.  You can
+have several slave lists, as long as the config key starts with
+'mirror.slaves' and is unique.  For example.</p>
+<pre style="color: #ffffff; background-color: #000000;">
+    option mirror.slaves-1   =   phobos deimos
+    option mirror.slaves-2   =   io europa
+    option mirror.slaves-3   =   ganymede callisto
+</pre>
+
+<p>Do not repeat a key; then only the last line for that key will be effective.</p>
+<h3 id="v36-preventing-automatic-sync"><span class="gray">(v3.6+)</span> preventing automatic sync<a class="headerlink" href="#v36-preventing-automatic-sync" title="Permanent link"></a></h3>
+<p>Sometimes you don't want a repo to be mirrored automatically (as soon as
+someone pushes to the master) to all the slaves.  For whatever reasons, you
+have some slaves for whom you would like to trigger the sync later (and you
+don't mind the fact that those slaves are out of sync until then).</p>
+<p>To make that happen, use option lines like this instead of those shown above:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+    option mirror.slaves.nosync-1   =   phobos deimos
+</pre>
+
+<p>Except for the addition of a <code>.nosync</code> just after <code>slaves</code>, all the other
+rules are the same as before.</p>
+<h1 id="v361-mirroring-failures"><span class="gray">(v3.6.1+)</span> mirroring failures<a class="headerlink" href="#v361-mirroring-failures" title="Permanent link"></a></h1>
+<p>Since mirror pushes happen asynchronously (i.e, the user who originally pushed
+does not have to wait for the mirrors to be synced), any mirror push failures
+are not immediately visible to a human being, although you will find them if
+you look in gitolite's log files.</p>
+<p><span class="box-r">Note: since only a successful push can clear the error status, it
+follows that if a mirror push failed due to an invalid hostname, that status
+file will need to be manually deleted from the server.  Look in the bare repo
+directory on the server, for one or more files whose names start with
+'gl-slave' and delete the appropriate one.</span></p>
+<p>Therefore, when the output of the mirror push to some slave contains the word
+"fatal", gitolite saves the output. This saved output is printed to STDERR
+when any user attempts to clone/fetch/push the repo on the master server for
+that repo.  The hope is that someone will alert an admin to look at the
+problem.  This will continue to happen until the error condition is cleared
+(i.e., a successful mirror push happens to that specific slave).</p>
+<p>If you don't want these unexpected reports confusing users (or programs!),
+simply create a new rc variable called HUSH_MIRROR_STATUS and set it to 1.
+<span class="gray">(If you're not sure where in the rc file this should go, I suggest
+putting it right after the HOSTNAME variable).</span></p>
+<p>You can see the mirror status of any repo using the 'mirror status' command;
+the command line help for the mirror command ('gitolite mirror -h' or 'ssh
+git@host mirror -h') has details.</p>
+<h1 id="manually-synchronising-a-slave-repo">manually synchronising a slave repo<a class="headerlink" href="#manually-synchronising-a-slave-repo" title="Permanent link"></a></h1>
+<p>You can use the <code>gitolite mirror push</code> command on a master to manually
+synchronise any of its slaves.  Try it with <code>-h</code> to get usage info.</p>
+<p>Tip: if you want to do this to all the slaves, try this:</p>
+<pre><code>for s in `gitolite mirror list slaves reponame`
+do
+    gitolite mirror push $s reponame
+done
+</code></pre>
+<p>This command can also be run remotely; run <code>ssh git@host mirror -h</code> for
+details.</p>
+<p>Note: if your version of the mirror command does not support 'list slaves',
+use <code>gitolite git-config -r reponame mirror.slave | cut -f3</code> instead.</p>
+<h1 id="redirected-pushes">redirected pushes<a class="headerlink" href="#redirected-pushes" title="Permanent link"></a></h1>
+<p><strong>Please read carefully; there are security implications if you enable this
+for mirrors NOT under your control</strong>.</p>
+<p>Normally, a master, (and <em>only</em> a master), pushes to a slave, and the slaves
+are "read-only" to the users.  Gitolite allows a <em>slave</em> to receive pushes
+from a user and transparently redirect them to the <em>master</em>.</p>
+<p>This simplifies things for users in complex setups, letting them use their
+local mirror for both fetch and push access to all repos.</p>
+<p>The syntax for enabling this is one of these:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+    option mirror.redirectOK    =   all
+    option mirror.redirectOK    =   phobos deimos
+</pre>
+
+<p>The first syntax trusts all valid slaves to redirect user pushes, while the
+second one trusts only some slaves.</p>
+<p><strong>IMPORTANT NOTES</strong></p>
+<ul>
+<li>
+<p>This only works for ssh-based setups; you cannot use this feature in http
+    mode.</p>
+</li>
+<li>
+<p><strong>Authentication</strong> happens on the slave, but <strong>authorisation</strong> is on the
+    master.  The master is trusting the slave to authenticate the user
+    correctly, even though the actual push is going to the master.  This means
+    that user alice on the slave must be guaranteed to be the same as user
+    alice on the master.</p>
+</li>
+<li>
+<p>The part of the authorisation that happens before passing control to
+    git-receive-pack (see <a href="../conf#access-rules">access rules</a>) will happen on the slave as
+    well.</p>
+</li>
+<li>
+<p>You cannot redirect gitolite commands (like perms, etc).</p>
+</li>
+</ul>
+<h1 id="appendix-a-hostname-substitution">appendix A: HOSTNAME substitution<a class="headerlink" href="#appendix-a-hostname-substitution" title="Permanent link"></a></h1>
+<p>Wherever gitolite sees the word <code>%HOSTNAME</code>, it will replace it with the
+HOSTNAME supplied in the rc file, if one was supplied.  This lets you maintain
+configurations for all servers in one repo, yet have them act differently on
+different servers, by saying something like:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="PreProc">include </span><span class="Constant">&quot;%HOSTNAME/*.conf&quot;</span>
+</pre>
+
+<p>(See <a href="../conf#include-files">include</a> for more on the 'include' command).</p>
+<p>You can use it in other places also, for example:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Statement">    RW+</span><span class="Constant">     VREF/NAME/subs/%HOSTNAME/       </span>=   <span class="Identifier">@</span><span class="Error">%</span><span class="Identifier">HOSTNAME-admins</span>
+</pre>
+
+<p>(you still have to define @mars-admins, @phobos-admins, etc., but the actual
+VREF is now one line instead of one for each server!)</p>
+<h1 id="appendix-b-efficiency-versus-paranoia">appendix B: efficiency versus paranoia<a class="headerlink" href="#appendix-b-efficiency-versus-paranoia" title="Permanent link"></a></h1>
+<p>If you're paranoid enough to use mirrors, you should be paranoid enough to
+set this on each server, despite the possible CPU overhead:</p>
+<pre><code>git config --global receive.fsckObjects true
+</code></pre>
+<h1 id="appendix-c-moving-the-admin-repo-to-a-different-master">appendix C: moving the admin repo to a different master<a class="headerlink" href="#appendix-c-moving-the-admin-repo-to-a-different-master" title="Permanent link"></a></h1>
+<p>Moving only some repos (other than the gitolite-admin repo) to a different
+master is easy.  Just make the change in the gitolite.conf file, add, commit,
+and push.</p>
+<p>Even for the gitolite-admin repo, if the current master is ok, it's the same
+thing; just make the change and push <em>to the current master</em>.  Subsequent
+pushes will go to the new master, of course.</p>
+<p>But if the current master is already dead, there's a bit of a catch-22.  You
+can't push to the master because it is dead, and you can't push to any slave
+because they won't accept updates from anywhere but the server they think is
+the master.</p>
+<p>Here's how to resolve this:</p>
+<ol>
+<li>
+<p>On <em>each</em> slave:</p>
+<ul>
+<li>
+<p>Edit <code>~/.gitolite/conf/gitolite.conf</code> to change the master and slave
+    options for the gitolite-admin repo.</p>
+</li>
+<li>
+<p>Run <code>gitolite setup</code>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Now clone the admin repo from the <em>new</em> master to your workstation, change
+    the options for the rest of the repos (if needed), then add/commit/push.</p>
+</li>
+</ol>
+<p>And that should be all you need to do.</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '..';</script>
+        <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+        <script src="../js/base.js"></script><div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

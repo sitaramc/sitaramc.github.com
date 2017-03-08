@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Putty and Msysgit - Gitolite</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../css/gitolite.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+	
+	<script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../..">Gitolite</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="../..">home</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../../overview/">overview</a>
+</li>
+                            
+<li >
+    <a href="../../concepts/">concepts, conventions, terminology</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../../quick_install/">(unix/ssh experts) quick install and setup</a>
+</li>
+                            
+<li >
+    <a href="../../install/">normal ssh mode install and setup</a>
+</li>
+                            
+<li >
+    <a href="../../fool_proof_setup/">(if all else fails) fool-proof, step-by-step, install and setup</a>
+</li>
+                            
+<li >
+    <a href="../../http/">HTTP mode install</a>
+</li>
+                            
+<li >
+    <a href="../../migr/">migrating from v2</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+  <li class="dropdown-submenu">
+    <a href="#">basic</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../../basic-admin/">basic administration</a>
+</li>
+            
+<li >
+    <a href="../../conf/">the "conf" file (part 1)</a>
+</li>
+            
+<li >
+    <a href="../../conf-2/">the "conf" file (part 2)</a>
+</li>
+            
+<li >
+    <a href="../../rc/">the "rc" file</a>
+</li>
+            
+<li >
+    <a href="../../user/">your users' view</a>
+</li>
+    </ul>
+  </li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">advanced</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../../git-config/">setting git-config values</a>
+</li>
+            
+<li >
+    <a href="../../options/">gitolite options</a>
+</li>
+            
+<li >
+    <a href="../../wild/">ad hoc user-created ("wild") repos</a>
+</li>
+            
+<li >
+    <a href="../../vref/">virtual refs (part 1)</a>
+</li>
+            
+<li >
+    <a href="../../vref-2/">virtual refs (part 2)</a>
+</li>
+            
+<li >
+    <a href="../../deleg/">delegation of admin duties</a>
+</li>
+            
+<li >
+    <a href="../../gitweb-daemon/">gitweb and git-daemon</a>
+</li>
+            
+<li >
+    <a href="../../mirroring/">mirroring</a>
+</li>
+    </ul>
+  </li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">customise</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../../non-core/">core and "non-core" gitolite</a>
+</li>
+            
+<li >
+    <a href="../../dev-notes/">writing your own non-core code</a>
+</li>
+            
+<li >
+    <a href="../../triggers/">gitolite triggers</a>
+</li>
+            
+<li >
+    <a href="../../list-non-core/">list of non-core programs shipped with gitolite</a>
+</li>
+    </ul>
+  </li>
+                            
+<li >
+    <a href="../../cookbook/">(quick! how do I...) the cookbook</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../../emergencies/">emergency!!</a>
+</li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">ssh</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../../ssh/">ssh</a>
+</li>
+            
+<li >
+    <a href="../../glssh/">how gitolite uses ssh</a>
+</li>
+            
+<li >
+    <a href="../../sts/">ssh troubleshooting</a>
+</li>
+    </ul>
+  </li>
+                            
+<li >
+    <a href="../../regex/">regular expressions</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../../odds-and-ends/">miscellaneous features</a>
+</li>
+                            
+<li >
+    <a href="../../namespaces/">using git namespaces</a>
+</li>
+                            
+<li >
+    <a href="../../locking/">locking binary files</a>
+</li>
+                            
+<li >
+    <a href="../../testing/">testing gitolite</a>
+</li>
+                            
+<li >
+    <a href="../../package/">packaging gitolite</a>
+</li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">more about gitolite</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../../files/">gitolite files & directories</a>
+</li>
+            
+<li >
+    <a href="../../rc-33/">the 3.3 format rc file</a>
+</li>
+            
+<li >
+    <a href="../../perf/">performance</a>
+</li>
+    </ul>
+  </li>
+                            
+  <li class="dropdown-submenu">
+    <a href="#">contrib</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../ssh-and-http/">Using both ssh and http</a>
+</li>
+            
+<li class="active">
+    <a href="./">Putty and Msysgit</a>
+</li>
+            
+<li >
+    <a href="../sskm/">Self-service key management</a>
+</li>
+            
+<li >
+    <a href="../ukm/">User key management</a>
+</li>
+            
+<li >
+    <a href="../README-emacs/">Emacs major mode</a>
+</li>
+    </ul>
+  </li>
+                            
+<li >
+    <a href="../../no-way/">no way!</a>
+</li>
+                        </ul>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../ssh-and-http/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../sskm/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#putty-and-msysgit">putty and msysgit</a></li>
+        <li class="main "><a href="#msysgit-setup">msysgit setup</a></li>
+        <li class="main "><a href="#going-back-to-openssh">Going back to OpenSSH</a></li>
+        <li class="main "><a href="#putty-keys">Putty keys</a></li>
+            <li><a href="#creating-a-new-key">Creating a new key</a></li>
+            <li><a href="#importing-an-existing-key">Importing an existing key</a></li>
+            <li><a href="#loading-an-existing-key">Loading an existing key</a></li>
+            <li><a href="#public-key">Public key</a></li>
+            <li><a href="#putty-ageant">Putty ageant</a></li>
+        <li class="main "><a href="#sessionless-or-raw-hostname-usage">Sessionless or raw hostname usage</a></li>
+        <li class="main "><a href="#putty-sessions">Putty sessions</a></li>
+        <li class="main "><a href="#host-key-authentication">Host key authentication</a></li>
+        <li class="main "><a href="#debugging-multiple-putty-ageant-keys">Debugging multiple putty ageant keys</a></li>
+        <li class="main "><a href="#setperms-and-other-commands">Setperms and other commands</a></li>
+        <li class="main "><a href="#about-this-document">About this document</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="putty-and-msysgit">putty and msysgit<a class="headerlink" href="#putty-and-msysgit" title="Permanent link"></a></h1>
+<p>Copyright: Thomas Berezansky (tsbere (at) mvlc (dot) org).  Licensed under
+CC-BY-SA unported 3.0, <a href="http://creativecommons.org/licenses/by-sa/3.0/">http://creativecommons.org/licenses/by-sa/3.0/</a></p>
+<p>This document is intended for those who wish to use Putty/Plink with msysgit.</p>
+<p>If you need more help with putty or component programs I suggest looking at <a href="http://the.earth.li/~sgtatham/putty/latest/htmldoc/">the official putty documentation</a>.</p>
+<p><strong>If you are not already using Putty for SSH it is recommended you do <em>NOT</em> use it with msysgit.</strong></p>
+<p><strong>Please note that this only covers the client side of things, and does not involve server side components to troubleshooting. For that, please see the <a href="../../sts">ssh-troubleshooting document</a>.</strong></p>
+<p><a name="msysgit_setup"/></p>
+<h1 id="msysgit-setup">msysgit setup<a class="headerlink" href="#msysgit-setup" title="Permanent link"></a></h1>
+<p>Provided you have putty sessions msysgit should give you the option of specifying a location to plink. If it did not then you will need to add an environment variable named "GIT_SSH" to point at plink.exe, wherever you have that sitting.</p>
+<p>How to do that on your version of windows will likely vary, and is not covered here. For purposes of example, on a 64 bit Windows Vista machine the GIT_SSH value could be:</p>
+<pre><code>C:\Program Files (x86)\PuTTY\plink.exe
+</code></pre>
+<p>Note the lack of quotes.</p>
+<p>Testing that msysgit is properly configured can be done from the git bash shell. Simply type (case sensitive, include the quotes):</p>
+<pre><code>"$GIT_SSH" -V
+</code></pre>
+<p>You should get a response similar to this:</p>
+<pre><code>plink: Release 0.60
+</code></pre>
+<p>If instead you get a "command not found" type error you likely have a typo in your environment variable.</p>
+<p><a name="Going_back_to_OpenSSH"/></p>
+<h1 id="going-back-to-openssh">Going back to OpenSSH<a class="headerlink" href="#going-back-to-openssh" title="Permanent link"></a></h1>
+<p>If you wish to go back to OpenSSH all you need to do is delete the GIT_SSH environment variable. This will vary by your version of windows and thus is not covered here.</p>
+<p><a name="Putty_keys"/></p>
+<h1 id="putty-keys">Putty keys<a class="headerlink" href="#putty-keys" title="Permanent link"></a></h1>
+<p>If you do not already have putty private key files (.ppk) you will need to make at least one. You can either make a new one or convert an existing key to putty private key format.</p>
+<p>Either way, you will want to use puttygen. Note that you can go the other way if you want to stop using putty but keep the key by exporting the key to OpenSSH format.</p>
+<p><a name="Creating_a_new_key"/></p>
+<h2 id="creating-a-new-key">Creating a new key<a class="headerlink" href="#creating-a-new-key" title="Permanent link"></a></h2>
+<p>To make it simple, I suggest SSH-2 RSA and a bit size of at least 1024. Larger keys will take longer to generate and will take longer to authenticate you on most systems. Making the key is as simple at hitting "Generate".</p>
+<p>It is recommended to give the key a meaningful comment.</p>
+<p><a name="Importing_an_existing_key"/></p>
+<h2 id="importing-an-existing-key">Importing an existing key<a class="headerlink" href="#importing-an-existing-key" title="Permanent link"></a></h2>
+<p>If you already have an OpenSSH or ssh.com key you can import it using the "Import" option on the "Conversions" menu.</p>
+<p>If the key does not have a meaningful comment I would suggest adding one at this point.</p>
+<p><a name="Loading_an_existing_key"/></p>
+<h2 id="loading-an-existing-key">Loading an existing key<a class="headerlink" href="#loading-an-existing-key" title="Permanent link"></a></h2>
+<p>If you need to load an existing key to edit or view it you can do so from the File menu.</p>
+<p><a name="Public_key"/></p>
+<h2 id="public-key">Public key<a class="headerlink" href="#public-key" title="Permanent link"></a></h2>
+<p>To get your public key for use with gitolite, load (or generate, or import) your key into puttygen. There is a box labeled "Public key for pasting into OpenSSH <code>authorized_keys</code> file" there. Copy the text into your preferred text editor and save.</p>
+<p><a name="Putty_ageant"/></p>
+<h2 id="putty-ageant">Putty ageant<a class="headerlink" href="#putty-ageant" title="Permanent link"></a></h2>
+<p>Though not required in all cases you may wish to use the putty ageant, pageant, to load your key(s). This will allow for your key(s) to be passphrase protected but not have to enter the passphrase when you go to use them, provided you have already loaded the key into the ageant.</p>
+<p><a name="Sessionless_or_raw_hostname_usage"/></p>
+<h1 id="sessionless-or-raw-hostname-usage">Sessionless or raw hostname usage<a class="headerlink" href="#sessionless-or-raw-hostname-usage" title="Permanent link"></a></h1>
+<p>When using plink without a putty session you pretty much have to load your keys with putty ageant, if only so that plink can find them.</p>
+<p><a name="Putty_sessions"/></p>
+<h1 id="putty-sessions">Putty sessions<a class="headerlink" href="#putty-sessions" title="Permanent link"></a></h1>
+<p>In addition to hostnames msysgit can, when using putty, use putty sessions. This works in a manner similar to definitions in OpenSSH's <code>ssh_config</code> file. All settings in the session that apply to plink usage will be loaded, including the key file to use and even the username to connect to. Thus, instead of:</p>
+<pre><code>ssh://user@host.example.ext:port/repo
+</code></pre>
+<p>You can use:</p>
+<pre><code>ssh://session_name/repo
+</code></pre>
+<p><a name="Host_key_authentication"/></p>
+<h1 id="host-key-authentication">Host key authentication<a class="headerlink" href="#host-key-authentication" title="Permanent link"></a></h1>
+<p>Whether you are using hostnames or sessions you still run into one potential problem. Plink currently wants to validate the server's SSH host key before allowing you to connect, and when git calls plink there is no way to tell it yes. Thus, you may get something like this:</p>
+<pre><code>The server's host key is not cached in the registry. You
+have no guarantee that the server is the computer you
+think it is.
+The server's rsa2 key fingerprint is:
+ssh-rsa 2048 00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00
+Connection abandoned.
+fatal: The remote end hung up unexpectedly
+</code></pre>
+<p>Or, in the case of the host key changing, something like this:</p>
+<pre><code>WARNING - POTENTIAL SECURITY BREACH!
+The server's host key does not match the one PuTTY has
+cached in the registry. This means that either the
+server administrator has changed the host key, or you
+have actually connected to another computer pretending
+to be the server.
+The new rsa2 key fingerprint is:
+ssh-rsa 2048 00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00
+Connection abandoned.
+fatal: The remote end hung up unexpectedly
+</code></pre>
+<p>The solution is to call plink directly, or start putty and connect with it first. To use plink, open the Git Bash shell and enter:</p>
+<pre><code>"$GIT_SSH" hostname_or_session_name
+</code></pre>
+<p>When you do you will see something like this:</p>
+<pre><code>The server's host key is not cached in the registry. You
+have no guarantee that the server is the computer you
+think it is.
+The server's rsa2 key fingerprint is:
+ssh-rsa 2048 00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00
+If you trust this host, enter "y" to add the key to
+PuTTY's cache and carry on connecting.
+If you want to carry on connecting just once, without
+adding the key to the cache, enter "n".
+If you do not trust this host, press Return to abandon the
+connection.
+Store key in cache? (y/n)
+</code></pre>
+<p>Or, in the case of a changed key, a response like this:</p>
+<pre><code>WARNING - POTENTIAL SECURITY BREACH!
+The server's host key does not match the one PuTTY has
+cached in the registry. This means that either the
+server administrator has changed the host key, or you
+have actually connected to another computer pretending
+to be the server.
+The new rsa2 key fingerprint is:
+ssh-rsa 2048 00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00
+If you were expecting this change and trust the new key,
+enter "y" to update PuTTY's cache and continue connecting.
+If you want to carry on connecting but without updating
+the cache, enter "n".
+If you want to abandon the connection completely, press
+Return to cancel. Pressing Return is the ONLY guaranteed
+safe choice.
+Update cached key? (y/n, Return cancels connection)
+</code></pre>
+<p>In either case hit y and the key will be stored.</p>
+<p><a name="Debugging_multiple_putty_ageant_keys"/></p>
+<h1 id="debugging-multiple-putty-ageant-keys">Debugging multiple putty ageant keys<a class="headerlink" href="#debugging-multiple-putty-ageant-keys" title="Permanent link"></a></h1>
+<p>In the event you are using putty ageant with multiple keys loaded you may see the wrong key being used. In general, pageant keys are tried in the order they were loaded into the ageant. If you have descriptive comment on each of your keys you can try connecting with plink in verbose mode to see what keys are being tried. Simply open the Git bash shell and run:</p>
+<pre><code>"$GIT_SSH" -v user@hostname
+</code></pre>
+<p>Or, if using sessions with a pre-entered username:</p>
+<pre><code>"$GIT_SSH" -v session_name
+</code></pre>
+<p>In either case, you should look for lines like:</p>
+<pre><code>Trying Pageant key #0
+Authenticating with public key "My Key" from agent
+</code></pre>
+<p>The first says which (numerical) key the ageant is trying. The second tells you the key comment for the authenticating key. To my knowledge the second line should only show up once, for the valid key.</p>
+<p><a name="Setperms_and_other_commands"/></p>
+<h1 id="setperms-and-other-commands">Setperms and other commands<a class="headerlink" href="#setperms-and-other-commands" title="Permanent link"></a></h1>
+<p>When using wildcard repos the setperms command is very important, and other commands can come in handy as well. See their documentation for how to use them, but where they use:</p>
+<pre><code>ssh user@host command etc etc
+</code></pre>
+<p>You will want to use:</p>
+<pre><code>"$GIT_SSH" user@host command etc etc
+</code></pre>
+<p>Otherwise everything should be identical.</p>
+<p><a name="About_this_document"/></p>
+<h1 id="about-this-document">About this document<a class="headerlink" href="#about-this-document" title="Permanent link"></a></h1>
+<p>This document was written by Thomas Berezansky (tsbere (at) mvlc (dot) org) in the hopes that it would be useful to those using putty on windows and wishing to use git/gitolite with their putty keys and sessions.</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script><div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
