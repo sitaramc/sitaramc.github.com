@@ -497,7 +497,7 @@ you there again.  Especially the first bullet.</p>
     receives that key, things will work.  But we're not done yet.  We still
     need to make sure that this specific key is being offered/sent by the
     client, instead of the default key.  See <a href="../sts/#appendix-3-ssh-client-may-not-be-offering-the-right-key">appendix 3</a> and
-    <a href="../sts#appendix-4-ssh-host-aliases">appendix 4</a>.</p>
+    <a href="../sts/#appendix-4-ssh-host-aliases">appendix 4</a>.</p>
 </li>
 </ul>
 <h1 id="random-tips-tricks-and-notes">random tips, tricks, and notes<a class="headerlink" href="#random-tips-tricks-and-notes" title="Permanent link"></a></h1>
@@ -534,7 +534,7 @@ change to the admin repo.</p>
 work in 3.6.*, but when 3.7 is released (whenever that may be), it will not
 work, and you will have to use the new syntax described above.</p>
 <h2 id="distinguishing-one-key-from-another">distinguishing one key from another<a class="headerlink" href="#distinguishing-one-key-from-another" title="Permanent link"></a></h2>
-<p>Since a user can have <a href="../basic-admin#multiple-keys-per-user">more than one key</a>, it is sometimes useful
+<p>Since a user can have <a href="../basic-admin/#multiple-keys-per-user">more than one key</a>, it is sometimes useful
 to distinguish one key from another.  Sshd does not tell you even the
 fingerprint of the key that finally matched, so normally all you have is the
 <code>GL_USER</code> env var.</p>
@@ -738,7 +738,7 @@ you're using ssh-agent, otherwise these new keys may not work.</p>
 </code></pre>
 <p>If some keys <em>are</em> being offered, but not the key that was supposed to be
 used, you may be using ssh-agent (next bullet).  You may also need to
-create some host aliases in <code>~/.ssh/config</code> (<a href="../sts#appendix-4-ssh-host-aliases">appendix 4</a>).</p>
+create some host aliases in <code>~/.ssh/config</code> (<a href="../sts/#appendix-4-ssh-host-aliases">appendix 4</a>).</p>
 </li>
 <li>
 <p>(ssh-agent issues) If <code>ssh-add -l</code> responds with either "The agent has no

@@ -349,7 +349,7 @@ question... next!)</p>
 hooks have <code>GL_USER</code> as well as <code>GL_REPO</code> (which is the <a href="../concepts/#the-logical-repo-name">logical
 reponame</a>).</p>
 <p>A special form of the <a href="../options">option</a> syntax can be used to set
-<a href="../dev-notes#appendix-1-repo-specific-environment-variables">repo-specific environment variables</a>.</p>
+<a href="../dev-notes/#appendix-1-repo-specific-environment-variables">repo-specific environment variables</a>.</p>
 <p>Finally, note that triggers get a lot of relevant information from gitolite as
 arguments; see <a href="../triggers">here</a> for details.</p>
 <h1 id="apis">APIs<a class="headerlink" href="#apis" title="Permanent link"></a></h1>
@@ -428,7 +428,7 @@ trigger events, especially if they don't <em>need</em> any arguments.</p>
 <p>Syntactic sugar helpers are NOT complete, standalone, programs.  They must
 include a perl sub called <code>sugar_script</code> that takes in a listref, and returns
 a listref.  The listrefs point to a list that contains the entire conf file
-(with all <a href="../conf#include-files">include</a> processing already done).  You create a new list with
+(with all <a href="../conf/#include-files">include</a> processing already done).  You create a new list with
 contents modified as you like and return a ref to it.</p>
 <p>There are a couple of examples in src/syntactic-sugar.</p>
 <h1 id="appendix-1-repo-specific-environment-variables">appendix 1: repo-specific environment variables<a class="headerlink" href="#appendix-1-repo-specific-environment-variables" title="Permanent link"></a></h1>
@@ -516,7 +516,7 @@ separated.</p>
 <p>field 4: <code>ARGV=&lt;comma-separated list of command line arguments&gt;</code></p>
 <p>Usually this is just the gitolite username (the argument to
 gitolite-shell, as supplied by the forced command in the authorized
-keys file).  If you're <a href="../sts#giving-shell-access-to-gitolite-users">giving shell access</a> to some
+keys file).  If you're <a href="../sts/#giving-shell-access-to-gitolite-users">giving shell access</a> to some
 users, this would be <code>-s,username</code>.  That's two command line arguments
 ("-s" and the username), comma separated.</p>
 </li>

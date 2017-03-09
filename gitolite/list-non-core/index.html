@@ -336,7 +336,7 @@
     If a non-core feature is shipped with gitolite, but information about it
     is not found in this page, it can be found within the source code; please
     look there.</p>
-<p><a href="../non-core#gitolite-commands">Commands</a>, however, have some extra magic,
+<p><a href="../non-core/#gitolite-commands">Commands</a>, however, have some extra magic,
 which is not available to the other types of non-core programs:</p>
 <ul>
 <li>
@@ -378,10 +378,10 @@ that in most cases running it with <code>-h</code> will give you enough to work 
     gitolite options also</li>
 <li><strong>help</strong> -- see note 1 at the top of this page</li>
 <li><em>htpasswd</em> -- sets your htpasswd</li>
-<li><strong><a href="../user#the-info-command">info</a></strong> -- print git/gitolite version, list repos you have access to</li>
+<li><strong><a href="../user/#the-info-command">info</a></strong> -- print git/gitolite version, list repos you have access to</li>
 <li><em><a href="../locking">lock</a></em> -- lock binary files for exclusive use (in combination
     with the 'lock' VREF)</li>
-<li><em><a href="../mirroring#manually-synchronising-a-slave-repo">mirror</a></em> -- manually mirror a repo to a slave</li>
+<li><em><a href="../mirroring/#manually-synchronising-a-slave-repo">mirror</a></em> -- manually mirror a repo to a slave</li>
 <li><em>motd</em> <span class="gray">(v3.6.1+)</span> -- set/remove a message of the day, per repo or for the whole
     system</li>
 <li><em>option</em> <span class="gray">(v3.6.3+)</span> -- allow repo owner to set options for a repo</li>
@@ -423,7 +423,7 @@ combination of a trigger and something else, like a command.</p>
 <li><strong><a href="../mirroring">Mirroring</a></strong> -- mirroring all or some repos</li>
 <li><em>Motd</em> <span class="gray">(v3.6.1+)</span> -- allows printing a message of the day to
     STDERR in ssh mode</li>
-<li><em><a href="../list-non-core#partial-copy-selective-read-control-for-branches">partial-copy</a></em> -- simulated read control for branches (in combination
+<li><em><a href="../list-non-core/#partial-copy-selective-read-control-for-branches">partial-copy</a></em> -- simulated read control for branches (in combination
     with the partial-copy VREF)</li>
 <li><em>RefexExpr</em> -- (in combination with VREF/refex-expr) logical expressions
     over refexes, like "refex-1 and not refex-2".  (Example: changing file
@@ -464,7 +464,7 @@ details.  However, here's a list of VREFs shipped with gitolite:</p>
 <li><em>MAX_NEWBIN_SIZE</em> -- restrict by size of new binary files (helps catch
     people checking in random PDFs, JARs, WARs, etc.)</li>
 <li><strong><a href="../vref-2#restricting-pushes-by-dirfile-name">NAME</a></strong> -- restrict pushes by dir/file name</li>
-<li><a href="../list-non-core#partial-copy-selective-read-control-for-branches">partial-copy</a> -- simulated read control for branches (in combination
+<li><a href="../list-non-core/#partial-copy-selective-read-control-for-branches">partial-copy</a> -- simulated read control for branches (in combination
     with the partial-copy trigger)</li>
 <li><em>refex-expr</em> -- (in combination with the refex-expr trigger) logical
     expressions over refexes, like "refex-1 and not refex-2".  (Example:

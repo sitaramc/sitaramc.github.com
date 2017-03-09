@@ -397,7 +397,7 @@ to push a branch called "xyz".</p>
 </pre>
 
 <p>After adding a default refex and expanding the supplied ones (see the
-<a href="../conf#the-refex-field">refex</a> section earlier), this is what it looks like.  We've added line
+<a href="../conf/#the-refex-field">refex</a> section earlier), this is what it looks like.  We've added line
 numbers for convenience; we'll see why later.</p>
 <pre style="color: #ffffff; background-color: #000000;">
 <span id="L1" class="LineNr"> 1 </span><span class="Comment"># managers should be able to read any repo</span>
@@ -573,7 +573,7 @@ situation to the above in terms of our ability to enumerate all the repos.</p>
 </pre>
 
 <p>To see why this works, you need to understand that for <a class="wikilink" href="../options/">options</a> and
-<a href="../git-config">config</a> lines, a later setting <a href="../git-config#overriding-config-values">overrides</a> earlier
+<a href="../git-config">config</a> lines, a later setting <a href="../git-config/#overriding-config-values">overrides</a> earlier
 ones.  So we set it to 1 for all repos, then selectively set it to 0 for some.</p>
 <p>This means the "deny-rules" option applies to <em>all the repos except the "open"
 repos</em>, and so the first rule encountered by gitweb and daemon is a deny rule,
@@ -596,7 +596,7 @@ rewind, but not <em>delete</em> a ref.  The <code>C</code> and <code>D</code> qu
 <p>If a rule specifies <code>RWC</code> or <code>RW+C</code>, then <em>rules that do NOT have the C
     qualifier will no longer permit <strong>creating</strong> a ref</em>.</p>
 <p><font color="gray">Please do not confuse this with the standalone <code>C</code>
-permission that allows someone to <a href="../wild#user-creating-a-specific-repo">create</a> a <strong>repo</strong></font></p>
+permission that allows someone to <a href="../wild/#user-creating-a-specific-repo">create</a> a <strong>repo</strong></font></p>
 </li>
 <li>
 <p>If a rule specifies <code>RWD</code> or <code>RW+D</code>, then <em>rules that do NOT have the D

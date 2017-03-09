@@ -345,7 +345,7 @@ License</a></p>
 <p>User key management allows certain users to add and remove keys.</p>
 <p>The key management is done using a command called <code>ukm</code>. This command
 must be enabled for remote use by both the <a href="#SYSADMIN">sysadmin</a> and the
-<a href="#GA">gitolite-admin</a> (see <a href="../../non-core#gitolite-commands">here</a> for more on this) or look
+<a href="#GA">gitolite-admin</a> (see <a href="../../non-core/#gitolite-commands">here</a> for more on this) or look
 below.</p>
 <hr />
 <h1 id="important-warning">Important Warning!<a class="headerlink" href="#important-warning" title="Permanent link"></a></h1>
@@ -361,7 +361,7 @@ default it uses ssh as its authentication mechanism. Sure, ssh is
 not at all part of gitolite and it can be replaced by other means, but
 still there is a directory <code>gitolite-admin/keydir</code> that is reserved
 for public ssh keys.</p>
-<p>In fact, management of <a href="../../basic-admin/#addremove-users">users</a> and <a href="../../basic-admin#multiple-keys-per-user">multiple keys</a> per
+<p>In fact, management of <a href="../../basic-admin/#addremove-users">users</a> and <a href="../../basic-admin/#multiple-keys-per-user">multiple keys</a> per
 user is not actually a gitolite administration stuff. It's external to
 gitolite. In a future version, <code>ukm</code> could be used as an equivalent of
 the <code>keydir/</code> directory from the <code>gitolite-admin</code> repo (currently it
@@ -745,13 +745,13 @@ probably fail. Then simply redo the command after a while.</p>
 <li><strong>USERID</strong><a id="USERID"></a>:
   The <a href="#KEYID">KEYID</a> given on the command line will be translated
   into a USERID which is used inside <code>conf/gitolite.conf</code> or for the
-  <a href="../../user/#setget-additional-permissions-for-repos-you-created">perms</a> <a href="../../non-core#gitolite-commands">command</a> of gitolite.</li>
+  <a href="../../user/#setget-additional-permissions-for-repos-you-created">perms</a> <a href="../../non-core/#gitolite-commands">command</a> of gitolite.</li>
 </ul>
 <h1 id="security-note">Security note<a class="headerlink" href="#security-note" title="Permanent link"></a></h1>
 <p><a id="MULTIKEY" />
 <a href="#SKM">Super key managers</a> can basically add any key.
 <a href="#GKM">Guest key managers</a> are not allowed to add
-<a href="../../basic-admin#multiple-keys-per-user">multiple keys</a> and this restriction is hardcoded.</p>
+<a href="../../basic-admin/#multiple-keys-per-user">multiple keys</a> and this restriction is hardcoded.</p>
 <p>Suppose Alice adds <code>bob.pub</code> as <code>bob@example.org</code> and David adds
 <code>eve.pub</code> under the keyid <code>bob@example.org@foo</code>. (Of course, only Eve
 and not Bob has the private key correspoinding to <code>eve.pub</code>.) This

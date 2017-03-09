@@ -429,7 +429,7 @@ available to remote users (as <code>ssh git@host foo</code>), add the line:</p>
 </code></pre>
 <p>(including the comma at the end) to the ENABLE list in the rc file.</p>
 <h1 id="hooks">hooks<a class="headerlink" href="#hooks" title="Permanent link"></a></h1>
-<p>Note: the main documentation for this feature starts <a href="../non-core#hooks-and-gitolite">here</a>.</p>
+<p>Note: the main documentation for this feature starts <a href="../non-core/#hooks-and-gitolite">here</a>.</p>
 <h2 id="adding-your-own-update-hooks">adding your own update hooks<a class="headerlink" href="#adding-your-own-update-hooks" title="Permanent link"></a></h2>
 <p>You have some update hooks (for example crlf checking) that you want to
 include in gitolite.  Assuming the hook itself is tested and works as a normal
@@ -699,7 +699,7 @@ repo, while still leaving it to be created by a user in the normal way.</p>
 
 <p>The repo will be created as a <strong>normal</strong> (not wild) repo as soon as you push,
 which means you can't run the <a href="../user/#setget-additional-permissions-for-repos-you-created">perms</a> command on it to add people to the
-READERS and WRITERS <a href="../wild#roles">roles</a>, or do other things that wild repos allow.</p>
+READERS and WRITERS <a href="../wild/#roles">roles</a>, or do other things that wild repos allow.</p>
 <p>The mental nudge you need to deal with this is to think what you would do if
 you had to write the same rule for more than one repo, say, any repo starting
 with "foo/special-" followed by a number.  You'd use a pattern.  And a pattern
@@ -716,11 +716,11 @@ prevents an ordinary repo from being created.</p>
 perfectly valid and supported.</p>
 <p>Note that you do NOT need a "C" rule in there, since the pattern is a subset
 of the previous one (<code>foo/..*</code>), everything there applies to this repo also.
-If you're not sure why that is, you may need to read up on <a href="../conf#rule-accumulation">rule
+If you're not sure why that is, you may need to read up on <a href="../conf/#rule-accumulation">rule
 accumulation</a>.</p>
 <h1 id="moving-stuff-around">moving stuff around<a class="headerlink" href="#moving-stuff-around" title="Permanent link"></a></h1>
 <h2 id="moving-a-gitolite-install-from-one-machine-to-another">moving a gitolite install from one machine to another<a class="headerlink" href="#moving-a-gitolite-install-from-one-machine-to-another" title="Permanent link"></a></h2>
-<p>See <a href="../install#moving-servers">moving servers</a>.</p></div>
+<p>See <a href="../install/#moving-servers">moving servers</a>.</p></div>
         </div>
 
         <footer class="col-md-12">

@@ -363,7 +363,7 @@ new repo that you know was setup.</p>
 <h1 id="normal-and-wild-repos">normal and wild repos<a class="headerlink" href="#normal-and-wild-repos" title="Permanent link"></a></h1>
 <p>Gitolite has two kinds of repos.  Normal repos are specified by their full
 names in the config file.  "Wildcard" repos are specified by a regex in the
-config file.  Try the <a href="../user#the-info-command"><code>info</code> command</a> and see if it shows any lines
+config file.  Try the <a href="../user/#the-info-command"><code>info</code> command</a> and see if it shows any lines
 that look like regex patterns, (with a "C" permission).</p>
 <p>If you see any, it means you are allowed to create brand new repos whose names
 fit that regex.  Normally, you create such repos simply by cloning them or
@@ -394,7 +394,7 @@ namespace, starting with <code>pub/&lt;username&gt;/</code>).</p>
 <span class="Statement">    R</span><span class="Constant">       </span>=   <span class="PreProc">READERS</span>
 </pre>
 
-<p><span class="gray">(he could also add other <a href="../wild#roles">roles</a> but then he
+<p><span class="gray">(he could also add other <a href="../wild/#roles">roles</a> but then he
 needs to read the documentation).</span></p>
 <p>Once he does this, you can then use the <code>perms</code> command (run <code>ssh git@host perms -h</code>
 for help) to set permissions for other users by specifying which

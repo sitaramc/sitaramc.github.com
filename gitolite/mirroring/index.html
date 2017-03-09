@@ -465,7 +465,7 @@ file settings and syntax.</p>
 distinguishes a human user from a mirroring peer.</p>
 </li>
 <li>
-<p>Create "host" aliases to refer to all other machines.  See <a href="../sts#appendix-4-ssh-host-aliases">here</a>
+<p>Create "host" aliases to refer to all other machines.  See <a href="../sts/#appendix-4-ssh-host-aliases">here</a>
     for what/how.</p>
 <p>The host alias for a host (in all other machines' <code>~/.ssh/config</code> files)
 MUST be the same as the <code>HOSTNAME</code> in the referred host's
@@ -507,7 +507,7 @@ option mirror.slaves    =   phobos
 <li>
 <p>If you wish to allow your users to run the mirror command remotely
     (usually <em>not</em> required), you need to enable it just like any other
-    command that is not enabled by default; see <a href="../non-core#gitolite-commands">gitolite commands</a>
+    command that is not enabled by default; see <a href="../non-core/#gitolite-commands">gitolite commands</a>
     for how.</p>
 </li>
 </ul>
@@ -614,7 +614,7 @@ second one trusts only some slaves.</p>
 </li>
 <li>
 <p>The part of the authorisation that happens before passing control to
-    git-receive-pack (see <a href="../conf#access-rules">access rules</a>) will happen on the slave as
+    git-receive-pack (see <a href="../conf/#access-rules">access rules</a>) will happen on the slave as
     well.</p>
 </li>
 <li>
@@ -630,7 +630,7 @@ different servers, by saying something like:</p>
 <span class="PreProc">include </span><span class="Constant">&quot;%HOSTNAME/*.conf&quot;</span>
 </pre>
 
-<p>(See <a href="../conf#include-files">include</a> for more on the 'include' command).</p>
+<p>(See <a href="../conf/#include-files">include</a> for more on the 'include' command).</p>
 <p>You can use it in other places also, for example:</p>
 <pre style="color: #ffffff; background-color: #000000;">
 <span class="Statement">    RW+</span><span class="Constant">     VREF/NAME/subs/%HOSTNAME/       </span>=   <span class="Identifier">@</span><span class="Error">%</span><span class="Identifier">HOSTNAME-admins</span>
