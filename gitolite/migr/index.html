@@ -446,7 +446,7 @@ references the new VREF!</p>
 <p><code>gl-perms</code> files: setting perms of R and RW will no longer work; you have
     to say READERS and WRITERS now.  Suggested command:</p>
 <p><pre style="color: #ffffff; background-color: #000000;">
-<span class="Statement">find</span> <span class="Special"><code>gitolite query-rc GL_REPO_BASE</code></span> <span class="Special">-name</span> gl-perms |
+<span class="Statement">find</span> <span class="Special">`</span>gitolite query-rc GL_REPO_BASE<span class="Special">`</span> <span class="Special">-name</span> gl-perms |
     xargs perl <span class="Special">-pi</span> <span class="Special">-e</span> <span class="Statement">'</span><span class="Constant">s/\bR\b/READERS/;s/\bRW\b/WRITERS/</span><span class="Statement">'</span>
 </pre></p>
 </li>
