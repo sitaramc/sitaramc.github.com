@@ -336,6 +336,12 @@
                 <div class="col-md-9" role="main">
 
 <h1 id="install-and-setup">install and setup<a class="headerlink" href="#install-and-setup" title="Permanent link"></a></h1>
+<div class="admonition danger">
+<p class="admonition-title">IMPORTANT</p>
+<p>Almost nothing in gitolite requires <code>root</code> (with some obvious exceptions).
+Unless the documentation says "do this from <code>root</code>", assume it is to be
+done from the <a href="../concepts/#the-hosting-user">hosting user</a> account.</p>
+</div>
 <hr />
 <div class="admonition danger">
 <p>This page is about an ssh mode installation.  It should work for most
@@ -459,8 +465,6 @@ package manager) and setting it up.  The install step gets the code to where
 you want it.  The setup step creates the files and directories gitolite needs,
 including the special gitolite-admin repo, and makes you an administrator so
 you can manage it remotely.</p>
-<p><strong>You do not need to be <code>root</code> for any of this.  You are expected to log in to
-the gitolite <a href="../concepts/#the-hosting-user">hosting user</a>.</strong></p>
 <p>If you install gitolite using a package manager, you should check your
 distro-standard mechanisms or distro-supplied documentation for how to
 complete the installation.</p>
