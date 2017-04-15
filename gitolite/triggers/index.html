@@ -541,7 +541,14 @@ by latching onto multiple events and sharing data to do something)</em>.</p>
     brand new env var that contains the <em>comment</em> field of the ssh pubkey that
     was used to gain access, using the information <a href="../sts/#distinguishing-one-key-from-another">here</a>.</p>
 </li>
-</ol></div>
+</ol>
+<!--
+
+  - PRE_GIT, ACCESS_1, and ACCESS_2 must only write to STDERR
+
+  - perl triggers should not chdir() away
+
+--></div>
         </div>
 
         <footer class="col-md-12">
