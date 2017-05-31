@@ -497,6 +497,12 @@ together, you can do that also.  Here's how.</p>
 <li>
 <p>Add your hooks here, with descriptive names (i.e., not "post-receive",
     etc., but maybe "jenkins" or "deploy" or whatever).</p>
+<ul>
+<li>As of v3.6.7, you can also put them in subdirectories for convenience
+    (like if you have too many repo specific hooks).  For instance, you
+    could put some hook code in <code>foo/bar</code>; the symlink in the repo's hooks
+    directory will be created as if you had called it <code>foo_bar</code>.</li>
+</ul>
 </li>
 <li>
 <p>Uncomment the 'repo-specific-hooks' line in the rc file or add it to the
