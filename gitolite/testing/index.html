@@ -331,7 +331,8 @@ userid</strong>.</font></p>
 safely</a>.</p>
 <p>To run the full test suite, create a <strong>throw-away userid</strong>, log in to it, then
 run these commands:</p>
-<pre><code>git clone git://github.com/sitaramc/gitolite
+<pre><code>git config --global include.path ~/.gitconfig.local
+git clone git://github.com/sitaramc/gitolite
 cd gitolite
 prove
 </code></pre>
