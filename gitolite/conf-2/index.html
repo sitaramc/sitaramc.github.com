@@ -327,6 +327,7 @@
             <li><a href="#summary-of-permissions">summary of permissions</a></li>
         <li class="main "><a href="#appendix-2-gitolite-access-check-flow">appendix 2: gitolite access check flow</a></li>
             <li><a href="#putting-it-all-together">putting it all together</a></li>
+        <li class="main "><a href="#appendix-3-embedding-test-code-in-your-conf">appendix 3: embedding test code in your conf</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -702,7 +703,23 @@ others are rare, and anyway it is easy to extrapolate to them.</span></p>
 </table>
 <p>As you can see, deny rules are ignored by check #1 -- they're not tested in
 any way.  For check #2, if there is a deny rule whose refex matched the ref,
-access is denied (as you'd expect).</p></div>
+access is denied (as you'd expect).</p>
+<h1 id="appendix-3-embedding-test-code-in-your-conf">appendix 3: embedding test code in your conf<a class="headerlink" href="#appendix-3-embedding-test-code-in-your-conf" title="Permanent link"></a></h1>
+<p>As of v3.6.7, it is possible to embed test code within gitolite.conf.  This
+can be useful if your conf file is complicated, and you need a way to make
+sure that any changes are not messing with your most important restrictions.</p>
+<p>Full details, including preparation and caveats, are in
+<code>contrib/utils/testconf</code>, but here's a teaser example:</p>
+<pre><code>repo foo
+    RW+     =   u1
+    RW      =   u2
+
+=begin testconf
+gitolite access -q foo u1 + any || echo FAILED
+gitolite access -q foo u2 + any &amp;&amp; echo FAILED
+gitolite access -q foo u2 W any || echo FAILED
+=end
+</code></pre></div>
         </div>
 
         <footer class="col-md-12">
