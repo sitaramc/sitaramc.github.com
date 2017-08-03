@@ -385,17 +385,17 @@ used by various features", add this (including the trailing comma):</p>
 and is available <a href="../contrib/ssh-and-http">here</a>.</p>
 <h1 id="usage">usage<a class="headerlink" href="#usage" title="Permanent link"></a></h1>
 <h2 id="client-side">client side<a class="headerlink" href="#client-side" title="Permanent link"></a></h2>
-<p>Git URLs look like <code>http://user:password@server/git/reponame.git</code>.</p>
+<p>Git URLs look like <code>https://user:password@server/git/reponame.git</code>.</p>
 <p>The custom commands, like "info", "expand" should be handled as follows.  The
 command name will come just after the <code>/git/</code>, followed by a <code>?</code>, followed by
 the arguments, with <code>+</code> representing a space.  Here are some examples:</p>
 <pre style="color: #ffffff; background-color: #000000;">
 <span class="Comment"># ssh git@server info</span>
-curl <a href="http://user:password@server/git/info">http://user:password@server/git/info</a>
+curl <a href="https://user:password@server/git/info">https://user:password@server/git/info</a>
 <span class="Comment"># ssh git@server info repopatt</span>
-curl <a href="http://user:password@server/git/info?repopatt">http://user:password@server/git/info?repopatt</a>
+curl <a href="https://user:password@server/git/info?repopatt">https://user:password@server/git/info?repopatt</a>
 <span class="Comment"># ssh git@server info repopatt user1 user2</span>
-curl <a href="http://user:password@server/git/info?repopatt+user1+user2">http://user:password@server/git/info?repopatt+user1+user2</a>
+curl <a href="https://user:password@server/git/info?repopatt+user1+user2">https://user:password@server/git/info?repopatt+user1+user2</a>
 </pre>
 
 <p>With a few nice shell aliases, you won't even notice the horrible convolutions

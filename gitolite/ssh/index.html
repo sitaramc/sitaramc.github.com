@@ -397,12 +397,12 @@ to have set up.  Even the user name comes from the <code>REMOTE_USER</code> envi
 variable instead of as a command line argument in this case.</p>
 <p>However, it has to be an authentication system that is compatible with sshd or
 httpd in some form.  Why?  Because the git <em>client</em> accessing the server only
-knows those 2 protocols to "speak git".  (Well, the <code>git://</code> protocol is
+knows those 2 protocols to "speak git".  (Well, the <code>https://</code> protocol is
 unauthenticated, and <code>file://</code> doesn't really apply to this discussion, so
 we're ignoring those).</p>
 <p>For example, let's say you have an LDAP-based authentication system somewhere.
 It is possible to make apache use that to authenticate users, so when a user
-accesses a git url using <code>http://sitaram:password@git.example.com/repo</code>, it is
+accesses a git url using <code>https://sitaram:password@git.example.com/repo</code>, it is
 LDAP that does the actual authentication.  [I wouldn't know how to do it but I
 know it is possible.  Patches to this doc explaining how are welcome!]</p>
 <p>There are also ssh daemons that use LDAP to store the authorised keys (instead

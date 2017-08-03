@@ -332,7 +332,7 @@ safely</a>.</p>
 <p>To run the full test suite, create a <strong>throw-away userid</strong>, log in to it, then
 run these commands:</p>
 <pre><code>git config --global include.path ~/.gitconfig.local
-git clone git://github.com/sitaramc/gitolite
+git clone https://github.com/sitaramc/gitolite
 cd gitolite
 prove
 </code></pre>
@@ -349,7 +349,7 @@ suite generally requires a more recent git.</p>
 <li><code>$HOME/bin</code> is in <code>$PATH</code></li>
 <li>sshd allows incoming ssh to this userid, at least from localhost</li>
 </ul>
-<p>Gitolite's test suite is mostly written using <a href="http://github.com/sitaramc/tsh">tsh</a> -- the "testing shell".
+<p>Gitolite's test suite is mostly written using <a href="https://github.com/sitaramc/tsh">tsh</a> -- the "testing shell".
 Take a look at some of the scripts and you will see what it looks like.  It
 has a few quirks and nuances, but it's fine for what I need here.</p>
 <p>The tests also use a somewhat convoluted system of environment variables in
