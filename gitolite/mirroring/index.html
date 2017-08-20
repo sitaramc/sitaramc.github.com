@@ -328,6 +328,7 @@
         <li class="main "><a href="#appendix-a-hostname-substitution">appendix A: HOSTNAME substitution</a></li>
         <li class="main "><a href="#appendix-b-efficiency-versus-paranoia">appendix B: efficiency versus paranoia</a></li>
         <li class="main "><a href="#appendix-c-moving-the-admin-repo-to-a-different-master">appendix C: moving the admin repo to a different master</a></li>
+        <li class="main "><a href="#appendix-d-fixing-a-broken-slave">appendix D: fixing a broken slave</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -687,7 +688,37 @@ the master.</p>
     way of knowing, short of recording the failure in some *other* place that
     a grandparent task can inspect and act on.
 
---></div>
+-->
+
+<h1 id="appendix-d-fixing-a-broken-slave">appendix D: fixing a broken slave<a class="headerlink" href="#appendix-d-fixing-a-broken-slave" title="Permanent link"></a></h1>
+<p>Let's say you had</p>
+<pre><code>option mirror.master        =   mars
+option mirror.slaves        =   phobos deimos
+</code></pre>
+<p>and you then accidentally removed <code>phobos</code> and pushed.</p>
+<p>You quickly realise your error and put the line back, then push again, only to
+realise that phobos is now unreachable.  It took the previous push to heart
+and updated its internal state accordingly, and any subsequent attempts to
+touch the gitolite-admin repo on phobos results in the message:</p>
+<pre><code>FATAL: phobos: 'gitolite-admin' is mirrored but not here
+</code></pre>
+<p>This is basically saying, "yes I see that repo in the config, but I (phobos)
+am neither the master nor one of the slaves for it, so please don't ask me
+about it!".  You're basically locked out of phobos now.</p>
+<p>The solution is this:</p>
+<ul>
+<li>
+<p>log on to phobos' gitolite shell account</p>
+</li>
+<li>
+<p>edit <code>~/.gitolite/conf/gitolite.conf</code> to fix the mirroring options for the
+    gitolite-admin repo.</p>
+</li>
+<li>
+<p>run <code>gitolite setup</code>.</p>
+</li>
+</ul>
+<p>That should do it.</p></div>
         </div>
 
         <footer class="col-md-12">
