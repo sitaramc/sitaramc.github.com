@@ -329,6 +329,8 @@
         <li class="main "><a href="#the-rc-module">the Rc module</a></li>
         <li class="main "><a href="#the-hooks-module">the Hooks module</a></li>
         <li class="main "><a href="#the-rest">the rest...</a></li>
+        <li class="main "><a href="#security-notes">security notes</a></li>
+        <li class="main "><a href="#appendix-a-accessing-the-documentation-offline">appendix A: accessing the documentation offline</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -415,7 +417,7 @@ for details) happens in this module.</p>
 <h2 id="confload"><code>Conf::Load</code><a class="headerlink" href="#confload" title="Permanent link"></a></h2>
 <p><code>Conf::Load</code> is the other of the two workhorses of gitolite.</p>
 <p>The most important function it exports is <code>access</code>, which is used by
-<code>gitolite-shell</code> as well as the update hook code to check for permissions.
+<code>gitolite-shell</code> as well as by the update hook code to check for permissions.
 This code has a few optimisations, including very simple, localised, caching
 of parsed conf files when needed.</p>
 <p>TODO: How the <code>access</code> function does its thing will be written up in more
@@ -461,7 +463,91 @@ general idea of <em>what</em> it does, while I find time to write up the <em>how
 module contains a whole bunch of common routines used all over -- many of them
 not gitolite specific at all, Cache is not to be used for now (sorry,
 bitrotted by now I think... I may need to take it out behind the woodshed one
-of these days).</p></div>
+of these days).</p>
+<h1 id="security-notes">security notes<a class="headerlink" href="#security-notes" title="Permanent link"></a></h1>
+<p>All security issues should be reported directly to me (sitaramc@gmail.com),
+and not to the mailing list.</p>
+<p>(In the following text, the words MUST, SHOULD, etc. are loosely as defined in
+RFC 2119).</p>
+<ol>
+<li>
+<p>Gitolite's MUST protect everything in <code>~/repositories</code> from people who do
+    not have command line access to the user hosting the service, and do not
+    have "push" access rights to the gitolite-admin repository.</p>
+<p>Specifically, gitolite MUST prevent such users from doing anything except
+the following:</p>
+<ul>
+<li>perform git operations they are allowed to by gitolite.conf</li>
+<li>run <em>gitolite</em> commands that are enabled for remote use</li>
+</ul>
+</li>
+<li>
+<p>People who have command line access are considered to be "in"; nothing in
+    gitolite attempts to protect from them (it's impossible anyway!)</p>
+<p>But someone who does not have command line access, but <em>does</em> have push
+access rights to the gitolite-admin repo (a "gitolite admin"), is a
+special case.</p>
+<p>Gitolite SHOULD prevent a gitolite admin from using that to pivot to
+executing arbitrary commands on the server.  (This is why, for example,
+the gitolite-admin repo can't have arbitrary "config" lines.)</p>
+<p>However, many sites don't care about this distinction -- all their
+gitolite admins already have shell access.</p>
+<p>Thus, a violation of this is important and should be fixed, but not
+considered critical.</p>
+</li>
+<li>
+<p>Gitolite SHOULD try to make sure that the <em>gitolite</em> commands shipped with
+    gitolite do not indirectly enable violation of the restrictions in the
+    first bullet.  The seriousness of failing this depends on the command in
+    question (is the command enabled in the default setup, or even if it is
+    not, is it a popular and widely used command, etc.)</p>
+</li>
+<li>
+<p>Gitolite SHOULD protect the local sysadmin from his own errors to some
+    extent.  For example, it should be possible to write a new "command" in
+    shell, without worrying about shell meta-characters sneaking in and
+    executing something; gitolite should prevent this from happening.</p>
+</li>
+<li>
+<p>As you probably <a href="../concepts/#authentication-and-authorisation">knew</a> already, gitolite does not do authentication;
+    it only deals with authorisation.  Still, gitolite MAY help the
+    administrator to setup authentication (as the default setup does when used
+    in ssh mode), but it is not mandatory.  In particular, use in http-mode
+    leaves gitolite completely out of the authentication picture.</p>
+</li>
+</ol>
+<p>In order to achieve these goals, gitolite expects the files and directories on
+the server to have sane permissions and ownerships.  A decent POSIX file
+system, and a reasonable sshd config are also expected.</p>
+<p>Finally, a note on a couple of related items:</p>
+<ul>
+<li>
+<p>Gitolite's stance on DOS (by authenticated users) is that if it is
+    fixable, it will be fixed, but it is not a critical issue, as long as the
+    log files cannot be tampered with.</p>
+<p>A DOS by un-authenticated users is completely out of scope.</p>
+</li>
+<li>
+<p>Gitolite cannot benefit from perl's taint mode, which was made for a
+    different threat model.</p>
+<p>Gitolite's threat model implicitly trusts anyone who has shell access to
+the server, including all programs already on the server.  It's only
+remote users that are considered a threat.</p>
+<p>Perl's taint mode treats <em>anything</em> outside the program itself as suspect.
+So, the rc file, the compiled config, the various internal files gitolite
+stores housekeeping information in, etc., would all need to be untainted.</p>
+<p>Since gitolite gets "suspicious" input only in one place, it's easier to
+check that rigorously enough rather than use taint mode.</p>
+</li>
+</ul>
+<h1 id="appendix-a-accessing-the-documentation-offline">appendix A: accessing the documentation offline<a class="headerlink" href="#appendix-a-accessing-the-documentation-offline" title="Permanent link"></a></h1>
+<p>The source code for the documentation is in
+<a href="https://github.com/sitaramc/gitolite-doc">https://github.com/sitaramc/gitolite-doc</a>.  Rendering it requires some work
+(TBD: details).</p>
+<p>For most purposes, it's simpler to clone
+<a href="https://github.com/sitaramc/sitaramc.github.com">https://github.com/sitaramc/sitaramc.github.com</a> and use the 'gitolite'
+subdirectory within as your pre-rendered document base.  Open it in a
+JS-enabled browser and you can even do searches.</p></div>
         </div>
 
         <footer class="col-md-12">
