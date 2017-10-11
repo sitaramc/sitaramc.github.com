@@ -414,15 +414,15 @@ edit the <a href="../conf"><code>conf/gitolite.conf</code></a> file. In that fil
 with at least one user with some permissions.</p>
 <p>You can add the new repo in its own paragraph,</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>bar
-<span class="Statement">    RW+</span><span class="Constant">     </span>=   alice
+<span class="Statement">repo</span> bar
+    <span class="Statement">RW+</span>     =   alice
 </pre>
 
 <p>or you can add it to an existing repo line, if the new repo is intended to
 have the same access rules:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>foo bar
-<span class="Statement">    RW+</span><span class="Constant">     </span>=   alice
+<span class="Statement">repo</span> foo bar
+    <span class="Statement">RW+</span>     =   alice
 </pre>
 
 <p>Either way, commit and push the changes.  Gitolite will create a bare, empty,
@@ -431,23 +431,23 @@ repo on the server that is ready to be cloned and pushed to.</p>
 <p>As you can see, the "repo" line can have any number of repo names or repo
 group names in it. However, it can only be one line; this will not work:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>foo
-<span class="Type">repo </span>bar   <span class="Comment"> # WRONG; 'foo' is now forgotten</span>
-<span class="Statement">    RW+</span><span class="Constant">     </span>=   alice
+<span class="Statement">repo</span> foo
+<span class="Statement">repo</span> bar    <span class="Comment"># WRONG; 'foo' is now forgotten</span>
+    <span class="Statement">RW+</span>     =   alice
 </pre>
 
 <p>If you have too many to fit on one line comfortably, you can create and use a
 <a href="../conf/#group-definitions">repo group</a>:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Identifier">@myrepos</span>    =   foo
-<span class="Identifier">@myrepos</span>    =   bar
+<span class="Identifier">@myrepos</span><span class="PreProc">    =   foo</span>
+<span class="Identifier">@myrepos</span><span class="PreProc">    =   bar</span>
     .
     .
     .
-<span class="Identifier">@myrepos</span>    =   zzq
+<span class="Identifier">@myrepos</span><span class="PreProc">    =   zzq</span>
 
-<span class="Type">repo </span><span class="Identifier">@myrepos</span>
-<span class="Statement">    RW+</span><span class="Constant">     </span>=   alice
+<span class="Statement">repo</span> <span class="Identifier">@myrepos</span>
+    <span class="Statement">RW+</span>     =   alice
 </pre>
 
 <h2 id="removingrenaming-a-repo">removing/renaming a repo<a class="headerlink" href="#removingrenaming-a-repo" title="Permanent link"></a></h2>
@@ -497,20 +497,20 @@ git-daemon</a> for how to enable that via gitolite.</p>
 <p>Run <code>gitolite setup</code>.  <strong>If you forget this step, you can also forget
     about write access control!</strong></p>
 </li>
-</ul>
-<p>Then, back on your workstation:</p>
-<ul>
 <li>
-<p>If the repos are normal repos, add them to the <code>conf/gitolite.conf</code> in
-    your clone of the admin repo, then commit and push the change.</p>
 <p>If the repos are <a href="../wild">wildcard</a> repos that already match some repo regex
-in the conf file, you need to manually create the gl-creator file, like
-so:</p>
+    in the conf file, you need to manually create the gl-creator file, like
+    so:</p>
 <pre><code>echo username &gt; ~/repositories/path/to/repo.git/gl-creator
 </code></pre>
 <p>I haven't yet found this to be common enough to bother wrapping it in a
 nice interface or command.</p>
 </li>
+</ul>
+<p>However, if the repos are normal repos, then, back on your workstation:</p>
+<ul>
+<li>Add them to the <code>conf/gitolite.conf</code> in your clone of the admin repo, then
+    commit and push the change.</li>
 </ul>
 <h1 id="appendix-2-old-style-multi-keys">appendix 2: old style multi-keys<a class="headerlink" href="#appendix-2-old-style-multi-keys" title="Permanent link"></a></h1>
 <p>There is another way that involves creating key files like <code>alice@home.pub</code>
