@@ -368,14 +368,14 @@ sometimes you want to separate them.</p>
 <p>To separate those roles, put the following in conf/gitolite.conf, and let the
 repo-manager manage everything through "actual.conf":</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>gitolite-admin
-<span class="Statement">    RW+</span><span class="Constant"> </span>= key-manager repo-manager
+<span class="Statement">repo</span> gitolite-admin
+    <span class="Statement">RW+</span> = key-manager repo-manager
 
-<span class="Statement">    RW+</span><span class="Constant"> VREF/NAME/                    </span>= key-manager
-<span class="Statement">    -</span><span class="Constant">   VREF/NAME/keydir/             </span>=<span class="WarningMsg"> @all</span>
-<span class="Statement">    -</span><span class="Constant">   VREF/NAME/conf/gitolite.conf  </span>=<span class="WarningMsg"> @all</span>
+    <span class="Statement">RW+</span> <span class="Constant">VREF/</span><span class="PreProc">NAME/</span>                    = key-manager
+    <span class="Statement">-</span>   <span class="Constant">VREF/</span><span class="PreProc">NAME/</span><span class="Constant">keydir/</span>             = <span class="WarningMsg">@all</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/</span><span class="PreProc">NAME/</span><span class="Constant">conf/gitolite.conf</span>  = <span class="WarningMsg">@all</span>
 
-<span class="PreProc">include </span><span class="Constant">&quot;actual.conf&quot;</span>
+<span class="Statement">include</span> &quot;actual.conf&quot;
 </pre>
 
 <h1 id="access">access<a class="headerlink" href="#access" title="Permanent link"></a></h1>
@@ -469,8 +469,8 @@ chmod +x local/VREF/crlf
 <p>Alternatively, you can simply add this at the end of the
 gitolite.conf file:</p>
 <p><pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span><span class="Identifier">@all</span>
-<span class="Statement">    -</span><span class="Constant">   VREF/crlf       </span>=<span class="WarningMsg">   @all</span>
+<span class="Statement">repo</span> <span class="Identifier">@all</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/crlf</span>       =   <span class="WarningMsg">@all</span>
 </pre></p>
 <p>Either way, add/commit/push the change to the gitolite-admin repo.</p>
 </li>
@@ -631,9 +631,9 @@ useful as a template.</p>
 <h3 id="example-1-restricting-by-day-of-week">example 1: restricting by day of week<a class="headerlink" href="#example-1-restricting-by-day-of-week" title="Permanent link"></a></h3>
 <p>Here's the conf extract to say "junior devs can only push on weekdays":</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>foo
-<span class="Statement">    -</span><span class="Constant">   VREF/DAY/Sat    </span>=<span class="WarningMsg">   @junior-devs</span>
-<span class="Statement">    -</span><span class="Constant">   VREF/DAY/Sun    </span>=<span class="WarningMsg">   @junior-devs</span>
+<span class="Statement">repo</span> foo
+    <span class="Statement">-</span>   <span class="Constant">VREF/DAY/Sat</span>    =   <span class="WarningMsg">@junior-devs</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/DAY/Sun</span>    =   <span class="WarningMsg">@junior-devs</span>
 </pre>
 
 <p>The code for this VREF is ridiculously simple:</p>
@@ -657,9 +657,9 @@ VREF-maker will return with <em>some</em> network address (as you'll see in the 
 later), so we set it up so that the correct network block is allowed and
 anything else is disallowed:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>foo
-<span class="Statement">    RW+</span><span class="Constant"> VREF/FROM/192.168.48.0/23   </span>=   <span class="Identifier">@junior-devs</span>
-<span class="Statement">    -</span><span class="Constant">   VREF/FROM                   </span>=<span class="WarningMsg">   @junior-devs</span>
+<span class="Statement">repo</span> foo
+    <span class="Statement">RW+</span> <span class="Constant">VREF/FROM/192.168.48.0/23</span>   =   <span class="Identifier">@junior-devs</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/FROM</span>                   =   <span class="WarningMsg">@junior-devs</span>
 </pre>
 
 <p>The code is not that complex.  We take the user's actual IP address (this is
@@ -701,16 +701,16 @@ is, the bits of the network address after the network bits must be zero).</p>
 repo, while still leaving it to be created by a user in the normal way.</p>
 <p>This <strong>will not</strong> work:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span><span class="Special">foo/..*</span>
-<span class="Statement">    C</span><span class="Constant">                   </span>=   blah blah
-<span class="Statement">    RW+</span><span class="Constant">                 </span>=   <span class="PreProc">CREATOR</span>
-<span class="Statement">    RW</span><span class="Constant">                  </span>=   <span class="PreProc">WRITERS</span>
-<span class="Statement">    R</span><span class="Constant">                   </span>=   <span class="PreProc">READERS</span>
+<span class="Statement">repo</span> foo/..*
+    <span class="Statement">C</span>                   =   <span class="PreProc">blah blah</span>
+    <span class="Statement">RW+</span>                 =   CREATOR
+    <span class="Statement">RW</span>                  =   WRITERS
+    <span class="Statement">R</span>                   =   READERS
 
 <span class="Comment"># this does </span><span class="Todo">NOT</span><span class="Comment"> work</span>
-<span class="Type">repo </span>foo/special-1
-<span class="Statement">    RW+</span><span class="Constant">                 </span>=   sitaram
-    option  foo.bar     =   baz
+<span class="Statement">repo</span> foo/special-1
+    <span class="Statement">RW+</span>                 =   sitaram
+    <span class="Statement">option</span>  <span class="Identifier">foo.bar</span>     =   <span class="Constant">baz</span>
 </pre>
 
 <p>The repo will be created as a <strong>normal</strong> (not wild) repo as soon as you push,
@@ -723,9 +723,9 @@ prevents an ordinary repo from being created.</p>
 <p>So do this:</p>
 <pre style="color: #ffffff; background-color: #000000;">
 <span class="Comment"># this will work</span>
-<span class="Type">repo </span><span class="Special">foo/special-[1]</span>
-<span class="Statement">    RW+</span><span class="Constant">                 </span>=   sitaram
-    option  foo.bar     =   baz
+<span class="Statement">repo</span> foo/special-[1]
+    <span class="Statement">RW+</span>                 =   sitaram
+    <span class="Statement">option</span>  <span class="Identifier">foo.bar</span>     =   <span class="Constant">baz</span>
 </pre>
 
 <p>Using a pattern for just one repo might sound like a kludge, but it's

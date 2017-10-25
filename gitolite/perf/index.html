@@ -321,9 +321,15 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
         <li class="main active"><a href="#gitolite-performance">gitolite performance</a></li>
-        <li class="main "><a href="#tips-for-performance-worriers">tips for performance worriers</a></li>
-        <li class="main "><a href="#why-theres-really-no-need-to-worry">why there's really no need to worry!</a></li>
-        <li class="main "><a href="#the-only-thing-that-will-take-more-time">the only thing that will take more time</a></li>
+        <li class="main "><a href="#factors-affecting-gitolite-performance">factors affecting gitolite performance</a></li>
+        <li class="main "><a href="#types-of-performance-issues">types of performance issues</a></li>
+            <li><a href="#normal-git-activity">normal git activity</a></li>
+            <li><a href="#admin-push">admin push</a></li>
+            <li><a href="#new-wild-repo">new wild repo</a></li>
+            <li><a href="#scan-all-repos">scan ALL repos</a></li>
+        <li class="main "><a href="#appendix-1-using-memoize">appendix 1: using memoize</a></li>
+            <li><a href="#gitweb">gitweb</a></li>
+            <li><a href="#the-info-command">the info command</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -333,84 +339,200 @@
 <p>TOP TIP: If you have more than 2000 or so repos, then you should be using v3.2
 or later; there was a bit of code that went in there that makes a <em>huge</em>
 difference for really large sites.</p>
-<h1 id="tips-for-performance-worriers">tips for performance worriers<a class="headerlink" href="#tips-for-performance-worriers" title="Permanent link"></a></h1>
-<p>Gitolite is pretty efficient in most cases, and generally nothing needs to be
-done.  If you think you have a performance problem, let me know on the mailing
-list.  Meanwhile, here are some tips:</p>
+<hr />
+<h1 id="factors-affecting-gitolite-performance">factors affecting gitolite performance<a class="headerlink" href="#factors-affecting-gitolite-performance" title="Permanent link"></a></h1>
+<p>A lot of the following discussion involves understanding these factors:</p>
 <ul>
 <li>
-<p>Look in the gitolite log file after any operation that you think ran
-    slowly.  In particular, pushing to the admin repo, or a user creating a
-    new wild repo, might be a little slow, and the log file will tell you a
-    bit more detail on what took time.</p>
+<p>the number of <strong>lines</strong> in gitolite.conf (plus all its "include" files, if
+    any).</p>
 </li>
 <li>
-<p>If you don't use gitweb or git-daemon, or use them but are perfectly happy
-    to control access to them from outside gitolite, you can comment out the
-    corresponding lines in the ENABLE list the rc file.</p>
+<p>the number of <strong>normal repos</strong> in the conf.  A normal repo is one that is
+    <em>directly named</em> in a <code>repo ...</code> line.</p>
+<p><pre style="color: #ffffff; background-color: #000000;">
+<span class="Statement">repo</span> foo bar
+    <span class="Comment"># ...rules...</span>
+</pre></p>
+<p>The rules for a normal repo is compiled into a file called <code>gl-conf</code> in
+the repo directory (i.e., one <code>gl-conf</code> file per normal repo).</p>
 </li>
 <li>
-<p>If you can't get rid of those scripts, and they are still taking too long,
-    you can make them run in the background.  They'll eventually finish but
-    the user doesn't have to wait.  See src/triggers/bg.  <em>This should not
-    normally be needed; if you feel you need it, please talk to me so I can
-    understand why and maybe help</em>.</p>
+<p>the number of <strong>group repos</strong> -- repos that are part of repo <em>groups</em>:</p>
+<p><pre style="color: #ffffff; background-color: #000000;">
+<span class="Identifier">@foss</span><span class="PreProc"> = git gitolite linux</span>
+<span class="Statement">repo</span> <span class="Identifier">@foss</span>
+    <span class="Comment"># ...rules...</span>
+</pre></p>
+<p>The rules for group repos are compiled into a "common" compiled rules file
+which resides in <code>~/.gitolite/conf</code>.</p>
 </li>
 <li>
-<p>If you're more concerned about your users' time when they create a new
-    wild repo (and not so much about the admin push taking time), you can fix
-    a couple of scripts and send me a patch :)</p>
-<p>Here's the scoop:</p>
-<p>Scripts invoked via <code>POST_CREATE</code> <em>do</em> get information about what repo has
-just been created.  However, the gitweb and daemon scripts are not set to
-take advantage of this, only the git-config one is.  So use the git-config
-script as an example, and/or read the <a class="wikilink" href="../triggers/">triggers</a> page, and fix the other
-two programs.</p>
-<p>(This should be easy enough for the daemon update, but the gitweb update
-may be a little more tricky, since it may involve <em>deleting</em> lines from
-the "projects.list" file.)</p>
+<p>the number of <strong>wild repos</strong> -- repos that match a <em>wild repo</em> pattern and
+    were created by a user.</p>
+<p><pre style="color: #ffffff; background-color: #000000;">
+<span class="Statement">repo</span> dev/CREATOR/..*
+    <span class="Statement">C</span>   =   <span class="Identifier">@team</span>
+    <span class="Comment"># ...rules...</span>
+<span class="Comment"># actual repos created by users using git clone/push commands</span>
+</pre></p>
+<p>The compiled rules for wild repos also go into the "common" compiled rules
+file.  However, these rules often consist of just <a href="../wild/#roles">"role names"</a>,
+not actual user names.  The user who owns the repo will map other users to
+various roles by running the <a href="../user/#setget-additional-permissions-for-repos-you-created">perms</a> command.</p>
+<p>This mapping is saved in a file called <code>gl-perms</code> in the repo directory.</p>
 </li>
 </ul>
-<h1 id="why-theres-really-no-need-to-worry">why there's really no need to worry!<a class="headerlink" href="#why-theres-really-no-need-to-worry" title="Permanent link"></a></h1>
-<p>In general, gitolite has a constant overhead of about 0.2 seconds on my
-laptop.  There really is nothing to optimise, but you can comment out some
-triggers as the previous section said.</p>
-<p>Here's the big-O stuff:</p>
-<ul>
-<li>N = number of normal repos, each with its own set of rules.  In <code>repo r1
-    r2 r3</code>, N = 3.  Add up all such lines.</li>
-<li>G = number of groups or repo regexes.  In <code>repo @g1 @g2 foo/[a-z]*</code>, G =
-    3.</li>
-<li>M = number of members.  In <code>@g1 = r1 r2 &lt;nl&gt; @g2 = r3 r4 r5</code>, M = 5.</li>
-<li>A = average number of rule lines in each "repo" block.  Usually about 5,
-    maybe 10 sometimes.  You may have more.</li>
-</ul>
-<p>Gitolite overheads compared to a normal ssh push are:</p>
+<h1 id="types-of-performance-issues">types of performance issues<a class="headerlink" href="#types-of-performance-issues" title="Permanent link"></a></h1>
+<p>Gitolite performance can be discussed in four different scenarios:</p>
+<h2 id="normal-git-activity">normal git activity<a class="headerlink" href="#normal-git-activity" title="Permanent link"></a></h2>
+<p>A user accesses a git repo using git clone, fetch, push, etc.</p>
+<p>Gitolite is heavily optimised for the day to day "developer" activity by
+users.  You should <em>never</em> have any issues with this, regardless of what mix
+of factors (affecting performance; see above) you have.</p>
+<h2 id="admin-push">admin push<a class="headerlink" href="#admin-push" title="Permanent link"></a></h2>
+<p>An admin does a "push" to the "gitolite-admin" repo (or does the
+equivalent when <a href="../odds-and-ends/#administering-gitolite-directly-on-the-server">administering gitolite directly on the server</a>).</p>
+<p>What happens then can be divided into two distinct parts.</p>
+<h3 id="gitolite-compile"><code>gitolite compile</code><a class="headerlink" href="#gitolite-compile" title="Permanent link"></a></h3>
+<p>The first part is <code>gitolite compile</code>.  This is influenced by the conf file
+size as well as the number of normal repos.  For each normal repo, gitolite
+has to write the <code>gl-conf</code> file in that repo's directory.</p>
+<p>That's a whole bunch of small-file writes.</p>
+<p>Over the past few weeks (as of Oct 2017), mainly driven by Fedora's mammoth
+560,000+ line conf file containing 42,000 or so repos, there have been a
+couple of attempts to mitigate this.</p>
 <ol>
-<li>perl startup time.  Fairly constant and fairly small.  I have generally
-    found it pretty hard to measure, especially with a hot cache.</li>
-<li>rule parse time.  Details below</li>
-<li>rule interpretation time.  Fairly constant, or at least subject to much
-    smaller variations than #2.</li>
+<li>
+<p>Extend the wild repos concept:</p>
+<p>See the <a href="../templates">templates</a> document for details on this.  The section that is
+directly relevant to the topic of performance is the one dealing with
+"bypassing gitolite.conf for huge sites", but really, you should read the
+whole document in order to understand what is happening there.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the templates feature was inspired by performance issues, I
+now realise it's a much nicer way to organise repos and rules, and --
+on my comparatively puny production setup -- I have reorganised all
+the rules to use templates instead.  The result is much easier to
+maintain, because I can farm out the maintenance to folks who are less
+gitolite-savvy.  See the "advantages" section in that page for more.</p>
+</div>
+</li>
+<li>
+<p>Compile repo rules separately:</p>
+<p>A much less interesting, probably even somewhat kludgey, outcome of the
+Fedora exercise was the <code>compile-1</code> command.</p>
+<p>It's in <code>contrib</code> because I do not encourage its use unless you really
+really (<strong>really!</strong>) need it.  Instructions and caveats are in the source
+file itself.</p>
+</li>
 </ol>
-<p>"rule parse time" is where it makes a difference.  There are 2 files gitolite
-parses on each "access": <code>~/.gitolite/conf/gitolite.conf-compiled.pm</code> and
-<code>~/repositories/your_repo.git/gl-conf</code>.  The former contains O(N + M + G*A)
-lines.  In addition, the gl-conf files contains about "A" lines (remember we
-called it an average), which is negligible.</p>
-<p>In practice, you can't measure this at a scale that a developer running a "git
-push" might even pretend to notice, unless you have more than, say, 5000 repos
-or so.  On my testbed of 11,100 repos, where the compiled.pm is almost 0.7 MB,
-it takes less than 0.2 seconds to do this.</p>
-<p>And on a busy system, when that file will be pretty much always in cache, it's
-even less.</p>
-<h1 id="the-only-thing-that-will-take-more-time">the only thing that will take more time<a class="headerlink" href="#the-only-thing-that-will-take-more-time" title="Permanent link"></a></h1>
-<p>Literally, the only thing that will take time is something like "ssh git@host
-info" because it finds all possible repos and for each of them it tries to
-check the access.  On that same test bed, therefore, this ends up reading all
-11,100 "gl-conf" files.</p>
-<p>On my laptop this takes about 14 seconds.  In contrast, a normal git operation
-(clone, pull, push, etc) is so small it is hard to measure without software.</p></div>
+<h3 id="gitolite-trigger-post_compile"><code>gitolite trigger POST_COMPILE</code><a class="headerlink" href="#gitolite-trigger-post_compile" title="Permanent link"></a></h3>
+<p>The second part runs all the <code>POST_COMPILE</code> triggers scripts.  On a default
+installation, this includes maintaining <code>~/.ssh/authorised_key</code>, updating
+<a href="../gitweb-daemon">gitweb and daemon</a> permissions, and updating <a href="../git-config">"config"</a> values.</p>
+<p>This is influenced by the total number of repos in the system (normal <em>and</em>
+other repos), <em>and</em> what options are enabled in your <code>~/.gitolite.rc</code> file.</p>
+<p>Many of these these require scanning all the repositories and doing something
+to each of them (see "scan ALL repos" section later).  For example, the
+trigger script that updates the "projects.list" file for gitweb needs to check
+every repo to see if the user <code>gitweb</code> is allowed <code>R</code>ead access to it.</p>
+<h2 id="new-wild-repo">new wild repo<a class="headerlink" href="#new-wild-repo" title="Permanent link"></a></h2>
+<p>A user creates a brand new "wild" repo.</p>
+<p>If you use only the default set of options enabled in the rc file, this
+should be pretty fast, though some of the non-default options may still be
+slow.</p>
+<div class="admonition note">
+<p>However, the commit that <em>finally</em> fixed this issue for the default
+options is pretty recent as of the time of writing.  In tag terms, you
+should see it in 3.6.8.  If you're really affected by this, bug me on the
+mailing list to make a release, and then bug your package maintainers :-)
+Or just upgrade from github!</p>
+</div>
+<p>How can you tell which program is slowing you down?  Look in the log file
+after a user runs a wild repo create -- any subtask of that 'create' that
+takes more than a second is a problem.  Send details to the mailing list so we
+can discuss and fix whatever can be fixed.</p>
+<h2 id="scan-all-repos">scan ALL repos<a class="headerlink" href="#scan-all-repos" title="Permanent link"></a></h2>
+<p>There are a few activities that scan <strong>all</strong> repos, looking for a given
+user's permission on <strong>each</strong> of them:</p>
+<ul>
+<li>a user runs the <code>info</code> command</li>
+<li>a user accesses gitweb on a site where <a href="../gitweb-daemon/#repo-specific-authorisation-in-gitweb">repo specific authorisation</a> is in place</li>
+<li>the <code>POST_COMPILE</code> triggers in an "admin push" are invoked (as briefly
+    explained above).</li>
+</ul>
+<p>In general, this is the slowest part of gitolite.  It's work load is
+influenced by two things: the number of normal repos, and the number of wild
+repos, because (as we saw up above) those are the two types of repos for which
+certain individual files in the repo directory need to be read.</p>
+<p>So, on a system with <em>lots of</em> of normal and/or wild repos, this operation
+needs to read <em>lots of</em> small files (one in each repo directory)... which
+takes time.  And depends on how fast your disk is, too.</p>
+<p>The appendix has a solution for this, using a perl module called Memoize
+(comes standard with perl); check down there for details.</p>
+<h1 id="appendix-1-using-memoize">appendix 1: using <code>memoize</code><a class="headerlink" href="#appendix-1-using-memoize" title="Permanent link"></a></h1>
+<p>It seems that perl's Memoize module does a great job at helping with the "scan
+ALL repos" use case, at least after the first time a user accesses gitweb or
+runs the 'info' command.</p>
+<h2 id="gitweb">gitweb<a class="headerlink" href="#gitweb" title="Permanent link"></a></h2>
+<p>To start with, here's tested code to add into gitweb.conf:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Comment"># ----------------------------------------------------------------------</span>
+<span class="Comment"># caching section</span>
+
+<span class="Statement">use </span>Fcntl;
+<span class="Statement">use </span>DB_File;
+<span class="Statement">use </span>Memoize;
+
+<span class="Comment"># the actual file on disk</span>
+<span class="Statement">my</span> <span class="Identifier">$dbf</span> = <span class="Constant">&quot;</span><span class="Identifier">$rc</span><span class="Identifier">{</span><span class="Constant">GL_ADMIN_BASE</span><span class="Identifier">}</span><span class="Constant">/</span><span class="Identifier">$ENV</span><span class="Identifier">{</span><span class="Constant">GL_USER</span><span class="Identifier">}</span><span class="Constant">-canread.db</span><span class="Constant">&quot;</span>;
+<span class="Comment"># set up persistence</span>
+<span class="Statement">tie</span>(<span class="Identifier">%disk_cache</span>, <span class="Constant">'</span><span class="Constant">DB_File</span><span class="Constant">'</span>, <span class="Identifier">$dbf</span>, O_RDWR|O_CREAT, <span class="Constant">0666</span>)
+    <span class="Statement">or</span> <span class="Statement">die</span> <span class="Constant">&quot;</span><span class="Constant">Tie '</span><span class="Identifier">$dbf</span><span class="Constant">' failed: </span><span class="Identifier">$!</span><span class="Constant">&quot;</span>;
+memoize <span class="Constant">'</span><span class="Constant">can_read</span><span class="Constant">'</span>, <span class="Constant">SCALAR_CACHE</span> =&gt; [ <span class="Constant">HASH</span> =&gt; \<span class="Identifier">%disk_cache</span> ];
+
+<span class="Comment"># ----------------------------------------------------------------------</span>
+</pre>
+
+<p>You can add this at the end of the code linked from the <a href="../gitweb-daemon/#repo-specific-authorisation-in-gitweb">repo specific
+authorisation</a> section.</p>
+<p>The maintenance of these cache files is tricky.  I suggest:</p>
+<ul>
+<li>
+<p>delete all of them when a gitolite-admin push happens (easy enough to add
+    a new <code>POST_COMPILE</code> trigger for it -- a simple 1-line shell script will
+    do)</p>
+</li>
+<li>
+<p>run a cron job at midnight that also does the same thing</p>
+</li>
+<li>
+<p>create a gitolite command (maybe "flush-canread-cache"?) to allow a user
+    to flush his/her own cache file.  The code is pretty simple:</p>
+<p><pre style="color: #ffffff; background-color: #000000;">
+<span class="Comment">#!/bin/sh</span></p>
+<p><span class="Statement">[</span> <span class="Statement">-z</span> <span class="Statement">&quot;</span><span class="PreProc">$GL_USER</span><span class="Statement">&quot;</span> <span class="Statement">]</span> &amp;&amp; die GL_USER not set
+<span class="Statement">rm</span> <span class="Special">-f</span> <span class="PreProc">$GL_ADMIN_BASE</span>/<span class="PreProc">$GL_USER</span>-canread.db
+</pre></p>
+</li>
+</ul>
+<p>The biggest complication is "wild" repos and users running the "perms"
+command.  That gets a little messy (you'd have to add code to the perms
+command to delete just this repo, from <em>all</em> user's cache files!), so I
+suggest ignoring this.  The worst that can happen is that, <em>until the next
+morning</em> (when your cron job fires) (a) he retains access to a repo that he
+has been removed from, and (b) he does <em>not</em> get access to a repo to which he
+has been just added.</p>
+<p>The first issue is unlikely to generate any complaints from the users, though
+you may have to run it by your security team (but remember these are
+<strong>user-assigned</strong> privileges, so just pretend the user did not get around to
+removing the permission till the next morning!)</p>
+<p>The second is easily solved by asking them to run that command we created.</p>
+<p>That's it.</p>
+<h2 id="the-info-command">the <code>info</code> command<a class="headerlink" href="#the-info-command" title="Permanent link"></a></h2>
+<p>TODO: see if the info command can also benefit from something similar!</p></div>
         </div>
 
         <footer class="col-md-12">
