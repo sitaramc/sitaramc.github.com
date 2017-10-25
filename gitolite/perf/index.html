@@ -430,7 +430,7 @@ file itself.</p>
 </ol>
 <h3 id="gitolite-trigger-post_compile"><code>gitolite trigger POST_COMPILE</code><a class="headerlink" href="#gitolite-trigger-post_compile" title="Permanent link"></a></h3>
 <p>The second part runs all the <code>POST_COMPILE</code> triggers scripts.  On a default
-installation, this includes maintaining <code>~/.ssh/authorised_key</code>, updating
+installation, this includes maintaining <code>~/.ssh/authorised_keys</code>, updating
 <a href="../gitweb-daemon">gitweb and daemon</a> permissions, and updating <a href="../git-config">"config"</a> values.</p>
 <p>This is influenced by the total number of repos in the system (normal <em>and</em>
 other repos), <em>and</em> what options are enabled in your <code>~/.gitolite.rc</code> file.</p>
@@ -510,11 +510,11 @@ authorisation</a> section.</p>
 </li>
 <li>
 <p>create a gitolite command (maybe "flush-canread-cache"?) to allow a user
-    to flush his/her own cache file.  The code is pretty simple:</p>
+    to flush his/her own cache file.  The basic code is pretty simple (you can
+    embellish it with proper error messages etc., if you like):</p>
 <p><pre style="color: #ffffff; background-color: #000000;">
 <span class="Comment">#!/bin/sh</span></p>
-<p><span class="Statement">[</span> <span class="Statement">-z</span> <span class="Statement">&quot;</span><span class="PreProc">$GL_USER</span><span class="Statement">&quot;</span> <span class="Statement">]</span> &amp;&amp; die GL_USER not set
-<span class="Statement">rm</span> <span class="Special">-f</span> <span class="PreProc">$GL_ADMIN_BASE</span>/<span class="PreProc">$GL_USER</span>-canread.db
+<p><span class="Statement">[</span> <span class="Statement">-n</span> <span class="Statement">&quot;</span><span class="PreProc">$GL_USER</span><span class="Statement">&quot;</span> <span class="Statement">]</span> &amp;&amp; <span class="Statement">rm</span> <span class="Special">-vf</span> <span class="PreProc">$GL_ADMIN_BASE</span>/<span class="PreProc">$GL_USER</span>-canread.db
 </pre></p>
 </li>
 </ul>
