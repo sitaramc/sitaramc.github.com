@@ -356,17 +356,17 @@ are defined:</p>
     <span class="Statement">R</span>                           =   <span class="Identifier">@all</span>
 
 <span class="Statement">repo</span> <span class="Identifier">@is_suspended</span>
-    <span class="Statement">-</span>                           =   <span class="Identifier">@all</span>
+    <span class="Statement">-</span>                           =   <span class="WarningMsg">@all</span>
 
 <span class="Statement">repo</span> <span class="Identifier">@has_personal_refs</span>
     <span class="Statement">RW+</span>     <span class="Constant">dev</span><span class="PreProc">/USER/</span>           =   teamleads team
-    <span class="Statement">-</span>       <span class="Constant">dev/</span>                =   <span class="Identifier">@all</span>
+    <span class="Statement">-</span>       <span class="Constant">dev/</span>                =   <span class="WarningMsg">@all</span>
     <span class="Statement">RW+</span>     <span class="Constant">refs/tags/dev</span><span class="PreProc">/USER/</span> =   teamleads team
-    <span class="Statement">-</span>       <span class="Constant">refs/tags/dev/</span>      =   <span class="Identifier">@all</span>
+    <span class="Statement">-</span>       <span class="Constant">refs/tags/dev/</span>      =   <span class="WarningMsg">@all</span>
 
 <span class="Statement">repo</span> <span class="Identifier">@has_releases</span>
     <span class="Statement">RW</span>      <span class="Constant">refs/tags/v[0-9]</span>    =   release_managers
-    <span class="Statement">-</span>       <span class="Constant">refs/tags/v[0-9]</span>    =   <span class="Identifier">@all</span>
+    <span class="Statement">-</span>       <span class="Constant">refs/tags/v[0-9]</span>    =   <span class="WarningMsg">@all</span>
 
 <span class="Statement">repo</span> <span class="Identifier">@base</span>
     <span class="Statement">RW+</span>                         =   teamleads
@@ -525,7 +525,7 @@ which says that no one can rewind <code>master</code>, not even <code>teamleads<
     <span class="Statement">RW</span>  <span class="Constant">master</span>      =   sitaram
     <span class="Comment"># notice we had to expand 'teamleads' from foo's definition in the</span>
     <span class="Comment"># template-data section</span>
-    <span class="Statement">-</span>   <span class="Constant">master</span>      =   <span class="Identifier">@all</span>
+    <span class="Statement">-</span>   <span class="Constant">master</span>      =   <span class="WarningMsg">@all</span>
 </pre></p>
 <p>But where do you place them?  The answer is, <em>at least before the <code>base</code>
 template is defined</em>.  Otherwise, the <code>RW+</code> in the base template will kick
@@ -535,7 +535,7 @@ placing it just before <code>repo @base</code>):</p>
 <p><pre style="color: #ffffff; background-color: #000000;">
 <span class="Statement">repo</span> <span class="Identifier">@limits_master</span>
     <span class="Statement">RW</span>  <span class="Constant">master</span>      =   teamleads
-    <span class="Statement">-</span>   <span class="Constant">master</span>      =   <span class="Identifier">@all</span>
+    <span class="Statement">-</span>   <span class="Constant">master</span>      =   <span class="WarningMsg">@all</span>
 </pre></p>
 <p>and then add <code>limits_master</code> to the list of templates that <code>foo</code> uses.</p>
 <p>This has the advantages of being able to reuse that logic for other repos,
@@ -602,7 +602,7 @@ to the conf file (one-time):</p>
 <pre><code>GL_USER=gitolite-admin gitolite create foo/bar
 </code></pre>
 <p>That creates the repo, and you can now populate its <code>gl-perms</code> and
-gl-repo-groups` files.</p>
+<code>gl-repo-groups</code> files.</p>
 <h1 id="thanks-to">thanks to...<a class="headerlink" href="#thanks-to" title="Permanent link"></a></h1>
 <p>...pingou on irc, and the Fedora project, for having 42,000 repos in a conf
 file over 560,000 lines long.  Which made me think about this real hard for
