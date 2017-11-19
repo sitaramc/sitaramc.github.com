@@ -383,11 +383,11 @@ concerned) is automatically recorded by gitolite.</p>
 <h2 id="setget-additional-permissions-for-repos-you-created">set/get additional permissions for repos you created<a class="headerlink" href="#setget-additional-permissions-for-repos-you-created" title="Permanent link"></a></h2>
 <p>The gitolite config may have several permissions lines for your repo, like so:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span><span class="Special">pub/</span><span class="PreProc">CREATOR</span><span class="Special">/..*</span>
-<span class="Statement">    C</span><span class="Constant">       </span>=   ...some list of users allowed to create repos...
-<span class="Statement">    RW+</span><span class="Constant">     </span>=   <span class="PreProc">CREATOR</span>
-<span class="Statement">    RW</span><span class="Constant">      </span>=   user1 user2
-<span class="Statement">    R</span><span class="Constant">       </span>=   user3
+<span class="Statement">repo</span> pub/CREATOR/..*
+    <span class="Statement">C</span>       =   <span class="PreProc">...some list of users allowed to create repos...</span>
+    <span class="Statement">RW+</span>     =   CREATOR
+    <span class="Statement">RW</span>      =   user1 user2
+    <span class="Statement">R</span>       =   user3
 </pre>
 
 <p>If that's all it had, you really can't do much.  Any changes to access must be
@@ -398,8 +398,8 @@ authenticated user</em>, if you specified <code>@all</code> there) has his own p
 namespace, starting with <code>pub/&lt;username&gt;/</code>).</p>
 <p>To give some flexibility to users, the admin could add rules like this:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Statement">    RW</span><span class="Constant">      </span>=   <span class="PreProc">WRITERS</span>
-<span class="Statement">    R</span><span class="Constant">       </span>=   <span class="PreProc">READERS</span>
+    <span class="Statement">RW</span>      =   WRITERS
+    <span class="Statement">R</span>       =   READERS
 </pre>
 
 <p><span class="gray">(he could also add other <a href="../wild/#roles">roles</a> but then he
@@ -432,16 +432,21 @@ own, if he chooses.</p>
 <p>"personal" branches are great for environments where developers need to share
 work but can't directly pull from each other (usually due to either a
 networking or authentication related reason, both common in corporate setups).</p>
-<p>Personal branches exist <strong>in a namespace</strong> of their own.  The syntax is</p>
+<p>Personal branches exist <strong>in a sub-tree</strong> of the <code>ref/heads/[...]</code> hierarchy.
+The syntax is</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Statement">    RW+</span><span class="Constant"> personal/</span><span class="PreProc">USER</span><span class="Constant">/  </span>=   <span class="Identifier">@userlist</span>
+    <span class="Statement">RW+</span> <span class="Constant">personal</span><span class="PreProc">/USER/</span>  =   <span class="Identifier">@userlist</span>
 </pre>
 
-<p>where the "personal" can be anything you like (but cannot be empty), and the
-"/USER/" part is <strong>necessary (including both slashes)</strong>.</p>
+<p>where (a) the "personal" can be anything you like, but cannot be empty, (b) the
+"/USER/" part is <strong>necessary (including both slashes)</strong>, and (c) the trailing
+slash can be optionally followed by additional restrictions on the ref name.</p>
 <p>A user "alice" (if she's in the userlist) can then push any branches inside
 <code>personal/alice/</code> (i.e., she can push <code>personal/alice/foo</code> and
-<code>personal/alice/bar</code>, but NOT <code>personal/alice</code>).</p>
+<code>personal/alice/bar</code>, but NOT <code>personal/alice</code>).  As another example
+<code>personal/USER/[a-zA-Z0-9_]+$</code> would mean that alice can create
+<code>personal/alice/foo</code>, but not <code>personal/alice/foo/bar</code>, because a <code>/</code> is not
+allowed by the expression following the <code>/USER/</code>.</p>
 <p>(Background: at runtime the "USER" component will be replaced by the name of
 the invoking user.  Access is determined by the right hand side, as usual).</p>
 <p>Compared to using arbitrary branch names on the same server, this:</p>
