@@ -380,16 +380,16 @@ example is from a mail to the gitolite list by Javier Domingo ("Mirroring
 forks", 13-11-2012), modified slightly.</p>
 <pre style="color: #ffffff; background-color: #000000;">
 <span class="Comment"># backing repos, normal (non-wild), serving as blessed repos</span>
-<span class="Type">repo </span>   linux git gitolite <span class="Special">[...other</span> <span class="Special">projects...]</span>
-<span class="Statement">    RW+</span><span class="Constant">     </span>=   integration-manager
-<span class="Statement">    R</span><span class="Constant">       </span>=   <span class="Identifier">@all</span>
+<span class="Statement">repo</span>    linux git gitolite [...other projects...]
+    <span class="Statement">RW+</span>     =   integration-manager
+    <span class="Statement">R</span>       =   <span class="Identifier">@all</span>
 
 <span class="Comment"># logical repos, wild, created by devs as needed</span>
-<span class="Type">repo </span>   <span class="PreProc">CREATOR</span>/[a-zA-Z0-9].*
-<span class="Statement">    C</span><span class="Constant">       </span>=   <span class="Identifier">@all</span>
-<span class="Statement">    RW+</span><span class="Constant">     </span>=   <span class="PreProc">CREATOR</span>
-<span class="Statement">    R</span><span class="Constant">       </span>=   <span class="PreProc">READERS</span> <span class="Identifier">@all</span>
-    option namespace.pattern = %/* is @1 in @2
+<span class="Statement">repo</span>    CREATOR/[a-zA-Z0-9].*
+    <span class="Statement">C</span>       =   <span class="Identifier">@all</span>
+    <span class="Statement">RW+</span>     =   CREATOR
+    <span class="Statement">R</span>       =   READERS <span class="Identifier">@all</span>
+    <span class="Statement">option</span> <span class="Identifier">namespace.pattern</span> = <span class="Constant">%/* is @1 in @2</span>
 </pre>
 
 <h1 id="use">use<a class="headerlink" href="#use" title="Permanent link"></a></h1>
@@ -420,7 +420,7 @@ name.</p>
 <li>
 <p>Here's a simple one that separate the first component from the rest:</p>
 <p><pre style="color: #ffffff; background-color: #000000;">
-    option namespace.pattern = %/* is @1 in @2
+    <span class="Statement">option</span> <span class="Identifier">namespace.pattern</span> = <span class="Constant">%/* is @1 in @2</span>
 </pre></p>
 <p>A reponame of 'alice/linux' gives you a namespace of 'alice' and a backing
 reponame of 'linux'.  Similarly, 'alice/linux/2.2' gives you 'alice' and
@@ -431,7 +431,7 @@ the asterisk grabs up all the remaining components in the repo name.</p>
 <p>This one separates the first, the second, and all the rest, but combines
     them in a different order:</p>
 <p><pre style="color: #ffffff; background-color: #000000;">
-    option namespace.pattern = %/%/* is @1/@3 in @2
+    <span class="Statement">option</span> <span class="Identifier">namespace.pattern</span> = <span class="Constant">%/%/* is @1/@3 in @2</span>
 </pre></p>
 <p>A reponame of 'alice/linux/2.2' gives you 'alice/2.2' and 'linux', while a
 reponame of 'alice/linux/2.2/smp' gives you 'alice/2.2/smp' and 'linux'.</p>
@@ -439,7 +439,7 @@ reponame of 'alice/linux/2.2/smp' gives you 'alice/2.2/smp' and 'linux'.</p>
 <li>
 <p>Here's another example on the same lines:</p>
 <p><pre style="color: #ffffff; background-color: #000000;">
-    option namespace.pattern = %/%/%/* is @3/@2/@4 in @1
+    <span class="Statement">option</span> <span class="Identifier">namespace.pattern</span> = <span class="Constant">%/%/%/* is @3/@2/@4 in @1</span>
 </pre></p>
 <p>A reponame of 'linux/kernel/torvalds/linux-2.6' gives you a namespace of
 'torvalds/kernel/linux-2.6' and a backing repo name of 'linux'.</p>
@@ -453,16 +453,16 @@ a fork of anything at all, and should not be subject to namespace
 processing (i.e., it's just a normal repo)</p>
 <p><pre style="color: #ffffff; background-color: #000000;">
 <span class="Comment"># backing repos</span>
-<span class="Type">repo </span>sitaramc/gitolite linux git
+<span class="Statement">repo</span> sitaramc/gitolite linux git
     ...access rules for backing repos...
 <span class="Comment"># logical repos</span>
-<span class="Type">repo </span><span class="PreProc">CREATOR</span>/..<em>
-<span class="Statement">    C</span><span class="Constant">   </span>=   <span class="Identifier">@team</span>
-<span class="Statement">    RW+</span><span class="Constant"> </span>=   <span class="PreProc">CREATOR</span>
-<span class="Statement">    R</span><span class="Constant">   </span>=   <span class="Identifier">@all</span>
-    option namespace.pattern-1 = %/gitolite is @1 in sitaramc/gitolite
-    option namespace.pattern-2 = %/% is @1 in @2
-    option namespace.pattern-3 = %/%/</em> is none in @1/@2/@3
+<span class="Statement">repo</span> CREATOR/..*
+    <span class="Statement">C</span>   =   <span class="Identifier">@team</span>
+    <span class="Statement">RW+</span> =   CREATOR
+    <span class="Statement">R</span>   =   <span class="Identifier">@all</span>
+    <span class="Statement">option</span> <span class="Identifier">namespace.pattern-1</span> = <span class="Constant">%/gitolite is @1 in sitaramc/gitolite</span>
+    <span class="Statement">option</span> <span class="Identifier">namespace.pattern-2</span> = <span class="Constant">%/% is @1 in @2</span>
+    <span class="Statement">option</span> <span class="Identifier">namespace.pattern-3</span> = <span class="Constant">%/%/* is none in @1/@2/@3</span>
 </pre></p>
 <p>Firstly, this shows how to specify more than one namespace pattern.  Each
 pattern is tried in <em>lexically</em> sorted order until a match is found.
@@ -486,9 +486,9 @@ alice/personal/foo          -&gt;  (namespace processing disabled)
 <li>
 <p>Here's an example with some errors:</p>
 <p><pre style="color: #ffffff; background-color: #000000;">
-    option namespace.pattern-1 = %/gitolite is @1 in sitaramc/gitolite
-    option namespace.pattern-2 = %/% is @1 in @2
-    option namespace.pattern-3 = %/%/* is @1/@3 in @2
+    <span class="Statement">option</span> <span class="Identifier">namespace.pattern-1</span> = <span class="Constant">%/gitolite is @1 in sitaramc/gitolite</span>
+    <span class="Statement">option</span> <span class="Identifier">namespace.pattern-2</span> = <span class="Constant">%/% is @1 in @2</span>
+    <span class="Statement">option</span> <span class="Identifier">namespace.pattern-3</span> = <span class="Constant">%/%/* is @1/@3 in @2</span>
 </pre></p>
 <p>If you try 'alice/gitolite/foo' in this setup, it will only match the 3rd
 pattern.  The backing repo name will be 'gitolite', which probably doesn't
