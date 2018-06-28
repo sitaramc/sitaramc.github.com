@@ -452,9 +452,8 @@ file settings and syntax.</p>
 <p>For <strong>each</strong> server:</p>
 <ul>
 <li>
-<p>Install gitolite normally on the server.  Make clones of the server's
-    'gitolite-admin' repo on your workstation so you can admin them all from
-    one place.</p>
+<p>Install gitolite normally.  Make clones of the server's 'gitolite-admin'
+    repo on your workstation so you can admin them all from one place.</p>
 </li>
 <li>
 <p>Give the server a short, simple, "hostname" and set the HOSTNAME in the
@@ -463,21 +462,18 @@ file settings and syntax.</p>
     networking or DNS terms, or in OS terms.  This is internal to gitolite</em>.</p>
 </li>
 <li>
-<p>Run ssh-keygen if needed and get an ssh key pair for the server.</p>
+<p>Run ssh-keygen if needed and get an ssh key pair for the server.  Copy the
+    public key to a common area (suitable for copying from your workstation)
+    and name it after the host, but with 'server-' prefixed.  For example, the
+    pubkey for server 'mars' must be stored as 'server-mars.pub'.</p>
 </li>
 <li>
-<p>Copy the public part of each server's key (say, <code>id_rsa.pub</code>) to your
-    workstation, but rename it <code>server-&lt;hostname&gt;.pub</code>.  For example, the
-    pubkey from server <code>mars</code> must be renamed <code>server-mars.pub</code>.</p>
+<p>Copy <em>all</em> these pubkeys (i.e., one from each server) to <em>all</em> the admin
+    repo clones on your workstation and add them as usual.  This is an
+    <code>O(N^2)</code> operation ;-)</p>
+<p>Don't forget to push the changes!</p>
 <p>You may have guessed that the prefix 'server-' is special, and
 distinguishes a human user from a mirroring peer.</p>
-<p>At this point you have one public key for each server, with file names as
-above, somewhere on your workstation.</p>
-</li>
-<li>
-<p>On <em>each</em> of the admin repo clones on your workstation, add <em>all</em> these
-    keys the same way you would add a user's key.</p>
-<p>Don't forget to push the changes.</p>
 </li>
 <li>
 <p>Create "host" aliases to refer to all other machines.  See <a href="../sts/#appendix-4-ssh-host-aliases">here</a>
