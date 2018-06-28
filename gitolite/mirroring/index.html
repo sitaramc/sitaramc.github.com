@@ -449,11 +449,12 @@ time to fix them immediately :-)</p>
 <p>This is in two parts: the initial setup and the rc file, followed by the conf
 file settings and syntax.</p>
 <h2 id="the-initial-setup-and-the-rc-file">the initial setup and the <a href="../rc">rc file</a><a class="headerlink" href="#the-initial-setup-and-the-rc-file" title="Permanent link"></a></h2>
-<p>On <strong>each</strong> server:</p>
+<p>For <strong>each</strong> server:</p>
 <ul>
 <li>
-<p>Install gitolite normally.  Make clones of the server's 'gitolite-admin'
-    repo on your workstation so you can admin them all from one place.</p>
+<p>Install gitolite normally on the server.  Make clones of the server's
+    'gitolite-admin' repo on your workstation so you can admin them all from
+    one place.</p>
 </li>
 <li>
 <p>Give the server a short, simple, "hostname" and set the HOSTNAME in the
@@ -462,16 +463,21 @@ file settings and syntax.</p>
     networking or DNS terms, or in OS terms.  This is internal to gitolite</em>.</p>
 </li>
 <li>
-<p>Run ssh-keygen if needed and get an ssh key pair for the server.  Copy the
-    public key to a common area and name it after the host, but with 'server-'
-    prefixed.  For example, the pubkey for server 'mars' must be stored as
-    'server-mars.pub'.</p>
+<p>Run ssh-keygen if needed and get an ssh key pair for the server.</p>
 </li>
 <li>
-<p>Copy all keys to all the admin repo clones on your workstation and and add
-    them as usual.  This is an <code>O(N^2)</code> operation ;-)</p>
+<p>Copy the public part of each server's key (say, <code>id_rsa.pub</code>) to your
+    workstation, but rename it <code>server-&lt;hostname&gt;.pub</code>.  For example, the
+    pubkey from server <code>mars</code> must be renamed <code>server-mars.pub</code>.</p>
 <p>You may have guessed that the prefix 'server-' is special, and
 distinguishes a human user from a mirroring peer.</p>
+<p>At this point you have one public key for each server, with file names as
+above, somewhere on your workstation.</p>
+</li>
+<li>
+<p>On <em>each</em> of the admin repo clones on your workstation, add <em>all</em> these
+    keys the same way you would add a user's key.</p>
+<p>Don't forget to push the changes.</p>
 </li>
 <li>
 <p>Create "host" aliases to refer to all other machines.  See <a href="../sts/#appendix-4-ssh-host-aliases">here</a>
@@ -501,10 +507,10 @@ get expected results.  <strong>Do NOT proceed otherwise.</strong></p>
     on the master; the slaves can have just this because on the first push to
     the master it will update all the slaves anyway:</p>
 <p><pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>gitolite-admin
-<span class="Statement">    RW+</span><span class="Constant">     </span>=   some-local-admin</p>
-<pre><code>option mirror.master    =   mars
-option mirror.slaves    =   phobos
+<span class="Statement">repo</span> gitolite-admin
+    <span class="Statement">RW+</span>     =   some-local-admin</p>
+<pre><code>&lt;span class="Statement"&gt;option&lt;/span&gt; &lt;span class="Identifier"&gt;mirror.master&lt;/span&gt;    =   &lt;span class="Constant"&gt;mars&lt;/span&gt;
+&lt;span class="Statement"&gt;option&lt;/span&gt; &lt;span class="Identifier"&gt;mirror.slaves&lt;/span&gt;    =   &lt;span class="Constant"&gt;phobos&lt;/span&gt;
 </code></pre>
 </pre>
 
@@ -525,12 +531,12 @@ option mirror.slaves    =   phobos
 settings for different repos, and of course some repos may not have any mirror
 options at all -- they are then purely local.</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>foo
+<span class="Statement">repo</span> foo
     ...access rules...
 
-    option mirror.master        =   mars
-    option mirror.slaves        =   phobos deimos
-    option mirror.redirectOK    =   all
+    <span class="Statement">option</span> <span class="Identifier">mirror.master</span>        =   <span class="Constant">mars</span>
+    <span class="Statement">option</span> <span class="Identifier">mirror.slaves</span>        =   <span class="Constant">phobos deimos</span>
+    <span class="Statement">option</span> <span class="Identifier">mirror.redirectOK</span>    =   <span class="Constant">all</span>
 </pre>
 
 <p>The first line is easy, since a repo can have only one master.</p>
@@ -538,9 +544,9 @@ options at all -- they are then purely local.</p>
 have several slave lists, as long as the config key starts with
 'mirror.slaves' and is unique.  For example.</p>
 <pre style="color: #ffffff; background-color: #000000;">
-    option mirror.slaves-1   =   phobos deimos
-    option mirror.slaves-2   =   io europa
-    option mirror.slaves-3   =   ganymede callisto
+    <span class="Statement">option</span> <span class="Identifier">mirror.slaves-1</span>   =   <span class="Constant">phobos deimos</span>
+    <span class="Statement">option</span> <span class="Identifier">mirror.slaves-2</span>   =   <span class="Constant">io europa</span>
+    <span class="Statement">option</span> <span class="Identifier">mirror.slaves-3</span>   =   <span class="Constant">ganymede callisto</span>
 </pre>
 
 <p>Do not repeat a key; then only the last line for that key will be effective.</p>
@@ -551,7 +557,7 @@ have some slaves for whom you would like to trigger the sync later (and you
 don't mind the fact that those slaves are out of sync until then).</p>
 <p>To make that happen, use option lines like this instead of those shown above:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-    option mirror.slaves.nosync-1   =   phobos deimos
+    <span class="Statement">option</span> <span class="Identifier">mirror.slaves.nosync-1</span>   =   <span class="Constant">phobos deimos</span>
 </pre>
 
 <p>Except for the addition of a <code>.nosync</code> just after <code>slaves</code>, all the other
@@ -602,8 +608,8 @@ from a user and transparently redirect them to the <em>master</em>.</p>
 local mirror for both fetch and push access to all repos.</p>
 <p>The syntax for enabling this is one of these:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-    option mirror.redirectOK    =   all
-    option mirror.redirectOK    =   phobos deimos
+    <span class="Statement">option</span> <span class="Identifier">mirror.redirectOK</span>    =   <span class="Constant">all</span>
+    <span class="Statement">option</span> <span class="Identifier">mirror.redirectOK</span>    =   <span class="Constant">phobos deimos</span>
 </pre>
 
 <p>The first syntax trusts all valid slaves to redirect user pushes, while the
@@ -636,13 +642,13 @@ HOSTNAME supplied in the rc file, if one was supplied.  This lets you maintain
 configurations for all servers in one repo, yet have them act differently on
 different servers, by saying something like:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="PreProc">include </span><span class="Constant">&quot;%HOSTNAME/*.conf&quot;</span>
+<span class="Statement">include</span> &quot;%HOSTNAME/*.conf&quot;
 </pre>
 
 <p>(See <a href="../conf/#include-files">include</a> for more on the 'include' command).</p>
 <p>You can use it in other places also, for example:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Statement">    RW+</span><span class="Constant">     VREF/NAME/subs/%HOSTNAME/       </span>=   <span class="Identifier">@</span><span class="Error">%</span><span class="Identifier">HOSTNAME-admins</span>
+    <span class="Statement">RW+</span>     <span class="Constant">VREF/</span><span class="PreProc">NAME/</span><span class="Constant">subs/%HOST</span><span class="PreProc">NAME/</span>       =   <span class="Identifier">@%HOSTNAME-admins</span>
 </pre>
 
 <p>(you still have to define @mars-admins, @phobos-admins, etc., but the actual
