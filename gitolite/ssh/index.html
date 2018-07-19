@@ -401,7 +401,7 @@ to have set up.  Even the user name comes from the <code>REMOTE_USER</code> envi
 variable instead of as a command line argument in this case.</p>
 <p>However, it has to be an authentication system that is compatible with sshd or
 httpd in some form.  Why?  Because the git <em>client</em> accessing the server only
-knows those 2 protocols to "speak git".  (Well, the <code>https://</code> protocol is
+knows those 2 protocols to "speak git".  (Well, the <code>git://</code> protocol is
 unauthenticated, and <code>file://</code> doesn't really apply to this discussion, so
 we're ignoring those).</p>
 <p>For example, let's say you have an LDAP-based authentication system somewhere.
