@@ -351,13 +351,13 @@ creating the repo.</p>
 the whole page, here's a very simple example.</p>
 <p>This is what the admin added to the conf file:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Identifier">@users</span> = u1 u2 u3
+<span class="Identifier">@users</span><span class="PreProc"> = u1 u2 u3</span>
 
-<span class="Type">repo </span><span class="Special">foo/</span><span class="PreProc">CREATOR</span><span class="Special">/[a-z]..*</span>
-<span class="Statement">    C</span><span class="Constant">   </span>=   u1 u2 u3
-<span class="Statement">    RW+</span><span class="Constant"> </span>=   <span class="PreProc">CREATOR</span>
-<span class="Statement">    RW</span><span class="Constant">  </span>=   <span class="PreProc">WRITERS</span>
-<span class="Statement">    R</span><span class="Constant">   </span>=   <span class="PreProc">READERS</span>
+<span class="Statement">repo</span> foo/CREATOR/[a-z]..*
+    <span class="Statement">C</span>   =   <span class="PreProc">u1 u2 u3</span>
+    <span class="Statement">RW+</span> =   CREATOR
+    <span class="Statement">RW</span>  =   WRITERS
+    <span class="Statement">R</span>   =   READERS
 </pre>
 
 <p>User 'u1' then runs <code>git clone git@host:foo/u1/bar</code>, creating the repo.
@@ -366,10 +366,10 @@ for the word CREATOR.</p>
 <p>This is the effective rule list for 'foo/u1/bar' immediately after the user
 creates it:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>foo/u1/bar
-<span class="Statement">    RW+</span><span class="Constant"> </span>=   u1
-<span class="Statement">    RW</span><span class="Constant">  </span>=   <span class="PreProc">WRITERS</span>
-<span class="Statement">    R</span><span class="Constant">   </span>=   <span class="PreProc">READERS</span>
+<span class="Statement">repo</span> foo/u1/bar
+    <span class="Statement">RW+</span> =   u1
+    <span class="Statement">RW</span>  =   WRITERS
+    <span class="Statement">R</span>   =   READERS
 </pre>
 
 <p>Most of this is fixed, but the creator (user 'u1') <em>can</em> use the <a href="../user/#setget-additional-permissions-for-repos-you-created">perms</a>
@@ -377,10 +377,10 @@ command to add other users as 'READERS' or 'WRITERS'.  For example he could
 add 'u2' as a writer and 'u3' and 'u5' as readers:</p>
 <p>This is the effective rule list that applies to the repo if he does that:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>foo/u1/bar
-<span class="Statement">    RW+</span><span class="Constant"> </span>=   u1
-<span class="Statement">    RW</span><span class="Constant">  </span>=   u2
-<span class="Statement">    R</span><span class="Constant">   </span>=   u3 u5
+<span class="Statement">repo</span> foo/u1/bar
+    <span class="Statement">RW+</span> =   u1
+    <span class="Statement">RW</span>  =   u2
+    <span class="Statement">R</span>   =   u3 u5
 </pre>
 
 <p>Note that both these "effective rule lists" were created without touching the
@@ -391,15 +391,15 @@ all this in much more detail.</p>
 <p>Here's a slightly more detailed example, starting with what the admin puts in
 the conf file:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Identifier">@prof</span>       =   u1
-<span class="Identifier">@TAs</span>        =   u2 u3
-<span class="Identifier">@students</span>   =   u4 u5 u6
+<span class="Identifier">@prof</span><span class="PreProc">       =   u1</span>
+<span class="Identifier">@TAs</span><span class="PreProc">        =   u2 u3</span>
+<span class="Identifier">@students</span><span class="PreProc">   =   u4 u5 u6</span>
 
-<span class="Type">repo </span>   <span class="Special">assignments/</span><span class="PreProc">CREATOR</span><span class="Special">/a[0-9][0-9]</span>
-<span class="Statement">    C</span><span class="Constant">   </span>=   <span class="Identifier">@students</span>
-<span class="Statement">    RW+</span><span class="Constant"> </span>=   <span class="PreProc">CREATOR</span>
-<span class="Statement">    RW</span><span class="Constant">  </span>=   <span class="PreProc">WRITERS</span> <span class="Identifier">@TAs</span>
-<span class="Statement">    R</span><span class="Constant">   </span>=   <span class="PreProc">READERS</span> <span class="Identifier">@prof</span>
+<span class="Statement">repo</span>    assignments/CREATOR/a[0-9][0-9]
+    <span class="Statement">C</span>   =   <span class="Identifier">@students</span>
+    <span class="Statement">RW+</span> =   CREATOR
+    <span class="Statement">RW</span>  =   WRITERS <span class="Identifier">@TAs</span>
+    <span class="Statement">R</span>   =   READERS <span class="Identifier">@prof</span>
 </pre>
 
 <p>Note the "C" permission.  This is a standalone "C", which gives the named
@@ -417,11 +417,11 @@ warning: You appear to have cloned an empty repository.
 <p>Here's how the same example would look if you did not want the CREATOR's name
 to be part of the actual repo name.</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>   <span class="Special">assignments/a[0-9][0-9]</span>
-<span class="Statement">    C</span><span class="Constant">   </span>=   <span class="Identifier">@students</span>
-<span class="Statement">    RW+</span><span class="Constant"> </span>=   <span class="PreProc">CREATOR</span>
-<span class="Statement">    RW</span><span class="Constant">  </span>=   <span class="PreProc">WRITERS</span> <span class="Identifier">@TAs</span>
-<span class="Statement">    R</span><span class="Constant">   </span>=   <span class="PreProc">READERS</span> <span class="Identifier">@prof</span>
+<span class="Statement">repo</span>    assignments/a[0-9][0-9]
+    <span class="Statement">C</span>   =   <span class="Identifier">@students</span>
+    <span class="Statement">RW+</span> =   CREATOR
+    <span class="Statement">RW</span>  =   WRITERS <span class="Identifier">@TAs</span>
+    <span class="Statement">R</span>   =   READERS <span class="Identifier">@prof</span>
 </pre>
 
 <p>We haven't changed anything except the repo name regex.  This means that the
@@ -473,14 +473,14 @@ more detail.</p>
 in that file for how to do that.  Be sure to run the 2 commands mentioned
 there after you have added the roles.</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span><span class="Special">foo/..*</span>
-<span class="Statement">  C</span><span class="Constant">                 </span>=   u1
-<span class="Statement">  RW</span><span class="Constant">    refs/tags/  </span>=   TESTERS
-<span class="Statement">  -</span><span class="Constant">     refs/tags/  </span>=<span class="WarningMsg">   @all</span>
-<span class="Statement">  RW+</span><span class="Constant">               </span>=   <span class="PreProc">WRITERS</span>
-<span class="Statement">  RW</span><span class="Constant">                </span>=   INTERNS
-<span class="Statement">  R</span><span class="Constant">                 </span>=   <span class="PreProc">READERS</span>
-<span class="Statement">  RW+D</span><span class="Constant">              </span>=   MANAGERS
+<span class="Statement">repo</span> foo/..*
+  <span class="Statement">C</span>                 =   <span class="PreProc">u1</span>
+  <span class="Statement">RW</span>    <span class="Constant">refs/tags/</span>  =   TESTERS
+  <span class="Statement">-</span>     <span class="Constant">refs/tags/</span>  =   <span class="WarningMsg">@all</span>
+  <span class="Statement">RW+</span>               =   WRITERS
+  <span class="Statement">RW</span>                =   INTERNS
+  <span class="Statement">R</span>                 =   READERS
+  <span class="Statement">RW+D</span>              =   MANAGERS
 </pre>
 
 <h3 id="important-warning-about-this-feature"><font color="red"><strong>IMPORTANT WARNING ABOUT THIS FEATURE</strong></font><a class="headerlink" href="#important-warning-about-this-feature" title="Permanent link"></a></h3>

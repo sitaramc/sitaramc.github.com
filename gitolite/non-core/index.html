@@ -518,8 +518,8 @@ all this.</p>
 <li>
 <p>Now add lines like this to your conf file:</p>
 <p><pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>   foo
-    option hook.post-receive    =   deploy
+<span class="Statement">repo</span>    foo
+    <span class="Statement">option</span> <span class="Identifier">hook.post-receive</span>    =   <span class="Constant">deploy</span>
 </pre></p>
 <p>The syntax should be fairly obvious, but just to be clear, in this case a
 symlink called "post-receive" will be placed in foo.git/hooks, pointing to
@@ -534,8 +534,8 @@ have to go to the server and remove it manually.</p>
 <p><span class="gray">(v3.6+)</span> You can assign multiple targets for each hook.  For
     example, you could say</p>
 <p><pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>   foo
-    option hook.post-receive    =   deploy mail-admins
+<span class="Statement">repo</span>    foo
+    <span class="Statement">option</span> <span class="Identifier">hook.post-receive</span>    =   <span class="Constant">deploy mail-admins</span>
 </pre></p>
 <p>where "deploy" and "mail-admins" are pieces of code that do whatever their
 names suggest, and both are, independently, candidates for being run from
@@ -549,28 +549,28 @@ If you really need more than one, ask on the mailing list.</strong></p>
 <li>
 <p><span class="gray">(v3.6+)</span> You can change these hooks by saying:</p>
 <p><pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>   foo
-    option hook.post-receive    =   deploy mail-admins
+<span class="Statement">repo</span>    foo
+    <span class="Statement">option</span> <span class="Identifier">hook.post-receive</span>    =   <span class="Constant">deploy mail-admins</span>
 </pre></p>
 <p>or delete all of them by saying:</p>
 <p><pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>   foo
-    option hook.post-receive    =   <span class="Constant">&quot;&quot;</span>
+<span class="Statement">repo</span>    foo
+    <span class="Statement">option</span> <span class="Identifier">hook.post-receive</span>    =   <span class="Constant">&quot;&quot;</span>
 </pre></p>
 </li>
 <li>
 <p><span class="gray">(v3.6.5+)</span> You can add hooks incrementally.  For example:</p>
 <p><pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>   <span class="Identifier">@all</span>
-    option hook.post-receive.00 =   mail-admins
-    option hook.post-receive.01 =   deploy
+<span class="Statement">repo</span>    <span class="Identifier">@all</span>
+    <span class="Statement">option</span> <span class="Identifier">hook.post-receive.00</span> =   <span class="Constant">mail-admins</span>
+    <span class="Statement">option</span> <span class="Identifier">hook.post-receive.01</span> =   <span class="Constant">deploy</span>
 <span class="Comment"># (and later)</span>
-<span class="Type">repo </span>   foo
-    option hook.post-receive.00 =   mail-users     <span class="Comment"> #1</span>
-    option hook.post-receive.01 =   <span class="Constant">&quot;&quot;</span>             <span class="Comment"> #2</span>
+<span class="Statement">repo</span>    foo
+    <span class="Statement">option</span> <span class="Identifier">hook.post-receive.00</span> =   <span class="Constant">mail-users      #1</span>
+    <span class="Statement">option</span> <span class="Identifier">hook.post-receive.01</span> =   <span class="Constant">&quot;&quot;              #2</span>
 <span class="Comment"># (and maybe still later)</span>
-<span class="Type">repo </span>   <span class="Identifier">@foss</span>
-    option hook.post-receive.02 =   save-push-sigs
+<span class="Statement">repo</span>    <span class="Identifier">@foss</span>
+    <span class="Statement">option</span> <span class="Identifier">hook.post-receive.02</span> =   <span class="Constant">save-push-sigs</span>
 </pre></p>
 <p>Assuming <code>foo</code> is a member of <code>@foss</code>, this declares 2 post-receive hooks
 for it: mail-users and save-push-sigs.  The suffix (in this example, "00",

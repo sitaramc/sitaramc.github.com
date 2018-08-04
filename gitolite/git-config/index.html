@@ -344,10 +344,10 @@ please see <code>$GIT_CONFIG_KEYS</code> in the <a href="../rc/#specific-variabl
 </code></pre>
 <p>For example:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>gitolite
-<span class="Statement">    config </span><span class="Identifier">hooks.mailinglist </span>= gitolite-commits@example.tld
-<span class="Statement">    config </span><span class="Identifier">hooks.emailprefix </span>= <span class="Constant">&quot;[gitolite] &quot;</span>
-<span class="Statement">    config </span><span class="Identifier">foo.bar </span>= <span class="Constant">&quot;&quot;</span>
+<span class="Statement">repo</span> gitolite
+    <span class="Statement">config</span> <span class="Identifier">hooks.mailinglist</span> = <span class="Constant">gitolite-commits@example.tld</span>
+    <span class="Statement">config</span> <span class="Identifier">hooks.emailprefix</span> = <span class="Constant">&quot;[gitolite] &quot;</span>
+    <span class="Statement">config</span> <span class="Identifier">foo.bar</span> = <span class="Constant">&quot;&quot;</span>
 </pre>
 
 <p>This does either a plain "git config section.key value" (for the first 2
@@ -366,9 +366,9 @@ operation on the given key.</p>
 string.  The former is available to all repos, while the latter is only
 available to <a class="wikilink" href="../wild/">wild</a> repos.</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>foo bar baz
-<span class="Statement">    config </span><span class="Identifier">hooks.mailinglist </span>= %GL_REPO-commits@example.tld
-<span class="Statement">    config </span><span class="Identifier">hooks.emailprefix </span>= <span class="Constant">&quot;[%GL_REPO] &quot;</span>
+<span class="Statement">repo</span> foo bar baz
+    <span class="Statement">config</span> <span class="Identifier">hooks.mailinglist</span> = <span class="Constant">%GL_REPO-commits@example.tld</span>
+    <span class="Statement">config</span> <span class="Identifier">hooks.emailprefix</span> = <span class="Constant">&quot;[%GL_REPO] &quot;</span>
 </pre>
 
 <h1 id="v367-expanding-a-group-name"><span class="gray">(v3.6.7+)</span> expanding a group name<a class="headerlink" href="#v367-expanding-a-group-name" title="Permanent link"></a></h1>
@@ -378,11 +378,11 @@ available to <a class="wikilink" href="../wild/">wild</a> repos.</p>
 <p>to the rc file (suggested location: just after the <code>GIT_CONFIG_KEYS</code> line),
 then the <em>value</em> of a config line will have groupnames expanded.  For example:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Identifier">@admins</span> = sitaramc@gmail.com jdoe@example.com
+<span class="Identifier">@admins</span><span class="PreProc"> = sitaramc</span><span class="Identifier">@gmail.com</span><span class="PreProc"> jdoe</span><span class="Identifier">@example.com</span>
 ...
-<span class="Type">repo </span>foo
+<span class="Statement">repo</span> foo
     ...
-<span class="Statement">    config </span><span class="Identifier">hooks.mailinglist </span>= @admins
+    <span class="Statement">config</span> <span class="Identifier">hooks.mailinglist</span> = <span class="Constant">@admins</span>
 </pre>
 
 <p>will behave as if the two email addresses were explicitly listed in the config
@@ -394,22 +394,22 @@ as part of the group name.</p>
 occurrence will be the one in effect.  This allows you to override settings
 just for one project, as in this example:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span><span class="Identifier">@all</span>
-<span class="Statement">    config </span><span class="Identifier">hooks.mailinglist </span>= %GL_REPO-commits@example.tld
-<span class="Statement">    config </span><span class="Identifier">hooks.emailprefix </span>= <span class="Constant">&quot;[%GL_REPO] &quot;</span>
+<span class="Statement">repo</span> <span class="Identifier">@all</span>
+    <span class="Statement">config</span> <span class="Identifier">hooks.mailinglist</span> = <span class="Constant">%GL_REPO-commits@example.tld</span>
+    <span class="Statement">config</span> <span class="Identifier">hooks.emailprefix</span> = <span class="Constant">&quot;[%GL_REPO] &quot;</span>
 
 <span class="Comment"># ... later ...</span>
 
-<span class="Type">repo </span>customer-project
-   <span class="Comment"> # different mailing list</span>
-<span class="Statement">    config </span><span class="Identifier">hooks.mailinglist </span>= announce@customer.tld
+<span class="Statement">repo</span> customer-project
+    <span class="Comment"># different mailing list</span>
+    <span class="Statement">config</span> <span class="Identifier">hooks.mailinglist</span> = <span class="Constant">announce@customer.tld</span>
 </pre>
 
 <p>The "delete config variable" syntax can also be used, if you wish:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>secret    <span class="Comment"> # no emails for this one please</span>
-<span class="Statement">    config </span><span class="Identifier">hooks.mailinglist </span>= <span class="Constant">&quot;&quot;</span>
-<span class="Statement">    config </span><span class="Identifier">hooks.emailprefix </span>= <span class="Constant">&quot;&quot;</span>
+<span class="Statement">repo</span> secret     <span class="Comment"># no emails for this one please</span>
+    <span class="Statement">config</span> <span class="Identifier">hooks.mailinglist</span> = <span class="Constant">&quot;&quot;</span>
+    <span class="Statement">config</span> <span class="Identifier">hooks.emailprefix</span> = <span class="Constant">&quot;&quot;</span>
 </pre>
 
 <p>As you can see, the general idea is to place the most generic ones (<code>repo @all</code>,
@@ -429,7 +429,7 @@ enforced by a regex called <code>UNSAFE_PATT</code>, whose default value is
 <code>[`~#\$\&amp;()|;&lt;&gt;]</code>.</p>
 <p>But let's say you need to do this, which fails due to the semicolon.</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Statement">    config </span><span class="Identifier">hooks.showrev </span>= <span class="Constant">&quot;git show -C %s; echo&quot;</span>
+    <span class="Statement">config</span> <span class="Identifier">hooks.showrev</span> = <span class="Constant">&quot;git show -C %s; echo&quot;</span>
 </pre>
 
 <p>There are two ways to fix this.</p>
@@ -457,7 +457,7 @@ method:</p>
 </li>
 </ul>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Statement">    config </span><span class="Identifier">hooks.showrev </span>= %SHOWREV
+    <span class="Statement">config</span> <span class="Identifier">hooks.showrev</span> = <span class="Constant">%SHOWREV</span>
 </pre>
 
 <p>This mechanism allows you to add any number of <strong>specific</strong> violations to the
@@ -480,7 +480,7 @@ characters.  Here's how to deal with that easily:</p>
 </li>
 </ul>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Statement">    config </span><span class="Identifier">hooks.mailinglist </span>= <span class="Constant">&quot;Sitaram Chamarty %LTsitaramc@gmail.com%GT&quot;</span>
+    <span class="Statement">config</span> <span class="Identifier">hooks.mailinglist</span> = <span class="Constant">&quot;Sitaram Chamarty %LTsitaramc@gmail.com%GT&quot;</span>
 </pre>
 
 <p>Admittedly, that looks a wee bit ugly, but it gets the job done without having

@@ -378,28 +378,28 @@ repo" is not a good idea.  Here're two examples to illustrate.</p>
 access to each repo.  It's a very simple, readable, syntax, and makes it easy
 to answer questions like "what repos can bob push to" (answer: only 'bar').</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>foo
-<span class="Statement">    RW+</span><span class="Constant">     </span>=   alice
-<span class="Statement">    RW</span><span class="Constant">      </span>=   carol
+<span class="Statement">repo</span> foo
+    <span class="Statement">RW+</span>     =   alice
+    <span class="Statement">RW</span>      =   carol
 
-<span class="Type">repo </span>bar
-<span class="Statement">    RW+</span><span class="Constant">     </span>=   bob
-<span class="Statement">    R</span><span class="Constant">       </span>=   alice
+<span class="Statement">repo</span> bar
+    <span class="Statement">RW+</span>     =   bob
+    <span class="Statement">R</span>       =   alice
 
-<span class="Type">repo </span>baz
-<span class="Statement">    RW+</span><span class="Constant">     </span>=   carol
-<span class="Statement">    R</span><span class="Constant">       </span>=   alice bob
+<span class="Statement">repo</span> baz
+    <span class="Statement">RW+</span>     =   carol
+    <span class="Statement">R</span>       =   alice bob
 </pre>
 
 <hr />
 <p>This second example allows different levels of access to different branches
 and tags for different developers:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>foo
-<span class="Statement">    RW+</span><span class="Constant">                         </span>=   alice
-<span class="Statement">    RW</span><span class="Constant">  master                  </span>=   bob
-<span class="Statement">    RW+</span><span class="Constant"> dev/                    </span>=   bob
-<span class="Statement">    RW</span><span class="Constant">  refs/heads/tags/v[0-9]  </span>=   ashok
+<span class="Statement">repo</span> foo
+    <span class="Statement">RW+</span>                         =   alice
+    <span class="Statement">RW</span>  <span class="Constant">master</span>                  =   bob
+    <span class="Statement">RW+</span> <span class="Constant">dev/</span>                    =   bob
+    <span class="Statement">RW</span>  <span class="Constant">refs/heads/tags/v[0-9]</span>  =   ashok
 </pre>
 
 <h2 id="other-features">other features<a class="headerlink" href="#other-features" title="Permanent link"></a></h2>

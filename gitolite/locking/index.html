@@ -356,9 +356,9 @@ into a "merge" situation.</p>
 list in the rc file.</p>
 <p>Next, the gitolite.conf file should have something like this:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>foo
+<span class="Statement">repo</span> foo
     ...other rules...
-<span class="Statement">    -</span><span class="Constant">   VREF/lock      </span>=<span class="WarningMsg">   @all</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/lock</span>      =   <span class="WarningMsg">@all</span>
 </pre>
 
 <p>However, see below for the difference between "RW" and "RW+" from the point of

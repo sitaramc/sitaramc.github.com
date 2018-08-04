@@ -350,17 +350,17 @@ from this file.</p>
 the hat to Teemu Matilainen's gitolite vim-syntax file for the
 colors.)</span></p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Identifier">@staff</span>              =   dilbert alice          <span class="Comment"> # groups</span>
-<span class="Identifier">@projects</span>           =   foo bar
+<span class="Identifier">@staff</span><span class="PreProc">              =   dilbert alice           </span><span class="Comment"># groups</span>
+<span class="Identifier">@projects</span><span class="PreProc">           =   foo bar</span>
 
-<span class="Type">repo </span><span class="Identifier">@projects</span> baz                             <span class="Comment"> # repos</span>
-<span class="Statement">    RW+</span><span class="Constant">             </span>=   <span class="Identifier">@staff</span>                 <span class="Comment"> # rules</span>
-<span class="Statement">    -</span><span class="Constant">       master  </span>=<span class="WarningMsg">   ashok</span>
-<span class="Statement">    RW</span><span class="Constant">              </span>=   ashok
-<span class="Statement">    R</span><span class="Constant">               </span>=   wally
+<span class="Statement">repo</span> <span class="Identifier">@projects</span> baz                              <span class="Comment"># repos</span>
+    <span class="Statement">RW+</span>             =   <span class="Identifier">@staff</span>                  <span class="Comment"># rules</span>
+    <span class="Statement">-</span>       <span class="Constant">master</span>  =   <span class="WarningMsg">ashok</span>
+    <span class="Statement">RW</span>              =   ashok
+    <span class="Statement">R</span>               =   wally
 
-    option deny-rules           =   1          <span class="Comment"> # options</span>
-<span class="Statement">    config </span><span class="Identifier">hooks.emailprefix    </span>= '[%GL_REPO] '<span class="Comment"> # git-config</span>
+    <span class="Statement">option</span> <span class="Identifier">deny-rules</span>           =   <span class="Constant">1           # options</span>
+    <span class="Statement">config</span> <span class="Identifier">hooks.emailprefix</span>    = <span class="Constant">'[%GL_REPO] ' # git-config</span>
 </pre>
 
 <h1 id="basic-syntax">basic syntax<a class="headerlink" href="#basic-syntax" title="Permanent link"></a></h1>
@@ -421,34 +421,34 @@ and does not distinguish; until you <em>use</em> the group name it could really 
 either.</p>
 <p>Here's an example:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Identifier">@developers</span>     =   dilbert alice wally
+<span class="Identifier">@developers</span><span class="PreProc">     =   dilbert alice wally</span>
 </pre>
 
 <p>Group definitions accumulate; this is the same as the above:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Identifier">@developers</span>     =   dilbert
-<span class="Identifier">@developers</span>     =   alice
-<span class="Identifier">@developers</span>     =   wally
+<span class="Identifier">@developers</span><span class="PreProc">     =   dilbert</span>
+<span class="Identifier">@developers</span><span class="PreProc">     =   alice</span>
+<span class="Identifier">@developers</span><span class="PreProc">     =   wally</span>
 </pre>
 
 <p>You can use one group in another group definition; the values will be expanded
 immediately (meaning later additions will not appear in the second group):</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Identifier">@developers</span>     =   dilbert alice
-<span class="Identifier">@interns</span>        =   ashok
-<span class="Identifier">@staff</span>          =   <span class="Identifier">@interns</span> <span class="Identifier">@developers</span>
-<span class="Identifier">@developers</span>     =   wally
+<span class="Identifier">@developers</span><span class="PreProc">     =   dilbert alice</span>
+<span class="Identifier">@interns</span><span class="PreProc">        =   ashok</span>
+<span class="Identifier">@staff</span><span class="PreProc">          =   </span><span class="Identifier">@interns</span><span class="PreProc"> </span><span class="Identifier">@developers</span>
+<span class="Identifier">@developers</span><span class="PreProc">     =   wally</span>
 
 <span class="Comment"># wally is </span><span class="Todo">NOT</span><span class="Comment"> part of @staff</span>
 </pre>
 
 <p>Here's a very simple but complete example of using groups:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Identifier">@developers</span>     =   dilbert alice wally
-<span class="Identifier">@foss-repos</span>     =   git gitolite
+<span class="Identifier">@developers</span><span class="PreProc">     =   dilbert alice wally</span>
+<span class="Identifier">@foss-repos</span><span class="PreProc">     =   git gitolite</span>
 
-<span class="Type">repo </span><span class="Identifier">@foss-repos</span>
-<span class="Statement">    RW+</span><span class="Constant">         </span>=   <span class="Identifier">@developers</span>
+<span class="Statement">repo</span> <span class="Identifier">@foss-repos</span>
+    <span class="Statement">RW+</span>         =   <span class="Identifier">@developers</span>
 </pre>
 
 <h2 id="special-group-all">special group <code>@all</code><a class="headerlink" href="#special-group-all" title="Permanent link"></a></h2>
@@ -458,9 +458,9 @@ mean "all repos" or "all users".</p>
 <p>Gitolite cannot truly catch undefined groups because the conf parser is
 1-pass, and you're allowed to define a group <em>after</em> it is used, like so:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>foo
-<span class="Statement">    RW</span><span class="Constant">  </span>=   <span class="Identifier">@foo</span>
-<span class="Identifier">@foo</span> = u1 u2
+<span class="Statement">repo</span> foo
+    <span class="Statement">RW</span>  =   <span class="Identifier">@foo</span>
+<span class="Identifier">@foo</span><span class="PreProc"> = u1 u2</span>
 </pre>
 
 <p><span class="gray">(v3.5.3+)</span> However, in a simplistic attempt to help
@@ -507,14 +507,14 @@ is to be allowed or denied.</p>
 administration</a> page.  Here's a slightly more complex one, just
 for illustration.</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>foo bar
+<span class="Statement">repo</span> foo bar
 
-<span class="Statement">    RW+</span><span class="Constant">                     </span>=   alice <span class="Identifier">@teamleads</span>
-<span class="Statement">    -</span><span class="Constant">   master              </span>=<span class="WarningMsg">   dilbert @devteam</span>
-<span class="Statement">    -</span><span class="Constant">   refs/tags/v[0-9]    </span>=<span class="WarningMsg">   dilbert @devteam</span>
-<span class="Statement">    RW+</span><span class="Constant"> dev/                </span>=   dilbert <span class="Identifier">@devteam</span>
-<span class="Statement">    RW</span><span class="Constant">                      </span>=   dilbert <span class="Identifier">@devteam</span>
-<span class="Statement">    R</span><span class="Constant">                       </span>=   <span class="Identifier">@managers</span>
+    <span class="Statement">RW+</span>                     =   alice <span class="Identifier">@teamleads</span>
+    <span class="Statement">-</span>   <span class="Constant">master</span>              =   <span class="WarningMsg">dilbert @devteam</span>
+    <span class="Statement">-</span>   <span class="Constant">refs/tags/v[0-9]</span>    =   <span class="WarningMsg">dilbert @devteam</span>
+    <span class="Statement">RW+</span> <span class="Constant">dev/</span>                =   dilbert <span class="Identifier">@devteam</span>
+    <span class="Statement">RW</span>                      =   dilbert <span class="Identifier">@devteam</span>
+    <span class="Statement">R</span>                       =   <span class="Identifier">@managers</span>
 </pre>
 
 <p>A "repo" line names one or more repos, and is followed by one or more rule
@@ -618,15 +618,15 @@ you might see something like this, perhaps at the top or bottom of the conf
 file:</p>
 <pre style="color: #ffffff; background-color: #000000;">
 <span class="Comment"># managers should be able to read any repo</span>
-<span class="Type">repo </span><span class="Identifier">@all</span>
-<span class="Statement">    R</span><span class="Constant">   </span>=   <span class="Identifier">@managers</span>
+<span class="Statement">repo</span> <span class="Identifier">@all</span>
+    <span class="Statement">R</span>   =   <span class="Identifier">@managers</span>
 </pre>
 
 <p>or perhaps this:</p>
 <pre style="color: #ffffff; background-color: #000000;">
 <span class="Comment"># anyone can clone open source repos</span>
-<span class="Type">repo </span><span class="Identifier">@FOSS</span>
-<span class="Statement">    R</span><span class="Constant">   </span>=   <span class="Identifier">@all</span>
+<span class="Statement">repo</span> <span class="Identifier">@FOSS</span>
+    <span class="Statement">R</span>   =   <span class="Identifier">@all</span>
 </pre>
 
 <p>Clearly, both these constructs affect repos which may have their own rules
@@ -637,23 +637,23 @@ affected as a regular expression.  Notice that the regex can be defined
 directly in the repo line, or it can be defined in a group and the <em>group</em>
 used in the repo line; it's all the same to gitolite.</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span><span class="Special">FOSS/..*</span>
-   <span class="Comment"> # ...rules for repos under FOSS/</span>
+<span class="Statement">repo</span> FOSS/..*
+    <span class="Comment"># ...rules for repos under FOSS/</span>
 
-<span class="Identifier">@secret</span>     =   <span class="Special">secret/..*</span> <span class="Special">private/..*</span>
-<span class="Type">repo </span><span class="Identifier">@secret</span>
-   <span class="Comment"> # ...rules for repos under secret/ and private/</span>
+<span class="Identifier">@secret</span><span class="PreProc">     =   secret/..* private/..*</span>
+<span class="Statement">repo</span> <span class="Identifier">@secret</span>
+    <span class="Comment"># ...rules for repos under secret/ and private/</span>
 </pre>
 
 <p>Finally, although not very common, you can certainly do things like this:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>foo
-   <span class="Comment"> # ...some rules...</span>
+<span class="Statement">repo</span> foo
+    <span class="Comment"># ...some rules...</span>
 
 <span class="Comment"># ...other repos and rules...</span>
 
-<span class="Type">repo </span>foo
-   <span class="Comment"> # ...more rules for foo...</span>
+<span class="Statement">repo</span> foo
+    <span class="Comment"># ...more rules for foo...</span>
 </pre>
 
 <p>Note that the "other repos and rules" may indirectly include repo "foo" (for

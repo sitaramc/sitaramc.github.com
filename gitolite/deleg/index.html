@@ -342,23 +342,23 @@ access rules for any other sub-admin's repos.</p>
 <h1 id="example">example<a class="headerlink" href="#example" title="Permanent link"></a></h1>
 <p>Here's a sample conf that does delegation:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Identifier">@webbrowsers</span>        = firefox lynx <span class="Special">browsers/..*</span>
-<span class="Identifier">@webservers</span>         = apache nginx <span class="Special">servers/..*</span>
-<span class="Identifier">@malwares</span>           = conficker storm <span class="Special">ms/..*</span>
-   <span class="Comment"> # side note: if anyone objects, we claim ms stands for &quot;metasploit&quot; ;-)</span>
+<span class="Identifier">@webbrowsers</span><span class="PreProc">        = firefox lynx browsers/..*</span>
+<span class="Identifier">@webservers</span><span class="PreProc">         = apache nginx servers/..*</span>
+<span class="Identifier">@malwares</span><span class="PreProc">           = conficker storm ms/..*</span>
+    <span class="Comment"># side note: if anyone objects, we claim ms stands for &quot;metasploit&quot; ;-)</span>
 
 <span class="Comment"># the admin repo access probably had these 2 lines to start with:</span>
-<span class="Type">repo </span>gitolite-admin
-<span class="Statement">    RW+</span><span class="Constant">                                     </span>= sitaram
+<span class="Statement">repo</span> gitolite-admin
+    <span class="Statement">RW+</span>                                     = sitaram
 <span class="Comment"># now add these lines to the config for the admin repo</span>
-<span class="Statement">    RW</span><span class="Constant">                                      </span>= alice bob mallory
-<span class="Statement">    RW</span><span class="Constant">  VREF/NAME/conf/subs/webbrowsers     </span>= alice
-<span class="Statement">    RW</span><span class="Constant">  VREF/NAME/conf/subs/webservers      </span>= bob
-<span class="Statement">    RW</span><span class="Constant">  VREF/NAME/conf/subs/malwares        </span>= mallory
-<span class="Statement">    -</span><span class="Constant">   VREF/NAME/                          </span>=<span class="WarningMsg"> alice bob mallory</span>
+    <span class="Statement">RW</span>                                      = alice bob mallory
+    <span class="Statement">RW</span>  <span class="Constant">VREF/</span><span class="PreProc">NAME/</span><span class="Constant">conf/subs/webbrowsers</span>     = alice
+    <span class="Statement">RW</span>  <span class="Constant">VREF/</span><span class="PreProc">NAME/</span><span class="Constant">conf/subs/webservers</span>      = bob
+    <span class="Statement">RW</span>  <span class="Constant">VREF/</span><span class="PreProc">NAME/</span><span class="Constant">conf/subs/malwares</span>        = mallory
+    <span class="Statement">-</span>   <span class="Constant">VREF/</span><span class="PreProc">NAME/</span>                          = <span class="WarningMsg">alice bob mallory</span>
 
 <span class="Comment"># pull in these files using the &quot;subconf&quot; command</span>
-<span class="PreProc">subconf </span><span class="Constant">&quot;subs/*.conf&quot;</span>
+<span class="Statement">subconf</span> &quot;subs/*.conf&quot;
 </pre>
 
 <p>If you've read the <a href="../vref">VREF</a> part, or at least understood how <a href="../vref-2/#restricting-pushes-by-dirfile-name">NAME
@@ -375,7 +375,7 @@ gitolite-admin repo:</p>
 <h1 id="the-subconf-command">the subconf command<a class="headerlink" href="#the-subconf-command" title="Permanent link"></a></h1>
 <p>Subconf is exactly like the include command in syntax:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="PreProc">subconf </span><span class="Constant">&quot;foo.conf&quot;</span>
+<span class="Statement">subconf</span> &quot;foo.conf&quot;
 </pre>
 
 <p>but while reading the included file (as well as anything included from it),
@@ -393,7 +393,7 @@ gitolite will only process "repo" lines for:</p>
 </ul>
 <p>Here's an example.  If the main conf file contains</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Identifier">@foo</span>    =   aa bb <span class="Special">cc/..*</span>
+<span class="Identifier">@foo</span><span class="PreProc">    =   aa bb cc/..*</span>
 </pre>
 
 <p>then the subconf can only accept repo statements that refer to 'foo', '@foo',
@@ -403,9 +403,9 @@ effect for the main conf file and has no restrictions.</p>
 <h2 id="how-the-subconf-name-is-derived">how the "subconf name" is derived<a class="headerlink" href="#how-the-subconf-name-is-derived" title="Permanent link"></a></h2>
 <p>For subconf lines that look just like include statements, i.e.,</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="PreProc">subconf </span><span class="Constant">&quot;foo/bar.conf&quot;</span>
-<span class="PreProc">subconf </span><span class="Constant">&quot;frob/*.conf&quot;</span>
-   <span class="Comment"> # assume frob has files aa.conf, bb.conf</span>
+<span class="Statement">subconf</span> &quot;foo/bar.conf&quot;
+<span class="Statement">subconf</span> &quot;frob/*.conf&quot;
+    <span class="Comment"># assume frob has files aa.conf, bb.conf</span>
 </pre>
 
 <p>the subconf name as each file is being processed is the base name of the file.
@@ -413,7 +413,7 @@ This means it would be "bar" for the first line, "aa" when processing
 "frob/aa.conf", and "bb" when processing "frob/bb.conf".</p>
 <p>A variation of subconf exists that can explicitly state the subconf name:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="PreProc">subconf </span>foo <span class="Constant">&quot;frob/*.conf&quot;</span>
+<span class="Statement">subconf</span> foo &quot;frob/*.conf&quot;
 </pre>
 
 <p>In this variation, regardless of what file in "frob/" is being read, the
@@ -424,7 +424,7 @@ subconf name in effect is "foo".</p>
 redefine or extend them in your own subconf file.  If you must extend a group
 (say <code>@foo</code>) defined in the main config file, do this:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Identifier">@myfoo</span>  =   <span class="Identifier">@foo</span>
+<span class="Identifier">@myfoo</span><span class="PreProc">  =   </span><span class="Identifier">@foo</span>
 <span class="Comment"># now do whatever you want with @myfoo</span>
 </pre>
 

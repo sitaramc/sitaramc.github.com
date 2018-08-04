@@ -367,11 +367,11 @@ somewhere else, you'll want to periodically "update" the keys.</p>
 <p>It's very easy to give users their own set of repos to create, with the
 username at the top level.  The simplest setup is:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span><span class="PreProc">CREATOR</span>/..*
-<span class="Statement">    C</span><span class="Constant">   </span>=   <span class="Identifier">@all</span>
-<span class="Statement">    RW+</span><span class="Constant"> </span>=   <span class="PreProc">CREATOR</span>
-<span class="Statement">    RW</span><span class="Constant">  </span>=   <span class="PreProc">WRITERS</span>
-<span class="Statement">    R</span><span class="Constant">   </span>=   <span class="PreProc">READERS</span>
+<span class="Statement">repo</span> CREATOR/..*
+    <span class="Statement">C</span>   =   <span class="Identifier">@all</span>
+    <span class="Statement">RW+</span> =   CREATOR
+    <span class="Statement">RW</span>  =   WRITERS
+    <span class="Statement">R</span>   =   READERS
 </pre>
 
 <p>Now users can create any repo under their own name simply by cloning it or

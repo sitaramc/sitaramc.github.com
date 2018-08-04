@@ -356,11 +356,11 @@ stop reading halfway!</p>
 <p>To disallow junior developers from changing more than five files, or from
 touching the Makefile, you can do this:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>foo
-<span class="Statement">    RW+</span><span class="Constant">                     </span>=   <span class="Identifier">@all-devs</span>
+<span class="Statement">repo</span> foo
+    <span class="Statement">RW+</span>                     =   <span class="Identifier">@all-devs</span>
 
-<span class="Statement">    -</span><span class="Constant">   VREF/COUNT/5        </span>=<span class="WarningMsg">   @junior-devs</span>
-<span class="Statement">    -</span><span class="Constant">   VREF/NAME/Makefile  </span>=<span class="WarningMsg">   @junior-devs</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/COUNT/5</span>        =   <span class="WarningMsg">@junior-devs</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/</span><span class="PreProc">NAME/</span><span class="Constant">Makefile</span>  =   <span class="WarningMsg">@junior-devs</span>
 </pre>
 
 <p>Here's a pictorial representation of what happens, at a very high level, based
@@ -485,8 +485,8 @@ use any existing update hook as a VREF-maker.</p>
 directory (again, see <a href="../non-core">here</a> for actual locations on disk).  Then
 add this rule to your repos:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>foo   <span class="Comment"> # or maybe even 'repo @all'</span>
-<span class="Statement">    -</span><span class="Constant">   VREF/my-update-hook     </span>=<span class="WarningMsg">   @all</span>
+<span class="Statement">repo</span> foo    <span class="Comment"># or maybe even 'repo @all'</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/my-update-hook</span>     =   <span class="WarningMsg">@all</span>
 </pre>
 
 <p>That's it.</p>
@@ -507,19 +507,19 @@ satisfies the third rule and is rejected.</p>
 <p>If bar is pushed at, say, 7:20am, the vref printed is VREF/Hour/07, which does
 not match any of the rules.  And fallthru is success so it passes.</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">repo </span>foo
-<span class="Statement">    RW+</span><span class="Constant">                         </span>=   <span class="Identifier">@all</span>
+<span class="Statement">repo</span> foo
+    <span class="Statement">RW+</span>                         =   <span class="Identifier">@all</span>
 
-<span class="Statement">    -</span><span class="Constant">   VREF/Hour/16            </span>=<span class="WarningMsg">   @junior-devs</span>
-<span class="Statement">    -</span><span class="Constant">   VREF/Hour/17            </span>=<span class="WarningMsg">   @junior-devs</span>
-<span class="Statement">    -</span><span class="Constant">   VREF/Hour/18            </span>=<span class="WarningMsg">   @junior-devs</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/Hour/16</span>            =   <span class="WarningMsg">@junior-devs</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/Hour/17</span>            =   <span class="WarningMsg">@junior-devs</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/Hour/18</span>            =   <span class="WarningMsg">@junior-devs</span>
 
-<span class="Type">repo </span>bar
-<span class="Statement">    RW+</span><span class="Constant">                         </span>=   <span class="Identifier">@all</span>
+<span class="Statement">repo</span> bar
+    <span class="Statement">RW+</span>                         =   <span class="Identifier">@all</span>
 
-<span class="Statement">    -</span><span class="Constant">   VREF/Hour/09            </span>=<span class="WarningMsg">   @junior-devs</span>
-<span class="Statement">    -</span><span class="Constant">   VREF/Hour/1[0-9]        </span>=<span class="WarningMsg">   @junior-devs</span>
-<span class="Statement">    -</span><span class="Constant">   VREF/Hour/2[0-9]        </span>=<span class="WarningMsg">   @junior-devs</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/Hour/09</span>            =   <span class="WarningMsg">@junior-devs</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/Hour/1[0-9]</span>        =   <span class="WarningMsg">@junior-devs</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/Hour/2[0-9]</span>        =   <span class="WarningMsg">@junior-devs</span>
 </pre>
 
 <h2 id="why-is-fallthru-considered-success-with-vrefs">why is fallthru considered success with VREFs<a class="headerlink" href="#why-is-fallthru-considered-success-with-vrefs" title="Permanent link"></a></h2>
@@ -532,7 +532,7 @@ whom such additional checks are not needed).</p>
 rule" like this for <em>every</em> virtual ref you used in this repo, in each case
 listing every user who was not already mentioned in the context of that vref:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Statement">    RW+</span><span class="Constant"> VREF/VREFNAME   </span>=   <span class="Identifier">@userlist</span>  <span class="Comment"> # uggh! what a pain!</span>
+    <span class="Statement">RW+</span> <span class="Constant">VREF/VREFNAME</span>   =   <span class="Identifier">@userlist</span>   <span class="Comment"># uggh! what a pain!</span>
 </pre>
 
 <p>Worse, since every virtual ref involves calling an external program, many of
@@ -542,8 +542,8 @@ example it's perfectly easy to turn this around if, instead of having a list
 of people who <em>do</em> need extra checks, all you have is the complementary
 list:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Statement">    RW+</span><span class="Constant"> VREF/NAME/Makefile      </span>=   <span class="Identifier">@senior-devs</span>
-<span class="Statement">    -</span><span class="Constant">   VREF/NAME/Makefile      </span>=<span class="WarningMsg">   @all</span>
+    <span class="Statement">RW+</span> <span class="Constant">VREF/</span><span class="PreProc">NAME/</span><span class="Constant">Makefile</span>      =   <span class="Identifier">@senior-devs</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/</span><span class="PreProc">NAME/</span><span class="Constant">Makefile</span>      =   <span class="WarningMsg">@all</span>
 </pre>
 
 <p></font></p>

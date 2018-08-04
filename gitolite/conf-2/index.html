@@ -390,19 +390,19 @@ to push a branch called "xyz".</p>
 <p>We'll pretend the rule list looks like this:</p>
 <pre style="color: #ffffff; background-color: #000000;">
 <span class="Comment"># managers should be able to read any repo</span>
-<span class="Type">repo </span><span class="Identifier">@all</span>
-<span class="Statement">    R</span><span class="Constant">                       </span>=   <span class="Identifier">@managers</span>
+<span class="Statement">repo</span> <span class="Identifier">@all</span>
+    <span class="Statement">R</span>                       =   <span class="Identifier">@managers</span>
 
 <span class="Comment"># ...other rules for other repos...</span>
 
-<span class="Type">repo </span>foo bar
+<span class="Statement">repo</span> foo bar
 
-<span class="Statement">    RW+</span><span class="Constant">                     </span>=   alice <span class="Identifier">@teamleads</span>
-<span class="Statement">    -</span><span class="Constant">   master              </span>=<span class="WarningMsg">   dilbert @devteam</span>
-<span class="Statement">    -</span><span class="Constant">   refs/tags/v[0-9]    </span>=<span class="WarningMsg">   dilbert @devteam</span>
-<span class="Statement">    RW+</span><span class="Constant"> dev/                </span>=   dilbert <span class="Identifier">@devteam</span>
-<span class="Statement">    RW</span><span class="Constant">                      </span>=   dilbert <span class="Identifier">@devteam</span>
-<span class="Statement">    R</span><span class="Constant">                       </span>=   <span class="Identifier">@managers</span>
+    <span class="Statement">RW+</span>                     =   alice <span class="Identifier">@teamleads</span>
+    <span class="Statement">-</span>   <span class="Constant">master</span>              =   <span class="WarningMsg">dilbert @devteam</span>
+    <span class="Statement">-</span>   <span class="Constant">refs/tags/v[0-9]</span>    =   <span class="WarningMsg">dilbert @devteam</span>
+    <span class="Statement">RW+</span> <span class="Constant">dev/</span>                =   dilbert <span class="Identifier">@devteam</span>
+    <span class="Statement">RW</span>                      =   dilbert <span class="Identifier">@devteam</span>
+    <span class="Statement">R</span>                       =   <span class="Identifier">@managers</span>
 </pre>
 
 <p>After adding a default refex and expanding the supplied ones (see the
@@ -410,19 +410,19 @@ to push a branch called "xyz".</p>
 numbers for convenience; we'll see why later.</p>
 <pre style="color: #ffffff; background-color: #000000;">
 <span id="L1" class="LineNr"> 1 </span><span class="Comment"># managers should be able to read any repo</span>
-<span id="L2" class="LineNr"> 2 </span><span class="Type">repo </span><span class="Identifier">@all</span>
-<span id="L3" class="LineNr"> 3 </span><span class="Statement">    R</span><span class="Constant">                       </span>=   <span class="Identifier">@managers</span>
+<span id="L2" class="LineNr"> 2 </span><span class="Statement">repo</span> <span class="Identifier">@all</span>
+<span id="L3" class="LineNr"> 3 </span>    <span class="Statement">R</span>                       =   <span class="Identifier">@managers</span>
 <span id="L4" class="LineNr"> 4 </span>
-<span id="L5" class="LineNr"> 5 </span>   <span class="Comment"> # ...other rules for other repos...</span>
+<span id="L5" class="LineNr"> 5 </span>    <span class="Comment"># ...other rules for other repos...</span>
 <span id="L6" class="LineNr"> 6 </span>
-<span id="L7" class="LineNr"> 7 </span><span class="Type">repo </span>foo bar
+<span id="L7" class="LineNr"> 7 </span><span class="Statement">repo</span> foo bar
 <span id="L8" class="LineNr"> 8 </span>
-<span id="L9" class="LineNr"> 9 </span><span class="Statement">    RW+</span><span class="Constant"> refs/.*             </span>=   alice <span class="Identifier">@teamleads</span>
-<span id="L10" class="LineNr">10 </span><span class="Statement">    -</span><span class="Constant">   refs/heads/master   </span>=<span class="WarningMsg">   dilbert @devteam</span>
-<span id="L11" class="LineNr">11 </span><span class="Statement">    -</span><span class="Constant">   refs/tags/v[0-9]    </span>=<span class="WarningMsg">   dilbert @devteam</span>
-<span id="L12" class="LineNr">12 </span><span class="Statement">    RW+</span><span class="Constant"> refs/heads/dev/     </span>=   dilbert <span class="Identifier">@devteam</span>
-<span id="L13" class="LineNr">13 </span><span class="Statement">    RW</span><span class="Constant">  refs/.*             </span>=   dilbert <span class="Identifier">@devteam</span>
-<span id="L14" class="LineNr">14 </span><span class="Statement">    R</span><span class="Constant">                       </span>=   <span class="Identifier">@managers</span>
+<span id="L9" class="LineNr"> 9 </span>    <span class="Statement">RW+</span> <span class="Constant">refs/.*</span>             =   alice <span class="Identifier">@teamleads</span>
+<span id="L10" class="LineNr">10 </span>    <span class="Statement">-</span>   <span class="Constant">refs/heads/master</span>   =   <span class="WarningMsg">dilbert @devteam</span>
+<span id="L11" class="LineNr">11 </span>    <span class="Statement">-</span>   <span class="Constant">refs/tags/v[0-9]</span>    =   <span class="WarningMsg">dilbert @devteam</span>
+<span id="L12" class="LineNr">12 </span>    <span class="Statement">RW+</span> <span class="Constant">refs/heads/dev/</span>     =   dilbert <span class="Identifier">@devteam</span>
+<span id="L13" class="LineNr">13 </span>    <span class="Statement">RW</span>  <span class="Constant">refs/.*</span>             =   dilbert <span class="Identifier">@devteam</span>
+<span id="L14" class="LineNr">14 </span>    <span class="Statement">R</span>                       =   <span class="Identifier">@managers</span>
 </pre>
 
 <p>This represents a set of rules that are basically this:</p>
@@ -533,13 +533,13 @@ we want to prevent gitweb or daemon from seeing.</p>
 work.  In fact nothing else seems to work either; you'll have to replace the
 <code>@all</code> with an exhaustive list of <em>all repos other than the secret repos</em>.</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span id="L1" class="LineNr">1 </span><span class="Identifier">@secret</span> = gitolite-admin <span class="Special">secret-repo/..*</span>
-<span id="L2" class="LineNr">2 </span><span class="Type">repo </span><span class="Identifier">@secret</span>
-<span id="L3" class="LineNr">3 </span><span class="Statement">    -</span><span class="Constant">   </span>=<span class="WarningMsg">   gitweb daemon</span>
+<span id="L1" class="LineNr">1 </span><span class="Identifier">@secret</span><span class="PreProc"> = gitolite-admin secret-repo/..*</span>
+<span id="L2" class="LineNr">2 </span><span class="Statement">repo</span> <span class="Identifier">@secret</span>
+<span id="L3" class="LineNr">3 </span>    <span class="Statement">-</span>   =   <span class="WarningMsg">gitweb daemon</span>
 <span id="L4" class="LineNr">4 </span>
 <span id="L5" class="LineNr">5 </span>
-<span id="L6" class="LineNr">6 </span><span class="Type">repo </span><span class="Identifier">@all</span>
-<span id="L7" class="LineNr">7 </span><span class="Statement">    R</span><span class="Constant">   </span>=   gitweb daemon
+<span id="L6" class="LineNr">6 </span><span class="Statement">repo</span> <span class="Identifier">@all</span>
+<span id="L7" class="LineNr">7 </span>    <span class="Statement">R</span>   =   gitweb daemon
 <span id="L8" class="LineNr">8 </span>
 <span id="L9" class="LineNr">9 </span><span class="Comment"># ...other repos and rules...</span>
 </pre>
@@ -548,13 +548,13 @@ work.  In fact nothing else seems to work either; you'll have to replace the
 <p>What you really want is for that repo to always use check #2, even when it
 doesn't actually have a ref to test for.</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span id="L1" class="LineNr">1 </span><span class="Identifier">@secret</span> = gitolite-admin <span class="Special">secret-repo/..*</span>
-<span id="L2" class="LineNr">2 </span><span class="Type">repo </span><span class="Identifier">@secret</span>
-<span id="L3" class="LineNr">3 </span><span class="Statement">    -</span><span class="Constant">   </span>=<span class="WarningMsg">   gitweb daemon</span>
-<span id="L4" class="LineNr">4 </span>    option deny-rules = 1
+<span id="L1" class="LineNr">1 </span><span class="Identifier">@secret</span><span class="PreProc"> = gitolite-admin secret-repo/..*</span>
+<span id="L2" class="LineNr">2 </span><span class="Statement">repo</span> <span class="Identifier">@secret</span>
+<span id="L3" class="LineNr">3 </span>    <span class="Statement">-</span>   =   <span class="WarningMsg">gitweb daemon</span>
+<span id="L4" class="LineNr">4 </span>    <span class="Statement">option</span> <span class="Identifier">deny-rules</span> = <span class="Constant">1</span>
 <span id="L5" class="LineNr">5 </span>
-<span id="L6" class="LineNr">6 </span><span class="Type">repo </span><span class="Identifier">@all</span>
-<span id="L7" class="LineNr">7 </span><span class="Statement">    R</span><span class="Constant">   </span>=   gitweb daemon
+<span id="L6" class="LineNr">6 </span><span class="Statement">repo</span> <span class="Identifier">@all</span>
+<span id="L7" class="LineNr">7 </span>    <span class="Statement">R</span>   =   gitweb daemon
 <span id="L8" class="LineNr">8 </span>
 <span id="L9" class="LineNr">9 </span><span class="Comment"># ...other repos and rules...</span>
 </pre>
@@ -570,15 +570,15 @@ lines 6, 7 matters -- don't switch them!</p>
 <p>In this example the "open" repos are fewer in number, so it is the opposite
 situation to the above in terms of our ability to enumerate all the repos.</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Identifier">@open</span> = git gitolite <span class="Special">foss/..*</span> <span class="Special">[...]</span>
+<span class="Identifier">@open</span><span class="PreProc"> = git gitolite foss/..* [...]</span>
 
-<span class="Type">repo </span><span class="Identifier">@all</span>
-<span class="Statement">    -</span><span class="Constant">   </span>=<span class="WarningMsg">   gitweb daemon</span>
-    option deny-rules = 1
+<span class="Statement">repo</span> <span class="Identifier">@all</span>
+    <span class="Statement">-</span>   =   <span class="WarningMsg">gitweb daemon</span>
+    <span class="Statement">option</span> <span class="Identifier">deny-rules</span> = <span class="Constant">1</span>
 
-<span class="Type">repo </span><span class="Identifier">@open</span>
-<span class="Statement">    R</span><span class="Constant">   </span>=   gitweb daemon
-    option deny-rules = 0
+<span class="Statement">repo</span> <span class="Identifier">@open</span>
+    <span class="Statement">R</span>   =   gitweb daemon
+    <span class="Statement">option</span> <span class="Identifier">deny-rules</span> = <span class="Constant">0</span>
 </pre>
 
 <p>To see why this works, you need to understand that for <a class="wikilink" href="../options/">options</a> and

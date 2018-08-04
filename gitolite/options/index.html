@@ -366,14 +366,14 @@ Here are some examples, although this list is not exhaustive:</p>
 <p>Here's how to disable an option from a single repo if it was enabled earlier
 in a group (which you might guess from reading the <a class="wikilink" href="../git-config/">git-config</a> page):</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Identifier">@g</span> = r1 r2 r3
+<span class="Identifier">@g</span><span class="PreProc"> = r1 r2 r3</span>
 
-<span class="Type">repo </span><span class="Identifier">@g</span>
-    option gitweb = 1
+<span class="Statement">repo</span> <span class="Identifier">@g</span>
+    <span class="Statement">option</span> <span class="Identifier">gitweb</span> = <span class="Constant">1</span>
 
 <span class="Comment"># but repo r2 should not be accessible by gitweb</span>
-<span class="Type">repo </span>r2
-    option gitweb = <span class="Constant">&quot;&quot;</span>
+<span class="Statement">repo</span> r2
+    <span class="Statement">option</span> <span class="Identifier">gitweb</span> = <span class="Constant">&quot;&quot;</span>
 </pre></div>
         </div>
 

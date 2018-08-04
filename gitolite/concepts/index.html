@@ -409,14 +409,14 @@ rules specifying who gets what level of access to each repo.  Here's a simple
 example:</p>
 <pre style="color: #ffffff; background-color: #000000;">
 <span class="Comment"># these lines were already in the file</span>
-<span class="Type">repo </span>foo
-<span class="Statement">    RW+</span><span class="Constant">     </span>=   alice
-<span class="Statement">    RW</span><span class="Constant">      </span>=   bob
+<span class="Statement">repo</span> foo
+    <span class="Statement">RW+</span>     =   alice
+    <span class="Statement">RW</span>      =   bob
 
 <span class="Comment"># these lines were added just now</span>
-<span class="Type">repo </span>bar
-<span class="Statement">    RW+</span><span class="Constant">     </span>=   bob
-<span class="Statement">    R</span><span class="Constant">       </span>=   alice
+<span class="Statement">repo</span> bar
+    <span class="Statement">RW+</span>     =   bob
+    <span class="Statement">R</span>       =   alice
 </pre>
 
 <hr />
