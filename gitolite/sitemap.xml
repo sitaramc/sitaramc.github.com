@@ -2,237 +2,237 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/overview/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/concepts/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/quick_install/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/install/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/fool_proof_setup/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/http/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/migr/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/basic-admin/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/conf/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/conf-2/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/rc/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/user/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/git-config/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/options/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/wild/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/templates/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/vref/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/vref-2/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/deleg/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/gitweb-daemon/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/mirroring/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/non-core/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/dev-notes/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/triggers/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/list-non-core/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/cookbook/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/emergencies/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/ssh/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/glssh/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/sts/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/regex/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/odds-and-ends/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/namespaces/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/locking/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/testing/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/package/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/files/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/rc-33/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/perf/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/internals/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/contrib/ssh-and-http/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/contrib/putty/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/contrib/sskm/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/contrib/ukm/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/contrib/README-emacs/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/no-way/</loc>
-     <lastmod>2018-08-04</lastmod>
+     <lastmod>2018-08-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

@@ -519,7 +519,9 @@ for illustration.</p>
 
 <p>A "repo" line names one or more repos, and is followed by one or more rule
 lines. All the rules from then till the next "repo" line apply to the repo(s)
-specified in the repo line -- in this example, the 'foo' and 'bar' repos.</p>
+specified in the repo line -- in this example, the 'foo' and 'bar' repos.  If
+there are no rule, <a href="../git-config">config</a>, or <a href="../options">option</a> lines before the next "repo"
+line, the repo line is silently ignored.</p>
 <p>Each rule line has a "permission" field, zero or more "refex"es, and one or
 more user or user group name after the equal sign.</p>
 <p><span class="gray">The "repo" line can also have repo groups, as we have seen in the
