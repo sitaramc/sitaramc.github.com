@@ -398,9 +398,17 @@ Here's how to do that:</p>
 some reason, or deleted any gitolite-specific files, or tried any other
 "behind the scenes" stunts, the quickest, sanest, way to fix everything up is:</p>
 <ul>
-<li>Make sure any new repos you copied in are mentioned in the gitolite.conf
-    in some 'repo' line and the change pushed.</li>
-<li>Then run <code>gitolite setup</code> on the server.</li>
+<li>
+<p>Make sure any new repos you copied in are mentioned in the gitolite.conf
+    in some 'repo' line and the change pushed.</p>
+</li>
+<li>
+<p>Run the following three commands:</p>
+<pre><code>gitolite compile
+gitolite setup --hooks-only
+gitolite trigger POST_COMPILE
+</code></pre>
+</li>
 </ul>
 <p>If the repo you botched is a wild repo, there's a bit more to be done.  Wild
 repos store the creator name in a file called gl-creator, and the data managed

@@ -479,7 +479,7 @@ git-daemon</a> for how to enable that via gitolite.</p>
 <p>With that out of the way, here's how to do this:</p>
 <div class="admonition danger">
 <p class="admonition-title">Warning!</p>
-<p>This warning applies to versions before v3.6.9.</p>
+<p>This warning applies to versions before v3.6.10.</p>
 <p>Depending on how your gitolite.conf is setup, and how much time you take
 between moving the repositories and completing the rest of the
 instructions below, it may be possible for a user to read or write the
@@ -507,8 +507,11 @@ ask on the mailing list.</p>
 </ul>
 </li>
 <li>
-<p>Run <code>gitolite setup</code>.  <strong>If you forget this step, you can also forget
-    about write access control!</strong></p>
+<p>Run the following three commands:</p>
+<pre><code>gitolite compile
+gitolite setup --hooks-only
+gitolite trigger POST_COMPILE
+</code></pre>
 </li>
 <li>
 <p>If the repos are <a href="../wild">wildcard</a> repos that already match some repo regex

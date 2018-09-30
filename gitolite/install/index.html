@@ -538,11 +538,11 @@ gitolite/install <span class="Special">-ln</span>
 <span class="Comment"># defaults to $HOME/bin (which is assumed to exist)</span>
 <span class="Comment">#   ** or **</span>
 <span class="Comment"># or use a specific directory (please supply FULL path):</span>
-gitolite/install <span class="Special">-ln</span> /usr/local/bin
+gitolite/install <span class="Special">-ln</span> /usr/<span class="Statement">local</span>/bin
 
 <span class="Comment"># option 3</span>
 <span class="Comment"># (again, please supply a FULL path)</span>
-gitolite/install <span class="Special">-to</span> /usr/local/gitolite/bin
+gitolite/install <span class="Special">-to</span> /usr/<span class="Statement">local</span>/gitolite/bin
 </pre>
 
 <p>Creating a symlink doesn't need a separate program but 'install' also runs
@@ -560,24 +560,6 @@ you probably supplied a key which already has shell access to the server.
 That won't work; you'll have to generate and use a different key pair for
 gitolite access and use <a href="../sts/#appendix-4-ssh-host-aliases">host aliases</a> to distinguish between the two.
 While you're there, read both the <a class="wikilink" href="../ssh/">ssh</a> pages.  Twice.</p>
-<hr />
-<p>The 'setup' command has other uses, so you will be running it at other times
-after the install as well:</p>
-<ul>
-<li>
-<p>To setup the update hook when you move <a href="../basic-admin/#appendix-1-bringing-existing-repos-into-gitolite">existing</a> repos to gitolite.
-    This also applies if someone has been fiddling with the hooks on some
-    repos and you want to put them all right quickly.</p>
-</li>
-<li>
-<p>To replace a <a href="../emergencies/#lost-admin-keyaccess">lost admin key</a>.</p>
-</li>
-<li>
-<p>To setup gitolite for http mode (run 'gitolite setup -h' for more info).</p>
-</li>
-</ul>
-<p>When in doubt, run <code>gitolite setup</code> anyway; it doesn't do any harm, though it
-may take a minute or so if you have more than a few thousand repos!</p>
 <h1 id="upgrades">upgrades<a class="headerlink" href="#upgrades" title="Permanent link"></a></h1>
 <ul>
 <li>Update your clone of the gitolite source.</li>
