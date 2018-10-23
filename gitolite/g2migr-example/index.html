@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>migration example - Gitolite</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="../css/gitolite.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">Gitolite</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="..">home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../overview/">overview</a>
+</li>
+                                    
+<li >
+    <a href="../concepts/">concepts, conventions, terminology</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../quick_install/">(unix/ssh experts) quick install and setup</a>
+</li>
+                                    
+<li >
+    <a href="../install/">normal ssh mode install and setup</a>
+</li>
+                                    
+<li >
+    <a href="../fool_proof_setup/">(if all else fails) fool-proof, step-by-step, install and setup</a>
+</li>
+                                    
+<li >
+    <a href="../http/">HTTP mode install</a>
+</li>
+                                    
+<li >
+    <a href="../migr/">migrating from v2</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">basic</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../basic-admin/">basic administration</a>
+</li>
+            
+<li >
+    <a href="../conf/">the "conf" file (part 1)</a>
+</li>
+            
+<li >
+    <a href="../conf-2/">the "conf" file (part 2)</a>
+</li>
+            
+<li >
+    <a href="../rc/">the "rc" file</a>
+</li>
+            
+<li >
+    <a href="../user/">your users' view</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">advanced</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../git-config/">setting git-config values</a>
+</li>
+            
+<li >
+    <a href="../options/">gitolite options</a>
+</li>
+            
+<li >
+    <a href="../wild/">ad hoc user-created ("wild") repos</a>
+</li>
+            
+<li >
+    <a href="../templates/">using templates</a>
+</li>
+            
+<li >
+    <a href="../vref/">virtual refs (part 1)</a>
+</li>
+            
+<li >
+    <a href="../vref-2/">virtual refs (part 2)</a>
+</li>
+            
+<li >
+    <a href="../deleg/">delegation of admin duties</a>
+</li>
+            
+<li >
+    <a href="../gitweb-daemon/">gitweb and git-daemon</a>
+</li>
+            
+<li >
+    <a href="../mirroring/">mirroring</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">customise</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../non-core/">core and "non-core" gitolite</a>
+</li>
+            
+<li >
+    <a href="../dev-notes/">writing your own non-core code</a>
+</li>
+            
+<li >
+    <a href="../triggers/">gitolite triggers</a>
+</li>
+            
+<li >
+    <a href="../list-non-core/">list of non-core programs shipped with gitolite</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="../cookbook/">(quick! how do I...) the cookbook</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../emergencies/">emergency!!</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">ssh</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../ssh/">ssh</a>
+</li>
+            
+<li >
+    <a href="../glssh/">how gitolite uses ssh</a>
+</li>
+            
+<li >
+    <a href="../sts/">ssh troubleshooting</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="../regex/">regular expressions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../odds-and-ends/">miscellaneous features</a>
+</li>
+                                    
+<li >
+    <a href="../namespaces/">using git namespaces</a>
+</li>
+                                    
+<li >
+    <a href="../locking/">locking binary files</a>
+</li>
+                                    
+<li >
+    <a href="../testing/">testing gitolite</a>
+</li>
+                                    
+<li >
+    <a href="../package/">packaging gitolite</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">more about gitolite</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../files/">gitolite files & directories</a>
+</li>
+            
+<li >
+    <a href="../rc-33/">the 3.3 format rc file</a>
+</li>
+            
+<li >
+    <a href="../perf/">performance</a>
+</li>
+            
+<li >
+    <a href="../internals/">internals</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">contrib</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../contrib/ssh-and-http/">Using both ssh and http</a>
+</li>
+            
+<li >
+    <a href="../contrib/putty/">Putty and Msysgit</a>
+</li>
+            
+<li >
+    <a href="../contrib/sskm/">Self-service key management</a>
+</li>
+            
+<li >
+    <a href="../contrib/ukm/">User key management</a>
+</li>
+            
+<li >
+    <a href="../contrib/README-emacs/">Emacs major mode</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="../no-way/">no way!</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#migration-example">migration example</a></li>
+        <li class="main "><a href="#existing-setup">existing setup</a></li>
+        <li class="main "><a href="#preparing-for-the-migration">preparing for the migration</a></li>
+            <li><a href="#getting-v3">getting v3</a></li>
+            <li><a href="#run-check-g2-compat">run check-g2-compat</a></li>
+        <li class="main "><a href="#the-actual-migration">the actual migration</a></li>
+            <li><a href="#step-1">step 1</a></li>
+            <li><a href="#step-2">step 2</a></li>
+            <li><a href="#step-3">step 3</a></li>
+            <li><a href="#step-4">step 4</a></li>
+            <li><a href="#step-5">step 5</a></li>
+        <li class="main "><a href="#checking-things-out">checking things out</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="migration-example">migration example<a class="headerlink" href="#migration-example" title="Permanent link"></a></h1>
+<p>This shows what a typical migration would look like, using a test setup.</p>
+<h1 id="existing-setup">existing setup<a class="headerlink" href="#existing-setup" title="Permanent link"></a></h1>
+<p>The existing gitolite is the latest in the "g2" (v2.x) branch.</p>
+<p>First, the rc file has the following lines different from the default:</p>
+<pre><code>-$GL_WILDREPOS = 0;
++$GL_WILDREPOS = 1;
+
+-$GL_GITCONFIG_KEYS = "";
++$GL_GITCONFIG_KEYS = ".*";
+</code></pre>
+<p>Next, the conf/gitolite.conf file in <code>~/.gitolite</code>:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Statement">repo</span>    gitolite-admin
+        <span class="Statement">RW+</span>             =   tester u1
+
+<span class="Statement">repo</span>    testing
+        <span class="Statement">RW+</span>     =   <span class="Identifier">@all</span>
+
+<span class="Statement">repo</span> foo
+        <span class="Statement">RW+</span>             =   u1 u2
+        <span class="Statement">RW+</span> <span class="PreProc">NAME/</span>       =   u1
+        <span class="Statement">RW+</span> <span class="PreProc">NAME/</span><span class="Constant">u2</span>     =   u2
+
+<span class="Statement">repo</span> bar
+        <span class="Statement">RW</span>  =   u2
+
+<span class="Statement">repo</span> baz/..*
+        <span class="Statement">C</span>   =   <span class="PreProc">u3 u4</span>
+        <span class="Statement">RW+</span>         =   CREATOR
+        <span class="Statement">config</span> <span class="Identifier">foo.bar</span> = <span class="Constant">baz</span>
+</pre>
+
+<p>(Note that this conf file has NAME/ rules, which <strong>have changed</strong>
+significantly in v3; see [here][g2i-name] for details).</p>
+<p>These are the repos already existing</p>
+<pre><code>$ find repositories -name "*.git" | sort
+repositories/bar.git
+repositories/baz/u3.git
+repositories/baz/u4.git
+repositories/baz/uthree.git
+repositories/foo.git
+repositories/gitolite-admin.git
+repositories/testing.git
+</code></pre>
+<p>The config entries exist for all the baz/ repos:</p>
+<pre><code>$ grep -2 foo `find repositories -name "config" `
+repositories/baz/uthree.git/config-[gitweb]
+repositories/baz/uthree.git/config- owner = u3
+repositories/baz/uthree.git/config:[foo]
+repositories/baz/uthree.git/config- bar = baz
+--
+repositories/baz/u4.git/config-[gitweb]
+repositories/baz/u4.git/config-     owner = u4
+repositories/baz/u4.git/config:[foo]
+repositories/baz/u4.git/config-     bar = baz
+--
+repositories/baz/u3.git/config-[gitweb]
+repositories/baz/u3.git/config-     owner = u3
+repositories/baz/u3.git/config:[foo]
+repositories/baz/u3.git/config-     bar = baz
+</code></pre>
+<h1 id="preparing-for-the-migration">preparing for the migration<a class="headerlink" href="#preparing-for-the-migration" title="Permanent link"></a></h1>
+<h2 id="getting-v3">getting v3<a class="headerlink" href="#getting-v3" title="Permanent link"></a></h2>
+<p>Fortunately this is easy here; I just happened to have the repo already
+fetched so I just had to switch branches.  You may have to 'git clone ...'
+from github.</p>
+<pre><code>$ cd gitolite
+$ git checkout master
+Branch master set up to track remote branch master from origin.
+Switched to a new branch 'master'
+</code></pre>
+<h2 id="run-check-g2-compat">run check-g2-compat<a class="headerlink" href="#run-check-g2-compat" title="Permanent link"></a></h2>
+<p>This is a quick and dirty program to catch some of the big issues.</p>
+<pre><code>$ cd
+$ gitolite/check-g2-compat
+INFO        This program only checks for uses that make the new v3 completely unusable
+            or that might end up giving *more* access to someone if migrated as-is.
+            It does NOT attempt to catch all the differences described in the docs.
+
+INFO        'see docs' usually means the pre-migration checklist in
+            "g2migr.html"; to get there, start from the main migration
+            page at https://sitaramc.github.com/gitolite/migr/
+
+checking rc file...
+NOTE        GL_ADMINDIR is in the right place; assuming you did not mess with
+            GL_CONF, GL_LOGT, GL_KEYDIR, and GL_CONF_COMPILED
+
+checking conf file(s)...
+SEVERE      NAME rules; see docs
+
+checking repos...
+WARNING     found 3 gl-creater files; see docs
+
+...all done...
+</code></pre>
+<h1 id="the-actual-migration">the actual migration<a class="headerlink" href="#the-actual-migration" title="Permanent link"></a></h1>
+<p>Here's the actual migration, step by step</p>
+<h2 id="step-1">step 1<a class="headerlink" href="#step-1" title="Permanent link"></a></h2>
+<pre><code>$ ls -a bin
+.                gl-admin-push    gl-install       gl-setup-authkeys  gl-VREF-DUPKEYS
+..               gl-auth-command  gl-mirror-push   gl-system-install  gl-VREF-EMAIL_CHECK
+gitolite_env.pm  gl-compile-conf  gl-mirror-shell  gl-time            gl-VREF-FILETYPE
+gitolite.pm      gl-conf-convert  gl-query-rc      gl-tool            gl-VREF-MERGE_CHECK
+gitolite_rc.pm   gl-dryrun        gl-setup         gl-VREF-COUNT      sshkeys-lint
+$ rm -rf bin;mkdir bin
+
+$ grep GL_PACKAGE .gitolite.rc
+$GL_PACKAGE_CONF = "/home/git/share/gitolite/conf";
+$GL_PACKAGE_HOOKS = "/home/git/share/gitolite/hooks";
+$ rm -rf share
+
+$GL_PACKAGE_HOOKS = "/home/git/share/gitolite/hooks";
+$ rm -rf share
+
+$ mv .gitolite.rc old.grc
+</code></pre>
+<p>(still on step 1, this is substep 3) notice we are cloning <strong>on the server</strong>,
+using a <strong>full path</strong> to the repo.</p>
+<pre><code>$ git clone repositories/gitolite-admin.git old.ga
+Cloning into 'old.ga'...
+done.
+$ rm -rf repositories/gitolite-admin.git/
+</code></pre>
+<p>Since I'm not interested in preserving the logs and don't have any custom
+hooks:</p>
+<pre><code>$ rm -rf .gitolite
+</code></pre>
+<h2 id="step-2">step 2<a class="headerlink" href="#step-2" title="Permanent link"></a></h2>
+<p>I have no variables that <em>must</em> be preset, since the report by
+<code>check-g2-compat</code> is clear.</p>
+<h2 id="step-3">step 3<a class="headerlink" href="#step-3" title="Permanent link"></a></h2>
+<p>Here we install the new gitolite.  Remember we already got the new software
+(in order to run 'check-g2-compat').</p>
+<p>Just check that bin is empty, then run 'install -ln' from the gitolite source
+tree:</p>
+<pre><code>$ ls -al bin
+total 8
+drwxrwxr-x 2 git git 4096 Apr 24 10:57 .
+drwx------ 8 git git 4096 Apr 24 10:59 ..
+$ gitolite/install -ln
+$ ls -al bin
+total 8
+drwxrwxr-x 2 git git 4096 Apr 24 11:01 .
+drwx------ 8 git git 4096 Apr 24 10:59 ..
+lrwxrwxrwx 1 git git   30 Apr 24 11:01 gitolite -&gt; /home/git/gitolite/src/gitolite
+</code></pre>
+<p>OK that went well.  Now setup gitolite.  You don't need a key here; just use a
+random name:</p>
+<pre><code>$ gitolite setup -a admin
+Initialized empty Git repository in /home/git/repositories/gitolite-admin.git/
+</code></pre>
+<h2 id="step-4">step 4<a class="headerlink" href="#step-4" title="Permanent link"></a></h2>
+<p>Now go to your old clone, and push it:</p>
+<pre><code>$ cd old.ga
+$ gitolite push -f
+    ...usual git progress output deleted...
+remote: FATAL: git config foo.bar not allowed
+remote: check GIT_CONFIG_KEYS in the rc file
+To /home/git/repositories/gitolite-admin.git
+ + 7eb8163...1474770 master -&gt; master (forced update)
+</code></pre>
+<p>Aaha!  I forgot to set <code>GIT_CONFIG_KEYS</code> (new name for <code>GL_GITCONFIG_KEYS</code>) in
+the new rc file so fix that:</p>
+<pre><code>$ vim ~/.gitolite.rc
+(edit and set it to `.*` for now)
+</code></pre>
+<p>and push again:</p>
+<pre><code>$ gitolite push -f
+Everything up-to-date
+</code></pre>
+<p>Damn.  We have to make a dummy commit to allow the push to do something.</p>
+<p>But wait!  We forgot fix the [NAME/][g2i-name] rules, so may as well fix
+those, add, and push:</p>
+<pre><code>$ vim conf/gitolite.conf
+# change all NAME/ to VREF/NAME/
+# append a '- VREF/NAME/ = @all' at the end
+# save
+git add conf
+
+$ git commit -m name-rules
+    ... some output for add...
+
+$ gitolite push -f
+Counting objects: 1, done.
+Writing objects: 100% (1/1), 181 bytes, done.
+Total 1 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (1/1), done.
+To /home/git/repositories/gitolite-admin.git
+   1474770..4c2b41d  master -&gt; master
+</code></pre>
+<h2 id="step-5">step 5<a class="headerlink" href="#step-5" title="Permanent link"></a></h2>
+<p>The only thing left is to fix up the gl-creater files:</p>
+<pre><code>$ cd $HOME/repositories
+$ find . -type d -name "*.git" -prune | while read r
+&gt; do
+&gt;     mv $r/gl-creater $r/gl-creator
+&gt; done 2&gt;/dev/null
+</code></pre>
+<p>And we're done!</p>
+<h1 id="checking-things-out">checking things out<a class="headerlink" href="#checking-things-out" title="Permanent link"></a></h1>
+<p>Let's see what repos u3 has:</p>
+<pre><code># as user 'u3'
+ssh git@server info
+hello u3, this is git@server running gitolite3 v3.0-11-g090b0f5 on git 1.7.7.6
+
+     C      baz/..*
+ R W        baz/u3
+ R W        baz/uthree
+ R W        gitolite-admin
+ R W        testing
+</code></pre>
+<p>That's a combination of 'info' and 'expand', by the way.  There is no expand
+command any more.</p>
+<p>How about adding a new repo and checking if the config entries made it?</p>
+<pre><code># as user u4
+$ git ls-remote git@server:baz/ufour
+Initialized empty Git repository in /home/git/repositories/baz/ufour.git/
+$ grep -A1 foo `find repositories -name "config" `
+repositories/baz/u3.git/config:[foo]
+repositories/baz/u3.git/config- bar = baz
+--
+repositories/baz/u4.git/config:[foo]
+repositories/baz/u4.git/config- bar = baz
+--
+repositories/baz/ufour.git/config:[foo]
+repositories/baz/ufour.git/config-      bar = baz
+--
+repositories/baz/uthree.git/config:[foo]
+repositories/baz/uthree.git/config-     bar = baz
+</code></pre>
+<p>And there it is, in the second block of lines...</p>
+<p>And now we're really done.</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

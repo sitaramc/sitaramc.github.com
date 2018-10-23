@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>building the documentation - Gitolite</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="../css/gitolite.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">Gitolite</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="..">home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../overview/">overview</a>
+</li>
+                                    
+<li >
+    <a href="../concepts/">concepts, conventions, terminology</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../quick_install/">(unix/ssh experts) quick install and setup</a>
+</li>
+                                    
+<li >
+    <a href="../install/">normal ssh mode install and setup</a>
+</li>
+                                    
+<li >
+    <a href="../fool_proof_setup/">(if all else fails) fool-proof, step-by-step, install and setup</a>
+</li>
+                                    
+<li >
+    <a href="../http/">HTTP mode install</a>
+</li>
+                                    
+<li >
+    <a href="../migr/">migrating from v2</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">basic</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../basic-admin/">basic administration</a>
+</li>
+            
+<li >
+    <a href="../conf/">the "conf" file (part 1)</a>
+</li>
+            
+<li >
+    <a href="../conf-2/">the "conf" file (part 2)</a>
+</li>
+            
+<li >
+    <a href="../rc/">the "rc" file</a>
+</li>
+            
+<li >
+    <a href="../user/">your users' view</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">advanced</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../git-config/">setting git-config values</a>
+</li>
+            
+<li >
+    <a href="../options/">gitolite options</a>
+</li>
+            
+<li >
+    <a href="../wild/">ad hoc user-created ("wild") repos</a>
+</li>
+            
+<li >
+    <a href="../templates/">using templates</a>
+</li>
+            
+<li >
+    <a href="../vref/">virtual refs (part 1)</a>
+</li>
+            
+<li >
+    <a href="../vref-2/">virtual refs (part 2)</a>
+</li>
+            
+<li >
+    <a href="../deleg/">delegation of admin duties</a>
+</li>
+            
+<li >
+    <a href="../gitweb-daemon/">gitweb and git-daemon</a>
+</li>
+            
+<li >
+    <a href="../mirroring/">mirroring</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">customise</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../non-core/">core and "non-core" gitolite</a>
+</li>
+            
+<li >
+    <a href="../dev-notes/">writing your own non-core code</a>
+</li>
+            
+<li >
+    <a href="../triggers/">gitolite triggers</a>
+</li>
+            
+<li >
+    <a href="../list-non-core/">list of non-core programs shipped with gitolite</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="../cookbook/">(quick! how do I...) the cookbook</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../emergencies/">emergency!!</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">ssh</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../ssh/">ssh</a>
+</li>
+            
+<li >
+    <a href="../glssh/">how gitolite uses ssh</a>
+</li>
+            
+<li >
+    <a href="../sts/">ssh troubleshooting</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="../regex/">regular expressions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../odds-and-ends/">miscellaneous features</a>
+</li>
+                                    
+<li >
+    <a href="../namespaces/">using git namespaces</a>
+</li>
+                                    
+<li >
+    <a href="../locking/">locking binary files</a>
+</li>
+                                    
+<li >
+    <a href="../testing/">testing gitolite</a>
+</li>
+                                    
+<li >
+    <a href="../package/">packaging gitolite</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">more about gitolite</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../files/">gitolite files & directories</a>
+</li>
+            
+<li >
+    <a href="../rc-33/">the 3.3 format rc file</a>
+</li>
+            
+<li >
+    <a href="../perf/">performance</a>
+</li>
+            
+<li >
+    <a href="../internals/">internals</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">contrib</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../contrib/ssh-and-http/">Using both ssh and http</a>
+</li>
+            
+<li >
+    <a href="../contrib/putty/">Putty and Msysgit</a>
+</li>
+            
+<li >
+    <a href="../contrib/sskm/">Self-service key management</a>
+</li>
+            
+<li >
+    <a href="../contrib/ukm/">User key management</a>
+</li>
+            
+<li >
+    <a href="../contrib/README-emacs/">Emacs major mode</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="../no-way/">no way!</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#building-the-documentation">building the documentation</a></li>
+        <li class="main "><a href="#building-the-docs">building the docs</a></li>
+        <li class="main "><a href="#what-doesnt-work-in-mkdocs">what doesn't work in mkdocs</a></li>
+            <li><a href="#bad-language-guesses">bad language guesses</a></li>
+            <li><a href="#no-hidden-docs">no hidden docs</a></li>
+            <li><a href="#foo-bar-split-across-lines">foo bar split across lines</a></li>
+            <li><a href="#toc-levels">TOC levels</a></li>
+            <li><a href="#code-highlight">code highlight</a></li>
+            <li><a href="#short-anchors">short anchors</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="building-the-documentation">building the documentation<a class="headerlink" href="#building-the-documentation" title="Permanent link"></a></h1>
+<hr />
+<p>I changed from my homemade system to mkdocs, mainly due to the search
+facility.  (I'm sure there are any number of other static site generators out
+there, but this one seemed to have the smallest footprint and was easiest to
+install and get going).</p>
+<h1 id="building-the-docs">building the docs<a class="headerlink" href="#building-the-docs" title="Permanent link"></a></h1>
+<ul>
+<li>Make sure the tree is not dirty.</li>
+<li>Run <code>bin/build</code>; takes a few seconds and grabs the screen, sorry!</li>
+<li>Deploy <code>site/</code></li>
+</ul>
+<h1 id="what-doesnt-work-in-mkdocs">what doesn't work in mkdocs<a class="headerlink" href="#what-doesnt-work-in-mkdocs" title="Permanent link"></a></h1>
+<h2 id="bad-language-guesses">bad language guesses<a class="headerlink" href="#bad-language-guesses" title="Permanent link"></a></h2>
+<p>It seems to be too hard to make it turn off its "guess the language"
+pseudo-smartness when you use a plain indented code block.  And looking at the
+mailing list archives does not give me much hope this will be fixed.  So
+you're left with strange colors on some random words in many code blocks!</p>
+<p>(I could fence each of them with an explicit language but I'm reluctant to do
+that; plain markdown's plain indented code <strong>should</strong> be left plain, ideally!)</p>
+<h2 id="no-hidden-docs">no hidden docs<a class="headerlink" href="#no-hidden-docs" title="Permanent link"></a></h2>
+<p>Every document must appear in the document menu (top nav bar), even if it is
+several levels deep.  The only way to have a document rendered without putting
+it on the nav bar is not to even list a page hierarchy, which makes them all
+come out in alphabetical order, which is useless for a project of this size.</p>
+<p>The mailing list has some workarounds, but at the moment I am not using them.
+I'd already added all the documents willy-nilly anyway.</p>
+<p>Except, ironically, <em>this</em> document; this will never be rendered -- you'll
+only see it in the source repo.</p>
+<h2 id="foo-bar-split-across-lines"><code>foo bar</code> split across lines<a class="headerlink" href="#foo-bar-split-across-lines" title="Permanent link"></a></h2>
+<p>If a <code>foo bar</code> is split across lines due to vim formatting, the bloody output
+also shows it split there.  My constant OCD to reformat all paras has taken a
+hit, due to all these manually UN-formatted paragraphs.</p>
+<h2 id="toc-levels">TOC levels<a class="headerlink" href="#toc-levels" title="Permanent link"></a></h2>
+<p>The 'cinder' theme gives you 3 levels, but does not scroll the side nav at
+all (i.e., if you have too many entries, you just won't see the ones that were
+below the window bottom)!  Sticking with default theme for now.</p>
+<h2 id="code-highlight">code highlight<a class="headerlink" href="#code-highlight" title="Permanent link"></a></h2>
+<ol>
+<li>
+<p>the "codehilite" extension seems too complicated looking at the steps
+    described in
+    <a href="https://pythonhosted.org/Markdown/extensions/code_hilite.html">https://pythonhosted.org/Markdown/extensions/code_hilite.html</a></p>
+</li>
+<li>
+<p>in any case they don't recognise gitolite syntax.</p>
+</li>
+</ol>
+<p>So we just use the</p>
+<pre><code>&lt;pre style="color: #ffffff; background-color: #000000;"&gt;
+...code...
+&lt;/pre&gt;
+</code></pre>
+<p>syntax and let our preprocessor fix things up using vim.  Kludgy, slow,
+annoying (all those xterms -- I need to implement caching for this), but it
+gets the job done with a minimum of fuss.</p>
+<h2 id="short-anchors">short anchors<a class="headerlink" href="#short-anchors" title="Permanent link"></a></h2>
+<p>can only be created like:</p>
+<pre><code>&lt;h1 id="dl"&gt;download&lt;/h1&gt;
+</code></pre>
+<p>Using</p>
+<pre><code># &lt;a id="dl" /&gt;download
+</code></pre>
+<p>causes some weird artefacts in the generated page.</p>
+<p>At present I'm not using them at all; just using the long forms.</p>
+<!--
+
+# notes
+
+from <https://pythonhosted.org/Markdown/extensions/admonition.html>
+
+    rST suggests the following types, but you’re free to use whatever you
+    want: attention, caution, danger, error, hint, important, note, tip,
+    warning.
+
+
+# vim: set ft=markdown:
+--></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

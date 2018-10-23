@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>How - Gitolite</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="../css/gitolite.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">Gitolite</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="..">home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../overview/">overview</a>
+</li>
+                                    
+<li >
+    <a href="../concepts/">concepts, conventions, terminology</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../quick_install/">(unix/ssh experts) quick install and setup</a>
+</li>
+                                    
+<li >
+    <a href="../install/">normal ssh mode install and setup</a>
+</li>
+                                    
+<li >
+    <a href="../fool_proof_setup/">(if all else fails) fool-proof, step-by-step, install and setup</a>
+</li>
+                                    
+<li >
+    <a href="../http/">HTTP mode install</a>
+</li>
+                                    
+<li >
+    <a href="../migr/">migrating from v2</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">basic</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../basic-admin/">basic administration</a>
+</li>
+            
+<li >
+    <a href="../conf/">the "conf" file (part 1)</a>
+</li>
+            
+<li >
+    <a href="../conf-2/">the "conf" file (part 2)</a>
+</li>
+            
+<li >
+    <a href="../rc/">the "rc" file</a>
+</li>
+            
+<li >
+    <a href="../user/">your users' view</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">advanced</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../git-config/">setting git-config values</a>
+</li>
+            
+<li >
+    <a href="../options/">gitolite options</a>
+</li>
+            
+<li >
+    <a href="../wild/">ad hoc user-created ("wild") repos</a>
+</li>
+            
+<li >
+    <a href="../templates/">using templates</a>
+</li>
+            
+<li >
+    <a href="../vref/">virtual refs (part 1)</a>
+</li>
+            
+<li >
+    <a href="../vref-2/">virtual refs (part 2)</a>
+</li>
+            
+<li >
+    <a href="../deleg/">delegation of admin duties</a>
+</li>
+            
+<li >
+    <a href="../gitweb-daemon/">gitweb and git-daemon</a>
+</li>
+            
+<li >
+    <a href="../mirroring/">mirroring</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">customise</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../non-core/">core and "non-core" gitolite</a>
+</li>
+            
+<li >
+    <a href="../dev-notes/">writing your own non-core code</a>
+</li>
+            
+<li >
+    <a href="../triggers/">gitolite triggers</a>
+</li>
+            
+<li >
+    <a href="../list-non-core/">list of non-core programs shipped with gitolite</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="../cookbook/">(quick! how do I...) the cookbook</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../emergencies/">emergency!!</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">ssh</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../ssh/">ssh</a>
+</li>
+            
+<li >
+    <a href="../glssh/">how gitolite uses ssh</a>
+</li>
+            
+<li >
+    <a href="../sts/">ssh troubleshooting</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="../regex/">regular expressions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../odds-and-ends/">miscellaneous features</a>
+</li>
+                                    
+<li >
+    <a href="../namespaces/">using git namespaces</a>
+</li>
+                                    
+<li >
+    <a href="../locking/">locking binary files</a>
+</li>
+                                    
+<li >
+    <a href="../testing/">testing gitolite</a>
+</li>
+                                    
+<li >
+    <a href="../package/">packaging gitolite</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">more about gitolite</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../files/">gitolite files & directories</a>
+</li>
+            
+<li >
+    <a href="../rc-33/">the 3.3 format rc file</a>
+</li>
+            
+<li >
+    <a href="../perf/">performance</a>
+</li>
+            
+<li >
+    <a href="../internals/">internals</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">contrib</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../contrib/ssh-and-http/">Using both ssh and http</a>
+</li>
+            
+<li >
+    <a href="../contrib/putty/">Putty and Msysgit</a>
+</li>
+            
+<li >
+    <a href="../contrib/sskm/">Self-service key management</a>
+</li>
+            
+<li >
+    <a href="../contrib/ukm/">User key management</a>
+</li>
+            
+<li >
+    <a href="../contrib/README-emacs/">Emacs major mode</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="../no-way/">no way!</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#viewing-this-slideshow">(viewing this slideshow)</a></li>
+        <li class="main "><a href="#authentication-versus-authorisation">authentication versus authorisation</a></li>
+        <li class="main "><a href="#git-over-plain-ssh">git over plain ssh</a></li>
+        <li class="main "><a href="#how-does-gitolite-work">how does gitolite work?</a></li>
+            <li><a href="#the-diagrams">the diagrams...</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<!-- options: to=slidy-2 -->
+
+<p>% authentication and authorization in gitolite</p>
+<h1 id="viewing-this-slideshow">(viewing this slideshow)<a class="headerlink" href="#viewing-this-slideshow" title="Permanent link"></a></h1>
+<p>This presentation uses <a href="https://www.w3.org/Talks/Tools/Slidy2/Overview.html">HTML
+Slidy</a>, a simple
+presentation software from the W3C. Although there's a help button in the
+footer of each presentation, it's missing some important stuff, so here's a
+smaller but more complete summary of the keyboard controls.</p>
+<p>.#d</p>
+<p>@@blue(<strong>Navigation</strong>)@@</p>
+<p>|   <strong>Next slide</strong>: right arrow, page down, space
+|   <strong>Prev slide</strong>: left arrow, page up</p>
+<p>|   <strong>Down within slide</strong>: down arrow
+|   <strong>Up within slide</strong>: up arrow</p>
+<p>|   <strong>First slide</strong>: home
+|   <strong>Last slide</strong>: end</p>
+<p>.#d</p>
+<p>@@blue(<strong>Display</strong>)@@</p>
+<p>|   <strong>Smaller font</strong>: "S" or "&lt;" key
+|   <strong>Larger font</strong>: "B" or "&gt;" key</p>
+<p>|   <strong>Toggle Current versus <em>All</em> slides</strong>: "A" key
+|   <strong>Toggle Table of Contents popup</strong>: "C" key
+|   <strong>Toggle footer</strong>: "F" key</p>
+<p>.#t</p>
+<p>@@blue(<strong>To search</strong>)@@ for stuff in the full document using your browser's
+Ctrl-F, first view all slides (press the "A" key).</p>
+<!-- end slidy help -->
+
+<h1 id="authentication-versus-authorisation">authentication versus authorisation<a class="headerlink" href="#authentication-versus-authorisation" title="Permanent link"></a></h1>
+<p>Before we start, we need to be clear about the difference between
+<em>authentication</em> and <em>authorisation</em>.</p>
+<p>.#d width=50% bgcolor=FFF0F0</p>
+<p><strong>Authentication</strong></p>
+<ul>
+<li>checks user's identity ("who are you?")</li>
+<li>is <strong>NOT</strong> done by gitolite!<ul>
+<li>although gitolite does help to set it up if you're using ssh</li>
+</ul>
+</li>
+<li>is done by ssh server (or perhaps by http server if you are running
+    gitolite in http mode)</li>
+</ul>
+<p>.#d bgcolor=#F0F0FF</p>
+<p><strong>Authorisation</strong></p>
+<ul>
+<li>check's user's access ("now I know who you are, are you allowed to do what
+    you want to do?")</li>
+<li><strong>This</strong> is what gitolite does</li>
+</ul>
+<p>.#t</p>
+<h1 id="git-over-plain-ssh">git over plain ssh<a class="headerlink" href="#git-over-plain-ssh" title="Permanent link"></a></h1>
+<p>First, we'll recap how git works over plain ssh.</p>
+<p><img alt="" src="f0.png" /></p>
+<p>.aa f0.png</p>
+<table>
+<thead>
+<tr>
+<th>User Workstation</th>
+<th>Git Server</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>----------------------------+-------------------------------------------------</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>git clone ---&gt; ssh ---+---&gt; sshd ------&gt; git‐upload‐pack</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>git fetch ---&gt; ssh ---+---&gt; sshd ------&gt; git‐upload‐pack</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>git push  ---&gt; ssh ---+---&gt; sshd ------&gt; git‐receive‐pack</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>.end</p>
+<p>The client user <em>authenticates</em> herself to the server using any method
+supported by ssh -- password or ssh public key. It does not matter to either
+the git client or the git server how that happens; that's entirely between ssh
+and sshd (the ssh daemon or server).</p>
+<p>There is no <em>authorisation</em> in this mode, other than any file system
+permissions that the OS may enforce.</p>
+<h1 id="how-does-gitolite-work">how does gitolite work?<a class="headerlink" href="#how-does-gitolite-work" title="Permanent link"></a></h1>
+<p>Gitolite adds an extra layer in between the sshd and the git-receive-pack (or
+git-upload-pack, for read operations), to check if the access is allowed and
+abort if needed.  Gitolite also installs its own update hook (see <code>man
+githooks</code>) in every repository to check branches being pushed.</p>
+<p>This means gitolite does <strong>two</strong> authorisation checks, as you will see.</p>
+<p>Gitolite also requires that the authentication <strong>must</strong> happen using an ssh
+public key.  We'll see why as we go along.</p>
+<p>Here's a series of pictures that show how gitolite works. We're using a "git
+push" example; the only difference for a fetch or clone is that instead of
+<code>git-receive-pack</code> it'd call <code>git-upload-pack</code>, and the last check (update
+hook) does not apply.</p>
+<p>@@blue(<strong>Terminology reminder</strong>: "ref" in git parlance means "branch or tag".
+At least in this page that's what we mean :-))@@</p>
+<hr />
+<h2 id="the-diagrams">the diagrams...<a class="headerlink" href="#the-diagrams" title="Permanent link"></a></h2>
+<p>The diagrams were originally drawn to be self-contained.  On a first pass you
+can simply ignore the text on each page, and come back to it later for the
+finer points.</p>
+<p>Experts: yes, I know I simplified the ssh part a lot.  If you can find fault
+with these pictures, you're not the target audience :-)</p>
+<hr />
+<p>.aa f1.png</p>
+<table>
+<thead>
+<tr>
+<th>User Workstation</th>
+<th>Gitolite Server</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>----------------------------+-------------------------------------------------</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Git client</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>calls</td>
+</tr>
+<tr>
+<td></td>
+<td>ssh</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>v</td>
+<td></td>
+</tr>
+<tr>
+<td>ssh client</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>.end</p>
+<p><img alt="" src="f1.png" /></p>
+<p>When the user runs a "git push" command, the git client calls ssh, passing it
+a command like</p>
+<pre><code>git-receive-pack 'reponame'
+</code></pre>
+<hr />
+<p>.aa f2.png</p>
+<table>
+<thead>
+<tr>
+<th>User Workstation</th>
+<th>Gitolite Server</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>----------------------------+-------------------------------------------------</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Git client</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>v</td>
+<td></td>
+</tr>
+<tr>
+<td>ssh client</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>reads</td>
+</tr>
+<tr>
+<td></td>
+<td>ssh keypair</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>v</td>
+<td></td>
+</tr>
+<tr>
+<td>~/.ssh/id_rsa</td>
+<td></td>
+</tr>
+<tr>
+<td>~/.ssh/id_rsa.pub</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>.end</p>
+<p><img alt="" src="f2.png" /></p>
+<p>The git client, before it starts talking to the server, looks for the user's
+ssh keys so it can use public key authentication (and not ask for a password).</p>
+<p>As you know, for gitolite to work, the user must already have an ssh key pair
+and the pub key already sent to the gitolite administrator who should have
+added it to gitolite (which in turn means it's part of
+<code>~/.ssh/authorized_keys</code> on the server).</p>
+<hr />
+<p>.aa f3.png</p>
+<table>
+<thead>
+<tr>
+<th>User Workstation</th>
+<th>Gitolite Server</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>----------------------------+-------------------------------------------------</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Git client</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>calls</td>
+</tr>
+<tr>
+<td>v         server</td>
+<td></td>
+</tr>
+<tr>
+<td>ssh client -------------+--------&gt; ssh server</td>
+<td></td>
+</tr>
+<tr>
+<td>sends</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>pubkey</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>v</td>
+<td></td>
+</tr>
+<tr>
+<td>~/.ssh/id_rsa</td>
+<td></td>
+</tr>
+<tr>
+<td>~/.ssh/id_rsa.pub</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>.end</p>
+<p><img alt="" src="f3.png" /></p>
+<p>The ssh client sends the public key to the server to identify itself.</p>
+<hr />
+<p>.aa f4.png</p>
+<table>
+<thead>
+<tr>
+<th>User Workstation</th>
+<th>Gitolite Server</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>----------------------------+-------------------------------------------------</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Git client</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>v</td>
+<td></td>
+</tr>
+<tr>
+<td>ssh client -------------+--------&gt; ssh server</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>v</td>
+<td>v</td>
+</tr>
+<tr>
+<td>~/.ssh/id_rsa</td>
+<td>~/.ssh/authorized_keys</td>
+</tr>
+<tr>
+<td>~/.ssh/id_rsa.pub</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>.end</p>
+<p><img alt="" src="f4.png" /></p>
+<p>The server looks for the public key in its "list of people who're allowed in"
+(<code>~/.ssh/authorized_keys</code>).  If it finds it, things are good.</p>
+<p>@@red(If it doesn't find it, it tells the client and the client asks the user
+for a password.  Which is BAD, because Gitolite doesn't work with
+passwords!)@@</p>
+<hr />
+<p>.aa f5.png</p>
+<table>
+<thead>
+<tr>
+<th>User Workstation</th>
+<th>Gitolite Server</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>----------------------------+-------------------------------------------------</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Git client</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>v</td>
+<td></td>
+</tr>
+<tr>
+<td>ssh client -------------+--------&gt; ssh server</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>v</td>
+<td>v</td>
+</tr>
+<tr>
+<td>~/.ssh/id_rsa</td>
+<td>~/.ssh/authorized_keys</td>
+</tr>
+<tr>
+<td>~/.ssh/id_rsa.pub</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>.end</p>
+<p><img alt="" src="f5.png" /></p>
+<p>If authentication succeeds, the ssh server calls gitolite-shell, with the
+username as the first argument. Here's how that happens.</p>
+<p>When the administrator adds Alice's pubkey to gitolite, he names it
+"alice.pub", puts it in the "keydir" directory of a clone of the
+gitolite-admin repository, and pushes the new file to the server.</p>
+<p>When the Gitolite server receives that push, one of the things it does is add
+this key to <code>~/.ssh/authorized_keys</code> file, but prefixed with a bunch of
+options, one of which is a "command" option that looks like this:</p>
+<pre><code>command="/home/git/bin/gitolite-shell alice"
+</code></pre>
+<p>It is this "command" that the ssh daemon executes when the offered public key
+matches the public key in this line.  For a different public key, from a
+different user, the command will have <em>that</em> user's name instead of "alice".</p>
+<p>This is how Gitolite distinguishes users from each other, even though they're
+all accessing the same (<code>git@host</code>) account.</p>
+<p>This is also why passwords won't work.  When a user supplies a password,
+there's no additional information to help the ssh server distinguish one user
+from another.</p>
+<hr />
+<p>.aa f6.png</p>
+<table>
+<thead>
+<tr>
+<th>User Workstation</th>
+<th>Gitolite Server</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>----------------------------+-------------------------------------------------</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Git client</td>
+<td>git‐receive‐pack</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>v</td>
+<td></td>
+</tr>
+<tr>
+<td>ssh client -------------+--------&gt; ssh server</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>v</td>
+<td>v</td>
+</tr>
+<tr>
+<td>~/.ssh/id_rsa</td>
+<td>~/.ssh/authorized_keys</td>
+</tr>
+<tr>
+<td>~/.ssh/id_rsa.pub</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>.end</p>
+<p><img alt="" src="f6.png" /></p>
+<p>When the ssh daemon decided to execute <code>/home/git/bin/gitolite-shell alice</code>
+instead of the <code>git-receive-pack 'reponame'</code> command that the user's git
+client sent to the user's ssh client, it didn't simply discard the
+git-receive-pack command.  It put it in an environment variable called
+<code>SSH_ORIGINAL_COMMAND</code>.</p>
+<p>Since that variable contains the repository name, and the username is the
+first argument passed to it, gitolite-shell now has enough information to
+decide "is this user allowed to write to this repo" (or "read", if the command
+was git-upload-pack).</p>
+<p>Assuming access is allowed, gitolite-shell then calls git-receive-pack (or
+git-upload-pack, as the case may be).</p>
+<p>This is the <strong>first authorisation check</strong> that gitolite does.</p>
+<p>Notice that git-receive-pack and git-upload-pack have NO idea that someone
+snuck in between them and the client calling them.  Neither does the git
+client know.  Gitolite is <strong>totally</strong> transparent to git clients unless access
+is denied for some reason.</p>
+<hr />
+<p>.aa f7.png</p>
+<table>
+<thead>
+<tr>
+<th>User Workstation</th>
+<th>Gitolite Server</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>----------------------------+-------------------------------------------------</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>gitolite-installed update hook</td>
+</tr>
+<tr>
+<td></td>
+<td>^</td>
+</tr>
+<tr>
+<td></td>
+<td>: each ref pushed is checked</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Git client</td>
+<td>git‐receive‐pack</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>v</td>
+<td></td>
+</tr>
+<tr>
+<td>ssh client -------------+--------&gt; ssh server</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>v</td>
+<td>v</td>
+</tr>
+<tr>
+<td>~/.ssh/id_rsa</td>
+<td>~/.ssh/authorized_keys</td>
+</tr>
+<tr>
+<td>~/.ssh/id_rsa.pub</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>.end</p>
+<p><img alt="" src="f7.png" /></p>
+<p>For a read (git-upload-pack), that is the end of the story.</p>
+<p>For a write, git will invoke the update hook for each branch or tag pushed.
+(See <code>man githooks</code> for details).</p>
+<p>This update hook, of course, has been installed by gitolite, and it proceeds
+to check if</p>
+<p>|   -   this user (alice, bob, ...)
+|   -   is allowed to do this (create, fast-forward push, non-fast-forward push, or delete)
+|   -   to this branch or tag (master, refs/tags/v1.0, ...)
+|   -   in this repo.</p>
+<p>This is the <strong>second authorisation check</strong> that gitolite does.</p>
+<p>If it is not allowed, the update hooks exits with an error, and git will abort
+the push (for that ref; other refs sent in the same push may be OK).</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
