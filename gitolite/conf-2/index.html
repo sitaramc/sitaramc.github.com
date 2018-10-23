@@ -10,87 +10,88 @@
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>the "conf" file (part 2) - Gitolite</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="../css/highlight.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
         <link href="../css/gitolite.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <script src="../js/jquery-1.10.2.min.js"></script>
-        <script src="../js/bootstrap-3.0.3.min.js"></script>
-        <script src="../js/highlight.pack.js"></script> 
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
+            <div class="container">
 
-        <!-- Collapsed navigation -->
-        <div class="navbar-header">
-            <!-- Expander button -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="..">Gitolite</a>
-        </div>
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">Gitolite</a>
+                </div>
 
-        <!-- Expanded navigation -->
-        <div class="navbar-collapse collapse">
-                <!-- Main navigation -->
-                <ul class="nav navbar-nav">
-                    <li >
-                        <a href="..">home</a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="..">home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../overview/">overview</a>
 </li>
-                            
+                                    
 <li >
     <a href="../concepts/">concepts, conventions, terminology</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../quick_install/">(unix/ssh experts) quick install and setup</a>
 </li>
-                            
+                                    
 <li >
     <a href="../install/">normal ssh mode install and setup</a>
 </li>
-                            
+                                    
 <li >
     <a href="../fool_proof_setup/">(if all else fails) fool-proof, step-by-step, install and setup</a>
 </li>
-                            
+                                    
 <li >
     <a href="../http/">HTTP mode install</a>
 </li>
-                            
+                                    
 <li >
     <a href="../migr/">migrating from v2</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
   <li class="dropdown-submenu">
     <a href="#">basic</a>
     <ul class="dropdown-menu">
@@ -116,7 +117,7 @@
 </li>
     </ul>
   </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">advanced</a>
     <ul class="dropdown-menu">
@@ -158,7 +159,7 @@
 </li>
     </ul>
   </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">customise</a>
     <ul class="dropdown-menu">
@@ -180,20 +181,20 @@
 </li>
     </ul>
   </li>
-                            
+                                    
 <li >
     <a href="../cookbook/">(quick! how do I...) the cookbook</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../emergencies/">emergency!!</a>
 </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">ssh</a>
     <ul class="dropdown-menu">
@@ -211,36 +212,36 @@
 </li>
     </ul>
   </li>
-                            
+                                    
 <li >
     <a href="../regex/">regular expressions</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../odds-and-ends/">miscellaneous features</a>
 </li>
-                            
+                                    
 <li >
     <a href="../namespaces/">using git namespaces</a>
 </li>
-                            
+                                    
 <li >
     <a href="../locking/">locking binary files</a>
 </li>
-                            
+                                    
 <li >
     <a href="../testing/">testing gitolite</a>
 </li>
-                            
+                                    
 <li >
     <a href="../package/">packaging gitolite</a>
 </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">more about gitolite</a>
     <ul class="dropdown-menu">
@@ -262,7 +263,7 @@
 </li>
     </ul>
   </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">contrib</a>
     <ul class="dropdown-menu">
@@ -288,34 +289,34 @@
 </li>
     </ul>
   </li>
-                            
+                                    
 <li >
     <a href="../no-way/">no way!</a>
 </li>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
-                </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                        <i class="fa fa-search"></i> Search
-                    </a>
-                </li>
-                    <li >
-                        <a rel="next" href="../conf/">
-                            <i class="fa fa-arrow-left"></i> Previous
-                        </a>
-                    </li>
-                    <li >
-                        <a rel="prev" href="../rc/">
-                            Next <i class="fa fa-arrow-right"></i>
-                        </a>
-                    </li>
-            </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../conf/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../rc/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
@@ -371,7 +372,7 @@ this ref.  (See <code>man githooks</code> for more.)</p>
 <p>In the following description, we use the word <code>operation</code> instead of <code>W</code>,
 because the actual operation could be a plain, fast-forward, push (<code>W</code>) or a
 rewind/delete (<code>+</code>).  <span class="gray">Other, less commonly used, values are "C", "D",
-or "M"; see <a href="../conf-2/#appendix-1-different-types-of-write-operations">here</a>.</span></p>
+or "M"; see <a href="conf-2/#appendix-1-different-types-of-write-operations">here</a>.</span></p>
 <ul>
 <li>collect all the rules pertaining to this repo <em>and</em> this user</li>
 <li>discard all the rules where the refex does not match the ref (branch or
@@ -406,7 +407,7 @@ to push a branch called "xyz".</p>
 </pre>
 
 <p>After adding a default refex and expanding the supplied ones (see the
-<a href="../conf/#the-refex-field">refex</a> section earlier), this is what it looks like.  We've added line
+<a href="conf/#the-refex-field">refex</a> section earlier), this is what it looks like.  We've added line
 numbers for convenience; we'll see why later.</p>
 <pre style="color: #ffffff; background-color: #000000;">
 <span id="L1" class="LineNr"> 1 </span><span class="Comment"># managers should be able to read any repo</span>
@@ -560,7 +561,7 @@ doesn't actually have a ref to test for.</p>
 </pre>
 
 <p>This is done by adding <em>one</em> line, line 4 in this example.  This sets a
-gitolite <a href="../options">"option"</a> that says you want "deny rules" to be applicable
+gitolite <a href="options">"option"</a> that says you want "deny rules" to be applicable
 even for read access.</p>
 <p>Once you do that, all you need to do is to ensure that the first rule
 encountered by these two "users" for those repos is a deny rule, so that it
@@ -581,8 +582,8 @@ situation to the above in terms of our ability to enumerate all the repos.</p>
     <span class="Statement">option</span> <span class="Identifier">deny-rules</span> = <span class="Constant">0</span>
 </pre>
 
-<p>To see why this works, you need to understand that for <a class="wikilink" href="../options/">options</a> and
-<a href="../git-config">config</a> lines, a later setting <a href="../git-config/#overriding-config-values">overrides</a> earlier
+<p>To see why this works, you need to understand that for <a class="wikilink" href="/options/">options</a> and
+<a href="git-config">config</a> lines, a later setting <a href="git-config/#overriding-config-values">overrides</a> earlier
 ones.  So we set it to 1 for all repos, then selectively set it to 0 for some.</p>
 <p>This means the "deny-rules" option applies to <em>all the repos except the "open"
 repos</em>, and so the first rule encountered by gitweb and daemon is a deny rule,
@@ -605,7 +606,7 @@ rewind, but not <em>delete</em> a ref.  The <code>C</code> and <code>D</code> qu
 <p>If a rule specifies <code>RWC</code> or <code>RW+C</code>, then <em>rules that do NOT have the C
     qualifier will no longer permit <strong>creating</strong> a ref in that repo</em>.</p>
 <p><font color="gray">Please do not confuse this with the standalone <code>C</code>
-permission that allows someone to <a href="../wild/#user-creating-a-specific-repo">create</a> a <strong>repo</strong></font></p>
+permission that allows someone to <a href="wild/#user-creating-a-specific-repo">create</a> a <strong>repo</strong></font></p>
 </li>
 <li>
 <p>If a rule specifies <code>RWD</code> or <code>RW+D</code>, then <em>rules that do NOT have the D
@@ -686,7 +687,7 @@ means our set of rules have only two fields: perm, refex.</p>
 either R or W, and for check #2 it can be W or +.</p>
 </li>
 </ul>
-<p><span class="gray">Note on permissions and "oper": there are other <a href="../conf-2/#appendix-1-different-types-of-write-operations">types of
+<p><span class="gray">Note on permissions and "oper": there are other <a href="conf-2/#appendix-1-different-types-of-write-operations">types of
 permissions</a>, but for our discussion these are enough.  The
 others are rare, and anyway it is easy to extrapolate to them.</span></p>
 <p>With that background, here's the flow.  The one on the left is for check #1
@@ -728,12 +729,14 @@ gitolite access -q foo u2 W any || echo FAILED
 
         <footer class="col-md-12">
             <hr>
-            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script>var base_url = '..';</script>
-        <script src="../js/base.js"></script>
-        <script src="../search/require.js"></script>
-        <script src="../search/search.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
     <div class="modal-dialog">
@@ -749,7 +752,7 @@ gitolite access -q foo u2 W any || echo FAILED
                 </p>
                 <form role="form">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
                 <div id="mkdocs-search-results"></div>
@@ -775,19 +778,19 @@ gitolite access -q foo u2 W any || echo FAILED
                 </thead>
                 <tbody>
                   <tr>
-                    <td><kbd>?</kbd></td>
+                    <td class="help shortcut"><kbd>?</kbd></td>
                     <td>Open this help</td>
                   </tr>
                   <tr>
-                    <td><kbd>&larr;</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td><kbd>&rarr;</kbd></td>
+                    <td class="next shortcut"><kbd>n</kbd></td>
                     <td>Next page</td>
                   </tr>
                   <tr>
-                    <td><kbd>s</kbd></td>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
                     <td>Search</td>
                   </tr>
                 </tbody>
@@ -798,7 +801,6 @@ gitolite access -q foo u2 W any || echo FAILED
         </div>
     </div>
 </div>
-
 
     </body>
 </html>

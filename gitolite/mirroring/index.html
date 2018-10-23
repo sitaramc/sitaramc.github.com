@@ -10,87 +10,88 @@
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>mirroring - Gitolite</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="../css/highlight.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
         <link href="../css/gitolite.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <script src="../js/jquery-1.10.2.min.js"></script>
-        <script src="../js/bootstrap-3.0.3.min.js"></script>
-        <script src="../js/highlight.pack.js"></script> 
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
+            <div class="container">
 
-        <!-- Collapsed navigation -->
-        <div class="navbar-header">
-            <!-- Expander button -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="..">Gitolite</a>
-        </div>
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">Gitolite</a>
+                </div>
 
-        <!-- Expanded navigation -->
-        <div class="navbar-collapse collapse">
-                <!-- Main navigation -->
-                <ul class="nav navbar-nav">
-                    <li >
-                        <a href="..">home</a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="..">home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../overview/">overview</a>
 </li>
-                            
+                                    
 <li >
     <a href="../concepts/">concepts, conventions, terminology</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../quick_install/">(unix/ssh experts) quick install and setup</a>
 </li>
-                            
+                                    
 <li >
     <a href="../install/">normal ssh mode install and setup</a>
 </li>
-                            
+                                    
 <li >
     <a href="../fool_proof_setup/">(if all else fails) fool-proof, step-by-step, install and setup</a>
 </li>
-                            
+                                    
 <li >
     <a href="../http/">HTTP mode install</a>
 </li>
-                            
+                                    
 <li >
     <a href="../migr/">migrating from v2</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
   <li class="dropdown-submenu">
     <a href="#">basic</a>
     <ul class="dropdown-menu">
@@ -116,7 +117,7 @@
 </li>
     </ul>
   </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">advanced</a>
     <ul class="dropdown-menu">
@@ -158,7 +159,7 @@
 </li>
     </ul>
   </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">customise</a>
     <ul class="dropdown-menu">
@@ -180,20 +181,20 @@
 </li>
     </ul>
   </li>
-                            
+                                    
 <li >
     <a href="../cookbook/">(quick! how do I...) the cookbook</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../emergencies/">emergency!!</a>
 </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">ssh</a>
     <ul class="dropdown-menu">
@@ -211,36 +212,36 @@
 </li>
     </ul>
   </li>
-                            
+                                    
 <li >
     <a href="../regex/">regular expressions</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../odds-and-ends/">miscellaneous features</a>
 </li>
-                            
+                                    
 <li >
     <a href="../namespaces/">using git namespaces</a>
 </li>
-                            
+                                    
 <li >
     <a href="../locking/">locking binary files</a>
 </li>
-                            
+                                    
 <li >
     <a href="../testing/">testing gitolite</a>
 </li>
-                            
+                                    
 <li >
     <a href="../package/">packaging gitolite</a>
 </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">more about gitolite</a>
     <ul class="dropdown-menu">
@@ -262,7 +263,7 @@
 </li>
     </ul>
   </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">contrib</a>
     <ul class="dropdown-menu">
@@ -288,34 +289,34 @@
 </li>
     </ul>
   </li>
-                            
+                                    
 <li >
     <a href="../no-way/">no way!</a>
 </li>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
-                </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                        <i class="fa fa-search"></i> Search
-                    </a>
-                </li>
-                    <li >
-                        <a rel="next" href="../gitweb-daemon/">
-                            <i class="fa fa-arrow-left"></i> Previous
-                        </a>
-                    </li>
-                    <li >
-                        <a rel="prev" href="../non-core/">
-                            Next <i class="fa fa-arrow-right"></i>
-                        </a>
-                    </li>
-            </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../gitweb-daemon/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../non-core/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
@@ -432,7 +433,7 @@ time to fix them immediately :-)</p>
     mirrored.</p>
 </li>
 <li>
-<p>If you ever do a <a href="../emergencies/#bypassing-gitolite">bypass push</a>, mirroring will not work.
+<p>If you ever do a <a href="emergencies/#bypassing-gitolite">bypass push</a>, mirroring will not work.
     Mirroring checks also will not work -- for example, you can push to a
     slave, which is not usually a good idea.  So don't bypass gitolite if the
     repo is mirrored!</p>
@@ -448,7 +449,7 @@ time to fix them immediately :-)</p>
 <h1 id="setting-up-mirroring">setting up mirroring<a class="headerlink" href="#setting-up-mirroring" title="Permanent link"></a></h1>
 <p>This is in two parts: the initial setup and the rc file, followed by the conf
 file settings and syntax.</p>
-<h2 id="the-initial-setup-and-the-rc-file">the initial setup and the <a href="../rc">rc file</a><a class="headerlink" href="#the-initial-setup-and-the-rc-file" title="Permanent link"></a></h2>
+<h2 id="the-initial-setup-and-the-rc-file">the initial setup and the <a href="rc">rc file</a><a class="headerlink" href="#the-initial-setup-and-the-rc-file" title="Permanent link"></a></h2>
 <p>For <strong>each</strong> server:</p>
 <ul>
 <li>
@@ -476,7 +477,7 @@ file settings and syntax.</p>
 distinguishes a human user from a mirroring peer.</p>
 </li>
 <li>
-<p>Create "host" aliases to refer to all other machines.  See <a href="../sts/#appendix-4-ssh-host-aliases">here</a>
+<p>Create "host" aliases to refer to all other machines.  See <a href="sts/#appendix-4-ssh-host-aliases">here</a>
     for what/how.</p>
 <p>The host alias for a host (in all other machines' <code>~/.ssh/config</code> files)
 MUST be the same as the <code>HOSTNAME</code> in the referred host's
@@ -518,12 +519,12 @@ get expected results.  <strong>Do NOT proceed otherwise.</strong></p>
 <li>
 <p>If you wish to allow your users to run the mirror command remotely
     (usually <em>not</em> required), you need to enable it just like any other
-    command that is not enabled by default; see <a href="../non-core/#gitolite-commands">gitolite commands</a>
+    command that is not enabled by default; see <a href="non-core/#gitolite-commands">gitolite commands</a>
     for how.</p>
 </li>
 </ul>
 <h2 id="conf-file-settings-and-syntax">conf file settings and syntax<a class="headerlink" href="#conf-file-settings-and-syntax" title="Permanent link"></a></h2>
-<p>Mirroring is defined by the following <a class="wikilink" href="../options/">options</a>.  You can have different
+<p>Mirroring is defined by the following <a class="wikilink" href="/options/">options</a>.  You can have different
 settings for different repos, and of course some repos may not have any mirror
 options at all -- they are then purely local.</p>
 <pre style="color: #ffffff; background-color: #000000;">
@@ -625,7 +626,7 @@ second one trusts only some slaves.</p>
 </li>
 <li>
 <p>The part of the authorisation that happens before passing control to
-    git-receive-pack (see <a href="../conf/#access-rules">access rules</a>) will happen on the slave as
+    git-receive-pack (see <a href="conf/#access-rules">access rules</a>) will happen on the slave as
     well.</p>
 </li>
 <li>
@@ -641,7 +642,7 @@ different servers, by saying something like:</p>
 <span class="Statement">include</span> &quot;%HOSTNAME/*.conf&quot;
 </pre>
 
-<p>(See <a href="../conf/#include-files">include</a> for more on the 'include' command).</p>
+<p>(See <a href="conf/#include-files">include</a> for more on the 'include' command).</p>
 <p>You can use it in other places also, for example:</p>
 <pre style="color: #ffffff; background-color: #000000;">
     <span class="Statement">RW+</span>     <span class="Constant">VREF/</span><span class="PreProc">NAME/</span><span class="Constant">subs/%HOST</span><span class="PreProc">NAME/</span>       =   <span class="Identifier">@%HOSTNAME-admins</span>
@@ -729,12 +730,14 @@ about it!".  You're basically locked out of phobos now.</p>
 
         <footer class="col-md-12">
             <hr>
-            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script>var base_url = '..';</script>
-        <script src="../js/base.js"></script>
-        <script src="../search/require.js"></script>
-        <script src="../search/search.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
     <div class="modal-dialog">
@@ -750,7 +753,7 @@ about it!".  You're basically locked out of phobos now.</p>
                 </p>
                 <form role="form">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
                 <div id="mkdocs-search-results"></div>
@@ -776,19 +779,19 @@ about it!".  You're basically locked out of phobos now.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><kbd>?</kbd></td>
+                    <td class="help shortcut"><kbd>?</kbd></td>
                     <td>Open this help</td>
                   </tr>
                   <tr>
-                    <td><kbd>&larr;</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td><kbd>&rarr;</kbd></td>
+                    <td class="next shortcut"><kbd>n</kbd></td>
                     <td>Next page</td>
                   </tr>
                   <tr>
-                    <td><kbd>s</kbd></td>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
                     <td>Search</td>
                   </tr>
                 </tbody>
@@ -799,7 +802,6 @@ about it!".  You're basically locked out of phobos now.</p>
         </div>
     </div>
 </div>
-
 
     </body>
 </html>

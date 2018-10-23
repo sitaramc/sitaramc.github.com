@@ -10,87 +10,88 @@
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>ad hoc user-created ("wild") repos - Gitolite</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="../css/highlight.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
         <link href="../css/gitolite.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <script src="../js/jquery-1.10.2.min.js"></script>
-        <script src="../js/bootstrap-3.0.3.min.js"></script>
-        <script src="../js/highlight.pack.js"></script> 
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
+            <div class="container">
 
-        <!-- Collapsed navigation -->
-        <div class="navbar-header">
-            <!-- Expander button -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="..">Gitolite</a>
-        </div>
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">Gitolite</a>
+                </div>
 
-        <!-- Expanded navigation -->
-        <div class="navbar-collapse collapse">
-                <!-- Main navigation -->
-                <ul class="nav navbar-nav">
-                    <li >
-                        <a href="..">home</a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="..">home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../overview/">overview</a>
 </li>
-                            
+                                    
 <li >
     <a href="../concepts/">concepts, conventions, terminology</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../quick_install/">(unix/ssh experts) quick install and setup</a>
 </li>
-                            
+                                    
 <li >
     <a href="../install/">normal ssh mode install and setup</a>
 </li>
-                            
+                                    
 <li >
     <a href="../fool_proof_setup/">(if all else fails) fool-proof, step-by-step, install and setup</a>
 </li>
-                            
+                                    
 <li >
     <a href="../http/">HTTP mode install</a>
 </li>
-                            
+                                    
 <li >
     <a href="../migr/">migrating from v2</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
   <li class="dropdown-submenu">
     <a href="#">basic</a>
     <ul class="dropdown-menu">
@@ -116,7 +117,7 @@
 </li>
     </ul>
   </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">advanced</a>
     <ul class="dropdown-menu">
@@ -158,7 +159,7 @@
 </li>
     </ul>
   </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">customise</a>
     <ul class="dropdown-menu">
@@ -180,20 +181,20 @@
 </li>
     </ul>
   </li>
-                            
+                                    
 <li >
     <a href="../cookbook/">(quick! how do I...) the cookbook</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../emergencies/">emergency!!</a>
 </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">ssh</a>
     <ul class="dropdown-menu">
@@ -211,36 +212,36 @@
 </li>
     </ul>
   </li>
-                            
+                                    
 <li >
     <a href="../regex/">regular expressions</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../odds-and-ends/">miscellaneous features</a>
 </li>
-                            
+                                    
 <li >
     <a href="../namespaces/">using git namespaces</a>
 </li>
-                            
+                                    
 <li >
     <a href="../locking/">locking binary files</a>
 </li>
-                            
+                                    
 <li >
     <a href="../testing/">testing gitolite</a>
 </li>
-                            
+                                    
 <li >
     <a href="../package/">packaging gitolite</a>
 </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">more about gitolite</a>
     <ul class="dropdown-menu">
@@ -262,7 +263,7 @@
 </li>
     </ul>
   </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">contrib</a>
     <ul class="dropdown-menu">
@@ -288,34 +289,34 @@
 </li>
     </ul>
   </li>
-                            
+                                    
 <li >
     <a href="../no-way/">no way!</a>
 </li>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
-                </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                        <i class="fa fa-search"></i> Search
-                    </a>
-                </li>
-                    <li >
-                        <a rel="next" href="../options/">
-                            <i class="fa fa-arrow-left"></i> Previous
-                        </a>
-                    </li>
-                    <li >
-                        <a rel="prev" href="../templates/">
-                            Next <i class="fa fa-arrow-right"></i>
-                        </a>
-                    </li>
-            </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../options/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../templates/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
@@ -343,7 +344,7 @@
 <hr />
 <p>The wildrepos feature allows you to specify access control rules using regular
 expression patterns, so you can have many actual repos being served by a
-single set of rules in the config file.  The <a class="wikilink" href="../regex/">regex</a> can also include the
+single set of rules in the config file.  The <a class="wikilink" href="/regex/">regex</a> can also include the
 word <code>CREATOR</code> in it, allowing you to parametrise the name of the user
 creating the repo.</p>
 <h1 id="quick-introexample">quick intro/example<a class="headerlink" href="#quick-introexample" title="Permanent link"></a></h1>
@@ -372,7 +373,7 @@ creates it:</p>
     <span class="Statement">R</span>   =   READERS
 </pre>
 
-<p>Most of this is fixed, but the creator (user 'u1') <em>can</em> use the <a href="../user/#setget-additional-permissions-for-repos-you-created">perms</a>
+<p>Most of this is fixed, but the creator (user 'u1') <em>can</em> use the <a href="user/#setget-additional-permissions-for-repos-you-created">perms</a>
 command to add other users as 'READERS' or 'WRITERS'.  For example he could
 add 'u2' as a writer and 'u3' and 'u5' as readers:</p>
 <p>This is the effective rule list that applies to the repo if he does that:</p>
@@ -404,7 +405,7 @@ the conf file:</p>
 
 <p>Note the "C" permission.  This is a standalone "C", which gives the named
 users the right to <em>create a repo</em>.  <span class="gray">This is not to be confused with
-the "RWC" permission or its variants described <a href="../conf-2/#appendix-1-different-types-of-write-operations">elsewhere</a>, which
+the "RWC" permission or its variants described <a href="conf-2/#appendix-1-different-types-of-write-operations">elsewhere</a>, which
 are about creating <em>branches</em>, not <em>repos</em>.</span></p>
 <h1 id="user-creating-a-specific-repo">(<strong>user</strong>) creating a specific repo<a class="headerlink" href="#user-creating-a-specific-repo" title="Permanent link"></a></h1>
 <p>For now, ignore the special usernames READERS and WRITERS, and just create a
@@ -436,7 +437,7 @@ admin logging on to the back end, though it's not too difficult.</p>
 <h2 id="regex-pattern-versus-normal-repo">regex pattern versus normal repo<a class="headerlink" href="#regex-pattern-versus-normal-repo" title="Permanent link"></a></h2>
 <p>Due to projects like <code>gtk+</code>, the <code>+</code> character is now considered a valid
 character for an <em>ordinary</em> repo.  Therefore, a regex like <code>foo/.+</code> does not
-look like a <a class="wikilink" href="../regex/">regex</a> to gitolite.  Use <code>foo/..*</code> if you want that.</p>
+look like a <a class="wikilink" href="/regex/">regex</a> to gitolite.  Use <code>foo/..*</code> if you want that.</p>
 <p>Also, <code>..*</code> by itself is not considered a valid repo regex.  Try
 <code>[a-zA-Z0-9].*</code>.  <code>CREATOR/..*</code> will also work.</p>
 <h2 id="line-anchored-regexes">line-anchored regexes<a class="headerlink" href="#line-anchored-regexes" title="Permanent link"></a></h2>
@@ -452,7 +453,7 @@ or <code>assignments/S02/a37</code>, obviously.</p>
 metacharacters.</p>
 <div class="admonition warning">
 <p class="admonition-title">Side-note: contrast with refexes</p>
-<p>Just for interest, note that this is in contrast to the <a href="../conf/#the-refex-field">refexes</a>
+<p>Just for interest, note that this is in contrast to the <a href="conf/#the-refex-field">refexes</a>
 for the normal "branch" permissions. Refexes are only anchored at the
 start; a regex like <code>refs/heads/master</code> actually can match
 <code>refs/heads/master01/bar</code> as well, even if no one will actually push such
@@ -465,11 +466,11 @@ the conf file decide what permissions these roles have, but they don't say
 what users are in each of these roles.</p>
 <p>That needs to be done by the creator of the repo, using the <code>perms</code> command.
 You can run <code>ssh git@host perms -h</code> for detailed help, but in brief, that
-command lets you give and take away roles to users.  <a href="../user/#setget-additional-permissions-for-repos-you-created">This</a> has some
+command lets you give and take away roles to users.  <a href="user/#setget-additional-permissions-for-repos-you-created">This</a> has some
 more detail.</p>
 <h2 id="adding-other-roles">adding other roles<a class="headerlink" href="#adding-other-roles" title="Permanent link"></a></h2>
 <p>If you want to have more than just the 2 default roles, say something like:</p>
-<p>You can add the new names to the ROLES hash in the <a href="../rc">rc file</a>; see comments
+<p>You can add the new names to the ROLES hash in the <a href="rc">rc file</a>; see comments
 in that file for how to do that.  Be sure to run the 2 commands mentioned
 there after you have added the roles.</p>
 <pre style="color: #ffffff; background-color: #000000;">
@@ -510,13 +511,13 @@ option default.roles-2  =   WRITERS @senior-devs
 </code></pre>
 </li>
 </ul>
-<p>This will then behave as if the <a href="../user/#setget-additional-permissions-for-repos-you-created">perms</a> command was used immediately after
+<p>This will then behave as if the <a href="user/#setget-additional-permissions-for-repos-you-created">perms</a> command was used immediately after
 the repo was created to add those two role assignments.</p>
 <p>If you want to simulate the old (pre v3.5) <code>DEFAULT_ROLE_PERMS</code> rc file
 variable, just add them under a <code>repo @all</code> line.  (Remember that this only
 affects newly created wild repos, despite the '@all' name).</p>
 <h2 id="specifying-owners">specifying owners<a class="headerlink" href="#specifying-owners" title="Permanent link"></a></h2>
-<p>See the section on <code>OWNER_ROLENAME</code> in the <a href="../rc">rc file page</a>.</p>
+<p>See the section on <code>OWNER_ROLENAME</code> in the <a href="rc">rc file page</a>.</p>
 <h1 id="listing-wild-repos">listing wild repos<a class="headerlink" href="#listing-wild-repos" title="Permanent link"></a></h1>
 <p>In order to see what repositories were created from a wildcard, use the 'info'
 command.  Try <code>ssh git@host info -h</code> to get help on the info command.</p>
@@ -549,12 +550,14 @@ permissions to other users (by running the 'perms' command), etc.</p>
 
         <footer class="col-md-12">
             <hr>
-            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script>var base_url = '..';</script>
-        <script src="../js/base.js"></script>
-        <script src="../search/require.js"></script>
-        <script src="../search/search.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
     <div class="modal-dialog">
@@ -570,7 +573,7 @@ permissions to other users (by running the 'perms' command), etc.</p>
                 </p>
                 <form role="form">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
                 <div id="mkdocs-search-results"></div>
@@ -596,19 +599,19 @@ permissions to other users (by running the 'perms' command), etc.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><kbd>?</kbd></td>
+                    <td class="help shortcut"><kbd>?</kbd></td>
                     <td>Open this help</td>
                   </tr>
                   <tr>
-                    <td><kbd>&larr;</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td><kbd>&rarr;</kbd></td>
+                    <td class="next shortcut"><kbd>n</kbd></td>
                     <td>Next page</td>
                   </tr>
                   <tr>
-                    <td><kbd>s</kbd></td>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
                     <td>Search</td>
                   </tr>
                 </tbody>
@@ -619,7 +622,6 @@ permissions to other users (by running the 'perms' command), etc.</p>
         </div>
     </div>
 </div>
-
 
     </body>
 </html>

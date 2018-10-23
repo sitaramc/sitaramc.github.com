@@ -10,87 +10,88 @@
         <link rel="shortcut icon" href="../../img/favicon.ico">
         <title>User key management - Gitolite</title>
         <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="../../css/highlight.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
         <link href="../../css/gitolite.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <script src="../../js/jquery-1.10.2.min.js"></script>
-        <script src="../../js/bootstrap-3.0.3.min.js"></script>
-        <script src="../../js/highlight.pack.js"></script> 
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
+            <div class="container">
 
-        <!-- Collapsed navigation -->
-        <div class="navbar-header">
-            <!-- Expander button -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="../..">Gitolite</a>
-        </div>
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../..">Gitolite</a>
+                </div>
 
-        <!-- Expanded navigation -->
-        <div class="navbar-collapse collapse">
-                <!-- Main navigation -->
-                <ul class="nav navbar-nav">
-                    <li >
-                        <a href="../..">home</a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="../..">home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../../overview/">overview</a>
 </li>
-                            
+                                    
 <li >
     <a href="../../concepts/">concepts, conventions, terminology</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../../quick_install/">(unix/ssh experts) quick install and setup</a>
 </li>
-                            
+                                    
 <li >
     <a href="../../install/">normal ssh mode install and setup</a>
 </li>
-                            
+                                    
 <li >
     <a href="../../fool_proof_setup/">(if all else fails) fool-proof, step-by-step, install and setup</a>
 </li>
-                            
+                                    
 <li >
     <a href="../../http/">HTTP mode install</a>
 </li>
-                            
+                                    
 <li >
     <a href="../../migr/">migrating from v2</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
   <li class="dropdown-submenu">
     <a href="#">basic</a>
     <ul class="dropdown-menu">
@@ -116,7 +117,7 @@
 </li>
     </ul>
   </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">advanced</a>
     <ul class="dropdown-menu">
@@ -158,7 +159,7 @@
 </li>
     </ul>
   </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">customise</a>
     <ul class="dropdown-menu">
@@ -180,20 +181,20 @@
 </li>
     </ul>
   </li>
-                            
+                                    
 <li >
     <a href="../../cookbook/">(quick! how do I...) the cookbook</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../../emergencies/">emergency!!</a>
 </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">ssh</a>
     <ul class="dropdown-menu">
@@ -211,36 +212,36 @@
 </li>
     </ul>
   </li>
-                            
+                                    
 <li >
     <a href="../../regex/">regular expressions</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../../odds-and-ends/">miscellaneous features</a>
 </li>
-                            
+                                    
 <li >
     <a href="../../namespaces/">using git namespaces</a>
 </li>
-                            
+                                    
 <li >
     <a href="../../locking/">locking binary files</a>
 </li>
-                            
+                                    
 <li >
     <a href="../../testing/">testing gitolite</a>
 </li>
-                            
+                                    
 <li >
     <a href="../../package/">packaging gitolite</a>
 </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">more about gitolite</a>
     <ul class="dropdown-menu">
@@ -262,7 +263,7 @@
 </li>
     </ul>
   </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">contrib</a>
     <ul class="dropdown-menu">
@@ -288,34 +289,34 @@
 </li>
     </ul>
   </li>
-                            
+                                    
 <li >
     <a href="../../no-way/">no way!</a>
 </li>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
-                </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                        <i class="fa fa-search"></i> Search
-                    </a>
-                </li>
-                    <li >
-                        <a rel="next" href="../sskm/">
-                            <i class="fa fa-arrow-left"></i> Previous
-                        </a>
-                    </li>
-                    <li >
-                        <a rel="prev" href="../README-emacs/">
-                            Next <i class="fa fa-arrow-right"></i>
-                        </a>
-                    </li>
-            </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../sskm/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../README-emacs/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
@@ -353,12 +354,12 @@ License</a></p>
 <p>User key management allows certain users to add and remove keys.</p>
 <p>The key management is done using a command called <code>ukm</code>. This command
 must be enabled for remote use by both the <a href="#SYSADMIN">sysadmin</a> and the
-<a href="#GA">gitolite-admin</a> (see <a href="../../non-core/#gitolite-commands">here</a> for more on this) or look
+<a href="#GA">gitolite-admin</a> (see <a href="../non-core/#gitolite-commands">here</a> for more on this) or look
 below.</p>
 <hr />
 <h1 id="important-warning">Important Warning!<a class="headerlink" href="#important-warning" title="Permanent link"></a></h1>
 <p>User key management undermines the fundamental principle of gitolite
-(see <a href="../../concepts/#authentication-and-authorisation">authentication versus authorisation</a>) by allowing certain
+(see <a href="../concepts/#authentication-and-authorisation">authentication versus authorisation</a>) by allowing certain
 users to juggle with ssh public keys. Make sure someone (sysadmin?)
 can login to the server with a <strong>password</strong>, just in case something
 breaks and the <code>.ssh/authorized_keys</code> file for the user running
@@ -369,7 +370,7 @@ default it uses ssh as its authentication mechanism. Sure, ssh is
 not at all part of gitolite and it can be replaced by other means, but
 still there is a directory <code>gitolite-admin/keydir</code> that is reserved
 for public ssh keys.</p>
-<p>In fact, management of <a href="../../basic-admin/#addremove-users">users</a> and <a href="../../basic-admin/#multiple-keys-per-user">multiple keys</a> per
+<p>In fact, management of <a href="../basic-admin/#addremove-users">users</a> and <a href="../basic-admin/#multiple-keys-per-user">multiple keys</a> per
 user is not actually a gitolite administration stuff. It's external to
 gitolite. In a future version, <code>ukm</code> could be used as an equivalent of
 the <code>keydir/</code> directory from the <code>gitolite-admin</code> repo (currently it
@@ -400,7 +401,7 @@ shell access to the server; only the <a href="#SYSADMIN">sysadmin</a> has shell
 access.)</p>
 <h2 id="users-that-want-more-control-over-who-can-access-their-repositories">Users that want more control over who can access their repositories<a class="headerlink" href="#users-that-want-more-control-over-who-can-access-their-repositories" title="Permanent link"></a></h2>
 <p>Suppose the <a href="#GA">gitolite administrator</a> of a research institute has
-set up gitolite to provide <a href="../../wild">wild repositories</a> for example with
+set up gitolite to provide <a href="../wild">wild repositories</a> for example with
 a <code>gitolite.conf</code> like this.</p>
 <pre><code>repo gitolite-admin
     RW+ = gitadmin
@@ -417,7 +418,7 @@ repo CREATOR/..*
 </code></pre>
 <p>Researchers Alice and Bob want to write an article together. Alice
 creates a wild repository <code>alice/article</code> and adds Bob via the
-<a href="../../user/#setget-additional-permissions-for-repos-you-created">perms</a> command to the WRITERS of her repository. After a while they
+<a href="../user/#setget-additional-permissions-for-repos-you-created">perms</a> command to the WRITERS of her repository. After a while they
 realize that Otto from another institute would be a reasonable third
 author. However, if they cannot give him write access to the
 repository, they would have to exchange the article via email. Back to
@@ -454,7 +455,7 @@ ln -s ../../contrib/commands/ukm .
 the <code>ENABLE</code> array, i.e.,</p>
 <pre><code>ENABLE =&gt; [ ..., 'ukm', ... ],
 </code></pre>
-<p>in <a href="../../rc">.gitolite.rc</a>. (That's the preferred way for gitolite starting
+<p>in <a href="../rc">.gitolite.rc</a>. (That's the preferred way for gitolite starting
 with version v3.4.)</p>
 <p>Instead of the above (in particular in gitolite v3.0-v3.3), add
 <code>'ukm' =&gt; 1</code> to the <code>COMMANDS</code> hash.</p>
@@ -465,7 +466,7 @@ with version v3.4.)</p>
 them requires different values in the respective config files.</p>
 <p>There are two files where <code>ukm</code> must be configured.</p>
 <ul>
-<li><a href="../../rc">.gitolite.rc</a> (managed by a <a href="#SYSADMIN">sysadmin</a> of the gitserver)</li>
+<li><a href="../rc">.gitolite.rc</a> (managed by a <a href="#SYSADMIN">sysadmin</a> of the gitserver)</li>
 <li><code>gitolite-admin/conf/gitolite.conf</code> (managed by a
     <a href="#GA">gitolite administrator</a>)</li>
 </ul>
@@ -489,7 +490,7 @@ is <code>@creators=@all</code>, it basically allows the initial guest key
 managers to start a hierarchy of new users with the same rights as the
 initial users.</p>
 <p>The <a href="#SYSADMIN">system administrator</a> must configure <code>ukm</code> for
-<a href="#GKM">guest key managers</a> in <a href="../../rc">.gitolite.rc</a> by adding something
+<a href="#GKM">guest key managers</a> in <a href="../rc">.gitolite.rc</a> by adding something
 like</p>
 <pre><code>UKM_CONFIG =&gt; { FORBIDDEN_GUEST_PATTERN =&gt; qr(FORBIDDEN-PATTERN), },
 </code></pre>
@@ -563,7 +564,7 @@ multiple keys. It's a security issue. (Suppose Alice has added a guest
 <code>foo@example.org@attacker</code> to the list of his guests. That would give
 MrBad all the permissions that <code>foo@example.org</code> has.)</p>
 <p>The <a href="#SYSADMIN">system administrator</a> must enable <code>ukm</code> for
-<a href="#EKM">self key managers</a> in <a href="../../rc">.gitolite.rc</a> by adding</p>
+<a href="#EKM">self key managers</a> in <a href="../rc">.gitolite.rc</a> by adding</p>
 <pre><code>UKM_CONGFIG =&gt; { SELFKEY_MANAGEMENT =&gt; 1, },
 </code></pre>
 <p>to the <code>%RC</code> hash.</p>
@@ -710,7 +711,7 @@ probably fail. Then simply redo the command after a while.</p>
 <ul>
 <li>
 <p><strong>sysadmin</strong><a id="SYSADMIN"></a>:
-  A person who is able to edit the <a href="../../rc">.gitolite.rc</a> file on
+  A person who is able to edit the <a href="../rc">.gitolite.rc</a> file on
   the server machine.</p>
 </li>
 <li>
@@ -753,13 +754,13 @@ probably fail. Then simply redo the command after a while.</p>
 <li><strong>USERID</strong><a id="USERID"></a>:
   The <a href="#KEYID">KEYID</a> given on the command line will be translated
   into a USERID which is used inside <code>conf/gitolite.conf</code> or for the
-  <a href="../../user/#setget-additional-permissions-for-repos-you-created">perms</a> <a href="../../non-core/#gitolite-commands">command</a> of gitolite.</li>
+  <a href="../user/#setget-additional-permissions-for-repos-you-created">perms</a> <a href="../non-core/#gitolite-commands">command</a> of gitolite.</li>
 </ul>
 <h1 id="security-note">Security note<a class="headerlink" href="#security-note" title="Permanent link"></a></h1>
 <p><a id="MULTIKEY" />
 <a href="#SKM">Super key managers</a> can basically add any key.
 <a href="#GKM">Guest key managers</a> are not allowed to add
-<a href="../../basic-admin/#multiple-keys-per-user">multiple keys</a> and this restriction is hardcoded.</p>
+<a href="../basic-admin/#multiple-keys-per-user">multiple keys</a> and this restriction is hardcoded.</p>
 <p>Suppose Alice adds <code>bob.pub</code> as <code>bob@example.org</code> and David adds
 <code>eve.pub</code> under the keyid <code>bob@example.org@foo</code>. (Of course, only Eve
 and not Bob has the private key correspoinding to <code>eve.pub</code>.) This
@@ -771,7 +772,7 @@ never <code>git push -f</code>, because that might override something <code>ukm<
 did.</p>
 <h1 id="ideas">Ideas<a class="headerlink" href="#ideas" title="Permanent link"></a></h1>
 <p>The command <code>ukm</code> has been created with also having the
-<code>keysubdirs-as-groups</code> <a href="../../non-core">syntactic sugar</a> in mind. If a
+<code>keysubdirs-as-groups</code> <a href="../non-core">syntactic sugar</a> in mind. If a
 <a href="#SKM">super key manager</a> manages the respective keys in
 sub-directories with names <code>guest-key-managers/</code> and
 <code>self-key-managers/</code>, respectively, he/she can use the <code>ukm</code> command
@@ -780,12 +781,14 @@ to control who is allowed to manage keys.</p></div>
 
         <footer class="col-md-12">
             <hr>
-            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script>var base_url = '../..';</script>
-        <script src="../../js/base.js"></script>
-        <script src="../../search/require.js"></script>
-        <script src="../../search/search.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
     <div class="modal-dialog">
@@ -801,7 +804,7 @@ to control who is allowed to manage keys.</p></div>
                 </p>
                 <form role="form">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
                 <div id="mkdocs-search-results"></div>
@@ -827,19 +830,19 @@ to control who is allowed to manage keys.</p></div>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><kbd>?</kbd></td>
+                    <td class="help shortcut"><kbd>?</kbd></td>
                     <td>Open this help</td>
                   </tr>
                   <tr>
-                    <td><kbd>&larr;</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td><kbd>&rarr;</kbd></td>
+                    <td class="next shortcut"><kbd>n</kbd></td>
                     <td>Next page</td>
                   </tr>
                   <tr>
-                    <td><kbd>s</kbd></td>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
                     <td>Search</td>
                   </tr>
                 </tbody>
@@ -850,7 +853,6 @@ to control who is allowed to manage keys.</p></div>
         </div>
     </div>
 </div>
-
 
     </body>
 </html>

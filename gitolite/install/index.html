@@ -10,87 +10,88 @@
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>normal ssh mode install and setup - Gitolite</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="../css/highlight.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
         <link href="../css/gitolite.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <script src="../js/jquery-1.10.2.min.js"></script>
-        <script src="../js/bootstrap-3.0.3.min.js"></script>
-        <script src="../js/highlight.pack.js"></script> 
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
+            <div class="container">
 
-        <!-- Collapsed navigation -->
-        <div class="navbar-header">
-            <!-- Expander button -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="..">Gitolite</a>
-        </div>
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">Gitolite</a>
+                </div>
 
-        <!-- Expanded navigation -->
-        <div class="navbar-collapse collapse">
-                <!-- Main navigation -->
-                <ul class="nav navbar-nav">
-                    <li >
-                        <a href="..">home</a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="..">home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../overview/">overview</a>
 </li>
-                            
+                                    
 <li >
     <a href="../concepts/">concepts, conventions, terminology</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../quick_install/">(unix/ssh experts) quick install and setup</a>
 </li>
-                            
+                                    
 <li class="active">
     <a href="./">normal ssh mode install and setup</a>
 </li>
-                            
+                                    
 <li >
     <a href="../fool_proof_setup/">(if all else fails) fool-proof, step-by-step, install and setup</a>
 </li>
-                            
+                                    
 <li >
     <a href="../http/">HTTP mode install</a>
 </li>
-                            
+                                    
 <li >
     <a href="../migr/">migrating from v2</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
   <li class="dropdown-submenu">
     <a href="#">basic</a>
     <ul class="dropdown-menu">
@@ -116,7 +117,7 @@
 </li>
     </ul>
   </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">advanced</a>
     <ul class="dropdown-menu">
@@ -158,7 +159,7 @@
 </li>
     </ul>
   </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">customise</a>
     <ul class="dropdown-menu">
@@ -180,20 +181,20 @@
 </li>
     </ul>
   </li>
-                            
+                                    
 <li >
     <a href="../cookbook/">(quick! how do I...) the cookbook</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../emergencies/">emergency!!</a>
 </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">ssh</a>
     <ul class="dropdown-menu">
@@ -211,36 +212,36 @@
 </li>
     </ul>
   </li>
-                            
+                                    
 <li >
     <a href="../regex/">regular expressions</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../odds-and-ends/">miscellaneous features</a>
 </li>
-                            
+                                    
 <li >
     <a href="../namespaces/">using git namespaces</a>
 </li>
-                            
+                                    
 <li >
     <a href="../locking/">locking binary files</a>
 </li>
-                            
+                                    
 <li >
     <a href="../testing/">testing gitolite</a>
 </li>
-                            
+                                    
 <li >
     <a href="../package/">packaging gitolite</a>
 </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">more about gitolite</a>
     <ul class="dropdown-menu">
@@ -262,7 +263,7 @@
 </li>
     </ul>
   </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">contrib</a>
     <ul class="dropdown-menu">
@@ -288,34 +289,34 @@
 </li>
     </ul>
   </li>
-                            
+                                    
 <li >
     <a href="../no-way/">no way!</a>
 </li>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
-                </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                        <i class="fa fa-search"></i> Search
-                    </a>
-                </li>
-                    <li >
-                        <a rel="next" href="../quick_install/">
-                            <i class="fa fa-arrow-left"></i> Previous
-                        </a>
-                    </li>
-                    <li >
-                        <a rel="prev" href="../fool_proof_setup/">
-                            Next <i class="fa fa-arrow-right"></i>
-                        </a>
-                    </li>
-            </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../quick_install/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../fool_proof_setup/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
@@ -344,27 +345,27 @@
 <p class="admonition-title">IMPORTANT</p>
 <p>Almost nothing in gitolite requires <code>root</code> (with some obvious exceptions).
 Unless the documentation says "do this from <code>root</code>", assume it is to be
-done from the <a href="../concepts/#the-hosting-user">hosting user</a> account.</p>
+done from the <a href="concepts/#the-hosting-user">hosting user</a> account.</p>
 </div>
 <hr />
 <div class="admonition danger">
 <p>This page is about an ssh mode installation.  It should work for most
 people, but if you are an absolute newbie to Unix etc., you may want to
-click <a href="../fool_proof_setup">here</a> for a very detailed, step-by-step,
+click <a href="fool_proof_setup">here</a> for a very detailed, step-by-step,
 hopefully fool-proof set of instructions.</p>
-<p>If ssh is not your thing, there's a different page for <a href="../http">http mode</a>
+<p>If ssh is not your thing, there's a different page for <a href="http">http mode</a>
 installation.</p>
 </div>
 <h1 id="before-you-start-pre-requisites">before you start... (pre-requisites)<a class="headerlink" href="#before-you-start-pre-requisites" title="Permanent link"></a></h1>
 <h2 id="your-skills">your skills<a class="headerlink" href="#your-skills" title="Permanent link"></a></h2>
 <ul>
 <li>
-<p>Please DO read the <a href="../concepts">concepts and terminology</a> page before doing
+<p>Please DO read the <a href="concepts">concepts and terminology</a> page before doing
     anything here.</p>
 </li>
 <li>
 <p>If you're installing gitolite, you're a "system admin", like it or not.
-    Since most people use the ssh mode, <strong><a class="wikilink" href="../ssh/">ssh</a></strong> is therefore a necessary
+    Since most people use the ssh mode, <strong><a class="wikilink" href="/ssh/">ssh</a></strong> is therefore a necessary
     skill.  Please take the time to learn at least enough to get passwordless
     access working.</p>
 </li>
@@ -383,7 +384,7 @@ branches and tags)</em>.</p>
 <p>Some familiarity with Unix and shells is probably required.</p>
 </li>
 <li>
-<p><a href="../regex">Regular expressions</a> are a big part of gitolite in many places but
+<p><a href="regex">Regular expressions</a> are a big part of gitolite in many places but
     familiarity is not necessary to do <em>basic</em> access control.</p>
 </li>
 </ul>
@@ -394,7 +395,7 @@ branches and tags)</em>.</p>
 <li>Perl 5.8.8 or later (see <a href="https://lwn.net/Articles/348084/">https://lwn.net/Articles/348084/</a> if this does
     not seem to be enough).</li>
 <li>
-<p>Openssh (almost any version).  Optional if you're using <a href="../http">smart http</a>.</p>
+<p>Openssh (almost any version).  Optional if you're using <a href="http">smart http</a>.</p>
 <ul>
 <li><strong>IMPORTANT</strong>: although a default openssh config will not do this (AFAIK),
     <strong>do not</strong> allow the user to set environment variables if you care about
@@ -418,14 +419,14 @@ branches and tags)</em>.</p>
 <ul>
 <li>
 <p>If you're bringing existing repos into gitolite, please see
-    <a href="../basic-admin/#appendix-1-bringing-existing-repos-into-gitolite">this</a> first.</p>
+    <a href="basic-admin/#appendix-1-bringing-existing-repos-into-gitolite">this</a> first.</p>
 </li>
 <li>
 <p>Gitolite expects all the directories and files it manages/uses to be owned
-    by the <a href="../concepts/#the-hosting-user">hosting user</a> and not have strange permissions and ownerships.</p>
+    by the <a href="concepts/#the-hosting-user">hosting user</a> and not have strange permissions and ownerships.</p>
 </li>
 <li>
-<p>Gitolite does NOT like it if you fiddle with <a href="../files">files and directories it cares about</a> in any way except as directed in the documentation.</p>
+<p>Gitolite does NOT like it if you fiddle with <a href="files">files and directories it cares about</a> in any way except as directed in the documentation.</p>
 </li>
 <li>
 <p>Gitolite depends on several system-installed packages: openssh, git, perl,
@@ -440,7 +441,7 @@ branches and tags)</em>.</p>
 take it for a trial run, in ssh mode, and play with all of its features
 (except mirroring).  This is very safe, and does not affect anything on your
 system permanently.</p>
-<p><font color="red"><strong>WARNING: this will clobber <a href="../testing/#appendix-1-the-clobber-list-clobber">these files and
+<p><font color="red"><strong>WARNING: this will clobber <a href="testing/#appendix-1-the-clobber-list-clobber">these files and
 directories</a> in your <code>$HOME</code>.  Ideally, you should use a throwaway
 userid</strong>.</font></p>
 <p>Just create a <strong>throw-away userid</strong>, log in to it, then run these commands:</p>
@@ -454,7 +455,7 @@ pay attention to the "data loss" warning, and then complain that it was not
 prominent enough.  Forcing them to read a much smaller page appears to focus
 their attention better!</p>
 <p>If it doesn't work, re-read this page to see if you may have missed something
-that gitolite requires, or ask for <a href="../index.html#contactsupport">support</a>.</p>
+that gitolite requires, or ask for <a href="index.html#contactsupport">support</a>.</p>
 <p>If it works, you get a gitolite installation with 7 gitolite users ("admin",
 and "u1" through "u6").</p>
 <p>Don't forget that the client and the server are all on the same user on the
@@ -558,8 +559,8 @@ the admin's workstation) ready.  If the main gitolite admin's username is
 <p>If that completes without any warnings, you are done.  If it had a warning,
 you probably supplied a key which already has shell access to the server.
 That won't work; you'll have to generate and use a different key pair for
-gitolite access and use <a href="../sts/#appendix-4-ssh-host-aliases">host aliases</a> to distinguish between the two.
-While you're there, read both the <a class="wikilink" href="../ssh/">ssh</a> pages.  Twice.</p>
+gitolite access and use <a href="sts/#appendix-4-ssh-host-aliases">host aliases</a> to distinguish between the two.
+While you're there, read both the <a class="wikilink" href="/ssh/">ssh</a> pages.  Twice.</p>
 <h1 id="upgrades">upgrades<a class="headerlink" href="#upgrades" title="Permanent link"></a></h1>
 <ul>
 <li>Update your clone of the gitolite source.</li>
@@ -568,7 +569,7 @@ While you're there, read both the <a class="wikilink" href="../ssh/">ssh</a> pag
 <li>Run <code>gitolite setup</code>.</li>
 </ul>
 <p>After you upgrade gitolite, you may also want to upgrade your rc file
-(<code>~/.gitolite.rc</code>).  See the <a href="../rc">rc file</a> documentation for that.</p>
+(<code>~/.gitolite.rc</code>).  See the <a href="rc">rc file</a> documentation for that.</p>
 <h1 id="moving-servers">moving servers<a class="headerlink" href="#moving-servers" title="Permanent link"></a></h1>
 <!-- XXX TODO: maybe a nice picture? -->
 
@@ -587,10 +588,10 @@ servers is this:</p>
     for the old server.</p>
 </li>
 <li>
-<p>Copy the <a class="wikilink" href="../rc/">rc</a> file from the old server, overwriting this one.</p>
+<p>Copy the <a class="wikilink" href="/rc/">rc</a> file from the old server, overwriting this one.</p>
 </li>
 <li>
-<p><a href="../odds-and-ends/#disabling-pushes-to-take-backups">Disable</a> the old server so people won't push to it.</p>
+<p><a href="odds-and-ends/#disabling-pushes-to-take-backups">Disable</a> the old server so people won't push to it.</p>
 </li>
 <li>
 <p>Copy all the repos over from the old server.  Make sure the files end up
@@ -611,12 +612,14 @@ useful, but because the next step will then fail!)</p>
 
         <footer class="col-md-12">
             <hr>
-            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script>var base_url = '..';</script>
-        <script src="../js/base.js"></script>
-        <script src="../search/require.js"></script>
-        <script src="../search/search.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
     <div class="modal-dialog">
@@ -632,7 +635,7 @@ useful, but because the next step will then fail!)</p>
                 </p>
                 <form role="form">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
                 <div id="mkdocs-search-results"></div>
@@ -658,19 +661,19 @@ useful, but because the next step will then fail!)</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><kbd>?</kbd></td>
+                    <td class="help shortcut"><kbd>?</kbd></td>
                     <td>Open this help</td>
                   </tr>
                   <tr>
-                    <td><kbd>&larr;</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td><kbd>&rarr;</kbd></td>
+                    <td class="next shortcut"><kbd>n</kbd></td>
                     <td>Next page</td>
                   </tr>
                   <tr>
-                    <td><kbd>s</kbd></td>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
                     <td>Search</td>
                   </tr>
                 </tbody>
@@ -681,7 +684,6 @@ useful, but because the next step will then fail!)</p>
         </div>
     </div>
 </div>
-
 
     </body>
 </html>

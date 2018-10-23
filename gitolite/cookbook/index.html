@@ -10,87 +10,88 @@
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>(quick! how do I...) the cookbook - Gitolite</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="../css/highlight.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
         <link href="../css/gitolite.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <script src="../js/jquery-1.10.2.min.js"></script>
-        <script src="../js/bootstrap-3.0.3.min.js"></script>
-        <script src="../js/highlight.pack.js"></script> 
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
+            <div class="container">
 
-        <!-- Collapsed navigation -->
-        <div class="navbar-header">
-            <!-- Expander button -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="..">Gitolite</a>
-        </div>
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">Gitolite</a>
+                </div>
 
-        <!-- Expanded navigation -->
-        <div class="navbar-collapse collapse">
-                <!-- Main navigation -->
-                <ul class="nav navbar-nav">
-                    <li >
-                        <a href="..">home</a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="..">home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../overview/">overview</a>
 </li>
-                            
+                                    
 <li >
     <a href="../concepts/">concepts, conventions, terminology</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../quick_install/">(unix/ssh experts) quick install and setup</a>
 </li>
-                            
+                                    
 <li >
     <a href="../install/">normal ssh mode install and setup</a>
 </li>
-                            
+                                    
 <li >
     <a href="../fool_proof_setup/">(if all else fails) fool-proof, step-by-step, install and setup</a>
 </li>
-                            
+                                    
 <li >
     <a href="../http/">HTTP mode install</a>
 </li>
-                            
+                                    
 <li >
     <a href="../migr/">migrating from v2</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
   <li class="dropdown-submenu">
     <a href="#">basic</a>
     <ul class="dropdown-menu">
@@ -116,7 +117,7 @@
 </li>
     </ul>
   </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">advanced</a>
     <ul class="dropdown-menu">
@@ -158,7 +159,7 @@
 </li>
     </ul>
   </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">customise</a>
     <ul class="dropdown-menu">
@@ -180,20 +181,20 @@
 </li>
     </ul>
   </li>
-                            
+                                    
 <li class="active">
     <a href="./">(quick! how do I...) the cookbook</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../emergencies/">emergency!!</a>
 </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">ssh</a>
     <ul class="dropdown-menu">
@@ -211,36 +212,36 @@
 </li>
     </ul>
   </li>
-                            
+                                    
 <li >
     <a href="../regex/">regular expressions</a>
 </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../odds-and-ends/">miscellaneous features</a>
 </li>
-                            
+                                    
 <li >
     <a href="../namespaces/">using git namespaces</a>
 </li>
-                            
+                                    
 <li >
     <a href="../locking/">locking binary files</a>
 </li>
-                            
+                                    
 <li >
     <a href="../testing/">testing gitolite</a>
 </li>
-                            
+                                    
 <li >
     <a href="../package/">packaging gitolite</a>
 </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">more about gitolite</a>
     <ul class="dropdown-menu">
@@ -262,7 +263,7 @@
 </li>
     </ul>
   </li>
-                            
+                                    
   <li class="dropdown-submenu">
     <a href="#">contrib</a>
     <ul class="dropdown-menu">
@@ -288,34 +289,34 @@
 </li>
     </ul>
   </li>
-                            
+                                    
 <li >
     <a href="../no-way/">no way!</a>
 </li>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
-                </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                        <i class="fa fa-search"></i> Search
-                    </a>
-                </li>
-                    <li >
-                        <a rel="next" href="../list-non-core/">
-                            <i class="fa fa-arrow-left"></i> Previous
-                        </a>
-                    </li>
-                    <li >
-                        <a rel="prev" href="../emergencies/">
-                            Next <i class="fa fa-arrow-right"></i>
-                        </a>
-                    </li>
-            </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../list-non-core/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../emergencies/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
@@ -385,7 +386,7 @@ Other languages should probably use the shell mode.  (The shell mode has a
 very convenient "batch" mode if you need to check many repos at once).</p>
 <p><strong>Perl interface</strong>: A good intro to this, including a link to code, using
 gitweb as an example can be found by looking for 'repo-specific authorisation
-in gitweb' in the page on <a href="../gitweb-daemon">allowing access to gitweb and
+in gitweb' in the page on <a href="gitweb-daemon">allowing access to gitweb and
 git-daemon</a>. Some notes:</p>
 <ul>
 <li>be sure to read the comments in the code to learn exactly how to adapt it
@@ -412,7 +413,7 @@ just 'master' won't do.</span></p>
 <h2 id="allowing-access-by-other-programs">allowing access by other programs<a class="headerlink" href="#allowing-access-by-other-programs" title="Permanent link"></a></h2>
 <p>Giving external tools (like apache) access to gitolite repositories involves
 making sure that the unix owner/group and permissions settings allow this.
-This is all described in the UMASK section in the page on the <a href="../rc">rc file</a>,
+This is all described in the UMASK section in the page on the <a href="rc">rc file</a>,
 because that's the only setting that gitolite controls; every thing else is
 pure Unix.</p>
 <h1 id="commands">commands<a class="headerlink" href="#commands" title="Permanent link"></a></h1>
@@ -437,7 +438,7 @@ available to remote users (as <code>ssh git@host foo</code>), add the line:</p>
 </code></pre>
 <p>(including the comma at the end) to the ENABLE list in the rc file.</p>
 <h1 id="hooks">hooks<a class="headerlink" href="#hooks" title="Permanent link"></a></h1>
-<p>Note: the main documentation for this feature starts <a href="../non-core/#hooks-and-gitolite">here</a>.</p>
+<p>Note: the main documentation for this feature starts <a href="non-core/#hooks-and-gitolite">here</a>.</p>
 <h2 id="adding-your-own-update-hooks">adding your own update hooks<a class="headerlink" href="#adding-your-own-update-hooks" title="Permanent link"></a></h2>
 <p>You have some update hooks (for example crlf checking) that you want to
 include in gitolite.  Assuming the hook itself is tested and works as a normal
@@ -504,7 +505,7 @@ chmod +x local/hooks/common/post-receive
 <p class="admonition-title">Important security note:</p>
 <p><strong>If you enable this, anyone who can push changes to the admin repo will
 effectively be able to run any arbitrary command on the server.</strong>  See
-<a href="../rc/#security-note-gitolite-admin-and-shell-access">gitolite admin and shell access</a> for more background.</p>
+<a href="rc/#security-note-gitolite-admin-and-shell-access">gitolite admin and shell access</a> for more background.</p>
 </div>
 <p>If you want to maintain these update hooks (VREFs) or non-update hooks
 (post-update, pre-receive, post-receive) in the gitolite-admin repo, instead
@@ -546,7 +547,7 @@ to apply them only to certain repos:</p>
 <p>uncomment the 'repo-specific-hooks' line in the rc file or add it to the
     ENABLE list if it doesn't exist.</p>
 <p>If your rc file does not have an ENABLE list, you need to add this to the
-POST_COMPILE and the POST_CREATE lists.  Click <a href="../triggers/#adding-your-own-scripts-to-a-trigger">here</a> for more on
+POST_COMPILE and the POST_CREATE lists.  Click <a href="triggers/#adding-your-own-scripts-to-a-trigger">here</a> for more on
 all this.</p>
 </li>
 <li>
@@ -576,7 +577,7 @@ repo bar @baz
 </ol>
 <h1 id="triggers">triggers<a class="headerlink" href="#triggers" title="Permanent link"></a></h1>
 <h2 id="adding-your-own-triggers">adding your own triggers<a class="headerlink" href="#adding-your-own-triggers" title="Permanent link"></a></h2>
-<p>First, write your trigger code, using the documentation <a href="../triggers">here</a>.
+<p>First, write your trigger code, using the documentation <a href="triggers">here</a>.
 Note especially the sections "common arguments" and "trigger-specific
 arguments".  Look in the shipped triggers for ideas.</p>
 <p>Let's say your trigger is called <code>foo</code>, and it will be a <code>PRE_GIT</code> trigger.</p>
@@ -619,7 +620,7 @@ something, and exit with a non-zero exit code for failure.</p>
 defines for an update hook, plus usually at least one or two more.  It also
 returns a lot more meaningful results via STDOUT.</p>
 <p>Here are some examples.  I also advise you to keep a browser tab open to the
-doc on <a href="../vref/#what-arguments-are-passed-to-the-vref-maker">VREF arguments</a> as you look at these.</p>
+doc on <a href="vref/#what-arguments-are-passed-to-the-vref-maker">VREF arguments</a> as you look at these.</p>
 <div class="admonition danger">
 <p class="admonition-title">Important:</p>
 <p><strong>VREFs only come into play for push operations.  When we say "access" in
@@ -714,8 +715,8 @@ repo, while still leaving it to be created by a user in the normal way.</p>
 </pre>
 
 <p>The repo will be created as a <strong>normal</strong> (not wild) repo as soon as you push,
-which means you can't run the <a href="../user/#setget-additional-permissions-for-repos-you-created">perms</a> command on it to add people to the
-READERS and WRITERS <a href="../wild/#roles">roles</a>, or do other things that wild repos allow.</p>
+which means you can't run the <a href="user/#setget-additional-permissions-for-repos-you-created">perms</a> command on it to add people to the
+READERS and WRITERS <a href="wild/#roles">roles</a>, or do other things that wild repos allow.</p>
 <p>The mental nudge you need to deal with this is to think what you would do if
 you had to write the same rule for more than one repo, say, any repo starting
 with "foo/special-" followed by a number.  You'd use a pattern.  And a pattern
@@ -732,21 +733,23 @@ prevents an ordinary repo from being created.</p>
 perfectly valid and supported.</p>
 <p>Note that you do NOT need a "C" rule in there, since the pattern is a subset
 of the previous one (<code>foo/..*</code>), everything there applies to this repo also.
-If you're not sure why that is, you may need to read up on <a href="../conf/#rule-accumulation">rule
+If you're not sure why that is, you may need to read up on <a href="conf/#rule-accumulation">rule
 accumulation</a>.</p>
 <h1 id="moving-stuff-around">moving stuff around<a class="headerlink" href="#moving-stuff-around" title="Permanent link"></a></h1>
 <h2 id="moving-a-gitolite-install-from-one-machine-to-another">moving a gitolite install from one machine to another<a class="headerlink" href="#moving-a-gitolite-install-from-one-machine-to-another" title="Permanent link"></a></h2>
-<p>See <a href="../install/#moving-servers">moving servers</a>.</p></div>
+<p>See <a href="install/#moving-servers">moving servers</a>.</p></div>
         </div>
 
         <footer class="col-md-12">
             <hr>
-            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script>var base_url = '..';</script>
-        <script src="../js/base.js"></script>
-        <script src="../search/require.js"></script>
-        <script src="../search/search.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
     <div class="modal-dialog">
@@ -762,7 +765,7 @@ accumulation</a>.</p>
                 </p>
                 <form role="form">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
                 <div id="mkdocs-search-results"></div>
@@ -788,19 +791,19 @@ accumulation</a>.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><kbd>?</kbd></td>
+                    <td class="help shortcut"><kbd>?</kbd></td>
                     <td>Open this help</td>
                   </tr>
                   <tr>
-                    <td><kbd>&larr;</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td><kbd>&rarr;</kbd></td>
+                    <td class="next shortcut"><kbd>n</kbd></td>
                     <td>Next page</td>
                   </tr>
                   <tr>
-                    <td><kbd>s</kbd></td>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
                     <td>Search</td>
                   </tr>
                 </tbody>
@@ -811,7 +814,6 @@ accumulation</a>.</p>
         </div>
     </div>
 </div>
-
 
     </body>
 </html>
