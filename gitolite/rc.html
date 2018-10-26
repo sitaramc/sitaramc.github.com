@@ -1,9 +1,576 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>redirecting...</title>
-        <meta http-equiv="refresh" content="2;URL='http://gitolite.com/gitolite/rc/index.html'" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>the "rc" file - Gitolite</title>
+        <link href="css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="css/gitolite.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
     </head>
+
     <body>
-        <p>This page has moved; redirecting...</p>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Gitolite</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="index.html">home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="overview.html">overview</a>
+</li>
+                                    
+<li >
+    <a href="concepts.html">concepts, conventions, terminology</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="quick_install.html">(unix/ssh experts) quick install and setup</a>
+</li>
+                                    
+<li >
+    <a href="install.html">normal ssh mode install and setup</a>
+</li>
+                                    
+<li >
+    <a href="fool_proof_setup.html">(if all else fails) fool-proof, step-by-step, install and setup</a>
+</li>
+                                    
+<li >
+    <a href="http.html">HTTP mode install</a>
+</li>
+                                    
+<li >
+    <a href="migr.html">migrating from v2</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">basic</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="basic-admin.html">basic administration</a>
+</li>
+            
+<li >
+    <a href="conf.html">the "conf" file (part 1)</a>
+</li>
+            
+<li >
+    <a href="conf-2.html">the "conf" file (part 2)</a>
+</li>
+            
+<li class="active">
+    <a href="rc.html">the "rc" file</a>
+</li>
+            
+<li >
+    <a href="user.html">your users' view</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">advanced</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="git-config.html">setting git-config values</a>
+</li>
+            
+<li >
+    <a href="options.html">gitolite options</a>
+</li>
+            
+<li >
+    <a href="wild.html">ad hoc user-created ("wild") repos</a>
+</li>
+            
+<li >
+    <a href="templates.html">using templates</a>
+</li>
+            
+<li >
+    <a href="vref.html">virtual refs (part 1)</a>
+</li>
+            
+<li >
+    <a href="vref-2.html">virtual refs (part 2)</a>
+</li>
+            
+<li >
+    <a href="deleg.html">delegation of admin duties</a>
+</li>
+            
+<li >
+    <a href="gitweb-daemon.html">gitweb and git-daemon</a>
+</li>
+            
+<li >
+    <a href="mirroring.html">mirroring</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">customise</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="non-core.html">core and "non-core" gitolite</a>
+</li>
+            
+<li >
+    <a href="dev-notes.html">writing your own non-core code</a>
+</li>
+            
+<li >
+    <a href="triggers.html">gitolite triggers</a>
+</li>
+            
+<li >
+    <a href="list-non-core.html">list of non-core programs shipped with gitolite</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="cookbook.html">(quick! how do I...) the cookbook</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="emergencies.html">emergency!!</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">ssh</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="ssh.html">ssh</a>
+</li>
+            
+<li >
+    <a href="glssh.html">how gitolite uses ssh</a>
+</li>
+            
+<li >
+    <a href="sts.html">ssh troubleshooting</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="regex.html">regular expressions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="odds-and-ends.html">miscellaneous features</a>
+</li>
+                                    
+<li >
+    <a href="namespaces.html">using git namespaces</a>
+</li>
+                                    
+<li >
+    <a href="locking.html">locking binary files</a>
+</li>
+                                    
+<li >
+    <a href="testing.html">testing gitolite</a>
+</li>
+                                    
+<li >
+    <a href="package.html">packaging gitolite</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">more about gitolite</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="files.html">gitolite files & directories</a>
+</li>
+            
+<li >
+    <a href="rc-33.html">the 3.3 format rc file</a>
+</li>
+            
+<li >
+    <a href="perf.html">performance</a>
+</li>
+            
+<li >
+    <a href="internals.html">internals</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">contrib</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="contrib/ssh-and-http.html">Using both ssh and http</a>
+</li>
+            
+<li >
+    <a href="contrib/putty.html">Putty and Msysgit</a>
+</li>
+            
+<li >
+    <a href="contrib/sskm.html">Self-service key management</a>
+</li>
+            
+<li >
+    <a href="contrib/ukm.html">User key management</a>
+</li>
+            
+<li >
+    <a href="contrib/README-emacs.html">Emacs major mode</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="no-way.html">no way!</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="conf-2.html">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="user.html">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#the-rc-file-homegitoliterc">the "rc" file ($HOME/.gitolite.rc)</a></li>
+        <li class="main "><a href="#structure-of-the-rc-file">structure of the rc file</a></li>
+        <li class="main "><a href="#specific-variables">specific variables</a></li>
+        <li class="main "><a href="#security-note-gitolite-admin-and-shell-access">security note: gitolite admin and shell access</a></li>
+        <li class="main "><a href="#appendix-a-upgrading-the-rc-file">appendix A: upgrading the rc file</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="the-rc-file-homegitoliterc">the "rc" file (<code>$HOME/.gitolite.rc</code>)<a class="headerlink" href="#the-rc-file-homegitoliterc" title="Permanent link"></a></h1>
+<hr />
+<p><strong>IMPORTANT</strong>: if you have a v3.0-v3.3 rc file it is documented <a href="rc-33">here</a>,
+and it will still work.  Please see appendix A below for details.</p>
+<hr />
+<p>The rc file is designed to be the only thing unique to your site for most
+setups.</p>
+<p>The rc file is well commented.  Please look at the <code>~/.gitolite.rc</code> file that
+gets installed when you setup gitolite.  <strong>You can always get a default copy
+for your current version by running <code>gitolite print-default-rc</code>.</strong>  (Please
+see appendix A for upgrade instructions.)</p>
+<h1 id="structure-of-the-rc-file">structure of the rc file<a class="headerlink" href="#structure-of-the-rc-file" title="Permanent link"></a></h1>
+<p>The rc file is perl code, but you do NOT need to know perl to edit it.  Just
+mind the commas, use single quotes unless you know what you're doing, and make
+sure the brackets and braces stay matched up!</p>
+<p>As you can see there are 3 types of variables in it:</p>
+<ul>
+<li>A lot of simple variables (like <code>UMASK</code>, <code>GIT_CONFIG_KEYS</code>, etc.).</li>
+<li>A hash or two (like <code>ROLES</code>).</li>
+<li>And one large list of features to be enabled (<code>ENABLE</code>).</li>
+</ul>
+<p>This page documents only some of them; for most of them it's best to look in
+the actual rc file or in each of their individual documentation files around;
+start with <a href="non-core">"non-core" gitolite</a>.  If a setting is used by a command
+then running that command with '-h' may give you additional information.</p>
+<h1 id="specific-variables">specific variables<a class="headerlink" href="#specific-variables" title="Permanent link"></a></h1>
+<ul>
+<li>
+<p><code>$UMASK</code>, octal, default <code>0077</code></p>
+<p>The default UMASK that gitolite uses gives <code>rwx------</code> permissions to all
+the repos and their contents.  People who want to run gitweb (or cgit,
+redmine, etc) realise that this will not do.</p>
+<p>The correct way to deal with this is to give this variable a value like
+<code>0027</code> (note the syntax: the leading 0 is required), and then make the
+user running the webserver (apache, www-data, whatever) a member of the
+'git' group.</p>
+<p>If you've already installed gitolite then existing files will have to be
+fixed up manually (for a umask or 0027, that would be <code>chmod -R g+rX</code>).
+This is because umask only affects permissions on newly created files, not
+existing ones.</p>
+</li>
+<li>
+<p><code>$GIT_CONFIG_KEYS</code>, string, default empty</p>
+<p><span class="box-r">See the <a href="rc#security-note-gitolite-admin-and-shell-access">security note</a> at the end of this
+page for why we do this.</span></p>
+<p>This setting allows the repo admin to define acceptable gitconfig keys.</p>
+<p>Gitolite allows you to set git config values using the "config" keyword;
+see <a href="git-config">here</a> for details and syntax.</p>
+<p>You have 3 choices.  By default <code>$GIT_CONFIG_KEYS</code> is left empty, which
+completely disables this feature (meaning you cannot set git configs via
+the repo config).</p>
+<p>The second choice is to give it a space separated list of settings you
+consider safe.  (These are actually treated as a set of <a href="regex">regular
+expressions</a>, and any one of them must match).</p>
+<p>For example:</p>
+<pre><code>$GIT_CONFIG_KEYS = 'core\.logAllRefUpdates core\..*compression';
+</code></pre>
+<p>Each regex should match the <em>whole</em> key (in other words, there
+is an implicit <code>^</code> at the start of each regex, and a <code>$</code> at the
+end).</p>
+<p>The third choice (which you may have guessed already if you're familiar
+with regular expressions) is to allow anything and everything:
+<code>$GIT_CONFIG_KEYS = '.*';</code></p>
+</li>
+<li>
+<p><code>ROLES</code>, hash, default keys 'READERS' and 'WRITERS'</p>
+<p>This specifies the role names allowed to be used by users running the
+<a href="user#setget-additional-permissions-for-repos-you-created">perms</a> command.  The <a href="wild">wild</a> repos doc has more info on roles.</p>
+</li>
+<li>
+<p><code>OWNER_ROLENAME</code>, string, default undef</p>
+<p>(requires v3.5 or later)</p>
+<p>By default, permissions on a wild repo can only be set by the <em>creator</em> of
+the repo (using the <a href="user#setget-additional-permissions-for-repos-you-created">perms</a> command).  But some sites want to allow
+other people to do this as well.</p>
+<p>To enable this behaviour, the server admin must first set this variable to
+some string, say 'OWNERS'.  (He must also add 'OWNERS' to the ROLES hash
+described in the previous bullet).</p>
+<p>The creator of the repo can then add other users to the OWNERS role using
+the <a href="user#setget-additional-permissions-for-repos-you-created">perms</a> command.</p>
+<p>The <a href="user#setget-additional-permissions-for-repos-you-created">perms</a> command, the new "owns" command, and possibly other commands
+in future, will then give these users the same privileges that they give
+to the creator of the repo.</p>
+<p>(Also see the full documentation on <a href="wild#roles">roles</a>).</p>
+</li>
+<li>
+<p><code>LOCAL_CODE</code>, string</p>
+<p>This is described in more detail <a href="non-core#for-your-non-core-programs">here</a>.  Please be aware
+<strong>this must be a FULL path</strong>, not a relative path.</p>
+</li>
+</ul>
+<h1 id="security-note-gitolite-admin-and-shell-access">security note: gitolite admin and shell access<a class="headerlink" href="#security-note-gitolite-admin-and-shell-access" title="Permanent link"></a></h1>
+<p>People sometimes ask why this file is also not revision controlled.  Here's
+why.</p>
+<p>Gitolite maintains a clear distinction between</p>
+<ul>
+<li>people who can push to the gitolite-admin repo, and</li>
+<li>people who can get a shell or run arbitrary commands on the server.</li>
+</ul>
+<p>This may not matter to many (small) sites, but in large installations, the
+former is often a much larger set of people that you really don't want to give
+shell access to.</p>
+<p>Therefore, gitolite tries very hard to make sure that people in the first set
+are not allowed to do anything that gets them into the second set.</p>
+<div class="admonition note">
+<p>If you <em>must</em> revision control it, you can.  Just add it to your admin
+repo, push the change, then replace <code>~/.gitolite.rc</code> with a symlink to
+<code>~/.gitolite/.gitolite.rc</code>.</span></p>
+</div>
+<h1 id="appendix-a-upgrading-the-rc-file">appendix A: upgrading the rc file<a class="headerlink" href="#appendix-a-upgrading-the-rc-file" title="Permanent link"></a></h1>
+<p>First, note that upgrading the rc file is always <em>optional</em>.  However, it may
+help if you want to use any of the new features available in later gitolite
+releases, in the sense that the lines you need to add may already be present
+(commented out) in the rc file, so you just need to uncomment them instead of
+typing them in yourself.</p>
+<p>If you have a v3.0-v3.3 rc file it is documented <a href="rc-33">here</a>, and it will
+still work.  In fact internally the v3.4 rc file data gets converted to the
+v3.3 format.  There's a simple program to help you upgrade a v3.3 (or prior)
+rc file (in <span class="gray">v3.6.1+</span>, see contrib/utils/rc-format-v3.4), but it has
+probably not seen too much testing; please tread carefully and report any
+problems you find.</p>
+<p>Upgrading from any v3.4+ rc file to any later gitolite is fairly easy, though
+still manual.  One useful aid is that, as of v3.6.4, you can run <code>gitolite query-rc -d</code>
+to dump the entire rc structure to STDOUT.  <strong>This only requires
+that gitolite be v3.6.4+; your rc file can still be the old one.</strong>  You can
+use this to confirm you did not miss something during the manual rc upgrade.</p>
+<ul>
+<li>
+<p>dump the current rc by running <code>gitolite query-rc -d &gt; old.dump</code> (assuming
+    you upgraded to v3.6.4 or higher)</p>
+</li>
+<li>
+<p>save your old rc file: <code>mv ~/.gitolite.rc ~/old.gitolite.rc</code></p>
+</li>
+<li>
+<p>get a "default" rc for your current gitolite by running</p>
+<pre><code>gitolite print-default-rc &gt; ~/.gitolite.rc
+</code></pre>
+</li>
+<li>
+<p>use your favourite diff-ing editor on the old and the new files and figure
+    out what to carry over from the old rc file to the new one.</p>
+<pre><code>vimdiff ~/old.gitolite.rc ~/.gitolite.rc
+# or maybe kdiff3 or whatever
+</code></pre>
+<p>This is the tricky part of course!  Watch out for configs that got <em>moved</em>
+around, or in some cases removed completely, not just new config items.</p>
+</li>
+<li>
+<p>dump the new rc by running <code>gitolite query-rc -d &gt; new.dump</code></p>
+</li>
+<li>
+<p>compare the 2 rc dumps to make sure you've got everything covered.</p>
+</li>
+</ul>
+<!--
+
+# appendix B: adding stuff to ENABLE
+
+adapt https://groups.google.com/forum#!searchin/gitolite/NON_CORE/gitolite/2kZaqLohSz0/LsIo_W8B2I8J
+
+-   document 'before' option (default: goes to the end)
+-   document arguments supplied via ENABLE list
+
+--></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
     </body>
 </html>

@@ -1,9 +1,533 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>redirecting...</title>
-        <meta http-equiv="refresh" content="2;URL='http://gitolite.com/gitolite/concepts/index.html'" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>concepts, conventions, terminology - Gitolite</title>
+        <link href="css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="css/gitolite.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
     </head>
+
     <body>
-        <p>This page has moved; redirecting...</p>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Gitolite</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="index.html">home</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="overview.html">overview</a>
+</li>
+                                    
+<li class="active">
+    <a href="concepts.html">concepts, conventions, terminology</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="quick_install.html">(unix/ssh experts) quick install and setup</a>
+</li>
+                                    
+<li >
+    <a href="install.html">normal ssh mode install and setup</a>
+</li>
+                                    
+<li >
+    <a href="fool_proof_setup.html">(if all else fails) fool-proof, step-by-step, install and setup</a>
+</li>
+                                    
+<li >
+    <a href="http.html">HTTP mode install</a>
+</li>
+                                    
+<li >
+    <a href="migr.html">migrating from v2</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">basic</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="basic-admin.html">basic administration</a>
+</li>
+            
+<li >
+    <a href="conf.html">the "conf" file (part 1)</a>
+</li>
+            
+<li >
+    <a href="conf-2.html">the "conf" file (part 2)</a>
+</li>
+            
+<li >
+    <a href="rc.html">the "rc" file</a>
+</li>
+            
+<li >
+    <a href="user.html">your users' view</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">advanced</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="git-config.html">setting git-config values</a>
+</li>
+            
+<li >
+    <a href="options.html">gitolite options</a>
+</li>
+            
+<li >
+    <a href="wild.html">ad hoc user-created ("wild") repos</a>
+</li>
+            
+<li >
+    <a href="templates.html">using templates</a>
+</li>
+            
+<li >
+    <a href="vref.html">virtual refs (part 1)</a>
+</li>
+            
+<li >
+    <a href="vref-2.html">virtual refs (part 2)</a>
+</li>
+            
+<li >
+    <a href="deleg.html">delegation of admin duties</a>
+</li>
+            
+<li >
+    <a href="gitweb-daemon.html">gitweb and git-daemon</a>
+</li>
+            
+<li >
+    <a href="mirroring.html">mirroring</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">customise</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="non-core.html">core and "non-core" gitolite</a>
+</li>
+            
+<li >
+    <a href="dev-notes.html">writing your own non-core code</a>
+</li>
+            
+<li >
+    <a href="triggers.html">gitolite triggers</a>
+</li>
+            
+<li >
+    <a href="list-non-core.html">list of non-core programs shipped with gitolite</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="cookbook.html">(quick! how do I...) the cookbook</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="emergencies.html">emergency!!</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">ssh</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="ssh.html">ssh</a>
+</li>
+            
+<li >
+    <a href="glssh.html">how gitolite uses ssh</a>
+</li>
+            
+<li >
+    <a href="sts.html">ssh troubleshooting</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="regex.html">regular expressions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="odds-and-ends.html">miscellaneous features</a>
+</li>
+                                    
+<li >
+    <a href="namespaces.html">using git namespaces</a>
+</li>
+                                    
+<li >
+    <a href="locking.html">locking binary files</a>
+</li>
+                                    
+<li >
+    <a href="testing.html">testing gitolite</a>
+</li>
+                                    
+<li >
+    <a href="package.html">packaging gitolite</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">more about gitolite</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="files.html">gitolite files & directories</a>
+</li>
+            
+<li >
+    <a href="rc-33.html">the 3.3 format rc file</a>
+</li>
+            
+<li >
+    <a href="perf.html">performance</a>
+</li>
+            
+<li >
+    <a href="internals.html">internals</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">contrib</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="contrib/ssh-and-http.html">Using both ssh and http</a>
+</li>
+            
+<li >
+    <a href="contrib/putty.html">Putty and Msysgit</a>
+</li>
+            
+<li >
+    <a href="contrib/sskm.html">Self-service key management</a>
+</li>
+            
+<li >
+    <a href="contrib/ukm.html">User key management</a>
+</li>
+            
+<li >
+    <a href="contrib/README-emacs.html">Emacs major mode</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="no-way.html">no way!</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="overview.html">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="quick_install.html">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#concepts-conventions-and-terminology">concepts, conventions, and terminology</a></li>
+        <li class="main "><a href="#authentication-and-authorisation">authentication and authorisation</a></li>
+        <li class="main "><a href="#ssh-mode-and-http-mode">ssh mode and http mode</a></li>
+        <li class="main "><a href="#the-hosting-user">The "hosting user"</a></li>
+        <li class="main "><a href="#the-logical-repo-name">the "logical repo name"</a></li>
+        <li class="main "><a href="#the-special-gitolite-admin-repo">the special gitolite-admin repo</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="concepts-conventions-and-terminology">concepts, conventions, and terminology<a class="headerlink" href="#concepts-conventions-and-terminology" title="Permanent link"></a></h1>
+<hr />
+<p><span class="box-r">(I assume you're at least somewhat familiar with <strong>git</strong>
+itself.  If not, the <a href="install#before-you-start-pre-requisites">"before you start..."</a> page has a list of topics
+that you need to be familiar with, in order to use gitolite.)</span></p>
+<p>This page will help newcomers get used to what we're talking about elsewhere.
+It also explains the special <code>gitolite-admin</code> repo and how it is used to do te
+day-to-day management of a gitolite server.</p>
+<h1 id="authentication-and-authorisation">authentication and authorisation<a class="headerlink" href="#authentication-and-authorisation" title="Permanent link"></a></h1>
+<p><span class="red"><strong>Gitolite does not do authentication.  It only does
+authorisation.</strong></span></p>
+<p>So let's loosely define these words:</p>
+<blockquote>
+<p><strong>Authentication</strong> is the process of verifying that you are who you claim
+  to be.  An authentication system will establish that I am the user
+  "sitaram" on my work system.  The one behind gmail will similarly
+  establish that I am "sitaramc".  And so on...</p>
+<p><strong>Authorisation</strong> is the process of asking what you want to do and
+  deciding if you're allowed to do it or not.</p>
+</blockquote>
+<p>When you install gitolite, your users will authenticate themselves to your
+server's "sshd" (ssh daemon) <strong>or</strong> to your web server.  If authentication
+succeeds, sshd or httpd will pass control to gitolite, which then performs the
+authorisation check -- i.e., figure out whether to allow you to do whatever it
+is you want to whatever repo you decided to touch.</p>
+<h1 id="ssh-mode-and-http-mode">ssh mode and http mode<a class="headerlink" href="#ssh-mode-and-http-mode" title="Permanent link"></a></h1>
+<p>Git allows authenticated remote access using these two mechanisms: ssh and
+http.  Gitolite supports both.</p>
+<p>Ssh mode is much easier to install and setup; most systems already have
+whatever you need, and -- except for creating the "hosting user" -- you don't
+need to do anything as root.  However, your users have to generate an ssh
+keypair for themselves (using "ssh-keygen") if they don't already have a
+keypair, and they have to send you the public key (the file ending in ".pub"),
+which you add to gitolite.</p>
+<p>Http mode requires a bit more work in terms of setting things up.  Once setup,
+however, it may be a little easier for your users.  Authentication is by
+username + password, which, although much less secure than ssh keypairs, is
+conceptually easier for users.</p>
+<h1 id="the-hosting-user">The "hosting user"<a class="headerlink" href="#the-hosting-user" title="Permanent link"></a></h1>
+<p><span class="box-r">If you're wondering how it distinguishes between different
+users when they are all logging into "git", <a href="glssh">this page</a> has answers!</span></p>
+<p>When you install gitolite in ssh mode, you pick one specific user on the Unix
+system to be the "hosting user".  This is the user whose name goes into the
+repo URLs your users will be cloning, for example <code>ssh://git@server/repo</code>, or
+the simpler form <code>git@server:repo</code>.</p>
+<p><em>Usually</em>, this is "git", and that is what we assume in this documentation.
+However, it can actually be any user on the system, and I think both the
+Fedora RPM and the Debian DEB use "gitolite", so adjust instructions and
+examples accordingly.  <strong>Unless otherwise stated, everything that we do "on
+the server" is done in this userid (for ssh mode installations).</strong></p>
+<p>Of course you can have any number of "hosting users", but that's rare.</p>
+<h1 id="the-logical-repo-name">the "logical repo name"<a class="headerlink" href="#the-logical-repo-name" title="Permanent link"></a></h1>
+<p>Gitolite refers to repos using a logical repo name, which is whatever name you
+specified in the gitolite.conf file (described later).  The actual repo will
+be in <code>$HOME/repositories</code>, and will have a ".git" suffix.  So, for example,
+the logical repo name "foo" will be <code>$HOME/repositories/foo.git</code> on disk, and
+"bar/baz" will be <code>$HOME/repositories/bar/baz.git</code>.  The logical repo name is
+what you must use for all interactions with gitolite (within the conf file,
+repo name arguments to gitolite commands or API functions, etc.) unless
+specifically documented otherwise.</p>
+<p>One exception: you're allowed to add the ".git" extension in git commands
+(clone, fetch, push, ls-remote, archive) if you wish, because git itself
+allows it, and we'd like to be as transparent as possible.  The
+<code>$HOME/repositories</code> prefix should never be specified.  If you do specify it,
+and things appear to work, <a href="sts#appendix-5-why-bypassing-gitolite-causes-a-problem">something is wrong!</a>.</p>
+<h1 id="the-special-gitolite-admin-repo">the special gitolite-admin repo<a class="headerlink" href="#the-special-gitolite-admin-repo" title="Permanent link"></a></h1>
+<p>Gitolite manages git repos.  Among them is a repo called "gitolite-admin",
+which is a very special repository that helps you add and remove users and
+repos, as well as define access rules for them. <strong>Most day-to-day management
+of gitolite is done by cloning this repository, making changes to it, and
+pushing the changes back to the server.</strong></p>
+<p>Specifically, it contains a directory called "keydir", in which you place
+files with names like "alice.pub", "bob.pub", etc.  These are the public keys
+of you and your users.  (Of course this applies only to ssh mode).</p>
+<p>It also contains a file called "conf/gitolite.conf", in which you add access
+rules specifying who gets what level of access to each repo.  Here's a simple
+example:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Comment"># these lines were already in the file</span>
+<span class="Statement">repo</span> foo
+    <span class="Statement">RW+</span>     =   alice
+    <span class="Statement">RW</span>      =   bob
+
+<span class="Comment"># these lines were added just now</span>
+<span class="Statement">repo</span> bar
+    <span class="Statement">RW+</span>     =   bob
+    <span class="Statement">R</span>       =   alice
+</pre>
+
+<hr />
+<p>Here's what happens when you commit the changes/additions to these files and
+push them to the server.  Since we've already seen the ssh/sshd part of this
+process (in the <a href="overview.html">overview</a> page), we'll start off from
+"git-receive-pack":</p>
+<p><img alt="" src="ct02.png" /></p>
+<ol>
+<li>
+<p>The <code>gitolite-admin</code> repo has a special <code>post-update</code> hook, installed by
+    gitolite, which is invoked by <code>git-receive-pack</code>.  This is how gitolite gets
+    in on the action.</p>
+</li>
+<li>
+<p>Gitolite looks at the keys in keydir, and updates ssh's authorized keys
+    file using those keys, so ssh knows who the valid users are.  A ton of
+    detail about this is in the <a href="ssh">ssh pages</a>.</p>
+</li>
+<li>
+<p>It then updates some internal files in <code>~/.gitolite</code></p>
+</li>
+<li>
+<p>For new repositories (repos that do not exist in <code>~/repositories</code>, but are
+    mentioned in <code>conf/gitolite.conf</code>), it <strong>creates</strong> the repository.</p>
+</li>
+<li>
+<p>For each repository, it updates a special file inside the repository that
+    contains the rules pertaining to that repository.</p>
+</li>
+</ol>
+<p>And that, boys and girls, is how gitolite does its thing.  That is also why
+you should NEVER touch any of those files yourself, unless you know what
+you're doing!</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
     </body>
 </html>

@@ -1,9 +1,628 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>redirecting...</title>
-        <meta http-equiv="refresh" content="2;URL='http://gitolite.com/gitolite/list-non-core/index.html'" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>list of non-core programs shipped with gitolite - Gitolite</title>
+        <link href="css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="css/gitolite.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
     </head>
+
     <body>
-        <p>This page has moved; redirecting...</p>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Gitolite</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="index.html">home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="overview.html">overview</a>
+</li>
+                                    
+<li >
+    <a href="concepts.html">concepts, conventions, terminology</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="quick_install.html">(unix/ssh experts) quick install and setup</a>
+</li>
+                                    
+<li >
+    <a href="install.html">normal ssh mode install and setup</a>
+</li>
+                                    
+<li >
+    <a href="fool_proof_setup.html">(if all else fails) fool-proof, step-by-step, install and setup</a>
+</li>
+                                    
+<li >
+    <a href="http.html">HTTP mode install</a>
+</li>
+                                    
+<li >
+    <a href="migr.html">migrating from v2</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">basic</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="basic-admin.html">basic administration</a>
+</li>
+            
+<li >
+    <a href="conf.html">the "conf" file (part 1)</a>
+</li>
+            
+<li >
+    <a href="conf-2.html">the "conf" file (part 2)</a>
+</li>
+            
+<li >
+    <a href="rc.html">the "rc" file</a>
+</li>
+            
+<li >
+    <a href="user.html">your users' view</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">advanced</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="git-config.html">setting git-config values</a>
+</li>
+            
+<li >
+    <a href="options.html">gitolite options</a>
+</li>
+            
+<li >
+    <a href="wild.html">ad hoc user-created ("wild") repos</a>
+</li>
+            
+<li >
+    <a href="templates.html">using templates</a>
+</li>
+            
+<li >
+    <a href="vref.html">virtual refs (part 1)</a>
+</li>
+            
+<li >
+    <a href="vref-2.html">virtual refs (part 2)</a>
+</li>
+            
+<li >
+    <a href="deleg.html">delegation of admin duties</a>
+</li>
+            
+<li >
+    <a href="gitweb-daemon.html">gitweb and git-daemon</a>
+</li>
+            
+<li >
+    <a href="mirroring.html">mirroring</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">customise</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="non-core.html">core and "non-core" gitolite</a>
+</li>
+            
+<li >
+    <a href="dev-notes.html">writing your own non-core code</a>
+</li>
+            
+<li >
+    <a href="triggers.html">gitolite triggers</a>
+</li>
+            
+<li class="active">
+    <a href="list-non-core.html">list of non-core programs shipped with gitolite</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="cookbook.html">(quick! how do I...) the cookbook</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="emergencies.html">emergency!!</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">ssh</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="ssh.html">ssh</a>
+</li>
+            
+<li >
+    <a href="glssh.html">how gitolite uses ssh</a>
+</li>
+            
+<li >
+    <a href="sts.html">ssh troubleshooting</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="regex.html">regular expressions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="odds-and-ends.html">miscellaneous features</a>
+</li>
+                                    
+<li >
+    <a href="namespaces.html">using git namespaces</a>
+</li>
+                                    
+<li >
+    <a href="locking.html">locking binary files</a>
+</li>
+                                    
+<li >
+    <a href="testing.html">testing gitolite</a>
+</li>
+                                    
+<li >
+    <a href="package.html">packaging gitolite</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">more about gitolite</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="files.html">gitolite files & directories</a>
+</li>
+            
+<li >
+    <a href="rc-33.html">the 3.3 format rc file</a>
+</li>
+            
+<li >
+    <a href="perf.html">performance</a>
+</li>
+            
+<li >
+    <a href="internals.html">internals</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">contrib</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="contrib/ssh-and-http.html">Using both ssh and http</a>
+</li>
+            
+<li >
+    <a href="contrib/putty.html">Putty and Msysgit</a>
+</li>
+            
+<li >
+    <a href="contrib/sskm.html">Self-service key management</a>
+</li>
+            
+<li >
+    <a href="contrib/ukm.html">User key management</a>
+</li>
+            
+<li >
+    <a href="contrib/README-emacs.html">Emacs major mode</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="no-way.html">no way!</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="triggers.html">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="cookbook.html">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#non-core-features-shipped-with-gitolite">non-core features shipped with gitolite</a></li>
+        <li class="main "><a href="#commands">commands</a></li>
+        <li class="main "><a href="#syntactic-sugar">syntactic sugar</a></li>
+        <li class="main "><a href="#triggers">triggers</a></li>
+        <li class="main "><a href="#vrefs">VREFs</a></li>
+        <li class="main "><a href="#details-on-some-non-core-programs">details on some non-core programs</a></li>
+            <li><a href="#partial-copy-selective-read-control-for-branches">partial-copy: selective read control for branches</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="non-core-features-shipped-with-gitolite">non-core features shipped with gitolite<a class="headerlink" href="#non-core-features-shipped-with-gitolite" title="Permanent link"></a></h1>
+<hr />
+<p><strong>Important Notes on "non-core" features</strong>:</p>
+<ol>
+<li>
+<p>The <a href="non-core">"non-core" gitolite</a> page is the starting point for all
+    information about ... non-core gitolite :)</p>
+</li>
+<li>
+<p>This page decribes many of the non-core features that come with gitolite.
+    If a non-core feature is shipped with gitolite, but information about it
+    is not found in this page, it can be found within the source code; please
+    look there.</p>
+<p><a href="non-core#gitolite-commands">Commands</a>, however, have some extra magic,
+which is not available to the other types of non-core programs:</p>
+<ul>
+<li>
+<p>Running the command with a single <code>-h</code> option (i.e., <code>gitolite &lt;command&gt; -h</code>
+    or <code>ssh git@host &lt;command&gt; -h</code>), will display a suitable
+    message.  Please report a bug to me if one of them doesn't.</p>
+</li>
+<li>
+<p>Running 'help', (either as <code>gitolite help</code> on the server, or
+    <code>ssh git@host help</code> remotely), will give you a list of commands you are
+    allowed to run.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Non-core code is <strong>meant</strong> to be <a href="non-core#for-your-non-core-programs">localised for your site</a> if
+    you don't like what the shipped version does.  You can even maintain it
+    <a href="non-core#using-the-gitolite-admin-repo-to-manage-non-core-code">within your gitolite-admin repo</a> if you wish.</p>
+</li>
+</ol>
+<h1 id="commands">commands<a class="headerlink" href="#commands" title="Permanent link"></a></h1>
+<p>This is a list of commands that are available in gitolite, with brief
+descriptions and, if available, a link to more detailed information.  Note
+that in most cases running it with <code>-h</code> will give you enough to work with.</p>
+<p>Also note that not all of these commands are available remotely.</p>
+<p>(The more common/important commands are in bold).</p>
+<ul>
+<li><em>access</em> -- print or test access rights for repo/user</li>
+<li><em>config</em> <span class="gray">(v3.6.3+)</span> -- allow limited remote use of 'git config'</li>
+<li><em>create</em> -- create a wild repo</li>
+<li><em>creator</em> -- print or test creator name for wild repo</li>
+<li><em>D</em> -- lets you <em>D</em>elete wild repos created using the <em>C</em> permission :)</li>
+<li><strong>desc</strong> -- show/set description for wild repo</li>
+<li><em>fork</em> -- fork a repo on the server.  This uses the <code>-l</code> option to git
+    clone, so it runs really fast</li>
+<li><em>git-config</em> -- print (or text existence of) 'config' values in the repo.
+    (Don't forget that <code>option foo.bar = 1</code> is merely syntactic sugar for
+    <code>config gitolite-options.foo.bar = 1</code>, so this can be used to query
+    gitolite options also</li>
+<li><strong>help</strong> -- see note 1 at the top of this page</li>
+<li><em>htpasswd</em> -- sets your htpasswd</li>
+<li><strong><a href="user#the-info-command">info</a></strong> -- print git/gitolite version, list repos you have access to</li>
+<li><em><a href="locking">lock</a></em> -- lock binary files for exclusive use (in combination
+    with the 'lock' VREF)</li>
+<li><em><a href="mirroring#manually-synchronising-a-slave-repo">mirror</a></em> -- manually mirror a repo to a slave</li>
+<li><em>motd</em> <span class="gray">(v3.6.1+)</span> -- set/remove a message of the day, per repo or for the whole
+    system</li>
+<li><em>option</em> <span class="gray">(v3.6.3+)</span> -- allow repo owner to set options for a repo</li>
+<li><strong><a href="user#setget-additional-permissions-for-repos-you-created">perms</a></strong> -- list or set permissions for wild repo</li>
+<li><em><a href="emergencies#bypassing-gitolite">push</a></em> -- push a gitolite repo locally, bypassing gitolite</li>
+<li><em>readme</em> <span class="gray">(v3.6.1+)</span> -- show, remove or set the README.html file for repo.</li>
+<li><em>rsync</em> -- resumable downloads of git bundles (bundles are auto-created as
+    needed)</li>
+<li><em>sshkeys-lint</em> -- look for potential problems in ssh keys</li>
+<li><em><a href="contrib/sskm">sskm</a></em> -- self-service key management</li>
+<li><em>sudo</em> -- allows an admin (i.e., someone who has push rights to the
+    'gitolite-admin' repo) to run any remote command as some other user.  This
+    is useful, for example, when a user claims he is unable to access a repo,
+    and you need to check the 'info' output for him, etc.  However, it does
+    not work the other way, sorry!</li>
+<li><em>symbolic-ref</em> -- run <code>git symbolic-ref</code> on a repo, remotely</li>
+<li><em>who-pushed</em> -- determine who pushed a given commit</li>
+<li><em>writable</em> -- disable/enable writes to specific repo (or all repos, if
+    you're an admin)</li>
+</ul>
+<h1 id="syntactic-sugar">syntactic sugar<a class="headerlink" href="#syntactic-sugar" title="Permanent link"></a></h1>
+<p>The following "sugar" programs are available:</p>
+<ul>
+<li><em>continuation-lines</em> -- allow C-style backslash escaped continuation lines
+    in the conf file</li>
+<li><em>keysubdirs-as-groups</em> -- use the last component of the sub-directory name
+    within keydir as a group name</li>
+<li><strong>macros</strong> -- simple line-wise macro processor</li>
+</ul>
+<h1 id="triggers">triggers<a class="headerlink" href="#triggers" title="Permanent link"></a></h1>
+<p>Here's a list of <strong>features</strong> that are enabled by <a href="triggers">triggers</a>, or a
+combination of a trigger and something else, like a command.</p>
+<ul>
+<li><em>Alias</em> -- allow repos to have aliases</li>
+<li><em>AutoCreate</em> -- deny auto-create of wild repos on R or RW access</li>
+<li><em>bg</em> -- allow long running post-compile/post-create jobs to be
+    backgrounded</li>
+<li><em>CpuTime</em> -- CPU and elapsed times for gitolite+git</li>
+<li><strong><a href="mirroring">Mirroring</a></strong> -- mirroring all or some repos</li>
+<li><em>Motd</em> <span class="gray">(v3.6.1+)</span> -- allows printing a message of the day to
+    STDERR in ssh mode</li>
+<li><em><a href="list-non-core#partial-copy-selective-read-control-for-branches">partial-copy</a></em> -- simulated read control for branches (in combination
+    with the partial-copy VREF)</li>
+<li><em>RefexExpr</em> -- (in combination with VREF/refex-expr) logical expressions
+    over refexes, like "refex-1 and not refex-2".  (Example: changing file
+    'foo' but not on 'master' branch)</li>
+<li><em>renice</em> -- renice the git operation</li>
+<li><em>RepoUmask</em> -- repo-specific umask settings</li>
+<li><em>Shell</em> -- see "giving shell access to gitolite users" in the <a href="sts">ssh
+    troubleshooting and tips</a> page.  (Internally enables the
+    'ssh-authkeys-shell-users' trigger also).</li>
+<li><em>ssh-authkeys-split</em> -- split pubkey files with multiple keys into
+    separate files with one pubkey each</li>
+<li><em>update-description-file</em> -- if you want the 'description' file to be
+    updated instead of the 'gitweb.description' config entry (e.g. cgit users)</li>
+<li><em>upstream</em> -- manage local, gitolite-controlled, copies of read-only
+    upstream repos</li>
+</ul>
+<p>In addition, the following post-compile trigger scripts are enabled by
+default, so are included here only for completeness and in case you wish to
+disable them:</p>
+<ul>
+<li>ssh-authkeys -- process keys in keydir/ and add/update appropriate lines
+    to the authorized keys file</li>
+<li>update-git-configs -- run <code>git config</code> in each repo to add/update entries
+    as needed</li>
+<li>update-git-daemon-access-list -- create/delete the 'git-daemon-export-ok'
+    files in each repo as needed</li>
+<li>update-gitweb-access-list -- create the "projects.list" file that gitweb
+    uses to determine what repos to show/not show</li>
+</ul>
+<h1 id="vrefs">VREFs<a class="headerlink" href="#vrefs" title="Permanent link"></a></h1>
+<p>VREFs are a complex topic and have their <a href="vref">own page</a> with lots more
+details.  However, here's a list of VREFs shipped with gitolite:</p>
+<ul>
+<li><em><a href="vref-2#number-of-changed-or-new-files">COUNT</a></em> -- restrict pushes by number of changed or new files pushed</li>
+<li><em>EMAIL-CHECK</em> -- check if all new commits are authored by the person pushing</li>
+<li><em><a href="locking">lock</a></em> -- lock binary files for exclusive use (in combination
+    with the 'lock' command)</li>
+<li><em>MAX_NEWBIN_SIZE</em> -- restrict by size of new binary files (helps catch
+    people checking in random PDFs, JARs, WARs, etc.)</li>
+<li><strong><a href="vref-2#restricting-pushes-by-dirfile-name">NAME</a></strong> -- restrict pushes by dir/file name</li>
+<li><a href="list-non-core#partial-copy-selective-read-control-for-branches">partial-copy</a> -- simulated read control for branches (in combination
+    with the partial-copy trigger)</li>
+<li><em>refex-expr</em> -- (in combination with the refex-expr trigger) logical
+    expressions over refexes, like "refex-1 and not refex-2".  (Example:
+    changing file 'foo' but not on 'master' branch)</li>
+<li><em><a href="vref-2#voting-on-commits">VOTES</a></em> -- voting on commits a la gerrit</li>
+</ul>
+<h1 id="details-on-some-non-core-programs">details on some non-core programs<a class="headerlink" href="#details-on-some-non-core-programs" title="Permanent link"></a></h1>
+<p>These non-core programs needed more detail than could be provided in the
+source code, but did not fit anywhere else neatly enough.</p>
+<h2 id="partial-copy-selective-read-control-for-branches">partial-copy: selective read control for branches<a class="headerlink" href="#partial-copy-selective-read-control-for-branches" title="Permanent link"></a></h2>
+<p>Git (and therefore gitolite) cannot do selective read control -- allowing
+someone to read branch A but not branch B.  It's the entire repo or nothing.</p>
+<p><span class="box-r">Gerrit Code Review can do that, but that is because they have their
+own git (as well as their own sshd, and so on).  If code review is part of
+your access control decision, you really should consider Gerrit
+anyway.</span></p>
+<p>The standard answer you get when you ask is "use separate repos" (where one
+contains all the branches, and one contains a subset of the branches).  This
+is nice in theory but in practice, when people are potentially <em>pushing</em> to
+both repos, you need to figure out how to keep them in sync.</p>
+<p>Gitolite can now help you do this.  Note that this is only for branches; you
+can't do this for files and directories.</p>
+<p>Here's how:</p>
+<ol>
+<li>
+<p>enable 'partial-copy' in the ENABLE list in the rc file.</p>
+</li>
+<li>
+<p>for each repo "foo" which has secret branches that a certain set of
+    developers (we'll use a group called <code>@temp-emp</code> as an example) are not
+    supposed to see, do this:</p>
+<p><pre style="color: #ffffff; background-color: #000000;">
+<span class="Statement">repo</span> foo
+    <span class="Comment"># rules should allow @temp-emp NO ACCESS</span></p>
+<p><span class="Statement">repo</span> foo-partialcopy-1
+    <span class="Comment"># first, a deny rule that allows no access to secret-branch</span>
+    <span class="Statement">-</span>   <span class="Constant">secret-branch</span>               =   <span class="WarningMsg">@all</span></p>
+<pre><code>&lt;span class="Comment"&gt;# other rules; see notes below&lt;/span&gt;
+
+&lt;span class="Statement"&gt;-&lt;/span&gt;   &lt;span class="Constant"&gt;VREF/partial-copy&lt;/span&gt;           =   &lt;span class="WarningMsg"&gt;@all&lt;/span&gt;
+&lt;span class="Statement"&gt;config&lt;/span&gt; &lt;span class="Identifier"&gt;gitolite.partialCopyOf&lt;/span&gt;   =   &lt;span class="Constant"&gt;foo&lt;/span&gt;
+</code></pre>
+</pre>
+
+<p><strong>IMPORTANT NOTES</strong>:</p>
+<ul>
+<li>
+<p>if you're using other VREFs, <strong>make sure</strong> this one is placed at the
+    end, after all the others.</p>
+</li>
+<li>
+<p>remember that any change allowed to be made to the partial-copy repo
+    will propagate to the main repo so make sure you use other rules to
+    restrict pushes to other branches and tags as needed.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>And that should be it.  <strong>Please test it and let me know if it doesn't work!</strong></p>
+<p>WARNINGS:</p>
+<ul>
+<li>
+<p>If you change the config to disallow something that used to be allowed,
+    you should delete the partial repo on the server and then run
+    <code>gitolite compile; gitolite trigger POST_COMPILE</code> to let it build again.</p>
+</li>
+<li>
+<p>Not tested with smart http; probably won't work.</p>
+</li>
+<li>
+<p>Also not tested with mirroring, or with wild card repos.</p>
+</li>
+</ul></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
     </body>
 </html>

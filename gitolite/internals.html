@@ -1,9 +1,634 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>redirecting...</title>
-        <meta http-equiv="refresh" content="2;URL='http://gitolite.com/gitolite/internals/index.html'" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>internals - Gitolite</title>
+        <link href="css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="css/gitolite.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
     </head>
+
     <body>
-        <p>This page has moved; redirecting...</p>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Gitolite</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="index.html">home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="overview.html">overview</a>
+</li>
+                                    
+<li >
+    <a href="concepts.html">concepts, conventions, terminology</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="quick_install.html">(unix/ssh experts) quick install and setup</a>
+</li>
+                                    
+<li >
+    <a href="install.html">normal ssh mode install and setup</a>
+</li>
+                                    
+<li >
+    <a href="fool_proof_setup.html">(if all else fails) fool-proof, step-by-step, install and setup</a>
+</li>
+                                    
+<li >
+    <a href="http.html">HTTP mode install</a>
+</li>
+                                    
+<li >
+    <a href="migr.html">migrating from v2</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">basic</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="basic-admin.html">basic administration</a>
+</li>
+            
+<li >
+    <a href="conf.html">the "conf" file (part 1)</a>
+</li>
+            
+<li >
+    <a href="conf-2.html">the "conf" file (part 2)</a>
+</li>
+            
+<li >
+    <a href="rc.html">the "rc" file</a>
+</li>
+            
+<li >
+    <a href="user.html">your users' view</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">advanced</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="git-config.html">setting git-config values</a>
+</li>
+            
+<li >
+    <a href="options.html">gitolite options</a>
+</li>
+            
+<li >
+    <a href="wild.html">ad hoc user-created ("wild") repos</a>
+</li>
+            
+<li >
+    <a href="templates.html">using templates</a>
+</li>
+            
+<li >
+    <a href="vref.html">virtual refs (part 1)</a>
+</li>
+            
+<li >
+    <a href="vref-2.html">virtual refs (part 2)</a>
+</li>
+            
+<li >
+    <a href="deleg.html">delegation of admin duties</a>
+</li>
+            
+<li >
+    <a href="gitweb-daemon.html">gitweb and git-daemon</a>
+</li>
+            
+<li >
+    <a href="mirroring.html">mirroring</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">customise</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="non-core.html">core and "non-core" gitolite</a>
+</li>
+            
+<li >
+    <a href="dev-notes.html">writing your own non-core code</a>
+</li>
+            
+<li >
+    <a href="triggers.html">gitolite triggers</a>
+</li>
+            
+<li >
+    <a href="list-non-core.html">list of non-core programs shipped with gitolite</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="cookbook.html">(quick! how do I...) the cookbook</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="emergencies.html">emergency!!</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">ssh</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="ssh.html">ssh</a>
+</li>
+            
+<li >
+    <a href="glssh.html">how gitolite uses ssh</a>
+</li>
+            
+<li >
+    <a href="sts.html">ssh troubleshooting</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="regex.html">regular expressions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="odds-and-ends.html">miscellaneous features</a>
+</li>
+                                    
+<li >
+    <a href="namespaces.html">using git namespaces</a>
+</li>
+                                    
+<li >
+    <a href="locking.html">locking binary files</a>
+</li>
+                                    
+<li >
+    <a href="testing.html">testing gitolite</a>
+</li>
+                                    
+<li >
+    <a href="package.html">packaging gitolite</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">more about gitolite</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="files.html">gitolite files & directories</a>
+</li>
+            
+<li >
+    <a href="rc-33.html">the 3.3 format rc file</a>
+</li>
+            
+<li >
+    <a href="perf.html">performance</a>
+</li>
+            
+<li class="active">
+    <a href="internals.html">internals</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">contrib</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="contrib/ssh-and-http.html">Using both ssh and http</a>
+</li>
+            
+<li >
+    <a href="contrib/putty.html">Putty and Msysgit</a>
+</li>
+            
+<li >
+    <a href="contrib/sskm.html">Self-service key management</a>
+</li>
+            
+<li >
+    <a href="contrib/ukm.html">User key management</a>
+</li>
+            
+<li >
+    <a href="contrib/README-emacs.html">Emacs major mode</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="no-way.html">no way!</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="perf.html">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="contrib/ssh-and-http.html">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#gitolite-internals">gitolite internals</a></li>
+        <li class="main "><a href="#what-is-core">what is "core"</a></li>
+        <li class="main "><a href="#entry-points">entry points</a></li>
+            <li><a href="#gitolite">gitolite</a></li>
+            <li><a href="#gitolite-shell">gitolite-shell</a></li>
+        <li class="main "><a href="#the-conf-module">the Conf module</a></li>
+            <li><a href="#confexplode">Conf::Explode</a></li>
+            <li><a href="#confsugar">Conf::Sugar</a></li>
+            <li><a href="#confstore">Conf::Store</a></li>
+            <li><a href="#confload">Conf::Load</a></li>
+        <li class="main "><a href="#the-rc-module">the Rc module</a></li>
+        <li class="main "><a href="#the-hooks-module">the Hooks module</a></li>
+        <li class="main "><a href="#the-rest">the rest...</a></li>
+        <li class="main "><a href="#security-notes">security notes</a></li>
+        <li class="main "><a href="#appendix-a-accessing-the-documentation-offline">appendix A: accessing the documentation offline</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="gitolite-internals">gitolite internals<a class="headerlink" href="#gitolite-internals" title="Permanent link"></a></h1>
+<p>This page is for people who may want to hack on <strong>core</strong> gitolite itself.
+This is <strong>not</strong> the page for people who merely want to customise their site
+(i.e., write their own VREFs, triggers, etc.); for that please start with the
+<a href="non-core">non-core</a> page.</p>
+<hr />
+<p>This document assumes you're familiar with the material in the <a href="overview#how-does-it-work">how does it
+work</a> section in the "overview" document, as well
+as the <a href="concepts">concepts</a> page.  If you're not familiar with ssh, and in particular
+how programs like gitolite use ssh to simulate many users over one Unix user,
+the <a href="ssh">ssh</a> page has useful info.</p>
+<!--
+
+I can't over-stress the importance of discussing any changes you propose on
+the mailing list.  I'm pretty conservative about adding code to core, so
+expect lots of push-back.  In general, if it can be done outside "core",
+that's what I will suggest!
+
+-->
+
+<h1 id="what-is-core">what is "core"<a class="headerlink" href="#what-is-core" title="Permanent link"></a></h1>
+<p>The core code consists mainly of <code>src/gitolite</code>, <code>src/gitolite-shell</code>, and all
+the perl modules in <code>src/lib/Gitolite</code> except <code>src/lib/Gitolite/Triggers</code>.</p>
+<p>That said, there are parts of non-core that, in a default (ssh) install, are
+used frequently enough to be important (for example if you are reviewing
+gitolite):</p>
+<ul>
+<li>commands in <code>src/commands</code>: access, git-config, info, mirror, option,
+    owns, perms</li>
+<li>triggers in <code>src/lib/Gitolite/Triggers</code>: Mirroring.pm, Shell.pm</li>
+<li>triggers in <code>src/triggers</code> and <code>src/triggers/post-compile</code>: ssh-authkeys,
+    ssh-authkeys-shell-users, update-git-configs, set-default-roles, </li>
+</ul>
+<h1 id="entry-points">entry points<a class="headerlink" href="#entry-points" title="Permanent link"></a></h1>
+<h2 id="gitolite">gitolite<a class="headerlink" href="#gitolite" title="Permanent link"></a></h2>
+<p>Most server-side operations that gitolite supports are invoked via the
+<code>gitolite</code> command.  This includes initial setup and maintenance, some
+built-in commands (run 'gitolite -h' to see them), and finally the commands in
+<code>src/commands</code> (run 'gitolite help' to get a list).</p>
+<h2 id="gitolite-shell">gitolite-shell<a class="headerlink" href="#gitolite-shell" title="Permanent link"></a></h2>
+<p>All remote access is via the <code>gitolite-shell</code> command, (invoked, of course, by
+sshd).  This includes both git operations (clone, fetch, push) as well as
+gitolite commands that have been enabled for remote invocation.</p>
+<p>For git operations, gitolite-shell does the initial access check ("is the user
+even allowed to read/write this repo at all?") and then calls git proper.</p>
+<p>Most of the code in this is housekeeping; the real action happens in one of
+the modules.</p>
+<h1 id="the-conf-module">the Conf module<a class="headerlink" href="#the-conf-module" title="Permanent link"></a></h1>
+<p>The <code>Conf</code> module and its child modules deal with the gitolite.conf file.</p>
+<p><code>Conf</code> is where the 'compile' command lands.  The parser for the conf file is
+also in this module; each "recognised" line is passed to appropriate functions
+in <code>Conf::Store</code>.</p>
+<p>Please note the parser is a very simple line-oriented parser using simple
+regexes; the DSL for the gitolite.conf file is intentionally very simple.</p>
+<h2 id="confexplode"><code>Conf::Explode</code><a class="headerlink" href="#confexplode" title="Permanent link"></a></h2>
+<p>This deals with "exploding" the main gitolite.conf file into a single perl
+list with all 'include' files recursively expanded.</p>
+<h2 id="confsugar"><code>Conf::Sugar</code><a class="headerlink" href="#confsugar" title="Permanent link"></a></h2>
+<p>This calls <code>Conf::Explode</code> to get the full set of conf lines, then applies a
+series of "syntactic sugar" transformations to them.  This keeps the main
+parser simple, while allowing the administrator to take some shortcuts in
+writing the rules.</p>
+<p>Some transformations are built-in and hardcoded, but a site can add their own
+site-local transformations if they like.</p>
+<h2 id="confstore"><code>Conf::Store</code><a class="headerlink" href="#confstore" title="Permanent link"></a></h2>
+<p><code>Conf::Store</code> is one of the two workhorses of gitolite.  It exports functions
+related to processing parsed lines and storing the parsed output for later
+use.  It also exports functions that deal with creating and setting up new
+repos.</p>
+<div class="admonition note">
+<p>The output of the compile step is essentially a set of perl hashes in
+<code>Data::Dumper</code> format.  Rules that apply to more than one repo (i.e., the
+repo name was a regex pattern or a group name) go into a "common" output
+file (<code>~/.gitolite/conf/gitolite.conf-compiled.pm</code>), while rules that
+apply to specific repos go into their own files
+(<code>~/repositories/$REPONAME.git/gl-conf</code>).</p>
+</div>
+<p>From a security perspective, dealing with 'subconf' (see <a href="deleg">delegation</a>
+for details) happens in this module.</p>
+<h2 id="confload"><code>Conf::Load</code><a class="headerlink" href="#confload" title="Permanent link"></a></h2>
+<p><code>Conf::Load</code> is the other of the two workhorses of gitolite.</p>
+<p>The most important function it exports is <code>access</code>, which is used by
+<code>gitolite-shell</code> as well as by the update hook code to check for permissions.
+This code has a few optimisations, including very simple, localised, caching
+of parsed conf files when needed.</p>
+<p>TODO: How the <code>access</code> function does its thing will be written up in more
+detail as I find time, but TLDR: it calls <code>rules</code> which builds up a list of
+the rules that apply.  Also see <a href="conf#defining-user-and-repo">this</a> until I
+manage to write it up in more detail.</p>
+<p>Other functions are <code>git_config</code>, which returns a list of config values
+specified in the conf file.</p>
+<p>Finally, this is where all the "list-" commands that 'gitolite -h' shows you
+(e.g., 'gitolite list-repos') land up.</p>
+<h1 id="the-rc-module">the Rc module<a class="headerlink" href="#the-rc-module" title="Permanent link"></a></h1>
+<p>The rc file (<code>~/.gitolite.rc</code>) is processed here.  In addition, it also
+declares a bunch of constants (like the all-important regex patterns to
+validate user inputs of various kinds; all ending in <code>_PATT</code>).</p>
+<p>The only complicated part of this is how the <code>non_core_expand</code> function takes
+the <code>$non_core</code> variable (currently 63 lines long!) and converts it into a set
+of arrays, one for each of the <a href="triggers">triggers</a> types.  You can see the effect of
+this logic by uncommenting something in the ENABLE list in the rc file, then
+running <code>gitolite query-rc PRE_GIT</code>, etc.</p>
+<p>(From a security point of view this is irrelevant.  Any inputs it receives
+come from totally trusted sources -- either the gitolite source code or the rc
+file).</p>
+<p>Finally, the trigger function is also exported by this module.  This is the
+function that actually runs all the programs tied to each trigger.</p>
+<h1 id="the-hooks-module">the Hooks module<a class="headerlink" href="#the-hooks-module" title="Permanent link"></a></h1>
+<p>This is where the code for the update hook (all repos) and the post-update
+hook (gitolite-admin repo only) can be found.</p>
+<p>The post-update hook code is fairly straightforward, consisting essentially of
+three shell commands.</p>
+<p>The update hook code has a lot more "action", since this is where all access
+checking for 'git push' goes.  Even that would not be much if it weren't for
+VREFs, because then it's just one call to the access function (from the
+<code>Conf::Load</code> module).</p>
+<p>The only other thing of note in this module is how the "attempted access" is
+determined.  Externally, we only know it's a "push" (i.e., a "W" in gitolite
+permission terms).  We need to compare the old and the new SHAs in various
+ways to determine if it's a rewind, or a delete, or a create, etc., which may
+make a difference to the access.</p>
+<p>TODO: expand on VREF handling.  For now please read <a href="vref">vref</a> to get the
+general idea of <em>what</em> it does, while I find time to write up the <em>how</em>.</p>
+<h1 id="the-rest">the rest...<a class="headerlink" href="#the-rest" title="Permanent link"></a></h1>
+<p>...is TBD (to be done).  Briefly, the Test module is for testing, the Common
+module contains a whole bunch of common routines used all over -- many of them
+not gitolite specific at all, Cache is not to be used for now (sorry,
+bitrotted by now I think... I may need to take it out behind the woodshed one
+of these days).</p>
+<h1 id="security-notes">security notes<a class="headerlink" href="#security-notes" title="Permanent link"></a></h1>
+<p>All security issues should be reported directly to me (sitaramc@gmail.com),
+and not to the mailing list.</p>
+<p>(In the following text, the words MUST, SHOULD, etc. are loosely as defined in
+RFC 2119).</p>
+<ol>
+<li>
+<p>Gitolite MUST protect everything in <code>~/repositories</code> from people who do
+    not have command line access to the user hosting the service, and do not
+    have "push" access rights to the gitolite-admin repository.</p>
+<p>Specifically, gitolite MUST prevent such users from doing anything except
+the following:</p>
+<ul>
+<li>perform git operations they are allowed to by gitolite.conf</li>
+<li>run <em>gitolite</em> commands that are enabled for remote use</li>
+</ul>
+</li>
+<li>
+<p>People who have command line access are considered to be "in"; nothing in
+    gitolite attempts to protect from them (it's impossible anyway!)</p>
+<p>But someone who does not have command line access, but <em>does</em> have push
+access rights to the gitolite-admin repo (a "gitolite admin"), is a
+special case.</p>
+<p>Gitolite SHOULD prevent a gitolite admin from using that to pivot to
+executing arbitrary commands on the server.  (This is why, for example,
+the gitolite-admin repo can't have arbitrary "config" lines.)</p>
+<p>However, many sites don't care about this distinction -- all their
+gitolite admins already have shell access.</p>
+<p>Thus, a violation of this is important and should be fixed, but not
+considered critical.</p>
+</li>
+<li>
+<p>Gitolite SHOULD try to make sure that the <em>gitolite</em> commands shipped with
+    gitolite do not indirectly enable violation of the restrictions in the
+    first bullet.  The seriousness of failing this depends on the command in
+    question (is the command enabled in the default setup, or even if it is
+    not, is it a popular and widely used command, etc.)</p>
+</li>
+<li>
+<p>Gitolite SHOULD protect the local sysadmin from his own errors to some
+    extent.  For example, it should be possible to write a new "command" in
+    shell, without worrying about shell meta-characters sneaking in and
+    executing something; gitolite should prevent this from happening.</p>
+</li>
+<li>
+<p>As you probably <a href="concepts#authentication-and-authorisation">knew</a> already, gitolite does not do authentication;
+    it only deals with authorisation.  Still, gitolite MAY help the
+    administrator to setup authentication (as the default setup does when used
+    in ssh mode), but it is not mandatory.  In particular, use in http-mode
+    leaves gitolite completely out of the authentication picture.</p>
+</li>
+</ol>
+<p>In order to achieve these goals, gitolite expects the files and directories on
+the server to have sane permissions and ownerships.  A decent POSIX file
+system, and a reasonable sshd config are also expected.</p>
+<p>Finally, a note on a couple of related items:</p>
+<ul>
+<li>
+<p>Gitolite's stance on DOS (by authenticated users) is that if it is
+    fixable, it will be fixed, but it is not a critical issue, as long as the
+    log files cannot be tampered with.</p>
+<p>A DOS by un-authenticated users is completely out of scope.</p>
+</li>
+<li>
+<p>Gitolite cannot benefit from perl's taint mode, which was made for a
+    different threat model.</p>
+<p>Gitolite's threat model implicitly trusts anyone who has shell access to
+the server, including all programs already on the server.  It's only
+remote users that are considered a threat.</p>
+<p>Perl's taint mode treats <em>anything</em> outside the program itself as suspect.
+So, the rc file, the compiled config, the various internal files gitolite
+stores housekeeping information in, etc., would all need to be untainted.</p>
+<p>Since gitolite gets "suspicious" input only in one place, it's easier to
+check that rigorously enough rather than use taint mode.</p>
+</li>
+</ul>
+<h1 id="appendix-a-accessing-the-documentation-offline">appendix A: accessing the documentation offline<a class="headerlink" href="#appendix-a-accessing-the-documentation-offline" title="Permanent link"></a></h1>
+<p>The source code for the documentation is in
+<a href="https://github.com/sitaramc/gitolite-doc">https://github.com/sitaramc/gitolite-doc</a>.  Rendering it requires some work
+(TBD: details).</p>
+<p>For most purposes, it's simpler to clone
+<a href="https://github.com/sitaramc/sitaramc.github.com">https://github.com/sitaramc/sitaramc.github.com</a> and use the 'gitolite'
+subdirectory within as your pre-rendered document base.  Open it in a
+JS-enabled browser and you can even do searches.</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
     </body>
 </html>

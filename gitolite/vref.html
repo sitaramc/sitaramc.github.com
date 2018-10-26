@@ -1,9 +1,681 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>redirecting...</title>
-        <meta http-equiv="refresh" content="2;URL='http://gitolite.com/gitolite/vref/index.html'" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>virtual refs (part 1) - Gitolite</title>
+        <link href="css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="css/gitolite.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
     </head>
+
     <body>
-        <p>This page has moved; redirecting...</p>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Gitolite</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="index.html">home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="overview.html">overview</a>
+</li>
+                                    
+<li >
+    <a href="concepts.html">concepts, conventions, terminology</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="quick_install.html">(unix/ssh experts) quick install and setup</a>
+</li>
+                                    
+<li >
+    <a href="install.html">normal ssh mode install and setup</a>
+</li>
+                                    
+<li >
+    <a href="fool_proof_setup.html">(if all else fails) fool-proof, step-by-step, install and setup</a>
+</li>
+                                    
+<li >
+    <a href="http.html">HTTP mode install</a>
+</li>
+                                    
+<li >
+    <a href="migr.html">migrating from v2</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">basic</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="basic-admin.html">basic administration</a>
+</li>
+            
+<li >
+    <a href="conf.html">the "conf" file (part 1)</a>
+</li>
+            
+<li >
+    <a href="conf-2.html">the "conf" file (part 2)</a>
+</li>
+            
+<li >
+    <a href="rc.html">the "rc" file</a>
+</li>
+            
+<li >
+    <a href="user.html">your users' view</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">advanced</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="git-config.html">setting git-config values</a>
+</li>
+            
+<li >
+    <a href="options.html">gitolite options</a>
+</li>
+            
+<li >
+    <a href="wild.html">ad hoc user-created ("wild") repos</a>
+</li>
+            
+<li >
+    <a href="templates.html">using templates</a>
+</li>
+            
+<li class="active">
+    <a href="vref.html">virtual refs (part 1)</a>
+</li>
+            
+<li >
+    <a href="vref-2.html">virtual refs (part 2)</a>
+</li>
+            
+<li >
+    <a href="deleg.html">delegation of admin duties</a>
+</li>
+            
+<li >
+    <a href="gitweb-daemon.html">gitweb and git-daemon</a>
+</li>
+            
+<li >
+    <a href="mirroring.html">mirroring</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">customise</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="non-core.html">core and "non-core" gitolite</a>
+</li>
+            
+<li >
+    <a href="dev-notes.html">writing your own non-core code</a>
+</li>
+            
+<li >
+    <a href="triggers.html">gitolite triggers</a>
+</li>
+            
+<li >
+    <a href="list-non-core.html">list of non-core programs shipped with gitolite</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="cookbook.html">(quick! how do I...) the cookbook</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="emergencies.html">emergency!!</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">ssh</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="ssh.html">ssh</a>
+</li>
+            
+<li >
+    <a href="glssh.html">how gitolite uses ssh</a>
+</li>
+            
+<li >
+    <a href="sts.html">ssh troubleshooting</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="regex.html">regular expressions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="odds-and-ends.html">miscellaneous features</a>
+</li>
+                                    
+<li >
+    <a href="namespaces.html">using git namespaces</a>
+</li>
+                                    
+<li >
+    <a href="locking.html">locking binary files</a>
+</li>
+                                    
+<li >
+    <a href="testing.html">testing gitolite</a>
+</li>
+                                    
+<li >
+    <a href="package.html">packaging gitolite</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">more about gitolite</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="files.html">gitolite files & directories</a>
+</li>
+            
+<li >
+    <a href="rc-33.html">the 3.3 format rc file</a>
+</li>
+            
+<li >
+    <a href="perf.html">performance</a>
+</li>
+            
+<li >
+    <a href="internals.html">internals</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">contrib</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="contrib/ssh-and-http.html">Using both ssh and http</a>
+</li>
+            
+<li >
+    <a href="contrib/putty.html">Putty and Msysgit</a>
+</li>
+            
+<li >
+    <a href="contrib/sskm.html">Self-service key management</a>
+</li>
+            
+<li >
+    <a href="contrib/ukm.html">User key management</a>
+</li>
+            
+<li >
+    <a href="contrib/README-emacs.html">Emacs major mode</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="no-way.html">no way!</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="templates.html">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="vref-2.html">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#virtual-refs">virtual refs</a></li>
+        <li class="main "><a href="#quick-introexample">quick intro/example</a></li>
+        <li class="main "><a href="#basic-use-and-understanding">basic use and understanding</a></li>
+        <li class="main "><a href="#advanced-use">advanced use</a></li>
+            <li><a href="#differences-from-normal-refs">differences from normal refs</a></li>
+            <li><a href="#generating-virtual-refs">generating virtual refs</a></li>
+        <li class="main "><a href="#more-details-and-nuances">more details and nuances</a></li>
+            <li><a href="#mimicking-a-plain-old-update-hook">mimicking a plain old update hook</a></li>
+            <li><a href="#what-if-the-vref-maker-prints-a-different-virtual-ref">what if the VREF-maker prints a different virtual ref?</a></li>
+            <li><a href="#why-is-fallthru-considered-success-with-vrefs">why is fallthru considered success with VREFs</a></li>
+            <li><a href="#what-if-the-vref-maker-prints-something-thats-not-even-a-virtual-ref">what if the VREF-maker prints something that's not even a virtual ref?</a></li>
+            <li><a href="#in-what-order-are-vref-makers-called">in what order are VREF-makers called?</a></li>
+            <li><a href="#what-arguments-are-passed-to-the-vref-maker">what arguments are passed to the vref-maker?</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="virtual-refs">virtual refs<a class="headerlink" href="#virtual-refs" title="Permanent link"></a></h1>
+<p><center>(part 1)</center></p>
+<hr />
+<p>VREFs are a mechanism to add additional constraints to a push.</p>
+<p>They are also the simplest way to add your old update hooks to gitolite --
+they'll just work, no coding changes needed.  If that's all you need, you
+should head over to the <a href="cookbook">cookbook</a> and look for the section on "adding your
+own update hooks".</p>
+<div class="admonition danger">
+<p class="admonition-title">IMPORTANT:</p>
+<p>Fallthru is success in VREFs, unlike for normal refs.  That won't make
+sense until you read further, but I had to put it up here for folks who
+stop reading halfway!</p>
+</div>
+<h1 id="quick-introexample">quick intro/example<a class="headerlink" href="#quick-introexample" title="Permanent link"></a></h1>
+<p>Here's an example to start you off.</p>
+<p>To disallow junior developers from changing more than five files, or from
+touching the Makefile, you can do this:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Statement">repo</span> foo
+    <span class="Statement">RW+</span>                     =   <span class="Identifier">@all-devs</span>
+
+    <span class="Statement">-</span>   <span class="Constant">VREF/COUNT/5</span>        =   <span class="WarningMsg">@junior-devs</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/</span><span class="PreProc">NAME/</span><span class="Constant">Makefile</span>  =   <span class="WarningMsg">@junior-devs</span>
+</pre>
+
+<p>Here's a pictorial representation of what happens, at a very high level, based
+on the <code>VREF/COUNT/5</code> rule in the rule list above.</p>
+<p><img alt="" src="vr-1.png" /></p>
+<ol>
+<li>
+<p>To start with, git-receive-pack calls the update hook with what we will
+    call a "real" ref, something like "refs/heads/master", or
+    "refs/tags/v1.0" -- in general, something that starts with "refs/".</p>
+<p>This ref is sent through "<a href="conf-2#putting-it-all-together">check #2</a>" (please click to refresh your
+memory if needed).</p>
+<p>Any rules that specify a <a href="conf#the-refex-field">refex</a> starting with "VREF/" clearly won't
+match and are ignored in this check.</p>
+</li>
+<li>
+<p>Assuming that check did not fail, the gitolite code in the update hook
+    then starts looking at each "VREF" rule in the rule list that applies to
+    that repo accessed by that user.  For each one, it runs the actual VREF
+    program whose name is given in the word after <code>VREF/</code>. (The rest of the
+    words, if any, along with all sorts of other information, are supplied as
+    <a href="vref#what-arguments-are-passed-to-the-vref-maker">arguments</a>).</p>
+</li>
+<li>
+<p>The STDOUT of the called program is captured and any line that starts with
+    the characters <code>VREF/</code> is taken as a "<strong>virtual</strong>" ref, and is run through
+    the same "<a href="conf-2#putting-it-all-together">check #2</a>". <span class="red"><strong>The only difference is that, unlike
+    for a regular ref, fallthru does not result in failure, but
+    success.</strong></span></p>
+</li>
+</ol>
+<h1 id="basic-use-and-understanding">basic use and understanding<a class="headerlink" href="#basic-use-and-understanding" title="Permanent link"></a></h1>
+<p>Normally, rules deal with branches and tags (which git collectively calls
+"refs").  The "ref" is a property of the push which gitolite checks against
+the set of rules.</p>
+<p>"Virtual refs" are other properties of a push that gitolite can be told to
+check, in addition to the normal ref.  For example, "this push has more than 5
+changed files" could be one property.  Or "this push changed the file called
+Makefile" could be another.  These properties are represented as "virtual
+refs" that start with <code>VREF/</code>.  (Recall that "normal" refs start with
+<code>refs/</code>).</p>
+<p>The simplest way to use them is as <em>additional</em> "deny" rules to fail a push
+that might otherwise have passed.  This is what the example at the top shows.</p>
+<p>It helps to separate VREF rules from normal rules, since no access rule can
+match both a normal ref and a virtual ref. Here's a good way to structure your
+rules:</p>
+<ul>
+<li>
+<p>Put your normal ref rules first.  These apply to the branch name or tag
+    name that git itself knows about and sends to gitolite's update hook.</p>
+<p>Fallthru is failure here, which means the ref being pushed <strong>must</strong> match
+some rule in this set for the push to succeed.</p>
+</li>
+<li>
+<p>Put your VREF rules next.  These apply to the virtual refs you want to
+    use as additional checks for the push.</p>
+<p>Fallthru is success here, which means the (virtual) ref must be
+<strong>explicitly denied</strong> in order for the push to fail.</p>
+</li>
+</ul>
+<h1 id="advanced-use">advanced use<a class="headerlink" href="#advanced-use" title="Permanent link"></a></h1>
+<p>More complex uses are possible, but may be harder to understand.  You may want
+to experiment with the rules to solidify your understanding as you read this.</p>
+<h2 id="differences-from-normal-refs">differences from normal refs<a class="headerlink" href="#differences-from-normal-refs" title="Permanent link"></a></h2>
+<p>We know where normal refs (like <code>refs/heads/master</code> or <code>refs/tags/v1.0</code>) come
+from -- they are supplied by git itself when it calls the update hook.</p>
+<p>Virtual refs have two differences with normal refs:</p>
+<ul>
+<li>Gitolite has to generate them somehow.</li>
+<li>Fallthru is success, not failure.</li>
+</ul>
+<p>Here's how it works.</p>
+<ul>
+<li>
+<p>First, the normal ("real") ref is checked.</p>
+<p>As you already know, the push dies if the ref hits a deny rule <strong>or</strong> it
+falls through without hitting an allow rule.</p>
+</li>
+<li>
+<p>Next, virtual refs are generated and checked one by one.</p>
+<p>We'll talk about the generaton later, but for the check, a virtual ref
+kills the push <em>only</em> if it meets an explicit deny rule ("-"); fallthru
+does <em>not</em> cause failure.  Other than that, the checking is done the same
+way as for a normal ref, viz., as described in the flow for <a href="conf-2#putting-it-all-together">check #2</a>.</p>
+</li>
+</ul>
+<h2 id="generating-virtual-refs">generating virtual refs<a class="headerlink" href="#generating-virtual-refs" title="Permanent link"></a></h2>
+<p>Gitolite uses the VREF rules themselves to help it generate the virtual refs.</p>
+<p>Specifically, it looks at each rule that contains a VREF (there are 2 in the
+above example) and calls a VREF-maker for each of them.</p>
+<p>We'll take the COUNT example rule above.</p>
+<p>When gitolite sees that rule, it calls the "COUNT" VREF-maker.  Specifically,
+this is the <code>VREF/COUNT</code> program (See <a href="non-core">here</a> for actual locations on
+disk).</p>
+<p>Gitolite passes it the string "5" as an argument (actually, as the <em>eighth</em>
+argument; details later).</p>
+<p>The program (which can be written in any language) is expected to do one of
+two things:</p>
+<ul>
+<li>
+<p>If the condition is satisfied (i.e., there <em>are</em> more than 5 files in this
+    push), it should print <code>VREF/COUNT/5</code> to STDOUT.</p>
+<p>You can see that when this virtual ref is processed through the rules, it
+will encounter the "deny" rule, and thus kill the push.</p>
+</li>
+<li>
+<p>Otherwise it should print nothing.  That is, there is no virtual ref to
+    run through "<a href="conf-2#putting-it-all-together">check #2</a>", so nothing happens.</p>
+</li>
+</ul>
+<p>It should exit with an exit code of zero in either case.</p>
+<p>If it exits with a non-zero, the push dies regardless of what is printed (see
+"mimicking a plain old update hook" for why this is useful).</p>
+<h1 id="more-details-and-nuances">more details and nuances<a class="headerlink" href="#more-details-and-nuances" title="Permanent link"></a></h1>
+<h2 id="mimicking-a-plain-old-update-hook">mimicking a plain old update hook<a class="headerlink" href="#mimicking-a-plain-old-update-hook" title="Permanent link"></a></h2>
+<p>If the VREF maker exists with a non-zero exit code, then regardless of what it
+prints or does not, the push dies.</p>
+<p>This is just like a plain 'update' hook.  Since the first 3 arguments (see
+later) are also the same that a plain 'update' hook receives, you can actually
+use any existing update hook as a VREF-maker.</p>
+<p>To repurpose an existing update hook as a VREF-maker, just copy it to the VREF
+directory (again, see <a href="non-core">here</a> for actual locations on disk).  Then
+add this rule to your repos:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Statement">repo</span> foo    <span class="Comment"># or maybe even 'repo @all'</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/my-update-hook</span>     =   <span class="WarningMsg">@all</span>
+</pre>
+
+<p>That's it.</p>
+<h2 id="what-if-the-vref-maker-prints-a-different-virtual-ref">what if the VREF-maker prints a different virtual ref?<a class="headerlink" href="#what-if-the-vref-maker-prints-a-different-virtual-ref" title="Permanent link"></a></h2>
+<p>Unless you know what you're upto, don't do that.</p>
+<p>But it's allowed and the behaviour is defined.  The VREF-maker for the NAME
+VREF is a good example.  It ignores the arguments and just makes VREFs out of
+the name of every file that was changed in the push.</p>
+<p>Here's another example.  Consider the problem of not allowing pushes at
+specific times.  Let's say repo 'foo' cannot be pushed between 4 and 7pm, and
+repo 'bar' can only be pushed before 9am.  And of course all this only applies
+to the junior developers, the poor guys!</p>
+<p>In this example, we write the "Hour" VREF-maker to <em>ignore the argument
+passed</em> and just print <code>VREF/Hour/NN</code> where NN can be between 00 to 23
+inclusive and of course represents the current hour.</p>
+<p>If foo is pushed at 6:30pm, the VREF-maker prints VREF/Hour/18, which
+satisfies the third rule and is rejected.</p>
+<p>If bar is pushed at, say, 7:20am, the vref printed is VREF/Hour/07, which does
+not match any of the rules.  And fallthru is success so it passes.</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Statement">repo</span> foo
+    <span class="Statement">RW+</span>                         =   <span class="Identifier">@all</span>
+
+    <span class="Statement">-</span>   <span class="Constant">VREF/Hour/16</span>            =   <span class="WarningMsg">@junior-devs</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/Hour/17</span>            =   <span class="WarningMsg">@junior-devs</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/Hour/18</span>            =   <span class="WarningMsg">@junior-devs</span>
+
+<span class="Statement">repo</span> bar
+    <span class="Statement">RW+</span>                         =   <span class="Identifier">@all</span>
+
+    <span class="Statement">-</span>   <span class="Constant">VREF/Hour/09</span>            =   <span class="WarningMsg">@junior-devs</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/Hour/1[0-9]</span>        =   <span class="WarningMsg">@junior-devs</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/Hour/2[0-9]</span>        =   <span class="WarningMsg">@junior-devs</span>
+</pre>
+
+<h2 id="why-is-fallthru-considered-success-with-vrefs">why is fallthru considered success with VREFs<a class="headerlink" href="#why-is-fallthru-considered-success-with-vrefs" title="Permanent link"></a></h2>
+<p>Virtual refs are <strong>best used</strong> (1) as <strong>additional</strong> "deny" rules, performing
+extra checks that core gitolite cannot.  You usually want such extra checks
+only for some people.</p>
+<p>When fallthru is success, you can simply <em>ignore</em> all the other users (for
+whom such additional checks are not needed).</p>
+<p>If fallthru were to be considered 'failure', you'd be forced to add a "success
+rule" like this for <em>every</em> virtual ref you used in this repo, in each case
+listing every user who was not already mentioned in the context of that vref:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+    <span class="Statement">RW+</span> <span class="Constant">VREF/VREFNAME</span>   =   <span class="Identifier">@userlist</span>   <span class="Comment"># uggh! what a pain!</span>
+</pre>
+
+<p>Worse, since every virtual ref involves calling an external program, many of
+these calls may be wasted.</p>
+<p><font color="gray">(1) "best used as..." does not mean "only used as...".  For
+example it's perfectly easy to turn this around if, instead of having a list
+of people who <em>do</em> need extra checks, all you have is the complementary
+list:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+    <span class="Statement">RW+</span> <span class="Constant">VREF/</span><span class="PreProc">NAME/</span><span class="Constant">Makefile</span>      =   <span class="Identifier">@senior-devs</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/</span><span class="PreProc">NAME/</span><span class="Constant">Makefile</span>      =   <span class="WarningMsg">@all</span>
+</pre>
+
+<p></font></p>
+<h2 id="what-if-the-vref-maker-prints-something-thats-not-even-a-virtual-ref">what if the VREF-maker prints something that's not even a virtual ref?<a class="headerlink" href="#what-if-the-vref-maker-prints-something-thats-not-even-a-virtual-ref" title="Permanent link"></a></h2>
+<p>The VREF-maker can print anything it wants to STDOUT.  Lines not starting with
+<code>VREF/</code> are printed as is (so your VREF-maker can do mostly-normal printing to
+STDOUT).  This is especially useful if you've turned an existing update hook
+into a VREF-maker, and it prints stuff meant for the user, but you don't want
+to touch the code.</p>
+<p>For lines starting with <code>VREF/</code>, the first word in each such line will be
+treated as a virtual ref, while the rest, if any, is a message to be added to
+the standard "...DENIED..." message that gitolite will print if that refex
+matches and the rule is a deny rule.</p>
+<h2 id="in-what-order-are-vref-makers-called">in what order are VREF-makers called?<a class="headerlink" href="#in-what-order-are-vref-makers-called" title="Permanent link"></a></h2>
+<p>VREF-makers are called in the sequence in which they appear in the conf file.</p>
+<p>There are some optimisations to prevent calling the same VREF-maker with the
+same arguments more than once, and the VREF-maker code for the NAME VREF
+(which is special) is called only once regardless of how many times it appears
+but these details should not concern anyone but a developer.</p>
+<h2 id="what-arguments-are-passed-to-the-vref-maker">what arguments are passed to the vref-maker?<a class="headerlink" href="#what-arguments-are-passed-to-the-vref-maker" title="Permanent link"></a></h2>
+<ul>
+<li>
+<p>Arguments <strong>1, 2, 3</strong>: the <code>ref</code>, <code>oldsha</code>, and <code>newsha</code> that git passed
+    to the update hook (see <code>man githooks</code>).</p>
+<p>This, combined with the fact that non-zero exits are detected, mean that
+you can simply use an existing update.secondary as a VREF-maker as-is, no
+changes needed.</p>
+</li>
+<li>
+<p>Arguments <strong>4 and 5</strong>: the 'oldtree' and 'newtree' SHAs.  These are the
+    same as the oldsha and newsha values, except if one of them is all-0.
+    (indicating a ref creation or deletion).  In that case the corresponding
+    'tree' SHA is set (by gitolite, as a courtesy) to the special SHA
+    <code>4b825dc642cb6eb9a060e54bf8d69288fbee4904</code>, which is the hash of an empty
+    tree.</p>
+<p>(None of these shenanigans would have been needed if <code>git diff $oldsha $newsha</code>
+would not error out when passed an all-0 SHA.)</p>
+</li>
+<li>
+<p>Argument <strong>6</strong>: the attempted access flag.  Typically <code>W</code> or <code>+</code>, but
+    could also be <code>C</code>, <code>D</code>, or any of these 4 followed by <code>M</code>.  If you have to
+    ask what they mean, you haven't read enough gitolite documentation to be
+    able to make virtual refs work.</p>
+</li>
+<li>
+<p>Argument <strong>7</strong>: is the entire refex; say <code>VREF/COUNT/3/NEWFILES</code>.</p>
+</li>
+<li>
+<p>Arguments <strong>8 onward</strong>: are the split out (by <code>/</code>) portions of the refex,
+    excluding the first two components.  In our example they would be <code>3</code>
+    followed by <code>NEWFILES</code>.</p>
+</li>
+</ul>
+<p>Yes, argument 7 is redundant if you have 8 and 9.  It's just more convenient
+for scripts to have both available, without having to split/join.</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
     </body>
 </html>

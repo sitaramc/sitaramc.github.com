@@ -1,9 +1,635 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>redirecting...</title>
-        <meta http-equiv="refresh" content="2;URL='http://gitolite.com/gitolite/triggers/index.html'" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>gitolite triggers - Gitolite</title>
+        <link href="css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="css/gitolite.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
     </head>
+
     <body>
-        <p>This page has moved; redirecting...</p>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Gitolite</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="index.html">home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="overview.html">overview</a>
+</li>
+                                    
+<li >
+    <a href="concepts.html">concepts, conventions, terminology</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="quick_install.html">(unix/ssh experts) quick install and setup</a>
+</li>
+                                    
+<li >
+    <a href="install.html">normal ssh mode install and setup</a>
+</li>
+                                    
+<li >
+    <a href="fool_proof_setup.html">(if all else fails) fool-proof, step-by-step, install and setup</a>
+</li>
+                                    
+<li >
+    <a href="http.html">HTTP mode install</a>
+</li>
+                                    
+<li >
+    <a href="migr.html">migrating from v2</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">basic</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="basic-admin.html">basic administration</a>
+</li>
+            
+<li >
+    <a href="conf.html">the "conf" file (part 1)</a>
+</li>
+            
+<li >
+    <a href="conf-2.html">the "conf" file (part 2)</a>
+</li>
+            
+<li >
+    <a href="rc.html">the "rc" file</a>
+</li>
+            
+<li >
+    <a href="user.html">your users' view</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">advanced</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="git-config.html">setting git-config values</a>
+</li>
+            
+<li >
+    <a href="options.html">gitolite options</a>
+</li>
+            
+<li >
+    <a href="wild.html">ad hoc user-created ("wild") repos</a>
+</li>
+            
+<li >
+    <a href="templates.html">using templates</a>
+</li>
+            
+<li >
+    <a href="vref.html">virtual refs (part 1)</a>
+</li>
+            
+<li >
+    <a href="vref-2.html">virtual refs (part 2)</a>
+</li>
+            
+<li >
+    <a href="deleg.html">delegation of admin duties</a>
+</li>
+            
+<li >
+    <a href="gitweb-daemon.html">gitweb and git-daemon</a>
+</li>
+            
+<li >
+    <a href="mirroring.html">mirroring</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">customise</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="non-core.html">core and "non-core" gitolite</a>
+</li>
+            
+<li >
+    <a href="dev-notes.html">writing your own non-core code</a>
+</li>
+            
+<li class="active">
+    <a href="triggers.html">gitolite triggers</a>
+</li>
+            
+<li >
+    <a href="list-non-core.html">list of non-core programs shipped with gitolite</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="cookbook.html">(quick! how do I...) the cookbook</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="emergencies.html">emergency!!</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">ssh</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="ssh.html">ssh</a>
+</li>
+            
+<li >
+    <a href="glssh.html">how gitolite uses ssh</a>
+</li>
+            
+<li >
+    <a href="sts.html">ssh troubleshooting</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="regex.html">regular expressions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="odds-and-ends.html">miscellaneous features</a>
+</li>
+                                    
+<li >
+    <a href="namespaces.html">using git namespaces</a>
+</li>
+                                    
+<li >
+    <a href="locking.html">locking binary files</a>
+</li>
+                                    
+<li >
+    <a href="testing.html">testing gitolite</a>
+</li>
+                                    
+<li >
+    <a href="package.html">packaging gitolite</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">more about gitolite</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="files.html">gitolite files & directories</a>
+</li>
+            
+<li >
+    <a href="rc-33.html">the 3.3 format rc file</a>
+</li>
+            
+<li >
+    <a href="perf.html">performance</a>
+</li>
+            
+<li >
+    <a href="internals.html">internals</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">contrib</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="contrib/ssh-and-http.html">Using both ssh and http</a>
+</li>
+            
+<li >
+    <a href="contrib/putty.html">Putty and Msysgit</a>
+</li>
+            
+<li >
+    <a href="contrib/sskm.html">Self-service key management</a>
+</li>
+            
+<li >
+    <a href="contrib/ukm.html">User key management</a>
+</li>
+            
+<li >
+    <a href="contrib/README-emacs.html">Emacs major mode</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="no-way.html">no way!</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="dev-notes.html">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="list-non-core.html">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#gitolite-triggers">gitolite triggers</a></li>
+        <li class="main "><a href="#types-of-trigger-programs">types of trigger programs</a></li>
+        <li class="main "><a href="#manually-firing-triggers">manually firing triggers</a></li>
+        <li class="main "><a href="#common-arguments">common arguments</a></li>
+        <li class="main "><a href="#trigger-specific-arguments-and-other-details">trigger-specific arguments and other details</a></li>
+        <li class="main "><a href="#adding-your-own-scripts-to-a-trigger">adding your own scripts to a trigger</a></li>
+            <li><a href="#displaying-the-resulting-trigger-list">displaying the resulting trigger list</a></li>
+        <li class="main "><a href="#tips-and-examples">tips and examples</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="gitolite-triggers">gitolite triggers<a class="headerlink" href="#gitolite-triggers" title="Permanent link"></a></h1>
+<hr />
+<p>Gitolite runs trigger code at several different times.  The features you
+enable in the <a href="rc">rc</a> file determine what commands to run (or functions in perl
+modules to call) at each trigger point.  Example of trigger points are
+<code>INPUT</code>, <code>PRE_GIT</code>, <code>POST_COMPILE</code>, etc.; the full list is examined later in
+this page.</p>
+<div class="admonition note">
+<p>Quick tip: triggers are to gitolite what hooks are to git; we simply use a
+different name to avoid constantly having to clarify which hooks we mean!
+The other difference in gitolite is that each trigger runs multiple pieces
+of code, not just one program with the same name as the hook, like git
+does.</p>
+</div>
+<h1 id="types-of-trigger-programs">types of trigger programs<a class="headerlink" href="#types-of-trigger-programs" title="Permanent link"></a></h1>
+<p>There are two types of trigger programs.  Standalone scripts are placed in
+triggers or its subdirectories.  Such scripts are quick and easy to write in
+any language of your choice.</p>
+<p>Triggers written as perl modules are placed in lib/Gitolite/Triggers.  Perl
+modules have to follow some conventions (see some of the shipped modules for
+ideas) but the advantage is that they can set environment variables and change
+the argument list of the gitolite-shell program that invokes them.</p>
+<p>If you intend to write your own triggers, it's a good idea to examine a
+default install of gitolite, paying attention to:</p>
+<ul>
+<li>the path names in various trigger lists in the rc file,</li>
+<li>corresponding path names in the src/ directory in gitolite source,</li>
+<li>and for perl modules, the package names and function names within.</li>
+</ul>
+<h1 id="manually-firing-triggers">manually firing triggers<a class="headerlink" href="#manually-firing-triggers" title="Permanent link"></a></h1>
+<p>It's easy to manually fire triggers from the server command line.  For
+example:</p>
+<pre><code>gitolite trigger POST_COMPILE
+</code></pre>
+<p>However if the triggered code depends on arguments (see next section) this
+won't work.  (The <code>POST_COMPILE</code> trigger programs all just happen to not
+require any arguments, so it works).</p>
+<h1 id="common-arguments">common arguments<a class="headerlink" href="#common-arguments" title="Permanent link"></a></h1>
+<p>Triggers receive the following arguments:</p>
+<ol>
+<li>
+<p>Any arguments mentioned in the rc file (for an example, see the renice
+    command).</p>
+</li>
+<li>
+<p>The name of the trigger as a string (example, <code>"POST_COMPILE"</code>), so you
+    can call the same program from multiple triggers and it can know where it
+    was called from.</p>
+</li>
+<li>
+<p>And finally, zero or more arguments specific to the trigger, as given in
+    the next section.</p>
+</li>
+</ol>
+<h1 id="trigger-specific-arguments-and-other-details">trigger-specific arguments and other details<a class="headerlink" href="#trigger-specific-arguments-and-other-details" title="Permanent link"></a></h1>
+<p>Here are the <strong>rest of</strong> the arguments for each trigger, plus a brief
+description of when the trigger runs.  (Note that when the repo name is passed
+in as an argument, it is without the '.git' suffix).</p>
+<ul>
+<li>
+<p><code>INPUT</code> runs before pretty much anything else.  INPUT trigger scripts
+    <em>must</em> be in perl, since they manipulate the arguments and the environment
+    of the 'gitolite-shell' program itself.  Most commonly they will
+    read/change <code>@ARGV</code>, and/or <code>$ENV{SSH_ORIGINAL_COMMAND}</code>.</p>
+<p>There are certain conventions to adhere to; please see some of the shipped
+samples or ask me if you need help writing your own.</p>
+</li>
+<li>
+<p><code>ACCESS_1</code> runs after the first access check.  Extra arguments:</p>
+<ul>
+<li>repo</li>
+<li>user</li>
+<li>'R' or 'W'</li>
+<li>'any'</li>
+<li>result (see notes below)</li>
+</ul>
+<p>'result' is the return value of the access() function.  If it contains the
+uppercase word "DENIED", the access was rejected.  Otherwise it is the
+refex that caused the access to succeed.</p>
+<div class="admonition note">
+<p>Note that if access is rejected, gitolite-shell will die as soon as it
+returns from the trigger.</p>
+</div>
+</li>
+<li>
+<p><code>ACCESS_2</code> runs after the second access check, which is invoked by the
+    update hook to check the ref.  Extra arguments:</p>
+<ul>
+<li>repo</li>
+<li>user</li>
+<li>any of W, +, C, D, WM, +M, CM, DM</li>
+<li>the ref being updated (e.g., 'refs/heads/master')</li>
+<li>result</li>
+<li>old SHA</li>
+<li>new SHA</li>
+</ul>
+<p><code>ACCESS_2</code> also runs on each <a href="vref">VREF</a> that gets checked.  In this case
+the "ref" argument will start with "VREF/", and the last two arguments
+won't be passed.</p>
+<p>'result' is similar to <code>ACCESS_1</code>, except that it is the <em>update hook</em>
+which dies as soon as access is rejected for the ref or any of the VREFs.
+Control then returns to git, and then to gitolite-shell, so the <code>POST_GIT</code>
+trigger <em>will</em> run.</p>
+</li>
+<li>
+<p><code>PRE_GIT</code> and <code>POST_GIT</code> run just before and after the git command.
+    Extra arguments:</p>
+<ul>
+<li>repo</li>
+<li>user</li>
+<li>'R' or 'W'</li>
+<li>'any'</li>
+<li>the git command ('git-receive-pack', 'git-upload-pack', or
+    'git-upload-archive') being invoked.</li>
+</ul>
+<div class="admonition note">
+<p>Note that the <code>POST_GIT</code> trigger has no way of knowing if the push
+succeeded, because 'git-shell' (or maybe 'git-receive-pack', I don't
+know) exits cleanly even if the update hook died.</p>
+</div>
+</li>
+<li>
+<p><code>PRE_CREATE</code> and <code>POST_CREATE</code> run just before and after a new repo is
+    created.  In addition, any command that creates a repo (like 'fork') or
+    potentially changes permissions (like 'perms') may choose to run
+    <code>POST_CREATE</code>.</p>
+<p>Extra arguments for normal repo creation (i.e., by adding a "repo foo"
+line to the conf file):</p>
+<ul>
+<li>repo</li>
+</ul>
+<p>Extra arguments for wild repo creation:</p>
+<ul>
+<li>repo</li>
+<li>user</li>
+<li>invoking operation<ul>
+<li>'R' for fetch/clone/ls-remote, 'W' for push</li>
+<li>can also be anything set by the command running the trigger (e.g.,
+    see the perms and fork commands).  This lets the trigger code know
+    how it was invoked.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><code>POST_COMPILE</code> runs after an admin push has successfully "compiled" the
+    config file.  By default, the next thing is to update the ssh authkeys
+    file, then all the 'git-config's, gitweb access, and daemon access.</p>
+<p>No extra arguments.</p>
+</li>
+</ul>
+<h1 id="adding-your-own-scripts-to-a-trigger">adding your own scripts to a trigger<a class="headerlink" href="#adding-your-own-scripts-to-a-trigger" title="Permanent link"></a></h1>
+<p><span class="box-r">Note: for gitolite v3.3 or less, adding your own scripts
+to a trigger list was simply a matter of finding the trigger name in the rc
+file and adding an entry to it.  Even for gitolite v3.4 or higher, if your rc
+file was created before v3.4, <em>it will continue to work, and you can continue
+to add triggers to it the same way as before</em>.</span></p>
+<p>The rc file (from v3.4 on) does not have trigger lists; it has a simple list
+of "features" within a list called "ENABLE" in the rc file.  Simply comment
+out or uncomment appropriate entries, and gitolite will <em>internally</em> create
+the trigger lists correctly.</p>
+<p>This is fine for triggers that are shipped with gitolite, but does present a
+problem when you want to add your own.</p>
+<p>Here's how to do that: Let's say you wrote yourself a trigger script called
+'foo', to be invoked from the <code>POST_CREATE</code> trigger list.  To do that, just
+add the following to the <a href="rc">rc</a> file, just before the ENABLE section:</p>
+<pre><code>POST_CREATE                 =&gt;
+    [
+        'foo'
+    ],
+</code></pre>
+<p>Since the ENABLE list pulls in the rest of the trigger entries, this will be
+<em>effectively</em> as if you had done this in a v3.3 rc file:</p>
+<pre><code>POST_CREATE                 =&gt;
+    [
+        'foo',
+        'post-compile/update-git-configs',
+        'post-compile/update-gitweb-access-list',
+        'post-compile/update-git-daemon-access-list',
+    ],
+</code></pre>
+<p>As you can see, the 'foo' gets added to the top of the list.</p>
+<h2 id="displaying-the-resulting-trigger-list">displaying the resulting trigger list<a class="headerlink" href="#displaying-the-resulting-trigger-list" title="Permanent link"></a></h2>
+<p>You can use the 'gitolite query-rc' command to see what the trigger list
+actually looks like.  For example:</p>
+<pre><code>gitolite query-rc POST_CREATE
+</code></pre>
+<h1 id="tips-and-examples">tips and examples<a class="headerlink" href="#tips-and-examples" title="Permanent link"></a></h1>
+<ol>
+<li>
+<p>If you have code that latches onto more than one trigger, collecting data
+    (such as for logging), then the outputs may be intermixed.  You can record
+    the value of the environment variable <code>GL_TID</code> to tie together related
+    entries.</p>
+<p>The documentation on the <a href="dev-notes#appendix-2-log-file-format">log file format</a> has more on this.</p>
+</li>
+<li>
+<p>If you look at CpuTime.pm, you'll see that it's <code>input()</code> function doesn't
+    set or change anything, but does set a package variable to record the
+    start time.  Later, when the same module's <code>post_git()</code> function is
+    invoked, it uses this variable to determine elapsed time.</p>
+<p><em>(This is a very nice and simple example of how you can implement features
+by latching onto multiple events and sharing data to do something)</em>.</p>
+</li>
+<li>
+<p>You can even change the reponame the user sees, behind his back.  Alias.pm
+    handles that.</p>
+</li>
+<li>
+<p>Finally, as an exercise for the reader, consider how you would create a
+    brand new env var that contains the <em>comment</em> field of the ssh pubkey that
+    was used to gain access, using the information <a href="sts#distinguishing-one-key-from-another">here</a>.</p>
+</li>
+</ol>
+<!--
+
+  - PRE_GIT, ACCESS_1, and ACCESS_2 must only write to STDERR
+
+  - perl triggers should not chdir() away
+
+--></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
     </body>
 </html>

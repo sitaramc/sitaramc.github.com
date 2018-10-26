@@ -1,9 +1,530 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>redirecting...</title>
-        <meta http-equiv="refresh" content="2;URL='http://gitolite.com/gitolite/vref-2/index.html'" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>virtual refs (part 2) - Gitolite</title>
+        <link href="css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="css/gitolite.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
     </head>
+
     <body>
-        <p>This page has moved; redirecting...</p>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Gitolite</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="index.html">home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="overview.html">overview</a>
+</li>
+                                    
+<li >
+    <a href="concepts.html">concepts, conventions, terminology</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="quick_install.html">(unix/ssh experts) quick install and setup</a>
+</li>
+                                    
+<li >
+    <a href="install.html">normal ssh mode install and setup</a>
+</li>
+                                    
+<li >
+    <a href="fool_proof_setup.html">(if all else fails) fool-proof, step-by-step, install and setup</a>
+</li>
+                                    
+<li >
+    <a href="http.html">HTTP mode install</a>
+</li>
+                                    
+<li >
+    <a href="migr.html">migrating from v2</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">basic</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="basic-admin.html">basic administration</a>
+</li>
+            
+<li >
+    <a href="conf.html">the "conf" file (part 1)</a>
+</li>
+            
+<li >
+    <a href="conf-2.html">the "conf" file (part 2)</a>
+</li>
+            
+<li >
+    <a href="rc.html">the "rc" file</a>
+</li>
+            
+<li >
+    <a href="user.html">your users' view</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">advanced</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="git-config.html">setting git-config values</a>
+</li>
+            
+<li >
+    <a href="options.html">gitolite options</a>
+</li>
+            
+<li >
+    <a href="wild.html">ad hoc user-created ("wild") repos</a>
+</li>
+            
+<li >
+    <a href="templates.html">using templates</a>
+</li>
+            
+<li >
+    <a href="vref.html">virtual refs (part 1)</a>
+</li>
+            
+<li class="active">
+    <a href="vref-2.html">virtual refs (part 2)</a>
+</li>
+            
+<li >
+    <a href="deleg.html">delegation of admin duties</a>
+</li>
+            
+<li >
+    <a href="gitweb-daemon.html">gitweb and git-daemon</a>
+</li>
+            
+<li >
+    <a href="mirroring.html">mirroring</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">customise</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="non-core.html">core and "non-core" gitolite</a>
+</li>
+            
+<li >
+    <a href="dev-notes.html">writing your own non-core code</a>
+</li>
+            
+<li >
+    <a href="triggers.html">gitolite triggers</a>
+</li>
+            
+<li >
+    <a href="list-non-core.html">list of non-core programs shipped with gitolite</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="cookbook.html">(quick! how do I...) the cookbook</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="emergencies.html">emergency!!</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">ssh</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="ssh.html">ssh</a>
+</li>
+            
+<li >
+    <a href="glssh.html">how gitolite uses ssh</a>
+</li>
+            
+<li >
+    <a href="sts.html">ssh troubleshooting</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="regex.html">regular expressions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="odds-and-ends.html">miscellaneous features</a>
+</li>
+                                    
+<li >
+    <a href="namespaces.html">using git namespaces</a>
+</li>
+                                    
+<li >
+    <a href="locking.html">locking binary files</a>
+</li>
+                                    
+<li >
+    <a href="testing.html">testing gitolite</a>
+</li>
+                                    
+<li >
+    <a href="package.html">packaging gitolite</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">more about gitolite</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="files.html">gitolite files & directories</a>
+</li>
+            
+<li >
+    <a href="rc-33.html">the 3.3 format rc file</a>
+</li>
+            
+<li >
+    <a href="perf.html">performance</a>
+</li>
+            
+<li >
+    <a href="internals.html">internals</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">contrib</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="contrib/ssh-and-http.html">Using both ssh and http</a>
+</li>
+            
+<li >
+    <a href="contrib/putty.html">Putty and Msysgit</a>
+</li>
+            
+<li >
+    <a href="contrib/sskm.html">Self-service key management</a>
+</li>
+            
+<li >
+    <a href="contrib/ukm.html">User key management</a>
+</li>
+            
+<li >
+    <a href="contrib/README-emacs.html">Emacs major mode</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="no-way.html">no way!</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="vref.html">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="deleg.html">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#virtual-refs">virtual refs</a></li>
+        <li class="main "><a href="#vref-makers-shipped-with-gitolite">VREF-makers shipped with gitolite</a></li>
+            <li><a href="#restricting-pushes-by-dirfile-name">restricting pushes by dir/file name</a></li>
+            <li><a href="#number-of-changed-or-new-files">number of changed or new files</a></li>
+            <li><a href="#advanced-filetype-detection">advanced filetype detection</a></li>
+            <li><a href="#checking-author-email">checking author email</a></li>
+            <li><a href="#voting-on-commits">voting on commits</a></li>
+        <li class="main "><a href="#other-ideas-code-welcome">other ideas -- code welcome!</a></li>
+            <li><a href="#no-non-merge-first-parents">"no non-merge first-parents"</a></li>
+            <li><a href="#other-ideas-for-vrefs">other ideas for VREFs</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="virtual-refs">virtual refs<a class="headerlink" href="#virtual-refs" title="Permanent link"></a></h1>
+<p><center>(part 2)</center></p>
+<hr />
+<h1 id="vref-makers-shipped-with-gitolite">VREF-makers shipped with gitolite<a class="headerlink" href="#vref-makers-shipped-with-gitolite" title="Permanent link"></a></h1>
+<h2 id="restricting-pushes-by-dirfile-name">restricting pushes by dir/file name<a class="headerlink" href="#restricting-pushes-by-dirfile-name" title="Permanent link"></a></h2>
+<p>The "NAME" VREF allows you to restrict pushes by the names of dirs and files
+changed.  (Side note: the NAME VREF is the only one directly implemented
+within the update hook, so you won't find it in the VREF directory).</p>
+<p>Here's an example.  Say you don't want junior developers pushing changes to
+the Makefile, because it's quite complex:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Statement">repo</span> foo
+        <span class="Statement">RW+</span>                             =   <span class="Identifier">@senior_devs</span>
+        <span class="Statement">RW</span>                              =   <span class="Identifier">@junior_devs</span>
+
+        <span class="Statement">-</span>   <span class="Constant">VREF/</span><span class="PreProc">NAME/</span><span class="Constant">Makefile</span>          =   <span class="WarningMsg">@junior_devs</span>
+</pre>
+
+<p>When a senior dev pushes, the VREF is not invoked at all.  But when a junior
+dev pushes, the VREF is invoked, and it returns a list of files changed <strong>as
+virtual refs</strong>, looking like this:</p>
+<pre><code>VREF/NAME/file-1
+VREF/NAME/dir-2/file-3
+...etc...
+</code></pre>
+<p>Each of these refs is matched against the access rules.  If one of them
+happens to be the Makefile, then the ref returned (<code>VREF/NAME/Makefile</code>) will
+match the deny rule and kill the push.</p>
+<p>Another way to use this is when you know what is allowed instead of what is
+not allowed.  Let's say the QA person is only allowed to touch a file called
+CHANGELOG and any files in a directory called ReleaseNotes:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Statement">repo</span> foo
+        <span class="Statement">RW+</span>                             =   <span class="Identifier">@senior_devs</span>
+        <span class="Statement">RW</span>                              =   <span class="Identifier">@junior_devs</span>
+        <span class="Statement">RW+</span>                             =   QA-guy
+
+        <span class="Statement">RW+</span> <span class="Constant">VREF/</span><span class="PreProc">NAME/</span><span class="Constant">CHANGELOG</span>         =   QA-guy
+        <span class="Statement">RW+</span> <span class="Constant">VREF/</span><span class="PreProc">NAME/</span><span class="Constant">ReleaseNotes/</span>     =   QA-guy
+        <span class="Statement">-</span>   <span class="Constant">VREF/</span><span class="PreProc">NAME/</span>                  =   <span class="WarningMsg">QA-guy</span>
+</pre>
+
+<h2 id="number-of-changed-or-new-files">number of changed or new files<a class="headerlink" href="#number-of-changed-or-new-files" title="Permanent link"></a></h2>
+<p>The COUNT VREF is used like this:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+    <span class="Statement">-</span>   <span class="Constant">VREF/COUNT/9</span>                    =   <span class="WarningMsg">@junior-developers</span>
+</pre>
+
+<p>In response, if anyone in the user list pushes a commit series that
+changes more than 9 files, a virtual ref of <code>VREF/COUNT/9</code> is returned.
+Gitolite uses that as a "ref" to match against all the rules, hits the same
+rule that invoked it, and denies the request.</p>
+<p>If the user did not push more than 9 files, the VREF code returns nothing,
+and nothing happens.</p>
+<p>COUNT can take one more argument:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+    <span class="Statement">-</span>   <span class="Constant">VREF/COUNT/9/NEWFILES</span>           =   <span class="WarningMsg">@junior-developers</span>
+</pre>
+
+<p>This is the same as before, but have to be more than 9 <em>new</em> files not
+just changed files.</p>
+<h2 id="advanced-filetype-detection">advanced filetype detection<a class="headerlink" href="#advanced-filetype-detection" title="Permanent link"></a></h2>
+<p>Note: this is more for illustration than use; it's rather specific to one of
+the projects I manage but the idea is the important thing.</p>
+<p>Sometimes a file has a standard extension (that cannot be 'gitignore'd), but
+it is actually automatically generated.  Here's one way to catch it:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+     <span class="Statement">-</span>   <span class="Constant">VREF/FILETYPE/AUTOGENERATED</span>     =   <span class="WarningMsg">@all</span>
+</pre>
+
+<p>You can look at <code>src/VREF/FILETYPE</code> to see how it handles the
+'AUTOGENERATED' option.  You could also have a more generic option, like
+perhaps BINARY, and handle that in the FILETYPE vref too.</p>
+<h2 id="checking-author-email">checking author email<a class="headerlink" href="#checking-author-email" title="Permanent link"></a></h2>
+<p>Some people want to ensure that "you can only push your own commits".</p>
+<p>If you force it on everyone, this is a very silly idea (see "Philosophical
+Notes" section of <code>src/VREF/EMAIL-CHECK</code>).</p>
+<p>But there may be value in enforcing it just for the junior developers.</p>
+<p>The neat thing is that the existing <code>contrib/update.email-check</code> was just
+copied to <code>src/VREF/EMAIL-CHECK</code> and it works, because VREFs get
+the same first 3 arguments and those are all that it cares about.  (Note: you
+have to change one subroutine in that script if you want to use it)</p>
+<h2 id="voting-on-commits">voting on commits<a class="headerlink" href="#voting-on-commits" title="Permanent link"></a></h2>
+<p>Although gitolite can't/won't do the whole "code review + workflow
+enforcement" thing that Gerrit Code Review does, a basic implementation of
+voting on a commit is surprisingly easy.  See <code>src/VREF/VOTES</code> for details
+(and note that the actual <em>code</em> is just 2-3 lines; the rest is inline
+documentation).</p>
+<h1 id="other-ideas-code-welcome">other ideas -- code welcome!<a class="headerlink" href="#other-ideas-code-welcome" title="Permanent link"></a></h1>
+<h2 id="no-non-merge-first-parents">"no non-merge first-parents"<a class="headerlink" href="#no-non-merge-first-parents" title="Permanent link"></a></h2>
+<p>Shruggar on #gitolite wanted this.  Possible code to implement it would be
+something like this (untested)</p>
+<pre><code>[ -z "$(git rev-list --first-parent --no-merges $2..$3)" ]
+</code></pre>
+<p>This can be implemented using <code>src/VREF/MERGE-CHECK</code> as a model.  That script
+does what the 'M' qualifier does in access rules (see last part of
+<a href="conf-2#appendix-1-different-types-of-write-operations">this</a>), although the syntax to be used in conf/gitolite will be
+quite different.</p>
+<h2 id="other-ideas-for-vrefs">other ideas for VREFs<a class="headerlink" href="#other-ideas-for-vrefs" title="Permanent link"></a></h2>
+<p>Here are some more ideas:</p>
+<ul>
+<li>Number of commits (<code>git rev-list --count $old $new</code>).</li>
+<li>Number of binary files in commit (currently I only know to count
+    occurrences of <code>Bin</code> in the output of <code>git diff --stat</code>.</li>
+<li>Number of <em>new</em> binary files (count <code>Bin 0 -&gt;</code> in <code>git diff --stat</code>
+    output).</li>
+<li>Time of day/day of week (see example snippet somewhere above).</li>
+<li>IP address.</li>
+<li>Phase of the moon.</li>
+</ul>
+<p>Note that pretty much anything that involves <code>$oldsha..$newsha</code> will have to
+deal with the issue that when you push a new tag or branch, the "old" part
+is all 0's, and unless you consider <code>--all</code> existing branches and tags it
+becomes meaningless in terms of "number of new files" etc.</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
     </body>
 </html>

@@ -1,9 +1,644 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>redirecting...</title>
-        <meta http-equiv="refresh" content="2;URL='http://gitolite.com/gitolite/basic-admin/index.html'" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>basic administration - Gitolite</title>
+        <link href="css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="css/gitolite.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
     </head>
+
     <body>
-        <p>This page has moved; redirecting...</p>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Gitolite</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="index.html">home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="overview.html">overview</a>
+</li>
+                                    
+<li >
+    <a href="concepts.html">concepts, conventions, terminology</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="quick_install.html">(unix/ssh experts) quick install and setup</a>
+</li>
+                                    
+<li >
+    <a href="install.html">normal ssh mode install and setup</a>
+</li>
+                                    
+<li >
+    <a href="fool_proof_setup.html">(if all else fails) fool-proof, step-by-step, install and setup</a>
+</li>
+                                    
+<li >
+    <a href="http.html">HTTP mode install</a>
+</li>
+                                    
+<li >
+    <a href="migr.html">migrating from v2</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">basic</a>
+    <ul class="dropdown-menu">
+            
+<li class="active">
+    <a href="basic-admin.html">basic administration</a>
+</li>
+            
+<li >
+    <a href="conf.html">the "conf" file (part 1)</a>
+</li>
+            
+<li >
+    <a href="conf-2.html">the "conf" file (part 2)</a>
+</li>
+            
+<li >
+    <a href="rc.html">the "rc" file</a>
+</li>
+            
+<li >
+    <a href="user.html">your users' view</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">advanced</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="git-config.html">setting git-config values</a>
+</li>
+            
+<li >
+    <a href="options.html">gitolite options</a>
+</li>
+            
+<li >
+    <a href="wild.html">ad hoc user-created ("wild") repos</a>
+</li>
+            
+<li >
+    <a href="templates.html">using templates</a>
+</li>
+            
+<li >
+    <a href="vref.html">virtual refs (part 1)</a>
+</li>
+            
+<li >
+    <a href="vref-2.html">virtual refs (part 2)</a>
+</li>
+            
+<li >
+    <a href="deleg.html">delegation of admin duties</a>
+</li>
+            
+<li >
+    <a href="gitweb-daemon.html">gitweb and git-daemon</a>
+</li>
+            
+<li >
+    <a href="mirroring.html">mirroring</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">customise</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="non-core.html">core and "non-core" gitolite</a>
+</li>
+            
+<li >
+    <a href="dev-notes.html">writing your own non-core code</a>
+</li>
+            
+<li >
+    <a href="triggers.html">gitolite triggers</a>
+</li>
+            
+<li >
+    <a href="list-non-core.html">list of non-core programs shipped with gitolite</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="cookbook.html">(quick! how do I...) the cookbook</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="emergencies.html">emergency!!</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">ssh</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="ssh.html">ssh</a>
+</li>
+            
+<li >
+    <a href="glssh.html">how gitolite uses ssh</a>
+</li>
+            
+<li >
+    <a href="sts.html">ssh troubleshooting</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="regex.html">regular expressions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="odds-and-ends.html">miscellaneous features</a>
+</li>
+                                    
+<li >
+    <a href="namespaces.html">using git namespaces</a>
+</li>
+                                    
+<li >
+    <a href="locking.html">locking binary files</a>
+</li>
+                                    
+<li >
+    <a href="testing.html">testing gitolite</a>
+</li>
+                                    
+<li >
+    <a href="package.html">packaging gitolite</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">more about gitolite</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="files.html">gitolite files & directories</a>
+</li>
+            
+<li >
+    <a href="rc-33.html">the 3.3 format rc file</a>
+</li>
+            
+<li >
+    <a href="perf.html">performance</a>
+</li>
+            
+<li >
+    <a href="internals.html">internals</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">contrib</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="contrib/ssh-and-http.html">Using both ssh and http</a>
+</li>
+            
+<li >
+    <a href="contrib/putty.html">Putty and Msysgit</a>
+</li>
+            
+<li >
+    <a href="contrib/sskm.html">Self-service key management</a>
+</li>
+            
+<li >
+    <a href="contrib/ukm.html">User key management</a>
+</li>
+            
+<li >
+    <a href="contrib/README-emacs.html">Emacs major mode</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li >
+    <a href="no-way.html">no way!</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="migr.html">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="conf.html">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#basic-administration">basic administration</a></li>
+        <li class="main "><a href="#clone-the-gitolite-admin-repo">clone the gitolite-admin repo</a></li>
+        <li class="main "><a href="#addremove-users">add/remove users</a></li>
+            <li><a href="#multiple-keys-per-user">multiple keys per user</a></li>
+        <li class="main "><a href="#add-remove-and-rename-repos">add, remove, and rename repos</a></li>
+            <li><a href="#removingrenaming-a-repo">removing/renaming a repo</a></li>
+        <li class="main "><a href="#appendix-1-bringing-existing-repos-into-gitolite">appendix 1: bringing existing repos into gitolite</a></li>
+        <li class="main "><a href="#appendix-2-old-style-multi-keys">appendix 2: old style multi-keys</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="basic-administration">basic administration<a class="headerlink" href="#basic-administration" title="Permanent link"></a></h1>
+<hr />
+<p><span class="green box-r">If you really, really, really want to manage
+gitolite directly on the server, i.e., without cloning the gitolite-admin
+repo, you can -- <a href="odds-and-ends#administering-gitolite-directly-on-the-server">here's how</a>.  This is likely to be of interest mainly
+to puppet/chef type installations.</span></p>
+<p>Day-to-day management of a gitolite site is done by cloning the special
+'gitolite-admin' repo, making appropriate changes to it, and pushing it back
+to the server.  The <a href="concepts">concepts and terminology</a> page has a section
+with some details on what happens after the push.</p>
+<p><span class="red">In other words, do <strong>NOT</strong> add new repos or users manually on the
+server!</span></p>
+<h1 id="clone-the-gitolite-admin-repo">clone the gitolite-admin repo<a class="headerlink" href="#clone-the-gitolite-admin-repo" title="Permanent link"></a></h1>
+<p>To clone the admin repo, go to the workstation where the public key used in
+'setup' came from, and run this:</p>
+<pre><code>git clone git@host:gitolite-admin
+</code></pre>
+<p>NOTE that (1) you must not include the <code>repositories/</code> part (gitolite handles
+that internally), and (2) you may include the ".git" at the end but it is
+optional.</p>
+<p>If this step fails, be sure to look at the two pages linked from the <a href="ssh">ssh</a>
+page before asking for help.  A very basic first step is to run the <code>info</code>
+command (<code>ssh git@host info</code>); <a href="user#the-info-command">this</a> page tells you what to expect.</p>
+<h1 id="addremove-users">add/remove users<a class="headerlink" href="#addremove-users" title="Permanent link"></a></h1>
+<p><span class="gray">NOTE: This section only applies to ssh mode.  If you've installed
+gitolite in http mode, adding and removing users is outside the scope of
+gitolite.</span></p>
+<p>Strictly speaking, gitolite doesn't know where users come from.  (If that
+surprises you, go back to the <a href="concepts">concepts</a> page and read the section on
+"authentication and authorisation"). However, gitolite does help with
+ssh-based authentication, by making it easy to add and remove users from
+<code>~/.ssh/authorized_keys</code>.</p>
+<p>To add or remove users, you have to clone the gitolite-admin repository, then
+add or remove ssh pubkey files from the "keydir/" directory in the clone.
+Then commit those changes and push.</p>
+<p>Here's how to add users to gitolite.  "alice" is the administrator and is
+adding "bob" and "carol".</p>
+<p><img alt="" src="ba01.png" /></p>
+<p>All this is done from the admin (Alice)'s workstation.  The steps are:</p>
+<ol>
+<li>
+<p>Run <code>git clone git@server:gitolite-admin</code>.</p>
+</li>
+<li>
+<p>Obtain pubkeys from each user; email, USB, DHL, pigeon post, owl mail, any
+    method you like.</p>
+<p>Rename each received file to the name of the user, add a ".pub" at the
+end, copy it into <code>keydir/</code> in the gitolite-admin repo you cloned.</p>
+</li>
+<li>
+<p>Run <code>git add keydir</code>, then <code>git commit</code>, then <code>git push</code>.</p>
+</li>
+</ol>
+<p>You do NOT need to add Carol or Bob as <em>real</em> (Unix) users.  You do NOT add
+their keys directly anywhere on the server, and you most definitely do NOT
+fiddle with the authorized_keys file on the server directly!</p>
+<p>To <strong>remove</strong> a user, <code>git rm keydir/alice.pub</code>.</p>
+<p>Commit and push the changes.  On receiving the push, gitolite will carry out
+the changes specified.</p>
+<p><strong>NOTE</strong>: your users' public key is typically
+<code>$HOME/.ssh/id_rsa.pub</code> on her workstation.  Please make sure it is in
+openssh's default format.</p>
+<h2 id="multiple-keys-per-user">multiple keys per user<a class="headerlink" href="#multiple-keys-per-user" title="Permanent link"></a></h2>
+<p>You can put pubkeys in subdirectories within "keydir/", because the user name
+is simply the <em>base name</em> of the public key file name.  That is,
+'keydir/alice.pub', 'keydir/home/alice.pub', 'keydir/laptop/alice.pub', (or
+even 'keydir/work/desktop/alice.pub' -- any number of subdirectory levels are
+OK) all resolve to user "alice".</p>
+<p>This is the simplest and most understandable way to allow multiple keys per
+user.</p>
+<p>Please see appendix 2 at the bottom of this document for an older way that
+will continue to be supported but has proved hard to explain!</p>
+<h1 id="add-remove-and-rename-repos">add, remove, and rename repos<a class="headerlink" href="#add-remove-and-rename-repos" title="Permanent link"></a></h1>
+<div class="admonition warning">
+<p>Note: this page describes how to add <strong>new</strong> repos.  To bring already
+existing repos under gitolite's control, click <a href="basic-admin#appendix-1-bringing-existing-repos-into-gitolite">here</a>.</p>
+</div>
+<p>To <strong>add</strong> a new repo, you have to clone the gitolite-admin repository, then
+edit the <a href="conf"><code>conf/gitolite.conf</code></a> file. In that file, add the repo, along
+with at least one user with some permissions.</p>
+<p>You can add the new repo in its own paragraph,</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Statement">repo</span> bar
+    <span class="Statement">RW+</span>     =   alice
+</pre>
+
+<p>or you can add it to an existing repo line, if the new repo is intended to
+have the same access rules:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Statement">repo</span> foo bar
+    <span class="Statement">RW+</span>     =   alice
+</pre>
+
+<p>Either way, commit and push the changes.  Gitolite will create a bare, empty,
+repo on the server that is ready to be cloned and pushed to.</p>
+<hr />
+<p>As you can see, the "repo" line can have any number of repo names or repo
+group names in it. However, it can only be one line; this will not work:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Statement">repo</span> foo
+<span class="Statement">repo</span> bar    <span class="Comment"># WRONG; 'foo' is now forgotten</span>
+    <span class="Statement">RW+</span>     =   alice
+</pre>
+
+<p>If you have too many to fit on one line comfortably, you can create and use a
+<a href="conf#group-definitions">repo group</a>:</p>
+<pre style="color: #ffffff; background-color: #000000;">
+<span class="Identifier">@myrepos</span><span class="PreProc">    =   foo</span>
+<span class="Identifier">@myrepos</span><span class="PreProc">    =   bar</span>
+    .
+    .
+    .
+<span class="Identifier">@myrepos</span><span class="PreProc">    =   zzq</span>
+
+<span class="Statement">repo</span> <span class="Identifier">@myrepos</span>
+    <span class="Statement">RW+</span>     =   alice
+</pre>
+
+<h2 id="removingrenaming-a-repo">removing/renaming a repo<a class="headerlink" href="#removingrenaming-a-repo" title="Permanent link"></a></h2>
+<p>Removing a repo is not so straightforward.  You certainly must remove the
+appropriate lines from the <code>conf/gitolite.conf</code> file, but gitolite will not
+automatically delete the repo from the server.  You have to log on to the
+server and do the dirty deed yourself :-)</p>
+<p>It is best to make the change in the conf file, push it, and <em>then</em> go to the
+server and do what you need to.</p>
+<p>Renaming a repo is also not automatic.  Here's what you do (and the order is
+important):</p>
+<ul>
+<li>Go to the server and rename the repo at the Unix command line.  Don't
+    forget to retain the ".git" extension on the directory name.</li>
+<li>Change the name in the conf/gitolite.conf file in your gitolite-admin repo
+    clone, and add/commit/push.</li>
+</ul>
+<h1 id="appendix-1-bringing-existing-repos-into-gitolite">appendix 1: bringing existing repos into gitolite<a class="headerlink" href="#appendix-1-bringing-existing-repos-into-gitolite" title="Permanent link"></a></h1>
+<div class="admonition danger">
+<p class="admonition-title">Warning!</p>
+<p>Gitolite <strong>will clobber</strong> any existing <code>update</code> hook in your repos when
+you do this.  Please see either the <a href="cookbook">cookbook</a> or the <a href="non-core">non-core</a> page
+for information on how to make your existing update hook work with
+gitolite.</p>
+<p>Gitolite <em>may clobber</em> any existing "git-daemon-export-ok" file in your
+repo; see the page on <a href="gitweb-daemon">allowing access to gitweb and
+git-daemon</a> for how to enable that via gitolite.</p>
+</div>
+<p>With that out of the way, here's how to do this:</p>
+<div class="admonition danger">
+<p class="admonition-title">Warning!</p>
+<p>This warning applies to versions before v3.6.10.</p>
+<p>Depending on how your gitolite.conf is setup, and how much time you take
+between moving the repositories and completing the rest of the
+instructions below, it may be possible for a user to read or write the
+repos you are in the process of migrating.</p>
+<p>To prevent writing, you can <a href="odds-and-ends#disabling-pushes-to-take-backups">disable write access</a> to all repos before
+you start this process.  Preventing reading is much harder, but at the
+same time, most configurations will not have this problem.  If in doubt,
+ask on the mailing list.</p>
+<p>Either way, don't forget to re-enable access at the end of this process!</p>
+</div>
+<p>First, on the server:</p>
+<ul>
+<li>
+<p>Move the repos to <code>$HOME/repositories</code>.</p>
+</li>
+<li>
+<p>Make sure that:</p>
+<ul>
+<li>They are all <em>bare</em> repos.</li>
+<li>All the repo names end in ".git".</li>
+<li>All the files and directories are owned and writable by the gitolite
+    <a href="concepts#the-hosting-user">hosting user</a> (especially true if you copied them as root).</li>
+<li>There are no symbolic links left over from wherever the files were
+    brought from.</li>
+</ul>
+</li>
+<li>
+<p>Run the following three commands:</p>
+<pre><code>gitolite compile
+gitolite setup --hooks-only
+gitolite trigger POST_COMPILE
+</code></pre>
+</li>
+<li>
+<p>If the repos are <a href="wild">wildcard</a> repos that already match some repo regex
+    in the conf file, you need to manually create the gl-creator file, like
+    so:</p>
+<pre><code>echo username &gt; ~/repositories/path/to/repo.git/gl-creator
+</code></pre>
+<p>I haven't yet found this to be common enough to bother wrapping it in a
+nice interface or command.</p>
+</li>
+</ul>
+<p>However, if the repos are normal repos, then, back on your workstation:</p>
+<ul>
+<li>Add them to the <code>conf/gitolite.conf</code> in your clone of the admin repo, then
+    commit and push the change.</li>
+</ul>
+<h1 id="appendix-2-old-style-multi-keys">appendix 2: old style multi-keys<a class="headerlink" href="#appendix-2-old-style-multi-keys" title="Permanent link"></a></h1>
+<p>There is another way that involves creating key files like <code>alice@home.pub</code>
+and <code>alice@laptop.pub</code>, but there is a complication because gitolite also
+allows <em>full email addresses</em> as user names.  (i.e., <code>sitaramc@gmail.com.pub</code>
+denotes the user called <code>sitaramc@gmail.com</code>).</p>
+<p>This older method of enabling multi-keys was developed to deal with that.  It
+will continue to work and be supported in <em>code</em>, simply because I prefer it.
+But I will not accept questions or doc patches for it, because it seems it is
+too difficult to understand for a lot of people.  This table of sample pubkey
+filenames and the corresponding derived usernames is all you get:</p>
+<ul>
+<li>
+<p>plain username, no multikey</p>
+<pre><code>sitaramc.pub                            sitaramc
+</code></pre>
+</li>
+<li>
+<p>plain username, with multikeys</p>
+<pre><code>sitaramc@laptop.pub                     sitaramc
+sitaramc@desktop.pub                    sitaramc
+</code></pre>
+</li>
+<li>
+<p>email address as username, no multikey</p>
+<pre><code>sitaramc@gmail.com.pub                  sitaramc@gmail.com
+</code></pre>
+</li>
+<li>
+<p>email address as username, with multikeys</p>
+<pre><code>sitaramc@gmail.com@laptop.pub           sitaramc@gmail.com
+sitaramc@gmail.com@desktop.pub          sitaramc@gmail.com
+</code></pre>
+</li>
+</ul></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
     </body>
 </html>
