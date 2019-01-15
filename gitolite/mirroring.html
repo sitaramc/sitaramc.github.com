@@ -505,12 +505,11 @@ get expected results.  <strong>Do NOT proceed otherwise.</strong></p>
     the master it will update all the slaves anyway:</p>
 <p><pre style="color: #ffffff; background-color: #000000;">
 <span class="Statement">repo</span> gitolite-admin
-    <span class="Statement">RW+</span>     =   some-local-admin</p>
-<pre><code>&lt;span class="Statement"&gt;option&lt;/span&gt; &lt;span class="Identifier"&gt;mirror.master&lt;/span&gt;    =   &lt;span class="Constant"&gt;mars&lt;/span&gt;
-&lt;span class="Statement"&gt;option&lt;/span&gt; &lt;span class="Identifier"&gt;mirror.slaves&lt;/span&gt;    =   &lt;span class="Constant"&gt;phobos&lt;/span&gt;
-</code></pre>
-</pre>
-
+    <span class="Statement">RW+</span>     =   some-local-admin
+<span class="Comment"># possibly other rules</span>
+    <span class="Statement">option</span> <span class="Identifier">mirror.master</span>    =   <span class="Constant">mars</span>
+    <span class="Statement">option</span> <span class="Identifier">mirror.slaves</span>    =   <span class="Constant">phobos</span>
+</pre></p>
 </li>
 <li>
 <p>When that is all done and tested, <strong>enable mirroring</strong> by going through
