@@ -405,6 +405,9 @@ OK) all resolve to user "alice".</p>
 user.</p>
 <p>Please see appendix 2 at the bottom of this document for an older way that
 will continue to be supported but has proved hard to explain!</p>
+<p>(Finally, if you <em>insist</em> on wanting to actually put all the keys for a user
+into a single, multi-line, pubkey file, it is possible.  For details, see the
+program <code>src/triggers/post-compile/ssh-authkeys-split</code> in the source.)</p>
 <h1 id="add-remove-and-rename-repos">add, remove, and rename repos<a class="headerlink" href="#add-remove-and-rename-repos" title="Permanent link"></a></h1>
 <div class="admonition warning">
 <p>Note: this page describes how to add <strong>new</strong> repos.  To bring already
@@ -571,7 +574,7 @@ sitaramc@gmail.com@desktop.pub          sitaramc@gmail.com
         </footer>
         <script>
             var base_url = ".",
-                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
         <script src="js/base.js" defer></script>
         <script src="search/main.js" defer></script>
