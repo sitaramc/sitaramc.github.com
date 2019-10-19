@@ -385,6 +385,15 @@ should first decide what repos they should have unauthenticated access to:</p>
 used by various features", add this (including the trailing comma):</p>
 <pre><code>HTTP_ANON_USER      =&gt;  'nobody',
 </code></pre>
+<p><strong>Updated 2019-10-19</strong></p>
+<p>The above does not seem to work any more.  The way it was supposed to work was
+that the user could supply a userid, or not.  If he did not, then gitolite
+would notice (the environment variable <code>REMOTE_USER</code> would be empty) and would
+then use whatever was specified above (in this case, <code>nobody</code>).</p>
+<p>This does not seem to happen any more.  Apache seems to insist on a userid,
+period.  Unfortunately I am very far from being an expert in apache
+configuration, so, if someone can make this work <em>without</em> requiring any
+userid at all, please let me know.</p>
 <h1 id="making-repositories-available-to-both-ssh-and-http-mode-clients">Making repositories available to both ssh and http mode clients<a class="headerlink" href="#making-repositories-available-to-both-ssh-and-http-mode-clients" title="Permanent link"></a></h1>
 <p>This section has been contributed by Thomas Hager (duke at sigsegv dot at),
 and is available <a href="contrib/ssh-and-http">here</a>.</p>
