@@ -9,307 +9,294 @@
         
         <link rel="shortcut icon" href="img/favicon.ico">
         <title>how gitolite uses ssh - Gitolite</title>
-        <link href="css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
         <link href="css/gitolite.css" rel="stylesheet">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
 
         <script src="js/jquery-1.10.2.min.js" defer></script>
-        <script src="js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="js/bootstrap.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
     <body>
-
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-
-                <!-- Collapsed navigation -->
-                <div class="navbar-header">
-                    <!-- Expander button -->
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html">Gitolite</a>
-                </div>
+                <a class="navbar-brand" href=".">Gitolite</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
                 <!-- Expanded navigation -->
-                <div class="navbar-collapse collapse">
+                <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li >
-                                <a href="index.html">home</a>
+                            <li class="navitem">
+                                <a href="index.html" class="nav-link">home</a>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
-<li >
-    <a href="overview.html">overview</a>
+<li>
+    <a href="overview.html" class="dropdown-item">overview</a>
 </li>
                                     
-<li >
-    <a href="concepts.html">concepts, conventions, terminology</a>
+<li>
+    <a href="concepts.html" class="dropdown-item">concepts, conventions, terminology</a>
 </li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
-<li >
-    <a href="quick_install.html">(unix/ssh experts) quick install and setup</a>
+<li>
+    <a href="quick_install.html" class="dropdown-item">(unix/ssh experts) quick install and setup</a>
 </li>
                                     
-<li >
-    <a href="install.html">normal ssh mode install and setup</a>
+<li>
+    <a href="install.html" class="dropdown-item">normal ssh mode install and setup</a>
 </li>
                                     
-<li >
-    <a href="fool_proof_setup.html">(if all else fails) fool-proof, step-by-step, install and setup</a>
+<li>
+    <a href="fool_proof_setup.html" class="dropdown-item">(if all else fails) fool-proof, step-by-step, install and setup</a>
 </li>
                                     
-<li >
-    <a href="http.html">HTTP mode install</a>
+<li>
+    <a href="http.html" class="dropdown-item">HTTP mode install</a>
 </li>
                                     
-<li >
-    <a href="migr.html">migrating from v2</a>
+<li>
+    <a href="migr.html" class="dropdown-item">migrating from v2</a>
 </li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
   <li class="dropdown-submenu">
-    <a href="#">basic</a>
+    <a href="#" class="dropdown-item">basic</a>
     <ul class="dropdown-menu">
             
-<li >
-    <a href="basic-admin.html">basic administration</a>
+<li>
+    <a href="basic-admin.html" class="dropdown-item">basic administration</a>
 </li>
             
-<li >
-    <a href="conf.html">the "conf" file (part 1)</a>
+<li>
+    <a href="conf.html" class="dropdown-item">the "conf" file (part 1)</a>
 </li>
             
-<li >
-    <a href="conf-2.html">the "conf" file (part 2)</a>
+<li>
+    <a href="conf-2.html" class="dropdown-item">the "conf" file (part 2)</a>
 </li>
             
-<li >
-    <a href="rc.html">the "rc" file</a>
+<li>
+    <a href="rc.html" class="dropdown-item">the "rc" file</a>
 </li>
             
-<li >
-    <a href="user.html">your users' view</a>
+<li>
+    <a href="user.html" class="dropdown-item">your users' view</a>
 </li>
     </ul>
   </li>
                                     
   <li class="dropdown-submenu">
-    <a href="#">advanced</a>
+    <a href="#" class="dropdown-item">advanced</a>
     <ul class="dropdown-menu">
             
-<li >
-    <a href="git-config.html">setting git-config values</a>
+<li>
+    <a href="git-config.html" class="dropdown-item">setting git-config values</a>
 </li>
             
-<li >
-    <a href="options.html">gitolite options</a>
+<li>
+    <a href="options.html" class="dropdown-item">gitolite options</a>
 </li>
             
-<li >
-    <a href="wild.html">ad hoc user-created ("wild") repos</a>
+<li>
+    <a href="wild.html" class="dropdown-item">ad hoc user-created ("wild") repos</a>
 </li>
             
-<li >
-    <a href="templates.html">using templates</a>
+<li>
+    <a href="templates.html" class="dropdown-item">using templates</a>
 </li>
             
-<li >
-    <a href="vref.html">virtual refs (part 1)</a>
+<li>
+    <a href="vref.html" class="dropdown-item">virtual refs (part 1)</a>
 </li>
             
-<li >
-    <a href="vref-2.html">virtual refs (part 2)</a>
+<li>
+    <a href="vref-2.html" class="dropdown-item">virtual refs (part 2)</a>
 </li>
             
-<li >
-    <a href="deleg.html">delegation of admin duties</a>
+<li>
+    <a href="deleg.html" class="dropdown-item">delegation of admin duties</a>
 </li>
             
-<li >
-    <a href="gitweb-daemon.html">gitweb and git-daemon</a>
+<li>
+    <a href="gitweb-daemon.html" class="dropdown-item">gitweb and git-daemon</a>
 </li>
             
-<li >
-    <a href="mirroring.html">mirroring</a>
+<li>
+    <a href="mirroring.html" class="dropdown-item">mirroring</a>
 </li>
     </ul>
   </li>
                                     
   <li class="dropdown-submenu">
-    <a href="#">customise</a>
+    <a href="#" class="dropdown-item">customise</a>
     <ul class="dropdown-menu">
             
-<li >
-    <a href="non-core.html">core and "non-core" gitolite</a>
+<li>
+    <a href="non-core.html" class="dropdown-item">core and "non-core" gitolite</a>
 </li>
             
-<li >
-    <a href="dev-notes.html">writing your own non-core code</a>
+<li>
+    <a href="dev-notes.html" class="dropdown-item">writing your own non-core code</a>
 </li>
             
-<li >
-    <a href="triggers.html">gitolite triggers</a>
+<li>
+    <a href="triggers.html" class="dropdown-item">gitolite triggers</a>
 </li>
             
-<li >
-    <a href="list-non-core.html">list of non-core programs shipped with gitolite</a>
+<li>
+    <a href="list-non-core.html" class="dropdown-item">list of non-core programs shipped with gitolite</a>
 </li>
     </ul>
   </li>
                                     
-<li >
-    <a href="cookbook.html">(quick! how do I...) the cookbook</a>
+<li>
+    <a href="cookbook.html" class="dropdown-item">(quick! how do I...) the cookbook</a>
 </li>
                                 </ul>
                             </li>
                             <li class="dropdown active">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
-<li >
-    <a href="emergencies.html">emergency!!</a>
+<li>
+    <a href="emergencies.html" class="dropdown-item">emergency!!</a>
 </li>
                                     
   <li class="dropdown-submenu">
-    <a href="#">ssh</a>
+    <a href="#" class="dropdown-item">ssh</a>
     <ul class="dropdown-menu">
             
-<li >
-    <a href="ssh.html">ssh</a>
+<li>
+    <a href="ssh.html" class="dropdown-item">ssh</a>
 </li>
             
-<li class="active">
-    <a href="glssh.html">how gitolite uses ssh</a>
+<li>
+    <a href="glssh.html" class="dropdown-item active">how gitolite uses ssh</a>
 </li>
             
-<li >
-    <a href="sts.html">ssh troubleshooting</a>
+<li>
+    <a href="sts.html" class="dropdown-item">ssh troubleshooting</a>
 </li>
     </ul>
   </li>
                                     
-<li >
-    <a href="regex.html">regular expressions</a>
+<li>
+    <a href="regex.html" class="dropdown-item">regular expressions</a>
 </li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
-<li >
-    <a href="odds-and-ends.html">miscellaneous features</a>
+<li>
+    <a href="odds-and-ends.html" class="dropdown-item">miscellaneous features</a>
 </li>
                                     
-<li >
-    <a href="namespaces.html">using git namespaces</a>
+<li>
+    <a href="namespaces.html" class="dropdown-item">using git namespaces</a>
 </li>
                                     
-<li >
-    <a href="locking.html">locking binary files</a>
+<li>
+    <a href="locking.html" class="dropdown-item">locking binary files</a>
 </li>
                                     
-<li >
-    <a href="testing.html">testing gitolite</a>
+<li>
+    <a href="testing.html" class="dropdown-item">testing gitolite</a>
 </li>
                                     
-<li >
-    <a href="package.html">packaging gitolite</a>
+<li>
+    <a href="package.html" class="dropdown-item">packaging gitolite</a>
 </li>
                                     
   <li class="dropdown-submenu">
-    <a href="#">more about gitolite</a>
+    <a href="#" class="dropdown-item">more about gitolite</a>
     <ul class="dropdown-menu">
             
-<li >
-    <a href="files.html">gitolite files & directories</a>
+<li>
+    <a href="files.html" class="dropdown-item">gitolite files & directories</a>
 </li>
             
-<li >
-    <a href="rc-33.html">the 3.3 format rc file</a>
+<li>
+    <a href="rc-33.html" class="dropdown-item">the 3.3 format rc file</a>
 </li>
             
-<li >
-    <a href="perf.html">performance</a>
+<li>
+    <a href="perf.html" class="dropdown-item">performance</a>
 </li>
             
-<li >
-    <a href="internals.html">internals</a>
+<li>
+    <a href="internals.html" class="dropdown-item">internals</a>
 </li>
     </ul>
   </li>
                                     
   <li class="dropdown-submenu">
-    <a href="#">contrib</a>
+    <a href="#" class="dropdown-item">contrib</a>
     <ul class="dropdown-menu">
             
-<li >
-    <a href="contrib/ssh-and-http.html">Using both ssh and http</a>
+<li>
+    <a href="contrib/ssh-and-http.html" class="dropdown-item">Using both ssh and http</a>
 </li>
             
-<li >
-    <a href="contrib/putty.html">Putty and Msysgit</a>
+<li>
+    <a href="contrib/putty.html" class="dropdown-item">Putty and Msysgit</a>
 </li>
             
-<li >
-    <a href="contrib/sskm.html">Self-service key management</a>
+<li>
+    <a href="contrib/sskm.html" class="dropdown-item">Self-service key management</a>
 </li>
             
-<li >
-    <a href="contrib/ukm.html">User key management</a>
+<li>
+    <a href="contrib/ukm.html" class="dropdown-item">User key management</a>
 </li>
             
-<li >
-    <a href="contrib/README-emacs.html">Emacs major mode</a>
+<li>
+    <a href="contrib/README-emacs.html" class="dropdown-item">Emacs major mode</a>
 </li>
     </ul>
   </li>
                                     
-<li >
-    <a href="no-way.html">no way!</a>
+<li>
+    <a href="no-way.html" class="dropdown-item">no way!</a>
 </li>
                                 </ul>
                             </li>
                         </ul>
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
-                            <li >
-                                <a rel="next" href="ssh.html">
+                            <li class="nav-item">
+                                <a rel="prev" href="ssh.html" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
-                            <li >
-                                <a rel="prev" href="sts.html">
+                            <li class="nav-item">
+                                <a rel="next" href="sts.html" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -319,16 +306,44 @@
         </div>
 
         <div class="container">
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#how-gitolite-uses-ssh">how gitolite uses ssh</a></li>
-        <li class="main "><a href="#ssh-basics">ssh basics</a></li>
-        <li class="main "><a href="#how-does-gitolite-use-all-this-ssh-magic">how does gitolite use all this ssh magic?</a></li>
-            <li><a href="#restricting-shell-accessdistinguishing-one-user-from-another">restricting shell access/distinguishing one user from another</a></li>
-            <li><a href="#restricting-branch-level-actions">restricting branch level actions</a></li>
-    </ul>
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#how-gitolite-uses-ssh" class="nav-link">how gitolite uses ssh</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#ssh-basics" class="nav-link">ssh basics</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#how-does-gitolite-use-all-this-ssh-magic" class="nav-link">how does gitolite use all this ssh magic?</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#restricting-shell-accessdistinguishing-one-user-from-another" class="nav-link">restricting shell access/distinguishing one user from another</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#restricting-branch-level-actions" class="nav-link">restricting branch level actions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
 </div></div>
-                <div class="col-md-9" role="main">
+                    <div class="col-md-9" role="main">
 
 <h1 id="how-gitolite-uses-ssh">how gitolite uses ssh<a class="headerlink" href="#how-gitolite-uses-ssh" title="Permanent link"></a></h1>
 <hr />
@@ -359,9 +374,9 @@ and give the server the public key.  (I need not add that the "private"
 key must be, well, kept <em>private</em>!)</p>
 </li>
 <li>
-<p><strong>Generating a key pair on your workstation</strong> is done by running the
+<p><strong>Generating a key pair on your workstation*<em> is done by running the
     command <code>ssh-keygen -t rsa</code>.  This produces two files in <code>~/.ssh</code>.  One is
-    <code>id_rsa</code>; this is the <strong>private</strong> key -- <strong><em>never</em></strong> let it out of your
+    <code>id_rsa</code>; this is the <strong>private</strong> key -- </em></strong>never*** let it out of your
     machine.  The other is <code>id_rsa.pub</code>, which is the corresponding public
     key.  This public key is usually just one long line of text.</p>
 <ul>
@@ -459,6 +474,7 @@ happening by returning an error code.</p>
 a special update hook.  This hook takes all the information presented, looks
 at the config file, and decides to allow or reject the update.</p>
 <p>And that's basically it.</p></div>
+            </div>
         </div>
 
         <footer class="col-md-12">
@@ -472,19 +488,19 @@ at the config file, and decides to allow or reject the update.</p>
         <script src="js/base.js" defer></script>
         <script src="search/main.js" defer></script>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-    <div class="modal-dialog">
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
             </div>
             <div class="modal-body">
                 <p>
                     From here you can search these documents. Enter
                     your search terms below.
                 </p>
-                <form role="form">
+                <form>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
@@ -495,12 +511,12 @@ at the config file, and decides to allow or reject the update.</p>
             </div>
         </div>
     </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
             </div>
             <div class="modal-body">
               <table class="table">
