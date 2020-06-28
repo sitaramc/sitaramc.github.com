@@ -1,47 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>what the heck is a reflog and why is it so important?</title>
-  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
-  
+
       code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
       pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
       pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-  
+
       td          { vertical-align: top }
-  
+
       .red        { color: red }
       .blue       { color: blue }
       .green      { color: green }
       .gray       { color: gray }
       .pink       { color: pink }
-  
+
       .box        { background-color:#e0e0e0 }
       .bg-red     { background-color:#ffe0e0 }
       .bg-green   { background-color:#e0ffe0 }
       .bg-blue    { background-color:#e0e0ff }
-  
+
       /* couldn't resist the name! */
       .wd40       { width: 40% !important }
-  
+
       .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
       .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
-  
+
       .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
       .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
-  
+
       .sidebar {
           margin-left: 4px;
           width: 25%;
           float: right;
           border: 4px solid #fff;
       }
-  
+
   </style>
   <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -65,21 +75,21 @@
         IMPORTANT NOTE:
     </strong>
     although this page has a &quot;gitolite.com&quot; URL, this is not about gitolite.
-    That's just an artifact of &quot;sitaramc.github.com&quot; being translated to
+    That&#39;s just an artifact of &quot;sitaramc.github.com&quot; being translated to
     &quot;gitolite.com&quot; and so ALL my git related stuff gets carried over.
     Gitolite documentation has another <code>/gitolite</code> in the URL, so
     you can tell.  My apologies for this confusion.
 </span>
 </p>
-<div id="header">
+<header id="title-block-header">
 <h1 class="title">what the heck is a <em>reflog</em> and why is it so important?</h1>
-</div>
-<h1 id="what-is-it"><span class="header-section-number">1</span> what is it</h1>
+</header>
+<h1 data-number="1" id="what-is-it"><span class="header-section-number">1</span> what is it</h1>
 <ul>
-<li><p>a reflog is a very special &quot;branch&quot; that records each position of HEAD in the last 30 days (by default). So removed branches won't be purged by prune until after waiting for 30 days, when the last reference to them will finally be released.</p></li>
-<li><p>reflog history is not shared -- it is exclusive to your repository. This is the only thing you lose if you clone a project as a means of performing a backup.</p></li>
+<li><p>a reflog is a very special “branch” that records each position of HEAD in the last 30 days (by default). So removed branches won’t be purged by prune until after waiting for 30 days, when the last reference to them will finally be released.</p></li>
+<li><p>reflog history is not shared – it is exclusive to your repository. This is the only thing you lose if you clone a project as a means of performing a backup.</p></li>
 </ul>
-<h1 id="how-do-i-visualise-it"><span class="header-section-number">2</span> how do I visualise it</h1>
+<h1 data-number="2" id="how-do-i-visualise-it"><span class="header-section-number">2</span> how do I visualise it</h1>
 <ul>
 <li><p>the basic reflog commands are like this (the relative date is my preference; see <code>git help log</code> for other choices)</p>
 <pre><code># activity on HEAD, including timestamp
@@ -87,21 +97,21 @@ git reflog show --date=relative
 # same, on some_branch
 git reflog show --date=relative some_branch</code></pre></li>
 <li><p>a good way to visualise the reflog is <code>git show-branch -g</code> (or <code>-gN</code>, where N is some integer). This shows reflog info for the branch specified (defaulting to the current branch), including topological relationships and relative time. This is useful if you had a lot of rebases or amended commits and you think you might need one of them back :-)</p>
-<p>It takes a little getting used to, so here're some hints:</p>
+<p>It takes a little getting used to, so here’re some hints:</p>
 <ul>
 <li>the top of each vertical line represents a prior position of HEAD (or whatever branch you specified), with the latest one being the extreme left column</li>
-<li>for each commit, the non-blank commit vertically below is its parent commit (merge commits are represented by a &quot;-&quot; sign)</li>
-<li>so when you see a dip in the &quot;line of peaks&quot;, you know there was a reset to something earlier followed by a new set of commits</li>
-<li>very likely, the top commit to the right of any such &quot;dip&quot; is probably unreachable</li>
+<li>for each commit, the non-blank commit vertically below is its parent commit (merge commits are represented by a “-” sign)</li>
+<li>so when you see a dip in the “line of peaks”, you know there was a reset to something earlier followed by a new set of commits</li>
+<li>very likely, the top commit to the right of any such “dip” is probably unreachable</li>
 </ul></li>
 </ul>
-<h1 id="why-would-i-need-it"><span class="header-section-number">3</span> why would I need it</h1>
+<h1 data-number="3" id="why-would-i-need-it"><span class="header-section-number">3</span> why would I need it</h1>
 <ul>
 <li><p>you can recover commits made on a detached head</p></li>
 <li><p>you can fix a non-bare push</p></li>
 </ul>
-<h1 id="cool-tricks"><span class="header-section-number">4</span> cool tricks</h1>
-<p><a href="tools/git-reflogk">Here</a>'s a neat tool that shows you reflog output but using gitk -- the graphical viewer. Don't knock it until you've tried it :-)</p>
+<h1 data-number="4" id="cool-tricks"><span class="header-section-number">4</span> cool tricks</h1>
+<p><a href="tools/git-reflogk">Here</a>’s a neat tool that shows you reflog output but using gitk – the graphical viewer. Don’t knock it until you’ve tried it :-)</p>
 <hr />
 <p><sup>[based on a comment in <a href="http://blogs.gnome.org/newren/2007/11/24/local-caching-a-major-distinguishing-difference-between-vcses/" class="uri">http://blogs.gnome.org/newren/2007/11/24/local-caching-a-major-distinguishing-difference-between-vcses/</a>]</sup></p>
 </body>

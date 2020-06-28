@@ -1,47 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title>try it and see...</title>
-  <style type="text/css">code{white-space: pre;}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>try it and see…</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
-  
+
       code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
       pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
       pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-  
+
       td          { vertical-align: top }
-  
+
       .red        { color: red }
       .blue       { color: blue }
       .green      { color: green }
       .gray       { color: gray }
       .pink       { color: pink }
-  
+
       .box        { background-color:#e0e0e0 }
       .bg-red     { background-color:#ffe0e0 }
       .bg-green   { background-color:#e0ffe0 }
       .bg-blue    { background-color:#e0e0ff }
-  
+
       /* couldn't resist the name! */
       .wd40       { width: 40% !important }
-  
+
       .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
       .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
-  
+
       .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
       .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
-  
+
       .sidebar {
           margin-left: 4px;
           width: 25%;
           float: right;
           border: 4px solid #fff;
       }
-  
+
   </style>
   <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -65,22 +75,22 @@
         IMPORTANT NOTE:
     </strong>
     although this page has a &quot;gitolite.com&quot; URL, this is not about gitolite.
-    That's just an artifact of &quot;sitaramc.github.com&quot; being translated to
+    That&#39;s just an artifact of &quot;sitaramc.github.com&quot; being translated to
     &quot;gitolite.com&quot; and so ALL my git related stuff gets carried over.
     Gitolite documentation has another <code>/gitolite</code> in the URL, so
     you can tell.  My apologies for this confusion.
 </span>
 </p>
-<div id="header">
-<h1 class="title">try it and see...</h1>
-</div>
-<p>It's easy to forget that a lot of git's features, including features concerned with remote repos like fetch/pull/push, can be safely and easily tried out <strong>locally</strong>:</p>
+<header id="title-block-header">
+<h1 class="title">try it and see…</h1>
+</header>
+<p>It’s easy to forget that a lot of git’s features, including features concerned with remote repos like fetch/pull/push, can be safely and easily tried out <strong>locally</strong>:</p>
 <ul>
 <li>start with an empty directory</li>
 <li>create a new bare repo in it (e.g., <code>git init --bare b.git</code>). This is your <strong>server</strong> repo!</li>
-<li>clone this one or more times (e.g., <code>git clone b.git c1; git clone b.git c2</code>). These are your <strong>developer</strong> repos; you can treat each one as belonging to a different developer. The &quot;server&quot; repo you cloned from will be defined as the remote called &quot;origin&quot; in each of these clones.</li>
+<li>clone this one or more times (e.g., <code>git clone b.git c1; git clone b.git     c2</code>). These are your <strong>developer</strong> repos; you can treat each one as belonging to a different developer. The “server” repo you cloned from will be defined as the remote called “origin” in each of these clones.</li>
 </ul>
-<p>Now you're ready to test out whatever features you want using any or all of the clones you created.</p>
+<p>Now you’re ready to test out whatever features you want using any or all of the clones you created.</p>
 <p>Notice that we are simply using the local file system as the transport protocol. People familiar with URLs on a browser might recognise this as eqvt to <code>file:///full/path/to/something</code>, and indeed that is exactly what git treats it as.</p>
 <p>Using ssh or http merely changes</p>
 <ul>
@@ -88,11 +98,11 @@
 <li>the authentication required and permissions granted by the server</li>
 </ul>
 <p>What <strong>does NOT change</strong> is the behaviour of most git commands!</p>
-<p>This means you can play with git to your heart's content in some temporary directory. There's no danger of messing up a real repo, or of getting side-tracked by connectivity or permissions or even speed issues, which might happen if you tried this with a real server.</p>
-<p>If playing on a test repo is not sufficient for your needs, you can replace the &quot;create a new bare repo&quot; step with a clone of one of your real repos. For example, I might do this:</p>
+<p>This means you can play with git to your heart’s content in some temporary directory. There’s no danger of messing up a real repo, or of getting side-tracked by connectivity or permissions or even speed issues, which might happen if you tried this with a real server.</p>
+<p>If playing on a test repo is not sufficient for your needs, you can replace the “create a new bare repo” step with a clone of one of your real repos. For example, I might do this:</p>
 <pre><code>git clone --bare git://github.com/sitaramc/gitolite.git b.git</code></pre>
-<p>and that would give me a &quot;b.git&quot; that is a bare repo that starts out with all the code and branches that my real server repo has.</p>
+<p>and that would give me a “b.git” that is a bare repo that starts out with all the code and branches that my real server repo has.</p>
 <hr />
-<p>Note: the <a href="terminology.html">terminology</a> page may also be useful, especially the section on &quot;accessing remote repositories&quot;.</p>
+<p>Note: the <a href="terminology.html">terminology</a> page may also be useful, especially the section on “accessing remote repositories”.</p>
 </body>
 </html>

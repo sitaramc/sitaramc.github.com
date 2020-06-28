@@ -1,47 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>git as a deployment tool</title>
-  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
-  
+
       code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
       pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
       pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-  
+
       td          { vertical-align: top }
-  
+
       .red        { color: red }
       .blue       { color: blue }
       .green      { color: green }
       .gray       { color: gray }
       .pink       { color: pink }
-  
+
       .box        { background-color:#e0e0e0 }
       .bg-red     { background-color:#ffe0e0 }
       .bg-green   { background-color:#e0ffe0 }
       .bg-blue    { background-color:#e0e0ff }
-  
+
       /* couldn't resist the name! */
       .wd40       { width: 40% !important }
-  
+
       .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
       .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
-  
+
       .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
       .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
-  
+
       .sidebar {
           margin-left: 4px;
           width: 25%;
           float: right;
           border: 4px solid #fff;
       }
-  
+
   </style>
   <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -65,43 +75,44 @@
         IMPORTANT NOTE:
     </strong>
     although this page has a &quot;gitolite.com&quot; URL, this is not about gitolite.
-    That's just an artifact of &quot;sitaramc.github.com&quot; being translated to
+    That&#39;s just an artifact of &quot;sitaramc.github.com&quot; being translated to
     &quot;gitolite.com&quot; and so ALL my git related stuff gets carried over.
     Gitolite documentation has another <code>/gitolite</code> in the URL, so
     you can tell.  My apologies for this confusion.
 </span>
 </p>
-<div id="header">
+<header id="title-block-header">
 <h1 class="title">git as a deployment tool</h1>
-</div>
-<div id="TOC">
+</header>
+<nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#introduction"><span class="toc-section-number">1</span> introduction</a></li>
 <li><a href="#deployment-rules"><span class="toc-section-number">2</span> deployment rules</a></li>
 <li><a href="#why-git-is-not-a-deployment-tool"><span class="toc-section-number">3</span> why git is not a deployment tool</a></li>
-<li><a href="#different-ways-to-deploy"><span class="toc-section-number">4</span> 6 different ways to deploy</a><ul>
-<li><a href="#checkout----the-fight-club-of-git-deployment"><span class="toc-section-number">4.1</span> checkout -- the &quot;fight club&quot; of git deployment</a></li>
-<li><a href="#fetch----reverse-the-flow"><span class="toc-section-number">4.2</span> fetch -- reverse the flow</a></li>
-<li><a href="#reset----another-reversing-trick"><span class="toc-section-number">4.3</span> reset -- another reversing trick</a></li>
+<li><a href="#different-ways-to-deploy"><span class="toc-section-number">4</span> 6 different ways to deploy</a>
+<ul>
+<li><a href="#checkout-the-fight-club-of-git-deployment"><span class="toc-section-number">4.1</span> checkout – the “fight club” of git deployment</a></li>
+<li><a href="#fetch-reverse-the-flow"><span class="toc-section-number">4.2</span> fetch – reverse the flow</a></li>
+<li><a href="#reset-another-reversing-trick"><span class="toc-section-number">4.3</span> reset – another reversing trick</a></li>
 <li><a href="#direct-archive-dump"><span class="toc-section-number">4.4</span> direct archive dump</a></li>
 <li><a href="#archive-dump-with-staging"><span class="toc-section-number">4.5</span> archive dump with staging</a></li>
 <li><a href="#archive-dump-with-staging-using-rsync"><span class="toc-section-number">4.6</span> archive dump with staging, using rsync</a></li>
 </ul></li>
 <li><a href="#summaryrecap"><span class="toc-section-number">5</span> summary/recap</a></li>
 </ul>
-</div>
+</nav>
 <p>One of the first things people want to do with a server side repo is to automatically deploy something when someone pushes to it.</p>
-<p>And one of the first things they hear when they ask about it on #git is &quot;git is not a deployment tool, so don't do that&quot; ;-)</p>
-<p>So let's talk deployment...</p>
+<p>And one of the first things they hear when they ask about it on #git is “git is not a deployment tool, so don’t do that” ;-)</p>
+<p>So let’s talk deployment…</p>
 <hr />
-<h1 id="introduction"><span class="header-section-number">1</span> introduction</h1>
+<h1 data-number="1" id="introduction"><span class="header-section-number">1</span> introduction</h1>
 <p>Deploying on a push to a bare repo should be easy. Just add a post-receive hook that contains this code:</p>
 <pre><code>#!/bin/sh
 some-magic-deploy-command /deploy/directory</code></pre>
 <p>Opinions differ on what that magic deploy command should actually be, and indeed whether there should even <em>be</em> one at all :-)</p>
-<h1 id="deployment-rules"><span class="header-section-number">2</span> deployment rules</h1>
-<p>Here's what we expect from a deployment tool. Note the rule numbers -- we'll be referring to some of them simply by number later.</p>
-<ol style="list-style-type: decimal">
+<h1 data-number="2" id="deployment-rules"><span class="header-section-number">2</span> deployment rules</h1>
+<p>Here’s what we expect from a deployment tool. Note the rule numbers – we’ll be referring to some of them simply by number later.</p>
+<ol type="1">
 <li><p>All files in the branch being deployed should be copied to the deployment directory.</p></li>
 <li><p>Files that were deleted in the git repo since the last deployment should get deleted from the deployment directory.</p></li>
 <li><p>Any changes <em>to tracked files</em> in the deployment directory after the last deployment should be ignored when following rules 1 and 2.</p>
@@ -109,34 +120,34 @@ some-magic-deploy-command /deploy/directory</code></pre>
 <li><p><em>Untracked</em> files in the deploy directory should be left alone.</p>
 <p>Again, some people might want to detect this and abort the deployment.</p></li>
 </ol>
-<p><strong>NOTE</strong>: if you need more than this, you should seriously consider a proper deployment tool. The best one I have heard of (but not used, since I don't need that level of control) is <a href="https://github.com/git-deploy/git-deploy">git-deploy</a>. It's educational to at least be aware of what is possible with a real tool, even if your current situation does not require it.</p>
-<h1 id="why-git-is-not-a-deployment-tool"><span class="header-section-number">3</span> why git is not a deployment tool</h1>
-<p>The most important reason is this: git does not track permissions (other than the first &quot;x&quot; in &quot;rwxrwxrwx&quot;). Many real-world deployments need a bit more granularity than that, I suspect.</p>
+<p><strong>NOTE</strong>: if you need more than this, you should seriously consider a proper deployment tool. The best one I have heard of (but not used, since I don’t need that level of control) is <a href="https://github.com/git-deploy/git-deploy">git-deploy</a>. It’s educational to at least be aware of what is possible with a real tool, even if your current situation does not require it.</p>
+<h1 data-number="3" id="why-git-is-not-a-deployment-tool"><span class="header-section-number">3</span> why git is not a deployment tool</h1>
+<p>The most important reason is this: git does not track permissions (other than the first “x” in “rwxrwxrwx”). Many real-world deployments need a bit more granularity than that, I suspect.</p>
 <p>Also, git does not track empty directories, which could also be a problem (albeit less common than permissions).</p>
-<p>There could be other reasons; I'll update this section as I hear of any but I'm sure those are the main ones.</p>
-<h1 id="different-ways-to-deploy"><span class="header-section-number">4</span> 6 different ways to deploy</h1>
-<p>We'll discuss these 6 ways of deploying your project using git. Note that none of these methods can overcome git's inherent limitations for deployment (permissions, etc., as described above), though any of them can be followed up with extra code to do that, using some site-local script.</p>
-<p>Also note that none of them involve <code>git pull</code>, which a naive user might think is worth trying, but in fact has <strong>absolutely no place</strong> in an automated setup or script of any kind. (If you don't know why, the short answer is &quot;pull = fetch + merge&quot; and merges cannot be guaranteed to complete without manual fixups).</p>
-<h2 id="checkout----the-fight-club-of-git-deployment"><span class="header-section-number">4.1</span> checkout -- the &quot;fight club&quot; of git deployment</h2>
+<p>There could be other reasons; I’ll update this section as I hear of any but I’m sure those are the main ones.</p>
+<h1 data-number="4" id="different-ways-to-deploy"><span class="header-section-number">4</span> 6 different ways to deploy</h1>
+<p>We’ll discuss these 6 ways of deploying your project using git. Note that none of these methods can overcome git’s inherent limitations for deployment (permissions, etc., as described above), though any of them can be followed up with extra code to do that, using some site-local script.</p>
+<p>Also note that none of them involve <code>git pull</code>, which a naive user might think is worth trying, but in fact has <strong>absolutely no place</strong> in an automated setup or script of any kind. (If you don’t know why, the short answer is “pull = fetch + merge” and merges cannot be guaranteed to complete without manual fixups).</p>
+<h2 data-number="4.1" id="checkout-the-fight-club-of-git-deployment"><span class="header-section-number">4.1</span> checkout – the “fight club” of git deployment</h2>
 <p><strong>Summary</strong></p>
 <pre><code>export GIT_WORK_TREE=/deploy/dir
 git checkout -f master</code></pre>
 <p><strong>Pros</strong>: satisfies all 4 of our rules.</p>
-<p><strong>Cons</strong>: you don't talk about it or ask questions about it ;-) Jokes apart, see discussion below.</p>
+<p><strong>Cons</strong>: you don’t talk about it or ask questions about it ;-) Jokes apart, see discussion below.</p>
 <p><strong>Discussion</strong></p>
 <p>If you want to use this method, you have to make sure:</p>
 <ul>
 <li>you always checkout to the same deploy directory</li>
 <li>you always checkout the same branch</li>
-<li>you always use &quot;-f&quot;</li>
+<li>you always use “-f”</li>
 </ul>
-<p>But it's hard to explain <em>why</em>. (It has to do with HEAD, the index, and the actual work tree getting out of sync in ways that won't ever happen on a normal repo using normal git commands).</p>
-<p>So if you run into trouble, it becomes a game of trying to dig out of you what exactly you did in what sequence. And if you think that's easy you've never done tech support :)</p>
+<p>But it’s hard to explain <em>why</em>. (It has to do with HEAD, the index, and the actual work tree getting out of sync in ways that won’t ever happen on a normal repo using normal git commands).</p>
+<p>So if you run into trouble, it becomes a game of trying to dig out of you what exactly you did in what sequence. And if you think that’s easy you’ve never done tech support :)</p>
 <p>Aborting on changes to tracked files is easy. Before the checkout, run:</p>
 <pre><code>git diff --quiet || exit 1</code></pre>
 <p>Aborting on finding untracked files is also easy enough:</p>
 <pre><code>git ls-files -o | grep &gt;/dev/null . &amp;&amp; exit 1</code></pre>
-<h2 id="fetch----reverse-the-flow"><span class="header-section-number">4.2</span> fetch -- reverse the flow</h2>
+<h2 data-number="4.2" id="fetch-reverse-the-flow"><span class="header-section-number">4.2</span> fetch – reverse the flow</h2>
 <p><strong>Summary</strong></p>
 <pre><code>cd /deploy/dir
 unset GIT_DIR
@@ -145,11 +156,11 @@ git reset --hard origin/master</code></pre>
 <p><strong>Pros</strong>: satisfies all 4 rules</p>
 <p><strong>Cons</strong>: your deploy directory needs to be a clone of the bare repo.</p>
 <p><strong>Discussion</strong></p>
-<p>If your deploy directory is OK with having a &quot;.git&quot; sitting in it (i.e., whatever application you have won't barf because of it), this is a simple way of reversing the flow.</p>
-<p>A lot of people try this; they fail because they don't realise git sets up an extra environment variable (because it expects to be running in a bare repo) that you need to unset when you cross over into a non-bare repo.</p>
+<p>If your deploy directory is OK with having a “.git” sitting in it (i.e., whatever application you have won’t barf because of it), this is a simple way of reversing the flow.</p>
+<p>A lot of people try this; they fail because they don’t realise git sets up an extra environment variable (because it expects to be running in a bare repo) that you need to unset when you cross over into a non-bare repo.</p>
 <p>Aborting on finding local changes is the same as in the previous section. Run those commands just before the fetch.</p>
-<p><strong>Security</strong>: a readable &quot;.git&quot; may be a security issue in some cases.</p>
-<h2 id="reset----another-reversing-trick"><span class="header-section-number">4.3</span> reset -- another reversing trick</h2>
+<p><strong>Security</strong>: a readable “.git” may be a security issue in some cases.</p>
+<h2 data-number="4.3" id="reset-another-reversing-trick"><span class="header-section-number">4.3</span> reset – another reversing trick</h2>
 <p><strong>Summary</strong></p>
 <pre><code>GIT_DIR=$PWD
 cd /deploy/dir
@@ -158,21 +169,21 @@ git reset --hard</code></pre>
 <p><strong>Pros</strong>: satisfies all 4 rules</p>
 <p><strong>Cons</strong>: newbie-unsafe; see below.</p>
 <p><strong>Discussion</strong></p>
-<p>This code deploys whatever HEAD points to, as it doesn't explicitly name a branch.</p>
+<p>This code deploys whatever HEAD points to, as it doesn’t explicitly name a branch.</p>
 <p>A newbie may be tempted to fix that:</p>
 <pre><code>git reset --hard master     # DONT DO THIS!</code></pre>
-<p>In a word, <strong>DON'T</strong>! If you did not change HEAD you do not need it. And if you <em>did</em> change HEAD to something other than master you'd lose that branch! (Didn't see <em>that</em> coming did ya?)</p>
+<p>In a word, <strong>DON’T</strong>! If you did not change HEAD you do not need it. And if you <em>did</em> change HEAD to something other than master you’d lose that branch! (Didn’t see <em>that</em> coming did ya?)</p>
 <p>If you never change HEAD and no one in their right mind in your site would, you can use this. But do you really want to take that chance?</p>
 <p>Finally, it has <em>no</em> advantage over the first method in any way.</p>
-<h2 id="direct-archive-dump"><span class="header-section-number">4.4</span> direct archive dump</h2>
+<h2 data-number="4.4" id="direct-archive-dump"><span class="header-section-number">4.4</span> direct archive dump</h2>
 <p><strong>Summary</strong></p>
 <pre><code>git archive master | tar -C /deploy/dir -xf -</code></pre>
 <p><strong>Pros</strong>: clean and simple</p>
-<p><strong>Cons</strong>: doesn't satisfy rule 2 (deleted files don't get deleted).</p>
+<p><strong>Cons</strong>: doesn’t satisfy rule 2 (deleted files don’t get deleted).</p>
 <p><strong>Discussion</strong></p>
 <p>Pretty useless, since it violates rule 2. If you prefer to sacrifice rule 4 instead of rule 2, see the next section!</p>
-<p>It's also inefficient for large repos if only a few files have changed.</p>
-<h2 id="archive-dump-with-staging"><span class="header-section-number">4.5</span> archive dump with staging</h2>
+<p>It’s also inefficient for large repos if only a few files have changed.</p>
+<h2 data-number="4.5" id="archive-dump-with-staging"><span class="header-section-number">4.5</span> archive dump with staging</h2>
 <p><strong>Summary</strong></p>
 <pre><code>git archive master | tar -C /deploy/dir.new -xf -
 mv /deploy/dir      /deploy/dir.old
@@ -183,25 +194,25 @@ rm -rf              /deploy/dir.old</code></pre>
 <p><strong>Discussion</strong></p>
 <p>This method uses a staging directory between the repo and the deploy directory. It is best used if you need to make any adjustments before the actual files are copied over.</p>
 <p>While still inefficient (in terms of disk writes compared to number of changed files), this method compensates for the inefficiency by allowing almost-atomic switchover if you put the staging directory on the same filesystem.</p>
-<p>Now, while I would consider a two-mv command sequence as atomic enough, there'll always be nitpickers who insist that &quot;almost&quot; isn't good enough. Patches welcome :-)</p>
-<p><font color="gray">(IMO, if you're worrying about that level of atomicity in these days of &quot;eventually consistent&quot; databases you should be <em>writing</em> this document not reading it!)</font></p>
+<p>Now, while I would consider a two-mv command sequence as atomic enough, there’ll always be nitpickers who insist that “almost” isn’t good enough. Patches welcome :-)</p>
+<p><font color="gray">(IMO, if you’re worrying about that level of atomicity in these days of “eventually consistent” databases you should be <em>writing</em> this document not reading it!)</font></p>
 <p><strong>Security</strong>: You also need to worry about security for the temp dir if untrusted people have local shell access to the server. Consider using mktemp and umask.</p>
 <p>Aborting on finding local changes is not easy. You need to checkout the <em>old</em> commit somewhere and compare files manually. If this is important, use one of the earlier methods.</p>
-<h2 id="archive-dump-with-staging-using-rsync"><span class="header-section-number">4.6</span> archive dump with staging, using rsync</h2>
+<h2 data-number="4.6" id="archive-dump-with-staging-using-rsync"><span class="header-section-number">4.6</span> archive dump with staging, using rsync</h2>
 <p>This is a variation of the previous one, except that your deploy directory is on a different host, or on a different user on the same server. The git user needs ssh access to the deploy user, and you use rsync to copy the files.</p>
-<p>You no longer get atomic switchover, but rsync's network efficiency is probably good enough. Maybe not as instantaneous as two rename commands (or a symlink switch) but not too bad.</p>
+<p>You no longer get atomic switchover, but rsync’s network efficiency is probably good enough. Maybe not as instantaneous as two rename commands (or a symlink switch) but not too bad.</p>
 <p>EugeneKay has written a very comprehensive script that uses this technique, but adds many more bells and whistles; find it <a href="https://github.com/EugeneKay/scripts/blob/master/bash/git-deploy-hook.sh">here</a>.</p>
-<p><strong>Security</strong>: If you don't want your git user to have full access to your deploy user, you need to restrict what it can do using 'rrsync', a script that comes with rsync. This is left as an exercise for the reader :-)</p>
-<h1 id="summaryrecap"><span class="header-section-number">5</span> summary/recap</h1>
-<p>We've seen 6 methods. Here's my summary. The ones in gray are considered not useful enough to be in the running.</p>
+<p><strong>Security</strong>: If you don’t want your git user to have full access to your deploy user, you need to restrict what it can do using ‘rrsync’, a script that comes with rsync. This is left as an exercise for the reader :-)</p>
+<h1 data-number="5" id="summaryrecap"><span class="header-section-number">5</span> summary/recap</h1>
+<p>We’ve seen 6 methods. Here’s my summary. The ones in gray are considered not useful enough to be in the running.</p>
 <ul>
-<li><p>checkout -- this is the one I prefer, in fact I use it in gitolite. It's very efficient (only changed files are written, as normal in git) and newbie friendly enough. The constraints imposed are simple to understand and easy to stick to.</p>
-<p>In addition, it's easy to detect local changes and abort. (This is equally true for the next 2 methods also).</p></li>
-<li><p>fetch -- this is pretty intuitive even for git-newbies (while also remaining efficient), but your deploy directory needs to be a clone, which could be a problem.</p></li>
-<li><p><font color="gray">reset -- highly newbie-unsafe. No particular advantage over the &quot;checkout&quot; method anyway.</font></p></li>
-<li><p><font color="gray">direct archive dump -- this is the only one that doesn't satisfy rule 2, so it's kinda useless :(</font></p></li>
-<li><p>archive dump with staging -- the absolute simplest in terms of git concepts. It's inefficient but compensates by allowing atomic switchovers.</p></li>
-<li><p>archive dump with staging using rsync -- very useful if your deploy dir is on a different server, or on a different user on the same server.</p></li>
+<li><p>checkout – this is the one I prefer, in fact I use it in gitolite. It’s very efficient (only changed files are written, as normal in git) and newbie friendly enough. The constraints imposed are simple to understand and easy to stick to.</p>
+<p>In addition, it’s easy to detect local changes and abort. (This is equally true for the next 2 methods also).</p></li>
+<li><p>fetch – this is pretty intuitive even for git-newbies (while also remaining efficient), but your deploy directory needs to be a clone, which could be a problem.</p></li>
+<li><p><font color="gray">reset – highly newbie-unsafe. No particular advantage over the “checkout” method anyway.</font></p></li>
+<li><p><font color="gray">direct archive dump – this is the only one that doesn’t satisfy rule 2, so it’s kinda useless :(</font></p></li>
+<li><p>archive dump with staging – the absolute simplest in terms of git concepts. It’s inefficient but compensates by allowing atomic switchovers.</p></li>
+<li><p>archive dump with staging using rsync – very useful if your deploy dir is on a different server, or on a different user on the same server.</p></li>
 </ul>
 </body>
 </html>

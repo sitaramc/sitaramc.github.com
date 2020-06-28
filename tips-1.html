@@ -1,47 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>tips for the beginner</title>
-  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
-  
+
       code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
       pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
       pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-  
+
       td          { vertical-align: top }
-  
+
       .red        { color: red }
       .blue       { color: blue }
       .green      { color: green }
       .gray       { color: gray }
       .pink       { color: pink }
-  
+
       .box        { background-color:#e0e0e0 }
       .bg-red     { background-color:#ffe0e0 }
       .bg-green   { background-color:#e0ffe0 }
       .bg-blue    { background-color:#e0e0ff }
-  
+
       /* couldn't resist the name! */
       .wd40       { width: 40% !important }
-  
+
       .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
       .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
-  
+
       .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
       .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
-  
+
       .sidebar {
           margin-left: 4px;
           width: 25%;
           float: right;
           border: 4px solid #fff;
       }
-  
+
   </style>
   <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -65,34 +75,35 @@
         IMPORTANT NOTE:
     </strong>
     although this page has a &quot;gitolite.com&quot; URL, this is not about gitolite.
-    That's just an artifact of &quot;sitaramc.github.com&quot; being translated to
+    That&#39;s just an artifact of &quot;sitaramc.github.com&quot; being translated to
     &quot;gitolite.com&quot; and so ALL my git related stuff gets carried over.
     Gitolite documentation has another <code>/gitolite</code> in the URL, so
     you can tell.  My apologies for this confusion.
 </span>
 </p>
-<div id="header">
+<header id="title-block-header">
 <h1 class="title">tips for the beginner</h1>
-</div>
-<div id="TOC">
+</header>
+<nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#set-up-your-gitconfig">set up your gitconfig</a><ul>
+<li><a href="#set-up-your-gitconfig">set up your gitconfig</a>
+<ul>
 <li><a href="#my-.gitconfig-file">my <code>~/.gitconfig</code> file</a></li>
 </ul></li>
 </ul>
-</div>
-<h1 id="set-up-your-gitconfig" class="unnumbered">set up your gitconfig</h1>
+</nav>
+<h1 class="unnumbered" data-number id="set-up-your-gitconfig">set up your gitconfig</h1>
 <p>This is <code>$HOME/.gitconfig</code>. Whenever you add the <code>--global</code> option to the <code>git config</code> command, it acts on the global gitconfig file.</p>
 <p>Setup your identity</p>
 <pre><code>git config --global user.email your.name@your.com
 git config --global user.name &quot;your name&quot;</code></pre>
-<p>Setup to edit files from within &quot;git gui&quot;; replace &quot;gvim -f&quot; with whatever you prefer</p>
-<pre><code>git config --global guitool.Edit.cmd 'gvim -f $FILENAME'
+<p>Setup to edit files from within “git gui”; replace “gvim -f” with whatever you prefer</p>
+<pre><code>git config --global guitool.Edit.cmd &#39;gvim -f $FILENAME&#39;
 git config --global guitool.Edit.noconsole yes
 git config --global guitool.Edit.needsfile yes</code></pre>
 <p>If you intend to use the command line more than the GUI, please do check out my gitconfig (at the end of this page) for many useful examples that may save you lots of time and trouble.</p>
-<h2 id="my-.gitconfig-file" class="unnumbered">my <code>~/.gitconfig</code> file</h2>
-<p>This is as of Dec 2013. One of these days I'll stop being lazy and explain some of them :-)</p>
+<h2 class="unnumbered" data-number id="my-.gitconfig-file">my <code>~/.gitconfig</code> file</h2>
+<p>This is as of Dec 2013. One of these days I’ll stop being lazy and explain some of them :-)</p>
 <pre><code>[user]
     name = Sitaram Chamarty
     email = sitaram@atc.tcs.com
@@ -149,15 +160,15 @@ git config --global guitool.Edit.needsfile yes</code></pre>
     ls  = log   -C --stat --decorate
     lsp = log   -C --stat -p --decorate
 
-    lgbw= log   --graph --boundary '--format=%h %ar %d %s'
-    lg  = log   --graph --boundary '--format=%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s'
-    lga = log   --graph --boundary '--format=%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s' --all
+    lgbw= log   --graph --boundary &#39;--format=%h %ar %d %s&#39;
+    lg  = log   --graph --boundary &#39;--format=%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s&#39;
+    lga = log   --graph --boundary &#39;--format=%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s&#39; --all
     # this is the most commonly used one, it turns out!
-    l19 = log   --graph --boundary '--format=%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s' --all -19
+    l19 = log   --graph --boundary &#39;--format=%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s&#39; --all -19
     # and this one can be a real lifesaver on a complex tree
-    lsd = log   --graph --boundary '--format=%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s' --all --simplify-by-decoration
+    lsd = log   --graph --boundary &#39;--format=%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s&#39; --all --simplify-by-decoration
     # log left-right; requires argument like A...B (3 dots)
-    lglr= log   --graph --boundary '--format=%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s' --boundary --left-right --cherry-pick
+    lglr= log   --graph --boundary &#39;--format=%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s&#39; --boundary --left-right --cherry-pick
 
     # this is so frequent for me...
     pom = push origin master
@@ -171,10 +182,10 @@ git config --global guitool.Edit.needsfile yes</code></pre>
     sl  = stash list
     sp  = stash pop
     ss  = stash save
-    # &quot;show-branch -g=N&quot; can't be aliased for N easily, so we stop here:
+    # &quot;show-branch -g=N&quot; can&#39;t be aliased for N easily, so we stop here:
     sb  = show-branch
-    # pg sbt master pu -- if the last line is 'master' and not 'master^'
-    # or 'master~N' then pu is a descendent of master
+    # pg sbt master pu -- if the last line is &#39;master&#39; and not &#39;master^&#39;
+    # or &#39;master~N&#39; then pu is a descendent of master
     sbt = show-branch --topics
     sbs = show-branch --sha1-name
 
@@ -190,23 +201,23 @@ git config --global guitool.Edit.needsfile yes</code></pre>
 [alias]
     # checkpoint and checkpoint recover
     cp      = !git stash save $(date +%F--%T) &amp;&amp; git stash pop --index
-    cpr     = &quot;!f() { git fsck | grep commit | cut -d' ' -f3 | while read hash; do git rev-parse --verify --no-revs --quiet $hash^2 2&gt;/dev/null &amp;&amp; echo $hash | xargs git rev-list --since=${1:-1day} -1; done | xargs -L 1 git log --format=%at:%h -1 | sort|cut -f2 -d: | xargs -L 1 git log --graph --oneline --format='%Cblue%h %Cgreen(%ar) %Creset%s' -3 ; }; f&quot;
+    cpr     = &quot;!f() { git fsck | grep commit | cut -d&#39; &#39; -f3 | while read hash; do git rev-parse --verify --no-revs --quiet $hash^2 2&gt;/dev/null &amp;&amp; echo $hash | xargs git rev-list --since=${1:-1day} -1; done | xargs -L 1 git log --format=%at:%h -1 | sort|cut -f2 -d: | xargs -L 1 git log --graph --oneline --format=&#39;%Cblue%h %Cgreen(%ar) %Creset%s&#39; -3 ; }; f&quot;
 
     # when was this file last updated, on each local branch
     wwflu = &quot;!f() { for b in $(git rev-parse --symbolic --branches); do echo -e `git log --format=%at:%ar -1 $b -- \&quot;$1\&quot;`\\\\t$b; done | sort -r |cut -f2 -d: ; }; f&quot;
 
-    # branch fast-forward: update from upstream if it's a fast-forward
-    # (obsoleted now by 'git-branch-check but keep it just in case)
+    # branch fast-forward: update from upstream if it&#39;s a fast-forward
+    # (obsoleted now by &#39;git-branch-check but keep it just in case)
     # bff = &quot;!f() { for i; do [[ $(git rev-parse $i) == $(git merge-base $i $i@{upstream}) ]] &amp;&amp; git checkout $i &amp;&amp; git merge $i@{upstream} &amp;&amp; git checkout -; done; }; f&quot;
 
-    graphviz = &quot;!f() { echo 'digraph git {' ; git log --pretty='format: %h -&gt; { %p }' \&quot;$@\&quot; | sed 's/[0-9a-f][0-9a-f]*/\&quot;&amp;\&quot;/g' ; echo '}'; }; f&quot;
+    graphviz = &quot;!f() { echo &#39;digraph git {&#39; ; git log --pretty=&#39;format: %h -&gt; { %p }&#39; \&quot;$@\&quot; | sed &#39;s/[0-9a-f][0-9a-f]*/\&quot;&amp;\&quot;/g&#39; ; echo &#39;}&#39;; }; f&quot;
 
     cat   = -p cat-file -p
 
     top = !eval cd &quot;$(pwd)/$(git rev-parse --show-cdup)&quot; &amp;&amp; pwd
 
 # exotic ones that I might forget they exist; keep them at the end of the file
-# for 'cat' or 'tail' to show them easily
+# for &#39;cat&#39; or &#39;tail&#39; to show them easily
 [alias]
     ls-del  = ls-files -d
     ls-mod  = ls-files -m   # this will include deleted files also
@@ -220,6 +231,6 @@ git config --global guitool.Edit.needsfile yes</code></pre>
     sk = !gitk --date-order $(git stash list | cut -d: -f1) --not --branches --tags --remotes
 
     d1 = !gitk --date-order $(git log -g --pretty=%H) --not --branches --tags --remotes
-    d2 = !gitk --date-order $(git fsck | grep &quot;dangling.commit&quot; | cut -f3 -d' ') --not --branches --tags --remotes</code></pre>
+    d2 = !gitk --date-order $(git fsck | grep &quot;dangling.commit&quot; | cut -f3 -d&#39; &#39;) --not --branches --tags --remotes</code></pre>
 </body>
 </html>

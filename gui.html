@@ -1,47 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title>git's native GUI tools</title>
-  <style type="text/css">code{white-space: pre;}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>git’s native GUI tools</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
-  
+
       code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
       pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
       pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-  
+
       td          { vertical-align: top }
-  
+
       .red        { color: red }
       .blue       { color: blue }
       .green      { color: green }
       .gray       { color: gray }
       .pink       { color: pink }
-  
+
       .box        { background-color:#e0e0e0 }
       .bg-red     { background-color:#ffe0e0 }
       .bg-green   { background-color:#e0ffe0 }
       .bg-blue    { background-color:#e0e0ff }
-  
+
       /* couldn't resist the name! */
       .wd40       { width: 40% !important }
-  
+
       .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
       .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
-  
+
       .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
       .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
-  
+
       .sidebar {
           margin-left: 4px;
           width: 25%;
           float: right;
           border: 4px solid #fff;
       }
-  
+
   </style>
   <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -65,41 +75,41 @@
         IMPORTANT NOTE:
     </strong>
     although this page has a &quot;gitolite.com&quot; URL, this is not about gitolite.
-    That's just an artifact of &quot;sitaramc.github.com&quot; being translated to
+    That&#39;s just an artifact of &quot;sitaramc.github.com&quot; being translated to
     &quot;gitolite.com&quot; and so ALL my git related stuff gets carried over.
     Gitolite documentation has another <code>/gitolite</code> in the URL, so
     you can tell.  My apologies for this confusion.
 </span>
 </p>
-<div id="header">
-<h1 class="title">git's native GUI tools</h1>
-</div>
-<div id="TOC">
+<header id="title-block-header">
+<h1 class="title">git’s native GUI tools</h1>
+</header>
+<nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#git-gui">git gui</a></li>
 <li><a href="#gitk">gitk</a></li>
 <li><a href="#where-you-really-need-the-command-line">where you <em>really</em> need the command line</a></li>
 <li><a href="#further-reading">further reading</a></li>
 </ul>
-</div>
-<p>Git comes with 3 GUI tools, but two of them are a bit more important than the third so we'll focus on those for now.</p>
-<p>These two tools are very powerful; if you don't like the command line, you can quite easily stick to them and get by for most purposes. Briefly, they are:</p>
+</nav>
+<p>Git comes with 3 GUI tools, but two of them are a bit more important than the third so we’ll focus on those for now.</p>
+<p>These two tools are very powerful; if you don’t like the command line, you can quite easily stick to them and get by for most purposes. Briefly, they are:</p>
 <ul>
 <li><code>git gui</code> to stage and unstage files (equivalent to <code>git add</code>), commit, and push</li>
-<li><code>gitk</code> to get a bird's eye view your current branch, or <code>gitk --all</code> to view all branches, local and remote</li>
+<li><code>gitk</code> to get a bird’s eye view your current branch, or <code>gitk --all</code> to view all branches, local and remote</li>
 </ul>
-<p>Git's GUI interfaces let you do almost anything that you <strong>normally</strong> need to do -- all the simple straightforward things as well as some sophisticated things.</p>
-<h1 id="git-gui" class="unnumbered">git gui</h1>
-<p><code>git gui</code> shows you the current state of your work area with respect to the currently checked-out branch. In the top left pane, it shows you what files are changed with respect to the last commit. In the bottom left pane it shows you what files have been marked &quot;ready for commit&quot; -- only these changes will go into the next commit if you commit now.</p>
-<p>(Git allows you to keep some changes &quot;pending&quot;, without committing them. The &quot;ready to commit&quot; part is called the &quot;index&quot;, &quot;staging area&quot;, or &quot;cache&quot; in the documentation, so the bottom left pane is showing you what is in the &quot;index&quot;. Check out <a href="uses-of-index.html">why the index is useful</a> for more).</p>
+<p>Git’s GUI interfaces let you do almost anything that you <strong>normally</strong> need to do – all the simple straightforward things as well as some sophisticated things.</p>
+<h1 class="unnumbered" data-number id="git-gui">git gui</h1>
+<p><code>git gui</code> shows you the current state of your work area with respect to the currently checked-out branch. In the top left pane, it shows you what files are changed with respect to the last commit. In the bottom left pane it shows you what files have been marked “ready for commit” – only these changes will go into the next commit if you commit now.</p>
+<p>(Git allows you to keep some changes “pending”, without committing them. The “ready to commit” part is called the “index”, “staging area”, or “cache” in the documentation, so the bottom left pane is showing you what is in the “index”. Check out <a href="uses-of-index.html">why the index is useful</a> for more).</p>
 <p>In either case, the changes made to the currently selected file are shown on the right pane.</p>
 <p>There are a lot of things you can do in this GUI, but here are the basic things:</p>
 <ul>
-<li>you can click on the icon to the left of each file name to move it back and forth between the two areas (&quot;staged, ready for commit&quot; &lt;-&gt; &quot;unstaged, not to be committed right now&quot;)</li>
-<li>you can also type in a suitable commit message and click the &quot;commit&quot; button. This commits the change to your local repository</li>
-<li>you can also &quot;push&quot; the changes to some central repository so that others can pull them</li>
+<li>you can click on the icon to the left of each file name to move it back and forth between the two areas (“staged, ready for commit” &lt;-&gt; “unstaged, not to be committed right now”)</li>
+<li>you can also type in a suitable commit message and click the “commit” button. This commits the change to your local repository</li>
+<li>you can also “push” the changes to some central repository so that others can pull them</li>
 </ul>
-<h1 id="gitk" class="unnumbered">gitk</h1>
+<h1 class="unnumbered" data-number id="gitk">gitk</h1>
 <p><code>gitk</code> (or <code>gitk --all</code>, which is what I use more often) shows you a visual tree of all the commits that have happened on this repository. It is a very powerful tool, allowing you to do all sorts of things like</p>
 <ul>
 <li>create a new branch</li>
@@ -111,17 +121,17 @@
 <li>traverse the tree of commits</li>
 <li>search for commits based on all sorts of criteria</li>
 </ul>
-<p>There's a much more detailed description of <a href="gitk.html">gitk's features</a> if you need it.</p>
-<h1 id="where-you-really-need-the-command-line" class="unnumbered">where you <em>really</em> need the command line</h1>
+<p>There’s a much more detailed description of <a href="gitk.html">gitk’s features</a> if you need it.</p>
+<h1 class="unnumbered" data-number id="where-you-really-need-the-command-line">where you <em>really</em> need the command line</h1>
 <p>One common task that is needlessly complex in both the GUIs is <code>git pull</code>. In a properly setup repository that has been cloned from the project master or something like that, getting the latest changes is just a matter of typing <code>git pull</code>. In <code>git gui</code>, described above, this takes 4 steps, although there is a reason for that complexity :-)</p>
-<h1 id="further-reading" class="unnumbered">further reading</h1>
-<p>There's a really thorough introduction to these tools, including lots of screenshots, at <a href="http://nathanj.github.com/gitguide/" class="uri">http://nathanj.github.com/gitguide/</a>. The page has an excellent example &quot;project&quot; that is simple enough that you can concentrate on the git features being demonstrated, and the author goes into quite a few things you can do with the GUI tools.</p>
+<h1 class="unnumbered" data-number id="further-reading">further reading</h1>
+<p>There’s a really thorough introduction to these tools, including lots of screenshots, at <a href="http://nathanj.github.com/gitguide/" class="uri">http://nathanj.github.com/gitguide/</a>. The page has an excellent example “project” that is simple enough that you can concentrate on the git features being demonstrated, and the author goes into quite a few things you can do with the GUI tools.</p>
 <p>Some minor caveats:</p>
 <ul>
-<li><p>if you're on Linux you'll just have to ignore some of the installation related stuff</p></li>
-<li><p>if you're on Windiws, I suggest you stick to the ssh that comes with git. Putty and plink have (in my experience supporting gitolite users) always been problems and I would avoid them like the plague. YMMV.</p>
+<li><p>if you’re on Linux you’ll just have to ignore some of the installation related stuff</p></li>
+<li><p>if you’re on Windiws, I suggest you stick to the ssh that comes with git. Putty and plink have (in my experience supporting gitolite users) always been problems and I would avoid them like the plague. YMMV.</p>
 <p>One tip: if you installed Putty/plink anyway, and now msysgit is not talking to the repository properly, <code>unset GIT_SSH</code> is apparently the thing to do. Again, YMMV and all that.</p></li>
-<li><p>some of the stuff dealing with other servers (like adding a remote, pulling from someone's IP address, etc.), may work differently in a corporate environment.</p></li>
+<li><p>some of the stuff dealing with other servers (like adding a remote, pulling from someone’s IP address, etc.), may work differently in a corporate environment.</p></li>
 </ul>
 </body>
 </html>

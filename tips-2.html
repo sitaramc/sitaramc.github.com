@@ -1,47 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>slightly more advanced tips</title>
-  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
-  
+
       code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
       pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
       pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-  
+
       td          { vertical-align: top }
-  
+
       .red        { color: red }
       .blue       { color: blue }
       .green      { color: green }
       .gray       { color: gray }
       .pink       { color: pink }
-  
+
       .box        { background-color:#e0e0e0 }
       .bg-red     { background-color:#ffe0e0 }
       .bg-green   { background-color:#e0ffe0 }
       .bg-blue    { background-color:#e0e0ff }
-  
+
       /* couldn't resist the name! */
       .wd40       { width: 40% !important }
-  
+
       .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
       .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
-  
+
       .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
       .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
-  
+
       .sidebar {
           margin-left: 4px;
           width: 25%;
           float: right;
           border: 4px solid #fff;
       }
-  
+
   </style>
   <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -65,54 +75,54 @@
         IMPORTANT NOTE:
     </strong>
     although this page has a &quot;gitolite.com&quot; URL, this is not about gitolite.
-    That's just an artifact of &quot;sitaramc.github.com&quot; being translated to
+    That&#39;s just an artifact of &quot;sitaramc.github.com&quot; being translated to
     &quot;gitolite.com&quot; and so ALL my git related stuff gets carried over.
     Gitolite documentation has another <code>/gitolite</code> in the URL, so
     you can tell.  My apologies for this confusion.
 </span>
 </p>
-<div id="header">
+<header id="title-block-header">
 <h1 class="title">slightly more advanced tips</h1>
-</div>
-<div id="TOC">
+</header>
+<nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#how-to-remember-what-...-does">how to remember what &quot;...&quot; does</a></li>
-<li><a href="#easy-way-to-remember-what-git-resets-softhardmixed-do">Easy way to remember what git reset's soft/hard/mixed do</a></li>
+<li><a href="#how-to-remember-what-does">how to remember what “…” does</a></li>
+<li><a href="#easy-way-to-remember-what-git-resets-softhardmixed-do">Easy way to remember what git reset’s soft/hard/mixed do</a></li>
 </ul>
-</div>
-<h1 id="how-to-remember-what-...-does" class="unnumbered">how to remember what &quot;...&quot; does</h1>
-<p>Git's &quot;...&quot; operator is confusing, because it does different things in git diff and git log. Here's something that may help you reason it out.</p>
+</nav>
+<h1 class="unnumbered" data-number id="how-to-remember-what-does">how to remember what “…” does</h1>
+<p>Git’s “…” operator is confusing, because it does different things in git diff and git log. Here’s something that may help you reason it out.</p>
 <p>To start with, these points are fundamental:</p>
 <ul>
 <li>the older revision is (normally) specified on the left side (LHS)</li>
-<li>&quot;diff&quot; only works on two <em>endpoint</em> commits, regardless of how many commits exist in between those endpoints</li>
-<li>however, &quot;log&quot; works on all the in between commits also</li>
-<li>normal, everyday, usage is <code>git diff A..B</code>, meaning &quot;changes from A to B&quot;, and <code>git log A..B</code>, meaning &quot;commits in B but not in A&quot;.</li>
+<li>“diff” only works on two <em>endpoint</em> commits, regardless of how many commits exist in between those endpoints</li>
+<li>however, “log” works on all the in between commits also</li>
+<li>normal, everyday, usage is <code>git diff A..B</code>, meaning “changes from A to B”, and <code>git log A..B</code>, meaning “commits in B but not in A”.</li>
 </ul>
-<p>To those simple rules, add just one more (easy enough to remember): the &quot;<code>...</code>&quot; operator always involves the common ancestor somehow.</p>
+<p>To those simple rules, add just one more (easy enough to remember): the “<code>...</code>” operator always involves the common ancestor somehow.</p>
 <p>With those rules in mind, you can keep track of what the double-dot and triple-dot mean very easily.</p>
 <p>Consider <code>git diff A...B</code>:</p>
 <ul>
-<li>since the &quot;<code>...</code>&quot; is used, the common ancestor is involved</li>
+<li>since the “<code>...</code>” is used, the common ancestor is involved</li>
 <li>since diff can only deal with 2 end points, one of A or B has to make way for the common ancestor</li>
 <li>since the common ancestor is older than A and B, clearly it has to appear on the left side, so A loses :-)</li>
 </ul>
 <p>And this becomes <code>git diff CA(A,B)..B</code>, where CA(A,B) is the common ancestor of A and B. Easy enough?</p>
 <p>Now look at <code>git log A...B</code></p>
 <ul>
-<li>again, the &quot;<code>...</code>&quot; is used, so the common ancestor is involved</li>
-<li>since log is not constrained to only 2 endpoints like diff is, you don't have to discard A or B</li>
+<li>again, the “<code>...</code>” is used, so the common ancestor is involved</li>
+<li>since log is not constrained to only 2 endpoints like diff is, you don’t have to discard A or B</li>
 <li>so you show the commits between the common ancestor and A, <em>as well as</em> between the common ancestor and B</li>
 </ul>
 <p>So: <code>git log CA(A,B)..A</code> PLUS <code>git log CA(A,B)..B</code></p>
-<h1 id="easy-way-to-remember-what-git-resets-softhardmixed-do" class="unnumbered">Easy way to remember what git reset's soft/hard/mixed do</h1>
+<h1 class="unnumbered" data-number id="easy-way-to-remember-what-git-resets-softhardmixed-do">Easy way to remember what git reset’s soft/hard/mixed do</h1>
 <p>^^loosely based on <a href="http://gitster.livejournal.com/25150.html" class="uri">http://gitster.livejournal.com/25150.html</a>^^</p>
-<p>Assume you start from a &quot;everything is committed and golden&quot; state. Let's pretend you came to this starting point via a <code>git checkout</code>: and then you edit a bunch of stuff, compile/test, and then <code>git add</code> and <code>git commit</code>:</p>
+<p>Assume you start from a “everything is committed and golden” state. Let’s pretend you came to this starting point via a <code>git checkout</code>: and then you edit a bunch of stuff, compile/test, and then <code>git add</code> and <code>git commit</code>:</p>
 <pre><code>$ git checkout mywork
 ...edit edit edit...
 $ git add ...
 $ git commit</code></pre>
-<p>If at this point you do a <code>git reset</code>, here's how the type of reset (&quot;soft&quot;, &quot;hard&quot;, or the default, which is &quot;mixed&quot;) affects things:</p>
+<p>If at this point you do a <code>git reset</code>, here’s how the type of reset (“soft”, “hard”, or the default, which is “mixed”) affects things:</p>
 <pre><code>$ git checkout mywork
             # --hard resets to this point
 ...edit edit edit...

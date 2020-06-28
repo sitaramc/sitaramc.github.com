@@ -1,47 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>for people who think Hg is just as good</title>
-  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
-  
+
       code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
       pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
       pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-  
+
       td          { vertical-align: top }
-  
+
       .red        { color: red }
       .blue       { color: blue }
       .green      { color: green }
       .gray       { color: gray }
       .pink       { color: pink }
-  
+
       .box        { background-color:#e0e0e0 }
       .bg-red     { background-color:#ffe0e0 }
       .bg-green   { background-color:#e0ffe0 }
       .bg-blue    { background-color:#e0e0ff }
-  
+
       /* couldn't resist the name! */
       .wd40       { width: 40% !important }
-  
+
       .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
       .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
-  
+
       .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
       .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
-  
+
       .sidebar {
           margin-left: 4px;
           width: 25%;
           float: right;
           border: 4px solid #fff;
       }
-  
+
   </style>
   <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -65,28 +75,28 @@
         IMPORTANT NOTE:
     </strong>
     although this page has a &quot;gitolite.com&quot; URL, this is not about gitolite.
-    That's just an artifact of &quot;sitaramc.github.com&quot; being translated to
+    That&#39;s just an artifact of &quot;sitaramc.github.com&quot; being translated to
     &quot;gitolite.com&quot; and so ALL my git related stuff gets carried over.
     Gitolite documentation has another <code>/gitolite</code> in the URL, so
     you can tell.  My apologies for this confusion.
 </span>
 </p>
-<div id="header">
+<header id="title-block-header">
 <h1 class="title">for people who think Hg is just as good</h1>
-</div>
+</header>
 <dl>
 <dt><strong>Update: Dec 2013</strong>.</dt>
-<dd><p>Of all the stuff I dumped in the &quot;archived/&quot; directory, this is probably the most out of date. Over the last few years, Hg has, I think, managed to get rid of most of the early craziness with respect to branching (exacerbated by, in my <em>firm</em> opinion, a huge dollop of NIH syndrome!).</p>
-<p>I actually tried to learn it a couple of times, but gave up. I didn't see any real advantages to it, but more important, I find I get <em>seriously</em> turned off when I see tutorials conflating &quot;branch&quot; and &quot;clone&quot;.</p>
+<dd><p>Of all the stuff I dumped in the “archived/” directory, this is probably the most out of date. Over the last few years, Hg has, I think, managed to get rid of most of the early craziness with respect to branching (exacerbated by, in my <em>firm</em> opinion, a huge dollop of NIH syndrome!).</p>
+<p>I actually tried to learn it a couple of times, but gave up. I didn’t see any real advantages to it, but more important, I find I get <em>seriously</em> turned off when I see tutorials conflating “branch” and “clone”.</p>
 </dd>
 </dl>
 <hr />
 <p>Hg is almost as good as git. Linus pretty much says so in his famous googletalk.</p>
 <p>Almost :-)</p>
-<p>Here're some links about Hg; detailed commentary from me may come later, but I doubt I will have the time or the inclination. It's not like this is SVN and I have to strenuously keep you away from it -- go ahead and use Hg if you like it and it fits your work style :-)</p>
-<p>Also, I have no intention of becoming an Hg expert to answer questions or criticisms about this page. If you think something is wrong, tell me and I'd be happy to update it.</p>
-<h1 id="local-branches"><span class="header-section-number">1</span> Local branches</h1>
-<p>Hg does not permit a quick experimental branch just to test some wild idea quickly. Check out the &quot;Branch Management&quot; section in <a href="http://www.rockstarprogrammer.org/post/2008/apr/06/differences-between-mercurial-and-git/" class="uri">http://www.rockstarprogrammer.org/post/2008/apr/06/differences-between-mercurial-and-git/</a>.</p>
+<p>Here’re some links about Hg; detailed commentary from me may come later, but I doubt I will have the time or the inclination. It’s not like this is SVN and I have to strenuously keep you away from it – go ahead and use Hg if you like it and it fits your work style :-)</p>
+<p>Also, I have no intention of becoming an Hg expert to answer questions or criticisms about this page. If you think something is wrong, tell me and I’d be happy to update it.</p>
+<h1 data-number="1" id="local-branches"><span class="header-section-number">1</span> Local branches</h1>
+<p>Hg does not permit a quick experimental branch just to test some wild idea quickly. Check out the “Branch Management” section in <a href="http://www.rockstarprogrammer.org/post/2008/apr/06/differences-between-mercurial-and-git/" class="uri">http://www.rockstarprogrammer.org/post/2008/apr/06/differences-between-mercurial-and-git/</a>.</p>
 <p>Read the last 3 paras of that section, at least.</p>
 <!--
 
@@ -105,15 +115,15 @@ naming them in such a way that they don't collide with something someone else
 has done somewhere else. 
 
 -->
-<h1 id="projects"><span class="header-section-number">2</span> Projects</h1>
+<h1 data-number="2" id="projects"><span class="header-section-number">2</span> Projects</h1>
 <p>Mozilla: quote from <a href="http://weblogs.mozillazine.org/preed/2007/04/version_control_system_shootou_1.html" class="uri">http://weblogs.mozillazine.org/preed/2007/04/version_control_system_shootou_1.html</a>:</p>
 <blockquote>
-<p><em>&quot;As good, performant Win32 (and Mac and Linux) is a hard-requirement, Git lost in early Kombat rounds. This is unfortunate because (as we would soon find out), lots of issues with the other systems did &quot;just work&quot; in Git.&quot;</em></p>
+<p><em>“As good, performant Win32 (and Mac and Linux) is a hard-requirement, Git lost in early Kombat rounds. This is unfortunate because (as we would soon find out), lots of issues with the other systems did”just work&quot; in Git.&quot;</em></p>
 </blockquote>
-<h1 id="unsorted-urls"><span class="header-section-number">3</span> Unsorted URLs</h1>
+<h1 data-number="3" id="unsorted-urls"><span class="header-section-number">3</span> Unsorted URLs</h1>
 <ul>
 <li><a href="http://weblog.masukomi.org/2008/2/4/some-thoughts-about-git" class="uri">http://weblog.masukomi.org/2008/2/4/some-thoughts-about-git</a></li>
-<li><a href="http://texagon.blogspot.com/2008/02/use-mercurial-you-git.html?showComment=1202345880000#c900552130121547868" class="uri">http://texagon.blogspot.com/2008/02/use-mercurial-you-git.html?showComment=1202345880000#c900552130121547868</a>: <em>I used to be more of a Mercurial guy, but there's just a moment (at least there was for me) where it all clicks and Git makes sense. Having your repository be just a giant DAG of commits is what you want -- forcing each fork in the road to live in its own separate repository is a pain and unnecessary.</em></li>
+<li><a href="http://texagon.blogspot.com/2008/02/use-mercurial-you-git.html?showComment=1202345880000#c900552130121547868" class="uri">http://texagon.blogspot.com/2008/02/use-mercurial-you-git.html?showComment=1202345880000#c900552130121547868</a>: <em>I used to be more of a Mercurial guy, but there’s just a moment (at least there was for me) where it all clicks and Git makes sense. Having your repository be just a giant DAG of commits is what you want – forcing each fork in the road to live in its own separate repository is a pain and unnecessary.</em></li>
 </ul>
 </body>
 </html>

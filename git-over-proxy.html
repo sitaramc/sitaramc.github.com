@@ -1,47 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>How to use git over an HTTP proxy, with socat</title>
-  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
-  
+
       code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
       pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
       pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-  
+
       td          { vertical-align: top }
-  
+
       .red        { color: red }
       .blue       { color: blue }
       .green      { color: green }
       .gray       { color: gray }
       .pink       { color: pink }
-  
+
       .box        { background-color:#e0e0e0 }
       .bg-red     { background-color:#ffe0e0 }
       .bg-green   { background-color:#e0ffe0 }
       .bg-blue    { background-color:#e0e0ff }
-  
+
       /* couldn't resist the name! */
       .wd40       { width: 40% !important }
-  
+
       .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
       .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
-  
+
       .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
       .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
-  
+
       .sidebar {
           margin-left: 4px;
           width: 25%;
           float: right;
           border: 4px solid #fff;
       }
-  
+
   </style>
   <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -65,39 +75,40 @@
         IMPORTANT NOTE:
     </strong>
     although this page has a &quot;gitolite.com&quot; URL, this is not about gitolite.
-    That's just an artifact of &quot;sitaramc.github.com&quot; being translated to
+    That&#39;s just an artifact of &quot;sitaramc.github.com&quot; being translated to
     &quot;gitolite.com&quot; and so ALL my git related stuff gets carried over.
     Gitolite documentation has another <code>/gitolite</code> in the URL, so
     you can tell.  My apologies for this confusion.
 </span>
 </p>
-<div id="header">
+<header id="title-block-header">
 <h1 class="title">How to use git over an HTTP proxy, with socat</h1>
-</div>
-<div id="TOC">
+</header>
+<nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#a-word-about-socat">a word about socat</a></li>
 <li><a href="#proxying-the-git-protocol">proxying the <strong>git</strong> protocol</a></li>
-<li><a href="#proxying-the-ssh-protocol">proxying the <strong>ssh</strong> protocol</a><ul>
+<li><a href="#proxying-the-ssh-protocol">proxying the <strong>ssh</strong> protocol</a>
+<ul>
 <li><a href="#ssh-proxy-using-corkscrew-instead-of-socat">ssh proxy using corkscrew instead of socat</a></li>
 <li><a href="#extra-coolness-for-github">extra coolness for github</a></li>
 </ul></li>
 </ul>
-</div>
-<p>Corporate firewalls and proxy typically block both of these (and often a lot more); here's how to get around them.</p>
-<p>If you're tracking a public repo, you will need to use the &quot;git&quot; protocol, because the &quot;http&quot; protocol is not very efficient, and/or requires some special handling on the server side. If you're pushing code to a public repo, you <strong>definitely</strong> need to use the &quot;ssh&quot; protocol.</p>
-<h1 id="a-word-about-socat" class="unnumbered">a word about socat</h1>
-<p>I will be using &quot;socat&quot;, an absolute corker of a program that does so many things it's incredible! Other people use corkscrew, ssh-https-tunnel, etc., which are all specialised for just one purpose. I prefer socat, and once you spend the 2-3 years :-) needed to read the man page, you will see why!</p>
+</nav>
+<p>Corporate firewalls and proxy typically block both of these (and often a lot more); here’s how to get around them.</p>
+<p>If you’re tracking a public repo, you will need to use the “git” protocol, because the “http” protocol is not very efficient, and/or requires some special handling on the server side. If you’re pushing code to a public repo, you <strong>definitely</strong> need to use the “ssh” protocol.</p>
+<h1 class="unnumbered" data-number id="a-word-about-socat">a word about socat</h1>
+<p>I will be using “socat”, an absolute corker of a program that does so many things it’s incredible! Other people use corkscrew, ssh-https-tunnel, etc., which are all specialised for just one purpose. I prefer socat, and once you spend the 2-3 years :-) needed to read the man page, you will see why!</p>
 <p>The basic idea is that you will somehow invoke socat, which will negotiate with the HTTP(S) proxy server using the CONNECT method to get you a clean pipe to the server on the far side.</p>
-<p>However, do note that socat does have one disadvantage: the passwords to your proxy server are visible in to local users running <code>ps -ef</code> or something. I don't care since I don't have anyone else logging into my desktop, and the ability to use a program I already have anyway (socat) is more important.</p>
-<h1 id="proxying-the-git-protocol" class="unnumbered">proxying the <strong>git</strong> protocol</h1>
+<p>However, do note that socat does have one disadvantage: the passwords to your proxy server are visible in to local users running <code>ps -ef</code> or something. I don’t care since I don’t have anyone else logging into my desktop, and the ability to use a program I already have anyway (socat) is more important.</p>
+<h1 class="unnumbered" data-number id="proxying-the-git-protocol">proxying the <strong>git</strong> protocol</h1>
 <p>When I want to download a public repo, I just type</p>
 <pre><code>proxied_git clone ...repo...
 proxied_git pull</code></pre>
 <p>and so on, instead of</p>
 <pre><code>git clone ...repo...
 git pull</code></pre>
-<p>Here's the how and why of it.</p>
+<p>Here’s the how and why of it.</p>
 <p>To proxy the git protocol, you need to export an environment variable called <code>GIT_PROXY_COMMAND</code>, which contains the command that is to be invoked. I have a shell function in my <code>.bashrc</code> that looks like this:</p>
 <pre><code>proxied_git () 
 ( 
@@ -113,11 +124,11 @@ EOF
 )</code></pre>
 <p>Possible variations are:</p>
 <ul>
-<li>you could give <code>/tmp/gitproxy</code> a more permanent name and remove the middle pararaph completely. I don't do this because that's too small a file to bother with; it just seems cleaner this way)</li>
+<li>you could give <code>/tmp/gitproxy</code> a more permanent name and remove the middle pararaph completely. I don’t do this because that’s too small a file to bother with; it just seems cleaner this way)</li>
 <li>you could permanently set the environment variable if <strong>all</strong> your git repos are remote (very unlikely)</li>
 </ul>
 <p>One thing you <em>cannot</em> do is to roll the entire socat command into the environment variable. Git passes the host and port as two arguments to the proxy command, but socat expects them in the syntax you see above, so you <em>will</em> need to wrap it in a script as I have done. I guess you could argue that this is a point in favour of corkscrew etc. ;-)</p>
-<h1 id="proxying-the-ssh-protocol" class="unnumbered">proxying the <strong>ssh</strong> protocol</h1>
+<h1 class="unnumbered" data-number id="proxying-the-ssh-protocol">proxying the <strong>ssh</strong> protocol</h1>
 <p>The git protocol is handled directly by git (duh!), but if you use the ssh protocol, it invokes ssh explicitly (again, duh!).</p>
 <p>Ssh already has this sort of stuff built-in, so you simply add a few lines to your <code>~/.ssh/config</code></p>
 <pre><code>host gh
@@ -127,10 +138,10 @@ EOF
     proxycommand socat - PROXY:your.proxy.ip:%h:%p,proxyport=3128,proxyauth=user:pwd</code></pre>
 <p>Now you can just say (for example):</p>
 <pre><code>git clone gh:sitaramc/git-notes.git</code></pre>
-<h2 id="ssh-proxy-using-corkscrew-instead-of-socat" class="unnumbered">ssh proxy using corkscrew instead of socat</h2>
+<h2 class="unnumbered" data-number id="ssh-proxy-using-corkscrew-instead-of-socat">ssh proxy using corkscrew instead of socat</h2>
 <ul>
-<li>download and install corkscrew (<a href="http://www.agroman.net/corkscrew/" class="uri">http://www.agroman.net/corkscrew/</a>)</li>
-<li>create a file (eg., ~/.ssh/myauth) and put your http proxy username and password as &quot;username:password&quot; in it and save it.</li>
+<li><p>download and install corkscrew (<a href="http://www.agroman.net/corkscrew/" class="uri">http://www.agroman.net/corkscrew/</a>)</p></li>
+<li><p>create a file (eg., ~/.ssh/myauth) and put your http proxy username and password as “username:password” in it and save it.</p></li>
 <li><p>safeguard the file</p>
 <pre><code>chmod 600 ~/.ssh/myauth</code></pre></li>
 <li><p>open ~/.ssh/config and add the following entry, adding an explicit path to corkscrew if needed.</p>
@@ -140,7 +151,7 @@ EOF
     port 22
     proxycommand corkscrew your.proxy.ip 3128 %h %p ~/.ssh/myauth</code></pre></li>
 </ul>
-<h2 id="extra-coolness-for-github" class="unnumbered">extra coolness for github</h2>
-<p>Noting that many corporate firewalls block access to the CONNECT method on ports other than 443, the good folks at github have an ssh server listening on 443 if you use the host &quot;ssh.github.com&quot;, so you can replace the hostname and the port in the above ssh config stanza as appropriate, and you're all set</p>
+<h2 class="unnumbered" data-number id="extra-coolness-for-github">extra coolness for github</h2>
+<p>Noting that many corporate firewalls block access to the CONNECT method on ports other than 443, the good folks at github have an ssh server listening on 443 if you use the host “ssh.github.com”, so you can replace the hostname and the port in the above ssh config stanza as appropriate, and you’re all set</p>
 </body>
 </html>

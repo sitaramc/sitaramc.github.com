@@ -1,47 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>dev/integ workflow</title>
-  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
-  
+
       code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
       pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
       pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-  
+
       td          { vertical-align: top }
-  
+
       .red        { color: red }
       .blue       { color: blue }
       .green      { color: green }
       .gray       { color: gray }
       .pink       { color: pink }
-  
+
       .box        { background-color:#e0e0e0 }
       .bg-red     { background-color:#ffe0e0 }
       .bg-green   { background-color:#e0ffe0 }
       .bg-blue    { background-color:#e0e0ff }
-  
+
       /* couldn't resist the name! */
       .wd40       { width: 40% !important }
-  
+
       .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
       .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
-  
+
       .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
       .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
-  
+
       .sidebar {
           margin-left: 4px;
           width: 25%;
           float: right;
           border: 4px solid #fff;
       }
-  
+
   </style>
   <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -65,31 +75,31 @@
         IMPORTANT NOTE:
     </strong>
     although this page has a &quot;gitolite.com&quot; URL, this is not about gitolite.
-    That's just an artifact of &quot;sitaramc.github.com&quot; being translated to
+    That&#39;s just an artifact of &quot;sitaramc.github.com&quot; being translated to
     &quot;gitolite.com&quot; and so ALL my git related stuff gets carried over.
     Gitolite documentation has another <code>/gitolite</code> in the URL, so
     you can tell.  My apologies for this confusion.
 </span>
 </p>
-<div id="header">
+<header id="title-block-header">
 <h1 class="title">dev/integ workflow</h1>
-</div>
-<h1 id="workflow"><span class="header-section-number">1</span> workflow</h1>
-<p>This is one possible workflow for dev/integ using gitolite. It assumes that there is one &quot;integrator&quot; and N developers &quot;dev1&quot;, ... &quot;devN&quot;.</p>
-<h2 id="branches"><span class="header-section-number">1.1</span> branches</h2>
+</header>
+<h1 data-number="1" id="workflow"><span class="header-section-number">1</span> workflow</h1>
+<p>This is one possible workflow for dev/integ using gitolite. It assumes that there is one “integrator” and N developers “dev1”, … “devN”.</p>
+<h2 data-number="1.1" id="branches"><span class="header-section-number">1.1</span> branches</h2>
 <ul>
-<li><p><code>integ</code> -- a branch that is <code>R</code> (readonly) for devs, <code>RW+</code> for integrator. This branch will always be kept in a compilable, basically runnable, state by the integrator. The history of this branch will be kept reasonably clean.</p>
+<li><p><code>integ</code> – a branch that is <code>R</code> (readonly) for devs, <code>RW+</code> for integrator. This branch will always be kept in a compilable, basically runnable, state by the integrator. The history of this branch will be kept reasonably clean.</p>
 <p>Each developer will start a new piece of work or task using <code>integ</code> as a starting point, and making sure that when he submits his work it builds upon this stable point.</p></li>
-<li><p><code>dev/dev1/</code>, <code>dev/dev2/</code>, ... <code>dev/devN/</code></p>
+<li><p><code>dev/dev1/</code>, <code>dev/dev2/</code>, … <code>dev/devN/</code></p>
 <p>branches under the <code>dev/devX/</code> hierarchy belong to the developer called <code>devX</code>. He submits his work to the integrator by pushing to one such branch and emailing the integrator the branch name (say <code>dev/sitaram/issue3423</code> or <code>dev/someone-else/bugfix-2321</code>.</p></li>
-<li><p>master -- a branch that is even more sacred than <code>integ</code>. Its usage and role are optional in the below described flow, but it can be used to filter <code>integ</code> even more, maybe based on some EQA (External Quality Assurance) perhaps. If so, its name can be changed to reflect that.</p></li>
+<li><p>master – a branch that is even more sacred than <code>integ</code>. Its usage and role are optional in the below described flow, but it can be used to filter <code>integ</code> even more, maybe based on some EQA (External Quality Assurance) perhaps. If so, its name can be changed to reflect that.</p></li>
 </ul>
-<h2 id="assumptions-startup"><span class="header-section-number">1.2</span> assumptions / startup:</h2>
+<h2 data-number="1.2" id="assumptions-startup"><span class="header-section-number">1.2</span> assumptions / startup:</h2>
 <ul>
 <li>a repo is created</li>
 <li>the code is kept in a branch called <code>integ</code>, even if it is bare minimum code in the beginning</li>
 </ul>
-<h2 id="developer-workflow"><span class="header-section-number">1.3</span> developer workflow</h2>
+<h2 data-number="1.3" id="developer-workflow"><span class="header-section-number">1.3</span> developer workflow</h2>
 <p>We use a sample developer called dev5 in the examples below.</p>
 <p>dev5 gets some work/spec/issue to work on. He is given, or chooses, a short name for the work he is doing. Examples:</p>
 <pre><code>xyz-module-error-23
@@ -121,7 +131,7 @@ a,b,c = intermediate commits
 d = issue-3394
 (current branch is issue-3394)</code></pre></li>
 </ul>
-<p>now he's ready to send. In the meantime, <code>integ</code> may have moved ahead, and he has to make it work against that:</p>
+<p>now he’s ready to send. In the meantime, <code>integ</code> may have moved ahead, and he has to make it work against that:</p>
 <ul>
 <li><p>fetch integ again and rebase</p>
 <pre><code>git fetch origin
@@ -136,34 +146,34 @@ git rebase origin/integ</code></pre>
              \
               \
                a---b---c---d</code></pre>
-<p>and moves the &quot;a, b, c, d&quot; on top of K:</p>
-<pre><code>---o---o---I---J---K---a'---b'---c'---d'
-(a',b',c',d' are rebased versions of a,b,c,d)
-(K = origin/integ, d' = issue-3394)</code></pre>
+<p>and moves the “a, b, c, d” on top of K:</p>
+<pre><code>---o---o---I---J---K---a&#39;---b&#39;---c&#39;---d&#39;
+(a&#39;,b&#39;,c&#39;,d&#39; are rebased versions of a,b,c,d)
+(K = origin/integ, d&#39; = issue-3394)</code></pre>
 <p>There is a reason for doing it this way. Dev5 is the one who knows the new code best, and he should be integrating it with the latest version of <code>integ</code> at any time he submits. And since <code>issue-3394</code> is a private branch, he can rebase it as often as he likes.</p>
 <p>[SIDE NOTE] why do we use rebase instead of merge here?</p>
-<p><strong>this is not a hard and fast rule -- you can use merge if you like. Feel free to experiment and see what works best for your team, because a lot also depends on their level of comfort with the process</strong></p>
-<p>However, in my opinion, work that has not been pushed out <em>and</em> accepted upstream should ideally be rebased against new upstream. The main difference is that, if the <em>acceptance</em> of the work goes through a few iterations (let's say it is rejected and partially redone 2-3 times), using rebases is easier to do, and also will result in a cleaner looking <em>final</em> commit list.</p></li>
+<p><strong>this is not a hard and fast rule – you can use merge if you like. Feel free to experiment and see what works best for your team, because a lot also depends on their level of comfort with the process</strong></p>
+<p>However, in my opinion, work that has not been pushed out <em>and</em> accepted upstream should ideally be rebased against new upstream. The main difference is that, if the <em>acceptance</em> of the work goes through a few iterations (let’s say it is rejected and partially redone 2-3 times), using rebases is easier to do, and also will result in a cleaner looking <em>final</em> commit list.</p></li>
 <li><p>retest one more time, to make sure the new <code>J</code> and <code>K</code> commits have not caused a problem for <code>issue-3394</code></p>
-<p>if the test fails, he has to fix his commits (a', b', c', d') or add some new commits (maybe e, f) and make it work.</p></li>
-<li><p>when test OK, push <code>issue-3394</code> under your own hierarchy (each time he comes back to &quot;LOOP POINT&quot; because something was rejected by code review or integ testing, the <code>v1</code> will increase -- <code>v2</code>, <code>v3</code>, etc)</p>
+<p>if the test fails, he has to fix his commits (a’, b’, c’, d’) or add some new commits (maybe e, f) and make it work.</p></li>
+<li><p>when test OK, push <code>issue-3394</code> under your own hierarchy (each time he comes back to “LOOP POINT” because something was rejected by code review or integ testing, the <code>v1</code> will increase – <code>v2</code>, <code>v3</code>, etc)</p>
 <pre><code>git push origin issue-3394:dev/dev5/issue-3394/v1</code></pre></li>
 <li><p>send email to integrator asking him to pull and test <code>dev/dev5/issue-3394/v1</code></p></li>
 </ul>
-<h2 id="integrator"><span class="header-section-number">1.4</span> integrator</h2>
+<h2 data-number="1.4" id="integrator"><span class="header-section-number">1.4</span> integrator</h2>
 <ul>
 <li><p>receive mail from dev5 saying <code>issue-3394</code> is done and ready</p></li>
 <li><p>clone repo if not already done</p></li>
 <li><p>fetch, make a test branch for testing <code>issue-3394</code></p>
 <pre><code>git fetch origin
 git checkout -b test_issue-3394 origin/dev/dev5/issue-3394</code></pre></li>
-<li><p>test, or do whatever he wants to do initially (maybe code review). If he doesn't like it, send it back for more work. <strong>dev5 then restarts his process from the point marked &quot;LOOP POINT&quot; in his workflow above</strong></p></li>
+<li><p>test, or do whatever he wants to do initially (maybe code review). If he doesn’t like it, send it back for more work. <strong>dev5 then restarts his process from the point marked “LOOP POINT” in his workflow above</strong></p></li>
 <li><p>if it is OK so far, <strong>test merge</strong> it with the current <em>integ</em> branch. Ideally, this should be a <strong>fast forward</strong>, because dev5 <em>already</em> did this.</p>
 <pre><code>git checkout -b test_integ_issue-3394 integ
 git merge origin/dev/dev5/issue-3394
 # this should be a fast forward, ideally
 # make some final tests</code></pre>
-<p>If something went wrong, no problem; just delete the test branch and email dev5 saying what the problems are. For dev5, work again starts at &quot;LOOP POINT&quot;</p>
+<p>If something went wrong, no problem; just delete the test branch and email dev5 saying what the problems are. For dev5, work again starts at “LOOP POINT”</p>
 <pre><code>git branch -D test_integ_issue-3394</code></pre>
 <p>However, if the tests were all ok, move integ forward and delete test merge branch</p>
 <pre><code>git checkout integ
@@ -171,15 +181,15 @@ git merge origin/dev/dev5/issue-3394
 git branch -D test_integ_issue-3394</code></pre>
 <p>This issue (3394) is now closed, unless there is a regression later. It has been integrated successfully, and dev5 can be assigned some other task.</p></li>
 </ul>
-<h1 id="gitolite-advanced-features-supporing-this-flow"><span class="header-section-number">2</span> gitolite advanced features supporing this flow</h1>
-<p>Here's a typical gitolite conf file:</p>
+<h1 data-number="2" id="gitolite-advanced-features-supporing-this-flow"><span class="header-section-number">2</span> gitolite advanced features supporing this flow</h1>
+<p>Here’s a typical gitolite conf file:</p>
 <pre><code>@myteam = dev1 dev2 ... devN
 
 repo myrepo
     RW+                 = integrator
     RW+ dev/USER/       = @myteam</code></pre>
-<p>That's it? How does, say <code>dev5</code> (assuming he is a member of <code>@myteam</code>), get access to write to <code>dev/dev5/something</code>?</p>
-<p>That is a unique feature of gitolite :-) When a rule has the string <code>/USER/</code> in the &quot;refex&quot; (see gitolite documentation for details), it replaces it with the name of the user invoking the push. This is effectively the same as manually adding one line like this</p>
+<p>That’s it? How does, say <code>dev5</code> (assuming he is a member of <code>@myteam</code>), get access to write to <code>dev/dev5/something</code>?</p>
+<p>That is a unique feature of gitolite :-) When a rule has the string <code>/USER/</code> in the “refex” (see gitolite documentation for details), it replaces it with the name of the user invoking the push. This is effectively the same as manually adding one line like this</p>
 <pre><code>    RW+ dev/sitaram/    = sitaram</code></pre>
 <p>for each member of <code>@myteam</code>.</p>
 </body>

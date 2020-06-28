@@ -1,47 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>blame detection</title>
-  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
-  
+
       code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
       pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
       pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-  
+
       td          { vertical-align: top }
-  
+
       .red        { color: red }
       .blue       { color: blue }
       .green      { color: green }
       .gray       { color: gray }
       .pink       { color: pink }
-  
+
       .box        { background-color:#e0e0e0 }
       .bg-red     { background-color:#ffe0e0 }
       .bg-green   { background-color:#e0ffe0 }
       .bg-blue    { background-color:#e0e0ff }
-  
+
       /* couldn't resist the name! */
       .wd40       { width: 40% !important }
-  
+
       .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
       .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
-  
+
       .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
       .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
-  
+
       .sidebar {
           margin-left: 4px;
           width: 25%;
           float: right;
           border: 4px solid #fff;
       }
-  
+
   </style>
   <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -65,25 +75,25 @@
         IMPORTANT NOTE:
     </strong>
     although this page has a &quot;gitolite.com&quot; URL, this is not about gitolite.
-    That's just an artifact of &quot;sitaramc.github.com&quot; being translated to
+    That&#39;s just an artifact of &quot;sitaramc.github.com&quot; being translated to
     &quot;gitolite.com&quot; and so ALL my git related stuff gets carried over.
     Gitolite documentation has another <code>/gitolite</code> in the URL, so
     you can tell.  My apologies for this confusion.
 </span>
 </p>
-<div id="header">
+<header id="title-block-header">
 <h1 class="title">blame detection</h1>
-</div>
-<p>Git tracks content, not files. As a result, the <code>git blame</code> and the <code>git gui blame</code> commands can detect code moved or copied from elsewhere in the project. It's a very powerful feature, accessed by specifying the <code>-C</code> flag one or more times, but there are some nuances.</p>
-<h1 id="move-detection-versus-copy-detection" class="unnumbered">move detection versus copy detection</h1>
+</header>
+<p>Git tracks content, not files. As a result, the <code>git blame</code> and the <code>git gui blame</code> commands can detect code moved or copied from elsewhere in the project. It’s a very powerful feature, accessed by specifying the <code>-C</code> flag one or more times, but there are some nuances.</p>
+<h1 class="unnumbered" data-number id="move-detection-versus-copy-detection">move detection versus copy detection</h1>
 <p>When the <code>-C</code> flag is given only once, it looks for code blocks that were <strong>moved</strong>. That is, it searches for new code among other files that were also modified in the same commit. This runs very fast.</p>
 <p>When you give the flag <strong>twice</strong>, it looks for new code among <strong>all</strong> the files in the parent commit, and so it detects code that was <strong>copied</strong>.</p>
 <p><code>git gui blame</code> behaves like <code>-C -C</code> by default, but can behave like <code>-C</code> if <code>gui.fastcopyblame</code> is true. (In addition, it also appears to set <code>-w</code>, to ignore whitespace changes while blaming).</p>
-<h1 id="threshold-and-how-to-specify-it" class="unnumbered">threshold, and how to specify it</h1>
-<p>There is a concept of a &quot;threshold&quot;, which is the minimum number of alphanumeric characters required to count something as a code move/copy -- be sure to read under <code>-C</code> in <code>man git-blame</code>.</p>
+<h1 class="unnumbered" data-number id="threshold-and-how-to-specify-it">threshold, and how to specify it</h1>
+<p>There is a concept of a “threshold”, which is the minimum number of alphanumeric characters required to count something as a code move/copy – be sure to read under <code>-C</code> in <code>man git-blame</code>.</p>
 <p>This threshold defaults to 40 characters for copy detection, and 20 for move detection. You can override it by appending a number to the <code>-C</code> option.</p>
-<p><code>git gui blame</code> defaults to 40 for this -- it actually sets <code>-C40</code> and calls (I assume) the command line blame tool. If you want to override it, use the GUI (Edit-&gt;Options), or directly set the <code>gui.copyblamethreshold</code> config variable.</p>
-<h1 id="documentation-lacunae" class="unnumbered">documentation lacunae</h1>
+<p><code>git gui blame</code> defaults to 40 for this – it actually sets <code>-C40</code> and calls (I assume) the command line blame tool. If you want to override it, use the GUI (Edit-&gt;Options), or directly set the <code>gui.copyblamethreshold</code> config variable.</p>
+<h1 class="unnumbered" data-number id="documentation-lacunae">documentation lacunae</h1>
 <p>The documentation does not seem to be very clear about the effect of <em>three</em> <code>-C</code> options on <code>git blame</code>. (In the GUI this is done by choosing full copy detection from the right click menu).</p>
 <p>The best hint is in <code>builtin-blame.c</code>, which says, within a function called <code>blame_copy_callback</code>:</p>
 <pre><code>/*
@@ -93,8 +103,8 @@
  * -C -C -C enables copy from existing files for
  *          everybody
  */</code></pre>
-<p>Sidenote: correlating the single and double cases in the code with the documentation, I imagine &quot;removed files&quot; actually means &quot;code from some other modified file in the same commit&quot;, and similarly &quot;existing files&quot; means &quot;code from any files in the parent commit&quot;.</p>
-<h1 id="my-observations" class="unnumbered">my observations</h1>
+<p>Sidenote: correlating the single and double cases in the code with the documentation, I imagine “removed files” actually means “code from some other modified file in the same commit”, and similarly “existing files” means “code from any files in the parent commit”.</p>
+<h1 class="unnumbered" data-number id="my-observations">my observations</h1>
 <ul>
 <li>a very high threshold makes it behave like no <code>-C</code> flags were supplied</li>
 </ul>

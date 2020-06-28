@@ -1,47 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
-  
+
       code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
       pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
       pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-  
+
       td          { vertical-align: top }
-  
+
       .red        { color: red }
       .blue       { color: blue }
       .green      { color: green }
       .gray       { color: gray }
       .pink       { color: pink }
-  
+
       .box        { background-color:#e0e0e0 }
       .bg-red     { background-color:#ffe0e0 }
       .bg-green   { background-color:#e0ffe0 }
       .bg-blue    { background-color:#e0e0ff }
-  
+
       /* couldn't resist the name! */
       .wd40       { width: 40% !important }
-  
+
       .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
       .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
-  
+
       .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
       .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
-  
+
       .sidebar {
           margin-left: 4px;
           width: 25%;
           float: right;
           border: 4px solid #fff;
       }
-  
+
   </style>
   <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -65,20 +75,20 @@
         IMPORTANT NOTE:
     </strong>
     although this page has a &quot;gitolite.com&quot; URL, this is not about gitolite.
-    That's just an artifact of &quot;sitaramc.github.com&quot; being translated to
+    That&#39;s just an artifact of &quot;sitaramc.github.com&quot; being translated to
     &quot;gitolite.com&quot; and so ALL my git related stuff gets carried over.
     Gitolite documentation has another <code>/gitolite</code> in the URL, so
     you can tell.  My apologies for this confusion.
 </span>
 </p>
-<h2 id="simple-gotchas-at-the-command-line" class="unnumbered">simple &quot;gotcha&quot;s at the command line</h2>
+<h2 class="unnumbered" data-number id="simple-gotchas-at-the-command-line">simple “gotcha”s at the command line</h2>
 <ul>
 <li><p><code>git log rev</code> and <code>git diff rev</code> go in different directions. Log shows backward from the rev given, while diff goes forward from rev to the working directory.</p></li>
-<li><p>many commands inherit options from lower level programs and their man pages will appear incomplete. Read carefully to see what other commands' options are applicable to this one. For example, <code>git-log</code> inherits from <code>git-rev-list</code> and <code>git-diff-tree</code>.</p></li>
+<li><p>many commands inherit options from lower level programs and their man pages will appear incomplete. Read carefully to see what other commands’ options are applicable to this one. For example, <code>git-log</code> inherits from <code>git-rev-list</code> and <code>git-diff-tree</code>.</p></li>
 <li><p>using <code>cp -a</code> copy instead of <code>git clone</code> will screw the timestamps. A subsequent <code>git add .</code> will make it look like every file has changed, in terms of just the time stamp. <em>Fix this by using <code>git status</code>, which updates the index for such cases as a side effect.</em></p></li>
 <li><p>confused by <code>HEAD^</code>, <code>HEAD~1</code>, etc.? <code>man git-rev-parse</code> has a good diagram. And remember the reflog is quite different and has a different syntax (<code>HEAD@{2</code>}).</p></li>
-<li><p>cloning a repo: the following two commands are different. The first one clones the repository using a mix of copy (for the smaller files in the &quot;.git&quot; directory ) and hard linking (for the larger files), so it's quite fast even for large repositories.</p>
-<p>The second one uses git's packfile transfer protocol, which makes no assumptions about the original and the clone being on the same file system or even machine. It will almost certainly take more time and disk space.</p>
+<li><p>cloning a repo: the following two commands are different. The first one clones the repository using a mix of copy (for the smaller files in the “.git” directory ) and hard linking (for the larger files), so it’s quite fast even for large repositories.</p>
+<p>The second one uses git’s packfile transfer protocol, which makes no assumptions about the original and the clone being on the same file system or even machine. It will almost certainly take more time and disk space.</p>
 <pre><code>git clone foo bar           # versus
 git clone file:///foo bar</code></pre></li>
 </ul>

@@ -1,47 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title>gardening tips -- grafting branches</title>
-  <style type="text/css">code{white-space: pre;}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>gardening tips – grafting branches</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
-  
+
       code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
       pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
       pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-  
+
       td          { vertical-align: top }
-  
+
       .red        { color: red }
       .blue       { color: blue }
       .green      { color: green }
       .gray       { color: gray }
       .pink       { color: pink }
-  
+
       .box        { background-color:#e0e0e0 }
       .bg-red     { background-color:#ffe0e0 }
       .bg-green   { background-color:#e0ffe0 }
       .bg-blue    { background-color:#e0e0ff }
-  
+
       /* couldn't resist the name! */
       .wd40       { width: 40% !important }
-  
+
       .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
       .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
-  
+
       .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
       .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
-  
+
       .sidebar {
           margin-left: 4px;
           width: 25%;
           float: right;
           border: 4px solid #fff;
       }
-  
+
   </style>
   <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -65,25 +75,25 @@
         IMPORTANT NOTE:
     </strong>
     although this page has a &quot;gitolite.com&quot; URL, this is not about gitolite.
-    That's just an artifact of &quot;sitaramc.github.com&quot; being translated to
+    That&#39;s just an artifact of &quot;sitaramc.github.com&quot; being translated to
     &quot;gitolite.com&quot; and so ALL my git related stuff gets carried over.
     Gitolite documentation has another <code>/gitolite</code> in the URL, so
     you can tell.  My apologies for this confusion.
 </span>
 </p>
-<div id="header">
-<h1 class="title">gardening tips -- grafting branches</h1>
-</div>
-<p><sup>[If you think the jokes are bad, you don't know me very well. Clearly that is <em>your</em> fault, not mine :-)]</sup></p>
+<header id="title-block-header">
+<h1 class="title">gardening tips – grafting branches</h1>
+</header>
+<p><sup>[If you think the jokes are bad, you don’t know me very well. Clearly that is <em>your</em> fault, not mine :-)]</sup></p>
 <hr />
-<p>Even people who consider themselves really good gardeners shy away from grafting. Wikipedia says &quot;For successful grafting to take place, the vascular cambium tissues of the stock and scion plants must be placed in contact with each other. Both tissues must be kept alive until the graft has taken, usually a period of a few weeks.&quot; That sounds... difficult.</p>
-<p>Fortunately, Grum on IRC explained to me that all that is bunkum in git. Git has no issues with tissues, and if Linus had to wait a few weeks for a graft to &quot;take&quot;, we'd still be at kernel level 2.2 or something.</p>
-<p>So, here's the long and short of grafting in git. Enjoy! (And thank Grum with a ++ next time you see him on #git!).</p>
-<p>Note: The following description will use the word &quot;line&quot; to mean &quot;a long chain of commits with no branch or merge within it&quot;. In <code>gitk --all</code>, it is literally a straight line.</p>
-<h1 id="connecting-two-unrelated-lines"><span class="header-section-number">1</span> connecting two unrelated lines</h1>
-<p>Let's say you have the following history, with two unrelated lines of development (quite easily achieved by just fetching from some other repo that has no common commits with yours!).</p>
-<p>^^(By the way, how can you tell they are unrelated? Easy -- just look at the break in the graph connector after &quot;a1&quot;!)^^</p>
-<pre><code>$ git log --graph '--pretty=tformat:%H %d %s %n'  --all
+<p>Even people who consider themselves really good gardeners shy away from grafting. Wikipedia says “For successful grafting to take place, the vascular cambium tissues of the stock and scion plants must be placed in contact with each other. Both tissues must be kept alive until the graft has taken, usually a period of a few weeks.” That sounds… difficult.</p>
+<p>Fortunately, Grum on IRC explained to me that all that is bunkum in git. Git has no issues with tissues, and if Linus had to wait a few weeks for a graft to “take”, we’d still be at kernel level 2.2 or something.</p>
+<p>So, here’s the long and short of grafting in git. Enjoy! (And thank Grum with a ++ next time you see him on #git!).</p>
+<p>Note: The following description will use the word “line” to mean “a long chain of commits with no branch or merge within it”. In <code>gitk --all</code>, it is literally a straight line.</p>
+<h1 data-number="1" id="connecting-two-unrelated-lines"><span class="header-section-number">1</span> connecting two unrelated lines</h1>
+<p>Let’s say you have the following history, with two unrelated lines of development (quite easily achieved by just fetching from some other repo that has no common commits with yours!).</p>
+<p>^^(By the way, how can you tell they are unrelated? Easy – just look at the break in the graph connector after “a1”!)^^</p>
+<pre><code>$ git log --graph &#39;--pretty=tformat:%H %d %s %n&#39;  --all
 * 891f2a69544779e7f61a6ae2c213a3c2dc2957b1  (refs/heads/a-m) a3
 |
 * 6a5b7c3ba50f91630f71aeaa36e2926ea6ad42f4  a2
@@ -95,12 +105,12 @@
 * adec8003a1c14984a8c39fc796c1ccbac27048e0  b2
 |
 * c5e268659a39921d87d6d50d6d3c6eccd12f4916  b1</code></pre>
-<p>Suppose the two lines are actually of the same project, and you now want to join them. You have decided that &quot;b1&quot; is the true root of the repository (probably because that is the one that a couple of thousand people have already cloned, and you can't change that chain ;-) and want to make the &quot;a&quot; line a fork from the &quot;b&quot; line at the point &quot;b1&quot;.</p>
-<p>Just make a graft that says that &quot;b1&quot; is the parent of &quot;a1&quot;! Of course you have to use the full SHA1s, and this isn't one of the more user-friendly parts of git, but:</p>
+<p>Suppose the two lines are actually of the same project, and you now want to join them. You have decided that “b1” is the true root of the repository (probably because that is the one that a couple of thousand people have already cloned, and you can’t change that chain ;-) and want to make the “a” line a fork from the “b” line at the point “b1”.</p>
+<p>Just make a graft that says that “b1” is the parent of “a1”! Of course you have to use the full SHA1s, and this isn’t one of the more user-friendly parts of git, but:</p>
 <pre><code>$ echo bb1cd6894bf5a073a80fb67575adb504539fca86 \
 c5e268659a39921d87d6d50d6d3c6eccd12f4916 &gt; .git/info/grafts</code></pre>
 <p>So now the repo looks like this:</p>
-<pre><code>$ git log --graph '--pretty=tformat:%H %d %s %n' --all
+<pre><code>$ git log --graph &#39;--pretty=tformat:%H %d %s %n&#39; --all
 * 891f2a69544779e7f61a6ae2c213a3c2dc2957b1  (refs/heads/a-m) a3
 |
 * 6a5b7c3ba50f91630f71aeaa36e2926ea6ad42f4  a2
@@ -113,11 +123,11 @@ c5e268659a39921d87d6d50d6d3c6eccd12f4916 &gt; .git/info/grafts</code></pre>
 |/
 |
 * c5e268659a39921d87d6d50d6d3c6eccd12f4916  b1</code></pre>
-<p>So far so good. You've somehow made &quot;a1&quot; a child of &quot;b1&quot;, but there's something not quite right -- the adoption has merely been recorded on a wee bit of notepaper, called <code>.git/info/grafts</code>. That thing could get lost, damaged, or whatever. In fact, it won't even make it past a clone, leave alone pushes and pulls. You need to get a more formal adoption certificate, on thick, strong, bond paper. With the logo of the local something-or-other. Maybe even laminated!</p>
-<p>Here's how to apply for one from the district magistrate's office:</p>
+<p>So far so good. You’ve somehow made “a1” a child of “b1”, but there’s something not quite right – the adoption has merely been recorded on a wee bit of notepaper, called <code>.git/info/grafts</code>. That thing could get lost, damaged, or whatever. In fact, it won’t even make it past a clone, leave alone pushes and pulls. You need to get a more formal adoption certificate, on thick, strong, bond paper. With the logo of the local something-or-other. Maybe even laminated!</p>
+<p>Here’s how to apply for one from the district magistrate’s office:</p>
 <pre><code>git filter-branch --tag-name-filter cat -- --all</code></pre>
 <p>And now the repo looks like this:</p>
-<pre><code>$ git log --graph '--pretty=tformat:%H %d %s %n' master a-m
+<pre><code>$ git log --graph &#39;--pretty=tformat:%H %d %s %n&#39; master a-m
 * b2ccb766b20061124010877b5c22e69015e0d076  (refs/heads/master) b3
 |
 * adec8003a1c14984a8c39fc796c1ccbac27048e0  b2
@@ -130,10 +140,10 @@ c5e268659a39921d87d6d50d6d3c6eccd12f4916 &gt; .git/info/grafts</code></pre>
 |/
 |
 * c5e268659a39921d87d6d50d6d3c6eccd12f4916  b1</code></pre>
-<p>Observant people will note that the SHA1 hashes for all the &quot;a&quot; commits have changed, which of course they will. The SHA1 hash for a commit is derived from all parent commits, the current tree for that commit, the commit message, author/committor info, and the date/time. Since the <code>filter-branch</code> command has made the relationship <em>permanent</em>, the SHAs for the &quot;a&quot;s change.</p>
-<p>Even <em>more</em> observant people will notice that in the previous diagram, the &quot;a&quot;s are in a straight line and the &quot;b&quot;s are on a &quot;branch&quot;, while in the next diagram they have switched places. Topologically that's irrelevant, so don't worry about it.</p>
+<p>Observant people will note that the SHA1 hashes for all the “a” commits have changed, which of course they will. The SHA1 hash for a commit is derived from all parent commits, the current tree for that commit, the commit message, author/committor info, and the date/time. Since the <code>filter-branch</code> command has made the relationship <em>permanent</em>, the SHAs for the “a”s change.</p>
+<p>Even <em>more</em> observant people will notice that in the previous diagram, the “a”s are in a straight line and the “b”s are on a “branch”, while in the next diagram they have switched places. Topologically that’s irrelevant, so don’t worry about it.</p>
 <p>^^ The <em>most</em> observant people will notice that instead of <code>--all</code> I have now passed <code>master a-m</code> (the actual branch names). This is what you will see if you do this with <code>--all</code>:</p>
-<pre><code>$ g log --graph '--pretty=tformat:%H %d %s %n'  --all
+<pre><code>$ g log --graph &#39;--pretty=tformat:%H %d %s %n&#39;  --all
 * f34c278dd638a8ade860aafb47bd7a5c8d79865b  (refs/heads/a-m) a3
 |
 * 92a7be0c15b242c8204ba86a4b5191d1492b1dd4  a2
@@ -153,16 +163,16 @@ c5e268659a39921d87d6d50d6d3c6eccd12f4916 &gt; .git/info/grafts</code></pre>
 |/
 |
 * c5e268659a39921d87d6d50d6d3c6eccd12f4916  b1</code></pre>
-<p>That's an artifact of the <code>filter-branch</code> command and git's well-known principle of making it very hard to lose data. If you did not like the filter-branch for some reason, you would just:</p>
+<p>That’s an artifact of the <code>filter-branch</code> command and git’s well-known principle of making it very hard to lose data. If you did not like the filter-branch for some reason, you would just:</p>
 <pre><code>git checkout a-m
 git reset --hard original/refs/heads/a-m</code></pre>
 <p>But if everything worked out, and the new tree looks good, you would type, <strong>very carefully</strong>:</p>
 <pre><code>rm -rf .git/refs/original/</code></pre>
-<p>That's it! ^^</p>
-<h1 id="breaking-a-line-into-two..."><span class="header-section-number">2</span> breaking a line into two...</h1>
+<p>That’s it! ^^</p>
+<h1 data-number="2" id="breaking-a-line-into-two"><span class="header-section-number">2</span> breaking a line into two…</h1>
 <p>What other tricks can you get up to?</p>
 <p>How about taking this:</p>
-<pre><code>$ g log --graph '--pretty=tformat:%H %d %s %n'  --all
+<pre><code>$ g log --graph &#39;--pretty=tformat:%H %d %s %n&#39;  --all
 * cb479e433d0fa639c5738f9b26c0cd5ca0d1e1e7  (refs/heads/master) a9
 |
 * 0f127260fff51ad71d092788d5630b6bf0c4764f  a8
@@ -181,7 +191,7 @@ git reset --hard original/refs/heads/a-m</code></pre>
 |
 * bb1cd6894bf5a073a80fb67575adb504539fca86  a1</code></pre>
 <p>and turning it into this:</p>
-<pre><code>$ g log --graph '--pretty=tformat:%H %d %s %n'  --all
+<pre><code>$ g log --graph &#39;--pretty=tformat:%H %d %s %n&#39;  --all
 * cb479e433d0fa639c5738f9b26c0cd5ca0d1e1e7  (refs/heads/master) a9 at Sat Apr 11 17:20:21 IST 2009
 |
 * 0f127260fff51ad71d092788d5630b6bf0c4764f  a8 at Sat Apr 11 17:20:19 IST 2009
@@ -201,8 +211,8 @@ git reset --hard original/refs/heads/a-m</code></pre>
 * bb1cd6894bf5a073a80fb67575adb504539fca86  a1 at Sat Apr 11 16:21:40 IST 2009</code></pre>
 <p>How? Just:</p>
 <pre><code>$ echo 8e48f4975469c9c9c5de644eb8eff1e165241b09 &gt; .git/info/grafts</code></pre>
-<p>We've made &quot;a6&quot; what is called a &quot;root&quot; commit -- it has no parent. Of course, if you do this without giving &quot;a5&quot; (&quot;a6&quot;'s original parent) a proper name, &quot;a5&quot; will become unreachable. Which is why we gave it a name.</p>
-<h1 id="and-joining-them-parallely-branch-merge"><span class="header-section-number">3</span> ...and joining them parallely (branch + merge)</h1>
+<p>We’ve made “a6” what is called a “root” commit – it has no parent. Of course, if you do this without giving “a5” (“a6”’s original parent) a proper name, “a5” will become unreachable. Which is why we gave it a name.</p>
+<h1 data-number="3" id="and-joining-them-parallely-branch-merge"><span class="header-section-number">3</span> …and joining them parallely (branch + merge)</h1>
 <p>Or how about not just breaking them and leaving them separate, but taking the pieces and putting them <em>parallel</em> to each other, with the tops and bottoms joined:</p>
 <pre><code>$ echo 6071135a250f9870aa8211eb871b4ac5d8e7e585 \
 bb1cd6894bf5a073a80fb67575adb504539fca86 &gt; .git/info/grafts
@@ -211,7 +221,7 @@ $ echo cb479e433d0fa639c5738f9b26c0cd5ca0d1e1e7 \
 0f127260fff51ad71d092788d5630b6bf0c4764f \
 179fb20ebbe3d9381b8944cc53c1ef0b893f431d &gt;&gt; .git/info/grafts
 
-$ g log --graph '--pretty=tformat:%H %d %s %n'  --all
+$ g log --graph &#39;--pretty=tformat:%H %d %s %n&#39;  --all
 *   cb479e433d0fa639c5738f9b26c0cd5ca0d1e1e7  (refs/heads/master) a9
 |\
 | |

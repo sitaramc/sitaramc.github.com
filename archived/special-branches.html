@@ -1,47 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>customer branches</title>
-  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
-  
+
       code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
       pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
       pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-  
+
       td          { vertical-align: top }
-  
+
       .red        { color: red }
       .blue       { color: blue }
       .green      { color: green }
       .gray       { color: gray }
       .pink       { color: pink }
-  
+
       .box        { background-color:#e0e0e0 }
       .bg-red     { background-color:#ffe0e0 }
       .bg-green   { background-color:#e0ffe0 }
       .bg-blue    { background-color:#e0e0ff }
-  
+
       /* couldn't resist the name! */
       .wd40       { width: 40% !important }
-  
+
       .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
       .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
-  
+
       .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
       .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
-  
+
       .sidebar {
           margin-left: 4px;
           width: 25%;
           float: right;
           border: 4px solid #fff;
       }
-  
+
   </style>
   <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -65,56 +75,56 @@
         IMPORTANT NOTE:
     </strong>
     although this page has a &quot;gitolite.com&quot; URL, this is not about gitolite.
-    That's just an artifact of &quot;sitaramc.github.com&quot; being translated to
+    That&#39;s just an artifact of &quot;sitaramc.github.com&quot; being translated to
     &quot;gitolite.com&quot; and so ALL my git related stuff gets carried over.
     Gitolite documentation has another <code>/gitolite</code> in the URL, so
     you can tell.  My apologies for this confusion.
 </span>
 </p>
-<div id="header">
+<header id="title-block-header">
 <h1 class="title">customer branches</h1>
-</div>
+</header>
 <!-- http://colabti.org/irclogger/irclogger_log/git?date=2009-08-15#l585 -->
-<p>Here's a question that someone asked (both question and response have been heavily edited):</p>
+<p>Here’s a question that someone asked (both question and response have been heavily edited):</p>
 <blockquote>
 <p>Hello. I have a Ruby on Rails application. This is currently managed using GIT. I have another business that wants a customised copy of this site. Is it possible to use GIT to do this?</p>
 </blockquote>
 <blockquote>
-<p>Currently I have one site in directory &quot;custA&quot;. I want to make a copy in &quot;custB&quot; which is a branch. They are the same base system with customer specific modifications. How does this work?</p>
+<p>Currently I have one site in directory “custA”. I want to make a copy in “custB” which is a branch. They are the same base system with customer specific modifications. How does this work?</p>
 </blockquote>
 <blockquote>
 <p>For example, on custA, I make commits 1, 2, 3. In custB, only commits 1 and 3 are relevant. Is it possible to pull only specific commits across? Would I be better served using a central repository and then using different branches, one for each site?</p>
 </blockquote>
 <blockquote>
-<p>What is the &quot;best&quot; way to do this using Git?</p>
+<p>What is the “best” way to do this using Git?</p>
 </blockquote>
-<p>There are several issues actually being raised here, so we'll look at them one at a time.</p>
+<p>There are several issues actually being raised here, so we’ll look at them one at a time.</p>
 <hr />
-<h1 id="svn-itis"><span class="header-section-number">1</span> SVN-itis</h1>
-<p>The first thing to note is that the question reflects what I have started calling <code>SVN-itis</code> -- where &quot;branch&quot; and &quot;(sub)directory&quot; are conflated :-)</p>
-<p>Some <a href="../terminology.html">basic terminology</a> is probably useful, if you're really new to git, or perhaps some info on <a href="branches.html">branches in git</a>, but neither of these quite manage a cure for SVN-itis. So let's lay it out:</p>
+<h1 data-number="1" id="svn-itis"><span class="header-section-number">1</span> SVN-itis</h1>
+<p>The first thing to note is that the question reflects what I have started calling <code>SVN-itis</code> – where “branch” and “(sub)directory” are conflated :-)</p>
+<p>Some <a href="../terminology.html">basic terminology</a> is probably useful, if you’re really new to git, or perhaps some info on <a href="branches.html">branches in git</a>, but neither of these quite manage a cure for SVN-itis. So let’s lay it out:</p>
 <blockquote>
 <p>In git, there is <strong>no connection</strong> between a branch and a subdirectory. Subdirectories are whatever your project needs them to be, and branch names are whatever you want them to be. You can have a branch whose name happens to be the same as that of one of your project directories, if you really need to.</p>
 </blockquote>
-<p>So &quot;custA&quot; is <strong>not</strong> a directory. Neither is &quot;custB&quot;; nor indeed any other branch. And if you have a directory called &quot;include&quot; or &quot;src&quot; or &quot;Documentation&quot;, that does <strong>not</strong> become a branch in your repo!</p>
-<p>When you checkout a branch called &quot;custA&quot;, your &quot;working tree&quot; is populated with the customer &quot;A&quot; specific version of your code. It's very likely that the actual directory structure for this version is pretty much the same as, say, for customer &quot;B&quot;, and both of them are similar to the directory structure of the main branch.</p>
-<h1 id="cherry-pick-versus-merge"><span class="header-section-number">2</span> cherry-pick versus merge</h1>
+<p>So “custA” is <strong>not</strong> a directory. Neither is “custB”; nor indeed any other branch. And if you have a directory called “include” or “src” or “Documentation”, that does <strong>not</strong> become a branch in your repo!</p>
+<p>When you checkout a branch called “custA”, your “working tree” is populated with the customer “A” specific version of your code. It’s very likely that the actual directory structure for this version is pretty much the same as, say, for customer “B”, and both of them are similar to the directory structure of the main branch.</p>
+<h1 data-number="2" id="cherry-pick-versus-merge"><span class="header-section-number">2</span> cherry-pick versus merge</h1>
 <p>[also see <code>git help workflows</code>]</p>
-<p>&quot;<em>Is it possible to pull only specific commits across?</em>&quot;</p>
+<p>“<em>Is it possible to pull only specific commits across?</em>”</p>
 <p>Well certainly yes; this is called <strong>cherry-picking</strong>, and git can do that from the command line, or from the GUI. But it is <strong>not</strong> the right thing to do in this circumstance, or indeed many other similar ones.</p>
-<p>In terms of &quot;history&quot;, a cherry-pick is the same as &quot;take a diff of <em>that</em> commit versus it's parent, and apply that same change <em>here</em> in <em>this</em> branch, and commit&quot;. Git does not remember that you pulled this change in any way whatsoever, and does not associate these two commits (the one you picked, and the new one made here as a result) in any long term way to ease maintenance. [Experts: <em>patch-id</em> is not relevant here for this discussion so leave it alone ok? :-)]</p>
+<p>In terms of “history”, a cherry-pick is the same as “take a diff of <em>that</em> commit versus it’s parent, and apply that same change <em>here</em> in <em>this</em> branch, and commit”. Git does not remember that you pulled this change in any way whatsoever, and does not associate these two commits (the one you picked, and the new one made here as a result) in any long term way to ease maintenance. [Experts: <em>patch-id</em> is not relevant here for this discussion so leave it alone ok? :-)]</p>
 <p>Secondly, if the feature you implemented was spread across more than one commit (as any non-trivial feature <em>should</em>!), you have to remember to cherry-pick <em>all</em> of them. In the <em>right order</em>! Miss one, or pick them in the wrong order, and things go bad.</p>
-<p>When you <strong>merge</strong> a branch, on the other hand, git remembers that you merged it. And since you only deal with the tip of the branch, not individual commits, it's git's job to make sure that they all come in, and in the right order. In particular, (as <code>git help workflows</code> says),</p>
+<p>When you <strong>merge</strong> a branch, on the other hand, git remembers that you merged it. And since you only deal with the tip of the branch, not individual commits, it’s git’s job to make sure that they all come in, and in the right order. In particular, (as <code>git help workflows</code> says),</p>
 <pre><code>...a merge can carry over the changes from 1, 10, or 1000 commits with
 equal ease, which in turn means the workflow scales much better...</code></pre>
 <p>So the long term way to do this is by merging. Just remember that when you merge a branch, <em>all</em> the changes in that branch are brought in (merging is <em>not</em> a selective operation) so it is best to <em>create a different branch for each logically separate set of changes</em>.</p>
-<h1 id="customer-specific-branches"><span class="header-section-number">3</span> customer specific branches</h1>
-<p>The idea is you use one common branch, and two (or as many as you need) customer specific branches. All common changes go into the master, and each customer branch gets changes that pertain only to that customer. Periodically (when master is considered to be at a stable point), you'll merge changes from master into the customer branch (<code>git checkout custA; git merge master</code>). This brings in newer &quot;common&quot; code into the customer branch. You will <strong>never</strong> merge the other way -- that would pollute master with customer-specific code.</p>
-<p>When you make a delivery to customer A, you checkout the &quot;custA&quot; branch and send that. And of course similarly for other customers.</p>
-<p>Now let's say you acquire a new customer, &quot;C&quot;, and a bit later find a feature that customers A and C want, but B doesn't. You create (aka &quot;fork&quot;) a branch off of master (<code>git checkout -b AC_feature master</code>), code/test it, making commits as you go, and then merge it into A and C (<code>git checkout A; git merge AC_feature</code> and similarly for customer C). You do <strong>not</strong> code it in A and then rely on merging A into C, because that would get all of A into C.</p>
+<h1 data-number="3" id="customer-specific-branches"><span class="header-section-number">3</span> customer specific branches</h1>
+<p>The idea is you use one common branch, and two (or as many as you need) customer specific branches. All common changes go into the master, and each customer branch gets changes that pertain only to that customer. Periodically (when master is considered to be at a stable point), you’ll merge changes from master into the customer branch (<code>git checkout custA; git merge master</code>). This brings in newer “common” code into the customer branch. You will <strong>never</strong> merge the other way – that would pollute master with customer-specific code.</p>
+<p>When you make a delivery to customer A, you checkout the “custA” branch and send that. And of course similarly for other customers.</p>
+<p>Now let’s say you acquire a new customer, “C”, and a bit later find a feature that customers A and C want, but B doesn’t. You create (aka “fork”) a branch off of master (<code>git checkout -b AC_feature master</code>), code/test it, making commits as you go, and then merge it into A and C (<code>git checkout A; git merge AC_feature</code> and similarly for customer C). You do <strong>not</strong> code it in A and then rely on merging A into C, because that would get all of A into C.</p>
 <p>If, sometime later, you find a minor bug in that feature, you make the change in the same branch (<code>git checkout AC_feature; edit/test/commit</code>), and then you merge it into <code>custA</code> and <code>custC</code> as above.</p>
-<h1 id="summary"><span class="header-section-number">4</span> Summary</h1>
-<p>The main thing we're avoiding in all this is cherry-picking specific commits because you only wanted a part of that code in this branch -- cherry-picking is certainly doable, but it is not scalable and in the long term it's a pain.</p>
+<h1 data-number="4" id="summary"><span class="header-section-number">4</span> Summary</h1>
+<p>The main thing we’re avoiding in all this is cherry-picking specific commits because you only wanted a part of that code in this branch – cherry-picking is certainly doable, but it is not scalable and in the long term it’s a pain.</p>
 <p>Of course, you do have to be disciplined about which branch you make each commit in, in order to keep things properly separated.</p>
 <p>But <a href="special-branch-fixups.html">here</a> is one way to fix up things if you did not manage to do that for some reason.</p>
 </body>

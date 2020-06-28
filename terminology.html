@@ -1,47 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>terminology</title>
-  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
-  
+
       code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
       pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
       pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-  
+
       td          { vertical-align: top }
-  
+
       .red        { color: red }
       .blue       { color: blue }
       .green      { color: green }
       .gray       { color: gray }
       .pink       { color: pink }
-  
+
       .box        { background-color:#e0e0e0 }
       .bg-red     { background-color:#ffe0e0 }
       .bg-green   { background-color:#e0ffe0 }
       .bg-blue    { background-color:#e0e0ff }
-  
+
       /* couldn't resist the name! */
       .wd40       { width: 40% !important }
-  
+
       .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
       .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
-  
+
       .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
       .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
-  
+
       .sidebar {
           margin-left: 4px;
           width: 25%;
           float: right;
           border: 4px solid #fff;
       }
-  
+
   </style>
   <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -65,19 +75,20 @@
         IMPORTANT NOTE:
     </strong>
     although this page has a &quot;gitolite.com&quot; URL, this is not about gitolite.
-    That's just an artifact of &quot;sitaramc.github.com&quot; being translated to
+    That&#39;s just an artifact of &quot;sitaramc.github.com&quot; being translated to
     &quot;gitolite.com&quot; and so ALL my git related stuff gets carried over.
     Gitolite documentation has another <code>/gitolite</code> in the URL, so
     you can tell.  My apologies for this confusion.
 </span>
 </p>
-<div id="header">
+<header id="title-block-header">
 <h1 class="title">terminology</h1>
-</div>
-<div id="TOC">
+</header>
+<nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#general-vcs-terminology"><span class="toc-section-number">1</span> general VCS terminology</a></li>
-<li><a href="#git-specific-terminology"><span class="toc-section-number">2</span> git-specific terminology</a><ul>
+<li><a href="#git-specific-terminology"><span class="toc-section-number">2</span> git-specific terminology</a>
+<ul>
 <li><a href="#working-tree-repository-bare-repository"><span class="toc-section-number">2.1</span> working tree, repository, bare repository</a></li>
 <li><a href="#commits-shas"><span class="toc-section-number">2.2</span> commits, SHAs</a></li>
 <li><a href="#parent-commits-commit-tree"><span class="toc-section-number">2.3</span> parent commits, commit tree</a></li>
@@ -86,16 +97,18 @@
 <li><a href="#master-head"><span class="toc-section-number">2.6</span> master, HEAD</a></li>
 <li><a href="#index"><span class="toc-section-number">2.7</span> index</a></li>
 </ul></li>
-<li><a href="#terminology-related-to-being-distributed"><span class="toc-section-number">3</span> terminology related to being &quot;distributed&quot;</a><ul>
+<li><a href="#terminology-related-to-being-distributed"><span class="toc-section-number">3</span> terminology related to being “distributed”</a>
+<ul>
 <li><a href="#clone-versus-checkout"><span class="toc-section-number">3.1</span> clone versus checkout</a></li>
 <li><a href="#accessing-remote-repositories"><span class="toc-section-number">3.2</span> accessing remote repositories</a></li>
-<li><a href="#naming-remote-repositories"><span class="toc-section-number">3.3</span> naming remote repositories</a><ul>
+<li><a href="#naming-remote-repositories"><span class="toc-section-number">3.3</span> naming remote repositories</a>
+<ul>
 <li><a href="#origin"><span class="toc-section-number">3.3.1</span> origin</a></li>
 </ul></li>
 </ul></li>
 </ul>
-</div>
-<h1 id="general-vcs-terminology"><span class="header-section-number">1</span> general VCS terminology</h1>
+</nav>
+<h1 data-number="1" id="general-vcs-terminology"><span class="header-section-number">1</span> general VCS terminology</h1>
 <p>A <strong>project</strong> is the minimum set of source code (and related files) that need to be kept together to <strong>build</strong> the software. Example: Linux</p>
 <ul>
 <li>each project will have one <strong>repository</strong></li>
@@ -109,57 +122,57 @@
 <li>these are only conventions, not rules, but they seem to work well in general</li>
 <li>more detail about branches is in the next section</li>
 </ul>
-<p>A <strong>feature</strong> is a part of a project that is large and complex enough that it's day-to-day commits would be too noisy to include in the main project. Example: the disk subsystem, the networking subsystem, etc., in Linux</p>
+<p>A <strong>feature</strong> is a part of a project that is large and complex enough that it’s day-to-day commits would be too noisy to include in the main project. Example: the disk subsystem, the networking subsystem, etc., in Linux</p>
 <ul>
-<li>a <strong>feature branch</strong> is a branch for a feature, and is usually long-lived. This means it regularly acquires changes made in the main line, and -- at stable points in its development cycle -- merges its changes back into the main line</li>
+<li>a <strong>feature branch</strong> is a branch for a feature, and is usually long-lived. This means it regularly acquires changes made in the main line, and – at stable points in its development cycle – merges its changes back into the main line</li>
 </ul>
-<h1 id="git-specific-terminology"><span class="header-section-number">2</span> git-specific terminology</h1>
+<h1 data-number="2" id="git-specific-terminology"><span class="header-section-number">2</span> git-specific terminology</h1>
 <p><strong>(By the way, <a href="gcs.html">git concepts simplified</a> contains a much more extensive treatment of some of the following concepts, with lots of diagrams to help).</strong></p>
-<h2 id="working-tree-repository-bare-repository"><span class="header-section-number">2.1</span> working tree, repository, bare repository</h2>
+<h2 data-number="2.1" id="working-tree-repository-bare-repository"><span class="header-section-number">2.1</span> working tree, repository, bare repository</h2>
 <ul>
 <li><p>a <strong>working tree</strong> in git is the same as anywhere else. When you edit, compile, test, etc., it is your working tree files that are used</p></li>
-<li><p>a normal <strong>repository</strong> in git consists of the working tree, plus <strong>one</strong> extra directory at the root of the project tree (meaning at the top directory of your project), called <code>.git</code>. Inside this <code>.git</code> are a bunch of files and directories which you need not worry about (and should not mess with unless you know what you're doing)</p></li>
+<li><p>a normal <strong>repository</strong> in git consists of the working tree, plus <strong>one</strong> extra directory at the root of the project tree (meaning at the top directory of your project), called <code>.git</code>. Inside this <code>.git</code> are a bunch of files and directories which you need not worry about (and should not mess with unless you know what you’re doing)</p></li>
 <li><p>a <strong>bare repository</strong> in git is a very special animal: it is a repository <em>without</em> a working tree (so you cannot edit, compile, test etc., in it). Central (or server) repos, meant only for people to push to and clone/pull from, are usually bare.</p></li>
 </ul>
-<h2 id="commits-shas"><span class="header-section-number">2.2</span> commits, SHAs</h2>
+<h2 data-number="2.2" id="commits-shas"><span class="header-section-number">2.2</span> commits, SHAs</h2>
 <ul>
 <li><p>a <strong>commit</strong> records the content of the working tree at a point in time</p></li>
 <li><p>every commit in git is represented by a globally unique 160-bit value (40 hex digits) which is a cryptographically secure hash of the commit data. This is often called the <strong>SHA</strong> or SHA-1, after the algorithm used.</p>
-<p>.<span class="citation">@gray</span>&lt;[&quot;Globally unique&quot; means no other commit in any other repository in any other project anywhere in the world will have the same SHA. You can become very, very, famous in the cryptography world if you find two different commits with the same SHA :-)]&gt;@</p></li>
+<p>.@gray&lt;[“Globally unique” means no other commit in any other repository in any other project anywhere in the world will have the same SHA. You can become very, very, famous in the cryptography world if you find two different commits with the same SHA :-)]&gt;@</p></li>
 </ul>
-<h2 id="parent-commits-commit-tree"><span class="header-section-number">2.3</span> parent commits, commit tree</h2>
+<h2 data-number="2.3" id="parent-commits-commit-tree"><span class="header-section-number">2.3</span> parent commits, commit tree</h2>
 <ul>
-<li><p>most commits build on top of one or more previous commits, called <strong>parents</strong>. Normal commits have only one parent, while &quot;merge&quot; commits have two. The very first commit in the tree has no parents; this is called a &quot;root commit&quot;.</p>
-<p>.<span class="citation">@gray</span>&lt;[A repo can have more than one &quot;root commit&quot;, but this is rare.]&gt;@</p></li>
-<li><p>every commit records the SHAs of its parent(s). It's as if every commit has an arrow pointing to its parents, like a back pointer in a linked list</p>
+<li><p>most commits build on top of one or more previous commits, called <strong>parents</strong>. Normal commits have only one parent, while “merge” commits have two. The very first commit in the tree has no parents; this is called a “root commit”.</p>
+<p>.@gray&lt;[A repo can have more than one “root commit”, but this is rare.]&gt;@</p></li>
+<li><p>every commit records the SHAs of its parent(s). It’s as if every commit has an arrow pointing to its parents, like a back pointer in a linked list</p>
 <ul>
 <li>thus, merge commits have two arrows pointing out</li>
-<li>and a &quot;fork&quot; (where you created a new branch) has two or more arrows pointing <strong>in</strong>, because it's the parent for more than one commit</li>
+<li>and a “fork” (where you created a new branch) has two or more arrows pointing <strong>in</strong>, because it’s the parent for more than one commit</li>
 </ul></li>
-<li><p>as a result, the entire repo can look like a <strong>tree</strong>. Strictly speaking, this is a DAG -- or &quot;directed acyclic graph&quot;.</p></li>
+<li><p>as a result, the entire repo can look like a <strong>tree</strong>. Strictly speaking, this is a DAG – or “directed acyclic graph”.</p></li>
 </ul>
-<h2 id="head-branch-tag"><span class="header-section-number">2.4</span> head, branch, tag</h2>
+<h2 data-number="2.4" id="head-branch-tag"><span class="header-section-number">2.4</span> head, branch, tag</h2>
 <ul>
 <li><p>a <strong>branch</strong> represents an active line of development; you use different branches to track different lines of development. Without branches, working on multiple features or versions simultaneously would be a nightmare!</p></li>
-<li><p>in practice, a branch is a symbolic name that points to the most recent commit on that line of development. This &quot;tip&quot; commit is called the <strong>head</strong> of that branch.</p>
-<p>When you checkout a branch and make a new commit on it, the &quot;branch&quot; now points to the <em>new</em> head node. In other words, a branch is a pointer that <em>moves as you make commits</em>.</p>
+<li><p>in practice, a branch is a symbolic name that points to the most recent commit on that line of development. This “tip” commit is called the <strong>head</strong> of that branch.</p>
+<p>When you checkout a branch and make a new commit on it, the “branch” now points to the <em>new</em> head node. In other words, a branch is a pointer that <em>moves as you make commits</em>.</p>
 <p>A repository can track many branches, but the working tree is associated with at most one branch at a time.</p></li>
-<li><p>a <strong>tag</strong> is also a symbolic name given to a commit. Tags don't &quot;move&quot; as you make new commits -- they stay where they are.</p>
-<p>Tags are used to mark specific milestones in a project, like &quot;v1.3&quot;, or &quot;v2.9&quot;, etc.</p></li>
+<li><p>a <strong>tag</strong> is also a symbolic name given to a commit. Tags don’t “move” as you make new commits – they stay where they are.</p>
+<p>Tags are used to mark specific milestones in a project, like “v1.3”, or “v2.9”, etc.</p></li>
 </ul>
-<h2 id="reachability"><span class="header-section-number">2.5</span> reachability</h2>
+<h2 data-number="2.5" id="reachability"><span class="header-section-number">2.5</span> reachability</h2>
 <ul>
-<li><p>you can start from a commit X and follow the parent SHAs (&quot;arrows&quot;) until you come to a root commit. The commits you found in this process are all said to be <strong>reachable</strong> from X</p></li>
-<li><p>if you have commit X in some other repo, git guarantees that that repo also has all these &quot;reachable&quot; commits.</p>
-<p>.<span class="citation">@gray</span>&lt;[If you know about grafts or shallow clones, you're too advanced to be reading this document ;-)]&gt;@</p></li>
+<li><p>you can start from a commit X and follow the parent SHAs (“arrows”) until you come to a root commit. The commits you found in this process are all said to be <strong>reachable</strong> from X</p></li>
+<li><p>if you have commit X in some other repo, git guarantees that that repo also has all these “reachable” commits.</p>
+<p>.@gray&lt;[If you know about grafts or shallow clones, you’re too advanced to be reading this document ;-)]&gt;@</p></li>
 <li><p>when you merge a branch into the currently checked out branch, git uses reachability to determine what commits to actually bring in. All the commits reachable from the branch being merged, which are not already reachable from the current branch, are pulled in and applied</p></li>
 </ul>
-<h2 id="master-head"><span class="header-section-number">2.6</span> master, HEAD</h2>
+<h2 data-number="2.6" id="master-head"><span class="header-section-number">2.6</span> master, HEAD</h2>
 <ul>
 <li><em>master</em>: default branch in a project (main development tree), by convention</li>
-<li><em>HEAD</em>: tip of the branch associated with the working tree; this is where commits go. Normally. There is also something called a 'detached HEAD' that you should be aware of. See the article on the <a href="detached-head.html">detached HEAD</a> for more.</li>
+<li><em>HEAD</em>: tip of the branch associated with the working tree; this is where commits go. Normally. There is also something called a ‘detached HEAD’ that you should be aware of. See the article on the <a href="detached-head.html">detached HEAD</a> for more.</li>
 </ul>
-<h2 id="index"><span class="header-section-number">2.7</span> index</h2>
+<h2 data-number="2.7" id="index"><span class="header-section-number">2.7</span> index</h2>
 <ul>
 <li><p>a staging area for the next commit; when you commit, the current index is turned into a real commit object</p></li>
 <li><p>the <strong>index</strong> is also called <strong>stage</strong> or <strong>cache</strong></p></li>
@@ -169,28 +182,28 @@
 <li><p>the <strong>uncommitted but staged changes</strong> are the difference between HEAD and index (<code>git diff --cached</code>)</p></li>
 <li><p>see <a href="uses-of-index.html">uses of index</a> for the cool things you can do with it</p></li>
 </ul>
-<h1 id="terminology-related-to-being-distributed"><span class="header-section-number">3</span> terminology related to being &quot;distributed&quot;</h1>
-<h2 id="clone-versus-checkout"><span class="header-section-number">3.1</span> clone versus checkout</h2>
-<p>In a <em>distributed</em> VCS, every developer's workstation has a full copy of the entire repository. It is therefore called a <strong>clone</strong> -- you <strong>clone</strong> the remote repository, you don't merely <em>checkout</em> the latest version from it. (Of course, you can have several clones on the same workstation if you wish).</p>
+<h1 data-number="3" id="terminology-related-to-being-distributed"><span class="header-section-number">3</span> terminology related to being “distributed”</h1>
+<h2 data-number="3.1" id="clone-versus-checkout"><span class="header-section-number">3.1</span> clone versus checkout</h2>
+<p>In a <em>distributed</em> VCS, every developer’s workstation has a full copy of the entire repository. It is therefore called a <strong>clone</strong> – you <strong>clone</strong> the remote repository, you don’t merely <em>checkout</em> the latest version from it. (Of course, you can have several clones on the same workstation if you wish).</p>
 <p>So where does <em>checkout</em> come in? In git, you <strong>checkout</strong> a <em>branch</em> from your local repo, so this happens <em>after</em> the clone. Remember this is a full repo, so you already have all the branches that the parent repo had when you cloned.</p>
-<p>By default, after the clone is done, git will <strong>checkout</strong> the same branch that was currently checked out in the repository you're cloning from. However, you can checkout some other branch at any time (and if you're using git, you will checkout and manage multiple branches on your local repo all the time, otherwise you're not really <em>using</em> git!)</p>
-<h2 id="accessing-remote-repositories"><span class="header-section-number">3.2</span> accessing remote repositories</h2>
+<p>By default, after the clone is done, git will <strong>checkout</strong> the same branch that was currently checked out in the repository you’re cloning from. However, you can checkout some other branch at any time (and if you’re using git, you will checkout and manage multiple branches on your local repo all the time, otherwise you’re not really <em>using</em> git!)</p>
+<h2 data-number="3.2" id="accessing-remote-repositories"><span class="header-section-number">3.2</span> accessing remote repositories</h2>
 <p>Every remote repository (often called just a <strong>remote</strong>) has a URL associated with it, which tells your (local) git client how to reach it. There are typically 4 kinds of Git URLs:</p>
 <ul>
 <li>ssh: like <code>ssh://[user@]host.xz[:port]/path/to/repo.git/</code></li>
 <li>http: like <code>http[s]://host.xz[:port]/path/to/repo.git/</code></li>
-<li>git: like <code>git://host.xz[:port]/path/to/repo.git/</code> -- note that this is an unauthenticated protocol suitable only for allowing downloads of open source or similar software</li>
+<li>git: like <code>git://host.xz[:port]/path/to/repo.git/</code> – note that this is an unauthenticated protocol suitable only for allowing downloads of open source or similar software</li>
 <li>local file: like <code>file:///full/path/to/reponame</code></li>
 </ul>
-<p>See 'man git-clone' for all the allowed syntaxes for git URLs.</p>
-<h2 id="naming-remote-repositories"><span class="header-section-number">3.3</span> naming remote repositories</h2>
-<p>You can refer to, (or fetch from, and push to) more than one remote repo in <em>your</em> clone, giving them all different URLs. After a while it gets inconvenient to use the full URLs in your <code>git fetch</code> and <code>git push</code> commands, so git allows you to give an easy to remember &quot;nickname&quot; for each &quot;remote&quot;. I could, for instance, do this:</p>
+<p>See ‘man git-clone’ for all the allowed syntaxes for git URLs.</p>
+<h2 data-number="3.3" id="naming-remote-repositories"><span class="header-section-number">3.3</span> naming remote repositories</h2>
+<p>You can refer to, (or fetch from, and push to) more than one remote repo in <em>your</em> clone, giving them all different URLs. After a while it gets inconvenient to use the full URLs in your <code>git fetch</code> and <code>git push</code> commands, so git allows you to give an easy to remember “nickname” for each “remote”. I could, for instance, do this:</p>
 <pre><code>git remote add sejal ssh://sitaram@sejal.herlab.ourcompany.com/path/to/repo.git</code></pre>
-<p>After this I could refer to the longer URL by the shortname &quot;sejal&quot; in most git commands and it would be the same thing.</p>
-<p>(Note: for convenience, a 'remote' called 'origin' is automatically created when you clone a repo, pointing to the repo you cloned from.)</p>
-<h3 id="origin"><span class="header-section-number">3.3.1</span> origin</h3>
-<p>So now you know what a nickname is, you can understand what &quot;origin&quot; means. &quot;origin&quot; is just the default name given to the remote repository when you do a <code>git clone</code>. So for example, if I do</p>
+<p>After this I could refer to the longer URL by the shortname “sejal” in most git commands and it would be the same thing.</p>
+<p>(Note: for convenience, a ‘remote’ called ‘origin’ is automatically created when you clone a repo, pointing to the repo you cloned from.)</p>
+<h3 data-number="3.3.1" id="origin"><span class="header-section-number">3.3.1</span> origin</h3>
+<p>So now you know what a nickname is, you can understand what “origin” means. “origin” is just the default name given to the remote repository when you do a <code>git clone</code>. So for example, if I do</p>
 <pre><code>git clone ssh://sitaram@sejal.herlab.ourcompany.com/path/to/repo.git</code></pre>
-<p>then, after the clone completes, git automatically creates a remote with the nickname <code>origin</code>, which points to <code>ssh://sitaram@sejal.herlab.ourcompany.com/path/to/repo.git</code>. It's just a convenience thing. You can delete that nickname, you can rename it to something else, etc., if you like.</p>
+<p>then, after the clone completes, git automatically creates a remote with the nickname <code>origin</code>, which points to <code>ssh://sitaram@sejal.herlab.ourcompany.com/path/to/repo.git</code>. It’s just a convenience thing. You can delete that nickname, you can rename it to something else, etc., if you like.</p>
 </body>
 </html>

@@ -1,47 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>useful commands</title>
-  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
-  
+
       code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
       pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
       pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-  
+
       td          { vertical-align: top }
-  
+
       .red        { color: red }
       .blue       { color: blue }
       .green      { color: green }
       .gray       { color: gray }
       .pink       { color: pink }
-  
+
       .box        { background-color:#e0e0e0 }
       .bg-red     { background-color:#ffe0e0 }
       .bg-green   { background-color:#e0ffe0 }
       .bg-blue    { background-color:#e0e0ff }
-  
+
       /* couldn't resist the name! */
       .wd40       { width: 40% !important }
-  
+
       .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
       .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
-  
+
       .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
       .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
-  
+
       .sidebar {
           margin-left: 4px;
           width: 25%;
           float: right;
           border: 4px solid #fff;
       }
-  
+
   </style>
   <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -65,16 +75,16 @@
         IMPORTANT NOTE:
     </strong>
     although this page has a &quot;gitolite.com&quot; URL, this is not about gitolite.
-    That's just an artifact of &quot;sitaramc.github.com&quot; being translated to
+    That&#39;s just an artifact of &quot;sitaramc.github.com&quot; being translated to
     &quot;gitolite.com&quot; and so ALL my git related stuff gets carried over.
     Gitolite documentation has another <code>/gitolite</code> in the URL, so
     you can tell.  My apologies for this confusion.
 </span>
 </p>
-<div id="header">
+<header id="title-block-header">
 <h1 class="title">useful commands</h1>
-</div>
-<div id="TOC">
+</header>
+<nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#grep">grep</a></li>
 <li><a href="#log-and-show">log and show</a></li>
@@ -84,64 +94,64 @@
 <li><a href="#cat-file-repo-object-and-ls-tree-tree-object">cat-file (repo object) and ls-tree (tree object)</a></li>
 <li><a href="#ls-files">ls-files</a></li>
 </ul>
-</div>
-<h1 id="grep" class="unnumbered">grep</h1>
+</nav>
+<h1 class="unnumbered" data-number id="grep">grep</h1>
 <p><code>git grep</code> is very, <strong>very</strong>, powerful. It has pretty much all the normal grep options, plus:</p>
 <ul>
-<li>doesn't search files that are not revisioned (untracked, excluded/ignored, etc)</li>
-<li>with <code>--cached</code>, looks only in the cache</li>
-<li>with one or more ref names, searched only within those revisions</li>
-<li>can take a pattern, like <code>*.c</code>, to restrict the files searched</li>
+<li><p>doesn’t search files that are not revisioned (untracked, excluded/ignored, etc)</p></li>
+<li><p>with <code>--cached</code>, looks only in the cache</p></li>
+<li><p>with one or more ref names, searched only within those revisions</p></li>
+<li><p>can take a pattern, like <code>*.c</code>, to restrict the files searched</p></li>
 <li><p>can do <code>--and</code>, <code>--or</code>, <code>--not</code>, etc with patterns. This is a pretty big wow. As <a href="http://gitster.livejournal.com/27674.html" class="uri">http://gitster.livejournal.com/27674.html</a> says:</p>
-<pre><code>git grep -e ';;' --and --not -e 'for *(.*;;' -- '*.c'</code></pre>
-<p>which searches for ';;' in all C files, unless they occur in a typical <code>for (;;) {</code> type of construct.</p></li>
-<li><p>finally, there's a somewhat gratuitously thrown in <code>--all-match</code> option, which says &quot;match any of these strings, but print matches only from files that have <em>all</em> of them&quot;. I wonder whose scratch that was... ;-)</p></li>
+<pre><code>git grep -e &#39;;;&#39; --and --not -e &#39;for *(.*;;&#39; -- &#39;*.c&#39;</code></pre>
+<p>which searches for ‘;;’ in all C files, unless they occur in a typical <code>for (;;) {</code> type of construct.</p></li>
+<li><p>finally, there’s a somewhat gratuitously thrown in <code>--all-match</code> option, which says “match any of these strings, but print matches only from files that have <em>all</em> of them”. I wonder whose scratch that was… ;-)</p></li>
 </ul>
-<h1 id="log-and-show" class="unnumbered">log and show</h1>
+<h1 class="unnumbered" data-number id="log-and-show">log and show</h1>
 <ul>
 <li><p><code>git lga</code> is pretty cool; lga is an alias in my config for</p>
 <pre><code>log --graph --pretty=oneline --abbrev-commit --decorate --all</code></pre></li>
-<li><p>Check the logs to see what's happened recently</p>
+<li><p>Check the logs to see what’s happened recently</p>
 <pre><code>git log [--stat] -[p] [-n &lt;number of commits to show&gt;]
 git log &quot;@{yesterday}..&quot;
     # note the suffix &quot;..&quot;, since the default is prefix &quot;..&quot;, which is
     # probably not what you want
 git log somefile.c</code></pre></li>
-<li><p><code>git show</code> is almost an alias for <code>git log -p -n 1</code>. In general, <code>git show</code> does the right thing: shows a commit as a commit, a tree as a plain &quot;ls&quot;, etc. But if you're printing a large blob you better use a pager or redirect!</p>
+<li><p><code>git show</code> is almost an alias for <code>git log -p -n 1</code>. In general, <code>git     show</code> does the right thing: shows a commit as a commit, a tree as a plain “ls”, etc. But if you’re printing a large blob you better use a pager or redirect!</p>
 <pre><code>git show [ HEAD^ | HEAD^^ | HEAD@{3} | origin | origin/master | etc ]
 git show 7a8b9c     # or some hex number; shows you the object
 git show HEAD~3:file.c  # get file.c from 3 versions back</code></pre></li>
 </ul>
-<h1 id="reflog" class="unnumbered">reflog</h1>
-<p>...see this more detailed <a href="reflog.html">note</a></p>
-<h1 id="show-branch" class="unnumbered">show-branch</h1>
+<h1 class="unnumbered" data-number id="reflog">reflog</h1>
+<p>…see this more detailed <a href="reflog.html">note</a></p>
+<h1 class="unnumbered" data-number id="show-branch">show-branch</h1>
 <ul>
-<li><code>git show-branch -a</code> is useful to get a bird's eye view of all your branches and their topological relationships.</li>
-<li><code>git show-branch -gN</code> (N is some number) shows you reflog info for the current branch, including topological relationships and relative time. This is useful if you had a lot of rebases or amended commits and you think you might need one of them back :-) See <a href="reflog.html">reflog</a> for more on this</li>
+<li><p><code>git show-branch -a</code> is useful to get a bird’s eye view of all your branches and their topological relationships.</p></li>
+<li><p><code>git show-branch -gN</code> (N is some number) shows you reflog info for the current branch, including topological relationships and relative time. This is useful if you had a lot of rebases or amended commits and you think you might need one of them back :-) See <a href="reflog.html">reflog</a> for more on this</p></li>
 <li><p>if you need serious troubleshooting with branches, use the following. It may be useful in some contexts where <code>git lg</code> is too complex to figure out what tip contains what commit, and you are unable to use gitk</p>
 <pre><code>git show-branch $(git show-ref -h |cut -c41-)</code></pre></li>
 </ul>
-<h1 id="cherry-not-cherry-pick" class="unnumbered">cherry (not cherry-pick)</h1>
+<h1 class="unnumbered" data-number id="cherry-not-cherry-pick">cherry (not cherry-pick)</h1>
 <ul>
-<li><p>summary: <code>+</code> shows you commits you have that the 'upstream' doesn't</p>
+<li><p>summary: <code>+</code> shows you commits you have that the ‘upstream’ doesn’t</p>
 <pre><code>git cherry -v upstream [head]</code></pre></li>
-<li>detail: for every commit in 'head' that doesn't exist in 'upstream'
+<li><p>detail: for every commit in ‘head’ that doesn’t exist in ‘upstream’</p>
 <ul>
 <li>prefix <code>-</code> if there is at least an <em>equivalent</em> commit</li>
-<li>prefix <code>+</code> if there's not even that</li>
+<li>prefix <code>+</code> if there’s not even that</li>
 </ul></li>
-<li>TIP: if you're trying to cut some branches (like <code>git branch --merged</code>)
+<li><p>TIP: if you’re trying to cut some branches (like <code>git branch --merged</code>)</p>
 <ul>
 <li>put the candidate to be cut <strong>on the right side</strong>, and</li>
 <li>make sure there are no <code>+</code>s in the output</li>
 </ul></li>
 </ul>
-<h1 id="cat-file-repo-object-and-ls-tree-tree-object" class="unnumbered">cat-file (repo object) and ls-tree (tree object)</h1>
-<p>Note: I'm not sure what, if any, is the difference between <code>show</code> and <code>cat-file -p</code> for &quot;blob&quot; objects. For commits there is a subtle difference. (Try it)</p>
+<h1 class="unnumbered" data-number id="cat-file-repo-object-and-ls-tree-tree-object">cat-file (repo object) and ls-tree (tree object)</h1>
+<p>Note: I’m not sure what, if any, is the difference between <code>show</code> and <code>cat-file -p</code> for “blob” objects. For commits there is a subtle difference. (Try it)</p>
 <pre><code># any object
 git cat-file [ -t | -s | -p ] 789abc
     # find the type or size of an object, or pretty print it
-    # If it's a blob, I'd use use &quot;git show&quot; until we find out what
+    # If it&#39;s a blob, I&#39;d use use &quot;git show&quot; until we find out what
     # &quot;pretty&quot; means for arbitrary blobs :-)
 git cat-file blob 789abc        # cat the object
 
@@ -152,12 +162,12 @@ git ls-tree -d      # only directories
 git ls-tree -r      # recurse, only files
 git ls-tree -r -d   # recurse, only directories
 git ls-tree -r -t   # recurse, both directories and files</code></pre>
-<h1 id="ls-files" class="unnumbered">ls-files</h1>
+<h1 class="unnumbered" data-number id="ls-files">ls-files</h1>
 <p>To get listings of various types of files, use <code>git ls-files</code>. The common but less intuitive ones are shown here, the rest can be had from the man page:</p>
 <pre><code># deleted files and modified files (deleted files are also counted as
 # modified, so may come up twice...
 git ls-files -d -m
-# what's in the index; includes files that were &quot;git add&quot;ed
+# what&#39;s in the index; includes files that were &quot;git add&quot;ed
 git ls-files -s
 # conflicted files
 git ls-files -u

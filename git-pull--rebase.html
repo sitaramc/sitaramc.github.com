@@ -1,47 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title>what does &quot;git pull --rebase&quot; do?</title>
-  <style type="text/css">code{white-space: pre;}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>what does “git pull –rebase” do?</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
   <style>
       body        { background: #fff; text-color: #000; margin-left:  40px;   font-size:  0.9em;  font-family: arial; }
-  
+
       code        { font-size:    1.1em;  background:  #ddf; text-color: #000; }
       pre         { margin-left:  2em;    background:  #ddf; text-color: #000; }
       pre code    { font-size:    1.1em;  background:  #ddf; text-color: #000; }
-  
+
       td          { vertical-align: top }
-  
+
       .red        { color: red }
       .blue       { color: blue }
       .green      { color: green }
       .gray       { color: gray }
       .pink       { color: pink }
-  
+
       .box        { background-color:#e0e0e0 }
       .bg-red     { background-color:#ffe0e0 }
       .bg-green   { background-color:#e0ffe0 }
       .bg-blue    { background-color:#e0e0ff }
-  
+
       /* couldn't resist the name! */
       .wd40       { width: 40% !important }
-  
+
       .box-l      { float: left;  padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-right: 4px; }
       .box-r      { float: right; padding: 0px 0.5em; background-color: #e0e0e0; width:25%; margin-left:  4px; }
-  
+
       .fl-l       { float: left;  padding: 0px 0.5em;                                       margin-right: 4px; }
       .fl-r       { float: right; padding: 0px 0.5em;                                       margin-left:  4px; }
-  
+
       .sidebar {
           margin-left: 4px;
           width: 25%;
           float: right;
           border: 4px solid #fff;
       }
-  
+
   </style>
   <style>
       h1          { background: #ffb; text-color: #000; margin-left: -30px;   border-top:    5px  solid #ccc; }
@@ -65,37 +75,37 @@
         IMPORTANT NOTE:
     </strong>
     although this page has a &quot;gitolite.com&quot; URL, this is not about gitolite.
-    That's just an artifact of &quot;sitaramc.github.com&quot; being translated to
+    That&#39;s just an artifact of &quot;sitaramc.github.com&quot; being translated to
     &quot;gitolite.com&quot; and so ALL my git related stuff gets carried over.
     Gitolite documentation has another <code>/gitolite</code> in the URL, so
     you can tell.  My apologies for this confusion.
 </span>
 </p>
-<div id="header">
-<h1 class="title">what does &quot;git pull --rebase&quot; do?</h1>
-</div>
+<header id="title-block-header">
+<h1 class="title">what does “git pull –rebase” do?</h1>
+</header>
 <p>[To understand this article you need to understand what a reflog is, and what a rebase does, especially the full form of the rebase command]</p>
 <p>[My initial article was a little simplistic; more exact details added thanks to doener!]</p>
 <hr />
-<p>Sometimes we have an upstream that rebased/rewound a branch we're depending on. This can be a big problem -- causing messy conflicts for us if we're downstream.</p>
-<p>Without going into why they would do that, and how many beers (I prefer rum+coke, thank you!) should be offered in compensation to downstream users, let's just try and describe how git helps you deal with it.</p>
+<p>Sometimes we have an upstream that rebased/rewound a branch we’re depending on. This can be a big problem – causing messy conflicts for us if we’re downstream.</p>
+<p>Without going into why they would do that, and how many beers (I prefer rum+coke, thank you!) should be offered in compensation to downstream users, let’s just try and describe how git helps you deal with it.</p>
 <p>The magic is <code>git pull --rebase</code>.</p>
-<p>A normal <code>git pull</code> is, loosely speaking, something like this (we'll use a remote called <code>origin</code> and a branch called <code>foo</code> in all these examples):</p>
+<p>A normal <code>git pull</code> is, loosely speaking, something like this (we’ll use a remote called <code>origin</code> and a branch called <code>foo</code> in all these examples):</p>
 <pre><code># assume current checked out branch is &quot;foo&quot;
 git fetch origin
 git merge origin/foo</code></pre>
 <p>At first glance, you might think that a <code>git pull --rebase</code> does just this:</p>
 <pre><code>git fetch origin
 git rebase origin/foo</code></pre>
-<p>But that will not help if the upstream rebase involved any &quot;squashing&quot; (meaning that the <code>patch-id</code>s of the commits changed, not just their order).</p>
-<p>Which means <code>git pull --rebase</code> has to do a little bit more than that. Here's an explanation of what it does and how.</p>
-<p>Let's say your starting point is this:</p>
+<p>But that will not help if the upstream rebase involved any “squashing” (meaning that the <code>patch-id</code>s of the commits changed, not just their order).</p>
+<p>Which means <code>git pull --rebase</code> has to do a little bit more than that. Here’s an explanation of what it does and how.</p>
+<p>Let’s say your starting point is this:</p>
 <pre><code>a---b---c---d---e  (origin/foo) (also your local &quot;foo&quot;)</code></pre>
-<p>Time passes, and you have made some commits on top of your own &quot;foo&quot;:</p>
+<p>Time passes, and you have made some commits on top of your own “foo”:</p>
 <pre><code>a---b---c---d---e---p---q---r (foo)</code></pre>
-<p>Meanwhile, in a fit of anti-social rage, the upstream maintainer has not only rebased his &quot;foo&quot;, he even used a squash or two. His commit chain now looks like this:</p>
+<p>Meanwhile, in a fit of anti-social rage, the upstream maintainer has not only rebased his “foo”, he even used a squash or two. His commit chain now looks like this:</p>
 <pre><code>a---b+c---d+e---f  (origin/foo)</code></pre>
-<p>A <code>git pull</code> at this point would result in chaos. Even a <code>git fetch; git rebase origin/foo</code> would not cut it, because commits &quot;b&quot; and &quot;c&quot; on one side, and commit &quot;b+c&quot; on the other, would conflict. (And similarly with d, e, and d+e).</p>
+<p>A <code>git pull</code> at this point would result in chaos. Even a <code>git fetch; git rebase origin/foo</code> would not cut it, because commits “b” and “c” on one side, and commit “b+c” on the other, would conflict. (And similarly with d, e, and d+e).</p>
 <p>What <code>git pull --rebase</code> does, in this case, is:</p>
 <pre><code>git fetch origin
 git rebase --onto origin/foo e foo</code></pre>
@@ -105,7 +115,7 @@ git rebase --onto origin/foo e foo</code></pre>
 <hr />
 <p>So how does this actually work?</p>
 <p>The command tries to find out which commits are <em>really</em> your local ones, and which had come from upstream in an earlier fetch.</p>
-<p>To do this, it looks at the reflog of the remote tracking branch (<code>origin/foo</code>, in this case). This reflog represents the tips of successive <code>git fetch</code> operations on <code>origin</code>, in &quot;most recent first&quot; order.</p>
+<p>To do this, it looks at the reflog of the remote tracking branch (<code>origin/foo</code>, in this case). This reflog represents the tips of successive <code>git fetch</code> operations on <code>origin</code>, in “most recent first” order.</p>
 <p>For each reflog entry, (<code>origin/foo@{1}</code>, then <code>...{2}</code>, and so on) it checks if that commit is an ancestor of the current branch head <code>foo</code>. As soon as it finds one, it picks it as the starting point for the rebase (<code>e</code> in the example above).</p>
 <p>That might sound a little complicated, but it works out fine. Just try it next time your upstream rebases something on you.</p>
 </body>
