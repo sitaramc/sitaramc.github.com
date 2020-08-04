@@ -351,7 +351,7 @@
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#manually-synchronising-a-slave-repo" class="nav-link">manually synchronising a slave repo</a>
+            <li class="nav-item" data-level="1"><a href="#manually-synchronising-a-copy-repo" class="nav-link">manually synchronising a copy repo</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -376,7 +376,7 @@
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#appendix-d-fixing-a-broken-slave" class="nav-link">appendix D: fixing a broken slave</a>
+            <li class="nav-item" data-level="1"><a href="#appendix-d-fixing-a-broken-copy" class="nav-link">appendix D: fixing a broken copy</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -392,49 +392,56 @@
 <!-- duplicated in migr.mkd with minor differences -->
 
 <p>There are <strong>several</strong> important differences in mirroring; it's best to
-<strong>start from a clean slate on all slaves</strong>, using this documentation.</p>
+<strong>start from a clean slate on all copies</strong>, using this documentation.</p>
 <p>If you're not willing to do that, you may be able to use the older, more
 detailed, documentation <a href="https://github.com/sitaramc/gitolite-doc/tree/master/archive">here</a> to manage the migration.  However, I
 cannot support that (mainly due to lack of time).</p>
 </div>
+<hr />
+<div class="admonition danger">
+<p class="admonition-title">terminology change</p>
+<p>NOTE This documentation is current with the <em>just</em>-released (as of 2pm UTC
+on 2020-08-04), v3.6.12.  For most people, until you upgrade, this
+documentation will have some terminology differences.</p>
+</div>
 <h1 id="quick-intro">quick intro<a class="headerlink" href="#quick-intro" title="Permanent link"></a></h1>
-<p>Mirroring is simple: you have one "master" server and one or more "slave"
-servers.  The slaves get updates only from the master; to the rest of the
+<p>Mirroring is simple: you have one "master" server and one or more "copy"
+servers.  The copies get updates only from the master; to the rest of the
 world they are at best read-only.</p>
 <p>In the following picture, each box (A, B, C, ...) is a repo.  The master
-server for a repo is colored red, slaves are green.  Users only push to a
+server for a repo is colored red, copies are green.  Users only push to a
 master server (red), and the master server then does a <code>git push --mirror</code> to
-the slaves.  The arrows show this mirror push.</p>
+the copies.  The arrows show this mirror push.</p>
 <p><img alt="" src="mi02.png" /></p>
 <p>Here's a more complete description of what gitolite can do:</p>
 <ul>
 <li>
-<p>Different masters and sets of slaves for different repos.</p>
+<p>Different masters and sets of copies for different repos.</p>
 <p>This lets you do things like:</p>
 <ul>
 <li>Use the server closest to <em>most</em> of its developers as the master for
     that repo.</li>
 <li>Mirror a repo to only some of the servers.</li>
 <li>Have repos that are purely local to a server (not mirrored at all).</li>
-<li>Push to a slave on demand or via cron (helps deal with bandwidth or
+<li>Push to a copy on demand or via cron (helps deal with bandwidth or
     connectivity constraints).</li>
 </ul>
 <p>All this is possible whether or not the gitolite-admin repo is mirrored --
 that is, all servers have the <em>exact same</em> gitolite-admin repo or not.</p>
 </li>
 <li>
-<p>Pushes to a slave can be transparently forwarded to the real master.</p>
+<p>Pushes to a copy can be transparently forwarded to the real master.</p>
 <p>Your developers need not worry about where a repo's master is -- they just
 write to their local mirror for <em>all</em> repos, even if their local mirror is
-only a slave for some.</p>
+only a copy for some.</p>
 </li>
 </ul>
 <h1 id="caveats">caveats<a class="headerlink" href="#caveats" title="Permanent link"></a></h1>
 <ul>
 <li>
-<p>Mirroring by itself will never <em>create</em> a repo on a slave; it has to exist
+<p>Mirroring by itself will never <em>create</em> a repo on a copy; it has to exist
     and be prepared to receive updates from the master.</p>
-<p>The simplest way to ensure your repos exist on the slaves also is to
+<p>The simplest way to ensure your repos exist on the copies also is to
 mirror the special gitolite-admin repo as well, and this is what most
 sites do.</p>
 </li>
@@ -446,21 +453,21 @@ sites do.</p>
 <li>
 <p><em><span class="red">WARNING</span>: it does NOT make sense to mirror
     wild repos in setups where the authentication data is not the same
-    (i.e., where "alice" on the master and "alice" on a slave maybe
+    (i.e., where "alice" on the master and "alice" on a copy maybe
     totally different people)</em>.</p>
 </li>
 <li>
 <p>This has only been minimally tested.  For example, complex setups or
-    asymmetric configs on master and slave, etc. have NOT been tested.</p>
+    asymmetric configs on master and copy, etc. have NOT been tested.</p>
 </li>
 <li>
 <p>Permission changes will only propagate on the next 'git push'.  Of
-    course, if you know the name of the slave server, you can run</p>
-<pre><code>ssh git@host mirror push slave-server-name repo-name
+    course, if you know the name of the copy server, you can run</p>
+<pre><code>ssh git@host mirror push copy-server-name repo-name
 </code></pre>
 </li>
 <li>
-<p>Using 'perms' on a slave is allowed but will neither propagate nor
+<p>Using 'perms' on a copy is allowed but will neither propagate nor
     persist.  They will be overwritten by whatever perms the master has
     (even if it is an empty set) on the next 'git push'.</p>
 </li>
@@ -482,14 +489,14 @@ time to fix them immediately :-)</p>
 <li>
 <p>If you ever do a <a href="emergencies#bypassing-gitolite">bypass push</a>, mirroring will not work.
     Mirroring checks also will not work -- for example, you can push to a
-    slave, which is not usually a good idea.  So don't bypass gitolite if the
+    copy, which is not usually a good idea.  So don't bypass gitolite if the
     repo is mirrored!</p>
 </li>
 <li>
-<p>From v3.5.3 on, gitolite uses an asynchronous push to the slaves, so that
-    the main push returns immediately, without waiting for the slave pushes to
+<p>From v3.5.3 on, gitolite uses an asynchronous push to the copies, so that
+    the main push returns immediately, without waiting for the copy pushes to
     complete.  Keep this in mind if you're writing scripts that do a push, and
-    then read one of the slaves immediately -- you will need to add a few
+    then read one of the copies immediately -- you will need to add a few
     seconds of sleep in your script.</p>
 </li>
 </ul>
@@ -546,16 +553,16 @@ info" are NOT sufficient.  That is why you need the ssh host aliases.</p>
 get expected results.  <strong>Do NOT proceed otherwise.</strong></p>
 </li>
 <li>
-<p>Setup the gitolite.conf file on all the servers.  If the slaves are to be
+<p>Setup the gitolite.conf file on all the servers.  If the copies are to be
     exact copies of the master, you need to do the complete configuration only
-    on the master; the slaves can have just this because on the first push to
-    the master it will update all the slaves anyway:</p>
+    on the master; the copies can have just this because on the first push to
+    the master it will update all the copies anyway:</p>
 <p><pre style="color: #ffffff; background-color: #000000;">
 <span class="Statement">repo</span> gitolite-admin
     <span class="Statement">RW+</span>     =   some-local-admin
 <span class="Comment"># possibly other rules</span>
     <span class="Statement">option</span> <span class="Identifier">mirror.master</span>    =   <span class="Constant">mars</span>
-    <span class="Statement">option</span> <span class="Identifier">mirror.slaves</span>    =   <span class="Constant">phobos</span>
+    <span class="Statement">option</span> <span class="Identifier">mirror.copies</span>    =   <span class="Constant">phobos</span>
 </pre></p>
 </li>
 <li>
@@ -578,32 +585,32 @@ options at all -- they are then purely local.</p>
     ...access rules...
 
     <span class="Statement">option</span> <span class="Identifier">mirror.master</span>        =   <span class="Constant">mars</span>
-    <span class="Statement">option</span> <span class="Identifier">mirror.slaves</span>        =   <span class="Constant">phobos deimos</span>
+    <span class="Statement">option</span> <span class="Identifier">mirror.copies</span>        =   <span class="Constant">phobos deimos</span>
     <span class="Statement">option</span> <span class="Identifier">mirror.redirectOK</span>    =   <span class="Constant">all</span>
 </pre>
 
 <p>The first line is easy, since a repo can have only one master.</p>
-<p>The second is a space separated list of hosts that are all slaves.  You can
-have several slave lists, as long as the config key starts with
-'mirror.slaves' and is unique.  For example.</p>
+<p>The second is a space separated list of hosts that are all copies.  You can
+have several copy lists, as long as the config key starts with
+'mirror.copies' and is unique.  For example.</p>
 <pre style="color: #ffffff; background-color: #000000;">
-    <span class="Statement">option</span> <span class="Identifier">mirror.slaves-1</span>   =   <span class="Constant">phobos deimos</span>
-    <span class="Statement">option</span> <span class="Identifier">mirror.slaves-2</span>   =   <span class="Constant">io europa</span>
-    <span class="Statement">option</span> <span class="Identifier">mirror.slaves-3</span>   =   <span class="Constant">ganymede callisto</span>
+    <span class="Statement">option</span> <span class="Identifier">mirror.copies-1</span>   =   <span class="Constant">phobos deimos</span>
+    <span class="Statement">option</span> <span class="Identifier">mirror.copies-2</span>   =   <span class="Constant">io europa</span>
+    <span class="Statement">option</span> <span class="Identifier">mirror.copies-3</span>   =   <span class="Constant">ganymede callisto</span>
 </pre>
 
 <p>Do not repeat a key; then only the last line for that key will be effective.</p>
 <h3 id="v36-preventing-automatic-sync"><span class="gray">(v3.6+)</span> preventing automatic sync<a class="headerlink" href="#v36-preventing-automatic-sync" title="Permanent link"></a></h3>
 <p>Sometimes you don't want a repo to be mirrored automatically (as soon as
-someone pushes to the master) to all the slaves.  For whatever reasons, you
-have some slaves for whom you would like to trigger the sync later (and you
-don't mind the fact that those slaves are out of sync until then).</p>
+someone pushes to the master) to all the copies.  For whatever reasons, you
+have some copies for whom you would like to trigger the sync later (and you
+don't mind the fact that those copies are out of sync until then).</p>
 <p>To make that happen, use option lines like this instead of those shown above:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-    <span class="Statement">option</span> <span class="Identifier">mirror.slaves.nosync-1</span>   =   <span class="Constant">phobos deimos</span>
+    <span class="Statement">option</span> <span class="Identifier">mirror.copies.nosync-1</span>   =   <span class="Constant">phobos deimos</span>
 </pre>
 
-<p>Except for the addition of a <code>.nosync</code> just after <code>slaves</code>, all the other
+<p>Except for the addition of a <code>.nosync</code> just after <code>copies</code>, all the other
 rules are the same as before.</p>
 <h1 id="v361-mirroring-failures"><span class="gray">(v3.6.1+)</span> mirroring failures<a class="headerlink" href="#v361-mirroring-failures" title="Permanent link"></a></h1>
 <p>Since mirror pushes happen asynchronously (i.e, the user who originally pushed
@@ -614,13 +621,13 @@ you look in gitolite's log files.</p>
 follows that if a mirror push failed due to an invalid hostname, that status
 file will need to be manually deleted from the server.  Look in the bare repo
 directory on the server, for one or more files whose names start with
-'gl-slave' and delete the appropriate one.</span></p>
-<p>Therefore, when the output of the mirror push to some slave contains the word
+'gl-copy' and delete the appropriate one.</span></p>
+<p>Therefore, when the output of the mirror push to some copy contains the word
 "fatal", gitolite saves the output. This saved output is printed to STDERR
 when any user attempts to clone/fetch/push the repo on the master server for
 that repo.  The hope is that someone will alert an admin to look at the
 problem.  This will continue to happen until the error condition is cleared
-(i.e., a successful mirror push happens to that specific slave).</p>
+(i.e., a successful mirror push happens to that specific copy).</p>
 <p>If you don't want these unexpected reports confusing users (or programs!),
 simply create a new rc variable called HUSH_MIRROR_STATUS and set it to 1.
 <span class="gray">(If you're not sure where in the rc file this should go, I suggest
@@ -628,24 +635,24 @@ putting it right after the HOSTNAME variable).</span></p>
 <p>You can see the mirror status of any repo using the 'mirror status' command;
 the command line help for the mirror command ('gitolite mirror -h' or 'ssh
 git@host mirror -h') has details.</p>
-<h1 id="manually-synchronising-a-slave-repo">manually synchronising a slave repo<a class="headerlink" href="#manually-synchronising-a-slave-repo" title="Permanent link"></a></h1>
+<h1 id="manually-synchronising-a-copy-repo">manually synchronising a copy repo<a class="headerlink" href="#manually-synchronising-a-copy-repo" title="Permanent link"></a></h1>
 <p>You can use the <code>gitolite mirror push</code> command on a master to manually
-synchronise any of its slaves.  Try it with <code>-h</code> to get usage info.</p>
-<p>Tip: if you want to do this to all the slaves, try this:</p>
-<pre><code>for s in `gitolite mirror list slaves reponame`
+synchronise any of its copies.  Try it with <code>-h</code> to get usage info.</p>
+<p>Tip: if you want to do this to all the copies, try this:</p>
+<pre><code>for s in `gitolite mirror list copies reponame`
 do
     gitolite mirror push $s reponame
 done
 </code></pre>
 <p>This command can also be run remotely; run <code>ssh git@host mirror -h</code> for
 details.</p>
-<p>Note: if your version of the mirror command does not support 'list slaves',
-use <code>gitolite git-config -r reponame mirror.slave | cut -f3</code> instead.</p>
+<p>Note: if your version of the mirror command does not support 'list copies',
+use <code>gitolite git-config -r reponame mirror.copies | cut -f3</code> instead.</p>
 <h1 id="redirected-pushes">redirected pushes<a class="headerlink" href="#redirected-pushes" title="Permanent link"></a></h1>
 <p><strong>Please read carefully; there are security implications if you enable this
 for mirrors NOT under your control</strong>.</p>
-<p>Normally, a master, (and <em>only</em> a master), pushes to a slave, and the slaves
-are "read-only" to the users.  Gitolite allows a <em>slave</em> to receive pushes
+<p>Normally, a master, (and <em>only</em> a master), pushes to a copy, and the copies
+are "read-only" to the users.  Gitolite allows a <em>copy</em> to receive pushes
 from a user and transparently redirect them to the <em>master</em>.</p>
 <p>This simplifies things for users in complex setups, letting them use their
 local mirror for both fetch and push access to all repos.</p>
@@ -655,8 +662,8 @@ local mirror for both fetch and push access to all repos.</p>
     <span class="Statement">option</span> <span class="Identifier">mirror.redirectOK</span>    =   <span class="Constant">phobos deimos</span>
 </pre>
 
-<p>The first syntax trusts all valid slaves to redirect user pushes, while the
-second one trusts only some slaves.</p>
+<p>The first syntax trusts all valid copies to redirect user pushes, while the
+second one trusts only some copies.</p>
 <p><strong>IMPORTANT NOTES</strong></p>
 <ul>
 <li>
@@ -664,15 +671,15 @@ second one trusts only some slaves.</p>
     mode.</p>
 </li>
 <li>
-<p><strong>Authentication</strong> happens on the slave, but <strong>authorisation</strong> is on the
-    master.  The master is trusting the slave to authenticate the user
+<p><strong>Authentication</strong> happens on the copy, but <strong>authorisation</strong> is on the
+    master.  The master is trusting the copy to authenticate the user
     correctly, even though the actual push is going to the master.  This means
-    that user alice on the slave must be guaranteed to be the same as user
+    that user alice on the copy must be guaranteed to be the same as user
     alice on the master.</p>
 </li>
 <li>
 <p>The part of the authorisation that happens before passing control to
-    git-receive-pack (see <a href="conf#access-rules">access rules</a>) will happen on the slave as
+    git-receive-pack (see <a href="conf#access-rules">access rules</a>) will happen on the copy as
     well.</p>
 </li>
 <li>
@@ -709,16 +716,16 @@ and push.</p>
 thing; just make the change and push <em>to the current master</em>.  Subsequent
 pushes will go to the new master, of course.</p>
 <p>But if the current master is already dead, there's a bit of a catch-22.  You
-can't push to the master because it is dead, and you can't push to any slave
+can't push to the master because it is dead, and you can't push to any copy
 because they won't accept updates from anywhere but the server they think is
 the master.</p>
 <p>Here's how to resolve this:</p>
 <ol>
 <li>
-<p>On <em>each</em> slave:</p>
+<p>On <em>each</em> copy:</p>
 <ul>
 <li>
-<p>Edit <code>~/.gitolite/conf/gitolite.conf</code> to change the master and slave
+<p>Edit <code>~/.gitolite/conf/gitolite.conf</code> to change the master and copy
     options for the gitolite-admin repo.</p>
 </li>
 <li>
@@ -735,7 +742,7 @@ the master.</p>
 <!--
 
 *   mirroring: when a redirected push fails on the master, it still does a
-    push-all-slaves?  yes because only the *client* knows that the push
+    push-all-copies?  yes because only the *client* knows that the push
     failed.  The actual update happens in a grandchild process and
     git-receive-pack does not propagate a non-0 exit status.  So we have no
     way of knowing, short of recording the failure in some *other* place that
@@ -743,10 +750,10 @@ the master.</p>
 
 -->
 
-<h1 id="appendix-d-fixing-a-broken-slave">appendix D: fixing a broken slave<a class="headerlink" href="#appendix-d-fixing-a-broken-slave" title="Permanent link"></a></h1>
+<h1 id="appendix-d-fixing-a-broken-copy">appendix D: fixing a broken copy<a class="headerlink" href="#appendix-d-fixing-a-broken-copy" title="Permanent link"></a></h1>
 <p>Let's say you had</p>
 <pre><code>option mirror.master        =   mars
-option mirror.slaves        =   phobos deimos
+option mirror.copies        =   phobos deimos
 </code></pre>
 <p>and you then accidentally removed <code>phobos</code> and pushed.</p>
 <p>You quickly realise your error and put the line back, then push again, only to
@@ -756,7 +763,7 @@ touch the gitolite-admin repo on phobos results in the message:</p>
 <pre><code>FATAL: phobos: 'gitolite-admin' is mirrored but not here
 </code></pre>
 <p>This is basically saying, "yes I see that repo in the config, but I (phobos)
-am neither the master nor one of the slaves for it, so please don't ask me
+am neither the master nor one of the copies for it, so please don't ask me
 about it!".  You're basically locked out of phobos now.</p>
 <p>The solution is this:</p>
 <ul>
