@@ -345,6 +345,10 @@
             
             <li class="nav-item" data-level="1"><a href="#adding-your-own-scripts-to-a-trigger" class="nav-link">adding your own scripts to a trigger</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#adding-a-perl-module-as-a-trigger" class="nav-link">adding a perl module as a trigger</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-level="2"><a href="#displaying-the-resulting-trigger-list" class="nav-link">displaying the resulting trigger list</a>
               <ul class="nav flex-column">
               </ul>
@@ -543,6 +547,21 @@ add the following to the <a href="rc">rc</a> file, just before the ENABLE sectio
     ],
 </code></pre>
 <p>As you can see, the 'foo' gets added to the top of the list.</p>
+<h2 id="adding-a-perl-module-as-a-trigger">adding a perl module as a trigger<a class="headerlink" href="#adding-a-perl-module-as-a-trigger" title="Permanent link"></a></h2>
+<p>If your trigger is a perl module, as opposed to a standalone script or
+executable, the process is almost the same as above, except what you add to
+the rc file it looks like this:</p>
+<pre><code>POST_CREATE                 =&gt;
+    [
+        'Foo::post_create'
+    ],
+</code></pre>
+<p>Gitolite will add the <code>Gitolite::Triggers::</code> prefix to the name given there.</p>
+<p>The subroutine to be run (in this example, <code>post_create</code>) is looked for in the
+<code>Gitolite::Triggers::Foo</code> package, so this requires that the perl module
+start with a package header like this:</p>
+<pre><code>package Gitolite::Triggers::Foo;
+</code></pre>
 <h2 id="displaying-the-resulting-trigger-list">displaying the resulting trigger list<a class="headerlink" href="#displaying-the-resulting-trigger-list" title="Permanent link"></a></h2>
 <p>You can use the 'gitolite query-rc' command to see what the trigger list
 actually looks like.  For example:</p>

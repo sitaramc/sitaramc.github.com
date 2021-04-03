@@ -655,6 +655,12 @@ repo bar @baz
 <p>First, write your trigger code, using the documentation <a href="triggers">here</a>.
 Note especially the sections "common arguments" and "trigger-specific
 arguments".  Look in the shipped triggers for ideas.</p>
+<div class="admonition danger">
+<p class="admonition-title">Note:</p>
+<p>If your trigger is a perl module, as opposed to a standalone script or
+executable, please see the section on <a href="triggers#adding-a-perl-module-as-a-trigger">adding a perl module as a
+trigger</a>.</p>
+</div>
 <p>Let's say your trigger is called <code>foo</code>, and it will be a <code>PRE_GIT</code> trigger.</p>
 <ol>
 <li>
