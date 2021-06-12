@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<html xmlns="https://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
@@ -88,7 +88,7 @@
 <p>In an ideal world, you’d keep ‘common’ development in the ‘common’ branch, and ‘customer specific’ development in the corresponding customer branches. In the real world, often the separation was not done properly in advance, (maybe it was not known, or maybe for initial testing reasons it had to be done in one branch, or whatever), and so you now have a mix of ‘common’ and ‘special’ changes all together.</p>
 <p><strong>This article describes one way to ‘fix up’ such a mixed development into the proper form</strong>.</p>
 <h1 data-number="1" id="the-basic-rules"><span class="header-section-number">1</span> The basic rules</h1>
-<p>The basic rules are best described by Junio in <a href="http://permalink.gmane.org/gmane.comp.version-control.git/110489" class="uri">http://permalink.gmane.org/gmane.comp.version-control.git/110489</a></p>
+<p>The basic rules are best described by Junio in <a href="https://permalink.gmane.org/gmane.comp.version-control.git/110489" class="uri">https://permalink.gmane.org/gmane.comp.version-control.git/110489</a></p>
 <ul>
 <li>You make edits to common files only on the common branch.</li>
 <li>You merge from common to deployment, never the other way.</li>
@@ -98,7 +98,7 @@
 <p>We use the following terminology:</p>
 <p>‘common’ is the branch representing the base product. All regular customers get this version.</p>
 <p>‘special’ is a branch for a specific customer. This customer needs changes unique to his environment, which should not be merged back into the common branch. However, this branch must regularly get the benefit of changes in the mainline ‘common’ branch. (This is the genesis of the two rules above).</p>
-<p>If you have more than one special customer the same logic will apply for each of them separately, although if you have too many such customers you may also want to look at <a href="http://gitster.livejournal.com/26540.html">Never merging back</a> for an additional tip on this.</p>
+<p>If you have more than one special customer the same logic will apply for each of them separately, although if you have too many such customers you may also want to look at <a href="https://gitster.livejournal.com/26540.html">Never merging back</a> for an additional tip on this.</p>
 <h1 data-number="3" id="the-nitty-gritty"><span class="header-section-number">3</span> The nitty gritty</h1>
 <h2 data-number="3.1" id="before-you-start"><span class="header-section-number">3.1</span> Before you start</h2>
 <p>The history looks like this in the beginning:</p>

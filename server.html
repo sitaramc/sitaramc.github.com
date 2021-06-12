@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<html xmlns="https://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
@@ -96,7 +96,7 @@ git config transfer.fsckObjects   true</code></pre></li>
 <p>Git uses the following protocols to access remote repositories; example URLs are given in parentheses:</p>
 <ul>
 <li><p><strong>ssh</strong> (<code>ssh://user@my.server/path/to/repo</code>). Authentication is handled by ssh. See the section on “gitolite and other tools” for authorisation.</p></li>
-<li><p><strong>http/https</strong>: (<code>http://my.server/path/to/repo</code>). Authentication is handled by the web server. Authorisation <em>can</em> be handled by gitolite if you’re using “smart http” (see ‘man git-http-backend’).</p></li>
+<li><p><strong>http/https</strong>: (<code>https://my.server/path/to/repo</code>). Authentication is handled by the web server. Authorisation <em>can</em> be handled by gitolite if you’re using “smart http” (see ‘man git-http-backend’).</p></li>
 <li><p><strong>local file system</strong>: (<code>file:///path/to/repo</code>). Authentication is not relevant (you’re already logged in).</p>
 <p>Authorisation is handled by OS file-system permissions, but there’s a little twist. Using OS permissions, or even filesystem ACLs, you can only get repo-level granularity for reads and writes (i.e., you can say Alice can read the repo, Bob can read and write, and Carol cannot do either, but that;s it).</p></li>
 <li><p><strong>git</strong>: (<code>git://my.server/path/to/repo</code>). This is an <em>UNAUTHENTICATED</em> protocol, useful only for allowing clones of publicly accessible repos. If they can reach port 9418 on your server, they can get it. Pushes are disabled by default, and – needless to say – you must <em>NEVER</em> enable them!</p>
@@ -104,7 +104,7 @@ git config transfer.fsckObjects   true</code></pre></li>
 </ul>
 <h1 class="unnumbered" data-number id="gitolite-and-other-tools-for-authorisation">gitolite and other tools for authorisation</h1>
 <p>There are many situations where you need to establish limits on what someone can do. When you have a number of developers, with varying levels of experience and expertise, accessing a number of repos, and different branches in different repos have different levels of “importance”, you need some serious authorisation tool.</p>
-<p><a href="http://github.com/sitaramc/gitolite">Gitolite</a> is the best such tool I know (blame author bias if you don’t agree!). It comes with a <a href="http://sitaramc.github.com/gitolite/index.html#qi">quick install</a> section, plus lots and lots of <a href="http://gitolite.com/gitolite">documentation</a>.</p>
+<p><a href="https://github.com/sitaramc/gitolite">Gitolite</a> is the best such tool I know (blame author bias if you don’t agree!). It comes with a <a href="https://sitaramc.github.com/gitolite/index.html#qi">quick install</a> section, plus lots and lots of <a href="https://gitolite.com/gitolite">documentation</a>.</p>
 <p>Other tools exist, but they are all web-based. “Gerrit code review” is the most powerful of the free ones, but it’s much more focused on (and much more useful for) code review / workflow enforcement. Less capable tools are gitorious, gitlab, and so on (I don’t believe any of them has the kind of branch level and file/directory level access controls that Gitolite has).</p>
 <p>For open source projects or if you don’t mind paying a small amount of money, Github is very nice. (Gitolite’s primary host is Github, and I have no other relationship with them than being a free user). Github’s access control is not at all fine-grained so it’s best if it’s used only as a “meeting point” server for your team, and not as a “source of truth”.</p>
 </body>

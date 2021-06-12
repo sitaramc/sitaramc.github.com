@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<html xmlns="https://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
@@ -84,13 +84,13 @@
 <header id="title-block-header">
 <h1 class="title">converting Visual Source Shredder to GIT</h1>
 </header>
-<p>[Thanks to http://martinfowler.com/bliki/VersionControlTools.html for the new expansion of VSS]</p>
+<p>[Thanks to https://martinfowler.com/bliki/VersionControlTools.html for the new expansion of VSS]</p>
 <p>This is a 2 step process. For large values of 2, as they say :) But the nice thing is it can all be done in Linux; no need to use a Windows machine as long as you have a copy of the full VSS repo.</p>
 <h1 data-number="1" id="build-vss2svn"><span class="header-section-number">1</span> build vss2svn</h1>
-<p>The base for all this is <a href="http://www.pumacode.org/projects/vss2svn" class="uri">http://www.pumacode.org/projects/vss2svn</a>. What I did is the following:</p>
+<p>The base for all this is <a href="https://www.pumacode.org/projects/vss2svn" class="uri">https://www.pumacode.org/projects/vss2svn</a>. What I did is the following:</p>
 <ul>
 <li><p>download the latest vss2svn (this includes ssphys also):</p>
-<pre><code>svn checkout http://svn.pumacode.org/repos/vss2svn/trunk/ vss2svn    </code></pre></li>
+<pre><code>svn checkout https://svn.pumacode.org/repos/vss2svn/trunk/ vss2svn    </code></pre></li>
 <li><p>follow all the instuctions to install all the various perl modules needed, copied <a href="#perlmodinstalls">here</a> just in case.</p></li>
 <li><p>install libboost-devel; ssphys needs it to build. On my current system (Mandriva 2009), the version was 1.36. I got a compile error which I fixed by running <a href="#libboostpatch">this patch</a> (don’t ask me how I found this – I compared the nearest boost libraries with each other and determined that this only seemed to be a name change, and that too <em>only</em> in 1.36 – very weird, but anyway…)</p></li>
 <li><p>build and install vss2svn (again, instructions from the main site reproduced here for convenience):</p>
@@ -145,7 +145,7 @@ git config --unset core.autocrlf</code></pre>
 <li><em>save the VSS repo</em> in a read-only location for future reference, should there ever (much later in time) be a question on the accuracy of the history at some revision that was not explicitly checked during the migration.</li>
 </ol>
 <h1 data-number="6" id="alternative-method-using-perl-on-windows"><span class="header-section-number">6</span> alternative method using perl on windows</h1>
-<p>There is another method, achieved by hacking a perl script that was supposed to convert <a href="http://www.riseup.com/~brettw/dev/VSS2Subversion.html">to SVN</a>, to make it go <a href="../tools/vss2git.pl">to git</a> instead. Pros and cons:</p>
+<p>There is another method, achieved by hacking a perl script that was supposed to convert <a href="https://www.riseup.com/~brettw/dev/VSS2Subversion.html">to SVN</a>, to make it go <a href="../tools/vss2git.pl">to git</a> instead. Pros and cons:</p>
 <ul>
 <li>(+) no CRLF problem</li>
 <li>(+) easier to use: you just need msysgit and this program, no messing around with all these dependencies for vss2svn (but then, you can execute vss2svn the same way too – they have a standalone windows executable)</li>
@@ -171,7 +171,7 @@ cd ~/.cpan/build/DBD-SQLite2-0.33
 make install
 
 # the Config:Ini module is not in CPAN, so:
-wget http://backpan.perl.org/authors/id/A/AV/AVATAR/Config-Ini-1.08.tar.gz
+wget https://backpan.perl.org/authors/id/A/AV/AVATAR/Config-Ini-1.08.tar.gz
 tar xzf Config-Ini-1.08.tar.gz 
 cd Config-Ini-1.08
 perl Makefile.PL

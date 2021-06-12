@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<html xmlns="https://www.w3.org/1999/xhtml" lang xml:lang>
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
@@ -102,7 +102,7 @@
 <li><p>with <code>--cached</code>, looks only in the cache</p></li>
 <li><p>with one or more ref names, searched only within those revisions</p></li>
 <li><p>can take a pattern, like <code>*.c</code>, to restrict the files searched</p></li>
-<li><p>can do <code>--and</code>, <code>--or</code>, <code>--not</code>, etc with patterns. This is a pretty big wow. As <a href="http://gitster.livejournal.com/27674.html" class="uri">http://gitster.livejournal.com/27674.html</a> says:</p>
+<li><p>can do <code>--and</code>, <code>--or</code>, <code>--not</code>, etc with patterns. This is a pretty big wow. As <a href="https://gitster.livejournal.com/27674.html" class="uri">https://gitster.livejournal.com/27674.html</a> says:</p>
 <pre><code>git grep -e &#39;;;&#39; --and --not -e &#39;for *(.*;;&#39; -- &#39;*.c&#39;</code></pre>
 <p>which searches for ‘;;’ in all C files, unless they occur in a typical <code>for (;;) {</code> type of construct.</p></li>
 <li><p>finally, there’s a somewhat gratuitously thrown in <code>--all-match</code> option, which says “match any of these strings, but print matches only from files that have <em>all</em> of them”. I wonder whose scratch that was… ;-)</p></li>
