@@ -12,19 +12,19 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
         <link href="css/gitolite.css" rel="stylesheet">
 
         <script src="js/jquery-1.10.2.min.js" defer></script>
         <script src="js/bootstrap.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
     <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">Gitolite</a>
+                <a class="navbar-brand" href="index.html">Gitolite</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
@@ -342,6 +342,11 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            
+            <li class="nav-item" data-level="1"><a href="#appendix-b-making-a-trigger-run-after-the-built-in-ones" class="nav-link">appendix B: making a trigger run after the built-in ones</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
@@ -502,15 +507,43 @@ around, or in some cases removed completely, not just new config items.</p>
 <p>compare the 2 rc dumps to make sure you've got everything covered.</p>
 </li>
 </ul>
+<h1 id="appendix-b-making-a-trigger-run-after-the-built-in-ones">appendix B: making a trigger run <em>after</em> the built-in ones<a class="headerlink" href="#appendix-b-making-a-trigger-run-after-the-built-in-ones" title="Permanent link"></a></h1>
+<p>For most purposes, the section on <a href="triggers#adding-your-own-scripts-to-a-trigger">adding your own scripts to a
+trigger</a> works fine.</p>
+<p>But triggers added that way, run <em>before</em> the built-in triggers, which you can
+also confirm by running <code>gitolite query-rc -d</code> and looking for your trigger in
+the output.</p>
+<p>If you need your trigger to run <em>after</em> the built-in ones, it <em>is</em> possible,
+it's a wee bit more work.</p>
+<p>Let's say you have a post-compile script called "my-custom-config", and you
+want it to run <em>after</em> the shipped post-compile scripts. Here's what you do:</p>
+<ul>
+<li>
+<p>add something like 'my-cust' (could be anything you like, as long as
+    it matches the next step) to the ENABLE list in the rc file. Dont
+    forget the trailing comma if it's not the last element (and in perl
+    you can add a trailing comma even if it <em>is</em> the last element)</p>
+</li>
+<li>
+<p>after the ENABLE list, but still within the RC hash, add this:</p>
+<pre><code>NON_CORE =&gt; "
+my-cust POST_COMPILE post-compile/my-custom-config
+",
+</code></pre>
+<p>The words in caps are fixed. The others you know, and as you can see
+the "my-cust" here matches the "my-cust" in the ENABLE list.</p>
+</li>
+</ul>
+<p>After you do this, you can test whether it worked or not:</p>
+<pre><code>gitolite query-rc POST_COMPILE
+</code></pre>
+<p>and it should show you what it thinks are the items in that list, in the
+order it has them.</p>
 <!--
-
-# appendix B: adding stuff to ENABLE
-
-adapt https://groups.google.com/forum#!searchin/gitolite/NON_CORE/gitolite/2kZaqLohSz0/LsIo_W8B2I8J
+-   from https://groups.google.com/forum#!searchin/gitolite/NON_CORE/gitolite/2kZaqLohSz0/LsIo_W8B2I8J
 
 -   document 'before' option (default: goes to the end)
 -   document arguments supplied via ENABLE list
-
 --></div>
             </div>
         </div>
@@ -534,16 +567,13 @@ adapt https://groups.google.com/forum#!searchin/gitolite/NON_CORE/gitolite/2kZaq
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
             <div class="modal-body">
-                <p>
-                    From here you can search these documents. Enter
-                    your search terms below.
-                </p>
+                <p>From here you can search these documents. Enter your search terms below.</p>
                 <form>
                     <div class="form-group">
                         <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
-                <div id="mkdocs-search-results"></div>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
             </div>
             <div class="modal-footer">
             </div>
