@@ -534,13 +534,13 @@ can't do this for files and directories.</p>
     <span class="Comment"># rules should allow @temp-emp NO ACCESS</span></p>
 <p><span class="Statement">repo</span> foo-partialcopy-1
     <span class="Comment"># first, a deny rule that allows no access to secret-branch</span>
-    <span class="Statement">-</span>   <span class="Constant">secret-branch</span>               =   <span class="WarningMsg">@all</span></p>
-<pre><code>&lt;span class="Comment"&gt;# other rules; see notes below&lt;/span&gt;
-
-&lt;span class="Statement"&gt;-&lt;/span&gt;   &lt;span class="Constant"&gt;VREF/partial-copy&lt;/span&gt;           =   &lt;span class="WarningMsg"&gt;@all&lt;/span&gt;
-&lt;span class="Statement"&gt;config&lt;/span&gt; &lt;span class="Identifier"&gt;gitolite.partialCopyOf&lt;/span&gt;   =   &lt;span class="Constant"&gt;foo&lt;/span&gt;
-</code></pre>
-</pre>
+    <span class="Statement">-</span>   <span class="Constant">secret-branch</span>               =   <span class="WarningMsg">@all</span>
+    <span class="Comment">#</span>
+    <span class="Comment"># other rules; see notes below</span>
+    <span class="Comment">#</span>
+    <span class="Statement">-</span>   <span class="Constant">VREF/partial-copy</span>           =   <span class="WarningMsg">@all</span>
+    <span class="Statement">config</span> <span class="Identifier">gitolite.partialCopyOf</span>   =   <span class="Constant">foo</span>
+</pre></p>
 <p><strong>IMPORTANT NOTES</strong>:</p>
 <ul>
 <li>
