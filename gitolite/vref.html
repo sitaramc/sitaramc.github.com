@@ -518,7 +518,7 @@ will encounter the "deny" rule, and thus kill the push.</p>
 "mimicking a plain old update hook" for why this is useful).</p>
 <h1 id="more-details-and-nuances">more details and nuances<a class="headerlink" href="#more-details-and-nuances" title="Permanent link"></a></h1>
 <h2 id="mimicking-a-plain-old-update-hook">mimicking a plain old update hook<a class="headerlink" href="#mimicking-a-plain-old-update-hook" title="Permanent link"></a></h2>
-<p>If the VREF maker exists with a non-zero exit code, then regardless of what it
+<p>If the VREF maker exits with a non-zero exit code, then regardless of what it
 prints or does not, the push dies.</p>
 <p>This is just like a plain 'update' hook.  Since the first 3 arguments (see
 later) are also the same that a plain 'update' hook receives, you can actually
