@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="img/favicon.ico">
-        <title>testing gitolite - Gitolite</title>
+        <title>gitolite and ssh certs - Gitolite</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/base.css" rel="stylesheet">
@@ -219,7 +219,7 @@
 </li>
                                     
 <li>
-    <a href="testing.html" class="dropdown-item active">testing gitolite</a>
+    <a href="testing.html" class="dropdown-item">testing gitolite</a>
 </li>
                                     
 <li>
@@ -227,7 +227,7 @@
 </li>
                                     
 <li>
-    <a href="gitolite-and-ssh-certs.html" class="dropdown-item">gitolite and ssh certs</a>
+    <a href="gitolite-and-ssh-certs.html" class="dropdown-item active">gitolite and ssh certs</a>
 </li>
                                     
   <li class="dropdown-submenu">
@@ -292,12 +292,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="locking.html" class="nav-link">
+                                <a rel="prev" href="package.html" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="package.html" class="nav-link">
+                                <a rel="next" href="files.html" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -319,13 +319,20 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#testing-gitolite" class="nav-link">testing gitolite</a>
+            <li class="nav-item" data-level="1"><a href="#gitolite-and-ssh-certificates" class="nav-link">gitolite and ssh certificates</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#objectives" class="nav-link">objectives</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            
-            <li class="nav-item" data-level="1"><a href="#appendix-1-the-clobber-list" class="nav-link">appendix 1 -- the clobber list</a>
+            <li class="nav-item" data-level="2"><a href="#host-certs-and-user-certs" class="nav-link">host certs and user certs</a>
               <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#detailed-steps" class="nav-link">detailed steps</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -333,52 +340,190 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="testing-gitolite">testing gitolite<a class="headerlink" href="#testing-gitolite" title="Permanent link"></a></h1>
-<p><font color="red"><strong>WARNING: this will clobber <a href="testing#appendix-1-the-clobber-list">these files and
-directories</a> in your <code>$HOME</code>.  Ideally, you should use a throwaway
-userid</strong>.</font></p>
-<hr />
-<p>Running gitolite's test suite is really just a superset of <a href="install#trying-out-gitolite-safely">trying it out
-safely</a>.</p>
-<p>To run the full test suite, create a <strong>throw-away userid</strong>, log in to it, then
-run these commands:</p>
-<pre><code>git config --global include.path ~/.gitconfig.local
-git clone https://github.com/sitaramc/gitolite
-cd gitolite
-prove
-</code></pre>
-<p>You will get an error that forces you to read <code>t/README</code> and set an env var
-before the test can proceed.  This is intentional; I've had people who don't
-pay attention to the "data loss" warning, and then complain that it was not
-prominent enough.  Forcing them to read a much smaller page appears to focus
-their attention better!</p>
-<p>The test suite should run fine on most recent Linuxes and Unixes.  Although
-gitolite itself should work fine with any git after 1.6.6 or so, the test
-suite generally requires a more recent git.</p>
-<p>Make sure:</p>
+<h1 id="gitolite-and-ssh-certificates">gitolite and ssh certificates<a class="headerlink" href="#gitolite-and-ssh-certificates" title="Permanent link"></a></h1>
+<p>(Background: there have been a few emails over the years about this on the
+mailing list, and I tried to understand how ssh certs work and so on back
+then, culminating in <a href="https://groups.google.com/g/gitolite/c/XouuE3s3DMs/m/6_HbGJKzAgAJ">this
+email</a>.
+That was still too open-ended, because there's more than one way to do it and
+none of them is canonical in any sense.  And even though there were other
+emails from folks who tried it themselves, none of those seemed to hit all the
+important points either.  So I finally found some time to work on this; hope
+it helps.)</p>
+<h2 id="objectives">objectives<a class="headerlink" href="#objectives" title="Permanent link"></a></h2>
 <ul>
-<li><code>$HOME/bin</code> is in <code>$PATH</code></li>
-<li>sshd allows incoming ssh to this userid, at least from localhost</li>
+<li>should not interfere in any way with existing ssh setup for other services
+    on the same machine, whether they are using certificates or not</li>
+<li><em>if</em> the site is already using ssh certs, should piggy-back on existing
+    setup, (whether it is homegrown, or something like teleport) and impose
+    minimal demands on them<ul>
+<li>specifically, we should not require separate certificates for
+    gitoliite, or require people to create separate keys for gitolite, etc.</li>
 </ul>
-<p>Gitolite's test suite is mostly written using <a href="https://github.com/sitaramc/tsh">tsh</a> -- the "testing shell".
-Take a look at some of the scripts and you will see what it looks like.  It
-has a few quirks and nuances, but it's fine for what I need here.</p>
-<p>The tests also use a somewhat convoluted system of environment variables in
-order to run <em>entirely</em> as a local user, without going through ssh at all.
-This lets a complete test suite run in about a lot less time than it would
-otherwise take.</p>
-<p>If you think that defeats the purpose of the testing, you haven't read
-<a href="concepts#authentication-and-authorisation">this</a> yet.</p>
-<h1 id="appendix-1-the-clobber-list">appendix 1 -- the clobber list<a class="headerlink" href="#appendix-1-the-clobber-list" title="Permanent link"></a></h1>
-<p>When you <a href="install#trying-out-gitolite-safely">try out gitolite</a> or run the test suite, the following files
-and directories in your \$HOME are potentially clobbered.</p>
-<pre><code>.gitconfig
-.gitolite/
-.gitolite.rc
-projects.list
-repositories/
-.ssh/
-</code></pre></div>
+</li>
+<li>finally, it should not require any changes to gitolite core<ul>
+<li><a href="https://gitolite.com/gitolite/ssh.html#but-but-you-have-all-that-ssh-stuff-in-gitolite">this</a>
+    may be useful as additional context for this</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note:</p>
+<p>Gitolite has an additional constraint on top of whatever any ssh cert
+management system can natively handle.  The system user is "git", and the
+"forced command" requires an argument that represents the user's "gitolite
+username".</p>
+</div>
+<p>The simplest way to deal with this, for, say, user "alice", is to present the
+pubkey to the CA system, asking for principals "gitolite" and
+"gitolite-user:alice" to be added to the certificate.</p>
+<p>The principal "gitolite" is used to allow login.  The principal
+"gitolite-user:alice" is not actually used for any login, but is <em>extracted</em>
+from the logged in certificate and passed to "gitolite-shell" as the gitolite
+username.</p>
+<p>Any other method seems to violate one of our objectives.</p>
+<div class="admonition note">
+<p class="admonition-title">Specifically...</p>
+<p>...notice that if you already use ssh certs, you only have to:
+(1) add the "Match User git" section to sshd config
+(3) add the two supporting files (see last bullet in the "detailed steps" section), and
+(3) ask the CA to add two principals to the certificates they issue, if
+the user is a gitolite user (see below)</p>
+</div>
+<h2 id="host-certs-and-user-certs">host certs and user certs<a class="headerlink" href="#host-certs-and-user-certs" title="Permanent link"></a></h2>
+<p>There are two parts to certificate usage.  One deals with the "host key" and
+its fingerprint; this is the piece that sometimes shows messages like this:</p>
+<pre><code>The authenticity of host '127.0.0.1 (127.0.0.1)' can't be established.
+[...etc...]
+</code></pre>
+<p>or, worse, this:</p>
+<pre><code>@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+[...and so on...]
+</code></pre>
+<p>User certs (authenticating the user) is where there are several ways of doing
+things.  What follows is one very simple way of using ssh certs, <strong>but this is
+by no means prescriptive</strong> and you may have a better way that I did not think
+of.</p>
+<h2 id="detailed-steps">detailed steps<a class="headerlink" href="#detailed-steps" title="Permanent link"></a></h2>
+<p>This takes a "default" ssh setup and does just enough to get this working.</p>
+<ul>
+<li>
+<p>create CA keys.  <em>Note that normally the CA keys are on a different
+    machine, and pubkeys to be signed have to be copied to that machine, then
+    the certs produced copied back.  We're ignoring all those details here.</em></p>
+<p><pre style="color: #ffffff; background-color: #000000;">
+<span class="Statement">cd</span> /etc/ssh
+ssh-keygen <span class="Special">-f</span> user_ca <span class="Special">-C</span> user_ca
+ssh-keygen <span class="Special">-f</span> host_ca <span class="Special">-C</span> host_ca
+</pre></p>
+</li>
+<li>
+<p>sign the (already existing) host key</p>
+<p><pre style="color: #ffffff; background-color: #000000;">
+<span class="Statement">cd</span> /etc/ssh
+ssh-keygen <span class="Special">-s</span> host_ca <span class="Special">-I</span> CA-server <span class="Special">-h</span> <span class="Special">-n</span> testpc ssh_host_rsa_key
+<span class="Comment"># (...similarly ed25519, ecdsa, etc...)</span>
+</pre></p>
+</li>
+<li>
+<p>add the following to sshd config.  Most systems now allow you to add
+    related entries in a separate file within, typically,
+    <code>/etc/ssh/sshd_config.d/</code> so you may be able to do that also.</p>
+<p>Don't forget to restart sshd after this.</p>
+<p><pre style="color: #ffffff; background-color: #000000;">
+<span class="Comment"># host cert: make the server &quot;offer&quot; this host-key-certificate when a user</span>
+<span class="Comment"># tries to login</span>
+<span class="Statement">HostCertificate</span> /etc/ssh/ssh_host_rsa_key-cert.pub
+<span class="Comment"># ...similarly other host key certs...</span></p>
+<p><span class="Comment"># user certs: make host trust user certificates</span>
+<span class="Statement">TrustedUserCAKeys</span> /etc/ssh/user_ca.pub
+<span class="Comment"># we have only one CA for now so we just use the CA pub key as is, but</span>
+<span class="Comment"># in real life this could be a separate file with multiple CA pubkeys,</span>
+<span class="Comment"># one per line</span></p>
+<p><span class="Comment"># just for the git user, force command &quot;/usr/local/bin/gl-wrapper&quot;</span>
+<span class="Comment"># from within an AuthorizedPrincipalsFile.</span>
+<span class="Statement">Match</span> <span class="Type">User</span> git
+   <span class="Comment"> # once you have migrated everyone to certs, uncomment this line and</span>
+   <span class="Comment"> # restart sshd</span>
+   <span class="Comment"> # AuthorizedKeysFile none</span>
+   <span class="Comment"> #</span>
+   <span class="Comment"> # expose auth info: this creates an env var $SSH_USER_AUTH pointing</span>
+   <span class="Comment"> # to a file that contains the certificate used, from which we</span>
+   <span class="Comment"> # extract the gitolite-user</span>
+    <span class="Statement">ExposeAuthInfo</span> <span class="Identifier">yes</span>
+   <span class="Comment"> #</span>
+    <span class="Statement">AuthorizedPrincipalsFile</span> /etc/ssh/gitolite-apf
+   <span class="Comment"> # this file contains just one line:</span>
+   <span class="Comment"> #       restrict,command=&quot;/usr/local/bin/gl-wrapper&quot; gitolite</span>
+   <span class="Comment"> # gl-wrapper will parse $SSH_USER_AUTH and extract the gitolite</span>
+   <span class="Comment"> # username from it, then call gitolite-shell</span>
+   <span class="Comment"> #</span>
+   <span class="Comment"> # you may have to edit the path of gitolite-shell within</span>
+   <span class="Comment"> # /usr/local/bin/gl-wrapper</span>
+</pre></p>
+</li>
+<li>
+<p>make the "client" accept this CA as a host CA.  This will be the same for
+    every client, since sites usually only have one CA.</p>
+<p><pre style="color: #ffffff; background-color: #000000;">
+<span class="Statement">cd</span> /etc/ssh
+<span class="PreProc">(</span><span class="Statement">echo</span><span class="Constant"> -n </span><span class="Statement">&quot;</span><span class="Constant">@cert-authority testpc </span><span class="Statement">&quot;</span><span class="Statement">;</span><span class="Special"> cat host_ca.pub</span><span class="PreProc">)</span> <span class="Statement">&gt;</span> ssh_known_hosts
+</pre></p>
+</li>
+<li>
+<p>sign user pubkeys and produce certs to be given back to them.</p>
+<p>This is how you setup a gitolite user.  You need to assign both the
+generic "gitolite" principal, so that the user can log in to "git", and
+also a specific one to identify the person's gitolite username.</p>
+<p><pre style="color: #ffffff; background-color: #000000;">
+ssh-keygen <span class="Special">-s</span> user_ca <span class="Special">-I</span> user-1 <span class="Special">-n</span> gitolite,gitolite-user:alice alice.pub
+ssh-keygen <span class="Special">-s</span> user_ca <span class="Special">-I</span> user-2 <span class="Special">-n</span> gitolite,gitolite-user:carol carol.pub
+</pre></p>
+<p>Note the principal <code>gitolite-user:alice</code> -- this gets parsed to "alice" as
+we will see later.</p>
+</li>
+<li>
+<p>install supporting file and script:</p>
+<ul>
+<li>
+<p><code>/etc/ssh/gitolite-apf</code> should contain just one line:</p>
+<p><pre style="color: #ffffff; background-color: #000000;">
+restrict,command=&quot;/usr/local/bin/gl-wrapper&quot; gitolite
+</pre></p>
+</li>
+<li>
+<p><code>/usr/local/bin/gl-wrapper</code> should contain this (and should be
+    executable):</p>
+<p><pre style="color: #ffffff; background-color: #000000;">
+<span class="Comment">#!/bin/bash</span></p>
+<p><span class="Comment"># $SSH_USER_AUTH is set by sshd because we enabled `ExposeAuthInfo`.</span>
+<span class="Comment"># It contains the cert used to login, which we parse to get the</span>
+<span class="Comment"># gitolite username from the output.  The parsing is a bit simplistic</span>
+<span class="Comment"># but works fine.</span>
+<span class="Identifier">gl_user</span>=<span class="PreProc">$(</span><span class="Special">cat </span><span class="PreProc">$SSH_USER_AUTH</span><span class="Special"> </span><span class="Statement">|</span>
+<span class="Special">    </span><span class="Statement">grep</span><span class="Special"> </span><span class="Statement">'</span><span class="Constant">^publickey</span><span class="Statement">'</span><span class="Special"> </span><span class="Statement">|</span>
+<span class="Special">    cut </span><span class="Special">-f</span><span class="Special">2- </span><span class="Special">-d</span><span class="Statement">'</span><span class="Constant"> </span><span class="Statement">'</span><span class="Special"> </span><span class="Statement">|</span>
+<span class="Special">    ssh-keygen </span><span class="Special">-L</span><span class="Special"> </span><span class="Special">-f</span><span class="Special"> - </span><span class="Statement">|</span>
+<span class="Special">    </span><span class="Statement">grep</span><span class="Special"> </span><span class="Special">-E</span><span class="Special"> </span><span class="Special">-o</span><span class="Special"> gitolite-user:</span><span class="Statement">'</span><span class="Constant">\S+</span><span class="Statement">'</span><span class="Special"> </span><span class="Statement">|</span>
+<span class="Special">    cut </span><span class="Special">-f</span><span class="Special">2 </span><span class="Special">-d</span><span class="Special">:</span>
+<span class="Special">    </span><span class="PreProc">)</span></p>
+<p><span class="Statement">exec</span> /home/git/gitolite/src/gitolite-shell <span class="PreProc">$gl_user</span>
+<span class="Comment"># BE SURE TO CHANGE THE ABOVE PATH!</span>
+</pre></p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Sidenote</p>
+<p>If it seems like parsing the output of what in git parlance would be
+called "porcelain" is not a good idea, I'm in good company.
+<a href="https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Certificate-based_Authentication#Forced_Commands_with_User_Certificates">https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Certificate-based_Authentication#Forced_Commands_with_User_Certificates</a>
+does exactly the same thing :)</p>
+</div>
+</li>
+</ul></div>
             </div>
         </div>
 
