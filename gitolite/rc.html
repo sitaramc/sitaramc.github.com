@@ -348,6 +348,11 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            
+            <li class="nav-item" data-level="1"><a href="#appendix-c-overriding-safety-net-patterns" class="nav-link">appendix C: overriding safety-net patterns</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
@@ -545,7 +550,30 @@ order it has them.</p>
 
 -   document 'before' option (default: goes to the end)
 -   document arguments supplied via ENABLE list
---></div>
+-->
+
+<h1 id="appendix-c-overriding-safety-net-patterns">appendix C: overriding safety-net patterns<a class="headerlink" href="#appendix-c-overriding-safety-net-patterns" title="Permanent link"></a></h1>
+<p>Apart from <a href="git-config.html#compensating-for-unsafe_patt-and-other-patterns"><code>UNSAFE_PATT</code></a>, there are other patterns that
+gitolite uses to prevent various attacks.  They're all defined in <code>Rc.pm</code> in
+the source, but you can override any of them in <code>~/.gitolite.rc</code> if needed.</p>
+<div class="admonition danger">
+<p class="admonition-title">DANGER!</p>
+<p>Overriding any of these regexes may impact the security of the
+installation severly if you are not careful.  You have been warned!</p>
+</div>
+<p>The patterns are:</p>
+<pre><code>$REMOTE_COMMAND_PATT  =                qr(^[-0-9a-zA-Z._\@/+ :,\%=]*$);
+$REF_OR_FILENAME_PATT =     qr(^[0-9a-zA-Z][-0-9a-zA-Z._\@/+ :,]*$);
+$REPONAME_PATT        =  qr(^\@?[0-9a-zA-Z][-0-9a-zA-Z._\@/+]*$);
+$REPOPATT_PATT        = qr(^\@?[[0-9a-zA-Z][-0-9a-zA-Z._\@/+\\^$|()[\]*?{},]*$);
+$USERNAME_PATT        =  qr(^\@?[0-9a-zA-Z][-0-9a-zA-Z._\@+]*$);
+</code></pre>
+<p>To override any of them, just add a new definition for the pattern at the
+<strong>very end</strong> of your rc file, just before the <code>1;</code> line.  E.g., to allow
+usernames to have a leading underscore, you might add:</p>
+<pre><code>$USERNAME_PATT        =  qr(^\@?[_0-9a-zA-Z][-0-9a-zA-Z._\@+]*$);
+</code></pre>
+<p>Needless to say you should be very comfortable with regexes to attempt this :)</p></div>
             </div>
         </div>
 

@@ -430,6 +430,12 @@ userid at all, please let me know.</p>
 <p>This section has been contributed by Thomas Hager (duke at sigsegv dot at),
 and is available <a href="contrib/ssh-and-http">here</a>.</p>
 <h1 id="usage">usage<a class="headerlink" href="#usage" title="Permanent link"></a></h1>
+<div class="admonition danger">
+<p class="admonition-title">Warning:</p>
+<p>Http mode does not seem capable of setting an exit code when things fail,
+unlike ssh mode.  Therefore, using an http-hosted gitolite in scripts may
+need more care and thought.</p>
+</div>
 <h2 id="client-side">client side<a class="headerlink" href="#client-side" title="Permanent link"></a></h2>
 <p>Git URLs look like <code>https://user:password@server/git/reponame.git</code>.</p>
 <p>The custom commands, like "info", "expand" should be handled as follows.  The
