@@ -612,6 +612,15 @@ don't mind the fact that those copies are out of sync until then).</p>
 
 <p>Except for the addition of a <code>.nosync</code> just after <code>copies</code>, all the other
 rules are the same as before.</p>
+<p>This setting will generate a warning that a "manual mirror push [is]
+pending" for each copy that has the <code>nosync</code> option.  If you're sure you
+don't need those warnings, you can upgrade to the latest gitolite, and
+use <code>nosync-quiet</code> as the option instead.</p>
+<pre style="color: #ffffff; background-color: #000000;">
+    <span class="Statement">option</span> <span class="Identifier">mirror.copies.nosync-quiet-1</span>   =   <span class="Constant">phobos deimos</span>
+</pre>
+
+<p>(Eventually, this will appear in v3.6.14)</p>
 <h1 id="v361-mirroring-failures"><span class="gray">(v3.6.1+)</span> mirroring failures<a class="headerlink" href="#v361-mirroring-failures" title="Permanent link"></a></h1>
 <p>Since mirror pushes happen asynchronously (i.e, the user who originally pushed
 does not have to wait for the mirrors to be synced), any mirror push failures
