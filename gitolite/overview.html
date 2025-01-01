@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,9 +10,13 @@
         <link rel="shortcut icon" href="img/favicon.ico">
         <title>overview - Gitolite</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/fontawesome.min.css" rel="stylesheet">
+        <link href="css/brands.min.css" rel="stylesheet">
+        <link href="css/solid.min.css" rel="stylesheet">
+        <link href="css/v4-font-face.min.css" rel="stylesheet">
         <link href="css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
         <link href="css/gitolite.css" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script>hljs.highlightAll();</script> 
@@ -23,7 +27,7 @@
             <div class="container">
                 <a class="navbar-brand" href="index.html">Gitolite</a>
                 <!-- Expander button -->
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -31,15 +35,15 @@
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li class="navitem">
+                            <li class="nav-item">
                                 <a href="index.html" class="nav-link">home</a>
                             </li>
-                            <li class="dropdown active">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">what/why</a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="overview.html" class="dropdown-item active">overview</a>
+    <a href="overview.html" class="dropdown-item active" aria-current="page">overview</a>
 </li>
                                     
 <li>
@@ -47,8 +51,8 @@
 </li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">install and setup</a>
                                 <ul class="dropdown-menu">
                                     
 <li>
@@ -72,8 +76,8 @@
 </li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">use</a>
                                 <ul class="dropdown-menu">
                                     
   <li class="dropdown-submenu">
@@ -171,8 +175,8 @@
 </li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">HELP!</a>
                                 <ul class="dropdown-menu">
                                     
 <li>
@@ -202,8 +206,8 @@
 </li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">other docs</a>
                                 <ul class="dropdown-menu">
                                     
 <li>
@@ -285,9 +289,9 @@
                             </li>
                         </ul>
 
-                    <ul class="nav navbar-nav ml-auto">
+                    <ul class="nav navbar-nav ms-md-auto">
                         <li class="nav-item">
-                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
@@ -308,50 +312,50 @@
 
         <div class="container">
             <div class="row">
-                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
     <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
             <span class="fa fa-angle-down"></span>
         </button>
     </div>
 
     
-    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#gitolite-overview" class="nav-link">gitolite overview</a>
+            <li class="nav-item" data-bs-level="1"><a href="#gitolite-overview" class="nav-link">gitolite overview</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#what-is-gitolite" class="nav-link">what is gitolite?</a>
+            <li class="nav-item" data-bs-level="1"><a href="#what-is-gitolite" class="nav-link">what is gitolite?</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#why-might-you-need-it" class="nav-link">why might you need it?</a>
+            <li class="nav-item" data-bs-level="1"><a href="#why-might-you-need-it" class="nav-link">why might you need it?</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#access-control" class="nav-link">access control</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#other-features" class="nav-link">other features</a>
+            <li class="nav-item" data-bs-level="2"><a href="#access-control" class="nav-link">access control</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#alternatives-to-gitolite" class="nav-link">alternatives to gitolite</a>
+            <li class="nav-item" data-bs-level="2"><a href="#other-features" class="nav-link">other features</a>
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-bs-level="2"><a href="#alternatives-to-gitolite" class="nav-link">alternatives to gitolite</a>
+              <ul class="nav flex-column">
               </ul>
             </li>
-            
-            <li class="nav-item" data-level="1"><a href="#how-does-it-work" class="nav-link">how does it work?</a>
-              <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#who-uses-it" class="nav-link">who uses it?</a>
+            <li class="nav-item" data-bs-level="1"><a href="#how-does-it-work" class="nav-link">how does it work?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#who-uses-it" class="nav-link">who uses it?</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -512,6 +516,27 @@ be checked, and gitolite sets up the update hook on the repo to do that.</p>
 to describe your use of it or add a link to your own description of it
 here.  Of course, you can anonymise it as much as you need to.</p>
 </div>
+<p><strong>NOTE</strong>: some of the links below may be outdated/bit-rotted.  As I find new links or someone points me to them I'll post them here with an approximate date.  (I'll keep the old text/links as-is for now).</p>
+<p><strong>Update 2021 July</strong></p>
+<ul>
+<li>
+<p>Operating Systems</p>
+<ul>
+<li>Linux <a href="https://korg.docs.kernel.org/gitolite/index.html">https://korg.docs.kernel.org/gitolite/index.html</a>; they moved to gitolite after kernel.org was compromised via a developer workstation in 2011 <a href="https://lkml.org/lkml/2011/9/23/357">https://lkml.org/lkml/2011/9/23/357</a></li>
+<li>FreeBSD (unable to find a proper link, I only found out when they asked a question on the gitolite mailing list: <a href="https://groups.google.com/g/gitolite/c/6qdyDDBjJ30/m/e0RndHSQAQAJ">https://groups.google.com/g/gitolite/c/6qdyDDBjJ30/m/e0RndHSQAQAJ</a>)</li>
+</ul>
+</li>
+<li>
+<p>Linux distributions:</p>
+<ul>
+<li>Fedora <a href="https://fedoraproject.org/wiki/Package_Source_Control#Authorization">https://fedoraproject.org/wiki/Package_Source_Control#Authorization</a></li>
+<li>KDE Neon <a href="https://community.kde.org/Neon/Git">https://community.kde.org/Neon/Git</a></li>
+<li>Gentoo (can't find a decent link, but <a href="https://wiki.gentoo.org/wiki/User:Robbat2">https://wiki.gentoo.org/wiki/User:Robbat2</a> has made several commits to gitolite over the years, e.g., <a href="https://github.com/gitolite/gitolite/commit/766fd7d46ebb82f9d0134886a3fc5228b4df3936">https://github.com/gitolite/gitolite/commit/766fd7d46ebb82f9d0134886a3fc5228b4df3936</a>)</li>
+<li>Mageia <a href="https://wiki.mageia.org/en/Git_Migration#Git_Authentication">https://wiki.mageia.org/en/Git_Migration#Git_Authentication</a></li>
+</ul>
+</li>
+</ul>
+<p><strong>Older text follows:</strong> (TODO: curate this properly and remove dead links)</p>
 <p>The <strong>Fedora Project</strong> controls access to over 10,000 package management
 repositories accessed by over 1,000 package maintainers <a href="https://lists.fedoraproject.org/pipermail/devel-announce/2010-July/000647.html">using
 gitolite</a>.  This is probably the largest <em>confirmed</em> gitolite
@@ -545,8 +570,8 @@ users as well.</p>
 <p><strong>kernel.org</strong>, the official distribution point for the Linux kernel, is the
 latest (as of 2011-10) high-visibility installation.  According to <a href="https://lkml.org/lkml/2011/9/23/357">this
 email</a> to the lkml, kernel.org decided to use gitolite for access
-controlling their git repos.  Their <a href="https://www.kernel.org/category/faq.html#how-does-kernel-org-provide-its-users-access-to-the-git-trees">FAQ entry</a> describes at a high
-level why they chose gitolite.</p>
+controlling their git repos.  ~~Their <a href="https://www.kernel.org/category/faq.html#how-does-kernel-org-provide-its-users-access-to-the-git-trees">FAQ entry</a> describes at a high
+level why they chose gitolite.~~ (this link no longer has that info; see up above for some newer links).</p>
 <p>This move also prompted the first ever security audit of gitolite by an
 outside party.  Gitolite did great; see <a href="https://groups.google.com/group/gitolite/browse_thread/thread/8dc5242052b16d0f">here</a> for details.  [NOTE: v3
 has not had such an audit yet; if you did one, please let me know what you
@@ -579,8 +604,7 @@ that gitolite benefits as much as they do; possibly more.</p>
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script src="js/jquery-3.6.0.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
         <script>
             var base_url = ".",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
@@ -593,7 +617,7 @@ that gitolite benefits as much as they do; possibly more.</p>
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p>From here you can search these documents. Enter your search terms below.</p>
@@ -613,7 +637,7 @@ that gitolite benefits as much as they do; possibly more.</p>
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <table class="table">

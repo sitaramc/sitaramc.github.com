@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,9 +10,13 @@
         <link rel="shortcut icon" href="img/favicon.ico">
         <title>ssh troubleshooting - Gitolite</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/fontawesome.min.css" rel="stylesheet">
+        <link href="css/brands.min.css" rel="stylesheet">
+        <link href="css/solid.min.css" rel="stylesheet">
+        <link href="css/v4-font-face.min.css" rel="stylesheet">
         <link href="css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
         <link href="css/gitolite.css" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script>hljs.highlightAll();</script> 
@@ -23,7 +27,7 @@
             <div class="container">
                 <a class="navbar-brand" href="index.html">Gitolite</a>
                 <!-- Expander button -->
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -31,11 +35,11 @@
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li class="navitem">
+                            <li class="nav-item">
                                 <a href="index.html" class="nav-link">home</a>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">what/why <b class="caret"></b></a>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">what/why</a>
                                 <ul class="dropdown-menu">
                                     
 <li>
@@ -47,8 +51,8 @@
 </li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">install and setup <b class="caret"></b></a>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">install and setup</a>
                                 <ul class="dropdown-menu">
                                     
 <li>
@@ -72,8 +76,8 @@
 </li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">use <b class="caret"></b></a>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">use</a>
                                 <ul class="dropdown-menu">
                                     
   <li class="dropdown-submenu">
@@ -171,8 +175,8 @@
 </li>
                                 </ul>
                             </li>
-                            <li class="dropdown active">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">HELP! <b class="caret"></b></a>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">HELP!</a>
                                 <ul class="dropdown-menu">
                                     
 <li>
@@ -192,7 +196,7 @@
 </li>
             
 <li>
-    <a href="sts.html" class="dropdown-item active">ssh troubleshooting</a>
+    <a href="sts.html" class="dropdown-item active" aria-current="page">ssh troubleshooting</a>
 </li>
     </ul>
   </li>
@@ -202,8 +206,8 @@
 </li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">other docs <b class="caret"></b></a>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">other docs</a>
                                 <ul class="dropdown-menu">
                                     
 <li>
@@ -285,9 +289,9 @@
                             </li>
                         </ul>
 
-                    <ul class="nav navbar-nav ml-auto">
+                    <ul class="nav navbar-nav ms-md-auto">
                         <li class="nav-item">
-                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
@@ -308,111 +312,111 @@
 
         <div class="container">
             <div class="row">
-                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
     <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
             <span class="fa fa-angle-down"></span>
         </button>
     </div>
 
     
-    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#ssh-troubleshooting-and-tips" class="nav-link">ssh troubleshooting and tips</a>
+            <li class="nav-item" data-bs-level="1"><a href="#ssh-troubleshooting-and-tips" class="nav-link">ssh troubleshooting and tips</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#important-read-this-first" class="nav-link">IMPORTANT -- READ THIS FIRST</a>
+            <li class="nav-item" data-bs-level="1"><a href="#important-read-this-first" class="nav-link">IMPORTANT -- READ THIS FIRST</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#caveats" class="nav-link">caveats</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#naming-conventions-used" class="nav-link">naming conventions used</a>
+            <li class="nav-item" data-bs-level="2"><a href="#caveats" class="nav-link">caveats</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#taking-stock-relevant-files-and-directories" class="nav-link">taking stock -- relevant files and directories</a>
+            <li class="nav-item" data-bs-level="2"><a href="#naming-conventions-used" class="nav-link">naming conventions used</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#normal-gitolite-key-handling" class="nav-link">normal gitolite key handling</a>
+            <li class="nav-item" data-bs-level="2"><a href="#taking-stock-relevant-files-and-directories" class="nav-link">taking stock -- relevant files and directories</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="1"><a href="#common-ssh-problems" class="nav-link">common ssh problems</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="1"><a href="#step-by-step" class="nav-link">step by step</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="1"><a href="#random-tips-tricks-and-notes" class="nav-link">random tips, tricks, and notes</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#giving-shell-access-to-gitolite-users" class="nav-link">giving shell access to gitolite users</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#distinguishing-one-key-from-another" class="nav-link">distinguishing one key from another</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#customising-the-authorized-key-options" class="nav-link">customising the authorized key options</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#simulating-ssh-copy-id" class="nav-link">simulating ssh-copy-id</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#problems-with-using-non-openssh-public-keys" class="nav-link">problems with using non-openssh public keys</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#windows-issues" class="nav-link">windows issues</a>
+            <li class="nav-item" data-bs-level="2"><a href="#normal-gitolite-key-handling" class="nav-link">normal gitolite key handling</a>
               <ul class="nav flex-column">
               </ul>
             </li>
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#appendix-1-ssh-daemon-asks-for-a-password" class="nav-link">appendix 1: ssh daemon asks for a password</a>
+            <li class="nav-item" data-bs-level="1"><a href="#common-ssh-problems" class="nav-link">common ssh problems</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#appendix-2-which-key-is-which-running-sshkeys-lint" class="nav-link">appendix 2: which key is which -- running sshkeys-lint</a>
+            <li class="nav-item" data-bs-level="1"><a href="#step-by-step" class="nav-link">step by step</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#typical-causes" class="nav-link">typical cause(s)</a>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#random-tips-tricks-and-notes" class="nav-link">random tips, tricks, and notes</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#giving-shell-access-to-gitolite-users" class="nav-link">giving shell access to gitolite users</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#distinguishing-one-key-from-another" class="nav-link">distinguishing one key from another</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#customising-the-authorized-key-options" class="nav-link">customising the authorized key options</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#simulating-ssh-copy-id" class="nav-link">simulating ssh-copy-id</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#problems-with-using-non-openssh-public-keys" class="nav-link">problems with using non-openssh public keys</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#windows-issues" class="nav-link">windows issues</a>
               <ul class="nav flex-column">
               </ul>
             </li>
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#appendix-3-ssh-client-may-not-be-offering-the-right-key" class="nav-link">appendix 3: ssh client may not be offering the right key</a>
+            <li class="nav-item" data-bs-level="1"><a href="#appendix-1-ssh-daemon-asks-for-a-password" class="nav-link">appendix 1: ssh daemon asks for a password</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#appendix-4-ssh-host-aliases" class="nav-link">appendix 4: ssh host aliases</a>
+            <li class="nav-item" data-bs-level="1"><a href="#appendix-2-which-key-is-which-running-sshkeys-lint" class="nav-link">appendix 2: which key is which -- running sshkeys-lint</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#more-than-one-keypair" class="nav-link">more than one keypair</a>
+            <li class="nav-item" data-bs-level="2"><a href="#typical-causes" class="nav-link">typical cause(s)</a>
               <ul class="nav flex-column">
               </ul>
             </li>
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#appendix-5-why-bypassing-gitolite-causes-a-problem" class="nav-link">appendix 5: why bypassing gitolite causes a problem</a>
+            <li class="nav-item" data-bs-level="1"><a href="#appendix-3-ssh-client-may-not-be-offering-the-right-key" class="nav-link">appendix 3: ssh client may not be offering the right key</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#appendix-4-ssh-host-aliases" class="nav-link">appendix 4: ssh host aliases</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#more-than-one-keypair" class="nav-link">more than one keypair</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#appendix-5-why-bypassing-gitolite-causes-a-problem" class="nav-link">appendix 5: why bypassing gitolite causes a problem</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -938,8 +942,7 @@ pathname on the server.  (This is by design.  Don't argue...)</p>
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script src="js/jquery-3.6.0.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
         <script>
             var base_url = ".",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
@@ -952,7 +955,7 @@ pathname on the server.  (This is by design.  Don't argue...)</p>
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p>From here you can search these documents. Enter your search terms below.</p>
@@ -972,7 +975,7 @@ pathname on the server.  (This is by design.  Don't argue...)</p>
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <table class="table">
