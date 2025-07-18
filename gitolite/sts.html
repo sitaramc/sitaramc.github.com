@@ -855,6 +855,9 @@ happens.  Due to a quirk in ssh-agent, ssh will now <em>only</em> use one of
 those keys, <em>even if you explicitly ask</em> for some other key to be used.</p>
 <p>In that case, add the key you want using <code>ssh-add ~/.ssh/YourName</code> and try
 the access again.</p>
+<p>(Long overdue update: A better solution is to add <code>IdentitiesOnly yes</code> to
+the host entry in your <code>~/.ssh/config</code> file.  This setting fixes the weird
+quirk described above.)</p>
 </li>
 </ul>
 <h1 id="appendix-4-ssh-host-aliases">appendix 4: ssh host aliases<a class="headerlink" href="#appendix-4-ssh-host-aliases" title="Permanent link"></a></h1>
@@ -870,7 +873,7 @@ to remember.</p>
 <p>Using a "host" para in <code>~/.ssh/config</code> lets you nicely encapsulate all this
 within ssh and give it a short, easy-to-remember, name.  Example:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">host</span> gitolite
+<span class="Type">host</span> <span class="Constant">gitolite</span>
     <span class="Statement">user</span> git
     <span class="Statement">hostname</span> <span class="Constant">a.long.server.name.or.annoying.IP.address</span>
     <span class="Statement">port</span> <span class="Constant">22</span>
@@ -891,13 +894,13 @@ using one keypair, and gitolite-mediated access using another.  Here's how I
 do that, where my "id_rsa" keypair has shell access, and my "sitaram" keypair
 has gitolite access:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">host</span> gitolite
+<span class="Type">host</span> <span class="Constant">gitolite</span>
     <span class="Statement">user</span> git
     <span class="Statement">hostname</span> <span class="Constant">gitolite.mydomain.com</span>
     <span class="Statement">port</span> <span class="Constant">22</span>
     <span class="Statement">identityfile</span> ~/.ssh/sitaram
 
-<span class="Type">host</span> gitolite-sh
+<span class="Type">host</span> <span class="Constant">gitolite-sh</span>
     <span class="Statement">user</span> git
     <span class="Statement">hostname</span> <span class="Constant">gitolite.mydomain.com</span>
     <span class="Statement">port</span> <span class="Constant">22</span>
