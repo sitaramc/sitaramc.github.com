@@ -1,388 +1,2192 @@
-<!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        
-        
-        <link rel="shortcut icon" href="img/favicon.ico">
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="basic-admin.html">
+      
+      
+        <link rel="next" href="conf-2.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
         <title>the "conf" file (part 1) - Gitolite</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/fontawesome.min.css" rel="stylesheet">
-        <link href="css/brands.min.css" rel="stylesheet">
-        <link href="css/solid.min.css" rel="stylesheet">
-        <link href="css/v4-font-face.min.css" rel="stylesheet">
-        <link href="css/base.css" rel="stylesheet">
-        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
-        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
-        <link href="css/gitolite.css" rel="stylesheet">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-        <script>hljs.highlightAll();</script> 
-    </head>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
 
-    <body>
-        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                <a class="navbar-brand" href="index.html">Gitolite</a>
-                <!-- Expander button -->
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Expanded navigation -->
-                <div id="navbar-collapse" class="navbar-collapse collapse">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav">
-                            <li class="nav-item">
-                                <a href="index.html" class="nav-link">home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">what/why</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="overview.html" class="dropdown-item">overview</a>
-</li>
-                                    
-<li>
-    <a href="concepts.html" class="dropdown-item">concepts, conventions, terminology</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">install and setup</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="quick_install.html" class="dropdown-item">(unix/ssh experts) quick install and setup</a>
-</li>
-                                    
-<li>
-    <a href="install.html" class="dropdown-item">normal ssh mode install and setup</a>
-</li>
-                                    
-<li>
-    <a href="fool_proof_setup.html" class="dropdown-item">(if all else fails) fool-proof, step-by-step, install and setup</a>
-</li>
-                                    
-<li>
-    <a href="http.html" class="dropdown-item">HTTP mode install</a>
-</li>
-                                    
-<li>
-    <a href="migr.html" class="dropdown-item">migrating from v2</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">use</a>
-                                <ul class="dropdown-menu">
-                                    
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">basic</a>
-    <ul class="dropdown-menu">
-            
-<li>
-    <a href="basic-admin.html" class="dropdown-item">basic administration</a>
-</li>
-            
-<li>
-    <a href="conf.html" class="dropdown-item active" aria-current="page">the "conf" file (part 1)</a>
-</li>
-            
-<li>
-    <a href="conf-2.html" class="dropdown-item">the "conf" file (part 2)</a>
-</li>
-            
-<li>
-    <a href="rc.html" class="dropdown-item">the "rc" file</a>
-</li>
-            
-<li>
-    <a href="user.html" class="dropdown-item">your users' view</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">advanced</a>
-    <ul class="dropdown-menu">
-            
-<li>
-    <a href="git-config.html" class="dropdown-item">setting git-config values</a>
-</li>
-            
-<li>
-    <a href="options.html" class="dropdown-item">gitolite options</a>
-</li>
-            
-<li>
-    <a href="wild.html" class="dropdown-item">ad hoc user-created ("wild") repos</a>
-</li>
-            
-<li>
-    <a href="templates.html" class="dropdown-item">using templates</a>
-</li>
-            
-<li>
-    <a href="vref.html" class="dropdown-item">virtual refs (part 1)</a>
-</li>
-            
-<li>
-    <a href="vref-2.html" class="dropdown-item">virtual refs (part 2)</a>
-</li>
-            
-<li>
-    <a href="deleg.html" class="dropdown-item">delegation of admin duties</a>
-</li>
-            
-<li>
-    <a href="gitweb-daemon.html" class="dropdown-item">gitweb and git-daemon</a>
-</li>
-            
-<li>
-    <a href="mirroring.html" class="dropdown-item">mirroring</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">customise</a>
-    <ul class="dropdown-menu">
-            
-<li>
-    <a href="non-core.html" class="dropdown-item">core and "non-core" gitolite</a>
-</li>
-            
-<li>
-    <a href="dev-notes.html" class="dropdown-item">writing your own non-core code</a>
-</li>
-            
-<li>
-    <a href="triggers.html" class="dropdown-item">gitolite triggers</a>
-</li>
-            
-<li>
-    <a href="list-non-core.html" class="dropdown-item">list of non-core programs shipped with gitolite</a>
-</li>
-    </ul>
-  </li>
-                                    
-<li>
-    <a href="cookbook.html" class="dropdown-item">(quick! how do I...) the cookbook</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">HELP!</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="emergencies.html" class="dropdown-item">emergency!!</a>
-</li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">ssh</a>
-    <ul class="dropdown-menu">
-            
-<li>
-    <a href="ssh.html" class="dropdown-item">ssh</a>
-</li>
-            
-<li>
-    <a href="glssh.html" class="dropdown-item">how gitolite uses ssh</a>
-</li>
-            
-<li>
-    <a href="sts.html" class="dropdown-item">ssh troubleshooting</a>
-</li>
-    </ul>
-  </li>
-                                    
-<li>
-    <a href="regex.html" class="dropdown-item">regular expressions</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">other docs</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="odds-and-ends.html" class="dropdown-item">miscellaneous features</a>
-</li>
-                                    
-<li>
-    <a href="namespaces.html" class="dropdown-item">using git namespaces</a>
-</li>
-                                    
-<li>
-    <a href="locking.html" class="dropdown-item">locking binary files</a>
-</li>
-                                    
-<li>
-    <a href="testing.html" class="dropdown-item">testing gitolite</a>
-</li>
-                                    
-<li>
-    <a href="package.html" class="dropdown-item">packaging gitolite</a>
-</li>
-                                    
-<li>
-    <a href="gitolite-and-ssh-certs.html" class="dropdown-item">gitolite and ssh certs</a>
-</li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">more about gitolite</a>
-    <ul class="dropdown-menu">
-            
-<li>
-    <a href="files.html" class="dropdown-item">gitolite files & directories</a>
-</li>
-            
-<li>
-    <a href="rc-33.html" class="dropdown-item">the 3.3 format rc file</a>
-</li>
-            
-<li>
-    <a href="perf.html" class="dropdown-item">performance</a>
-</li>
-            
-<li>
-    <a href="internals.html" class="dropdown-item">internals</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">contrib</a>
-    <ul class="dropdown-menu">
-            
-<li>
-    <a href="contrib/ssh-and-http.html" class="dropdown-item">Using both ssh and http</a>
-</li>
-            
-<li>
-    <a href="contrib/putty.html" class="dropdown-item">Putty and Msysgit</a>
-</li>
-            
-<li>
-    <a href="contrib/sskm.html" class="dropdown-item">Self-service key management</a>
-</li>
-            
-<li>
-    <a href="contrib/ukm.html" class="dropdown-item">User key management</a>
-</li>
-            
-<li>
-    <a href="contrib/README-emacs.html" class="dropdown-item">Emacs major mode</a>
-</li>
-    </ul>
-  </li>
-                                    
-<li>
-    <a href="no-way.html" class="dropdown-item">no way!</a>
-</li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                    <ul class="nav navbar-nav ms-md-auto">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </li>
-                            <li class="nav-item">
-                                <a rel="prev" href="basic-admin.html" class="nav-link">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a rel="next" href="conf-2.html" class="nav-link">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
-            <span class="fa fa-angle-down"></span>
-        </button>
-    </div>
 
     
-    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
-        <ul class="nav flex-column">
-            
-            <li class="nav-item" data-bs-level="1"><a href="#the-conf-file-confgitoliteconf" class="nav-link">the "conf" file (conf/gitolite.conf)</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-bs-level="1"><a href="#basic-syntax" class="nav-link">basic syntax</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-bs-level="1"><a href="#include-files" class="nav-link">include files</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-bs-level="1"><a href="#group-definitions" class="nav-link">group definitions</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#special-group-all" class="nav-link">special group @all</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#warnings-on-undefined-groups" class="nav-link">warnings on undefined groups</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#getting-user-group-info-from-ldap" class="nav-link">getting user group info from LDAP</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-bs-level="1"><a href="#access-rules" class="nav-link">access rules</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#what-does-a-rule-look-like" class="nav-link">what does a rule look like?</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#rule-accumulation" class="nav-link">rule accumulation</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-              </ul>
-            </li>
-        </ul>
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="css/gitolite.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-conf-file-confgitoliteconf" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
-</div></div>
-                    <div class="col-md-9" role="main">
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Gitolite" class="md-header__button md-logo" aria-label="Gitolite" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Gitolite
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              the "conf" file (part 1)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Gitolite" class="md-nav__button md-logo" aria-label="Gitolite" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Gitolite
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    what/why
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            what/why
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="concepts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    concepts, conventions, terminology
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    install and setup
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            install and setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="quick_install.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    (unix/ssh experts) quick install and setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    normal ssh mode install and setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="fool_proof_setup.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    (if all else fails) fool-proof, step-by-step, install and setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="http.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    HTTP mode install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="migr.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    migrating from v2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    use
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            use
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    basic
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            basic
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="basic-admin.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    basic administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    the "conf" file (part 1)
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="conf.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    the "conf" file (part 1)
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      basic syntax
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#include-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      include files
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      group definitions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="group definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#special-group-all" class="md-nav__link">
+    <span class="md-ellipsis">
+      special group @all
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#warnings-on-undefined-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      warnings on undefined groups
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-user-group-info-from-ldap" class="md-nav__link">
+    <span class="md-ellipsis">
+      getting user group info from LDAP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#access-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      access rules
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="access rules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-does-a-rule-look-like" class="md-nav__link">
+    <span class="md-ellipsis">
+      what does a rule look like?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="what does a rule look like?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-permission-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      the permission field
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-refex-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      the "refex" field
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#useruser-group-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      user/user group list
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-accumulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      rule accumulation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="rule accumulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#defining-user-and-repo" class="md-nav__link">
+    <span class="md-ellipsis">
+      defining "user" and "repo"
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="conf-2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    the "conf" file (part 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="rc.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    the "rc" file
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="user.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    your users' view
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    advanced
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            advanced
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="git-config.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    setting git-config values
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="options.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    gitolite options
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="wild.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ad hoc user-created ("wild") repos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="templates.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    using templates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vref.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    virtual refs (part 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vref-2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    virtual refs (part 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="deleg.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    delegation of admin duties
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gitweb-daemon.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    gitweb and git-daemon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mirroring.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    mirroring
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    customise
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            customise
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="non-core.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    core and "non-core" gitolite
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="dev-notes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    writing your own non-core code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="triggers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    gitolite triggers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="list-non-core.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    list of non-core programs shipped with gitolite
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="cookbook.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    (quick! how do I...) the cookbook
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    HELP!
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            HELP!
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="emergencies.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    emergency!!
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    ssh
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            ssh
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ssh.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ssh
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="glssh.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    how gitolite uses ssh
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ssh troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="regex.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    regular expressions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    other docs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            other docs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="odds-and-ends.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    miscellaneous features
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="namespaces.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    using git namespaces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="locking.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    locking binary files
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="testing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    testing gitolite
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="package.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    packaging gitolite
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gitolite-and-ssh-certs.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    gitolite and ssh certs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_7" id="__nav_6_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    more about gitolite
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_7">
+            <span class="md-nav__icon md-icon"></span>
+            more about gitolite
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="files.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    gitolite files & directories
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="rc-33.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    the 3.3 format rc file
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="perf.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    performance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="internals.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    internals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_8" id="__nav_6_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    contrib
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_8">
+            <span class="md-nav__icon md-icon"></span>
+            contrib
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contrib/ssh-and-http.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Using both ssh and http
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contrib/putty.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Putty and Msysgit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contrib/sskm.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Self-service key management
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contrib/ukm.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    User key management
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contrib/README-emacs.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Emacs major mode
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="no-way.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    no way!
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      basic syntax
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#include-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      include files
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      group definitions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="group definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#special-group-all" class="md-nav__link">
+    <span class="md-ellipsis">
+      special group @all
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#warnings-on-undefined-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      warnings on undefined groups
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-user-group-info-from-ldap" class="md-nav__link">
+    <span class="md-ellipsis">
+      getting user group info from LDAP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#access-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      access rules
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="access rules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-does-a-rule-look-like" class="md-nav__link">
+    <span class="md-ellipsis">
+      what does a rule look like?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="what does a rule look like?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-permission-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      the permission field
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-refex-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      the "refex" field
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#useruser-group-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      user/user group list
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rule-accumulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      rule accumulation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="rule accumulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#defining-user-and-repo" class="md-nav__link">
+    <span class="md-ellipsis">
+      defining "user" and "repo"
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
 
 <h1 id="the-conf-file-confgitoliteconf">the "conf" file (<code>conf/gitolite.conf</code>)<a class="headerlink" href="#the-conf-file-confgitoliteconf" title="Permanent link"></a></h1>
-<p><center>(part 1)</center></p>
+<center>(part 1)</center>
+
 <hr />
-<p><span class="box-r">You might recall from the <a href="basic-admin">basic
+<p><span class="box-r">You might recall from the <a href="basic-admin.html">basic
 administration</a> page that this file is part of the gitolite-admin
 repo.  You need to clone that repo, make and commit changes to this file, and
 push the commits back.</span></p>
 <p>The <code>conf/gitolite.conf</code> file (often called just "the conf file" for short) is
 one of the two most important files in gitolite.  It specifies repo names and
 access rules, as well as repo options of various kinds and git-config values.</p>
-<p>Pretty much all day-to-day management, except <a href="basic-admin#addremove-users">managing users</a>, happens
+<p>Pretty much all day-to-day management, except <a href="basic-admin.html#addremove-users">managing users</a>, happens
 from this file.</p>
 <p>We'll use the following example to describe it's features.  <span class="gray">(A tip of
 the hat to Teemu Matilainen's gitolite vim-syntax file for the
@@ -401,7 +2205,7 @@ colors.)</span></p>
     <span class="Statement">config</span> <span class="Identifier">hooks.emailprefix</span>    = <span class="Constant">'[%GL_REPO] ' # git-config</span>
 </pre>
 
-<h1 id="basic-syntax">basic syntax<a class="headerlink" href="#basic-syntax" title="Permanent link"></a></h1>
+<h2 id="basic-syntax">basic syntax<a class="headerlink" href="#basic-syntax" title="Permanent link"></a></h2>
 <p>As the example above shows, the syntax is fairly straightforward and simple.</p>
 <ul>
 <li>In general, everything is <strong>space separated</strong>; there are no commas,
@@ -417,12 +2221,12 @@ colors.)</span></p>
 <li>Reponames can contain <code>/</code> characters (this allows you to put your repos in
     a tree-structure for convenience).</li>
 <li>There are no continuation lines by default.  You do not need them; the
-    section on <a href="conf#group-definitions">groups</a> will tell you how you can break up large lists of
+    section on <a href="conf.html#group-definitions">groups</a> will tell you how you can break up large lists of
     names in a group definition into multiple lines. <span class="gray">(But if you <em>must</em>
     have them, you can optionally enable them; look for "continuation-lines"
     in <code>~/.gitolite.rc</code>).</span></li>
 </ul>
-<h1 id="include-files">include files<a class="headerlink" href="#include-files" title="Permanent link"></a></h1>
+<h2 id="include-files">include files<a class="headerlink" href="#include-files" title="Permanent link"></a></h2>
 <p>Gitolite allows you to break up the configuration into multiple files and
 include them in the main file for convenience.  For example:</p>
 <pre><code>include "foo.conf"
@@ -449,11 +2253,11 @@ include them in the main file for convenience.  For example:</p>
 </li>
 </ul>
 <p><font color="gray">Advanced users: <code>subconf</code>, a command that is very closely
-related to <code>include</code>, is documented <a href="deleg#the-subconf-command">here</a>.</font></p>
+related to <code>include</code>, is documented <a href="deleg.html#the-subconf-command">here</a>.</font></p>
 <p><strong>Please note</strong> that whenever you see "the <code>conf/gitolite.conf</code> file" or "the
 conf file" in gitolite documentation, it means the combined text after the
 include processing is done.</p>
-<h1 id="group-definitions">group definitions<a class="headerlink" href="#group-definitions" title="Permanent link"></a></h1>
+<h2 id="group-definitions">group definitions<a class="headerlink" href="#group-definitions" title="Permanent link"></a></h2>
 <p>You can group repos or users for convenience.  The syntax is the same for both
 and does not distinguish; until you <em>use</em> the group name it could really be
 either.</p>
@@ -489,10 +2293,10 @@ immediately (meaning later additions will not appear in the second group):</p>
     <span class="Statement">RW+</span>         =   <span class="Identifier">@developers</span>
 </pre>
 
-<h2 id="special-group-all">special group <code>@all</code><a class="headerlink" href="#special-group-all" title="Permanent link"></a></h2>
+<h3 id="special-group-all">special group <code>@all</code><a class="headerlink" href="#special-group-all" title="Permanent link"></a></h3>
 <p><code>@all</code> is a special group name that is often convenient to use if you really
 mean "all repos" or "all users".</p>
-<h2 id="warnings-on-undefined-groups">warnings on undefined groups<a class="headerlink" href="#warnings-on-undefined-groups" title="Permanent link"></a></h2>
+<h3 id="warnings-on-undefined-groups">warnings on undefined groups<a class="headerlink" href="#warnings-on-undefined-groups" title="Permanent link"></a></h3>
 <p>Gitolite cannot truly catch undefined groups because the conf parser is
 1-pass, and you're allowed to define a group <em>after</em> it is used, like so:</p>
 <pre style="color: #ffffff; background-color: #000000;">
@@ -505,15 +2309,15 @@ mean "all repos" or "all users".</p>
 people tearing their hair out because of a typo, gitolite will warn if a group
 is not defined when it is used.  So if you defined it later, either ignore the
 warning or move the definition up.</p>
-<p>Note that these warnings do NOT appear if you're <a href="conf#getting-user-group-info-from-ldap">getting user group info from
+<p>Note that these warnings do NOT appear if you're <a href="conf.html#getting-user-group-info-from-ldap">getting user group info from
 LDAP</a>.</p>
-<h2 id="getting-user-group-info-from-ldap">getting user group info from LDAP<a class="headerlink" href="#getting-user-group-info-from-ldap" title="Permanent link"></a></h2>
+<h3 id="getting-user-group-info-from-ldap">getting user group info from LDAP<a class="headerlink" href="#getting-user-group-info-from-ldap" title="Permanent link"></a></h3>
 <p>Gitolite's groups are pretty convenient, but some organisations already have
 similar (or sufficient) information in their LDAP store.</p>
 <p>Gitolite can tap into that information, with a little help.  Write a program
 which, given a username, queries your LDAP store and returns a space-separated
 list of groups that the user is a member of.  Then put the full path to this
-program in an <a href="rc">rc</a> variable called <code>GROUPLIST_PGM</code>, like so:</p>
+program in an <a href="rc.html">rc</a> variable called <code>GROUPLIST_PGM</code>, like so:</p>
 <pre><code>GROUPLIST_PGM           =&gt;  '/home/git/bin/ldap-query-groups',
 </code></pre>
 <p>Now you can use those groupnames in access rules in gitolite, because the user
@@ -523,7 +2327,7 @@ added him to in the conf file.</p>
 "why/how did this user get access to this repo at this time?" to resolve
 properly.  Gitolite does not do any logging of the results of the queries
 because for people who don't need it that would be a huge waste.</p>
-<h1 id="access-rules">access rules<a class="headerlink" href="#access-rules" title="Permanent link"></a></h1>
+<h2 id="access-rules">access rules<a class="headerlink" href="#access-rules" title="Permanent link"></a></h2>
 <p><span class="box-r">Some of the pictures are thanks (<em>enormous</em> thanks!) to someone who
 contributed them but does not want to be named (go figure!).  She even
 converted them to ditaa format when I asked; these are not as pretty as what
@@ -540,8 +2344,8 @@ several rules -- some people have thousands! -- in the conf file. This section
 will try and explain how these rules are used to decide if a given operation
 is to be allowed or denied.</p>
 <hr />
-<h2 id="what-does-a-rule-look-like">what does a rule look like?<a class="headerlink" href="#what-does-a-rule-look-like" title="Permanent link"></a></h2>
-<p>You've seen some simple rules so far, for example in the <a href="basic-admin">basic
+<h3 id="what-does-a-rule-look-like">what does a rule look like?<a class="headerlink" href="#what-does-a-rule-look-like" title="Permanent link"></a></h3>
+<p>You've seen some simple rules so far, for example in the <a href="basic-admin.html">basic
 administration</a> page.  Here's a slightly more complex one, just
 for illustration.</p>
 <pre style="color: #ffffff; background-color: #000000;">
@@ -558,12 +2362,12 @@ for illustration.</p>
 <p>A "repo" line names one or more repos, and is followed by one or more rule
 lines. All the rules from then till the next "repo" line apply to the repo(s)
 specified in the repo line -- in this example, the 'foo' and 'bar' repos.  If
-there are no rule, <a href="git-config">config</a>, or <a href="options">option</a> lines before the next "repo"
+there are no rule, <a href="git-config.html">config</a>, or <a href="options.html">option</a> lines before the next "repo"
 line, the repo line is silently ignored.</p>
 <p>Each rule line has a "permission" field, zero or more "refex"es, and one or
 more user or user group name after the equal sign.</p>
 <p><span class="gray">The "repo" line can also have repo groups, as we have seen in the
-section on <a href="conf#group-definitions">groups</a> above.  Also, it can have regular expressions that match
+section on <a href="conf.html#group-definitions">groups</a> above.  Also, it can have regular expressions that match
 multiple repos.</span></p>
 <p>Before describing the various fields more formally, here's a description of
 what this specific rule list is saying:</p>
@@ -587,7 +2391,7 @@ what this specific rule list is saying:</p>
 </li>
 </ul>
 <p>More formally, a rule line has the following fields:</p>
-<h3 id="the-permission-field">the permission field<a class="headerlink" href="#the-permission-field" title="Permanent link"></a></h3>
+<h4 id="the-permission-field">the permission field<a class="headerlink" href="#the-permission-field" title="Permanent link"></a></h4>
 <p>The permission field gives the type of access this rule line permits. The most
 commonly used permissions are:</p>
 <ul>
@@ -598,11 +2402,11 @@ commonly used permissions are:</p>
 <li><code>-</code> (the minus sign), to <strong>deny</strong> access.</li>
 </ul>
 <div class="admonition danger">
-<p>There are also other, less commonly used, <a href="conf-2#appendix-1-different-types-of-write-operations">types of permissions</a>.</p>
+<p>There are also other, less commonly used, <a href="conf-2.html#appendix-1-different-types-of-write-operations">types of permissions</a>.</p>
 </div>
-<h3 id="the-refex-field">the "refex" field<a class="headerlink" href="#the-refex-field" title="Permanent link"></a></h3>
+<h4 id="the-refex-field">the "refex" field<a class="headerlink" href="#the-refex-field" title="Permanent link"></a></h4>
 <p>You cannot write rules for all possible branch and tag names (i.e., refs) that
-users will push.  The only sensible way to do this is to use <a href="regex">regular
+users will push.  The only sensible way to do this is to use <a href="regex.html">regular
 expressions</a> instead.</p>
 <p>A refex is a word I made up to mean "a regex that matches a ref".</p>
 <p>In addition:</p>
@@ -641,18 +2445,18 @@ the end, for example:</p>
 </code></pre>
 </li>
 </ul>
-<p><span class="gray">You can also use <a href="vref">virtual refs</a> to perform extra checks and
+<p><span class="gray">You can also use <a href="vref.html">virtual refs</a> to perform extra checks and
 controls that you can't do with just the normal ref (like refs/heads/master)
 being pushed.  The most common example is restricting pushes by dir/file name,
 but there are lots of other possibilities.</span></p>
-<h3 id="useruser-group-list">user/user group list<a class="headerlink" href="#useruser-group-list" title="Permanent link"></a></h3>
+<h4 id="useruser-group-list">user/user group list<a class="headerlink" href="#useruser-group-list" title="Permanent link"></a></h4>
 <p>Like the repos on the repo line, you can have any number of user names and/or
 user group names on the rule line.  (However, please note that there is no
 concept of regular expressions for user names).</p>
 <p><strong>SECTION SUMMARY</strong>: at this point you know that each rule basically specifies
 a repo, user, permission, and a "refex".</p>
 <hr />
-<h2 id="rule-accumulation">rule accumulation<a class="headerlink" href="#rule-accumulation" title="Permanent link"></a></h2>
+<h3 id="rule-accumulation">rule accumulation<a class="headerlink" href="#rule-accumulation" title="Permanent link"></a></h3>
 <p><em>All</em> the rules for a repo need not be specified in one place.  For example,
 you might see something like this, perhaps at the top or bottom of the conf
 file:</p>
@@ -706,88 +2510,106 @@ conf file</strong>.</p>
 access is being checked</strong>.  (A rule applies to a user if the user's name
 appears in the rule (after the equal sign), or if he is a member of any of the
 group names that appear in the rule.)</p>
-<h3 id="defining-user-and-repo">defining "user" and "repo"<a class="headerlink" href="#defining-user-and-repo" title="Permanent link"></a></h3>
+<h4 id="defining-user-and-repo">defining "user" and "repo"<a class="headerlink" href="#defining-user-and-repo" title="Permanent link"></a></h4>
 <p>To be very specific, when we speak of "user" and "repo" in rules,</p>
 <ul>
-<li>"user" means "user or a <a href="conf#group-definitions">group</a> that he/she is a member of", and</li>
+<li>"user" means "user or a <a href="conf.html#group-definitions">group</a> that he/she is a member of", and</li>
 <li>"repo" means "repo, or a group that it is a member of, or a regex that
     matches it, or a group that contains a regex that matches it".</li>
-</ul></div>
-            </div>
-        </div>
+</ul>
 
-        <footer class="col-md-12">
-            <hr>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
-        </footer>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script>
-            var base_url = ".",
-                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
-        </script>
-        <script src="js/base.js"></script>
-        <script src="search/main.js"></script>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
             </div>
-            <div class="modal-body">
-                <p>From here you can search these documents. Enter your search terms below.</p>
-                <form>
-                    <div class="form-group">
-                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
-    </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="basic-admin.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: basic administration">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
             </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style="width: 20%;">Keys</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="help shortcut"><kbd>?</kbd></td>
-                    <td>Open this help</td>
-                  </tr>
-                  <tr>
-                    <td class="next shortcut"><kbd>n</kbd></td>
-                    <td>Next page</td>
-                  </tr>
-                  <tr>
-                    <td class="prev shortcut"><kbd>p</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                basic administration
+              </div>
             </div>
-            <div class="modal-footer">
+          </a>
+        
+        
+          
+          <a href="conf-2.html" class="md-footer__link md-footer__link--next" aria-label="Next: the &#34;conf&#34; file (part 2)">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                the "conf" file (part 2)
+              </div>
             </div>
-        </div>
-    </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
 </div>
-
-    </body>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.footer", "search.suggest", "search.highlight"], "search": "assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
 </html>

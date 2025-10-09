@@ -1,429 +1,2353 @@
-<!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        
-        
-        <link rel="shortcut icon" href="img/favicon.ico">
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="glssh.html">
+      
+      
+        <link rel="next" href="regex.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
         <title>ssh troubleshooting - Gitolite</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/fontawesome.min.css" rel="stylesheet">
-        <link href="css/brands.min.css" rel="stylesheet">
-        <link href="css/solid.min.css" rel="stylesheet">
-        <link href="css/v4-font-face.min.css" rel="stylesheet">
-        <link href="css/base.css" rel="stylesheet">
-        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
-        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
-        <link href="css/gitolite.css" rel="stylesheet">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-        <script>hljs.highlightAll();</script> 
-    </head>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
 
-    <body>
-        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                <a class="navbar-brand" href="index.html">Gitolite</a>
-                <!-- Expander button -->
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Expanded navigation -->
-                <div id="navbar-collapse" class="navbar-collapse collapse">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav">
-                            <li class="nav-item">
-                                <a href="index.html" class="nav-link">home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">what/why</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="overview.html" class="dropdown-item">overview</a>
-</li>
-                                    
-<li>
-    <a href="concepts.html" class="dropdown-item">concepts, conventions, terminology</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">install and setup</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="quick_install.html" class="dropdown-item">(unix/ssh experts) quick install and setup</a>
-</li>
-                                    
-<li>
-    <a href="install.html" class="dropdown-item">normal ssh mode install and setup</a>
-</li>
-                                    
-<li>
-    <a href="fool_proof_setup.html" class="dropdown-item">(if all else fails) fool-proof, step-by-step, install and setup</a>
-</li>
-                                    
-<li>
-    <a href="http.html" class="dropdown-item">HTTP mode install</a>
-</li>
-                                    
-<li>
-    <a href="migr.html" class="dropdown-item">migrating from v2</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">use</a>
-                                <ul class="dropdown-menu">
-                                    
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">basic</a>
-    <ul class="dropdown-menu">
-            
-<li>
-    <a href="basic-admin.html" class="dropdown-item">basic administration</a>
-</li>
-            
-<li>
-    <a href="conf.html" class="dropdown-item">the "conf" file (part 1)</a>
-</li>
-            
-<li>
-    <a href="conf-2.html" class="dropdown-item">the "conf" file (part 2)</a>
-</li>
-            
-<li>
-    <a href="rc.html" class="dropdown-item">the "rc" file</a>
-</li>
-            
-<li>
-    <a href="user.html" class="dropdown-item">your users' view</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">advanced</a>
-    <ul class="dropdown-menu">
-            
-<li>
-    <a href="git-config.html" class="dropdown-item">setting git-config values</a>
-</li>
-            
-<li>
-    <a href="options.html" class="dropdown-item">gitolite options</a>
-</li>
-            
-<li>
-    <a href="wild.html" class="dropdown-item">ad hoc user-created ("wild") repos</a>
-</li>
-            
-<li>
-    <a href="templates.html" class="dropdown-item">using templates</a>
-</li>
-            
-<li>
-    <a href="vref.html" class="dropdown-item">virtual refs (part 1)</a>
-</li>
-            
-<li>
-    <a href="vref-2.html" class="dropdown-item">virtual refs (part 2)</a>
-</li>
-            
-<li>
-    <a href="deleg.html" class="dropdown-item">delegation of admin duties</a>
-</li>
-            
-<li>
-    <a href="gitweb-daemon.html" class="dropdown-item">gitweb and git-daemon</a>
-</li>
-            
-<li>
-    <a href="mirroring.html" class="dropdown-item">mirroring</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">customise</a>
-    <ul class="dropdown-menu">
-            
-<li>
-    <a href="non-core.html" class="dropdown-item">core and "non-core" gitolite</a>
-</li>
-            
-<li>
-    <a href="dev-notes.html" class="dropdown-item">writing your own non-core code</a>
-</li>
-            
-<li>
-    <a href="triggers.html" class="dropdown-item">gitolite triggers</a>
-</li>
-            
-<li>
-    <a href="list-non-core.html" class="dropdown-item">list of non-core programs shipped with gitolite</a>
-</li>
-    </ul>
-  </li>
-                                    
-<li>
-    <a href="cookbook.html" class="dropdown-item">(quick! how do I...) the cookbook</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">HELP!</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="emergencies.html" class="dropdown-item">emergency!!</a>
-</li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">ssh</a>
-    <ul class="dropdown-menu">
-            
-<li>
-    <a href="ssh.html" class="dropdown-item">ssh</a>
-</li>
-            
-<li>
-    <a href="glssh.html" class="dropdown-item">how gitolite uses ssh</a>
-</li>
-            
-<li>
-    <a href="sts.html" class="dropdown-item active" aria-current="page">ssh troubleshooting</a>
-</li>
-    </ul>
-  </li>
-                                    
-<li>
-    <a href="regex.html" class="dropdown-item">regular expressions</a>
-</li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">other docs</a>
-                                <ul class="dropdown-menu">
-                                    
-<li>
-    <a href="odds-and-ends.html" class="dropdown-item">miscellaneous features</a>
-</li>
-                                    
-<li>
-    <a href="namespaces.html" class="dropdown-item">using git namespaces</a>
-</li>
-                                    
-<li>
-    <a href="locking.html" class="dropdown-item">locking binary files</a>
-</li>
-                                    
-<li>
-    <a href="testing.html" class="dropdown-item">testing gitolite</a>
-</li>
-                                    
-<li>
-    <a href="package.html" class="dropdown-item">packaging gitolite</a>
-</li>
-                                    
-<li>
-    <a href="gitolite-and-ssh-certs.html" class="dropdown-item">gitolite and ssh certs</a>
-</li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">more about gitolite</a>
-    <ul class="dropdown-menu">
-            
-<li>
-    <a href="files.html" class="dropdown-item">gitolite files & directories</a>
-</li>
-            
-<li>
-    <a href="rc-33.html" class="dropdown-item">the 3.3 format rc file</a>
-</li>
-            
-<li>
-    <a href="perf.html" class="dropdown-item">performance</a>
-</li>
-            
-<li>
-    <a href="internals.html" class="dropdown-item">internals</a>
-</li>
-    </ul>
-  </li>
-                                    
-  <li class="dropdown-submenu">
-    <a href="#" class="dropdown-item">contrib</a>
-    <ul class="dropdown-menu">
-            
-<li>
-    <a href="contrib/ssh-and-http.html" class="dropdown-item">Using both ssh and http</a>
-</li>
-            
-<li>
-    <a href="contrib/putty.html" class="dropdown-item">Putty and Msysgit</a>
-</li>
-            
-<li>
-    <a href="contrib/sskm.html" class="dropdown-item">Self-service key management</a>
-</li>
-            
-<li>
-    <a href="contrib/ukm.html" class="dropdown-item">User key management</a>
-</li>
-            
-<li>
-    <a href="contrib/README-emacs.html" class="dropdown-item">Emacs major mode</a>
-</li>
-    </ul>
-  </li>
-                                    
-<li>
-    <a href="no-way.html" class="dropdown-item">no way!</a>
-</li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                    <ul class="nav navbar-nav ms-md-auto">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </li>
-                            <li class="nav-item">
-                                <a rel="prev" href="glssh.html" class="nav-link">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a rel="next" href="regex.html" class="nav-link">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
-            <span class="fa fa-angle-down"></span>
-        </button>
-    </div>
 
     
-    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
-        <ul class="nav flex-column">
-            
-            <li class="nav-item" data-bs-level="1"><a href="#ssh-troubleshooting-and-tips" class="nav-link">ssh troubleshooting and tips</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-bs-level="1"><a href="#important-read-this-first" class="nav-link">IMPORTANT -- READ THIS FIRST</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#caveats" class="nav-link">caveats</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#naming-conventions-used" class="nav-link">naming conventions used</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#taking-stock-relevant-files-and-directories" class="nav-link">taking stock -- relevant files and directories</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#normal-gitolite-key-handling" class="nav-link">normal gitolite key handling</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-bs-level="1"><a href="#common-ssh-problems" class="nav-link">common ssh problems</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-bs-level="1"><a href="#step-by-step" class="nav-link">step by step</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-bs-level="1"><a href="#random-tips-tricks-and-notes" class="nav-link">random tips, tricks, and notes</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#giving-shell-access-to-gitolite-users" class="nav-link">giving shell access to gitolite users</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#distinguishing-one-key-from-another" class="nav-link">distinguishing one key from another</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#customising-the-authorized-key-options" class="nav-link">customising the authorized key options</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#simulating-ssh-copy-id" class="nav-link">simulating ssh-copy-id</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#problems-with-using-non-openssh-public-keys" class="nav-link">problems with using non-openssh public keys</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#windows-issues" class="nav-link">windows issues</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-bs-level="1"><a href="#appendix-1-ssh-daemon-asks-for-a-password" class="nav-link">appendix 1: ssh daemon asks for a password</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-bs-level="1"><a href="#appendix-2-which-key-is-which-running-sshkeys-lint" class="nav-link">appendix 2: which key is which -- running sshkeys-lint</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#typical-causes" class="nav-link">typical cause(s)</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-bs-level="1"><a href="#appendix-3-ssh-client-may-not-be-offering-the-right-key" class="nav-link">appendix 3: ssh client may not be offering the right key</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-bs-level="1"><a href="#appendix-4-ssh-host-aliases" class="nav-link">appendix 4: ssh host aliases</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#more-than-one-keypair" class="nav-link">more than one keypair</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-bs-level="1"><a href="#appendix-5-why-bypassing-gitolite-causes-a-problem" class="nav-link">appendix 5: why bypassing gitolite causes a problem</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-        </ul>
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="css/gitolite.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ssh-troubleshooting-and-tips" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
-</div></div>
-                    <div class="col-md-9" role="main">
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Gitolite" class="md-header__button md-logo" aria-label="Gitolite" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Gitolite
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ssh troubleshooting
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Gitolite" class="md-nav__button md-logo" aria-label="Gitolite" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Gitolite
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    what/why
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            what/why
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="concepts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    concepts, conventions, terminology
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    install and setup
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            install and setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="quick_install.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    (unix/ssh experts) quick install and setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    normal ssh mode install and setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="fool_proof_setup.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    (if all else fails) fool-proof, step-by-step, install and setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="http.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    HTTP mode install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="migr.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    migrating from v2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    use
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            use
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    basic
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            basic
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="basic-admin.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    basic administration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="conf.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    the "conf" file (part 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="conf-2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    the "conf" file (part 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="rc.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    the "rc" file
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="user.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    your users' view
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    advanced
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            advanced
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="git-config.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    setting git-config values
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="options.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    gitolite options
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="wild.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ad hoc user-created ("wild") repos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="templates.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    using templates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vref.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    virtual refs (part 1)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vref-2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    virtual refs (part 2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="deleg.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    delegation of admin duties
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gitweb-daemon.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    gitweb and git-daemon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mirroring.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    mirroring
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    customise
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            customise
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="non-core.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    core and "non-core" gitolite
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="dev-notes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    writing your own non-core code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="triggers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    gitolite triggers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="list-non-core.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    list of non-core programs shipped with gitolite
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="cookbook.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    (quick! how do I...) the cookbook
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    HELP!
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            HELP!
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="emergencies.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    emergency!!
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    ssh
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            ssh
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ssh.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ssh
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="glssh.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    how gitolite uses ssh
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    ssh troubleshooting
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="sts.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    ssh troubleshooting
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#important-read-this-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      IMPORTANT -- READ THIS FIRST
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IMPORTANT -- READ THIS FIRST">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caveats" class="md-nav__link">
+    <span class="md-ellipsis">
+      caveats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#naming-conventions-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      naming conventions used
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#taking-stock-relevant-files-and-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      taking stock -- relevant files and directories
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normal-gitolite-key-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      normal gitolite key handling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-ssh-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      common ssh problems
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      step by step
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#random-tips-tricks-and-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      random tips, tricks, and notes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="random tips, tricks, and notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#giving-shell-access-to-gitolite-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      giving shell access to gitolite users
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="giving shell access to gitolite users">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-shell_users_list" class="md-nav__link">
+    <span class="md-ellipsis">
+      the SHELL_USERS_LIST
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distinguishing-one-key-from-another" class="md-nav__link">
+    <span class="md-ellipsis">
+      distinguishing one key from another
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customising-the-authorized-key-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      customising the authorized key options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simulating-ssh-copy-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      simulating ssh-copy-id
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problems-with-using-non-openssh-public-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      problems with using non-openssh public keys
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      windows issues
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-1-ssh-daemon-asks-for-a-password" class="md-nav__link">
+    <span class="md-ellipsis">
+      appendix 1: ssh daemon asks for a password
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-2-which-key-is-which-running-sshkeys-lint" class="md-nav__link">
+    <span class="md-ellipsis">
+      appendix 2: which key is which -- running sshkeys-lint
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="appendix 2: which key is which -- running sshkeys-lint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#typical-causes" class="md-nav__link">
+    <span class="md-ellipsis">
+      typical cause(s)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-3-ssh-client-may-not-be-offering-the-right-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      appendix 3: ssh client may not be offering the right key
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-4-ssh-host-aliases" class="md-nav__link">
+    <span class="md-ellipsis">
+      appendix 4: ssh host aliases
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="appendix 4: ssh host aliases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#more-than-one-keypair" class="md-nav__link">
+    <span class="md-ellipsis">
+      more than one keypair
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-5-why-bypassing-gitolite-causes-a-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      appendix 5: why bypassing gitolite causes a problem
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="regex.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    regular expressions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    other docs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            other docs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="odds-and-ends.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    miscellaneous features
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="namespaces.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    using git namespaces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="locking.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    locking binary files
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="testing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    testing gitolite
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="package.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    packaging gitolite
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gitolite-and-ssh-certs.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    gitolite and ssh certs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_7" id="__nav_6_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    more about gitolite
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_7">
+            <span class="md-nav__icon md-icon"></span>
+            more about gitolite
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="files.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    gitolite files & directories
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="rc-33.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    the 3.3 format rc file
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="perf.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    performance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="internals.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    internals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_8" id="__nav_6_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    contrib
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_8">
+            <span class="md-nav__icon md-icon"></span>
+            contrib
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contrib/ssh-and-http.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Using both ssh and http
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contrib/putty.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Putty and Msysgit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contrib/sskm.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Self-service key management
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contrib/ukm.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    User key management
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contrib/README-emacs.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Emacs major mode
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="no-way.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    no way!
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#important-read-this-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      IMPORTANT -- READ THIS FIRST
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IMPORTANT -- READ THIS FIRST">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caveats" class="md-nav__link">
+    <span class="md-ellipsis">
+      caveats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#naming-conventions-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      naming conventions used
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#taking-stock-relevant-files-and-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      taking stock -- relevant files and directories
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normal-gitolite-key-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      normal gitolite key handling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-ssh-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      common ssh problems
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      step by step
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#random-tips-tricks-and-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      random tips, tricks, and notes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="random tips, tricks, and notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#giving-shell-access-to-gitolite-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      giving shell access to gitolite users
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="giving shell access to gitolite users">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-shell_users_list" class="md-nav__link">
+    <span class="md-ellipsis">
+      the SHELL_USERS_LIST
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distinguishing-one-key-from-another" class="md-nav__link">
+    <span class="md-ellipsis">
+      distinguishing one key from another
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customising-the-authorized-key-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      customising the authorized key options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simulating-ssh-copy-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      simulating ssh-copy-id
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problems-with-using-non-openssh-public-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      problems with using non-openssh public keys
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      windows issues
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-1-ssh-daemon-asks-for-a-password" class="md-nav__link">
+    <span class="md-ellipsis">
+      appendix 1: ssh daemon asks for a password
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-2-which-key-is-which-running-sshkeys-lint" class="md-nav__link">
+    <span class="md-ellipsis">
+      appendix 2: which key is which -- running sshkeys-lint
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="appendix 2: which key is which -- running sshkeys-lint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#typical-causes" class="md-nav__link">
+    <span class="md-ellipsis">
+      typical cause(s)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-3-ssh-client-may-not-be-offering-the-right-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      appendix 3: ssh client may not be offering the right key
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-4-ssh-host-aliases" class="md-nav__link">
+    <span class="md-ellipsis">
+      appendix 4: ssh host aliases
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="appendix 4: ssh host aliases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#more-than-one-keypair" class="md-nav__link">
+    <span class="md-ellipsis">
+      more than one keypair
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-5-why-bypassing-gitolite-causes-a-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      appendix 5: why bypassing gitolite causes a problem
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
 
 <h1 id="ssh-troubleshooting-and-tips">ssh troubleshooting and tips<a class="headerlink" href="#ssh-troubleshooting-and-tips" title="Permanent link"></a></h1>
 <hr />
@@ -433,12 +2357,12 @@ expert at ssh</strong>.</p>
 <p>This page should help you troubleshoot ssh-related problems in installing and
 accessing gitolite.  It also has a section of random ssh-related tips and
 tricks that gitolite can do.</p>
-<h1 id="important-read-this-first">IMPORTANT -- READ THIS FIRST<a class="headerlink" href="#important-read-this-first" title="Permanent link"></a></h1>
-<h2 id="caveats">caveats<a class="headerlink" href="#caveats" title="Permanent link"></a></h2>
+<h2 id="important-read-this-first">IMPORTANT -- READ THIS FIRST<a class="headerlink" href="#important-read-this-first" title="Permanent link"></a></h2>
+<h3 id="caveats">caveats<a class="headerlink" href="#caveats" title="Permanent link"></a></h3>
 <ul>
 <li>
 <p>Before reading this page, it is <strong>mandatory</strong> to read and <strong>completely
-    understand</strong> <a href="glssh">this</a>, which is a very detailed look at how gitolite
+    understand</strong> <a href="glssh.html">this</a>, which is a very detailed look at how gitolite
     uses ssh's features on the server side.  Don't assume you know all that;
     if you did, you wouldn't be needing <em>this</em> page either!</p>
 </li>
@@ -453,10 +2377,10 @@ tricks that gitolite can do.</p>
 <p>Please note that authentication is not really gitolite's job at all.  I'd
     rather spend time on actual gitolite features, code, and documentation
     than authentication (i.e., ssh, in the common case).</p>
-<p>Surprised?  <a href="concepts#authentication-and-authorisation">This</a> might help explain better.</p>
+<p>Surprised?  <a href="concepts.html#authentication-and-authorisation">This</a> might help explain better.</p>
 </li>
 </ul>
-<h2 id="naming-conventions-used">naming conventions used<a class="headerlink" href="#naming-conventions-used" title="Permanent link"></a></h2>
+<h3 id="naming-conventions-used">naming conventions used<a class="headerlink" href="#naming-conventions-used" title="Permanent link"></a></h3>
 <ul>
 <li>
 <p>Your workstation is the <strong>client</strong>.  Your userid on the client does not
@@ -468,7 +2392,7 @@ tricks that gitolite can do.</p>
     "gitolite", however we will use "git" in this page.</p>
 </li>
 </ul>
-<h2 id="taking-stock-relevant-files-and-directories">taking stock -- relevant files and directories<a class="headerlink" href="#taking-stock-relevant-files-and-directories" title="Permanent link"></a></h2>
+<h3 id="taking-stock-relevant-files-and-directories">taking stock -- relevant files and directories<a class="headerlink" href="#taking-stock-relevant-files-and-directories" title="Permanent link"></a></h3>
 <ul>
 <li>
 <p>The client has a <code>~/.ssh</code> containing a few keypairs.  It may also have a
@@ -490,7 +2414,7 @@ tricks that gitolite can do.</p>
     <code>*.pub</code> files.</p>
 </li>
 </ul>
-<h2 id="normal-gitolite-key-handling">normal gitolite key handling<a class="headerlink" href="#normal-gitolite-key-handling" title="Permanent link"></a></h2>
+<h3 id="normal-gitolite-key-handling">normal gitolite key handling<a class="headerlink" href="#normal-gitolite-key-handling" title="Permanent link"></a></h3>
 <p>Here's how normal gitolite key handling works:</p>
 <ul>
 <li>
@@ -520,13 +2444,13 @@ between gitolite's "marker" lines (<code># gitolite start</code> and <code># git
 </ul>
 </li>
 </ul>
-<h1 id="common-ssh-problems">common ssh problems<a class="headerlink" href="#common-ssh-problems" title="Permanent link"></a></h1>
+<h2 id="common-ssh-problems">common ssh problems<a class="headerlink" href="#common-ssh-problems" title="Permanent link"></a></h2>
 <p>Since I'm pretty sure at least some of you didn't bother to read the
 "IMPORTANT: PLEASE READ FIRST" section above, let me take a minute to point
 you there again.  Especially the first bullet.</p>
 <p>Done?  OK, read on...</p>
 <p>The following problem(s) indicate that pubkey access is not working at all, so
-you should start with <a href="sts#appendix-1-ssh-daemon-asks-for-a-password">appendix 1</a>.  If that doesn't fix the problem, continue
+you should start with <a href="sts.html#appendix-1-ssh-daemon-asks-for-a-password">appendix 1</a>.  If that doesn't fix the problem, continue
 with the other appendices in sequence.</p>
 <ul>
 <li>Running any git clone/fetch/ls-remote or just <code>ssh git@server info</code> asks
@@ -534,8 +2458,8 @@ with the other appendices in sequence.</p>
     disconnects without doing anything).</li>
 </ul>
 <p>The following problem(s) indicate that your pubkey is bypassing gitolite and
-going straight to a shell.  You should start with <a href="sts#appendix-2-which-key-is-which-running-sshkeys-lint">appendix 2</a>
-and continue with the rest in sequence.  <a href="sts#appendix-5-why-bypassing-gitolite-causes-a-problem">Appendix 5</a> has some
+going straight to a shell.  You should start with <a href="sts.html#appendix-2-which-key-is-which-running-sshkeys-lint">appendix 2</a>
+and continue with the rest in sequence.  <a href="sts.html#appendix-5-why-bypassing-gitolite-causes-a-problem">Appendix 5</a> has some
 background info.</p>
 <ul>
 <li>
@@ -563,7 +2487,7 @@ background info.</p>
     you are sure 'reponame' exists, you haven't mis-spelled it, etc.</p>
 </li>
 </ul>
-<h1 id="step-by-step">step by step<a class="headerlink" href="#step-by-step" title="Permanent link"></a></h1>
+<h2 id="step-by-step">step by step<a class="headerlink" href="#step-by-step" title="Permanent link"></a></h2>
 <p>Since I'm pretty sure at least some of you didn't bother to read the
 "IMPORTANT: PLEASE READ FIRST" section above, let me take a minute to point
 you there again.  Especially the first bullet.</p>
@@ -573,23 +2497,23 @@ you there again.  Especially the first bullet.</p>
 <p>Make sure the server's overall setup even <em>allows</em> pubkey based login.
     I.e., check that git fetch/clone/ls-remote commands or a plain
     <code>ssh git@server info</code> do NOT ask for a password.  If you do get asked for
-    a password, see <a href="sts#appendix-1-ssh-daemon-asks-for-a-password">appendix 1</a>.</p>
+    a password, see <a href="sts.html#appendix-1-ssh-daemon-asks-for-a-password">appendix 1</a>.</p>
 </li>
 <li>
 <p>Match client-side pubkeys (<code>~/.ssh/*.pub</code>) with the server's authkeys
     file.  To do this, run <code>sshkeys-lint</code>, which tells you in detail what key
-    has what access.  See <a href="sts#appendix-2-which-key-is-which-running-sshkeys-lint">appendix 2</a>.</p>
+    has what access.  See <a href="sts.html#appendix-2-which-key-is-which-running-sshkeys-lint">appendix 2</a>.</p>
 </li>
 <li>
 <p>At this point, we know that we have the right key, and that if sshd
     receives that key, things will work.  But we're not done yet.  We still
     need to make sure that this specific key is being offered/sent by the
-    client, instead of the default key.  See <a href="sts#appendix-3-ssh-client-may-not-be-offering-the-right-key">appendix 3</a> and
-    <a href="sts#appendix-4-ssh-host-aliases">appendix 4</a>.</p>
+    client, instead of the default key.  See <a href="sts.html#appendix-3-ssh-client-may-not-be-offering-the-right-key">appendix 3</a> and
+    <a href="sts.html#appendix-4-ssh-host-aliases">appendix 4</a>.</p>
 </li>
 </ul>
-<h1 id="random-tips-tricks-and-notes">random tips, tricks, and notes<a class="headerlink" href="#random-tips-tricks-and-notes" title="Permanent link"></a></h1>
-<h2 id="giving-shell-access-to-gitolite-users">giving shell access to gitolite users<a class="headerlink" href="#giving-shell-access-to-gitolite-users" title="Permanent link"></a></h2>
+<h2 id="random-tips-tricks-and-notes">random tips, tricks, and notes<a class="headerlink" href="#random-tips-tricks-and-notes" title="Permanent link"></a></h2>
+<h3 id="giving-shell-access-to-gitolite-users">giving shell access to gitolite users<a class="headerlink" href="#giving-shell-access-to-gitolite-users" title="Permanent link"></a></h3>
 <p>Thanks to an idea from Jesse Keating, a single key can allow both gitolite
 access <em>and</em> shell access.</p>
 <p><span class="gray">(v3.6.1+)</span> There are two ways to do this, both require uncommenting
@@ -607,7 +2531,7 @@ example:</p>
 that needs to be interpolated into the value).</p>
 <p>Then run <code>gitolite compile; gitolite trigger POST_COMPILE</code> or push a dummy
 change to the admin repo.</p>
-<h3 id="the-shell_users_list">the SHELL_USERS_LIST<a class="headerlink" href="#the-shell_users_list" title="Permanent link"></a></h3>
+<h4 id="the-shell_users_list">the SHELL_USERS_LIST<a class="headerlink" href="#the-shell_users_list" title="Permanent link"></a></h4>
 <p>If you're using gitolite v3.6 or below, it's slightly different.  You have to
 enable the trigger by uncommenting the 'Shell' line in the ENABLE list, but
 you cannot list the users directly on the 'Shell' line in the rc file, nor can
@@ -621,8 +2545,8 @@ change to the admin repo.</p>
 <p><strong>NOTE</strong>: to maintain backward compatibility, this method will continue to
 work in 3.6.*, but when 3.7 is released (whenever that may be), it will not
 work, and you will have to use the new syntax described above.</p>
-<h2 id="distinguishing-one-key-from-another">distinguishing one key from another<a class="headerlink" href="#distinguishing-one-key-from-another" title="Permanent link"></a></h2>
-<p>Since a user can have <a href="basic-admin#multiple-keys-per-user">more than one key</a>, it is sometimes useful
+<h3 id="distinguishing-one-key-from-another">distinguishing one key from another<a class="headerlink" href="#distinguishing-one-key-from-another" title="Permanent link"></a></h3>
+<p>Since a user can have <a href="basic-admin.html#multiple-keys-per-user">more than one key</a>, it is sometimes useful
 to distinguish one key from another.  Sshd does not tell you even the
 fingerprint of the key that finally matched, so normally all you have is the
 <code>GL_USER</code> env var.</p>
@@ -642,7 +2566,7 @@ of the authkeys file.  That is, instead of this:</p>
 <p>You can then write an INPUT trigger to do whatever you need with the file
 name, which is in <code>$ARGV[1]</code> (the second argument).  The actual file is
 available at <code>$ENV{GL_ADMIN_BASE}/$ARGV[1]</code> if you need its contents.</p>
-<h2 id="customising-the-authorized-key-options">customising the authorized key options<a class="headerlink" href="#customising-the-authorized-key-options" title="Permanent link"></a></h2>
+<h3 id="customising-the-authorized-key-options">customising the authorized key options<a class="headerlink" href="#customising-the-authorized-key-options" title="Permanent link"></a></h3>
 <p>By default, the options used in the <code>authorized_keys</code> file, to restrict remote
 users, are:</p>
 <pre><code>no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty
@@ -660,7 +2584,7 @@ AUTH_OPTIONS =&gt; "...your option list...",
 addition</em> to it.  You must include all the options you need, even those
 that are in the default list, if you use this feature.</p>
 </div>
-<h2 id="simulating-ssh-copy-id">simulating ssh-copy-id<a class="headerlink" href="#simulating-ssh-copy-id" title="Permanent link"></a></h2>
+<h3 id="simulating-ssh-copy-id">simulating ssh-copy-id<a class="headerlink" href="#simulating-ssh-copy-id" title="Permanent link"></a></h3>
 <p>don't have <code>ssh-copy-id</code>?  This is broadly what that command does, if you want
 to replicate it manually.  The input is your pubkey, typically
 <code>~/.ssh/id_rsa.pub</code> from your client/workstation.</p>
@@ -685,7 +2609,7 @@ to replicate it manually.  The input is your pubkey, typically
 typically) also must be <code>go-w</code>, but that needs root.  And typically
 they're already set that way anyway.  (Or if they're not, you've got
 bigger problems than gitolite install not working!)]</p>
-<h2 id="problems-with-using-non-openssh-public-keys">problems with using non-openssh public keys<a class="headerlink" href="#problems-with-using-non-openssh-public-keys" title="Permanent link"></a></h2>
+<h3 id="problems-with-using-non-openssh-public-keys">problems with using non-openssh public keys<a class="headerlink" href="#problems-with-using-non-openssh-public-keys" title="Permanent link"></a></h3>
 <p>Gitolite accepts public keys only in openssh format.  Trying to use an "ssh2"
 key (used by proprietary SSH software) will not be a happy experience.
 src/triggers/post-compile/ssh-authkeys can be made to detect non-openssh
@@ -695,15 +2619,15 @@ be done with it, is:</p>
 <pre><code>ssh-keygen -i -f /tmp/ssh2/YourName.pub &gt; /tmp/openssh/YourName.pub
 </code></pre>
 <p>then use the resulting pubkey as you normally would in gitolite.</p>
-<h2 id="windows-issues">windows issues<a class="headerlink" href="#windows-issues" title="Permanent link"></a></h2>
+<h3 id="windows-issues">windows issues<a class="headerlink" href="#windows-issues" title="Permanent link"></a></h3>
 <p>On windows, I have only used msysgit, and the openssh that comes with it.
 Over time, I have grown to distrust putty/plink due to the number of people
 who seem to have trouble when those beasts are involved (I myself have never
 used them for any kind of git access).  If you have unusual ssh problems that
 just don't seem to have any explanation, try removing all traces of
 putty/plink, including environment variables, etc., and then try again.</p>
-<p>Thankfully, someone contributed <a href="contrib/putty">this</a>.</p>
-<h1 id="appendix-1-ssh-daemon-asks-for-a-password">appendix 1: ssh daemon asks for a password<a class="headerlink" href="#appendix-1-ssh-daemon-asks-for-a-password" title="Permanent link"></a></h1>
+<p>Thankfully, someone contributed <a href="contrib/putty.html">this</a>.</p>
+<h2 id="appendix-1-ssh-daemon-asks-for-a-password">appendix 1: ssh daemon asks for a password<a class="headerlink" href="#appendix-1-ssh-daemon-asks-for-a-password" title="Permanent link"></a></h2>
 <blockquote>
 <p><strong>NOTE</strong>: This section should be useful to anyone trying to get
   password-less access working.  It is not necessarily specific to gitolite,
@@ -786,7 +2710,7 @@ chmod -R go-rwx .ssh
     to login, to see if they tell you what is the problem.</p>
 </li>
 </ul>
-<h1 id="appendix-2-which-key-is-which-running-sshkeys-lint">appendix 2: which key is which -- running sshkeys-lint<a class="headerlink" href="#appendix-2-which-key-is-which-running-sshkeys-lint" title="Permanent link"></a></h1>
+<h2 id="appendix-2-which-key-is-which-running-sshkeys-lint">appendix 2: which key is which -- running sshkeys-lint<a class="headerlink" href="#appendix-2-which-key-is-which-running-sshkeys-lint" title="Permanent link"></a></h2>
 <p>The sshkeys-lint program can be run on the server or the client.  Run it with
 '-h' to get a help message.</p>
 <p>On the server you can run <code>gitolite sshkeys-lint</code> and it will tell you, for
@@ -823,7 +2747,7 @@ need.  Be careful:</p>
     and re-add identities for it to pick up the renamed ones correctly.</p>
 </li>
 </ul>
-<h2 id="typical-causes">typical cause(s)<a class="headerlink" href="#typical-causes" title="Permanent link"></a></h2>
+<h3 id="typical-causes">typical cause(s)<a class="headerlink" href="#typical-causes" title="Permanent link"></a></h3>
 <p>The admin often has passwordless shell access to <code>git@server</code> already, and
 then used that same key to get access to gitolite (i.e., copied that same
 pubkey as YourName.pub and ran <code>gitolite setup</code> on it).</p>
@@ -835,7 +2759,7 @@ best way to do this is to create a new keypair, copy the pubkey to the server
 as YourName.pub, then run <code>gitolite setup -pk YourName.pub</code> on the server.
 Remember to adjust your agent identities using ssh-add -D and ssh-add if
 you're using ssh-agent, otherwise these new keys may not work.</p>
-<h1 id="appendix-3-ssh-client-may-not-be-offering-the-right-key">appendix 3: ssh client may not be offering the right key<a class="headerlink" href="#appendix-3-ssh-client-may-not-be-offering-the-right-key" title="Permanent link"></a></h1>
+<h2 id="appendix-3-ssh-client-may-not-be-offering-the-right-key">appendix 3: ssh client may not be offering the right key<a class="headerlink" href="#appendix-3-ssh-client-may-not-be-offering-the-right-key" title="Permanent link"></a></h2>
 <ul>
 <li>
 <p>Make sure the right private key is being offered.  Run ssh in very
@@ -844,7 +2768,7 @@ you're using ssh-agent, otherwise these new keys may not work.</p>
 </code></pre>
 <p>If some keys <em>are</em> being offered, but not the key that was supposed to be
 used, you may be using ssh-agent (next bullet).  You may also need to
-create some host aliases in <code>~/.ssh/config</code> (<a href="sts#appendix-4-ssh-host-aliases">appendix 4</a>).</p>
+create some host aliases in <code>~/.ssh/config</code> (<a href="sts.html#appendix-4-ssh-host-aliases">appendix 4</a>).</p>
 </li>
 <li>
 <p>(ssh-agent issues) If <code>ssh-add -l</code> responds with either "The agent has no
@@ -860,7 +2784,7 @@ the host entry in your <code>~/.ssh/config</code> file.  This setting fixes the 
 quirk described above.)</p>
 </li>
 </ul>
-<h1 id="appendix-4-ssh-host-aliases">appendix 4: ssh host aliases<a class="headerlink" href="#appendix-4-ssh-host-aliases" title="Permanent link"></a></h1>
+<h2 id="appendix-4-ssh-host-aliases">appendix 4: ssh host aliases<a class="headerlink" href="#appendix-4-ssh-host-aliases" title="Permanent link"></a></h2>
 <p>(or "making git use the right options for ssh")</p>
 <p>The ssh command has several options for non-default items to be specified.
 Two common examples are <code>-p</code> for the port number if it is not 22, and <code>-i</code> for
@@ -873,7 +2797,7 @@ to remember.</p>
 <p>Using a "host" para in <code>~/.ssh/config</code> lets you nicely encapsulate all this
 within ssh and give it a short, easy-to-remember, name.  Example:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">host</span> <span class="Constant">gitolite</span>
+<span class="Type">host</span> gitolite
     <span class="Statement">user</span> git
     <span class="Statement">hostname</span> <span class="Constant">a.long.server.name.or.annoying.IP.address</span>
     <span class="Statement">port</span> <span class="Constant">22</span>
@@ -885,7 +2809,7 @@ defined here) and ssh will infer all those details defined under it -- just
 say <code>ssh gitolite</code> and <code>git clone gitolite:reponame</code> and things will work.</p>
 <p>(By the way, the 'port' and 'identityfile' lines are needed only if you have
 non-default values, although I put them in anyway just to be complete).</p>
-<h2 id="more-than-one-keypair">more than one keypair<a class="headerlink" href="#more-than-one-keypair" title="Permanent link"></a></h2>
+<h3 id="more-than-one-keypair">more than one keypair<a class="headerlink" href="#more-than-one-keypair" title="Permanent link"></a></h3>
 <p>If you have <em>more than one</em> pubkey with access to the <em>same</em> server, you
 <strong>must</strong> use this method to make git pick up the right key.  There is no other
 way to do this, as far as I know.</p>
@@ -894,13 +2818,13 @@ using one keypair, and gitolite-mediated access using another.  Here's how I
 do that, where my "id_rsa" keypair has shell access, and my "sitaram" keypair
 has gitolite access:</p>
 <pre style="color: #ffffff; background-color: #000000;">
-<span class="Type">host</span> <span class="Constant">gitolite</span>
+<span class="Type">host</span> gitolite
     <span class="Statement">user</span> git
     <span class="Statement">hostname</span> <span class="Constant">gitolite.mydomain.com</span>
     <span class="Statement">port</span> <span class="Constant">22</span>
     <span class="Statement">identityfile</span> ~/.ssh/sitaram
 
-<span class="Type">host</span> <span class="Constant">gitolite-sh</span>
+<span class="Type">host</span> gitolite-sh
     <span class="Statement">user</span> git
     <span class="Statement">hostname</span> <span class="Constant">gitolite.mydomain.com</span>
     <span class="Statement">port</span> <span class="Constant">22</span>
@@ -913,7 +2837,7 @@ commands (like "ssh gitolite info").</p>
 <p>Just to be clear, please note that this assumes the authorized keys file on
 the gitolite hosting user has my "id_rsa.pub" line, <strong>without</strong> the gitolite
 related forced command and options.</p>
-<h1 id="appendix-5-why-bypassing-gitolite-causes-a-problem">appendix 5: why bypassing gitolite causes a problem<a class="headerlink" href="#appendix-5-why-bypassing-gitolite-causes-a-problem" title="Permanent link"></a></h1>
+<h2 id="appendix-5-why-bypassing-gitolite-causes-a-problem">appendix 5: why bypassing gitolite causes a problem<a class="headerlink" href="#appendix-5-why-bypassing-gitolite-causes-a-problem" title="Permanent link"></a></h2>
 <p>When you bypass gitolite, you end up running your normal shell instead of the
 special gitolite entry point script <code>gitolite-shell</code>.</p>
 <p>This means commands (like 'info') are interpreted by the shell instead of
@@ -937,82 +2861,100 @@ pathname on the server.  (This is by design.  Don't argue...)</p>
     gitolite's <strong>update hook</strong> kicks in, and fails to run because some of the
     environment variables it is expecting are not present.</p>
 </li>
-</ul></div>
-            </div>
-        </div>
+</ul>
 
-        <footer class="col-md-12">
-            <hr>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
-        </footer>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script>
-            var base_url = ".",
-                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
-        </script>
-        <script src="js/base.js"></script>
-        <script src="search/main.js"></script>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
             </div>
-            <div class="modal-body">
-                <p>From here you can search these documents. Enter your search terms below.</p>
-                <form>
-                    <div class="form-group">
-                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
-    </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="glssh.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: how gitolite uses ssh">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
             </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style="width: 20%;">Keys</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="help shortcut"><kbd>?</kbd></td>
-                    <td>Open this help</td>
-                  </tr>
-                  <tr>
-                    <td class="next shortcut"><kbd>n</kbd></td>
-                    <td>Next page</td>
-                  </tr>
-                  <tr>
-                    <td class="prev shortcut"><kbd>p</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                how gitolite uses ssh
+              </div>
             </div>
-            <div class="modal-footer">
+          </a>
+        
+        
+          
+          <a href="regex.html" class="md-footer__link md-footer__link--next" aria-label="Next: regular expressions">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                regular expressions
+              </div>
             </div>
-        </div>
-    </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
 </div>
-
-    </body>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.footer", "search.suggest", "search.highlight"], "search": "assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
 </html>
