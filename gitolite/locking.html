@@ -1963,7 +1963,7 @@
 
 
 
-<h1 id="locking-binary-files">locking binary files<a class="headerlink" href="#locking-binary-files" title="Permanent link"></a></h1>
+<h1 id="locking-binary-files">locking binary files<a class="headerlink" href="#locking-binary-files" title="Permanent link">#</a></h1>
 <hr />
 <p>Locking is useful to make sure that binary files (office docs, images, ...)
 don't get into a merge state.  (<font color="gray">If you think it's not a big
@@ -1981,11 +1981,11 @@ merge situations if you make changes in branches.  For best results you should
 actually keep all the binary files in their own branch, separate from the ones
 containing source code.</p>
 <hr />
-<h2 id="problem-description">problem description<a class="headerlink" href="#problem-description" title="Permanent link"></a></h2>
+<h2 id="problem-description">problem description<a class="headerlink" href="#problem-description" title="Permanent link">#</a></h2>
 <p>Our users are alice, bob, and carol.  Our repo is foo.  It has some "odt"
 files in the "doc/" directory.  We want to make sure these odt files never get
 into a "merge" situation.</p>
-<h2 id="adminsetup">admin/setup<a class="headerlink" href="#adminsetup" title="Permanent link"></a></h2>
+<h2 id="adminsetup">admin/setup<a class="headerlink" href="#adminsetup" title="Permanent link">#</a></h2>
 <p>First, someone with shell access to the server must add 'lock' to the ENABLE
 list in the rc file.</p>
 <p>Next, the gitolite.conf file should have something like this:</p>
@@ -1997,7 +1997,7 @@ list in the rc file.</p>
 
 <p>However, see below for the difference between "RW" and "RW+" from the point of
 view of this feature and adjust permissions accordingly.</p>
-<h2 id="user-view">user view<a class="headerlink" href="#user-view" title="Permanent link"></a></h2>
+<h2 id="user-view">user view<a class="headerlink" href="#user-view" title="Permanent link">#</a></h2>
 <p>Here's a summary:</p>
 <ul>
 <li>Any user with "W" permissions to any branch in the repo can "lock" any
@@ -2016,7 +2016,7 @@ view of this feature and adjust permissions accordingly.</p>
 <li>Understand that breaking a lock require additional, (out of band)
     communication.  It is upto the team's policies what that entails.</li>
 </ul>
-<h2 id="detailed-example">detailed example<a class="headerlink" href="#detailed-example" title="Permanent link"></a></h2>
+<h2 id="detailed-example">detailed example<a class="headerlink" href="#detailed-example" title="Permanent link">#</a></h2>
 <p>Alice declares her intent to work on "d1.odt":</p>
 <pre><code>$ git pull
 $ ssh git@host lock -l foo doc/d1.odt

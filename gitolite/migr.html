@@ -2065,7 +2065,7 @@
 
 
 
-<h1 id="migrating-from-gitolite-v2">migrating from gitolite v2<a class="headerlink" href="#migrating-from-gitolite-v2" title="Permanent link"></a></h1>
+<h1 id="migrating-from-gitolite-v2">migrating from gitolite v2<a class="headerlink" href="#migrating-from-gitolite-v2" title="Permanent link">#</a></h1>
 <hr />
 <p>Gitolite v3 came out in April 2012.  Until now, my policy was that I would not
 support it except for critical issues, but I think by now (I am writing this
@@ -2079,7 +2079,7 @@ on your own.  After five years, it makes little sense to maintain all that in
 the active document hierarchy.</p>
 <p>Despite all that, this document <em>does</em> list some of the more important issues,
 mainly those that cause a significant change in behaviour.</p>
-<h2 id="step-1-backups">step 1: backups<a class="headerlink" href="#step-1-backups" title="Permanent link"></a></h2>
+<h2 id="step-1-backups">step 1: backups<a class="headerlink" href="#step-1-backups" title="Permanent link">#</a></h2>
 <ul>
 <li>take a backup of all <code>~/repositories</code> from the v2 server</li>
 <li>take an extra backup, in the form of a normal <code>git clone</code>, of the
@@ -2087,7 +2087,7 @@ mainly those that cause a significant change in behaviour.</p>
 <li>take a backup of <code>~/.gitolite.rc</code> and keep it handy</li>
 <li>(<em>optional but suggested</em>) take a backup of <code>~/.gitolite</code> and <code>~/.ssh</code></li>
 </ul>
-<h2 id="step-2-install-gitolite">step 2: install gitolite<a class="headerlink" href="#step-2-install-gitolite" title="Permanent link"></a></h2>
+<h2 id="step-2-install-gitolite">step 2: install gitolite<a class="headerlink" href="#step-2-install-gitolite" title="Permanent link">#</a></h2>
 <div class="admonition danger">
 <p class="admonition-title">Important:</p>
 <p>If you are reusing the same <a href="concepts.html#the-hosting-user">hosting user</a> on the same server, for the
@@ -2105,22 +2105,22 @@ install creates at this stage.</p>
 </div>
 <p>Smoke test the installation by cloning the <code>testing</code> repo and pushing some
 minor change to it.</p>
-<h2 id="step-3-add-existing-repos">step 3: add existing repos<a class="headerlink" href="#step-3-add-existing-repos" title="Permanent link"></a></h2>
+<h2 id="step-3-add-existing-repos">step 3: add existing repos<a class="headerlink" href="#step-3-add-existing-repos" title="Permanent link">#</a></h2>
 <p>Once the install is done, follow the instructions <a href="basic-admin.html#appendix-1-bringing-existing-repos-into-gitolite">here</a> to bring in
 existing repos.</p>
 <p>At the point where it talks about adding repos to the gitolite.conf file, you
 can copy relevant bits from your old gitolite-admin repo.</p>
-<h2 id="step-4-identify-any-remaining-changes-needed">step 4: identify any remaining changes needed<a class="headerlink" href="#step-4-identify-any-remaining-changes-needed" title="Permanent link"></a></h2>
+<h2 id="step-4-identify-any-remaining-changes-needed">step 4: identify any remaining changes needed<a class="headerlink" href="#step-4-identify-any-remaining-changes-needed" title="Permanent link">#</a></h2>
 <p>If you're using any of the following features in your old (v2) setup, please
 make the appropriate changes as indicated.</p>
-<h3 id="name-rules">NAME rules<a class="headerlink" href="#name-rules" title="Permanent link"></a></h3>
+<h3 id="name-rules">NAME rules<a class="headerlink" href="#name-rules" title="Permanent link">#</a></h3>
 <p><code>NAME/</code> rules must be changed to <code>VREF/NAME/</code>.  Also, fallthru on all VREFs is
 "success" now, so any <code>NAME/</code> rules you have <strong>MUST</strong> change the rule list in
 some way to maintain the same restrictions.  The simplest is to add the
 following line to the end of each repo's rule list:</p>
 <pre><code>-   VREF/NAME/       =   @all
 </code></pre>
-<h3 id="subconf-command"><code>subconf</code> command<a class="headerlink" href="#subconf-command" title="Permanent link"></a></h3>
+<h3 id="subconf-command"><code>subconf</code> command<a class="headerlink" href="#subconf-command" title="Permanent link">#</a></h3>
 <p>(This is also affected by the previous issue, 'NAME rules'; please read that
 as well).</p>
 <p>If you're using delegation in your admin conf setup, please add the following
@@ -2137,7 +2137,7 @@ that line.</p>
 <p>The second part explicitly says when and where to include the subconf files.
 (Before subconf was invented, this used to happen implicitly at the end of the
 main conf file, and was hardcoded to that specific glob.)</p>
-<h3 id="mirroring">mirroring<a class="headerlink" href="#mirroring" title="Permanent link"></a></h3>
+<h3 id="mirroring">mirroring<a class="headerlink" href="#mirroring" title="Permanent link">#</a></h3>
 <!-- duplicated in mirroring.md with minor differences -->
 
 <p>There are <strong>several</strong> important differences in mirroring; if you're using
@@ -2146,7 +2146,7 @@ documentation on <a href="mirroring.html">mirroring</a>.</p>
 <p>If you're not willing to do that, you may be able to use the older, more
 detailed, documentation <a href="https://github.com/sitaramc/gitolite-doc/tree/master/archive">here</a> to manage the migration.  However, I
 cannot support that (mainly due to lack of time).</p>
-<h3 id="rc-file-settings">rc file settings<a class="headerlink" href="#rc-file-settings" title="Permanent link"></a></h3>
+<h3 id="rc-file-settings">rc file settings<a class="headerlink" href="#rc-file-settings" title="Permanent link">#</a></h3>
 <p>Many rc file settings have been dropped.  You should be able to get by without
 most of them, but some of them cause a significant change to behaviour:</p>
 <ul>
@@ -2173,7 +2173,7 @@ chain.  For the latter, use a <a href="vref.html">vref</a>.  Don't forget to add
 references the new VREF!</p>
 </li>
 </ul>
-<h3 id="wild-repos">wild repos<a class="headerlink" href="#wild-repos" title="Permanent link"></a></h3>
+<h3 id="wild-repos">wild repos<a class="headerlink" href="#wild-repos" title="Permanent link">#</a></h3>
 <ul>
 <li>
 <p><code>gl-creater</code> files: these files need to be renamed to <code>gl-creator</code> (the

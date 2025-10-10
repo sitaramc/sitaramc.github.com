@@ -2133,7 +2133,7 @@
 
 
 
-<h1 id="virtual-refs">virtual refs<a class="headerlink" href="#virtual-refs" title="Permanent link"></a></h1>
+<h1 id="virtual-refs">virtual refs<a class="headerlink" href="#virtual-refs" title="Permanent link">#</a></h1>
 <center>(part 1)</center>
 
 <hr />
@@ -2148,7 +2148,7 @@ own update hooks".</p>
 sense until you read further, but I had to put it up here for folks who
 stop reading halfway!</p>
 </div>
-<h2 id="quick-introexample">quick intro/example<a class="headerlink" href="#quick-introexample" title="Permanent link"></a></h2>
+<h2 id="quick-introexample">quick intro/example<a class="headerlink" href="#quick-introexample" title="Permanent link">#</a></h2>
 <p>Here's an example to start you off.</p>
 <p>To disallow junior developers from changing more than five files, or from
 touching the Makefile, you can do this:</p>
@@ -2189,7 +2189,7 @@ match and are ignored in this check.</p>
     success.</strong></span></p>
 </li>
 </ol>
-<h2 id="basic-use-and-understanding">basic use and understanding<a class="headerlink" href="#basic-use-and-understanding" title="Permanent link"></a></h2>
+<h2 id="basic-use-and-understanding">basic use and understanding<a class="headerlink" href="#basic-use-and-understanding" title="Permanent link">#</a></h2>
 <p>Normally, rules deal with branches and tags (which git collectively calls
 "refs").  The "ref" is a property of the push which gitolite checks against
 the set of rules.</p>
@@ -2218,10 +2218,10 @@ some rule in this set for the push to succeed.</p>
 <strong>explicitly denied</strong> in order for the push to fail.</p>
 </li>
 </ul>
-<h2 id="advanced-use">advanced use<a class="headerlink" href="#advanced-use" title="Permanent link"></a></h2>
+<h2 id="advanced-use">advanced use<a class="headerlink" href="#advanced-use" title="Permanent link">#</a></h2>
 <p>More complex uses are possible, but may be harder to understand.  You may want
 to experiment with the rules to solidify your understanding as you read this.</p>
-<h3 id="differences-from-normal-refs">differences from normal refs<a class="headerlink" href="#differences-from-normal-refs" title="Permanent link"></a></h3>
+<h3 id="differences-from-normal-refs">differences from normal refs<a class="headerlink" href="#differences-from-normal-refs" title="Permanent link">#</a></h3>
 <p>We know where normal refs (like <code>refs/heads/master</code> or <code>refs/tags/v1.0</code>) come
 from -- they are supplied by git itself when it calls the update hook.</p>
 <p>Virtual refs have two differences with normal refs:</p>
@@ -2244,7 +2244,7 @@ does <em>not</em> cause failure.  Other than that, the checking is done the same
 way as for a normal ref, viz., as described in the flow for <a href="conf-2.html#putting-it-all-together">check #2</a>.</p>
 </li>
 </ul>
-<h3 id="generating-virtual-refs">generating virtual refs<a class="headerlink" href="#generating-virtual-refs" title="Permanent link"></a></h3>
+<h3 id="generating-virtual-refs">generating virtual refs<a class="headerlink" href="#generating-virtual-refs" title="Permanent link">#</a></h3>
 <p>Gitolite uses the VREF rules themselves to help it generate the virtual refs.</p>
 <p>Specifically, it looks at each rule that contains a VREF (there are 2 in the
 above example) and calls a VREF-maker for each of them.</p>
@@ -2271,8 +2271,8 @@ will encounter the "deny" rule, and thus kill the push.</p>
 <p>It should exit with an exit code of zero in either case.</p>
 <p>If it exits with a non-zero, the push dies regardless of what is printed (see
 "mimicking a plain old update hook" for why this is useful).</p>
-<h2 id="more-details-and-nuances">more details and nuances<a class="headerlink" href="#more-details-and-nuances" title="Permanent link"></a></h2>
-<h3 id="mimicking-a-plain-old-update-hook">mimicking a plain old update hook<a class="headerlink" href="#mimicking-a-plain-old-update-hook" title="Permanent link"></a></h3>
+<h2 id="more-details-and-nuances">more details and nuances<a class="headerlink" href="#more-details-and-nuances" title="Permanent link">#</a></h2>
+<h3 id="mimicking-a-plain-old-update-hook">mimicking a plain old update hook<a class="headerlink" href="#mimicking-a-plain-old-update-hook" title="Permanent link">#</a></h3>
 <p>If the VREF maker exits with a non-zero exit code, then regardless of what it
 prints or does not, the push dies.</p>
 <p>This is just like a plain 'update' hook.  Since the first 3 arguments (see
@@ -2287,7 +2287,7 @@ add this rule to your repos:</p>
 </pre>
 
 <p>That's it.</p>
-<h3 id="what-if-the-vref-maker-prints-a-different-virtual-ref">what if the VREF-maker prints a different virtual ref?<a class="headerlink" href="#what-if-the-vref-maker-prints-a-different-virtual-ref" title="Permanent link"></a></h3>
+<h3 id="what-if-the-vref-maker-prints-a-different-virtual-ref">what if the VREF-maker prints a different virtual ref?<a class="headerlink" href="#what-if-the-vref-maker-prints-a-different-virtual-ref" title="Permanent link">#</a></h3>
 <p>Unless you know what you're upto, don't do that.</p>
 <p>But it's allowed and the behaviour is defined.  The VREF-maker for the NAME
 VREF is a good example.  It ignores the arguments and just makes VREFs out of
@@ -2319,7 +2319,7 @@ not match any of the rules.  And fallthru is success so it passes.</p>
     <span class="Statement">-</span>   <span class="Constant">VREF/Hour/2[0-9]</span>        =   <span class="WarningMsg">@junior-devs</span>
 </pre>
 
-<h3 id="why-is-fallthru-considered-success-with-vrefs">why is fallthru considered success with VREFs<a class="headerlink" href="#why-is-fallthru-considered-success-with-vrefs" title="Permanent link"></a></h3>
+<h3 id="why-is-fallthru-considered-success-with-vrefs">why is fallthru considered success with VREFs<a class="headerlink" href="#why-is-fallthru-considered-success-with-vrefs" title="Permanent link">#</a></h3>
 <p>Virtual refs are <strong>best used</strong> (1) as <strong>additional</strong> "deny" rules, performing
 extra checks that core gitolite cannot.  You usually want such extra checks
 only for some people.</p>
@@ -2344,7 +2344,7 @@ list:</p>
 </pre>
 
 <p></font></p>
-<h3 id="what-if-the-vref-maker-prints-something-thats-not-even-a-virtual-ref">what if the VREF-maker prints something that's not even a virtual ref?<a class="headerlink" href="#what-if-the-vref-maker-prints-something-thats-not-even-a-virtual-ref" title="Permanent link"></a></h3>
+<h3 id="what-if-the-vref-maker-prints-something-thats-not-even-a-virtual-ref">what if the VREF-maker prints something that's not even a virtual ref?<a class="headerlink" href="#what-if-the-vref-maker-prints-something-thats-not-even-a-virtual-ref" title="Permanent link">#</a></h3>
 <p>The VREF-maker can print anything it wants to STDOUT.  Lines not starting with
 <code>VREF/</code> are printed as is (so your VREF-maker can do mostly-normal printing to
 STDOUT).  This is especially useful if you've turned an existing update hook
@@ -2354,13 +2354,13 @@ to touch the code.</p>
 treated as a virtual ref, while the rest, if any, is a message to be added to
 the standard "...DENIED..." message that gitolite will print if that refex
 matches and the rule is a deny rule.</p>
-<h3 id="in-what-order-are-vref-makers-called">in what order are VREF-makers called?<a class="headerlink" href="#in-what-order-are-vref-makers-called" title="Permanent link"></a></h3>
+<h3 id="in-what-order-are-vref-makers-called">in what order are VREF-makers called?<a class="headerlink" href="#in-what-order-are-vref-makers-called" title="Permanent link">#</a></h3>
 <p>VREF-makers are called in the sequence in which they appear in the conf file.</p>
 <p>There are some optimisations to prevent calling the same VREF-maker with the
 same arguments more than once, and the VREF-maker code for the NAME VREF
 (which is special) is called only once regardless of how many times it appears
 but these details should not concern anyone but a developer.</p>
-<h3 id="what-arguments-are-passed-to-the-vref-maker">what arguments are passed to the vref-maker?<a class="headerlink" href="#what-arguments-are-passed-to-the-vref-maker" title="Permanent link"></a></h3>
+<h3 id="what-arguments-are-passed-to-the-vref-maker">what arguments are passed to the vref-maker?<a class="headerlink" href="#what-arguments-are-passed-to-the-vref-maker" title="Permanent link">#</a></h3>
 <ul>
 <li>
 <p>Arguments <strong>1, 2, 3</strong>: the <code>ref</code>, <code>oldsha</code>, and <code>newsha</code> that git passed

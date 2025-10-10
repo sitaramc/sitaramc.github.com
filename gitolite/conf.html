@@ -2175,7 +2175,7 @@
 
 
 
-<h1 id="the-conf-file-confgitoliteconf">the "conf" file (<code>conf/gitolite.conf</code>)<a class="headerlink" href="#the-conf-file-confgitoliteconf" title="Permanent link"></a></h1>
+<h1 id="the-conf-file-confgitoliteconf">the "conf" file (<code>conf/gitolite.conf</code>)<a class="headerlink" href="#the-conf-file-confgitoliteconf" title="Permanent link">#</a></h1>
 <center>(part 1)</center>
 
 <hr />
@@ -2205,7 +2205,7 @@ colors.)</span></p>
     <span class="Statement">config</span> <span class="Identifier">hooks.emailprefix</span>    = <span class="Constant">'[%GL_REPO] ' # git-config</span>
 </pre>
 
-<h2 id="basic-syntax">basic syntax<a class="headerlink" href="#basic-syntax" title="Permanent link"></a></h2>
+<h2 id="basic-syntax">basic syntax<a class="headerlink" href="#basic-syntax" title="Permanent link">#</a></h2>
 <p>As the example above shows, the syntax is fairly straightforward and simple.</p>
 <ul>
 <li>In general, everything is <strong>space separated</strong>; there are no commas,
@@ -2226,7 +2226,7 @@ colors.)</span></p>
     have them, you can optionally enable them; look for "continuation-lines"
     in <code>~/.gitolite.rc</code>).</span></li>
 </ul>
-<h2 id="include-files">include files<a class="headerlink" href="#include-files" title="Permanent link"></a></h2>
+<h2 id="include-files">include files<a class="headerlink" href="#include-files" title="Permanent link">#</a></h2>
 <p>Gitolite allows you to break up the configuration into multiple files and
 include them in the main file for convenience.  For example:</p>
 <pre><code>include "foo.conf"
@@ -2257,7 +2257,7 @@ related to <code>include</code>, is documented <a href="deleg.html#the-subconf-c
 <p><strong>Please note</strong> that whenever you see "the <code>conf/gitolite.conf</code> file" or "the
 conf file" in gitolite documentation, it means the combined text after the
 include processing is done.</p>
-<h2 id="group-definitions">group definitions<a class="headerlink" href="#group-definitions" title="Permanent link"></a></h2>
+<h2 id="group-definitions">group definitions<a class="headerlink" href="#group-definitions" title="Permanent link">#</a></h2>
 <p>You can group repos or users for convenience.  The syntax is the same for both
 and does not distinguish; until you <em>use</em> the group name it could really be
 either.</p>
@@ -2293,10 +2293,10 @@ immediately (meaning later additions will not appear in the second group):</p>
     <span class="Statement">RW+</span>         =   <span class="Identifier">@developers</span>
 </pre>
 
-<h3 id="special-group-all">special group <code>@all</code><a class="headerlink" href="#special-group-all" title="Permanent link"></a></h3>
+<h3 id="special-group-all">special group <code>@all</code><a class="headerlink" href="#special-group-all" title="Permanent link">#</a></h3>
 <p><code>@all</code> is a special group name that is often convenient to use if you really
 mean "all repos" or "all users".</p>
-<h3 id="warnings-on-undefined-groups">warnings on undefined groups<a class="headerlink" href="#warnings-on-undefined-groups" title="Permanent link"></a></h3>
+<h3 id="warnings-on-undefined-groups">warnings on undefined groups<a class="headerlink" href="#warnings-on-undefined-groups" title="Permanent link">#</a></h3>
 <p>Gitolite cannot truly catch undefined groups because the conf parser is
 1-pass, and you're allowed to define a group <em>after</em> it is used, like so:</p>
 <pre style="color: #ffffff; background-color: #000000;">
@@ -2311,7 +2311,7 @@ is not defined when it is used.  So if you defined it later, either ignore the
 warning or move the definition up.</p>
 <p>Note that these warnings do NOT appear if you're <a href="conf.html#getting-user-group-info-from-ldap">getting user group info from
 LDAP</a>.</p>
-<h3 id="getting-user-group-info-from-ldap">getting user group info from LDAP<a class="headerlink" href="#getting-user-group-info-from-ldap" title="Permanent link"></a></h3>
+<h3 id="getting-user-group-info-from-ldap">getting user group info from LDAP<a class="headerlink" href="#getting-user-group-info-from-ldap" title="Permanent link">#</a></h3>
 <p>Gitolite's groups are pretty convenient, but some organisations already have
 similar (or sufficient) information in their LDAP store.</p>
 <p>Gitolite can tap into that information, with a little help.  Write a program
@@ -2327,7 +2327,7 @@ added him to in the conf file.</p>
 "why/how did this user get access to this repo at this time?" to resolve
 properly.  Gitolite does not do any logging of the results of the queries
 because for people who don't need it that would be a huge waste.</p>
-<h2 id="access-rules">access rules<a class="headerlink" href="#access-rules" title="Permanent link"></a></h2>
+<h2 id="access-rules">access rules<a class="headerlink" href="#access-rules" title="Permanent link">#</a></h2>
 <p><span class="box-r">Some of the pictures are thanks (<em>enormous</em> thanks!) to someone who
 contributed them but does not want to be named (go figure!).  She even
 converted them to ditaa format when I asked; these are not as pretty as what
@@ -2344,7 +2344,7 @@ several rules -- some people have thousands! -- in the conf file. This section
 will try and explain how these rules are used to decide if a given operation
 is to be allowed or denied.</p>
 <hr />
-<h3 id="what-does-a-rule-look-like">what does a rule look like?<a class="headerlink" href="#what-does-a-rule-look-like" title="Permanent link"></a></h3>
+<h3 id="what-does-a-rule-look-like">what does a rule look like?<a class="headerlink" href="#what-does-a-rule-look-like" title="Permanent link">#</a></h3>
 <p>You've seen some simple rules so far, for example in the <a href="basic-admin.html">basic
 administration</a> page.  Here's a slightly more complex one, just
 for illustration.</p>
@@ -2391,7 +2391,7 @@ what this specific rule list is saying:</p>
 </li>
 </ul>
 <p>More formally, a rule line has the following fields:</p>
-<h4 id="the-permission-field">the permission field<a class="headerlink" href="#the-permission-field" title="Permanent link"></a></h4>
+<h4 id="the-permission-field">the permission field<a class="headerlink" href="#the-permission-field" title="Permanent link">#</a></h4>
 <p>The permission field gives the type of access this rule line permits. The most
 commonly used permissions are:</p>
 <ul>
@@ -2404,7 +2404,7 @@ commonly used permissions are:</p>
 <div class="admonition danger">
 <p>There are also other, less commonly used, <a href="conf-2.html#appendix-1-different-types-of-write-operations">types of permissions</a>.</p>
 </div>
-<h4 id="the-refex-field">the "refex" field<a class="headerlink" href="#the-refex-field" title="Permanent link"></a></h4>
+<h4 id="the-refex-field">the "refex" field<a class="headerlink" href="#the-refex-field" title="Permanent link">#</a></h4>
 <p>You cannot write rules for all possible branch and tag names (i.e., refs) that
 users will push.  The only sensible way to do this is to use <a href="regex.html">regular
 expressions</a> instead.</p>
@@ -2449,14 +2449,14 @@ the end, for example:</p>
 controls that you can't do with just the normal ref (like refs/heads/master)
 being pushed.  The most common example is restricting pushes by dir/file name,
 but there are lots of other possibilities.</span></p>
-<h4 id="useruser-group-list">user/user group list<a class="headerlink" href="#useruser-group-list" title="Permanent link"></a></h4>
+<h4 id="useruser-group-list">user/user group list<a class="headerlink" href="#useruser-group-list" title="Permanent link">#</a></h4>
 <p>Like the repos on the repo line, you can have any number of user names and/or
 user group names on the rule line.  (However, please note that there is no
 concept of regular expressions for user names).</p>
 <p><strong>SECTION SUMMARY</strong>: at this point you know that each rule basically specifies
 a repo, user, permission, and a "refex".</p>
 <hr />
-<h3 id="rule-accumulation">rule accumulation<a class="headerlink" href="#rule-accumulation" title="Permanent link"></a></h3>
+<h3 id="rule-accumulation">rule accumulation<a class="headerlink" href="#rule-accumulation" title="Permanent link">#</a></h3>
 <p><em>All</em> the rules for a repo need not be specified in one place.  For example,
 you might see something like this, perhaps at the top or bottom of the conf
 file:</p>
@@ -2510,7 +2510,7 @@ conf file</strong>.</p>
 access is being checked</strong>.  (A rule applies to a user if the user's name
 appears in the rule (after the equal sign), or if he is a member of any of the
 group names that appear in the rule.)</p>
-<h4 id="defining-user-and-repo">defining "user" and "repo"<a class="headerlink" href="#defining-user-and-repo" title="Permanent link"></a></h4>
+<h4 id="defining-user-and-repo">defining "user" and "repo"<a class="headerlink" href="#defining-user-and-repo" title="Permanent link">#</a></h4>
 <p>To be very specific, when we speak of "user" and "repo" in rules,</p>
 <ul>
 <li>"user" means "user or a <a href="conf.html#group-definitions">group</a> that he/she is a member of", and</li>

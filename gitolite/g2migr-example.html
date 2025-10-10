@@ -1954,9 +1954,9 @@
 
 
 
-<h1 id="migration-example">migration example<a class="headerlink" href="#migration-example" title="Permanent link"></a></h1>
+<h1 id="migration-example">migration example<a class="headerlink" href="#migration-example" title="Permanent link">#</a></h1>
 <p>This shows what a typical migration would look like, using a test setup.</p>
-<h2 id="existing-setup">existing setup<a class="headerlink" href="#existing-setup" title="Permanent link"></a></h2>
+<h2 id="existing-setup">existing setup<a class="headerlink" href="#existing-setup" title="Permanent link">#</a></h2>
 <p>The existing gitolite is the latest in the "g2" (v2.x) branch.</p>
 <p>First, the rc file has the following lines different from the default:</p>
 <pre><code>-$GL_WILDREPOS = 0;
@@ -2016,8 +2016,8 @@ repositories/baz/u3.git/config-     owner = u3
 repositories/baz/u3.git/config:[foo]
 repositories/baz/u3.git/config-     bar = baz
 </code></pre>
-<h2 id="preparing-for-the-migration">preparing for the migration<a class="headerlink" href="#preparing-for-the-migration" title="Permanent link"></a></h2>
-<h3 id="getting-v3">getting v3<a class="headerlink" href="#getting-v3" title="Permanent link"></a></h3>
+<h2 id="preparing-for-the-migration">preparing for the migration<a class="headerlink" href="#preparing-for-the-migration" title="Permanent link">#</a></h2>
+<h3 id="getting-v3">getting v3<a class="headerlink" href="#getting-v3" title="Permanent link">#</a></h3>
 <p>Fortunately this is easy here; I just happened to have the repo already
 fetched so I just had to switch branches.  You may have to 'git clone ...'
 from github.</p>
@@ -2026,7 +2026,7 @@ $ git checkout master
 Branch master set up to track remote branch master from origin.
 Switched to a new branch 'master'
 </code></pre>
-<h3 id="run-check-g2-compat">run check-g2-compat<a class="headerlink" href="#run-check-g2-compat" title="Permanent link"></a></h3>
+<h3 id="run-check-g2-compat">run check-g2-compat<a class="headerlink" href="#run-check-g2-compat" title="Permanent link">#</a></h3>
 <p>This is a quick and dirty program to catch some of the big issues.</p>
 <pre><code>$ cd
 $ gitolite/check-g2-compat
@@ -2050,9 +2050,9 @@ WARNING     found 3 gl-creater files; see docs
 
 ...all done...
 </code></pre>
-<h2 id="the-actual-migration">the actual migration<a class="headerlink" href="#the-actual-migration" title="Permanent link"></a></h2>
+<h2 id="the-actual-migration">the actual migration<a class="headerlink" href="#the-actual-migration" title="Permanent link">#</a></h2>
 <p>Here's the actual migration, step by step</p>
-<h3 id="step-1">step 1<a class="headerlink" href="#step-1" title="Permanent link"></a></h3>
+<h3 id="step-1">step 1<a class="headerlink" href="#step-1" title="Permanent link">#</a></h3>
 <pre><code>$ ls -a bin
 .                gl-admin-push    gl-install       gl-setup-authkeys  gl-VREF-DUPKEYS
 ..               gl-auth-command  gl-mirror-push   gl-system-install  gl-VREF-EMAIL_CHECK
@@ -2082,10 +2082,10 @@ $ rm -rf repositories/gitolite-admin.git/
 hooks:</p>
 <pre><code>$ rm -rf .gitolite
 </code></pre>
-<h3 id="step-2">step 2<a class="headerlink" href="#step-2" title="Permanent link"></a></h3>
+<h3 id="step-2">step 2<a class="headerlink" href="#step-2" title="Permanent link">#</a></h3>
 <p>I have no variables that <em>must</em> be preset, since the report by
 <code>check-g2-compat</code> is clear.</p>
-<h3 id="step-3">step 3<a class="headerlink" href="#step-3" title="Permanent link"></a></h3>
+<h3 id="step-3">step 3<a class="headerlink" href="#step-3" title="Permanent link">#</a></h3>
 <p>Here we install the new gitolite.  Remember we already got the new software
 (in order to run 'check-g2-compat').</p>
 <p>Just check that bin is empty, then run 'install -ln' from the gitolite source
@@ -2106,7 +2106,7 @@ random name:</p>
 <pre><code>$ gitolite setup -a admin
 Initialized empty Git repository in /home/git/repositories/gitolite-admin.git/
 </code></pre>
-<h3 id="step-4">step 4<a class="headerlink" href="#step-4" title="Permanent link"></a></h3>
+<h3 id="step-4">step 4<a class="headerlink" href="#step-4" title="Permanent link">#</a></h3>
 <p>Now go to your old clone, and push it:</p>
 <pre><code>$ cd old.ga
 $ gitolite push -f
@@ -2145,7 +2145,7 @@ Unpacking objects: 100% (1/1), done.
 To /home/git/repositories/gitolite-admin.git
    1474770..4c2b41d  master -&gt; master
 </code></pre>
-<h3 id="step-5">step 5<a class="headerlink" href="#step-5" title="Permanent link"></a></h3>
+<h3 id="step-5">step 5<a class="headerlink" href="#step-5" title="Permanent link">#</a></h3>
 <p>The only thing left is to fix up the gl-creater files:</p>
 <pre><code>$ cd $HOME/repositories
 $ find . -type d -name "*.git" -prune | while read r
@@ -2154,7 +2154,7 @@ $ find . -type d -name "*.git" -prune | while read r
 &gt; done 2&gt;/dev/null
 </code></pre>
 <p>And we're done!</p>
-<h2 id="checking-things-out">checking things out<a class="headerlink" href="#checking-things-out" title="Permanent link"></a></h2>
+<h2 id="checking-things-out">checking things out<a class="headerlink" href="#checking-things-out" title="Permanent link">#</a></h2>
 <p>Let's see what repos u3 has:</p>
 <pre><code># as user 'u3'
 ssh git@server info

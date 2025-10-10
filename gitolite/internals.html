@@ -2169,7 +2169,7 @@
 
 
 
-<h1 id="gitolite-internals">gitolite internals<a class="headerlink" href="#gitolite-internals" title="Permanent link"></a></h1>
+<h1 id="gitolite-internals">gitolite internals<a class="headerlink" href="#gitolite-internals" title="Permanent link">#</a></h1>
 <p>This page is for people who may want to hack on <strong>core</strong> gitolite itself.
 This is <strong>not</strong> the page for people who merely want to customise their site
 (i.e., write their own VREFs, triggers, etc.); for that please start with the
@@ -2189,7 +2189,7 @@ that's what I will suggest!
 
 -->
 
-<h2 id="what-is-core">what is "core"<a class="headerlink" href="#what-is-core" title="Permanent link"></a></h2>
+<h2 id="what-is-core">what is "core"<a class="headerlink" href="#what-is-core" title="Permanent link">#</a></h2>
 <p>The core code consists mainly of <code>src/gitolite</code>, <code>src/gitolite-shell</code>, and all
 the perl modules in <code>src/lib/Gitolite</code> except <code>src/lib/Gitolite/Triggers</code>.</p>
 <p>That said, there are parts of non-core that, in a default (ssh) install, are
@@ -2202,13 +2202,13 @@ gitolite):</p>
 <li>triggers in <code>src/triggers</code> and <code>src/triggers/post-compile</code>: ssh-authkeys,
     ssh-authkeys-shell-users, update-git-configs, set-default-roles, </li>
 </ul>
-<h2 id="entry-points">entry points<a class="headerlink" href="#entry-points" title="Permanent link"></a></h2>
-<h3 id="gitolite">gitolite<a class="headerlink" href="#gitolite" title="Permanent link"></a></h3>
+<h2 id="entry-points">entry points<a class="headerlink" href="#entry-points" title="Permanent link">#</a></h2>
+<h3 id="gitolite">gitolite<a class="headerlink" href="#gitolite" title="Permanent link">#</a></h3>
 <p>Most server-side operations that gitolite supports are invoked via the
 <code>gitolite</code> command.  This includes initial setup and maintenance, some
 built-in commands (run 'gitolite -h' to see them), and finally the commands in
 <code>src/commands</code> (run 'gitolite help' to get a list).</p>
-<h3 id="gitolite-shell">gitolite-shell<a class="headerlink" href="#gitolite-shell" title="Permanent link"></a></h3>
+<h3 id="gitolite-shell">gitolite-shell<a class="headerlink" href="#gitolite-shell" title="Permanent link">#</a></h3>
 <p>All remote access is via the <code>gitolite-shell</code> command, (invoked, of course, by
 sshd).  This includes both git operations (clone, fetch, push) as well as
 gitolite commands that have been enabled for remote invocation.</p>
@@ -2216,24 +2216,24 @@ gitolite commands that have been enabled for remote invocation.</p>
 even allowed to read/write this repo at all?") and then calls git proper.</p>
 <p>Most of the code in this is housekeeping; the real action happens in one of
 the modules.</p>
-<h2 id="the-conf-module">the Conf module<a class="headerlink" href="#the-conf-module" title="Permanent link"></a></h2>
+<h2 id="the-conf-module">the Conf module<a class="headerlink" href="#the-conf-module" title="Permanent link">#</a></h2>
 <p>The <code>Conf</code> module and its child modules deal with the gitolite.conf file.</p>
 <p><code>Conf</code> is where the 'compile' command lands.  The parser for the conf file is
 also in this module; each "recognised" line is passed to appropriate functions
 in <code>Conf::Store</code>.</p>
 <p>Please note the parser is a very simple line-oriented parser using simple
 regexes; the DSL for the gitolite.conf file is intentionally very simple.</p>
-<h3 id="confexplode"><code>Conf::Explode</code><a class="headerlink" href="#confexplode" title="Permanent link"></a></h3>
+<h3 id="confexplode"><code>Conf::Explode</code><a class="headerlink" href="#confexplode" title="Permanent link">#</a></h3>
 <p>This deals with "exploding" the main gitolite.conf file into a single perl
 list with all 'include' files recursively expanded.</p>
-<h3 id="confsugar"><code>Conf::Sugar</code><a class="headerlink" href="#confsugar" title="Permanent link"></a></h3>
+<h3 id="confsugar"><code>Conf::Sugar</code><a class="headerlink" href="#confsugar" title="Permanent link">#</a></h3>
 <p>This calls <code>Conf::Explode</code> to get the full set of conf lines, then applies a
 series of "syntactic sugar" transformations to them.  This keeps the main
 parser simple, while allowing the administrator to take some shortcuts in
 writing the rules.</p>
 <p>Some transformations are built-in and hardcoded, but a site can add their own
 site-local transformations if they like.</p>
-<h3 id="confstore"><code>Conf::Store</code><a class="headerlink" href="#confstore" title="Permanent link"></a></h3>
+<h3 id="confstore"><code>Conf::Store</code><a class="headerlink" href="#confstore" title="Permanent link">#</a></h3>
 <p><code>Conf::Store</code> is one of the two workhorses of gitolite.  It exports functions
 related to processing parsed lines and storing the parsed output for later
 use.  It also exports functions that deal with creating and setting up new
@@ -2248,7 +2248,7 @@ apply to specific repos go into their own files
 </div>
 <p>From a security perspective, dealing with 'subconf' (see <a href="deleg.html">delegation</a>
 for details) happens in this module.</p>
-<h3 id="confload"><code>Conf::Load</code><a class="headerlink" href="#confload" title="Permanent link"></a></h3>
+<h3 id="confload"><code>Conf::Load</code><a class="headerlink" href="#confload" title="Permanent link">#</a></h3>
 <p><code>Conf::Load</code> is the other of the two workhorses of gitolite.</p>
 <p>The most important function it exports is <code>access</code>, which is used by
 <code>gitolite-shell</code> as well as by the update hook code to check for permissions.
@@ -2262,7 +2262,7 @@ manage to write it up in more detail.</p>
 specified in the conf file.</p>
 <p>Finally, this is where all the "list-" commands that 'gitolite -h' shows you
 (e.g., 'gitolite list-repos') land up.</p>
-<h2 id="the-rc-module">the Rc module<a class="headerlink" href="#the-rc-module" title="Permanent link"></a></h2>
+<h2 id="the-rc-module">the Rc module<a class="headerlink" href="#the-rc-module" title="Permanent link">#</a></h2>
 <p>The rc file (<code>~/.gitolite.rc</code>) is processed here.  In addition, it also
 declares a bunch of constants (like the all-important regex patterns to
 validate user inputs of various kinds; all ending in <code>_PATT</code>).</p>
@@ -2276,7 +2276,7 @@ come from totally trusted sources -- either the gitolite source code or the rc
 file).</p>
 <p>Finally, the trigger function is also exported by this module.  This is the
 function that actually runs all the programs tied to each trigger.</p>
-<h2 id="the-hooks-module">the Hooks module<a class="headerlink" href="#the-hooks-module" title="Permanent link"></a></h2>
+<h2 id="the-hooks-module">the Hooks module<a class="headerlink" href="#the-hooks-module" title="Permanent link">#</a></h2>
 <p>This is where the code for the update hook (all repos) and the post-update
 hook (gitolite-admin repo only) can be found.</p>
 <p>The post-update hook code is fairly straightforward, consisting essentially of
@@ -2292,13 +2292,13 @@ ways to determine if it's a rewind, or a delete, or a create, etc., which may
 make a difference to the access.</p>
 <p>TODO: expand on VREF handling.  For now please read <a href="vref.html">vref</a> to get the
 general idea of <em>what</em> it does, while I find time to write up the <em>how</em>.</p>
-<h2 id="the-rest">the rest...<a class="headerlink" href="#the-rest" title="Permanent link"></a></h2>
+<h2 id="the-rest">the rest...<a class="headerlink" href="#the-rest" title="Permanent link">#</a></h2>
 <p>...is TBD (to be done).  Briefly, the Test module is for testing, the Common
 module contains a whole bunch of common routines used all over -- many of them
 not gitolite specific at all, Cache is not to be used for now (sorry,
 bitrotted by now I think... I may need to take it out behind the woodshed one
 of these days).</p>
-<h2 id="security-notes">security notes<a class="headerlink" href="#security-notes" title="Permanent link"></a></h2>
+<h2 id="security-notes">security notes<a class="headerlink" href="#security-notes" title="Permanent link">#</a></h2>
 <p>All security issues should be reported directly to me (sitaramc@gmail.com),
 and not to the mailing list.</p>
 <p>(In the following text, the words MUST, SHOULD, etc. are loosely as defined in
@@ -2374,7 +2374,7 @@ stores housekeeping information in, etc., would all need to be untainted.</p>
 check that rigorously enough rather than use taint mode.</p>
 </li>
 </ul>
-<h2 id="appendix-a-accessing-the-documentation-offline">appendix A: accessing the documentation offline<a class="headerlink" href="#appendix-a-accessing-the-documentation-offline" title="Permanent link"></a></h2>
+<h2 id="appendix-a-accessing-the-documentation-offline">appendix A: accessing the documentation offline<a class="headerlink" href="#appendix-a-accessing-the-documentation-offline" title="Permanent link">#</a></h2>
 <p>The source code for the documentation is in
 <a href="https://github.com/sitaramc/gitolite-doc">https://github.com/sitaramc/gitolite-doc</a>.  Rendering it requires some work
 (TBD: details).</p>

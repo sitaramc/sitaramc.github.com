@@ -2403,7 +2403,7 @@
 
 
 
-<h1 id="user-key-management">user key management<a class="headerlink" href="#user-key-management" title="Permanent link"></a></h1>
+<h1 id="user-key-management">user key management<a class="headerlink" href="#user-key-management" title="Permanent link">#</a></h1>
 <p>Copyright 2012-2013  Ralf Hemmecke <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#114;&#97;&#108;&#102;&#64;&#104;&#101;&#109;&#109;&#101;&#99;&#107;&#101;&#46;&#111;&#114;&#103;">&#114;&#97;&#108;&#102;&#64;&#104;&#101;&#109;&#109;&#101;&#99;&#107;&#101;&#46;&#111;&#114;&#103;</a>.</p>
 <p>Licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons
 Attribution-NonCommercial-ShareAlike 3.0 Unported
@@ -2414,14 +2414,14 @@ must be enabled for remote use by both the <a href="#SYSADMIN">sysadmin</a> and 
 <a href="#GA">gitolite-admin</a> (see <a href="../non-core.html#gitolite-commands">here</a> for more on this) or look
 below.</p>
 <hr />
-<h2 id="important-warning">Important Warning!<a class="headerlink" href="#important-warning" title="Permanent link"></a></h2>
+<h2 id="important-warning">Important Warning!<a class="headerlink" href="#important-warning" title="Permanent link">#</a></h2>
 <p>User key management undermines the fundamental principle of gitolite
 (see <a href="../concepts.html#authentication-and-authorisation">authentication versus authorisation</a>) by allowing certain
 users to juggle with ssh public keys. Make sure someone (sysadmin?)
 can login to the server with a <strong>password</strong>, just in case something
 breaks and the <code>.ssh/authorized_keys</code> file for the user running
 gitolite on the server is messed up.</p>
-<h2 id="general-note">General note<a class="headerlink" href="#general-note" title="Permanent link"></a></h2>
+<h2 id="general-note">General note<a class="headerlink" href="#general-note" title="Permanent link">#</a></h2>
 <p>Although gitolite deals in its core only with authorisation, by
 default it uses ssh as its authentication mechanism. Sure, ssh is
 not at all part of gitolite and it can be replaced by other means, but
@@ -2440,8 +2440,8 @@ external tool that does what its name suggests: user (key) management.</p>
      User git                      # user that runs gitolite
 </code></pre>
 <p>in the client's <code>~/.ssh/config</code> file.</p>
-<h2 id="who-might-be-interested">Who might be interested?<a class="headerlink" href="#who-might-be-interested" title="Permanent link"></a></h2>
-<h3 id="the-gitolite-admin">The gitolite admin<a class="headerlink" href="#the-gitolite-admin" title="Permanent link"></a></h3>
+<h2 id="who-might-be-interested">Who might be interested?<a class="headerlink" href="#who-might-be-interested" title="Permanent link">#</a></h2>
+<h3 id="the-gitolite-admin">The gitolite admin<a class="headerlink" href="#the-gitolite-admin" title="Permanent link">#</a></h3>
 <p>Adding a new public key to the system means to copy the key into
 <code>gitolite/keydir</code> commit and push.</p>
 <p>With <code>ukm</code> it would be</p>
@@ -2456,7 +2456,7 @@ prevents the administrator from locking him-/herself out of the
 system. (Note, we assume that the <a href="#GA">gitolite administrator</a> has no
 shell access to the server; only the <a href="#SYSADMIN">sysadmin</a> has shell
 access.)</p>
-<h3 id="users-that-want-more-control-over-who-can-access-their-repositories">Users that want more control over who can access their repositories<a class="headerlink" href="#users-that-want-more-control-over-who-can-access-their-repositories" title="Permanent link"></a></h3>
+<h3 id="users-that-want-more-control-over-who-can-access-their-repositories">Users that want more control over who can access their repositories<a class="headerlink" href="#users-that-want-more-control-over-who-can-access-their-repositories" title="Permanent link">#</a></h3>
 <p>Suppose the <a href="#GA">gitolite administrator</a> of a research institute has
 set up gitolite to provide <a href="../wild.html">wild repositories</a> for example with
 a <code>gitolite.conf</code> like this.</p>
@@ -2491,7 +2491,7 @@ perhaps even faster in saying:</p>
 ssh gitserver perms alice/article + WRITERS otto@other.institute.edu
 </code></pre>
 <p>The effect would be the same.</p>
-<h3 id="users-that-want-to-manage-multiple-keys">Users that want to manage multiple keys<a class="headerlink" href="#users-that-want-to-manage-multiple-keys" title="Permanent link"></a></h3>
+<h3 id="users-that-want-to-manage-multiple-keys">Users that want to manage multiple keys<a class="headerlink" href="#users-that-want-to-manage-multiple-keys" title="Permanent link">#</a></h3>
 <p>Suppose, you have different computers and a different ssh key for each
 of them. You would like to tell gitolite that all these different keys
 belong to just one gitolite identity.</p>
@@ -2500,7 +2500,7 @@ one of your keys as your initial key. This key can only be managed by
 the gitolite administrator, not by you. It basically determines under
 which name you are known to gitolite.</p>
 <p>You can add new keys to this identity and remove them at your will.</p>
-<h2 id="how-to-enable-user-key-management">How to enable user key management?<a class="headerlink" href="#how-to-enable-user-key-management" title="Permanent link"></a></h2>
+<h2 id="how-to-enable-user-key-management">How to enable user key management?<a class="headerlink" href="#how-to-enable-user-key-management" title="Permanent link">#</a></h2>
 <p>The <code>ukm</code> command is contributed code and lives under
 <code>contrib/commands/ukm</code> in the gitolite source tree.
 A <a href="#SYSADMIN">sysadmin</a> of the gitserver has to copy or link this
@@ -2518,7 +2518,7 @@ with version v3.4.)</p>
 <code>'ukm' =&gt; 1</code> to the <code>COMMANDS</code> hash.</p>
 <pre><code>COMMANDS =&gt; {..., 'ukm' =&gt; 1, ... },
 </code></pre>
-<h2 id="how-to-configure-user-key-management-and-who-can-use-it">How to configure user key management and who can use it?<a class="headerlink" href="#how-to-configure-user-key-management-and-who-can-use-it" title="Permanent link"></a></h2>
+<h2 id="how-to-configure-user-key-management-and-who-can-use-it">How to configure user key management and who can use it?<a class="headerlink" href="#how-to-configure-user-key-management-and-who-can-use-it" title="Permanent link">#</a></h2>
 <p>As described above there are three main use cases for <code>ukm</code>. Each of
 them requires different values in the respective config files.</p>
 <p>There are two files where <code>ukm</code> must be configured.</p>
@@ -2534,9 +2534,9 @@ knows 3 roles.</p>
 <li><a href="#GKM">guest key manager</a></li>
 <li><a href="#EKM">self key manager</a></li>
 </ul>
-<h3 id="super-key-managers"><a href="#SKM">Super key managers</a><a class="headerlink" href="#super-key-managers" title="Permanent link"></a></h3>
+<h3 id="super-key-managers"><a href="#SKM">Super key managers</a><a class="headerlink" href="#super-key-managers" title="Permanent link">#</a></h3>
 <p>When <code>ukm</code> is enabled, nothing else must be configured.</p>
-<h3 id="guest-key-managers"><a href="#GKM">Guest key managers</a><a class="headerlink" href="#guest-key-managers" title="Permanent link"></a></h3>
+<h3 id="guest-key-managers"><a href="#GKM">Guest key managers</a><a class="headerlink" href="#guest-key-managers" title="Permanent link">#</a></h3>
 <p>The <a href="#GA">gitolite administrator</a> defines guest key managers by
 creating a group <code>@guest-key-managers</code> in
 <code>gitolite-admin/conf/gitolite.conf</code> and adding (trusted) users to this
@@ -2604,7 +2604,7 @@ purposes.</p>
      reserved for in-house <a href="#USERID">USERIDs</a>.</p>
 </li>
 </ol>
-<h3 id="self-key-managers"><a href="#EKM">Self key managers</a><a class="headerlink" href="#self-key-managers" title="Permanent link"></a></h3>
+<h3 id="self-key-managers"><a href="#EKM">Self key managers</a><a class="headerlink" href="#self-key-managers" title="Permanent link">#</a></h3>
 <p>The <a href="#GA">gitolite administrator</a> defines <a href="#EKM">self key managers</a> by
 creating a group <code>@self-key-managers</code> in
 <code>gitolite-admin/conf/gitolite.conf</code> and adding (trusted) users to this
@@ -2634,7 +2634,7 @@ same time.</p>
     SELFKEY_MANAGEMENT =&gt; 1,
 },
 </code></pre>
-<h2 id="how-to-use-user-key-management">How to use user key management?<a class="headerlink" href="#how-to-use-user-key-management" title="Permanent link"></a></h2>
+<h2 id="how-to-use-user-key-management">How to use user key management?<a class="headerlink" href="#how-to-use-user-key-management" title="Permanent link">#</a></h2>
 <p>There are three subcommands of <code>ukm</code>, namely <code>list</code> (the default),<code>add</code>, and <code>del</code>.</p>
 <p>Depending on whether or not the respective <a href="#KEYID">KEYID</a> starts with
 an <code>@</code> sign, <code>ukm</code> distinguishes between guest and self key management.
@@ -2646,7 +2646,7 @@ extension removed.</p>
 <p>By convention, take as guest key the proper email address of the
 guest. That not only makes for a unique ID, it also gives you a hint
 to whom this key belongs.</p>
-<h3 id="list-managed-keys">List managed keys<a class="headerlink" href="#list-managed-keys" title="Permanent link"></a></h3>
+<h3 id="list-managed-keys">List managed keys<a class="headerlink" href="#list-managed-keys" title="Permanent link">#</a></h3>
 <p>A <a href="#GKM">guest key manager</a> and <a href="#EKM">self key manager</a> can list all
 their personally managed keys via:</p>
 <pre><code>ssh gitserver ukm
@@ -2659,13 +2659,13 @@ keys that are stored under <code>keydir/</code>.</p>
 <p>The result will show the fingerprints of the keys, the corresponding
 <a href="#USERID">USERID</a> and the <a href="#KEYID">KEYID</a> by which one can refer to
 the key on the commandline.</p>
-<h3 id="add-a-new-public-key">Add a new public key<a class="headerlink" href="#add-a-new-public-key" title="Permanent link"></a></h3>
-<h4 id="add-a-new-key-as-a-super-key-manager">Add a new key as a super key manager<a class="headerlink" href="#add-a-new-key-as-a-super-key-manager" title="Permanent link"></a></h4>
+<h3 id="add-a-new-public-key">Add a new public key<a class="headerlink" href="#add-a-new-public-key" title="Permanent link">#</a></h3>
+<h4 id="add-a-new-key-as-a-super-key-manager">Add a new key as a super key manager<a class="headerlink" href="#add-a-new-key-as-a-super-key-manager" title="Permanent link">#</a></h4>
 <p>A <a href="#SKM">super key manager</a> can nearly add any key, but <code>ukm</code> does not
 accept a different key, i.e., different fingerprint, for the same
 <a href="#KEYID">KEYID</a>. Also a double dot is not allowed in the
 <a href="#KEYID">KEYID</a>.</p>
-<h4 id="add-a-new-key-as-a-guest-key-manager">Add a new key as a guest key manager<a class="headerlink" href="#add-a-new-key-as-a-guest-key-manager" title="Permanent link"></a></h4>
+<h4 id="add-a-new-key-as-a-guest-key-manager">Add a new key as a guest key manager<a class="headerlink" href="#add-a-new-key-as-a-guest-key-manager" title="Permanent link">#</a></h4>
 <p>The command for this is:</p>
 <pre><code>cat foo.pub | ssh gitserver ukm add foo@example.com
 </code></pre>
@@ -2696,7 +2696,7 @@ rejects to add the key.</p>
     <a href="#MULTIKEY">multiple keys</a> for one user.</p>
 </li>
 </ul>
-<h4 id="add-a-new-key-as-a-self-key-manager">Add a new key as a self key manager<a class="headerlink" href="#add-a-new-key-as-a-self-key-manager" title="Permanent link"></a></h4>
+<h4 id="add-a-new-key-as-a-self-key-manager">Add a new key as a self key manager<a class="headerlink" href="#add-a-new-key-as-a-self-key-manager" title="Permanent link">#</a></h4>
 <p>Adding a self key is a bit more complicated, since the user must
 confirm that he/she is in possession of the corresponding private key.
 The command sequence is as follows. Note that the second call of ssh
@@ -2714,14 +2714,14 @@ user on the <code>gitserver</code>.</p>
 scheduled for addition and a session key is returned on stdin. That
 session key must be used to confirm the addition of the new public key
 as shown above.</p>
-<h3 id="delete-a-key">Delete a key<a class="headerlink" href="#delete-a-key" title="Permanent link"></a></h3>
+<h3 id="delete-a-key">Delete a key<a class="headerlink" href="#delete-a-key" title="Permanent link">#</a></h3>
 <p>A <a href="#SKM">super key manager</a> can delete any key by simply giving its
 <a href="#KEYID">KEYID</a> in a command like this</p>
 <pre><code>ssh gitserver ukm del some/dir/foo@example.com
 </code></pre>
 <p>The <code>ukm</code> command, however, prevents a <a href="#SKM">super key manager</a> from
 removing his/her last key.</p>
-<h4 id="delete-a-guest-key">Delete a guest key<a class="headerlink" href="#delete-a-guest-key" title="Permanent link"></a></h4>
+<h4 id="delete-a-guest-key">Delete a guest key<a class="headerlink" href="#delete-a-guest-key" title="Permanent link">#</a></h4>
 <p>The command for this is:</p>
 <pre><code>ssh gitserver ukm del foo@example.com
 </code></pre>
@@ -2738,7 +2738,7 @@ because this key might still be managed by another
 | while read r; do ssh gitserver perms $r - WRITERS foo@example.com; done
 </code></pre>
 <p>Repeat this for other roles such as <code>READERS</code> instead of <code>WRITERS</code>.</p>
-<h4 id="delete-a-self-key">Delete a self key<a class="headerlink" href="#delete-a-self-key" title="Permanent link"></a></h4>
+<h4 id="delete-a-self-key">Delete a self key<a class="headerlink" href="#delete-a-self-key" title="Permanent link">#</a></h4>
 <p>The command for this is:</p>
 <pre><code>ssh gitserver ukm del @two
 ssh gitserver ukm del @two
@@ -2758,13 +2758,13 @@ Maybe this over complication will be simplified in the future. Losing
 a passphrase is not a good excuse and should result in removal of the
 corresponding key from the system, i.e., contacting the
 <a href="#GA">gitolite administrator</a>.)</p>
-<h2 id="generic-errors">Generic Errors<a class="headerlink" href="#generic-errors" title="Permanent link"></a></h2>
+<h2 id="generic-errors">Generic Errors<a class="headerlink" href="#generic-errors" title="Permanent link">#</a></h2>
 <p>Key management is done via creating a temporary clone of the
 <code>gitolite-admin</code> repository, changing, committing, and pushing back.
 In cases where two people are trying to modify the <code>gitolite-admin</code>
 repository at the same time, one of the push commands will most
 probably fail. Then simply redo the command after a while.</p>
-<h2 id="glossary">Glossary<a class="headerlink" href="#glossary" title="Permanent link"></a></h2>
+<h2 id="glossary">Glossary<a class="headerlink" href="#glossary" title="Permanent link">#</a></h2>
 <ul>
 <li>
 <p><strong>sysadmin</strong><a id="SYSADMIN"></a>:
@@ -2813,7 +2813,7 @@ probably fail. Then simply redo the command after a while.</p>
   into a USERID which is used inside <code>conf/gitolite.conf</code> or for the
   <a href="../user.html#setget-additional-permissions-for-repos-you-created">perms</a> <a href="../non-core.html#gitolite-commands">command</a> of gitolite.</li>
 </ul>
-<h2 id="security-note">Security note<a class="headerlink" href="#security-note" title="Permanent link"></a></h2>
+<h2 id="security-note">Security note<a class="headerlink" href="#security-note" title="Permanent link">#</a></h2>
 <p><a id="MULTIKEY" />
 <a href="#SKM">Super key managers</a> can basically add any key.
 <a href="#GKM">Guest key managers</a> are not allowed to add
@@ -2822,12 +2822,12 @@ probably fail. Then simply redo the command after a while.</p>
 <code>eve.pub</code> under the keyid <code>bob@example.org@foo</code>. (Of course, only Eve
 and not Bob has the private key correspoinding to <code>eve.pub</code>.) This
 basically gives Eve the same rights as Bob.</p>
-<h2 id="important-notes-for-the-admin">Important notes for the admin<a class="headerlink" href="#important-notes-for-the-admin" title="Permanent link"></a></h2>
+<h2 id="important-notes-for-the-admin">Important notes for the admin<a class="headerlink" href="#important-notes-for-the-admin" title="Permanent link">#</a></h2>
 <p>Note that <code>ukm</code> clones, changes, and pushes back the <code>gitolite-admin</code>
 repo. This means, even if you are the only administrator, you should
 never <code>git push -f</code>, because that might override something <code>ukm</code>
 did.</p>
-<h2 id="ideas">Ideas<a class="headerlink" href="#ideas" title="Permanent link"></a></h2>
+<h2 id="ideas">Ideas<a class="headerlink" href="#ideas" title="Permanent link">#</a></h2>
 <p>The command <code>ukm</code> has been created with also having the
 <code>keysubdirs-as-groups</code> <a href="../non-core.html">syntactic sugar</a> in mind. If a
 <a href="#SKM">super key manager</a> manages the respective keys in

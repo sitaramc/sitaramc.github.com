@@ -2431,7 +2431,7 @@
 
 
 
-<h1 id="gitolite-cookbook">gitolite cookbook<a class="headerlink" href="#gitolite-cookbook" title="Permanent link"></a></h1>
+<h1 id="gitolite-cookbook">gitolite cookbook<a class="headerlink" href="#gitolite-cookbook" title="Permanent link">#</a></h1>
 <center>(a.k.a. "stop all that rambling and just tell me what I need to do!")</center>
 
 <hr />
@@ -2444,8 +2444,8 @@ done rather than explain <em>why</em>, many tasks can be described very easily.<
 it faster, simply because it's organised differently.</p>
 <p>Maybe this will help.  If you run into problems, please check the main
 documentation before asking for help.</p>
-<h2 id="administration">administration<a class="headerlink" href="#administration" title="Permanent link"></a></h2>
-<h3 id="separating-key-admin-from-repo-admin">separating "key admin" from "repo admin"<a class="headerlink" href="#separating-key-admin-from-repo-admin" title="Permanent link"></a></h3>
+<h2 id="administration">administration<a class="headerlink" href="#administration" title="Permanent link">#</a></h2>
+<h3 id="separating-key-admin-from-repo-admin">separating "key admin" from "repo admin"<a class="headerlink" href="#separating-key-admin-from-repo-admin" title="Permanent link">#</a></h3>
 <p>In gitolite, the person who controls the keys is the most critical in terms of
 security -- because he can always add his own key in your name :-)</p>
 <p>Traditionally, the same person also administers repos and permissions.  But
@@ -2463,8 +2463,8 @@ repo-manager manage everything through "actual.conf":</p>
 <span class="Statement">include</span> &quot;actual.conf&quot;
 </pre>
 
-<h2 id="access">access<a class="headerlink" href="#access" title="Permanent link"></a></h2>
-<h3 id="looking-up-repo-access-from-external-tools">looking up repo access from external tools<a class="headerlink" href="#looking-up-repo-access-from-external-tools" title="Permanent link"></a></h3>
+<h2 id="access">access<a class="headerlink" href="#access" title="Permanent link">#</a></h2>
+<h3 id="looking-up-repo-access-from-external-tools">looking up repo access from external tools<a class="headerlink" href="#looking-up-repo-access-from-external-tools" title="Permanent link">#</a></h3>
 <p>There are two supported interfaces for this, one in perl and one in shell.
 Other languages should probably use the shell mode.  (The shell mode has a
 very convenient "batch" mode if you need to check many repos at once).</p>
@@ -2494,14 +2494,14 @@ then
 </code></pre>
 <p><span class="gray">If your gitolite is older than v3.6, you must use the full ref name;
 just 'master' won't do.</span></p>
-<h3 id="allowing-access-by-other-programs">allowing access by other programs<a class="headerlink" href="#allowing-access-by-other-programs" title="Permanent link"></a></h3>
+<h3 id="allowing-access-by-other-programs">allowing access by other programs<a class="headerlink" href="#allowing-access-by-other-programs" title="Permanent link">#</a></h3>
 <p>Giving external tools (like apache) access to gitolite repositories involves
 making sure that the unix owner/group and permissions settings allow this.
 This is all described in the UMASK section in the page on the <a href="rc.html">rc file</a>,
 because that's the only setting that gitolite controls; every thing else is
 pure Unix.</p>
-<h2 id="commands">commands<a class="headerlink" href="#commands" title="Permanent link"></a></h2>
-<h3 id="adding-your-own-commands">adding your own commands<a class="headerlink" href="#adding-your-own-commands" title="Permanent link"></a></h3>
+<h2 id="commands">commands<a class="headerlink" href="#commands" title="Permanent link">#</a></h2>
+<h3 id="adding-your-own-commands">adding your own commands<a class="headerlink" href="#adding-your-own-commands" title="Permanent link">#</a></h3>
 <p>To add a command, say <code>foo</code>, do this:</p>
 <ol>
 <li>
@@ -2515,15 +2515,15 @@ pure Unix.</p>
     <code>chmod +x</code>!)</p>
 </li>
 </ol>
-<h3 id="making-commands-available-to-remote-users">making commands available to remote users<a class="headerlink" href="#making-commands-available-to-remote-users" title="Permanent link"></a></h3>
+<h3 id="making-commands-available-to-remote-users">making commands available to remote users<a class="headerlink" href="#making-commands-available-to-remote-users" title="Permanent link">#</a></h3>
 <p>Once you do the above, <code>foo</code> is available as <code>gitolite foo</code>.  To make it
 available to remote users (as <code>ssh git@host foo</code>), add the line:</p>
 <pre><code>`foo`,
 </code></pre>
 <p>(including the comma at the end) to the ENABLE list in the rc file.</p>
-<h2 id="hooks">hooks<a class="headerlink" href="#hooks" title="Permanent link"></a></h2>
+<h2 id="hooks">hooks<a class="headerlink" href="#hooks" title="Permanent link">#</a></h2>
 <p>Note: the main documentation for this feature starts <a href="non-core.html#hooks-and-gitolite">here</a>.</p>
-<h3 id="adding-your-own-update-hooks">adding your own update hooks<a class="headerlink" href="#adding-your-own-update-hooks" title="Permanent link"></a></h3>
+<h3 id="adding-your-own-update-hooks">adding your own update hooks<a class="headerlink" href="#adding-your-own-update-hooks" title="Permanent link">#</a></h3>
 <p>You have some update hooks (for example crlf checking) that you want to
 include in gitolite.  Assuming the hook itself is tested and works as a normal
 <strong>git</strong> update hook does (i.e., conforms to what <code>man githooks</code> says an update
@@ -2560,7 +2560,7 @@ gitolite.conf file:</p>
 <p>Either way, add/commit/push the change to the gitolite-admin repo.</p>
 </li>
 </ol>
-<h3 id="adding-other-non-update-hooks">adding other (non-update) hooks<a class="headerlink" href="#adding-other-non-update-hooks" title="Permanent link"></a></h3>
+<h3 id="adding-other-non-update-hooks">adding other (non-update) hooks<a class="headerlink" href="#adding-other-non-update-hooks" title="Permanent link">#</a></h3>
 <p>Say you want other hooks, like a post-receive hook.  Here's how:</p>
 <ol>
 <li>
@@ -2584,7 +2584,7 @@ chmod +x local/hooks/common/post-receive
     created after this will get them anyway).</p>
 </li>
 </ol>
-<h3 id="variation-maintain-these-hooks-in-the-gitolite-admin-repo">variation: maintain these hooks in the gitolite-admin repo<a class="headerlink" href="#variation-maintain-these-hooks-in-the-gitolite-admin-repo" title="Permanent link"></a></h3>
+<h3 id="variation-maintain-these-hooks-in-the-gitolite-admin-repo">variation: maintain these hooks in the gitolite-admin repo<a class="headerlink" href="#variation-maintain-these-hooks-in-the-gitolite-admin-repo" title="Permanent link">#</a></h3>
 <div class="admonition danger">
 <p class="admonition-title">Important security note:</p>
 <p><strong>If you enable this, anyone who can push changes to the admin repo will
@@ -2617,7 +2617,7 @@ the same except for the following differences:</p>
 <p>For update hooks, you will of course need to add VREF rule lines to
 appropriate repos in the conf file.  For non-update hooks, you <strong>don't</strong> need
 to run 'gitolite setup' on the server; the push takes care of that.</p>
-<h3 id="v36-variation-repo-specific-hooks"><span class="gray">(v3.6+)</span> variation: repo-specific hooks<a class="headerlink" href="#v36-variation-repo-specific-hooks" title="Permanent link"></a></h3>
+<h3 id="v36-variation-repo-specific-hooks"><span class="gray">(v3.6+)</span> variation: repo-specific hooks<a class="headerlink" href="#v36-variation-repo-specific-hooks" title="Permanent link">#</a></h3>
 <p>Until now, the non-update hooks you specified apply to all repos.  Here's how
 to apply them only to certain repos:</p>
 <ol>
@@ -2659,8 +2659,8 @@ repo bar @baz
 <p>add, commit, and push the admin repo.</p>
 </li>
 </ol>
-<h2 id="triggers">triggers<a class="headerlink" href="#triggers" title="Permanent link"></a></h2>
-<h3 id="adding-your-own-triggers">adding your own triggers<a class="headerlink" href="#adding-your-own-triggers" title="Permanent link"></a></h3>
+<h2 id="triggers">triggers<a class="headerlink" href="#triggers" title="Permanent link">#</a></h2>
+<h3 id="adding-your-own-triggers">adding your own triggers<a class="headerlink" href="#adding-your-own-triggers" title="Permanent link">#</a></h3>
 <p>First, write your trigger code, using the documentation <a href="triggers.html">here</a>.
 Note especially the sections "common arguments" and "trigger-specific
 arguments".  Look in the shipped triggers for ideas.</p>
@@ -2698,11 +2698,11 @@ and double check your work.</p>
 </li>
 </ol>
 <p>That should be it.</p>
-<h2 id="vrefs">VREFs<a class="headerlink" href="#vrefs" title="Permanent link"></a></h2>
-<h3 id="adding-your-own-vrefs">adding your own VREFs<a class="headerlink" href="#adding-your-own-vrefs" title="Permanent link"></a></h3>
+<h2 id="vrefs">VREFs<a class="headerlink" href="#vrefs" title="Permanent link">#</a></h2>
+<h3 id="adding-your-own-vrefs">adding your own VREFs<a class="headerlink" href="#adding-your-own-vrefs" title="Permanent link">#</a></h3>
 <p>Adding VREFs is the same as adding the update hook, so please see the section
 on "adding your own update hooks" above.</p>
-<h3 id="example-vrefs">example VREFs<a class="headerlink" href="#example-vrefs" title="Permanent link"></a></h3>
+<h3 id="example-vrefs">example VREFs<a class="headerlink" href="#example-vrefs" title="Permanent link">#</a></h3>
 <p>However, <em>writing</em> a proper VREF is not the same as writing a normal git
 "update hook".  A proper VREF does more than just take 3 arguments, do
 something, and exit with a non-zero exit code for failure.</p>
@@ -2719,7 +2719,7 @@ even for reads, you can do this in a <code>PRE_GIT</code> trigger; there's an ex
 in <code>contrib/triggers/IP-check</code> in the gitolite source tree that may be
 useful as a template.</p>
 </div>
-<h4 id="example-1-restricting-by-day-of-week">example 1: restricting by day of week<a class="headerlink" href="#example-1-restricting-by-day-of-week" title="Permanent link"></a></h4>
+<h4 id="example-1-restricting-by-day-of-week">example 1: restricting by day of week<a class="headerlink" href="#example-1-restricting-by-day-of-week" title="Permanent link">#</a></h4>
 <p>Here's the conf extract to say "junior devs can only push on weekdays":</p>
 <pre style="color: #ffffff; background-color: #000000;">
 <span class="Statement">repo</span> foo
@@ -2741,7 +2741,7 @@ the actual day of the week happens to be.</p>
 On a Monday to Friday, nothing happens, because the VREFs generated do not
 match any deny rules (or indeed any rules at all).  On weekends, they do
 match, and the push is denied.</p>
-<h4 id="example-2-restricting-by-source-ip-address">example 2: restricting by source IP address<a class="headerlink" href="#example-2-restricting-by-source-ip-address" title="Permanent link"></a></h4>
+<h4 id="example-2-restricting-by-source-ip-address">example 2: restricting by source IP address<a class="headerlink" href="#example-2-restricting-by-source-ip-address" title="Permanent link">#</a></h4>
 <p>This one restricts junior developers to push to this repo only from a specific
 network block.  The conf file here is slightly different.  We know that the
 VREF-maker will return with <em>some</em> network address (as you'll see in the code
@@ -2786,8 +2786,8 @@ the push.</p>
 to be careful when constructing the VREF rule.  For any VREF/FROM/A/B, the
 result of running <code>ipcalc -n A/B</code> must be A, otherwise this won't work.  That
 is, the bits of the network address after the network bits must be zero).</p>
-<h2 id="wild-repos">wild repos<a class="headerlink" href="#wild-repos" title="Permanent link"></a></h2>
-<h3 id="making-exceptions-for-specific-instances-of-a-wild-repo">making exceptions for <em>specific</em> instances of a wild repo<a class="headerlink" href="#making-exceptions-for-specific-instances-of-a-wild-repo" title="Permanent link"></a></h3>
+<h2 id="wild-repos">wild repos<a class="headerlink" href="#wild-repos" title="Permanent link">#</a></h2>
+<h3 id="making-exceptions-for-specific-instances-of-a-wild-repo">making exceptions for <em>specific</em> instances of a wild repo<a class="headerlink" href="#making-exceptions-for-specific-instances-of-a-wild-repo" title="Permanent link">#</a></h3>
 <p>Sometimes you want to specify rules or config for specific instances of a wild
 repo, while still leaving it to be created by a user in the normal way.</p>
 <p>This <strong>will not</strong> work:</p>
@@ -2825,8 +2825,8 @@ perfectly valid and supported.</p>
 of the previous one (<code>foo/..*</code>), everything there applies to this repo also.
 If you're not sure why that is, you may need to read up on <a href="conf.html#rule-accumulation">rule
 accumulation</a>.</p>
-<h2 id="moving-stuff-around">moving stuff around<a class="headerlink" href="#moving-stuff-around" title="Permanent link"></a></h2>
-<h3 id="moving-a-gitolite-install-from-one-machine-to-another">moving a gitolite install from one machine to another<a class="headerlink" href="#moving-a-gitolite-install-from-one-machine-to-another" title="Permanent link"></a></h3>
+<h2 id="moving-stuff-around">moving stuff around<a class="headerlink" href="#moving-stuff-around" title="Permanent link">#</a></h2>
+<h3 id="moving-a-gitolite-install-from-one-machine-to-another">moving a gitolite install from one machine to another<a class="headerlink" href="#moving-a-gitolite-install-from-one-machine-to-another" title="Permanent link">#</a></h3>
 <p>See <a href="install.html#moving-servers">moving servers</a>.</p>
 
 

@@ -1995,13 +1995,13 @@
 
 
 
-<h1 id="allowing-access-to-gitweb-and-git-daemon">allowing access to gitweb and git-daemon<a class="headerlink" href="#allowing-access-to-gitweb-and-git-daemon" title="Permanent link"></a></h1>
+<h1 id="allowing-access-to-gitweb-and-git-daemon">allowing access to gitweb and git-daemon<a class="headerlink" href="#allowing-access-to-gitweb-and-git-daemon" title="Permanent link">#</a></h1>
 <hr />
 <div class="admonition danger">
 <p>Gitolite does <strong>not</strong> install or configure gitweb/git-daemon -- that is a
 one-time setup you must do separately.</p>
 </div>
-<h2 id="gitweb">gitweb<a class="headerlink" href="#gitweb" title="Permanent link"></a></h2>
+<h2 id="gitweb">gitweb<a class="headerlink" href="#gitweb" title="Permanent link">#</a></h2>
 <p>The following repos are deemed to be readable by gitweb:</p>
 <ul>
 <li>Any repos readable by the special user <code>gitweb</code>.</li>
@@ -2025,11 +2025,11 @@ the <a href="rc.html">rc</a> file variable <code>GITWEB_PROJECTS_LIST</code>.  T
 variable, if it is not specified or empty, is <code>$HOME/projects.list</code>.</p>
 <p>In addition, each of the config variables described above is written to the
 repo to which it pertains, so that gitweb can use them.</p>
-<h3 id="changing-the-umask">changing the UMASK<a class="headerlink" href="#changing-the-umask" title="Permanent link"></a></h3>
+<h3 id="changing-the-umask">changing the UMASK<a class="headerlink" href="#changing-the-umask" title="Permanent link">#</a></h3>
 <p>Gitweb (or cgit, redmine, etc.) typically runs under a different userid, and
 the default permissions that gitolite sets make them unreadable.</p>
 <p>See the section on the <code>UMASK</code> variable in the page for the <a href="rc.html">rc file</a>.</p>
-<h3 id="repo-specific-authorisation-in-gitweb">repo-specific authorisation in gitweb<a class="headerlink" href="#repo-specific-authorisation-in-gitweb" title="Permanent link"></a></h3>
+<h3 id="repo-specific-authorisation-in-gitweb">repo-specific authorisation in gitweb<a class="headerlink" href="#repo-specific-authorisation-in-gitweb" title="Permanent link">#</a></h3>
 <p>Gitweb has a feature whereby it will call a (perl) function that you supply,
 passing it the full path to the repo being accessed.  If the remote user is
 authenticated, the username will be available, so your function can take those
@@ -2041,12 +2041,12 @@ apache/gitweb) is the same as the gitolite username.  If you're using
 gitolite's <a href="http.html">http</a> mode, this is probably already true, but if you're using
 the more widely used ssh mode, you'll have to make sure they match.</p>
 <p>You then need to add <a href="gitweb.conf.html">this code</a> to your gitweb.conf.</p>
-<h2 id="git-daemon">git-daemon<a class="headerlink" href="#git-daemon" title="Permanent link"></a></h2>
+<h2 id="git-daemon">git-daemon<a class="headerlink" href="#git-daemon" title="Permanent link">#</a></h2>
 <p>Any repo readable by the special user <code>daemon</code> is deemed to be readable by
 git-daemon.  For each of these repos, an empty file called
 <code>git-daemon-export-ok</code> is created in the repository (i.e., the <code>repo.git</code>
 directory inside <code>$HOME/repositories</code>).</p>
-<h2 id="tips">tips<a class="headerlink" href="#tips" title="Permanent link"></a></h2>
+<h2 id="tips">tips<a class="headerlink" href="#tips" title="Permanent link">#</a></h2>
 <p>Setting descriptions en-masse usually does not make sense, but you can
 certainly do things like</p>
 <pre><code>repo @all

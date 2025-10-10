@@ -2083,7 +2083,7 @@
 
 
 
-<h1 id="help-for-emergencies">help for emergencies<a class="headerlink" href="#help-for-emergencies" title="Permanent link"></a></h1>
+<h1 id="help-for-emergencies">help for emergencies<a class="headerlink" href="#help-for-emergencies" title="Permanent link">#</a></h1>
 <center><span class="red">**"Don't Panic!"**</span></center>
 
 <hr />
@@ -2093,13 +2093,13 @@
 Unless the documentation says "do this from <code>root</code>", assume it is to be
 done from the <a href="concepts.html#the-hosting-user">hosting user</a> account.</p>
 </div>
-<h2 id="installsetup-issues">install/setup issues<a class="headerlink" href="#installsetup-issues" title="Permanent link"></a></h2>
+<h2 id="installsetup-issues">install/setup issues<a class="headerlink" href="#installsetup-issues" title="Permanent link">#</a></h2>
 <p>Most install/setup issues in ssh mode are caused by lack of ssh knowledge.
 Ssh is a complex beast, and can cause problems for people who are not familiar
 with its quirks.</p>
 <p><strong>Be prepared to spend some time reading the <a href="ssh.html">ssh</a> documentation that comes
 with gitolite</strong>.</p>
-<h2 id="lost-admin-keyaccess">lost admin key/access<a class="headerlink" href="#lost-admin-keyaccess" title="Permanent link"></a></h2>
+<h2 id="lost-admin-keyaccess">lost admin key/access<a class="headerlink" href="#lost-admin-keyaccess" title="Permanent link">#</a></h2>
 <p>If you lost your gitolite <strong>admin</strong> key or access, here's what you do.  We'll
 assume your username is "alice" (i.e., alice has RW or RW+ permissions on the
 gitolite-admin repo).</p>
@@ -2114,7 +2114,7 @@ gitolite-admin repo).</p>
 </ul>
 <p>That's it; the new alice.pub file replaces whatever existed in the repo
 before.</p>
-<h2 id="bypassing-gitolite">bypassing gitolite<a class="headerlink" href="#bypassing-gitolite" title="Permanent link"></a></h2>
+<h2 id="bypassing-gitolite">bypassing gitolite<a class="headerlink" href="#bypassing-gitolite" title="Permanent link">#</a></h2>
 <p>You may have lost access because of a conf file error, in which case the above
 trick (which merely changes a pubkey) won't help.  What you want is to make
 changes to the gitolite-admin repo (or perhaps just rewind) and push that.
@@ -2141,8 +2141,8 @@ Here's how to do that:</p>
 <p><font color="red">
 <strong>NOTE</strong>: gitolite does <strong>no access checking</strong> when you do this!
 </font></p>
-<h2 id="botched-something">botched something?<a class="headerlink" href="#botched-something" title="Permanent link"></a></h2>
-<h3 id="fixing-botched-repos">fixing botched repos<a class="headerlink" href="#fixing-botched-repos" title="Permanent link"></a></h3>
+<h2 id="botched-something">botched something?<a class="headerlink" href="#botched-something" title="Permanent link">#</a></h2>
+<h3 id="fixing-botched-repos">fixing botched repos<a class="headerlink" href="#fixing-botched-repos" title="Permanent link">#</a></h3>
 <p>If you copied some repos from somewhere else, or mucked with the hooks for
 some reason, or deleted any gitolite-specific files, or tried any other
 "behind the scenes" stunts, the quickest, sanest, way to fix everything up is:</p>
@@ -2164,7 +2164,7 @@ repos store the creator name in a file called gl-creator, and the data managed
 by the <a href="user.html#setget-additional-permissions-for-repos-you-created">perms</a> command in a file called "gl-perms".  If these files got
 deleted, you may have to manually recreate them.  The format is very simple
 and guessable by looking at those files on any other wild repo.</p>
-<h3 id="cleaning-out-a-botched-install">cleaning out a botched install<a class="headerlink" href="#cleaning-out-a-botched-install" title="Permanent link"></a></h3>
+<h3 id="cleaning-out-a-botched-install">cleaning out a botched install<a class="headerlink" href="#cleaning-out-a-botched-install" title="Permanent link">#</a></h3>
 <p>Here's a list of files and directories to deal with:</p>
 <ul>
 <li>
@@ -2201,7 +2201,7 @@ update hook, if any, is replaced with gitolite's own hook.</p>
 <p>Gitolite does not touch any other files in the ssh directory.</p>
 </li>
 </ul>
-<h2 id="common-errors">common errors<a class="headerlink" href="#common-errors" title="Permanent link"></a></h2>
+<h2 id="common-errors">common errors<a class="headerlink" href="#common-errors" title="Permanent link">#</a></h2>
 <ul>
 <li>
 <p><code>WARNING: keydir/&lt;yourname&gt;.pub duplicates a non-gitolite key, sshd will ignore it</code></p>
@@ -2226,9 +2226,9 @@ one-time thing, you can try <code>gitolite push</code> instead of <code>git push
 do this often, maybe you don't need gitolite!</p>
 </li>
 </ul>
-<h2 id="uncommon-errors">uncommon errors<a class="headerlink" href="#uncommon-errors" title="Permanent link"></a></h2>
+<h2 id="uncommon-errors">uncommon errors<a class="headerlink" href="#uncommon-errors" title="Permanent link">#</a></h2>
 <p>(This page intentionally left blank)</p>
-<h2 id="non-standard-configs-thatll-trip-you-up">non-standard configs that'll trip you up<a class="headerlink" href="#non-standard-configs-thatll-trip-you-up" title="Permanent link"></a></h2>
+<h2 id="non-standard-configs-thatll-trip-you-up">non-standard configs that'll trip you up<a class="headerlink" href="#non-standard-configs-thatll-trip-you-up" title="Permanent link">#</a></h2>
 <ul>
 <li>
 <p><strong>IMPORTANT</strong>: although a default openssh config will not do this (AFAIK),
@@ -2268,7 +2268,7 @@ do this often, maybe you don't need gitolite!</p>
     /etc/shells, there might be problems.</p>
 </li>
 </ul>
-<h2 id="things-that-are-not-gitolite-problems">things that are not gitolite problems<a class="headerlink" href="#things-that-are-not-gitolite-problems" title="Permanent link"></a></h2>
+<h2 id="things-that-are-not-gitolite-problems">things that are not gitolite problems<a class="headerlink" href="#things-that-are-not-gitolite-problems" title="Permanent link">#</a></h2>
 <p>There are several things that appear to be gitolite problems but are not.  I
 cannot help with most of these (although the good folks on irc or the mailing
 list -- see <a href="index.html#contactsupport">contact</a> -- might be able to; they certainly appear to have a

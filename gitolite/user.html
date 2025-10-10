@@ -2049,11 +2049,11 @@
 
 
 
-<h1 id="the-users-view">the users' view<a class="headerlink" href="#the-users-view" title="Permanent link"></a></h1>
+<h1 id="the-users-view">the users' view<a class="headerlink" href="#the-users-view" title="Permanent link">#</a></h1>
 <hr />
 <p>This page talks about what gitolite looks like to non-admins, and the commands
 and features available to them.</p>
-<h2 id="accessing-gitolite">accessing gitolite<a class="headerlink" href="#accessing-gitolite" title="Permanent link"></a></h2>
+<h2 id="accessing-gitolite">accessing gitolite<a class="headerlink" href="#accessing-gitolite" title="Permanent link">#</a></h2>
 <p>The most common setup is based on ssh, where your admin asks you to send him
 your public key, and uses that to setup your access.</p>
 <p>Your actual access is either a git command (like <code>git clone git@server:reponame</code>,
@@ -2078,13 +2078,13 @@ work.  The only things to note are:</p>
     like) but <strong>gitolite</strong> commands in general (see below) will not like the
     additional ".git" at the end.</li>
 </ul>
-<h2 id="the-info-command">the info command<a class="headerlink" href="#the-info-command" title="Permanent link"></a></h2>
+<h2 id="the-info-command">the info command<a class="headerlink" href="#the-info-command" title="Permanent link">#</a></h2>
 <p>The only command that is <em>always</em> available to every user is the <code>info</code>
 command (run <code>ssh git@host info -h</code> for help), which tells you what version of
 gitolite and git are on the server, and what repositories you have access to.
 The list of repos is very useful if you have doubts about the spelling of some
 new repo that you know was setup.</p>
-<h2 id="normal-and-wild-repos">normal and wild repos<a class="headerlink" href="#normal-and-wild-repos" title="Permanent link"></a></h2>
+<h2 id="normal-and-wild-repos">normal and wild repos<a class="headerlink" href="#normal-and-wild-repos" title="Permanent link">#</a></h2>
 <p>Gitolite has two kinds of repos.  Normal repos are specified by their full
 names in the config file.  "Wildcard" repos are specified by a regex in the
 config file.  Try the <a href="user.html#the-info-command"><code>info</code> command</a> and see if it shows any lines
@@ -2095,8 +2095,8 @@ pushing to them -- gitolite automatically creates the repo on the server side.
 (If your site is different, your admin will tell you).</p>
 <p>When you create such a repo, your "ownership" of it (as far as gitolite is
 concerned) is automatically recorded by gitolite.</p>
-<h2 id="other-commands">other commands<a class="headerlink" href="#other-commands" title="Permanent link"></a></h2>
-<h3 id="setget-additional-permissions-for-repos-you-created">set/get additional permissions for repos you created<a class="headerlink" href="#setget-additional-permissions-for-repos-you-created" title="Permanent link"></a></h3>
+<h2 id="other-commands">other commands<a class="headerlink" href="#other-commands" title="Permanent link">#</a></h2>
+<h3 id="setget-additional-permissions-for-repos-you-created">set/get additional permissions for repos you created<a class="headerlink" href="#setget-additional-permissions-for-repos-you-created" title="Permanent link">#</a></h3>
 <p>The gitolite config may have several permissions lines for your repo, like so:</p>
 <pre style="color: #ffffff; background-color: #000000;">
 <span class="Statement">repo</span> pub/CREATOR/..*
@@ -2132,9 +2132,9 @@ read access to the special 'gitolite-admin' repo.  Sorry.  The idea is
 that your admin will tell you what "roles" he added into rules for your
 repos, and what permissions those roles have.</p>
 </div>
-<h3 id="adding-a-description-to-repos-you-created">adding a description to repos you created<a class="headerlink" href="#adding-a-description-to-repos-you-created" title="Permanent link"></a></h3>
+<h3 id="adding-a-description-to-repos-you-created">adding a description to repos you created<a class="headerlink" href="#adding-a-description-to-repos-you-created" title="Permanent link">#</a></h3>
 <p>The <code>desc</code> command is extremely simple.  Run <code>ssh git@host desc -h</code> for help.</p>
-<h2 id="site-local-commands">"site-local" commands<a class="headerlink" href="#site-local-commands" title="Permanent link"></a></h2>
+<h2 id="site-local-commands">"site-local" commands<a class="headerlink" href="#site-local-commands" title="Permanent link">#</a></h2>
 <p>The main purpose of gitolite is to prevent you from getting a shell.  But
 there are commands that you often need to run on the server (i.e., cannot be
 done by pushing something to a repo).</p>
@@ -2144,7 +2144,7 @@ scripts that your admin may install, or may use as a starting point for his
 own, if he chooses.</p>
 <p>Think of these commands as equivalent to those in <code>COMMAND_DIR</code> in <code>man git-shell</code>.</p>
 <p>You can get a list of available commands by running <code>ssh git@host help</code>.</p>
-<h2 id="personal-branches">"personal" branches<a class="headerlink" href="#personal-branches" title="Permanent link"></a></h2>
+<h2 id="personal-branches">"personal" branches<a class="headerlink" href="#personal-branches" title="Permanent link">#</a></h2>
 <p>"personal" branches are great for environments where developers need to share
 work but can't directly pull from each other (usually due to either a
 networking or authentication related reason, both common in corporate setups).</p>

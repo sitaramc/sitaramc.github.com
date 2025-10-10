@@ -2151,7 +2151,7 @@
 
 
 
-<h1 id="mirroring-using-gitolite">mirroring using gitolite<a class="headerlink" href="#mirroring-using-gitolite" title="Permanent link"></a></h1>
+<h1 id="mirroring-using-gitolite">mirroring using gitolite<a class="headerlink" href="#mirroring-using-gitolite" title="Permanent link">#</a></h1>
 <hr />
 <div class="admonition danger">
 <p class="admonition-title">v2 mirroring users:</p>
@@ -2169,7 +2169,7 @@ cannot support that (mainly due to lack of time).</p>
 on 2020-08-04), v3.6.12.  For most people, until you upgrade, this
 documentation will have some terminology differences.</p>
 </div>
-<h2 id="quick-intro">quick intro<a class="headerlink" href="#quick-intro" title="Permanent link"></a></h2>
+<h2 id="quick-intro">quick intro<a class="headerlink" href="#quick-intro" title="Permanent link">#</a></h2>
 <p>Mirroring is simple: you have one "master" server and one or more "copy"
 servers.  The copies get updates only from the master; to the rest of the
 world they are at best read-only.</p>
@@ -2201,7 +2201,7 @@ write to their local mirror for <em>all</em> repos, even if their local mirror i
 only a copy for some.</p>
 </li>
 </ul>
-<h2 id="caveats">caveats<a class="headerlink" href="#caveats" title="Permanent link"></a></h2>
+<h2 id="caveats">caveats<a class="headerlink" href="#caveats" title="Permanent link">#</a></h2>
 <ul>
 <li>
 <p>Mirroring by itself will never <em>create</em> a repo on a copy; it has to exist
@@ -2265,10 +2265,10 @@ time to fix them immediately :-)</p>
     seconds of sleep in your script.</p>
 </li>
 </ul>
-<h2 id="setting-up-mirroring">setting up mirroring<a class="headerlink" href="#setting-up-mirroring" title="Permanent link"></a></h2>
+<h2 id="setting-up-mirroring">setting up mirroring<a class="headerlink" href="#setting-up-mirroring" title="Permanent link">#</a></h2>
 <p>This is in two parts: the initial setup and the rc file, followed by the conf
 file settings and syntax.</p>
-<h3 id="the-initial-setup-and-the-rc-file">the initial setup and the <a href="rc.html">rc file</a><a class="headerlink" href="#the-initial-setup-and-the-rc-file" title="Permanent link"></a></h3>
+<h3 id="the-initial-setup-and-the-rc-file">the initial setup and the <a href="rc.html">rc file</a><a class="headerlink" href="#the-initial-setup-and-the-rc-file" title="Permanent link">#</a></h3>
 <p>For <strong>each</strong> server:</p>
 <ul>
 <li>
@@ -2341,7 +2341,7 @@ get expected results.  <strong>Do NOT proceed otherwise.</strong></p>
     for how.</p>
 </li>
 </ul>
-<h3 id="conf-file-settings-and-syntax">conf file settings and syntax<a class="headerlink" href="#conf-file-settings-and-syntax" title="Permanent link"></a></h3>
+<h3 id="conf-file-settings-and-syntax">conf file settings and syntax<a class="headerlink" href="#conf-file-settings-and-syntax" title="Permanent link">#</a></h3>
 <p>Mirroring is defined by the following <a href="options.html">options</a>.  You can have different
 settings for different repos, and of course some repos may not have any mirror
 options at all -- they are then purely local.</p>
@@ -2365,7 +2365,7 @@ have several copy lists, as long as the config key starts with
 </pre>
 
 <p>Do not repeat a key; then only the last line for that key will be effective.</p>
-<h4 id="v36-preventing-automatic-sync"><span class="gray">(v3.6+)</span> preventing automatic sync<a class="headerlink" href="#v36-preventing-automatic-sync" title="Permanent link"></a></h4>
+<h4 id="v36-preventing-automatic-sync"><span class="gray">(v3.6+)</span> preventing automatic sync<a class="headerlink" href="#v36-preventing-automatic-sync" title="Permanent link">#</a></h4>
 <p>Sometimes you don't want a repo to be mirrored automatically (as soon as
 someone pushes to the master) to all the copies.  For whatever reasons, you
 have some copies for whom you would like to trigger the sync later (and you
@@ -2386,7 +2386,7 @@ use <code>nosync-quiet</code> as the option instead.</p>
 </pre>
 
 <p>(Eventually, this will appear in v3.6.14)</p>
-<h2 id="v361-mirroring-failures"><span class="gray">(v3.6.1+)</span> mirroring failures<a class="headerlink" href="#v361-mirroring-failures" title="Permanent link"></a></h2>
+<h2 id="v361-mirroring-failures"><span class="gray">(v3.6.1+)</span> mirroring failures<a class="headerlink" href="#v361-mirroring-failures" title="Permanent link">#</a></h2>
 <p>Since mirror pushes happen asynchronously (i.e, the user who originally pushed
 does not have to wait for the mirrors to be synced), any mirror push failures
 are not immediately visible to a human being, although you will find them if
@@ -2409,7 +2409,7 @@ putting it right after the HOSTNAME variable).</span></p>
 <p>You can see the mirror status of any repo using the 'mirror status' command;
 the command line help for the mirror command ('gitolite mirror -h' or 'ssh
 git@host mirror -h') has details.</p>
-<h2 id="manually-synchronising-a-copy-repo">manually synchronising a copy repo<a class="headerlink" href="#manually-synchronising-a-copy-repo" title="Permanent link"></a></h2>
+<h2 id="manually-synchronising-a-copy-repo">manually synchronising a copy repo<a class="headerlink" href="#manually-synchronising-a-copy-repo" title="Permanent link">#</a></h2>
 <p>You can use the <code>gitolite mirror push</code> command on a master to manually
 synchronise any of its copies.  Try it with <code>-h</code> to get usage info.</p>
 <p>Tip: if you want to do this to all the copies, try this:</p>
@@ -2422,7 +2422,7 @@ done
 details.</p>
 <p>Note: if your version of the mirror command does not support 'list copies',
 use <code>gitolite git-config -r reponame mirror.copies | cut -f3</code> instead.</p>
-<h2 id="redirected-pushes">redirected pushes<a class="headerlink" href="#redirected-pushes" title="Permanent link"></a></h2>
+<h2 id="redirected-pushes">redirected pushes<a class="headerlink" href="#redirected-pushes" title="Permanent link">#</a></h2>
 <p><strong>Please read carefully; there are security implications if you enable this
 for mirrors NOT under your control</strong>.</p>
 <p>Normally, a master, (and <em>only</em> a master), pushes to a copy, and the copies
@@ -2472,7 +2472,7 @@ second one trusts only some copies.</p>
 <p>You cannot redirect gitolite commands (like perms, etc).</p>
 </li>
 </ul>
-<h2 id="appendix-a-hostname-substitution">appendix A: HOSTNAME substitution<a class="headerlink" href="#appendix-a-hostname-substitution" title="Permanent link"></a></h2>
+<h2 id="appendix-a-hostname-substitution">appendix A: HOSTNAME substitution<a class="headerlink" href="#appendix-a-hostname-substitution" title="Permanent link">#</a></h2>
 <p>Wherever gitolite sees the word <code>%HOSTNAME</code>, it will replace it with the
 HOSTNAME supplied in the rc file, if one was supplied.  This lets you maintain
 configurations for all servers in one repo, yet have them act differently on
@@ -2489,12 +2489,12 @@ different servers, by saying something like:</p>
 
 <p>(you still have to define @mars-admins, @phobos-admins, etc., but the actual
 VREF is now one line instead of one for each server!)</p>
-<h2 id="appendix-b-efficiency-versus-paranoia">appendix B: efficiency versus paranoia<a class="headerlink" href="#appendix-b-efficiency-versus-paranoia" title="Permanent link"></a></h2>
+<h2 id="appendix-b-efficiency-versus-paranoia">appendix B: efficiency versus paranoia<a class="headerlink" href="#appendix-b-efficiency-versus-paranoia" title="Permanent link">#</a></h2>
 <p>If you're paranoid enough to use mirrors, you should be paranoid enough to
 set this on each server, despite the possible CPU overhead:</p>
 <pre><code>git config --global receive.fsckObjects true
 </code></pre>
-<h2 id="appendix-c-moving-the-admin-repo-to-a-different-master">appendix C: moving the admin repo to a different master<a class="headerlink" href="#appendix-c-moving-the-admin-repo-to-a-different-master" title="Permanent link"></a></h2>
+<h2 id="appendix-c-moving-the-admin-repo-to-a-different-master">appendix C: moving the admin repo to a different master<a class="headerlink" href="#appendix-c-moving-the-admin-repo-to-a-different-master" title="Permanent link">#</a></h2>
 <p>Moving only some repos (other than the gitolite-admin repo) to a different
 master is easy.  Just make the change in the gitolite.conf file, add, commit,
 and push.</p>
@@ -2536,7 +2536,7 @@ the master.</p>
 
 -->
 
-<h2 id="appendix-d-fixing-a-broken-copy">appendix D: fixing a broken copy<a class="headerlink" href="#appendix-d-fixing-a-broken-copy" title="Permanent link"></a></h2>
+<h2 id="appendix-d-fixing-a-broken-copy">appendix D: fixing a broken copy<a class="headerlink" href="#appendix-d-fixing-a-broken-copy" title="Permanent link">#</a></h2>
 <p>Let's say you had</p>
 <pre><code>option mirror.master        =   mars
 option mirror.copies        =   phobos deimos

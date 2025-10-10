@@ -2127,13 +2127,13 @@
 
 
 
-<h1 id="gitolite-performance">gitolite performance<a class="headerlink" href="#gitolite-performance" title="Permanent link"></a></h1>
+<h1 id="gitolite-performance">gitolite performance<a class="headerlink" href="#gitolite-performance" title="Permanent link">#</a></h1>
 <hr />
 <p>TOP TIP: If you have more than 2000 or so repos, then you should be using v3.2
 or later; there was a bit of code that went in there that makes a <em>huge</em>
 difference for really large sites.</p>
 <hr />
-<h2 id="factors-affecting-gitolite-performance">factors affecting gitolite performance<a class="headerlink" href="#factors-affecting-gitolite-performance" title="Permanent link"></a></h2>
+<h2 id="factors-affecting-gitolite-performance">factors affecting gitolite performance<a class="headerlink" href="#factors-affecting-gitolite-performance" title="Permanent link">#</a></h2>
 <p>A lot of the following discussion involves understanding these factors:</p>
 <ul>
 <li>
@@ -2176,18 +2176,18 @@ various roles by running the <a href="user.html#setget-additional-permissions-fo
 <p>This mapping is saved in a file called <code>gl-perms</code> in the repo directory.</p>
 </li>
 </ul>
-<h2 id="types-of-performance-issues">types of performance issues<a class="headerlink" href="#types-of-performance-issues" title="Permanent link"></a></h2>
+<h2 id="types-of-performance-issues">types of performance issues<a class="headerlink" href="#types-of-performance-issues" title="Permanent link">#</a></h2>
 <p>Gitolite performance can be discussed in four different scenarios:</p>
-<h3 id="normal-git-activity">normal git activity<a class="headerlink" href="#normal-git-activity" title="Permanent link"></a></h3>
+<h3 id="normal-git-activity">normal git activity<a class="headerlink" href="#normal-git-activity" title="Permanent link">#</a></h3>
 <p>A user accesses a git repo using git clone, fetch, push, etc.</p>
 <p>Gitolite is heavily optimised for the day to day "developer" activity by
 users.  You should <em>never</em> have any issues with this, regardless of what mix
 of factors (affecting performance; see above) you have.</p>
-<h3 id="admin-push">admin push<a class="headerlink" href="#admin-push" title="Permanent link"></a></h3>
+<h3 id="admin-push">admin push<a class="headerlink" href="#admin-push" title="Permanent link">#</a></h3>
 <p>An admin does a "push" to the "gitolite-admin" repo (or does the
 equivalent when <a href="odds-and-ends.html#administering-gitolite-directly-on-the-server">administering gitolite directly on the server</a>).</p>
 <p>What happens then can be divided into two distinct parts.</p>
-<h4 id="gitolite-compile"><code>gitolite compile</code><a class="headerlink" href="#gitolite-compile" title="Permanent link"></a></h4>
+<h4 id="gitolite-compile"><code>gitolite compile</code><a class="headerlink" href="#gitolite-compile" title="Permanent link">#</a></h4>
 <p>The first part is <code>gitolite compile</code>.  This is influenced by the conf file
 size as well as the number of normal repos.  For each normal repo, gitolite
 has to write the <code>gl-conf</code> file in that repo's directory.</p>
@@ -2221,7 +2221,7 @@ really (<strong>really!</strong>) need it.  Instructions and caveats are in the 
 file itself.</p>
 </li>
 </ol>
-<h4 id="gitolite-trigger-post_compile"><code>gitolite trigger POST_COMPILE</code><a class="headerlink" href="#gitolite-trigger-post_compile" title="Permanent link"></a></h4>
+<h4 id="gitolite-trigger-post_compile"><code>gitolite trigger POST_COMPILE</code><a class="headerlink" href="#gitolite-trigger-post_compile" title="Permanent link">#</a></h4>
 <p>The second part runs all the <code>POST_COMPILE</code> triggers scripts.  On a default
 installation, this includes maintaining <code>~/.ssh/authorised_keys</code>, updating
 <a href="gitweb-daemon.html">gitweb and daemon</a> permissions, and updating <a href="git-config.html">"config"</a> values.</p>
@@ -2231,7 +2231,7 @@ other repos), <em>and</em> what options are enabled in your <code>~/.gitolite.rc
 to each of them (see "scan ALL repos" section later).  For example, the
 trigger script that updates the "projects.list" file for gitweb needs to check
 every repo to see if the user <code>gitweb</code> is allowed <code>R</code>ead access to it.</p>
-<h3 id="new-wild-repo">new wild repo<a class="headerlink" href="#new-wild-repo" title="Permanent link"></a></h3>
+<h3 id="new-wild-repo">new wild repo<a class="headerlink" href="#new-wild-repo" title="Permanent link">#</a></h3>
 <p>A user creates a brand new "wild" repo.</p>
 <p>If you use only the default set of options enabled in the rc file, this
 should be pretty fast, though some of the non-default options may still be
@@ -2247,7 +2247,7 @@ Or just upgrade from github!</p>
 after a user runs a wild repo create -- any subtask of that 'create' that
 takes more than a second is a problem.  Send details to the mailing list so we
 can discuss and fix whatever can be fixed.</p>
-<h3 id="scan-all-repos">scan ALL repos<a class="headerlink" href="#scan-all-repos" title="Permanent link"></a></h3>
+<h3 id="scan-all-repos">scan ALL repos<a class="headerlink" href="#scan-all-repos" title="Permanent link">#</a></h3>
 <p>There are a few activities that scan <strong>all</strong> repos, looking for a given
 user's permission on <strong>each</strong> of them:</p>
 <ul>
@@ -2265,11 +2265,11 @@ needs to read <em>lots of</em> small files (one in each repo directory)... which
 takes time.  And depends on how fast your disk is, too.</p>
 <p>The appendix has a solution for this, using a perl module called Memoize
 (comes standard with perl); check down there for details.</p>
-<h2 id="appendix-1-using-memoize">appendix 1: using <code>memoize</code><a class="headerlink" href="#appendix-1-using-memoize" title="Permanent link"></a></h2>
+<h2 id="appendix-1-using-memoize">appendix 1: using <code>memoize</code><a class="headerlink" href="#appendix-1-using-memoize" title="Permanent link">#</a></h2>
 <p>It seems that perl's Memoize module does a great job at helping with the "scan
 ALL repos" use case, at least after the first time a user accesses gitweb or
 runs the 'info' command.</p>
-<h3 id="gitweb">gitweb<a class="headerlink" href="#gitweb" title="Permanent link"></a></h3>
+<h3 id="gitweb">gitweb<a class="headerlink" href="#gitweb" title="Permanent link">#</a></h3>
 <p>To start with, here's tested code to add into gitweb.conf:</p>
 <pre style="color: #ffffff; background-color: #000000;">
 <span class="Comment"># ----------------------------------------------------------------------</span>
@@ -2324,7 +2324,7 @@ you may have to run it by your security team (but remember these are
 removing the permission till the next morning!)</p>
 <p>The second is easily solved by asking them to run that command we created.</p>
 <p>That's it.</p>
-<h3 id="the-info-command">the <code>info</code> command<a class="headerlink" href="#the-info-command" title="Permanent link"></a></h3>
+<h3 id="the-info-command">the <code>info</code> command<a class="headerlink" href="#the-info-command" title="Permanent link">#</a></h3>
 <p>TODO: see if the info command can also benefit from something similar!</p>
 
 

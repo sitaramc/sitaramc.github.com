@@ -1894,7 +1894,7 @@
 
 
 
-<h1 id="gitolite-and-the-redis-cache">gitolite and the (redis) cache<a class="headerlink" href="#gitolite-and-the-redis-cache" title="Permanent link"></a></h1>
+<h1 id="gitolite-and-the-redis-cache">gitolite and the (redis) cache<a class="headerlink" href="#gitolite-and-the-redis-cache" title="Permanent link">#</a></h1>
 <hr />
 <p>(requires v3.6.1)</p>
 <p><strong>WARNING: this has not been tested in a while.  YMMV</strong></p>
@@ -1909,7 +1909,7 @@ like that, but since this is only a <em>cache</em>, an in-memory database works 
 better.  However, Redis does have one real advantage: cache [timeout][]s!</p>
 <p>Support for this feature is limited to verifiable gitolite bugs, if you find
 any; I can't help you with redis itself.</p>
-<h2 id="how-does-caching-work">how does caching work?<a class="headerlink" href="#how-does-caching-work" title="Permanent link"></a></h2>
+<h2 id="how-does-caching-work">how does caching work?<a class="headerlink" href="#how-does-caching-work" title="Permanent link">#</a></h2>
 <p>To use this feature, just install Redis, then the perl driver "Redis.pm".
 Install or upgrade Gitolite to the latest master, then uncomment (or add, if
 it doesn't exist) the following line in the rc file:</p>
@@ -1920,7 +1920,7 @@ ENABLE list.  (If in doubt, add it just after the UMASK entry).</p>
 <p>Then perform some gitolite operation (anything that requires any form of
 access checking).  Redis should start automatically and the right things
 should happen; see below if it does not.</p>
-<h2 id="troubleshooting-caching">troubleshooting caching<a class="headerlink" href="#troubleshooting-caching" title="Permanent link"></a></h2>
+<h2 id="troubleshooting-caching">troubleshooting caching<a class="headerlink" href="#troubleshooting-caching" title="Permanent link">#</a></h2>
 <p>If you ever kill the redis-server be sure to also remove the socket file
 <code>~/.redis-gitolite.sock</code>.  Conversely if you ever remove the sock file be sure
 to kill the process also.  Otherwise you get weird behaviour, including
@@ -1930,8 +1930,8 @@ try again.)</p>
 <p><strong>Note</strong>: To the best of my knowledge, this cannot result in wrong data being
 passed to gitolite, causing a security breach.  If anyone has time I'd
 appreciate a review of the code.</p>
-<h2 id="caching-details">caching details<a class="headerlink" href="#caching-details" title="Permanent link"></a></h2>
-<h3 id="what-is-cached">what is cached<a class="headerlink" href="#what-is-cached" title="Permanent link"></a></h3>
+<h2 id="caching-details">caching details<a class="headerlink" href="#caching-details" title="Permanent link">#</a></h2>
+<h3 id="what-is-cached">what is cached<a class="headerlink" href="#what-is-cached" title="Permanent link">#</a></h3>
 <p>At present, gitolite caches only one specific function: the "access()"
 function.  This is available from the shell as the 'gitolite access ...'
 command, as well as from perl via the "Easy.pm" interface; see [dev-notes][]
@@ -1941,7 +1941,7 @@ might see some things running a bit slower -- at least until things settle
 down.</p>
 <p>Finally, if you run 'perms', the cache entries <em>for that specific repo</em> are
 also flushed.</p>
-<h3 id="how-long-is-it-cached-timeout">how long is it cached {#timeout}<a class="headerlink" href="#how-long-is-it-cached-timeout" title="Permanent link"></a></h3>
+<h3 id="how-long-is-it-cached-timeout">how long is it cached {#timeout}<a class="headerlink" href="#how-long-is-it-cached-timeout" title="Permanent link">#</a></h3>
 <p>Redis has a timeout feature that can delete entries after a certain period of
 time has elapsed since they were created or updated.  Gitolite sets a timeout
 of 90000 seconds (just over a day) normally.  However, if you're using the

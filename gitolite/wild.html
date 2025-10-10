@@ -2199,14 +2199,14 @@
 
 
 
-<h1 id="wild-repos-user-created-repos">"wild" repos (user created repos)<a class="headerlink" href="#wild-repos-user-created-repos" title="Permanent link"></a></h1>
+<h1 id="wild-repos-user-created-repos">"wild" repos (user created repos)<a class="headerlink" href="#wild-repos-user-created-repos" title="Permanent link">#</a></h1>
 <hr />
 <p>The wildrepos feature allows you to specify access control rules using regular
 expression patterns, so you can have many actual repos being served by a
 single set of rules in the config file.  The <a href="regex.html">regex</a> can also include the
 word <code>CREATOR</code> in it, allowing you to parametrise the name of the user
 creating the repo.</p>
-<h2 id="quick-introexample">quick intro/example<a class="headerlink" href="#quick-introexample" title="Permanent link"></a></h2>
+<h2 id="quick-introexample">quick intro/example<a class="headerlink" href="#quick-introexample" title="Permanent link">#</a></h2>
 <p>If you're curious about the feature but you aren't sure if you want to read
 the whole page, here's a very simple example.</p>
 <p>This is what the admin added to the conf file:</p>
@@ -2247,7 +2247,7 @@ add 'u2' as a writer and 'u3' and 'u5' as readers:</p>
 actual conf file or any admin intervention.</p>
 <p>And that's it for our quick intro example.  The rest of this page will explain
 all this in much more detail.</p>
-<h2 id="declaring-wild-repos-in-the-conf-file">declaring wild repos in the conf file<a class="headerlink" href="#declaring-wild-repos-in-the-conf-file" title="Permanent link"></a></h2>
+<h2 id="declaring-wild-repos-in-the-conf-file">declaring wild repos in the conf file<a class="headerlink" href="#declaring-wild-repos-in-the-conf-file" title="Permanent link">#</a></h2>
 <p>Here's a slightly more detailed example, starting with what the admin puts in
 the conf file:</p>
 <pre style="color: #ffffff; background-color: #000000;">
@@ -2266,14 +2266,14 @@ the conf file:</p>
 users the right to <em>create a repo</em>.  <span class="gray">This is not to be confused with
 the "RWC" permission or its variants described <a href="conf-2.html#appendix-1-different-types-of-write-operations">elsewhere</a>, which
 are about creating <em>branches</em>, not <em>repos</em>.</span></p>
-<h2 id="user-creating-a-specific-repo">(<strong>user</strong>) creating a specific repo<a class="headerlink" href="#user-creating-a-specific-repo" title="Permanent link"></a></h2>
+<h2 id="user-creating-a-specific-repo">(<strong>user</strong>) creating a specific repo<a class="headerlink" href="#user-creating-a-specific-repo" title="Permanent link">#</a></h2>
 <p>For now, ignore the special usernames READERS and WRITERS, and just create a
 new repo, as user "u4" (a student):</p>
 <pre><code>$ git clone git@server:assignments/u4/a12
 Initialized empty Git repository in /home/git/repositories/assignments/u4/a12.git/
 warning: You appear to have cloned an empty repository.
 </code></pre>
-<h2 id="a-slightly-different-example">a slightly different example<a class="headerlink" href="#a-slightly-different-example" title="Permanent link"></a></h2>
+<h2 id="a-slightly-different-example">a slightly different example<a class="headerlink" href="#a-slightly-different-example" title="Permanent link">#</a></h2>
 <p>Here's how the same example would look if you did not want the CREATOR's name
 to be part of the actual repo name.</p>
 <pre style="color: #ffffff; background-color: #000000;">
@@ -2292,14 +2292,14 @@ admin logging on to the back end, though it's not too difficult.</p>
 <pre><code>    C   =   @TAs
 </code></pre>
 <p>and have a TA create the repos in advance.</p>
-<h2 id="repo-regex-patterns">repo regex patterns<a class="headerlink" href="#repo-regex-patterns" title="Permanent link"></a></h2>
-<h3 id="regex-pattern-versus-normal-repo">regex pattern versus normal repo<a class="headerlink" href="#regex-pattern-versus-normal-repo" title="Permanent link"></a></h3>
+<h2 id="repo-regex-patterns">repo regex patterns<a class="headerlink" href="#repo-regex-patterns" title="Permanent link">#</a></h2>
+<h3 id="regex-pattern-versus-normal-repo">regex pattern versus normal repo<a class="headerlink" href="#regex-pattern-versus-normal-repo" title="Permanent link">#</a></h3>
 <p>Due to projects like <code>gtk+</code>, the <code>+</code> character is now considered a valid
 character for an <em>ordinary</em> repo.  Therefore, a regex like <code>foo/.+</code> does not
 look like a <a href="regex.html">regex</a> to gitolite.  Use <code>foo/..*</code> if you want that.</p>
 <p>Also, <code>..*</code> by itself is not considered a valid repo regex.  Try
 <code>[a-zA-Z0-9].*</code>.  <code>CREATOR/..*</code> will also work.</p>
-<h3 id="line-anchored-regexes">line-anchored regexes<a class="headerlink" href="#line-anchored-regexes" title="Permanent link"></a></h3>
+<h3 id="line-anchored-regexes">line-anchored regexes<a class="headerlink" href="#line-anchored-regexes" title="Permanent link">#</a></h3>
 <p>A regex like</p>
 <pre><code>repo assignments/S[0-9]+/A[0-9]+
 </code></pre>
@@ -2319,7 +2319,7 @@ start; a regex like <code>refs/heads/master</code> actually can match
 a branch!  You can anchor both sides if you really care, by using
 <code>master$</code> instead of <code>master</code>, but that is <em>not</em> the default for refexes.</p>
 </div>
-<h2 id="roles">roles<a class="headerlink" href="#roles" title="Permanent link"></a></h2>
+<h2 id="roles">roles<a class="headerlink" href="#roles" title="Permanent link">#</a></h2>
 <p>The words READERS and WRITERS are called "role" names.  The access rules in
 the conf file decide what permissions these roles have, but they don't say
 what users are in each of these roles.</p>
@@ -2327,7 +2327,7 @@ what users are in each of these roles.</p>
 You can run <code>ssh git@host perms -h</code> for detailed help, but in brief, that
 command lets you give and take away roles to users.  <a href="user.html#setget-additional-permissions-for-repos-you-created">This</a> has some
 more detail.</p>
-<h3 id="adding-other-roles">adding other roles<a class="headerlink" href="#adding-other-roles" title="Permanent link"></a></h3>
+<h3 id="adding-other-roles">adding other roles<a class="headerlink" href="#adding-other-roles" title="Permanent link">#</a></h3>
 <p>If you want to have more than just the 2 default roles, say something like:</p>
 <p>You can add the new names to the ROLES hash in the <a href="rc.html">rc file</a>; see comments
 in that file for how to do that.  Be sure to run the 2 commands mentioned
@@ -2343,7 +2343,7 @@ there after you have added the roles.</p>
   <span class="Statement">RW+D</span>              =   MANAGERS
 </pre>
 
-<h4 id="important-warning-about-this-feature"><font color="red"><strong>IMPORTANT WARNING ABOUT THIS FEATURE</strong></font><a class="headerlink" href="#important-warning-about-this-feature" title="Permanent link"></a></h4>
+<h4 id="important-warning-about-this-feature"><font color="red"><strong>IMPORTANT WARNING ABOUT THIS FEATURE</strong></font><a class="headerlink" href="#important-warning-about-this-feature" title="Permanent link">#</a></h4>
 <div class="admonition danger">
 <p>Please make sure that none of the role names conflict with any of the user
 names or group names in the system.  For example, if you have a user
@@ -2353,7 +2353,7 @@ as a valid role in the ROLES hash.</p>
 <p>You can keep things sane by using UPPERCASE names for roles, while keeping all
 your user and group names lowercase; then you don't have to worry about this
 problem.</p>
-<h3 id="setting-default-roles">setting default roles<a class="headerlink" href="#setting-default-roles" title="Permanent link"></a></h3>
+<h3 id="setting-default-roles">setting default roles<a class="headerlink" href="#setting-default-roles" title="Permanent link">#</a></h3>
 <p>You can setup some default role assignments as soon as a new wild repo is
 created.</p>
 <p>Here's how:</p>
@@ -2375,18 +2375,18 @@ the repo was created to add those two role assignments.</p>
 <p>If you want to simulate the old (pre v3.5) <code>DEFAULT_ROLE_PERMS</code> rc file
 variable, just add them under a <code>repo @all</code> line.  (Remember that this only
 affects newly created wild repos, despite the '@all' name).</p>
-<h3 id="specifying-owners">specifying owners<a class="headerlink" href="#specifying-owners" title="Permanent link"></a></h3>
+<h3 id="specifying-owners">specifying owners<a class="headerlink" href="#specifying-owners" title="Permanent link">#</a></h3>
 <p>See the section on <code>OWNER_ROLENAME</code> in the <a href="rc.html">rc file page</a>.</p>
-<h2 id="listing-wild-repos">listing wild repos<a class="headerlink" href="#listing-wild-repos" title="Permanent link"></a></h2>
+<h2 id="listing-wild-repos">listing wild repos<a class="headerlink" href="#listing-wild-repos" title="Permanent link">#</a></h2>
 <p>In order to see what repositories were created from a wildcard, use the 'info'
 command.  Try <code>ssh git@host info -h</code> to get help on the info command.</p>
-<h2 id="deleting-a-wild-repo">deleting a wild repo<a class="headerlink" href="#deleting-a-wild-repo" title="Permanent link"></a></h2>
+<h2 id="deleting-a-wild-repo">deleting a wild repo<a class="headerlink" href="#deleting-a-wild-repo" title="Permanent link">#</a></h2>
 <p>Run the whimsically named "D" command -- try <code>ssh git@host D -h</code> for more info
 on how to delete a wild repo.  (Yes the command is "D"; it's meant to be a
 counterpart to the "C" permission that allowed you to create the repo in the
 first place).  Of course this only works if your admin has enabled the command
 (gitolite ships with the command disabled for remote use).</p>
-<h2 id="appendix-1-owner-and-creator">appendix 1: owner and creator<a class="headerlink" href="#appendix-1-owner-and-creator" title="Permanent link"></a></h2>
+<h2 id="appendix-1-owner-and-creator">appendix 1: owner and creator<a class="headerlink" href="#appendix-1-owner-and-creator" title="Permanent link">#</a></h2>
 <p>A wild repo is created by one specific user.  This user is usually called the
 <strong>creator</strong> of the repo: his username is placed in a file called gl-creator in
 the (bare) repo directory, any permissions given in the gitolite.conf file to

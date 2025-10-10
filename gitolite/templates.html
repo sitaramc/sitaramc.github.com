@@ -2115,12 +2115,12 @@
 
 
 
-<h1 id="setting-up-and-using-templates">setting up and using templates<a class="headerlink" href="#setting-up-and-using-templates" title="Permanent link"></a></h1>
+<h1 id="setting-up-and-using-templates">setting up and using templates<a class="headerlink" href="#setting-up-and-using-templates" title="Permanent link">#</a></h1>
 <hr />
 <p>This feature was added late September 2017, after 3.6.7.  In terms of
 versioning, it will be part of 3.6.8, or you could just grab the latest from
 github.</p>
-<h2 id="overview">overview<a class="headerlink" href="#overview" title="Permanent link"></a></h2>
+<h2 id="overview">overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
 <p>This feature describes a new method of specifying gitolite rules.</p>
 <p>A "template" is a set of gitolite access rules with a name.  A gitolite
 "expert" can setup a suitable set of templates, and then actual repos can use
@@ -2177,7 +2177,7 @@ require.</p>
 <p>Notice that <code>foo</code> and <code>bar</code> use different sets of templates: <code>foo</code> is a
 public-readable repo that controls who can push versioned tags (releases),
 while <code>bar</code> is a basic repo which supports <a href="user.html#personal-branches">personal branches</a>.</p>
-<h2 id="advantages">advantages<a class="headerlink" href="#advantages" title="Permanent link"></a></h2>
+<h2 id="advantages">advantages<a class="headerlink" href="#advantages" title="Permanent link">#</a></h2>
 <p>There are a few advantages with this approach:</p>
 <ol>
 <li>
@@ -2211,8 +2211,8 @@ repo <code>bar</code>.)</p>
     tens of thousands) of repos.</p>
 </li>
 </ol>
-<h2 id="how-does-it-work">how does it work?<a class="headerlink" href="#how-does-it-work" title="Permanent link"></a></h2>
-<h3 id="a-repo-and-its-users">a repo and its users<a class="headerlink" href="#a-repo-and-its-users" title="Permanent link"></a></h3>
+<h2 id="how-does-it-work">how does it work?<a class="headerlink" href="#how-does-it-work" title="Permanent link">#</a></h2>
+<h3 id="a-repo-and-its-users">a repo and its users<a class="headerlink" href="#a-repo-and-its-users" title="Permanent link">#</a></h3>
 <p>The <a href="wild.html">wildcard</a> repos feature already has a way to dissociate the actual
 user names from the rule set in gitolite.conf.  For example, you can say</p>
 <pre style="color: #ffffff; background-color: #000000;">
@@ -2232,14 +2232,14 @@ pattern (as they would be if you listed the users in gitolite.conf directly).</p
 <p>In other words, we've taken the actual users (say alice, bob, etc) out of the
 gitolite.conf file, and thus any changes to the users/roles no longer need to
 involve gitolite.conf.</p>
-<h3 id="a-repo-and-its-rules">a repo and its <em>rules</em><a class="headerlink" href="#a-repo-and-its-rules" title="Permanent link"></a></h3>
+<h3 id="a-repo-and-its-rules">a repo and its <em>rules</em><a class="headerlink" href="#a-repo-and-its-rules" title="Permanent link">#</a></h3>
 <p>In a "duh! Why didn't I think of this till now" moment, I realised I can do
 the same for the <em>rules</em> that apply to a repo -- take that association out of
 gitolite.conf.  That is what the <code>repo foo = [...list of templates...]</code> lines
 are doing.</p>
 <p>This list of templates is also stored in a plain text file just like the one
 that contains the user/role mappings, and in the same directory.</p>
-<h2 id="usage-and-syntax">usage and syntax<a class="headerlink" href="#usage-and-syntax" title="Permanent link"></a></h2>
+<h2 id="usage-and-syntax">usage and syntax<a class="headerlink" href="#usage-and-syntax" title="Permanent link">#</a></h2>
 <p>First, you have to add all the new "roles" to the <code>ROLES</code> hash in
 <code>~/.gitolite.rc</code>.  If you edit that file, you'll see two pre-created roles
 <code>READERS</code> and <code>WRITERS</code>.  Using the same syntax (including the trailing
@@ -2339,7 +2339,7 @@ if someone forgot to update both places when the teamleads change!)</p>
 </pre></p>
 </li>
 </ol>
-<h2 id="bypassing-gitoliteconf-for-huge-sites">bypassing gitolite.conf for <em>huge</em> sites<a class="headerlink" href="#bypassing-gitoliteconf-for-huge-sites" title="Permanent link"></a></h2>
+<h2 id="bypassing-gitoliteconf-for-huge-sites">bypassing gitolite.conf for <em>huge</em> sites<a class="headerlink" href="#bypassing-gitoliteconf-for-huge-sites" title="Permanent link">#</a></h2>
 <p>Some sites have all their access control information in a web-based system,
 and generate gitolite.conf as needed.  If they have tens of thousands of
 repos, this "generated" gitolite.conf becomes humongous, and slows down
@@ -2351,7 +2351,7 @@ those text files to change the users and rule-sets for a given repo.  It
 doesn't even have to touch gitolite or gitolite.conf (assuming the templates
 and roles are already defined in gitolite.conf and <code>~/.gitolite.rc</code> of
 course!)</p>
-<h3 id="generating-the-text-files-externally">generating the text files externally<a class="headerlink" href="#generating-the-text-files-externally" title="Permanent link"></a></h3>
+<h3 id="generating-the-text-files-externally">generating the text files externally<a class="headerlink" href="#generating-the-text-files-externally" title="Permanent link">#</a></h3>
 <p>The actual text files involved are very simple.  Remember these files go into
 <code>~/repositories/$REPO.git</code> (or more accurately, <code>$(gitolite query-rc GL_REPO_BASE)/$REPO.git</code>).</p>
 <p>For the example above, here's the file <code>gl-repo-groups</code> in repo foo:</p>
@@ -2368,7 +2368,7 @@ READERS             =   ashok
 release_managers    =   alice
 </code></pre>
 <p>Again, this text is exactly the same as in the gitolite.conf!</p>
-<h3 id="creating-new-repos">creating new repos<a class="headerlink" href="#creating-new-repos" title="Permanent link"></a></h3>
+<h3 id="creating-new-repos">creating new repos<a class="headerlink" href="#creating-new-repos" title="Permanent link">#</a></h3>
 <p>Gitolite has no mechanism to create repos out of thin air, so if you don't
 want to go via gitolite.conf, one way to do this is to add the following lines
 to the conf file (one-time):</p>
@@ -2382,13 +2382,13 @@ to the conf file (one-time):</p>
 </code></pre>
 <p>That creates the repo, and you can now populate its <code>gl-perms</code> and
 <code>gl-repo-groups</code> files.</p>
-<h2 id="thanks-to">thanks to...<a class="headerlink" href="#thanks-to" title="Permanent link"></a></h2>
+<h2 id="thanks-to">thanks to...<a class="headerlink" href="#thanks-to" title="Permanent link">#</a></h2>
 <p>...pingou on irc, and the Fedora project, for having 42,000 repos in a conf
 file over 560,000 lines long.  Which made me think about this real hard for
 days, including two false starts (one of which I published and have just now
 reverted, and one which was so kludgey I refuse to acknowledge it exists --
 thank God I did not publish that!)</p>
-<h2 id="miscellanea">miscellanea<a class="headerlink" href="#miscellanea" title="Permanent link"></a></h2>
+<h2 id="miscellanea">miscellanea<a class="headerlink" href="#miscellanea" title="Permanent link">#</a></h2>
 <p>This feature is not the same as <a href="wild.html">wild</a> repos; repos here are created by the
 gitolite admin or a server-side backend, <em>not</em> by a gitolite user.  (However,
 this feature piggy-backs on a lot of the code for wild repos, adding just a

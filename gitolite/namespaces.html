@@ -2083,7 +2083,7 @@
 
 
 
-<h1 id="namespace-support-in-gitolite">namespace support in gitolite<a class="headerlink" href="#namespace-support-in-gitolite" title="Permanent link"></a></h1>
+<h1 id="namespace-support-in-gitolite">namespace support in gitolite<a class="headerlink" href="#namespace-support-in-gitolite" title="Permanent link">#</a></h1>
 <p><em>This feature is only available in the 'namespaces' branch until enough people
 test it and tell me it works fine</em>.</p>
 <hr />
@@ -2091,7 +2091,7 @@ test it and tell me it works fine</em>.</p>
 use or install this.  Most non-core features of gitolite do not work with
 namespaces, and, worse, many of them will <em>fail silently</em>.  There are also
 security issues you need to be aware of.</p>
-<h2 id="background">background<a class="headerlink" href="#background" title="Permanent link"></a></h2>
+<h2 id="background">background<a class="headerlink" href="#background" title="Permanent link">#</a></h2>
 <p>In many projects, developers need to push their work to some central place for
 others to fetch.  Namespaces allow you to give each developer what looks like
 her own repo or set of repos, while combining all these logical repos into one
@@ -2099,7 +2099,7 @@ physical repo on the server.  This saves a lot of disk space if they all share
 a lot of common history.</p>
 <p>The logical repos look like normal repos to a git <em>client</em>; all the magic is
 on the server side.  (But see the "WARNINGS" section).</p>
-<h2 id="terminology">terminology<a class="headerlink" href="#terminology" title="Permanent link"></a></h2>
+<h2 id="terminology">terminology<a class="headerlink" href="#terminology" title="Permanent link">#</a></h2>
 <p>There is one repo that is special, and several others that depend upon it or
 use it.  Depending on context, we use one of the following names:</p>
 <ul>
@@ -2111,7 +2111,7 @@ blessed repo is a normal (not "wild") repo and the logical repos are <a href="wi
 repos, since that is the most convenient way to set this up.  However, it is
 not mandatory -- you can have a wild repo as a backing repo, and/or a normal
 repo as a logical repo if you wish.</font></p>
-<h2 id="setup">setup<a class="headerlink" href="#setup" title="Permanent link"></a></h2>
+<h2 id="setup">setup<a class="headerlink" href="#setup" title="Permanent link">#</a></h2>
 <p>First, add the following lines to the rc file, as indicated:</p>
 <pre><code># add this line as the *last* item in the PRE_GIT trigger list.  In
 # particular, it should be *after* the Mirroring::pre_git line if you're
@@ -2140,7 +2140,7 @@ forks", 13-11-2012), modified slightly.</p>
     <span class="Statement">option</span> <span class="Identifier">namespace.pattern</span> = <span class="Constant">%/* is @1 in @2</span>
 </pre>
 
-<h2 id="use">use<a class="headerlink" href="#use" title="Permanent link"></a></h2>
+<h2 id="use">use<a class="headerlink" href="#use" title="Permanent link">#</a></h2>
 <p>A developer doesn't have to do anything differently.  She will still run,
 e.g., <code>git clone git@host:alice/linux</code> to auto-create and clone a <a href="wild.html">wild</a>
 repo for herself, then add a remote to the "backing" repo, fetch it, start
@@ -2150,7 +2150,7 @@ an enormous code base, to what she thought was an empty repo on the server,
 might go surprisingly fast :)</p>
 <p>Secondly, a lot of <em>gitolite</em> commands (and other features) won't work.  See
 the "WARNINGS" section below for more.</p>
-<h2 id="details">details<a class="headerlink" href="#details" title="Permanent link"></a></h2>
+<h2 id="details">details<a class="headerlink" href="#details" title="Permanent link">#</a></h2>
 <p>The option line above has 3 parts separated by the words "is" and "in":</p>
 <pre><code>&lt;pattern&gt; is &lt;namespace&gt; in &lt;backing repo&gt;
 </code></pre>
@@ -2248,8 +2248,8 @@ options and the options themselves; you need to fine tune one or the
 others to fix things.</p>
 </li>
 </ul>
-<h2 id="warnings">WARNINGS<a class="headerlink" href="#warnings" title="Permanent link"></a></h2>
-<h3 id="security">SECURITY<a class="headerlink" href="#security" title="Permanent link"></a></h3>
+<h2 id="warnings">WARNINGS<a class="headerlink" href="#warnings" title="Permanent link">#</a></h2>
+<h3 id="security">SECURITY<a class="headerlink" href="#security" title="Permanent link">#</a></h3>
 <p><strong>First and most important</strong>, please read 'man gitnamespaces' for important
 security information about namespaces.</p>
 <p>Secondly, please note that gitolite's access control decisions are made based
@@ -2267,7 +2267,7 @@ allow or reject a push, while line 2, which is directly contacting the
 "backing" repo, use that repo's access rules.</p>
 <p>In particular, Alice does <strong>not</strong> need write access to the backing repo for
 the push to succeed!</p>
-<h3 id="gitolite-functionality">gitolite functionality<a class="headerlink" href="#gitolite-functionality" title="Permanent link"></a></h3>
+<h3 id="gitolite-functionality">gitolite functionality<a class="headerlink" href="#gitolite-functionality" title="Permanent link">#</a></h3>
 <p>Most things you're used to in gitolite won't work with logical repos.  From
 the client point of view, <strong>the only features guaranteed to work on logical
 repos are</strong>:</p>
@@ -2285,13 +2285,13 @@ repos, and may even fail silently!</strong>:</p>
 <li>anything that expects to be recorded somewhere in the bare repo directory.</li>
 <li>...and anything else not explicitly listed as "working" in this doc ;-)</li>
 </ul>
-<h3 id="gitolite-functionality-mirroring">gitolite functionality -- mirroring<a class="headerlink" href="#gitolite-functionality-mirroring" title="Permanent link"></a></h3>
+<h3 id="gitolite-functionality-mirroring">gitolite functionality -- mirroring<a class="headerlink" href="#gitolite-functionality-mirroring" title="Permanent link">#</a></h3>
 <p>Mirroring works, but <strong>all the logical repos and the backing repo should have
 the same mirroring setup</strong>.  I.e., which server is the master, who are the
 copies, are redirects allowed, if so from where, etc., etc., etc., should all
 have the same values for all of them.  I cannot over-emphasise the importance
 of this for proper mirroring.</p>
-<h2 id="other-notes">other notes<a class="headerlink" href="#other-notes" title="Permanent link"></a></h2>
+<h2 id="other-notes">other notes<a class="headerlink" href="#other-notes" title="Permanent link">#</a></h2>
 <p>The "backing repo" needs to exist.  If it is itself a <a href="wild.html">wild</a> repo, it must
 be auto-created <em>before</em> a logical repo that hangs off of it is accessed.</p>
 <p>The logical repo must also be mentioned in the gitolite.conf file in some way,

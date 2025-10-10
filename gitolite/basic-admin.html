@@ -2043,7 +2043,7 @@
 
 
 
-<h1 id="basic-administration">basic administration<a class="headerlink" href="#basic-administration" title="Permanent link"></a></h1>
+<h1 id="basic-administration">basic administration<a class="headerlink" href="#basic-administration" title="Permanent link">#</a></h1>
 <hr />
 <p><span class="green box-r">If you really, really, really want to manage
 gitolite directly on the server, i.e., without cloning the gitolite-admin
@@ -2055,7 +2055,7 @@ to the server.  The <a href="concepts.html">concepts and terminology</a> page ha
 with some details on what happens after the push.</p>
 <p><span class="red">In other words, do <strong>NOT</strong> add new repos or users manually on the
 server!</span></p>
-<h2 id="clone-the-gitolite-admin-repo">clone the gitolite-admin repo<a class="headerlink" href="#clone-the-gitolite-admin-repo" title="Permanent link"></a></h2>
+<h2 id="clone-the-gitolite-admin-repo">clone the gitolite-admin repo<a class="headerlink" href="#clone-the-gitolite-admin-repo" title="Permanent link">#</a></h2>
 <p>To clone the admin repo, go to the workstation where the public key used in
 'setup' came from, and run this:</p>
 <pre><code>git clone git@host:gitolite-admin
@@ -2066,7 +2066,7 @@ optional.</p>
 <p>If this step fails, be sure to look at the two pages linked from the <a href="ssh.html">ssh</a>
 page before asking for help.  A very basic first step is to run the <code>info</code>
 command (<code>ssh git@host info</code>); <a href="user.html#the-info-command">this</a> page tells you what to expect.</p>
-<h2 id="addremove-users">add/remove users<a class="headerlink" href="#addremove-users" title="Permanent link"></a></h2>
+<h2 id="addremove-users">add/remove users<a class="headerlink" href="#addremove-users" title="Permanent link">#</a></h2>
 <p><span class="gray">NOTE: This section only applies to ssh mode.  If you've installed
 gitolite in http mode, adding and removing users is outside the scope of
 gitolite.</span></p>
@@ -2105,7 +2105,7 @@ the changes specified.</p>
 <p><strong>NOTE</strong>: your users' public key is typically
 <code>$HOME/.ssh/id_rsa.pub</code> on her workstation.  Please make sure it is in
 openssh's default format.</p>
-<h3 id="multiple-keys-per-user">multiple keys per user<a class="headerlink" href="#multiple-keys-per-user" title="Permanent link"></a></h3>
+<h3 id="multiple-keys-per-user">multiple keys per user<a class="headerlink" href="#multiple-keys-per-user" title="Permanent link">#</a></h3>
 <p>You can put pubkeys in subdirectories within "keydir/", because the user name
 is simply the <em>base name</em> of the public key file name.  That is,
 'keydir/alice.pub', 'keydir/home/alice.pub', 'keydir/laptop/alice.pub', (or
@@ -2118,7 +2118,7 @@ will continue to be supported but has proved hard to explain!</p>
 <p>(Finally, if you <em>insist</em> on wanting to actually put all the keys for a user
 into a single, multi-line, pubkey file, it is possible.  For details, see the
 program <code>src/triggers/post-compile/ssh-authkeys-split</code> in the source.)</p>
-<h2 id="add-remove-and-rename-repos">add, remove, and rename repos<a class="headerlink" href="#add-remove-and-rename-repos" title="Permanent link"></a></h2>
+<h2 id="add-remove-and-rename-repos">add, remove, and rename repos<a class="headerlink" href="#add-remove-and-rename-repos" title="Permanent link">#</a></h2>
 <div class="admonition warning">
 <p>Note: this page describes how to add <strong>new</strong> repos.  To bring already
 existing repos under gitolite's control, click <a href="basic-admin.html#appendix-1-bringing-existing-repos-into-gitolite">here</a>.</p>
@@ -2164,7 +2164,7 @@ group names in it. However, it can only be one line; this will not work:</p>
     <span class="Statement">RW+</span>     =   alice
 </pre>
 
-<h3 id="removingrenaming-a-repo">removing/renaming a repo<a class="headerlink" href="#removingrenaming-a-repo" title="Permanent link"></a></h3>
+<h3 id="removingrenaming-a-repo">removing/renaming a repo<a class="headerlink" href="#removingrenaming-a-repo" title="Permanent link">#</a></h3>
 <p>Removing a repo is not so straightforward.  You certainly must remove the
 appropriate lines from the <code>conf/gitolite.conf</code> file, but gitolite will not
 automatically delete the repo from the server.  You have to log on to the
@@ -2179,7 +2179,7 @@ important):</p>
 <li>Change the name in the conf/gitolite.conf file in your gitolite-admin repo
     clone, and add/commit/push.</li>
 </ul>
-<h2 id="appendix-1-bringing-existing-repos-into-gitolite">appendix 1: bringing existing repos into gitolite<a class="headerlink" href="#appendix-1-bringing-existing-repos-into-gitolite" title="Permanent link"></a></h2>
+<h2 id="appendix-1-bringing-existing-repos-into-gitolite">appendix 1: bringing existing repos into gitolite<a class="headerlink" href="#appendix-1-bringing-existing-repos-into-gitolite" title="Permanent link">#</a></h2>
 <div class="admonition danger">
 <p class="admonition-title">Warning!</p>
 <p>Gitolite <strong>will clobber</strong> any existing <code>update</code> hook in your repos when
@@ -2242,7 +2242,7 @@ nice interface or command.</p>
 <li>Add them to the <code>conf/gitolite.conf</code> in your clone of the admin repo, then
     commit and push the change.</li>
 </ul>
-<h2 id="appendix-2-old-style-multi-keys">appendix 2: old style multi-keys<a class="headerlink" href="#appendix-2-old-style-multi-keys" title="Permanent link"></a></h2>
+<h2 id="appendix-2-old-style-multi-keys">appendix 2: old style multi-keys<a class="headerlink" href="#appendix-2-old-style-multi-keys" title="Permanent link">#</a></h2>
 <p>There is another way that involves creating key files like <code>alice@home.pub</code>
 and <code>alice@laptop.pub</code>, but there is a complication because gitolite also
 allows <em>full email addresses</em> as user names.  (i.e., <code>sitaramc@gmail.com.pub</code>

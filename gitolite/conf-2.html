@@ -2139,11 +2139,11 @@
 
 
 
-<h1 id="the-conf-file-confgitoliteconf">the "conf" file (<code>conf/gitolite.conf</code>)<a class="headerlink" href="#the-conf-file-confgitoliteconf" title="Permanent link"></a></h1>
+<h1 id="the-conf-file-confgitoliteconf">the "conf" file (<code>conf/gitolite.conf</code>)<a class="headerlink" href="#the-conf-file-confgitoliteconf" title="Permanent link">#</a></h1>
 <center>(part 2)</center>
 
 <hr />
-<h2 id="access-control-rule-matching">access control rule matching<a class="headerlink" href="#access-control-rule-matching" title="Permanent link"></a></h2>
+<h2 id="access-control-rule-matching">access control rule matching<a class="headerlink" href="#access-control-rule-matching" title="Permanent link">#</a></h2>
 <p>Access control rule matching is pretty simple.  From the previous section,
 you know what "permission", "refex", "user", and "repo" are.  Here's how the
 rules are used to decide whether to allow or deny a request.</p>
@@ -2188,7 +2188,7 @@ or "M"; see <a href="conf-2.html#appendix-1-different-types-of-write-operations"
 </ul>
 </li>
 </ul>
-<h3 id="an-example">an example<a class="headerlink" href="#an-example" title="Permanent link"></a></h3>
+<h3 id="an-example">an example<a class="headerlink" href="#an-example" title="Permanent link">#</a></h3>
 <p>Just to be clear, let's work out an example of what happens when dilbert tries
 to push a branch called "xyz".</p>
 <p>We'll pretend the rule list looks like this:</p>
@@ -2273,7 +2273,7 @@ contained in the perm for rule 13, access is allowed.</p>
 is not contained in "RW", it wouldn't match, then control would go back for
 the <em>next</em> rule, and since there aren't any more, access would be denied.</p>
 <hr />
-<h2 id="tracing-the-access-control-decision">tracing the access control decision<a class="headerlink" href="#tracing-the-access-control-decision" title="Permanent link"></a></h2>
+<h2 id="tracing-the-access-control-decision">tracing the access control decision<a class="headerlink" href="#tracing-the-access-control-decision" title="Permanent link">#</a></h2>
 <p><span class="gray">(v3.6.1)</span> Gitolite can help you trace this logic quickly and easily.
 Here's one example run, with the above rules.  This one tests whether dilbert
 can push to repo foo (check #1).  Note that the syntax for specifying an
@@ -2318,7 +2318,7 @@ refs/.*
 <p>I hope that was useful!  Be sure you correlated the output of 'gitolite access
 -s' with the rule workflow pictures and corresponding descriptions to cement
 your understanding.</p>
-<h2 id="read-access-respecting-deny-rules">read access respecting deny rules<a class="headerlink" href="#read-access-respecting-deny-rules" title="Permanent link"></a></h2>
+<h2 id="read-access-respecting-deny-rules">read access respecting deny rules<a class="headerlink" href="#read-access-respecting-deny-rules" title="Permanent link">#</a></h2>
 <p>Normally, deny rules are ignored by access check #1 (the one that runs
 <em>before</em> git-upload-pack or git-receive-pack is called by gitolite-shell);
 they apply only to check #2 (the update hook check).</p>
@@ -2326,7 +2326,7 @@ they apply only to check #2 (the update hook check).</p>
 i.e., use the flow of check #2, not check #1.  You tell gitolite to do this by
 setting the "deny-rules" option for the repo; when you do that, the flow of
 check #2 is used for both stages, before git <em>and</em> in the update hook.</p>
-<h3 id="example-1">example 1<a class="headerlink" href="#example-1" title="Permanent link"></a></h3>
+<h3 id="example-1">example 1<a class="headerlink" href="#example-1" title="Permanent link">#</a></h3>
 <p>Here's an example. Here, we have lots of repos, which should all be accessible
 by gitweb or daemon, so we want the convenience provided by lines 6 and 7 (we
 don't want to put line 7 in <em>each</em> repo).  However, we also have some secret
@@ -2370,7 +2370,7 @@ even for read access.</p>
 encountered by these two "users" for those repos is a deny rule, so that it
 can take effect first.  In this example, the placement of lines 2, 3 vis-a-vis
 lines 6, 7 matters -- don't switch them!</p>
-<h3 id="example-2">example 2<a class="headerlink" href="#example-2" title="Permanent link"></a></h3>
+<h3 id="example-2">example 2<a class="headerlink" href="#example-2" title="Permanent link">#</a></h3>
 <p>In this example the "open" repos are fewer in number, so it is the opposite
 situation to the above in terms of our ability to enumerate all the repos.</p>
 <pre style="color: #ffffff; background-color: #000000;">
@@ -2394,7 +2394,7 @@ so they are denied read access.  The "open" repos, on the other hand, get the
 normal default behaviour, which is to ignore deny rules for read access, and
 thus they only see the "R" permission.</p>
 <hr />
-<h2 id="appendix-1-different-types-of-write-operations">appendix 1: different types of write operations<a class="headerlink" href="#appendix-1-different-types-of-write-operations" title="Permanent link"></a></h2>
+<h2 id="appendix-1-different-types-of-write-operations">appendix 1: different types of write operations<a class="headerlink" href="#appendix-1-different-types-of-write-operations" title="Permanent link">#</a></h2>
 <p>Git supplies enough information to the update hook to be able to distinguish
 several types of writes.</p>
 <p>The most common are:</p>
@@ -2424,12 +2424,12 @@ straight line of commits).  The <code>M</code> qualifier helps here:</p>
     it will reject a commit sequence that contains a merge commit</em> (i.e., they
     only accept a straight line series of commits).</li>
 </ul>
-<h3 id="summary-of-permissions">summary of permissions<a class="headerlink" href="#summary-of-permissions" title="Permanent link"></a></h3>
+<h3 id="summary-of-permissions">summary of permissions<a class="headerlink" href="#summary-of-permissions" title="Permanent link">#</a></h3>
 <p>The full set of permissions, in regex syntax, is <code>-|R|RW+?C?D?M?</code>.  This
 expands to one of <code>-</code>, <code>R</code>, <code>RW</code>, <code>RW+</code>, <code>RWC</code>, <code>RW+C</code>, <code>RWD</code>, <code>RW+D</code>, <code>RWCD</code>,
 or <code>RW+CD</code>, all but the first two optionally followed by an <code>M</code>.</p>
 <hr />
-<h2 id="appendix-2-gitolite-access-check-flow">appendix 2: gitolite access check flow<a class="headerlink" href="#appendix-2-gitolite-access-check-flow" title="Permanent link"></a></h2>
+<h2 id="appendix-2-gitolite-access-check-flow">appendix 2: gitolite access check flow<a class="headerlink" href="#appendix-2-gitolite-access-check-flow" title="Permanent link">#</a></h2>
 <p>Here's lots more detail on the access check process, with flow diagrams.</p>
 <p>When do the access checks happen and what are the four pieces of data (repo,
 user, operation, ref) in each case?</p>
@@ -2473,7 +2473,7 @@ gitolite sets the "oper" field to "W" or "+", respectively.</p>
 <p><strong>Access check #2</strong> proceeds with this information.  The result is sent back
 to git-receive-pack (in the form of an exit code; again, see 'man githooks'),
 and the push fails or succeeds based on that.</p>
-<h3 id="putting-it-all-together">putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permanent link"></a></h3>
+<h3 id="putting-it-all-together">putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permanent link">#</a></h3>
 <p>At this point, we have the following pieces of information:</p>
 <ul>
 <li>
@@ -2512,7 +2512,7 @@ others are rare, and anyway it is easy to extrapolate to them.</span></p>
 <p>As you can see, deny rules are ignored by check #1 -- they're not tested in
 any way.  For check #2, if there is a deny rule whose refex matched the ref,
 access is denied (as you'd expect).</p>
-<h2 id="appendix-3-embedding-test-code-in-your-conf">appendix 3: embedding test code in your conf<a class="headerlink" href="#appendix-3-embedding-test-code-in-your-conf" title="Permanent link"></a></h2>
+<h2 id="appendix-3-embedding-test-code-in-your-conf">appendix 3: embedding test code in your conf<a class="headerlink" href="#appendix-3-embedding-test-code-in-your-conf" title="Permanent link">#</a></h2>
 <p>As of v3.6.7, it is possible to embed test code within gitolite.conf.  This
 can be useful if your conf file is complicated, and you need a way to make
 sure that any changes are not messing with your most important restrictions.</p>

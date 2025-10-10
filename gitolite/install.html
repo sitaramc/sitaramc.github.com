@@ -2167,7 +2167,7 @@
 
 
 
-<h1 id="install-and-setup">install and setup<a class="headerlink" href="#install-and-setup" title="Permanent link"></a></h1>
+<h1 id="install-and-setup">install and setup<a class="headerlink" href="#install-and-setup" title="Permanent link">#</a></h1>
 <div class="admonition danger">
 <p class="admonition-title">IMPORTANT</p>
 <p>Almost nothing in gitolite requires <code>root</code> (with some obvious exceptions).
@@ -2183,8 +2183,8 @@ hopefully fool-proof set of instructions.</p>
 <p>If ssh is not your thing, there's a different page for <a href="http.html">http mode</a>
 installation.</p>
 </div>
-<h2 id="before-you-start-pre-requisites">before you start... (pre-requisites)<a class="headerlink" href="#before-you-start-pre-requisites" title="Permanent link"></a></h2>
-<h3 id="your-skills">your skills<a class="headerlink" href="#your-skills" title="Permanent link"></a></h3>
+<h2 id="before-you-start-pre-requisites">before you start... (pre-requisites)<a class="headerlink" href="#before-you-start-pre-requisites" title="Permanent link">#</a></h2>
+<h3 id="your-skills">your skills<a class="headerlink" href="#your-skills" title="Permanent link">#</a></h3>
 <ul>
 <li>
 <p>Please DO read the <a href="concepts.html">concepts and terminology</a> page before doing
@@ -2215,7 +2215,7 @@ branches and tags)</em>.</p>
     familiarity is not necessary to do <em>basic</em> access control.</p>
 </li>
 </ul>
-<h3 id="your-server">your server<a class="headerlink" href="#your-server" title="Permanent link"></a></h3>
+<h3 id="your-server">your server<a class="headerlink" href="#your-server" title="Permanent link">#</a></h3>
 <ul>
 <li>Any Unix system with a posix compatible "sh" and a <strong>sane</strong> file system.</li>
 <li>Git version 1.6.6 or later.</li>
@@ -2235,13 +2235,13 @@ branches and tags)</em>.</p>
     install probably created one called "gitolite").</p>
 </li>
 </ul>
-<h3 id="you-and-your-users-clients">you and your users' clients<a class="headerlink" href="#you-and-your-users-clients" title="Permanent link"></a></h3>
+<h3 id="you-and-your-users-clients">you and your users' clients<a class="headerlink" href="#you-and-your-users-clients" title="Permanent link">#</a></h3>
 <ul>
 <li>Openssh client.</li>
 <li>Git 1.6.6 or later.  Almost any git client will work, as long as it knows
     how to use ssh keys and send the right one along.</li>
 </ul>
-<h3 id="cautions-and-caveats">cautions and caveats<a class="headerlink" href="#cautions-and-caveats" title="Permanent link"></a></h3>
+<h3 id="cautions-and-caveats">cautions and caveats<a class="headerlink" href="#cautions-and-caveats" title="Permanent link">#</a></h3>
 <p><strong>Please take note of the following points</strong>:</p>
 <ul>
 <li>
@@ -2263,7 +2263,7 @@ branches and tags)</em>.</p>
     default, expect trouble).</p>
 </li>
 </ul>
-<h2 id="trying-out-gitolite-safely">trying out gitolite safely<a class="headerlink" href="#trying-out-gitolite-safely" title="Permanent link"></a></h2>
+<h2 id="trying-out-gitolite-safely">trying out gitolite safely<a class="headerlink" href="#trying-out-gitolite-safely" title="Permanent link">#</a></h2>
 <p>If you're not sure if gitolite is right for you or your system, it's easy to
 take it for a trial run, in ssh mode, and play with all of its features
 (except mirroring).  This is very safe, and does not affect anything on your
@@ -2291,7 +2291,7 @@ Maybe <code>~/.ssh/config</code> will give you a hint).</p>
 <p>URLs look like <code>user:repo</code>, so for example you can clone the admin repo by
 <code>git clone admin:gitolite-admin</code>.  Remote commands look like <code>ssh u1 info</code>.</p>
 <p>So start by cloning the admin repo, and try out whatever you want!</p>
-<h2 id="install-and-setup_1">install and setup<a class="headerlink" href="#install-and-setup_1" title="Permanent link"></a></h2>
+<h2 id="install-and-setup_1">install and setup<a class="headerlink" href="#install-and-setup_1" title="Permanent link">#</a></h2>
 <p>This section talks about installing the software manually (i.e., not using a
 package manager) and setting it up.  The install step gets the code to where
 you want it.  The setup step creates the files and directories gitolite needs,
@@ -2307,7 +2307,7 @@ The correct package you want may be called "gitolite3", even though
 "gitolite" also exists.  If you want to know what the latest gitolite
 version is, the gitolite <a href="https://github.com/sitaramc/gitolite/blob/master/CHANGELOG">CHANGELOG</a> will tell you.</p>
 </div>
-<h3 id="a-graphical-overview">(a graphical overview)<a class="headerlink" href="#a-graphical-overview" title="Permanent link"></a></h3>
+<h3 id="a-graphical-overview">(a graphical overview)<a class="headerlink" href="#a-graphical-overview" title="Permanent link">#</a></h3>
 <p>Here's a graphical overview of what files/directories are affected by each
 step in the install+setup process.  Alice is installing gitolite, with herself
 as the administrator.</p>
@@ -2324,7 +2324,7 @@ the command for each numbered step shown:</p>
 <p>Note also that you only need ONE real user on the server.  In our example it
 is git.  In particular, you do NOT create Unix userids for your gitolite
 users.</p>
-<h3 id="prepare-for-the-install">prepare for the install<a class="headerlink" href="#prepare-for-the-install" title="Permanent link"></a></h3>
+<h3 id="prepare-for-the-install">prepare for the install<a class="headerlink" href="#prepare-for-the-install" title="Permanent link">#</a></h3>
 <p>The simplest, most foolproof, way of ensuring that your gitolite install +
 setup will succeed is to use a brand new userid as the hosting user.  If that
 is not possible, make sure the following do NOT exist in that user's home
@@ -2336,7 +2336,7 @@ machine!</span></p>
 <p><span class="gray">The authorized keys file <em>can</em> exist, actually, as long as none of the
 keys you intend to use with gitolite are present in it.  But again, if you're
 not an ssh guru, you should probably play safe.</span></p>
-<h3 id="get-the-software">get the software<a class="headerlink" href="#get-the-software" title="Permanent link"></a></h3>
+<h3 id="get-the-software">get the software<a class="headerlink" href="#get-the-software" title="Permanent link">#</a></h3>
 <p>Get the software using git-clone:</p>
 <pre style="color: #ffffff; background-color: #000000;">
 git clone <a href="https://github.com/sitaramc/gitolite">https://github.com/sitaramc/gitolite</a>
@@ -2344,7 +2344,7 @@ git clone <a href="https://github.com/sitaramc/gitolite">https://github.com/sita
 
 <p>You can use this as is, or you can check out the latest tag to make sure
 you're running a tagged version instead of just the current 'master'.</p>
-<h3 id="install">install<a class="headerlink" href="#install" title="Permanent link"></a></h3>
+<h3 id="install">install<a class="headerlink" href="#install" title="Permanent link">#</a></h3>
 <p>Gitolite has one server side command: <code>gitolite</code>.  You don't need to place it
 anywhere special; in the worst case you can run it with the full path.</p>
 <p>"Installation" consists of deciding where to put it:</p>
@@ -2376,7 +2376,7 @@ gitolite/install <span class="Special">-to</span> /usr/local/gitolite/bin
 <p>Creating a symlink doesn't need a separate program but 'install' also runs
 <code>git describe</code> to create a VERSION file, which can be very important if you
 want support :-)</p>
-<h3 id="setup">setup<a class="headerlink" href="#setup" title="Permanent link"></a></h3>
+<h3 id="setup">setup<a class="headerlink" href="#setup" title="Permanent link">#</a></h3>
 <p>For the first-time setup, you need to have a public key file (usually from
 the admin's workstation) ready.  If the main gitolite admin's username is
 "alice", this file should be named "alice.pub" and copied to the server.</p>
@@ -2388,7 +2388,7 @@ you probably supplied a key which already has shell access to the server.
 That won't work; you'll have to generate and use a different key pair for
 gitolite access and use <a href="sts.html#appendix-4-ssh-host-aliases">host aliases</a> to distinguish between the two.
 While you're there, read both the <a href="ssh.html">ssh</a> pages.  Twice.</p>
-<h2 id="upgrades">upgrades<a class="headerlink" href="#upgrades" title="Permanent link"></a></h2>
+<h2 id="upgrades">upgrades<a class="headerlink" href="#upgrades" title="Permanent link">#</a></h2>
 <ul>
 <li>Update your clone of the gitolite source.</li>
 <li>Repeat the install command you used earlier (make sure you use the same
@@ -2397,7 +2397,7 @@ While you're there, read both the <a href="ssh.html">ssh</a> pages.  Twice.</p>
 </ul>
 <p>After you upgrade gitolite, you may also want to upgrade your rc file
 (<code>~/.gitolite.rc</code>).  See the <a href="rc.html">rc file</a> documentation for that.</p>
-<h2 id="moving-servers">moving servers<a class="headerlink" href="#moving-servers" title="Permanent link"></a></h2>
+<h2 id="moving-servers">moving servers<a class="headerlink" href="#moving-servers" title="Permanent link">#</a></h2>
 <!-- XXX TODO: maybe a nice picture? -->
 
 <p>Nothing in any of the gitolite install/setup/etc will ever touch the <em>data</em> in

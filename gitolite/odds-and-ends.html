@@ -1981,15 +1981,15 @@
 
 
 
-<h1 id="miscellaneous-features">miscellaneous features<a class="headerlink" href="#miscellaneous-features" title="Permanent link"></a></h1>
+<h1 id="miscellaneous-features">miscellaneous features<a class="headerlink" href="#miscellaneous-features" title="Permanent link">#</a></h1>
 <hr />
 <p>This page has a bunch of features that didn't seem to fit anywhere.</p>
-<h2 id="disabling-pushes-to-take-backups">disabling pushes to take backups<a class="headerlink" href="#disabling-pushes-to-take-backups" title="Permanent link"></a></h2>
+<h2 id="disabling-pushes-to-take-backups">disabling pushes to take backups<a class="headerlink" href="#disabling-pushes-to-take-backups" title="Permanent link">#</a></h2>
 <p>The <code>writable</code> command allows you to disable pushes to all repos or just the
 named repo, in order to do file-system level things to the repo directory that
 require it not to change, like using normal backup software.</p>
 <p>Run <code>gitolite writable -h</code> for more info.</p>
-<h2 id="putting-repositories-and-gitolite-elsewhere">putting 'repositories' and '.gitolite' elsewhere<a class="headerlink" href="#putting-repositories-and-gitolite-elsewhere" title="Permanent link"></a></h2>
+<h2 id="putting-repositories-and-gitolite-elsewhere">putting 'repositories' and '.gitolite' elsewhere<a class="headerlink" href="#putting-repositories-and-gitolite-elsewhere" title="Permanent link">#</a></h2>
 <p>Gitolite insists that the "repositories" and ".gitolite" directories be in
 <code>$HOME</code>.  If you want them somewhere else:</p>
 <ul>
@@ -1997,7 +1997,7 @@ require it not to change, like using normal backup software.</p>
 <li><em>then</em> move those directories to wherever you want and replace them with
     symlinks pointing to the new location.</li>
 </ul>
-<h2 id="using-pubkeys-obtained-from-elsewhere">using pubkeys obtained from elsewhere<a class="headerlink" href="#using-pubkeys-obtained-from-elsewhere" title="Permanent link"></a></h2>
+<h2 id="using-pubkeys-obtained-from-elsewhere">using pubkeys obtained from elsewhere<a class="headerlink" href="#using-pubkeys-obtained-from-elsewhere" title="Permanent link">#</a></h2>
 <p>If you're not managing keys via the gitolite-admin repo, but getting them from
 somewhere else, you'll want to periodically "update" the keys.</p>
 <p>To do that, first edit your rc file and add something like this:</p>
@@ -2013,7 +2013,7 @@ somewhere else, you'll want to periodically "update" the keys.</p>
 <li>runs <code>gitolite trigger SSH_AUTHKEYS</code>.</li>
 </ul>
 <p>Run this from cron or however you want.</p>
-<h2 id="giving-users-their-own-repos">giving users their own repos<a class="headerlink" href="#giving-users-their-own-repos" title="Permanent link"></a></h2>
+<h2 id="giving-users-their-own-repos">giving users their own repos<a class="headerlink" href="#giving-users-their-own-repos" title="Permanent link">#</a></h2>
 <p>(Please see <a href="wild.html">this</a> for background on the ideas in this section).</p>
 <p>It's very easy to give users their own set of repos to create, with the
 username at the top level.  The simplest setup is:</p>
@@ -2032,7 +2032,7 @@ WRITERS and READERS lists.</p>
 <p><font color="gray">(I prefer using some prefix, say "u", as in
 <code>repo u/CREATOR/..*</code>.  This helps to keep user-created repos separate, and
 avoid name clashes in some far-fetched scenarios).</font></p>
-<h2 id="administering-gitolite-directly-on-the-server">administering gitolite directly on the server<a class="headerlink" href="#administering-gitolite-directly-on-the-server" title="Permanent link"></a></h2>
+<h2 id="administering-gitolite-directly-on-the-server">administering gitolite directly on the server<a class="headerlink" href="#administering-gitolite-directly-on-the-server" title="Permanent link">#</a></h2>
 <p>The main use of managing gitolite via the admin repo is that you get to
 version control the access rules.  But for large sites, there's another use:
 you can share the admin load with more people, <strong>without</strong> having to give all

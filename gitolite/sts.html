@@ -2349,7 +2349,7 @@
 
 
 
-<h1 id="ssh-troubleshooting-and-tips">ssh troubleshooting and tips<a class="headerlink" href="#ssh-troubleshooting-and-tips" title="Permanent link"></a></h1>
+<h1 id="ssh-troubleshooting-and-tips">ssh troubleshooting and tips<a class="headerlink" href="#ssh-troubleshooting-and-tips" title="Permanent link">#</a></h1>
 <hr />
 <p><strong>This page must be read in full the first time.  If you start from some nice
 looking section in the middle it may not help you unless you're already an
@@ -2357,8 +2357,8 @@ expert at ssh</strong>.</p>
 <p>This page should help you troubleshoot ssh-related problems in installing and
 accessing gitolite.  It also has a section of random ssh-related tips and
 tricks that gitolite can do.</p>
-<h2 id="important-read-this-first">IMPORTANT -- READ THIS FIRST<a class="headerlink" href="#important-read-this-first" title="Permanent link"></a></h2>
-<h3 id="caveats">caveats<a class="headerlink" href="#caveats" title="Permanent link"></a></h3>
+<h2 id="important-read-this-first">IMPORTANT -- READ THIS FIRST<a class="headerlink" href="#important-read-this-first" title="Permanent link">#</a></h2>
+<h3 id="caveats">caveats<a class="headerlink" href="#caveats" title="Permanent link">#</a></h3>
 <ul>
 <li>
 <p>Before reading this page, it is <strong>mandatory</strong> to read and <strong>completely
@@ -2380,7 +2380,7 @@ tricks that gitolite can do.</p>
 <p>Surprised?  <a href="concepts.html#authentication-and-authorisation">This</a> might help explain better.</p>
 </li>
 </ul>
-<h3 id="naming-conventions-used">naming conventions used<a class="headerlink" href="#naming-conventions-used" title="Permanent link"></a></h3>
+<h3 id="naming-conventions-used">naming conventions used<a class="headerlink" href="#naming-conventions-used" title="Permanent link">#</a></h3>
 <ul>
 <li>
 <p>Your workstation is the <strong>client</strong>.  Your userid on the client does not
@@ -2392,7 +2392,7 @@ tricks that gitolite can do.</p>
     "gitolite", however we will use "git" in this page.</p>
 </li>
 </ul>
-<h3 id="taking-stock-relevant-files-and-directories">taking stock -- relevant files and directories<a class="headerlink" href="#taking-stock-relevant-files-and-directories" title="Permanent link"></a></h3>
+<h3 id="taking-stock-relevant-files-and-directories">taking stock -- relevant files and directories<a class="headerlink" href="#taking-stock-relevant-files-and-directories" title="Permanent link">#</a></h3>
 <ul>
 <li>
 <p>The client has a <code>~/.ssh</code> containing a few keypairs.  It may also have a
@@ -2414,7 +2414,7 @@ tricks that gitolite can do.</p>
     <code>*.pub</code> files.</p>
 </li>
 </ul>
-<h3 id="normal-gitolite-key-handling">normal gitolite key handling<a class="headerlink" href="#normal-gitolite-key-handling" title="Permanent link"></a></h3>
+<h3 id="normal-gitolite-key-handling">normal gitolite key handling<a class="headerlink" href="#normal-gitolite-key-handling" title="Permanent link">#</a></h3>
 <p>Here's how normal gitolite key handling works:</p>
 <ul>
 <li>
@@ -2444,7 +2444,7 @@ between gitolite's "marker" lines (<code># gitolite start</code> and <code># git
 </ul>
 </li>
 </ul>
-<h2 id="common-ssh-problems">common ssh problems<a class="headerlink" href="#common-ssh-problems" title="Permanent link"></a></h2>
+<h2 id="common-ssh-problems">common ssh problems<a class="headerlink" href="#common-ssh-problems" title="Permanent link">#</a></h2>
 <p>Since I'm pretty sure at least some of you didn't bother to read the
 "IMPORTANT: PLEASE READ FIRST" section above, let me take a minute to point
 you there again.  Especially the first bullet.</p>
@@ -2487,7 +2487,7 @@ background info.</p>
     you are sure 'reponame' exists, you haven't mis-spelled it, etc.</p>
 </li>
 </ul>
-<h2 id="step-by-step">step by step<a class="headerlink" href="#step-by-step" title="Permanent link"></a></h2>
+<h2 id="step-by-step">step by step<a class="headerlink" href="#step-by-step" title="Permanent link">#</a></h2>
 <p>Since I'm pretty sure at least some of you didn't bother to read the
 "IMPORTANT: PLEASE READ FIRST" section above, let me take a minute to point
 you there again.  Especially the first bullet.</p>
@@ -2512,8 +2512,8 @@ you there again.  Especially the first bullet.</p>
     <a href="sts.html#appendix-4-ssh-host-aliases">appendix 4</a>.</p>
 </li>
 </ul>
-<h2 id="random-tips-tricks-and-notes">random tips, tricks, and notes<a class="headerlink" href="#random-tips-tricks-and-notes" title="Permanent link"></a></h2>
-<h3 id="giving-shell-access-to-gitolite-users">giving shell access to gitolite users<a class="headerlink" href="#giving-shell-access-to-gitolite-users" title="Permanent link"></a></h3>
+<h2 id="random-tips-tricks-and-notes">random tips, tricks, and notes<a class="headerlink" href="#random-tips-tricks-and-notes" title="Permanent link">#</a></h2>
+<h3 id="giving-shell-access-to-gitolite-users">giving shell access to gitolite users<a class="headerlink" href="#giving-shell-access-to-gitolite-users" title="Permanent link">#</a></h3>
 <p>Thanks to an idea from Jesse Keating, a single key can allow both gitolite
 access <em>and</em> shell access.</p>
 <p><span class="gray">(v3.6.1+)</span> There are two ways to do this, both require uncommenting
@@ -2531,7 +2531,7 @@ example:</p>
 that needs to be interpolated into the value).</p>
 <p>Then run <code>gitolite compile; gitolite trigger POST_COMPILE</code> or push a dummy
 change to the admin repo.</p>
-<h4 id="the-shell_users_list">the SHELL_USERS_LIST<a class="headerlink" href="#the-shell_users_list" title="Permanent link"></a></h4>
+<h4 id="the-shell_users_list">the SHELL_USERS_LIST<a class="headerlink" href="#the-shell_users_list" title="Permanent link">#</a></h4>
 <p>If you're using gitolite v3.6 or below, it's slightly different.  You have to
 enable the trigger by uncommenting the 'Shell' line in the ENABLE list, but
 you cannot list the users directly on the 'Shell' line in the rc file, nor can
@@ -2545,7 +2545,7 @@ change to the admin repo.</p>
 <p><strong>NOTE</strong>: to maintain backward compatibility, this method will continue to
 work in 3.6.*, but when 3.7 is released (whenever that may be), it will not
 work, and you will have to use the new syntax described above.</p>
-<h3 id="distinguishing-one-key-from-another">distinguishing one key from another<a class="headerlink" href="#distinguishing-one-key-from-another" title="Permanent link"></a></h3>
+<h3 id="distinguishing-one-key-from-another">distinguishing one key from another<a class="headerlink" href="#distinguishing-one-key-from-another" title="Permanent link">#</a></h3>
 <p>Since a user can have <a href="basic-admin.html#multiple-keys-per-user">more than one key</a>, it is sometimes useful
 to distinguish one key from another.  Sshd does not tell you even the
 fingerprint of the key that finally matched, so normally all you have is the
@@ -2566,7 +2566,7 @@ of the authkeys file.  That is, instead of this:</p>
 <p>You can then write an INPUT trigger to do whatever you need with the file
 name, which is in <code>$ARGV[1]</code> (the second argument).  The actual file is
 available at <code>$ENV{GL_ADMIN_BASE}/$ARGV[1]</code> if you need its contents.</p>
-<h3 id="customising-the-authorized-key-options">customising the authorized key options<a class="headerlink" href="#customising-the-authorized-key-options" title="Permanent link"></a></h3>
+<h3 id="customising-the-authorized-key-options">customising the authorized key options<a class="headerlink" href="#customising-the-authorized-key-options" title="Permanent link">#</a></h3>
 <p>By default, the options used in the <code>authorized_keys</code> file, to restrict remote
 users, are:</p>
 <pre><code>no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty
@@ -2584,7 +2584,7 @@ AUTH_OPTIONS =&gt; "...your option list...",
 addition</em> to it.  You must include all the options you need, even those
 that are in the default list, if you use this feature.</p>
 </div>
-<h3 id="simulating-ssh-copy-id">simulating ssh-copy-id<a class="headerlink" href="#simulating-ssh-copy-id" title="Permanent link"></a></h3>
+<h3 id="simulating-ssh-copy-id">simulating ssh-copy-id<a class="headerlink" href="#simulating-ssh-copy-id" title="Permanent link">#</a></h3>
 <p>don't have <code>ssh-copy-id</code>?  This is broadly what that command does, if you want
 to replicate it manually.  The input is your pubkey, typically
 <code>~/.ssh/id_rsa.pub</code> from your client/workstation.</p>
@@ -2609,7 +2609,7 @@ to replicate it manually.  The input is your pubkey, typically
 typically) also must be <code>go-w</code>, but that needs root.  And typically
 they're already set that way anyway.  (Or if they're not, you've got
 bigger problems than gitolite install not working!)]</p>
-<h3 id="problems-with-using-non-openssh-public-keys">problems with using non-openssh public keys<a class="headerlink" href="#problems-with-using-non-openssh-public-keys" title="Permanent link"></a></h3>
+<h3 id="problems-with-using-non-openssh-public-keys">problems with using non-openssh public keys<a class="headerlink" href="#problems-with-using-non-openssh-public-keys" title="Permanent link">#</a></h3>
 <p>Gitolite accepts public keys only in openssh format.  Trying to use an "ssh2"
 key (used by proprietary SSH software) will not be a happy experience.
 src/triggers/post-compile/ssh-authkeys can be made to detect non-openssh
@@ -2619,7 +2619,7 @@ be done with it, is:</p>
 <pre><code>ssh-keygen -i -f /tmp/ssh2/YourName.pub &gt; /tmp/openssh/YourName.pub
 </code></pre>
 <p>then use the resulting pubkey as you normally would in gitolite.</p>
-<h3 id="windows-issues">windows issues<a class="headerlink" href="#windows-issues" title="Permanent link"></a></h3>
+<h3 id="windows-issues">windows issues<a class="headerlink" href="#windows-issues" title="Permanent link">#</a></h3>
 <p>On windows, I have only used msysgit, and the openssh that comes with it.
 Over time, I have grown to distrust putty/plink due to the number of people
 who seem to have trouble when those beasts are involved (I myself have never
@@ -2627,7 +2627,7 @@ used them for any kind of git access).  If you have unusual ssh problems that
 just don't seem to have any explanation, try removing all traces of
 putty/plink, including environment variables, etc., and then try again.</p>
 <p>Thankfully, someone contributed <a href="contrib/putty.html">this</a>.</p>
-<h2 id="appendix-1-ssh-daemon-asks-for-a-password">appendix 1: ssh daemon asks for a password<a class="headerlink" href="#appendix-1-ssh-daemon-asks-for-a-password" title="Permanent link"></a></h2>
+<h2 id="appendix-1-ssh-daemon-asks-for-a-password">appendix 1: ssh daemon asks for a password<a class="headerlink" href="#appendix-1-ssh-daemon-asks-for-a-password" title="Permanent link">#</a></h2>
 <blockquote>
 <p><strong>NOTE</strong>: This section should be useful to anyone trying to get
   password-less access working.  It is not necessarily specific to gitolite,
@@ -2710,7 +2710,7 @@ chmod -R go-rwx .ssh
     to login, to see if they tell you what is the problem.</p>
 </li>
 </ul>
-<h2 id="appendix-2-which-key-is-which-running-sshkeys-lint">appendix 2: which key is which -- running sshkeys-lint<a class="headerlink" href="#appendix-2-which-key-is-which-running-sshkeys-lint" title="Permanent link"></a></h2>
+<h2 id="appendix-2-which-key-is-which-running-sshkeys-lint">appendix 2: which key is which -- running sshkeys-lint<a class="headerlink" href="#appendix-2-which-key-is-which-running-sshkeys-lint" title="Permanent link">#</a></h2>
 <p>The sshkeys-lint program can be run on the server or the client.  Run it with
 '-h' to get a help message.</p>
 <p>On the server you can run <code>gitolite sshkeys-lint</code> and it will tell you, for
@@ -2747,7 +2747,7 @@ need.  Be careful:</p>
     and re-add identities for it to pick up the renamed ones correctly.</p>
 </li>
 </ul>
-<h3 id="typical-causes">typical cause(s)<a class="headerlink" href="#typical-causes" title="Permanent link"></a></h3>
+<h3 id="typical-causes">typical cause(s)<a class="headerlink" href="#typical-causes" title="Permanent link">#</a></h3>
 <p>The admin often has passwordless shell access to <code>git@server</code> already, and
 then used that same key to get access to gitolite (i.e., copied that same
 pubkey as YourName.pub and ran <code>gitolite setup</code> on it).</p>
@@ -2759,7 +2759,7 @@ best way to do this is to create a new keypair, copy the pubkey to the server
 as YourName.pub, then run <code>gitolite setup -pk YourName.pub</code> on the server.
 Remember to adjust your agent identities using ssh-add -D and ssh-add if
 you're using ssh-agent, otherwise these new keys may not work.</p>
-<h2 id="appendix-3-ssh-client-may-not-be-offering-the-right-key">appendix 3: ssh client may not be offering the right key<a class="headerlink" href="#appendix-3-ssh-client-may-not-be-offering-the-right-key" title="Permanent link"></a></h2>
+<h2 id="appendix-3-ssh-client-may-not-be-offering-the-right-key">appendix 3: ssh client may not be offering the right key<a class="headerlink" href="#appendix-3-ssh-client-may-not-be-offering-the-right-key" title="Permanent link">#</a></h2>
 <ul>
 <li>
 <p>Make sure the right private key is being offered.  Run ssh in very
@@ -2784,7 +2784,7 @@ the host entry in your <code>~/.ssh/config</code> file.  This setting fixes the 
 quirk described above.)</p>
 </li>
 </ul>
-<h2 id="appendix-4-ssh-host-aliases">appendix 4: ssh host aliases<a class="headerlink" href="#appendix-4-ssh-host-aliases" title="Permanent link"></a></h2>
+<h2 id="appendix-4-ssh-host-aliases">appendix 4: ssh host aliases<a class="headerlink" href="#appendix-4-ssh-host-aliases" title="Permanent link">#</a></h2>
 <p>(or "making git use the right options for ssh")</p>
 <p>The ssh command has several options for non-default items to be specified.
 Two common examples are <code>-p</code> for the port number if it is not 22, and <code>-i</code> for
@@ -2809,7 +2809,7 @@ defined here) and ssh will infer all those details defined under it -- just
 say <code>ssh gitolite</code> and <code>git clone gitolite:reponame</code> and things will work.</p>
 <p>(By the way, the 'port' and 'identityfile' lines are needed only if you have
 non-default values, although I put them in anyway just to be complete).</p>
-<h3 id="more-than-one-keypair">more than one keypair<a class="headerlink" href="#more-than-one-keypair" title="Permanent link"></a></h3>
+<h3 id="more-than-one-keypair">more than one keypair<a class="headerlink" href="#more-than-one-keypair" title="Permanent link">#</a></h3>
 <p>If you have <em>more than one</em> pubkey with access to the <em>same</em> server, you
 <strong>must</strong> use this method to make git pick up the right key.  There is no other
 way to do this, as far as I know.</p>
@@ -2837,7 +2837,7 @@ commands (like "ssh gitolite info").</p>
 <p>Just to be clear, please note that this assumes the authorized keys file on
 the gitolite hosting user has my "id_rsa.pub" line, <strong>without</strong> the gitolite
 related forced command and options.</p>
-<h2 id="appendix-5-why-bypassing-gitolite-causes-a-problem">appendix 5: why bypassing gitolite causes a problem<a class="headerlink" href="#appendix-5-why-bypassing-gitolite-causes-a-problem" title="Permanent link"></a></h2>
+<h2 id="appendix-5-why-bypassing-gitolite-causes-a-problem">appendix 5: why bypassing gitolite causes a problem<a class="headerlink" href="#appendix-5-why-bypassing-gitolite-causes-a-problem" title="Permanent link">#</a></h2>
 <p>When you bypass gitolite, you end up running your normal shell instead of the
 special gitolite entry point script <code>gitolite-shell</code>.</p>
 <p>This means commands (like 'info') are interpreted by the shell instead of

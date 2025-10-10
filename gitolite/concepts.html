@@ -1981,7 +1981,7 @@
 
 
 
-<h1 id="concepts-conventions-and-terminology">concepts, conventions, and terminology<a class="headerlink" href="#concepts-conventions-and-terminology" title="Permanent link"></a></h1>
+<h1 id="concepts-conventions-and-terminology">concepts, conventions, and terminology<a class="headerlink" href="#concepts-conventions-and-terminology" title="Permanent link">#</a></h1>
 <hr />
 <p><span class="box-r">(I assume you're at least somewhat familiar with <strong>git</strong>
 itself.  If not, the <a href="install.html#before-you-start-pre-requisites">"before you start..."</a> page has a list of topics
@@ -1989,7 +1989,7 @@ that you need to be familiar with, in order to use gitolite.)</span></p>
 <p>This page will help newcomers get used to what we're talking about elsewhere.
 It also explains the special <code>gitolite-admin</code> repo and how it is used to do te
 day-to-day management of a gitolite server.</p>
-<h2 id="authentication-and-authorisation">authentication and authorisation<a class="headerlink" href="#authentication-and-authorisation" title="Permanent link"></a></h2>
+<h2 id="authentication-and-authorisation">authentication and authorisation<a class="headerlink" href="#authentication-and-authorisation" title="Permanent link">#</a></h2>
 <p><span class="red"><strong>Gitolite does not do authentication.  It only does
 authorisation.</strong></span></p>
 <p>So let's loosely define these words:</p>
@@ -2006,7 +2006,9 @@ server's "sshd" (ssh daemon) <strong>or</strong> to your web server.  If authent
 succeeds, sshd or httpd will pass control to gitolite, which then performs the
 authorisation check -- i.e., figure out whether to allow you to do whatever it
 is you want to whatever repo you decided to touch.</p>
-<h2 id="ssh-mode-and-http-mode">ssh mode and http mode<a class="headerlink" href="#ssh-mode-and-http-mode" title="Permanent link"></a></h2>
+<p><a href="how.html">Here</a> is a slightly more "slideshow-y" presentation on this
+concept, if it helps.</p>
+<h2 id="ssh-mode-and-http-mode">ssh mode and http mode<a class="headerlink" href="#ssh-mode-and-http-mode" title="Permanent link">#</a></h2>
 <p>Git allows authenticated remote access using these two mechanisms: ssh and
 http.  Gitolite supports both.</p>
 <p>Ssh mode is much easier to install and setup; most systems already have
@@ -2019,7 +2021,7 @@ which you add to gitolite.</p>
 however, it may be a little easier for your users.  Authentication is by
 username + password, which, although much less secure than ssh keypairs, is
 conceptually easier for users.</p>
-<h2 id="the-hosting-user">The "hosting user"<a class="headerlink" href="#the-hosting-user" title="Permanent link"></a></h2>
+<h2 id="the-hosting-user">The "hosting user"<a class="headerlink" href="#the-hosting-user" title="Permanent link">#</a></h2>
 <p><span class="box-r">If you're wondering how it distinguishes between different
 users when they are all logging into "git", <a href="glssh.html">this page</a> has answers!</span></p>
 <p>When you install gitolite in ssh mode, you pick one specific user on the Unix
@@ -2032,7 +2034,7 @@ Fedora RPM and the Debian DEB use "gitolite", so adjust instructions and
 examples accordingly.  <strong>Unless otherwise stated, everything that we do "on
 the server" is done in this userid (for ssh mode installations).</strong></p>
 <p>Of course you can have any number of "hosting users", but that's rare.</p>
-<h2 id="the-logical-repo-name">the "logical repo name"<a class="headerlink" href="#the-logical-repo-name" title="Permanent link"></a></h2>
+<h2 id="the-logical-repo-name">the "logical repo name"<a class="headerlink" href="#the-logical-repo-name" title="Permanent link">#</a></h2>
 <p>Gitolite refers to repos using a logical repo name, which is whatever name you
 specified in the gitolite.conf file (described later).  The actual repo will
 be in <code>$HOME/repositories</code>, and will have a ".git" suffix.  So, for example,
@@ -2046,7 +2048,7 @@ specifically documented otherwise.</p>
 allows it, and we'd like to be as transparent as possible.  The
 <code>$HOME/repositories</code> prefix should never be specified.  If you do specify it,
 and things appear to work, <a href="sts.html#appendix-5-why-bypassing-gitolite-causes-a-problem">something is wrong!</a>.</p>
-<h2 id="the-special-gitolite-admin-repo">the special gitolite-admin repo<a class="headerlink" href="#the-special-gitolite-admin-repo" title="Permanent link"></a></h2>
+<h2 id="the-special-gitolite-admin-repo">the special gitolite-admin repo<a class="headerlink" href="#the-special-gitolite-admin-repo" title="Permanent link">#</a></h2>
 <p>Gitolite manages git repos.  Among them is a repo called "gitolite-admin",
 which is a very special repository that helps you add and remove users and
 repos, as well as define access rules for them. <strong>Most day-to-day management

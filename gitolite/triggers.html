@@ -2049,7 +2049,7 @@
 
 
 
-<h1 id="gitolite-triggers">gitolite triggers<a class="headerlink" href="#gitolite-triggers" title="Permanent link"></a></h1>
+<h1 id="gitolite-triggers">gitolite triggers<a class="headerlink" href="#gitolite-triggers" title="Permanent link">#</a></h1>
 <hr />
 <p>Gitolite runs trigger code at several different times.  The features you
 enable in the <a href="rc.html">rc</a> file determine what commands to run (or functions in perl
@@ -2063,7 +2063,7 @@ The other difference in gitolite is that each trigger runs multiple pieces
 of code, not just one program with the same name as the hook, like git
 does.</p>
 </div>
-<h2 id="types-of-trigger-programs">types of trigger programs<a class="headerlink" href="#types-of-trigger-programs" title="Permanent link"></a></h2>
+<h2 id="types-of-trigger-programs">types of trigger programs<a class="headerlink" href="#types-of-trigger-programs" title="Permanent link">#</a></h2>
 <p>There are two types of trigger programs.  Standalone scripts are placed in
 triggers or its subdirectories.  Such scripts are quick and easy to write in
 any language of your choice.</p>
@@ -2078,7 +2078,7 @@ default install of gitolite, paying attention to:</p>
 <li>corresponding path names in the src/ directory in gitolite source,</li>
 <li>and for perl modules, the package names and function names within.</li>
 </ul>
-<h2 id="manually-firing-triggers">manually firing triggers<a class="headerlink" href="#manually-firing-triggers" title="Permanent link"></a></h2>
+<h2 id="manually-firing-triggers">manually firing triggers<a class="headerlink" href="#manually-firing-triggers" title="Permanent link">#</a></h2>
 <p>It's easy to manually fire triggers from the server command line.  For
 example:</p>
 <pre><code>gitolite trigger POST_COMPILE
@@ -2086,7 +2086,7 @@ example:</p>
 <p>However if the triggered code depends on arguments (see next section) this
 won't work.  (The <code>POST_COMPILE</code> trigger programs all just happen to not
 require any arguments, so it works).</p>
-<h2 id="common-arguments">common arguments<a class="headerlink" href="#common-arguments" title="Permanent link"></a></h2>
+<h2 id="common-arguments">common arguments<a class="headerlink" href="#common-arguments" title="Permanent link">#</a></h2>
 <p>Triggers receive the following arguments:</p>
 <ol>
 <li>
@@ -2103,7 +2103,7 @@ require any arguments, so it works).</p>
     the next section.</p>
 </li>
 </ol>
-<h2 id="trigger-specific-arguments-and-other-details">trigger-specific arguments and other details<a class="headerlink" href="#trigger-specific-arguments-and-other-details" title="Permanent link"></a></h2>
+<h2 id="trigger-specific-arguments-and-other-details">trigger-specific arguments and other details<a class="headerlink" href="#trigger-specific-arguments-and-other-details" title="Permanent link">#</a></h2>
 <p>Here are the <strong>rest of</strong> the arguments for each trigger, plus a brief
 description of when the trigger runs.  (Note that when the repo name is passed
 in as an argument, it is without the '.git' suffix).</p>
@@ -2200,7 +2200,7 @@ line to the conf file):</p>
 <p>No extra arguments.</p>
 </li>
 </ul>
-<h2 id="adding-your-own-scripts-to-a-trigger">adding your own scripts to a trigger<a class="headerlink" href="#adding-your-own-scripts-to-a-trigger" title="Permanent link"></a></h2>
+<h2 id="adding-your-own-scripts-to-a-trigger">adding your own scripts to a trigger<a class="headerlink" href="#adding-your-own-scripts-to-a-trigger" title="Permanent link">#</a></h2>
 <p><span class="box-r">Note: for gitolite v3.3 or less, adding your own scripts
 to a trigger list was simply a matter of finding the trigger name in the rc
 file and adding an entry to it.  Even for gitolite v3.4 or higher, if your rc
@@ -2231,7 +2231,7 @@ add the following to the <a href="rc.html">rc</a> file, just before the ENABLE s
     ],
 </code></pre>
 <p>As you can see, the 'foo' gets added to the top of the list.</p>
-<h3 id="adding-a-perl-module-as-a-trigger">adding a perl module as a trigger<a class="headerlink" href="#adding-a-perl-module-as-a-trigger" title="Permanent link"></a></h3>
+<h3 id="adding-a-perl-module-as-a-trigger">adding a perl module as a trigger<a class="headerlink" href="#adding-a-perl-module-as-a-trigger" title="Permanent link">#</a></h3>
 <p>If your trigger is a perl module, as opposed to a standalone script or
 executable, the process is almost the same as above, except what you add to
 the rc file it looks like this:</p>
@@ -2246,7 +2246,7 @@ the rc file it looks like this:</p>
 start with a package header like this:</p>
 <pre><code>package Gitolite::Triggers::Foo;
 </code></pre>
-<h3 id="displaying-the-resulting-trigger-list">displaying the resulting trigger list<a class="headerlink" href="#displaying-the-resulting-trigger-list" title="Permanent link"></a></h3>
+<h3 id="displaying-the-resulting-trigger-list">displaying the resulting trigger list<a class="headerlink" href="#displaying-the-resulting-trigger-list" title="Permanent link">#</a></h3>
 <p>You can use the 'gitolite query-rc' command to see what the trigger list
 actually looks like.  For example:</p>
 <pre><code>gitolite query-rc POST_CREATE
@@ -2291,7 +2291,7 @@ you do:
 
 -->
 
-<h2 id="tips-and-examples">tips and examples<a class="headerlink" href="#tips-and-examples" title="Permanent link"></a></h2>
+<h2 id="tips-and-examples">tips and examples<a class="headerlink" href="#tips-and-examples" title="Permanent link">#</a></h2>
 <ol>
 <li>
 <p>If you have code that latches onto more than one trigger, collecting data

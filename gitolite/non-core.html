@@ -2145,7 +2145,7 @@
 
 
 
-<h1 id="non-core-gitolite">"non-core" gitolite<a class="headerlink" href="#non-core-gitolite" title="Permanent link"></a></h1>
+<h1 id="non-core-gitolite">"non-core" gitolite<a class="headerlink" href="#non-core-gitolite" title="Permanent link">#</a></h1>
 <hr />
 <p>Much of gitolite's functionality comes from programs and scripts that are not
 considered "core".  This keeps the core simpler, and allows you to enhance
@@ -2166,7 +2166,7 @@ gitolite for your own site without too much fuss.</p>
 </li>
 </ul>
 <hr />
-<h2 id="core-versus-non-core">core versus non-core<a class="headerlink" href="#core-versus-non-core" title="Permanent link"></a></h2>
+<h2 id="core-versus-non-core">core versus non-core<a class="headerlink" href="#core-versus-non-core" title="Permanent link">#</a></h2>
 <p>Gitolite has five types of non-core code:</p>
 <ul>
 <li><em>Commands</em> can be run from the shell command line.  Among those, the ones
@@ -2178,8 +2178,8 @@ gitolite for your own site without too much fuss.</p>
     different name to avoid confusion and constant disambiguation in the docs.</li>
 <li><em>VREFs</em> are extensions to the access control check part of gitolite.</li>
 </ul>
-<h2 id="locations">locations...<a class="headerlink" href="#locations" title="Permanent link"></a></h2>
-<h3 id="for-non-core-programs-shipped-with-gitolite">...for non-core programs shipped with gitolite<a class="headerlink" href="#for-non-core-programs-shipped-with-gitolite" title="Permanent link"></a></h3>
+<h2 id="locations">locations...<a class="headerlink" href="#locations" title="Permanent link">#</a></h2>
+<h3 id="for-non-core-programs-shipped-with-gitolite">...for non-core programs shipped with gitolite<a class="headerlink" href="#for-non-core-programs-shipped-with-gitolite" title="Permanent link">#</a></h3>
 <pre style="float: right; font-family: 'Andale mono',monospace; margin-top: 0; font-weight: bold; padding: 4px; color: #ffffff; background-color: #000000;">
 .
 ├── <span style="color: #00ff00">commands</span>
@@ -2202,7 +2202,7 @@ ones in red are considered "core".  In addition, the two files "gitolite" and
 <p>You might notice that there are two locations for <a href="triggers.html">triggers</a>; that is simply
 because there are two types of them.  You might also notice that there is no
 place for hooks -- gitolite doesn't <em>ship</em> with any hooks that are non-core.</p>
-<h3 id="for-your-non-core-programs">...for <em>your</em> non-core programs<a class="headerlink" href="#for-your-non-core-programs" title="Permanent link"></a></h3>
+<h3 id="for-your-non-core-programs">...for <em>your</em> non-core programs<a class="headerlink" href="#for-your-non-core-programs" title="Permanent link">#</a></h3>
 <pre style="float: right; font-family: 'Andale mono',monospace; margin-top: 0; font-weight: bold; padding: 4px; color: #ffffff; background-color: #000000; margin: 8px">
 .
 ├── <span style="color: #00ff00">commands</span>
@@ -2232,7 +2232,7 @@ here, neither of which exist in the shipped non-core code.  Also, the
 <code>hooks/common</code> directory is a bit special.  If you add new hooks to this, you
 must run <code>gitolite setup</code>, or at least <code>gitolite setup --hooks-only</code>, for it
 to take effect.</span></p>
-<h3 id="using-the-gitolite-admin-repo-to-manage-non-core-code">using the gitolite-admin repo to manage non-core code<a class="headerlink" href="#using-the-gitolite-admin-repo-to-manage-non-core-code" title="Permanent link"></a></h3>
+<h3 id="using-the-gitolite-admin-repo-to-manage-non-core-code">using the gitolite-admin repo to manage non-core code<a class="headerlink" href="#using-the-gitolite-admin-repo-to-manage-non-core-code" title="Permanent link">#</a></h3>
 <div class="admonition danger">
 <p class="admonition-title">Important security note:</p>
 <p><strong>In this mode, anyone who can push changes to the admin repo will
@@ -2255,8 +2255,8 @@ the directory structure (shown in the previous section) within that directory.
 Thus, when you push the admin repo, the files will land up, with the correct
 paths, in the location pointed to by LOCAL_CODE.</p>
 <p>(Note: when you do this, gitolite takes care of running <code>gitolite setup --hooks-only</code> when you change any hooks and push).</p>
-<h2 id="types-of-non-core-programs">types of non-core programs<a class="headerlink" href="#types-of-non-core-programs" title="Permanent link"></a></h2>
-<h3 id="gitolite-commands">gitolite "commands"<a class="headerlink" href="#gitolite-commands" title="Permanent link"></a></h3>
+<h2 id="types-of-non-core-programs">types of non-core programs<a class="headerlink" href="#types-of-non-core-programs" title="Permanent link">#</a></h2>
+<h3 id="gitolite-commands">gitolite "commands"<a class="headerlink" href="#gitolite-commands" title="Permanent link">#</a></h3>
 <p>Gitolite comes with several commands that users can run.  Remote users run
 commands by saying:</p>
 <pre><code>ssh git@host command [args...]
@@ -2272,7 +2272,7 @@ Naturally, a remote user will see a much smaller list than the server user.</p>
 <p>You allow a command to be run from remote clients by adding its name to (or
 uncommenting it if it's already added but commented out) the ENABLE list in
 the <a href="rc.html">rc</a> file.</p>
-<h3 id="hooks-and-gitolite">hooks and gitolite<a class="headerlink" href="#hooks-and-gitolite" title="Permanent link"></a></h3>
+<h3 id="hooks-and-gitolite">hooks and gitolite<a class="headerlink" href="#hooks-and-gitolite" title="Permanent link">#</a></h3>
 <p>You can install any hooks except these:</p>
 <ul>
 <li>
@@ -2288,7 +2288,7 @@ the <a href="rc.html">rc</a> file.</p>
 above, especially <a href="non-core.html#for-your-non-core-programs">this</a> and <a href="non-core.html#using-the-gitolite-admin-repo-to-manage-non-core-code">this</a>.  The summary is that
 you put them in the "hooks/common" sub-directory within the directory whose
 name is given in the <code>LOCAL_CODE</code> rc variable, then run <code>gitolite setup</code>.</p>
-<h4 id="repo-specific-hooks">repo-specific hooks<a class="headerlink" href="#repo-specific-hooks" title="Permanent link"></a></h4>
+<h4 id="repo-specific-hooks">repo-specific hooks<a class="headerlink" href="#repo-specific-hooks" title="Permanent link">#</a></h4>
 <div class="admonition danger">
 <p class="admonition-title">Important security note:</p>
 <p><strong>If you enable this, anyone who can push changes to the admin repo will
@@ -2390,7 +2390,7 @@ order in which the options are used in applying hooks to the repo.  If the
 order doesn't matter to you, just make sure they're unique.</p>
 </li>
 </ul>
-<h3 id="syntactic-sugar">syntactic sugar<a class="headerlink" href="#syntactic-sugar" title="Permanent link"></a></h3>
+<h3 id="syntactic-sugar">syntactic sugar<a class="headerlink" href="#syntactic-sugar" title="Permanent link">#</a></h3>
 <p>Sugar scripts help you change the perceived syntax of the conf language.  The
 base syntax of the language is very simple, so sugar scripts take something
 <em>else</em> and convert it into that.</p>
@@ -2400,9 +2400,9 @@ lines), while the parser in the core gitolite engine does not change.</p>
 section in <a href="dev-notes.html">dev-notes</a> first then email me.</p>
 <p>You enable a sugar script by uncommenting the feature name in the ENABLE list
 in the rc file.</p>
-<h3 id="triggers">triggers<a class="headerlink" href="#triggers" title="Permanent link"></a></h3>
+<h3 id="triggers">triggers<a class="headerlink" href="#triggers" title="Permanent link">#</a></h3>
 <p>Triggers have their own <a href="triggers.html">page</a>.</p>
-<h3 id="vrefs">VREFs<a class="headerlink" href="#vrefs" title="Permanent link"></a></h3>
+<h3 id="vrefs">VREFs<a class="headerlink" href="#vrefs" title="Permanent link">#</a></h3>
 <p>VREFs also have their own <a href="vref.html">page</a>.</p>
 
 

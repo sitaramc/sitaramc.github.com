@@ -2001,7 +2001,7 @@
 
 
 
-<h1 id="the-rc-file-homegitoliterc">the "rc" file (<code>$HOME/.gitolite.rc</code>)<a class="headerlink" href="#the-rc-file-homegitoliterc" title="Permanent link"></a></h1>
+<h1 id="the-rc-file-homegitoliterc">the "rc" file (<code>$HOME/.gitolite.rc</code>)<a class="headerlink" href="#the-rc-file-homegitoliterc" title="Permanent link">#</a></h1>
 <hr />
 <p><strong>IMPORTANT</strong>: if you have a v3.0-v3.3 rc file it is documented <a href="rc-33.html">here</a>,
 and it will still work.  Please see appendix A below for details.</p>
@@ -2012,7 +2012,7 @@ setups.</p>
 gets installed when you setup gitolite.  <strong>You can always get a default copy
 for your current version by running <code>gitolite print-default-rc</code>.</strong>  (Please
 see appendix A for upgrade instructions.)</p>
-<h2 id="structure-of-the-rc-file">structure of the rc file<a class="headerlink" href="#structure-of-the-rc-file" title="Permanent link"></a></h2>
+<h2 id="structure-of-the-rc-file">structure of the rc file<a class="headerlink" href="#structure-of-the-rc-file" title="Permanent link">#</a></h2>
 <p>The rc file is perl code, but you do NOT need to know perl to edit it.  Just
 mind the commas, use single quotes unless you know what you're doing, and make
 sure the brackets and braces stay matched up!</p>
@@ -2026,7 +2026,7 @@ sure the brackets and braces stay matched up!</p>
 the actual rc file or in each of their individual documentation files around;
 start with <a href="non-core.html">"non-core" gitolite</a>.  If a setting is used by a command
 then running that command with '-h' may give you additional information.</p>
-<h2 id="specific-variables">specific variables<a class="headerlink" href="#specific-variables" title="Permanent link"></a></h2>
+<h2 id="specific-variables">specific variables<a class="headerlink" href="#specific-variables" title="Permanent link">#</a></h2>
 <ul>
 <li>
 <p><code>$UMASK</code>, octal, default <code>0077</code></p>
@@ -2092,7 +2092,7 @@ to the creator of the repo.</p>
 <strong>this must be a FULL path</strong>, not a relative path.</p>
 </li>
 </ul>
-<h2 id="security-note-gitolite-admin-and-shell-access">security note: gitolite admin and shell access<a class="headerlink" href="#security-note-gitolite-admin-and-shell-access" title="Permanent link"></a></h2>
+<h2 id="security-note-gitolite-admin-and-shell-access">security note: gitolite admin and shell access<a class="headerlink" href="#security-note-gitolite-admin-and-shell-access" title="Permanent link">#</a></h2>
 <p>People sometimes ask why this file is also not revision controlled.  Here's
 why.</p>
 <p>Gitolite maintains a clear distinction between</p>
@@ -2110,7 +2110,7 @@ are not allowed to do anything that gets them into the second set.</p>
 repo, push the change, then replace <code>~/.gitolite.rc</code> with a symlink to
 <code>~/.gitolite/.gitolite.rc</code>.</span></p>
 </div>
-<h2 id="appendix-a-upgrading-the-rc-file">appendix A: upgrading the rc file<a class="headerlink" href="#appendix-a-upgrading-the-rc-file" title="Permanent link"></a></h2>
+<h2 id="appendix-a-upgrading-the-rc-file">appendix A: upgrading the rc file<a class="headerlink" href="#appendix-a-upgrading-the-rc-file" title="Permanent link">#</a></h2>
 <p>First, note that upgrading the rc file is always <em>optional</em>.  However, it may
 help if you want to use any of the new features available in later gitolite
 releases, in the sense that the lines you need to add may already be present
@@ -2156,7 +2156,7 @@ around, or in some cases removed completely, not just new config items.</p>
 <p>compare the 2 rc dumps to make sure you've got everything covered.</p>
 </li>
 </ul>
-<h2 id="appendix-b-making-a-trigger-run-after-the-built-in-ones">appendix B: making a trigger run <em>after</em> the built-in ones<a class="headerlink" href="#appendix-b-making-a-trigger-run-after-the-built-in-ones" title="Permanent link"></a></h2>
+<h2 id="appendix-b-making-a-trigger-run-after-the-built-in-ones">appendix B: making a trigger run <em>after</em> the built-in ones<a class="headerlink" href="#appendix-b-making-a-trigger-run-after-the-built-in-ones" title="Permanent link">#</a></h2>
 <p>For most purposes, the section on <a href="triggers.html#adding-your-own-scripts-to-a-trigger">adding your own scripts to a
 trigger</a> works fine.</p>
 <p>But triggers added that way, run <em>before</em> the built-in triggers, which you can
@@ -2195,7 +2195,7 @@ order it has them.</p>
 -   document arguments supplied via ENABLE list
 -->
 
-<h2 id="appendix-c-overriding-safety-net-patterns">appendix C: overriding safety-net patterns<a class="headerlink" href="#appendix-c-overriding-safety-net-patterns" title="Permanent link"></a></h2>
+<h2 id="appendix-c-overriding-safety-net-patterns">appendix C: overriding safety-net patterns<a class="headerlink" href="#appendix-c-overriding-safety-net-patterns" title="Permanent link">#</a></h2>
 <p>Apart from <a href="git-config.html#compensating-for-unsafe_patt-and-other-patterns"><code>UNSAFE_PATT</code></a>, there are other patterns that
 gitolite uses to prevent various attacks.  They're all defined in <code>Rc.pm</code> in
 the source, but you can override any of them in <code>~/.gitolite.rc</code> if needed.</p>

@@ -2013,14 +2013,14 @@
 
 
 
-<h1 id="specifying-git-config-keys-and-values">specifying "git-config" keys and values<a class="headerlink" href="#specifying-git-config-keys-and-values" title="Permanent link"></a></h1>
+<h1 id="specifying-git-config-keys-and-values">specifying "git-config" keys and values<a class="headerlink" href="#specifying-git-config-keys-and-values" title="Permanent link">#</a></h1>
 <hr />
 <p><span class="gray">(Original version thanks to teemu dot matilainen at iki dot fi.)</span></p>
 <div class="admonition danger">
 <p><strong>Important</strong>: This won't work unless the rc file has the right settings;
 please see <code>$GIT_CONFIG_KEYS</code> in the <a href="rc.html#specific-variables">rc file doc</a>.</p>
 </div>
-<h2 id="basic-syntax">basic syntax<a class="headerlink" href="#basic-syntax" title="Permanent link"></a></h2>
+<h2 id="basic-syntax">basic syntax<a class="headerlink" href="#basic-syntax" title="Permanent link">#</a></h2>
 <p>The syntax is simple:</p>
 <pre><code>config sectionname.keyname = value
 </code></pre>
@@ -2036,14 +2036,14 @@ please see <code>$GIT_CONFIG_KEYS</code> in the <a href="rc.html#specific-variab
 examples above) or "git config --unset-all section.key" (for the last
 example).  Other forms of the <code>git config</code> command (<code>--add</code>, the
 <code>value_regex</code>, etc) are not supported.</p>
-<h3 id="an-important-warning-about-deleting-a-config-line"><span class="red">an important warning about <strong>deleting</strong> a config line</span><a class="headerlink" href="#an-important-warning-about-deleting-a-config-line" title="Permanent link"></a></h3>
+<h3 id="an-important-warning-about-deleting-a-config-line"><span class="red">an important warning about <strong>deleting</strong> a config line</span><a class="headerlink" href="#an-important-warning-about-deleting-a-config-line" title="Permanent link">#</a></h3>
 <div class="admonition danger">
 <p>Simply deleting the config line from the <code>conf/gitolite.conf</code> file will
 <em>not</em> delete the variable from <code>repo.git/config</code>.  You have to use the
 syntax in the last example to make gitolite execute a <code>--unset-all</code>
 operation on the given key.</p>
 </div>
-<h2 id="substituting-the-repo-name-and-the-creator-name">substituting the repo name and the creator name<a class="headerlink" href="#substituting-the-repo-name-and-the-creator-name" title="Permanent link"></a></h2>
+<h2 id="substituting-the-repo-name-and-the-creator-name">substituting the repo name and the creator name<a class="headerlink" href="#substituting-the-repo-name-and-the-creator-name" title="Permanent link">#</a></h2>
 <p>You can also use the special values <code>%GL_REPO</code> and <code>%GL_CREATOR</code> in the
 string.  The former is available to all repos, while the latter is only
 available to <a href="wild.html">wild</a> repos.</p>
@@ -2053,7 +2053,7 @@ available to <a href="wild.html">wild</a> repos.</p>
     <span class="Statement">config</span> <span class="Identifier">hooks.emailprefix</span> = <span class="Constant">&quot;[%GL_REPO] &quot;</span>
 </pre>
 
-<h2 id="v367-expanding-a-group-name"><span class="gray">(v3.6.7+)</span> expanding a group name<a class="headerlink" href="#v367-expanding-a-group-name" title="Permanent link"></a></h2>
+<h2 id="v367-expanding-a-group-name"><span class="gray">(v3.6.7+)</span> expanding a group name<a class="headerlink" href="#v367-expanding-a-group-name" title="Permanent link">#</a></h2>
 <p>If you add</p>
 <pre><code>EXPAND_GROUPS_IN_CONFIG     =&gt;  1,
 </code></pre>
@@ -2071,7 +2071,7 @@ then the <em>value</em> of a config line will have groupnames expanded.  For exa
 line.  However, if there is no such group, the text will be left as-is.  Also,
 for safety, only word characters (alphanumerics and underscore) are expected
 as part of the group name.</p>
-<h2 id="overriding-config-values">overriding config values<a class="headerlink" href="#overriding-config-values" title="Permanent link"></a></h2>
+<h2 id="overriding-config-values">overriding config values<a class="headerlink" href="#overriding-config-values" title="Permanent link">#</a></h2>
 <p>You can repeat the 'config' line as many times as you like, and the <em>last</em>
 occurrence will be the one in effect.  This allows you to override settings
 just for one project, as in this example:</p>
@@ -2097,7 +2097,7 @@ just for one project, as in this example:</p>
 <p>As you can see, the general idea is to place the most generic ones (<code>repo @all</code>,
 or repo regex like <code>repo foo.*</code>) first, and place more specific ones
 later to override the generic settings.</p>
-<h2 id="compensating-for-unsafe_patt-and-other-patterns">compensating for UNSAFE_PATT (and other patterns)<a class="headerlink" href="#compensating-for-unsafe_patt-and-other-patterns" title="Permanent link"></a></h2>
+<h2 id="compensating-for-unsafe_patt-and-other-patterns">compensating for UNSAFE_PATT (and other patterns)<a class="headerlink" href="#compensating-for-unsafe_patt-and-other-patterns" title="Permanent link">#</a></h2>
 <p>An important feature in gitolite is that you can share the admin load with
 more people, <strong>without</strong> having to give all of them shell access on the
 server.  Thus there are some restrictions designed to prevent someone who can

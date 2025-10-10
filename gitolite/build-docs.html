@@ -16,7 +16,7 @@
     
     
       
-        <title>building the documentation - Gitolite</title>
+        <title>Building the Documentation - Gitolite</title>
       
     
     
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              building the documentation
+              Building the Documentation
             
           </span>
         </div>
@@ -1828,37 +1828,52 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#side-note-why-move-away-from-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      Side note: why "move away from github"
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#building-the-docs" class="md-nav__link">
     <span class="md-ellipsis">
-      building the docs
+      Building the Docs
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-doesnt-work-in-mkdocs" class="md-nav__link">
+  <a href="#appendix-a-some-mkdocs-quirks" class="md-nav__link">
     <span class="md-ellipsis">
-      what doesn't work in mkdocs
+      Appendix A: Some mkdocs quirks
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="what doesn&#39;t work in mkdocs">
+    <nav class="md-nav" aria-label="Appendix A: Some mkdocs quirks">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#bad-language-guesses" class="md-nav__link">
     <span class="md-ellipsis">
-      bad language guesses
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#no-hidden-docs" class="md-nav__link">
-    <span class="md-ellipsis">
-      no hidden docs
+      Bad language guesses
     </span>
   </a>
   
@@ -1874,18 +1889,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#toc-levels" class="md-nav__link">
-    <span class="md-ellipsis">
-      TOC levels
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#code-highlight" class="md-nav__link">
     <span class="md-ellipsis">
-      code highlight
+      Code highlight
     </span>
   </a>
   
@@ -1894,7 +1900,7 @@
           <li class="md-nav__item">
   <a href="#short-anchors" class="md-nav__link">
     <span class="md-ellipsis">
-      short anchors
+      Short anchors
     </span>
   </a>
   
@@ -1921,44 +1927,65 @@
 
 
 
-<h1 id="building-the-documentation">building the documentation<a class="headerlink" href="#building-the-documentation" title="Permanent link"></a></h1>
-<hr />
-<p>I changed from my homemade system to mkdocs, mainly due to the search
-facility.  (I'm sure there are any number of other static site generators out
-there, but this one seemed to have the smallest footprint and was easiest to
-install and get going).</p>
-<h2 id="building-the-docs">building the docs<a class="headerlink" href="#building-the-docs" title="Permanent link"></a></h2>
+<h1 id="building-the-documentation">Building the Documentation<a class="headerlink" href="#building-the-documentation" title="Permanent link">#</a></h1>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">#</a></h2>
+<p>As of 2025-10, it is my intention to eventually move away from depending on
+the specifics of any particular service (specifically, github pages or
+anything else like it).  The gitolite documentation is now:</p>
 <ul>
-<li>Make sure the tree is not dirty.</li>
-<li>Run <code>bin/build</code>; takes a few seconds and grabs the screen, sorry!</li>
+<li>easy to build if you have mkdocs with the material theme, and pandoc<ul>
+<li>pandoc is needed for <a href="how.html">one specific file</a>).</li>
+<li>in addition, you'll also need vim and xterm.  I know this sounds weird
+    but I wasn't able to easily enable gitolite.conf's syntax highlighting
+    within mkdocs, so I kludged it.  See below for more on this</li>
+</ul>
+</li>
+<li>easy to view just by pointing a browser at the site that is built, or copy
+    that entire directory as is to any web server you want to.</li>
+<li>for convenience, the "site" is downloadable as a ZIP file from
+    <a href="https://codeberg.org/sitaramc/gitolite-doc/releases">https://codeberg.org/sitaramc/gitolite-doc/releases</a> -- just pick the
+    latest one.</li>
+</ul>
+<p>As before, it will also be available at <a href="https://gitolite.com">https://gitolite.com</a>, except there is
+no promise of long term availability because this is currently hosted by
+github pages.</p>
+<h3 id="side-note-why-move-away-from-github">Side note: why "move away from github"<a class="headerlink" href="#side-note-why-move-away-from-github" title="Permanent link">#</a></h3>
+<p>First, I'm not deleting anything in github.  Yet.</p>
+<p>I'm only making my stuff <strong>not</strong> dependent on github's features, beyond what
+the command line git client needs.  In fact, at the moment, gitolite.com is
+still being served by github pages (as I mentioned above).</p>
+<p>The point is, it was always the intent that the documentation, once "built"
+(by <code>mkdocs build</code>) would stand on its own.</p>
+<p>But a few days ago I suddenly realised that this was not the case.  Many of
+the <strong>links were broken</strong>, when I tried to access the "site" directly with a
+browser, or put it behind some other web server.</p>
+<p>It seems that github silently allows "URL/ending/in/foo" to resolve to
+"URL/ending/in/foo.html" if "foo" does not exist but foo.html does.</p>
+<p>Sure it's partly my fault for saying e.g., <code>[install](install)</code> instead of
+<code>[install](install.md)</code>, but if I weren't using github I'd have realised this
+long ago.</p>
+<h2 id="building-the-docs">Building the Docs<a class="headerlink" href="#building-the-docs" title="Permanent link">#</a></h2>
+<ul>
+<li>Make sure the tree is not dirty.  <code>cd</code> to the project root.</li>
+<li>Run <code>bin/build</code>; takes a few seconds and <strong>grabs the screen</strong>, sorry!<ul>
+<li>See the <a href="#code-highlight">Code highlight</a> section below for more on this</li>
+</ul>
+</li>
 <li>Deploy <code>site/</code></li>
 </ul>
-<h2 id="what-doesnt-work-in-mkdocs">what doesn't work in mkdocs<a class="headerlink" href="#what-doesnt-work-in-mkdocs" title="Permanent link"></a></h2>
-<h3 id="bad-language-guesses">bad language guesses<a class="headerlink" href="#bad-language-guesses" title="Permanent link"></a></h3>
+<h2 id="appendix-a-some-mkdocs-quirks">Appendix A: Some mkdocs quirks<a class="headerlink" href="#appendix-a-some-mkdocs-quirks" title="Permanent link">#</a></h2>
+<h3 id="bad-language-guesses">Bad language guesses<a class="headerlink" href="#bad-language-guesses" title="Permanent link">#</a></h3>
 <p>It seems to be too hard to make it turn off its "guess the language"
 pseudo-smartness when you use a plain indented code block.  And looking at the
 mailing list archives does not give me much hope this will be fixed.  So
 you're left with strange colors on some random words in many code blocks!</p>
 <p>(I could fence each of them with an explicit language but I'm reluctant to do
 that; plain markdown's plain indented code <strong>should</strong> be left plain, ideally!)</p>
-<h3 id="no-hidden-docs">no hidden docs<a class="headerlink" href="#no-hidden-docs" title="Permanent link"></a></h3>
-<p>Every document must appear in the document menu (top nav bar), even if it is
-several levels deep.  The only way to have a document rendered without putting
-it on the nav bar is not to even list a page hierarchy, which makes them all
-come out in alphabetical order, which is useless for a project of this size.</p>
-<p>The mailing list has some workarounds, but at the moment I am not using them.
-I'd already added all the documents willy-nilly anyway.</p>
-<p>Except, ironically, <em>this</em> document; this will never be rendered -- you'll
-only see it in the source repo.</p>
-<h3 id="foo-bar-split-across-lines"><code>foo bar</code> split across lines<a class="headerlink" href="#foo-bar-split-across-lines" title="Permanent link"></a></h3>
+<h3 id="foo-bar-split-across-lines"><code>foo bar</code> split across lines<a class="headerlink" href="#foo-bar-split-across-lines" title="Permanent link">#</a></h3>
 <p>If a <code>foo bar</code> is split across lines due to vim formatting, the bloody output
 also shows it split there.  My constant OCD to reformat all paras has taken a
 hit, due to all these manually UN-formatted paragraphs.</p>
-<h3 id="toc-levels">TOC levels<a class="headerlink" href="#toc-levels" title="Permanent link"></a></h3>
-<p>The 'cinder' theme gives you 3 levels, but does not scroll the side nav at
-all (i.e., if you have too many entries, you just won't see the ones that were
-below the window bottom)!  Sticking with default theme for now.</p>
-<h3 id="code-highlight">code highlight<a class="headerlink" href="#code-highlight" title="Permanent link"></a></h3>
+<h3 id="code-highlight">Code highlight<a class="headerlink" href="#code-highlight" title="Permanent link">#</a></h3>
 <ol>
 <li>
 <p>the "codehilite" extension seems too complicated looking at the steps
@@ -1976,8 +2003,9 @@ below the window bottom)!  Sticking with default theme for now.</p>
 </code></pre>
 <p>syntax and let our preprocessor fix things up using vim.  Kludgy, slow,
 annoying (all those xterms -- I need to implement caching for this), but it
-gets the job done with a minimum of fuss.</p>
-<h3 id="short-anchors">short anchors<a class="headerlink" href="#short-anchors" title="Permanent link"></a></h3>
+gets the job done with a minimum of fuss.  If you don't like it, just look
+away from the screen for about 20 seconds ;-)</p>
+<h3 id="short-anchors">Short anchors<a class="headerlink" href="#short-anchors" title="Permanent link">#</a></h3>
 <p>can only be created like:</p>
 <pre><code>&lt;h1 id="dl"&gt;download&lt;/h1&gt;
 </code></pre>

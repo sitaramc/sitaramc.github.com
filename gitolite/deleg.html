@@ -2025,7 +2025,7 @@
 
 
 
-<h1 id="delegating-access-control-responsibilities">delegating access control responsibilities<a class="headerlink" href="#delegating-access-control-responsibilities" title="Permanent link"></a></h1>
+<h1 id="delegating-access-control-responsibilities">delegating access control responsibilities<a class="headerlink" href="#delegating-access-control-responsibilities" title="Permanent link">#</a></h1>
 <hr />
 <p>Delegation allows you to divide up a large conf file into smaller groups of
 repos (called <strong>subconf</strong>s) and hand over responsibility to manage them to
@@ -2033,7 +2033,7 @@ repos (called <strong>subconf</strong>s) and hand over responsibility to manage 
 access rules for any other sub-admin's repos.</p>
 <p>Delegation is achieved by combining two gitolite features:
 <a href="deleg.html#the-subconf-command">subconf</a> and the <a href="vref-2.html#restricting-pushes-by-dirfile-name">NAME VREF</a>.</p>
-<h2 id="example">example<a class="headerlink" href="#example" title="Permanent link"></a></h2>
+<h2 id="example">example<a class="headerlink" href="#example" title="Permanent link">#</a></h2>
 <p>Here's a sample conf that does delegation:</p>
 <pre style="color: #ffffff; background-color: #000000;">
 <span class="Identifier">@webbrowsers</span><span class="PreProc">        = firefox lynx browsers/..*</span>
@@ -2066,7 +2066,7 @@ gitolite-admin repo:</p>
     then the last rule kicks in and the push gets rejected.</li>
 </ul>
 <p>Now all we need is to see what this "subconf" thing is all about.</p>
-<h2 id="the-subconf-command">the subconf command<a class="headerlink" href="#the-subconf-command" title="Permanent link"></a></h2>
+<h2 id="the-subconf-command">the subconf command<a class="headerlink" href="#the-subconf-command" title="Permanent link">#</a></h2>
 <p>Subconf is exactly like the include command in syntax:</p>
 <pre style="color: #ffffff; background-color: #000000;">
 <span class="Statement">subconf</span> &quot;foo.conf&quot;
@@ -2094,7 +2094,7 @@ gitolite will only process "repo" lines for:</p>
 'aa', 'bb', or any repo whose name starts with 'cc/'.</p>
 <p><strong>Note</strong>: the subconf name "master" is special; it is the default subconf in
 effect for the main conf file and has no restrictions.</p>
-<h3 id="how-the-subconf-name-is-derived">how the "subconf name" is derived<a class="headerlink" href="#how-the-subconf-name-is-derived" title="Permanent link"></a></h3>
+<h3 id="how-the-subconf-name-is-derived">how the "subconf name" is derived<a class="headerlink" href="#how-the-subconf-name-is-derived" title="Permanent link">#</a></h3>
 <p>For subconf lines that look just like include statements, i.e.,</p>
 <pre style="color: #ffffff; background-color: #000000;">
 <span class="Statement">subconf</span> &quot;foo/bar.conf&quot;
@@ -2112,8 +2112,8 @@ This means it would be "bar" for the first line, "aa" when processing
 
 <p>In this variation, regardless of what file in "frob/" is being read, the
 subconf name in effect is "foo".</p>
-<h2 id="security-notes">security notes<a class="headerlink" href="#security-notes" title="Permanent link"></a></h2>
-<h3 id="group-names">group names<a class="headerlink" href="#group-names" title="Permanent link"></a></h3>
+<h2 id="security-notes">security notes<a class="headerlink" href="#security-notes" title="Permanent link">#</a></h2>
+<h3 id="group-names">group names<a class="headerlink" href="#group-names" title="Permanent link">#</a></h3>
 <p>You can use "@group"s defined in the main config file but do not attempt to
 redefine or extend them in your own subconf file.  If you must extend a group
 (say <code>@foo</code>) defined in the main config file, do this:</p>
@@ -2124,7 +2124,7 @@ redefine or extend them in your own subconf file.  If you must extend a group
 
 <p>Group names you define in your subconf will not clash even if the exact same
 name is used in another subconf file, so you need not worry about that.</p>
-<h3 id="delegating-pubkeys">delegating pubkeys<a class="headerlink" href="#delegating-pubkeys" title="Permanent link"></a></h3>
+<h3 id="delegating-pubkeys">delegating pubkeys<a class="headerlink" href="#delegating-pubkeys" title="Permanent link">#</a></h3>
 <p>Short answer: not gonna happen.</p>
 <p>The delegation feature is meant only for access control rules, not pubkeys.
 Adding/removing pubkeys is a much more significant event than changing branch
